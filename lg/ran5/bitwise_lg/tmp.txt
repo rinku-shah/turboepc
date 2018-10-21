@@ -1,0 +1,203 @@
+571,673d570
+< 
+<  void Client::write_data2(int data_len){
+<       //Datagram to represent the packet
+<     char datagram[4096] , source_ip[32] , *data , *pseudogram;
+<      
+<     //zero out the packet buffer
+<     memset (datagram, 0, 4096);
+<      
+<     //IP header
+<     struct iphdr *iph = (struct iphdr *) datagram;
+<      
+<     //UDP header
+<     struct udphdr *udph = (struct udphdr *) (datagram + sizeof (struct ip));
+<      
+<     struct sockaddr_in server_sock_addr;
+<     struct pseudo_header psh;
+<      
+<     //Data part
+<     
+<     data = datagram + sizeof(struct iphdr) + sizeof(struct udphdr);
+<     cout<<"data len = "<<data_len<<endl;
+< 
+<     memcpy (data, client_buffer, data_len);
+<     
+<     bzero(client_buffer, BUFFER_SIZE);
+<     if(MY_DEBUG){	
+<     cout<<"SENDING - "<<data<<endl;
+<     }
+<     //cout<<"Thread ID- "<<tID<<endl;
+<     /*int c = 0;
+<     while (client_buffer[c] != '\0') {
+<       data[c] = client_buffer[c];
+<       c++;
+<     }
+<     data[c] = '\0';*/
+< 
+<     //some address resolution
+<     strcpy(source_ip , RAN_IP); //Source IP
+<    
+<     server_sock_addr.sin_family = AF_INET;
+<     server_sock_addr.sin_port = htons(g_mme_port);
+<     server_sock_addr.sin_addr.s_addr = inet_addr(DGW_IP); //Dest IP
+<      
+<     //Bind the client socket to UDP port 
+<     //bind(client_socket, (struct sockaddr *)& server_sock_addr, sizeof(server_sock_addr)); 
+< 
+<    //Tell the kernel that we build our own packets
+<    /*int one = 1;
+<    const int *val = &one;
+<     if(setsockopt(client_socket, IPPROTO_IP, IP_HDRINCL, val, sizeof(one)) < 0){
+< 		perror("setsockopt() error");
+< 		exit(-1);
+<     }*/
+< 
+<     //Fill in the IP Header
+<     iph->ihl = 5;
+<     iph->version = 4;
+<     iph->tos = stoi("1")*4; //16;
+<     iph->tot_len = sizeof (struct iphdr) + sizeof (struct udphdr) + data_len;
+<     iph->id = htonl(0); //htonl (12345); //Id of this packet
+<     iph->frag_off = 0;
+<     iph->ttl = 255;
+<     iph->protocol = IPPROTO_UDP;
+<     iph->check = 0;      //Set to 0 before calculating checksum
+<     iph->saddr = inet_addr(source_ip);    //Spoof the source ip address
+<     iph->daddr = server_sock_addr.sin_addr.s_addr;
+<      
+<     //Ip checksum
+<     iph->check = csum ((unsigned short *) datagram, iph->tot_len);
+<     
+<     //int pid = getpid();
+<     //int parentsPID = getppid();     
+< 
+<     //UDP header
+<     //udph->source = htons (RAN_UDP_PORT);
+<     udph->source = htons (tID);
+<     udph->dest = htons (g_mme_port);// htons(stoi(msg_id)+2000);
+<     udph->len = htons(8 + data_len); //tcp header size
+<     udph->check = 0; //leave checksum 0 now, filled later by pseudo header
+<      
+<     //Now the UDP checksum using the pseudo header
+<     psh.source_address = inet_addr( source_ip );
+<     psh.dest_address = server_sock_addr.sin_addr.s_addr;
+<     psh.placeholder = 0;
+<     psh.protocol = IPPROTO_UDP;
+<     psh.udp_length = htons(sizeof(struct udphdr) + data_len );
+<      
+<     int psize = sizeof(struct pseudo_header) + sizeof(struct udphdr) + data_len;
+<     pseudogram =(char*) malloc(psize);
+<      
+<     memcpy(pseudogram , (char*) &psh , sizeof (struct pseudo_header));
+<     memcpy(pseudogram + sizeof(struct pseudo_header) , udph , sizeof(struct udphdr) + data_len);
+<      
+<     udph->check = csum( (unsigned short*) pseudogram , psize);
+< 
+< 	int status;
+<     status = sendto(client_socket, datagram, iph->tot_len, 0 , (struct sockaddr*) &server_sock_addr, sizeof(server_sock_addr));
+< 	
+<     report_error(status);
+< 
+< 
+<  }
+< 
+697d593
+< 
+770,771c666,667
+< 	int status;
+<     status = sendto(client_socket, datagram, iph->tot_len, 0 , (struct sockaddr*) &server_sock_addr, sizeof(server_sock_addr));
+---
+> 	 int status;
+>         status = sendto(client_socket, datagram, iph->tot_len, 0 , (struct sockaddr*) &server_sock_addr, sizeof(server_sock_addr));
+773c669
+<     report_error(status);
+---
+>         report_error(status);
+810c706
+<         string f = "iperf3 -c "+dstIp+" -p "+to_string(portnum)+" -b "+rate+" -M "+to_string(LINK_MTU)+" -f "+format+" -t "+to_string(meanTime)+" -B "+srcIp;
+---
+>  string f = "iperf3 -c "+dstIp+" -p "+to_string(portnum)+" -b "+rate+" -M "+to_string(LINK_MTU)+" -f "+format+" -t "+to_string(meanTime)+" -B "+srcIp;
+817c713
+< 		        cout<<"*** client.cpp DATA TIME _--- "<<meanTime<<endl;
+---
+> 		cout<<"*** client.cpp DATA TIME _--- "<<meanTime<<endl;
+828,831c724
+< 	// string g = runIperfCommand("iperf3 -c "+dstIp+" -p "+to_string(portnum)+" -b "+rate+" -M "+to_string(LINK_MTU)+" -f "+format+" -t "+to_string(meanTime)+" -B "+srcIp, srcIp);
+<     string No_of_bytes="1K";
+< 	string g = runIperfCommand("iperf3 -c "+dstIp+" -p "+to_string(portnum)+" -b "+rate+" -M "+to_string(LINK_MTU)+" -f "+format+" -n "+No_of_bytes+" -B "+srcIp+" -l "+to_string(1424), srcIp );
+< 
+---
+> 	string g = runIperfCommand("iperf3 -c "+dstIp+" -p "+to_string(portnum)+" -b "+rate+" -M "+to_string(LINK_MTU)+" -f "+format+" -t "+to_string(meanTime)+" -B "+srcIp, srcIp);
+923d815
+<         // cout<<"cmd = "<<cmd<<endl;
+926c818
+<         // cmd.append(" 2>&1");
+---
+>         cmd.append(" 2>&1");
+939d830
+< 
+947,965c838,846
+<                 string get_pid = "ps -aux | grep -E 'iperf3.*"+srcIp+"'|grep -v 'grep'| tr -s \" \"| cut -d \" \" -f 2";
+<                 //cout<<"client --- GET PID COMMAND --- "<<get_pid<<endl;
+<                 string pid = GetStdoutFromCommand(get_pid);
+<                 //cout<<"\nclient --- PROCESS TO KILL - "<<pid<<endl; 	
+<                 if(!pid.empty()){
+<                     //cout<<"\ninside PROCESS TO KILL - "<<pid<<endl; 		
+<                     string kill_out = GetStdoutFromCommand("sudo kill -9 "+pid);
+<                     
+<                     //cout<<"KILL OUTPUT ---- "<<kill_out<<endl;
+< 		        }
+<        	
+< 
+< 
+< 		    int status = pclose(stream);
+<             if(status!=-1){
+< 
+<             }
+<             else{
+<             cout<<"status some error= "<<endl;
+---
+> 		string get_pid = "ps -aux | grep -E 'iperf3.*"+srcIp+"'|grep -v 'grep'| tr -s \" \"| cut -d \" \" -f 2";
+> 		//cout<<"client --- GET PID COMMAND --- "<<get_pid<<endl;
+> 		string pid = GetStdoutFromCommand(get_pid);
+> 		//cout<<"\nclient --- PROCESS TO KILL - "<<pid<<endl; 	
+> 		if(!pid.empty()){
+> 			//cout<<"\ninside PROCESS TO KILL - "<<pid<<endl; 		
+> 			string kill_out = GetStdoutFromCommand("sudo kill -9 "+pid);
+> 			//cout<<"KILL OUTPUT ---- "<<kill_out<<endl;
+> 		}		
+967,971d847
+<             }
+<         }
+<         else{
+<             cout<<"some eroor in stream in runiperfcommand"<<endl;
+<         }
+973c849,850
+<         
+---
+> 		pclose(stream);
+>         }
+974a852
+> 
+984,985c862,863
+<         // if you want to see error uncomment the below line
+<         // cmd.append(" 2>&1");
+---
+> 
+>         cmd.append(" 2>&1");
+999,1010c877
+< 		// pclose(stream);
+<         int status = pclose(stream);
+<             if(status!=-1){
+< 
+<             }
+<             else{
+<             cout<<"status ###################= "<<endl;
+< 
+<             }
+<         }
+<         else{
+<             cout<<"some error in stream"<<endl;
+---
+> 		pclose(stream);
