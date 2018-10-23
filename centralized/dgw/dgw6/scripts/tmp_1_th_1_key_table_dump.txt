@@ -1,0 +1,485 @@
+Obtaining JSON from switch...
+Done
+Control utility for runtime P4 table manipulation
+RuntimeCmd: ==========
+TABLE ENTRIES
+**********
+Dumping entry 0x3c000000
+Match key:
+* vlan.vid            : EXACT     0078
+Action entry: c_ingress.populate_ip_op_tun_s2_uplink - 3d, 02
+**********
+Dumping entry 0x3c000001
+Match key:
+* vlan.vid            : EXACT     007d
+Action entry: c_ingress.populate_ip_op_tun_s2_uplink - 3d, 02
+**********
+Dumping entry 0x3c000002
+Match key:
+* vlan.vid            : EXACT     008c
+Action entry: c_ingress.populate_ip_op_tun_s2_uplink - 3d, 02
+**********
+Dumping entry 0x3c000003
+Match key:
+* vlan.vid            : EXACT     0073
+Action entry: c_ingress.populate_ip_op_tun_s2_uplink - 3d, 02
+**********
+Dumping entry 0x3c000004
+Match key:
+* vlan.vid            : EXACT     006e
+Action entry: c_ingress.populate_ip_op_tun_s2_uplink - 3d, 02
+**********
+Dumping entry 0x3c000005
+Match key:
+* vlan.vid            : EXACT     0096
+Action entry: c_ingress.populate_ip_op_tun_s2_uplink - 3d, 02
+**********
+Dumping entry 0x3c000006
+Match key:
+* vlan.vid            : EXACT     005a
+Action entry: c_ingress.populate_ip_op_tun_s2_uplink - 3d, 02
+**********
+Dumping entry 0x3c000007
+Match key:
+* vlan.vid            : EXACT     0091
+Action entry: c_ingress.populate_ip_op_tun_s2_uplink - 3d, 02
+**********
+Dumping entry 0x3c000008
+Match key:
+* vlan.vid            : EXACT     0064
+Action entry: c_ingress.populate_ip_op_tun_s2_uplink - 3d, 02
+**********
+Dumping entry 0x3c000009
+Match key:
+* vlan.vid            : EXACT     0069
+Action entry: c_ingress.populate_ip_op_tun_s2_uplink - 3d, 02
+**********
+Dumping entry 0x3c00000a
+Match key:
+* vlan.vid            : EXACT     009b
+Action entry: c_ingress.populate_ip_op_tun_s2_uplink - 3d, 02
+**********
+Dumping entry 0x3c00000b
+Match key:
+* vlan.vid            : EXACT     0082
+Action entry: c_ingress.populate_ip_op_tun_s2_uplink - 3d, 02
+**********
+Dumping entry 0x3c00000f
+Match key:
+* vlan.vid            : EXACT     00a5
+Action entry: c_ingress.populate_ip_op_tun_s2_uplink - 3d, 02
+**********
+Dumping entry 0x3c00001e
+Match key:
+* vlan.vid            : EXACT     00c8
+Action entry: c_ingress.populate_ip_op_tun_s2_uplink - 3d, 02
+**********
+Dumping entry 0x3c00001f
+Match key:
+* vlan.vid            : EXACT     00aa
+Action entry: c_ingress.populate_ip_op_tun_s2_uplink - 3d, 02
+**********
+Dumping entry 0x3c000022
+Match key:
+* vlan.vid            : EXACT     0127
+Action entry: c_ingress.populate_ip_op_tun_s2_uplink - 3d, 02
+**********
+Dumping entry 0x3c000024
+Match key:
+* vlan.vid            : EXACT     0118
+Action entry: c_ingress.populate_ip_op_tun_s2_uplink - 3d, 02
+**********
+Dumping entry 0x3c000028
+Match key:
+* vlan.vid            : EXACT     0087
+Action entry: c_ingress.populate_ip_op_tun_s2_uplink - 3d, 02
+**********
+Dumping entry 0x3c00002a
+Match key:
+* vlan.vid            : EXACT     00af
+Action entry: c_ingress.populate_ip_op_tun_s2_uplink - 3d, 02
+**********
+Dumping entry 0x3c00002d
+Match key:
+* vlan.vid            : EXACT     00d7
+Action entry: c_ingress.populate_ip_op_tun_s2_uplink - 3d, 02
+**********
+Dumping entry 0x3c00002e
+Match key:
+* vlan.vid            : EXACT     0104
+Action entry: c_ingress.populate_ip_op_tun_s2_uplink - 3d, 02
+**********
+Dumping entry 0x3c00002f
+Match key:
+* vlan.vid            : EXACT     0122
+Action entry: c_ingress.populate_ip_op_tun_s2_uplink - 3d, 02
+**********
+Dumping entry 0x3c000030
+Match key:
+* vlan.vid            : EXACT     00eb
+Action entry: c_ingress.populate_ip_op_tun_s2_uplink - 3d, 02
+**********
+Dumping entry 0x3c000031
+Match key:
+* vlan.vid            : EXACT     00b4
+Action entry: c_ingress.populate_ip_op_tun_s2_uplink - 3d, 02
+**********
+Dumping entry 0x3c000032
+Match key:
+* vlan.vid            : EXACT     0109
+Action entry: c_ingress.populate_ip_op_tun_s2_uplink - 3d, 02
+**********
+Dumping entry 0x3c000033
+Match key:
+* vlan.vid            : EXACT     012c
+Action entry: c_ingress.populate_ip_op_tun_s2_uplink - 3d, 02
+**********
+Dumping entry 0x3c000034
+Match key:
+* vlan.vid            : EXACT     010e
+Action entry: c_ingress.populate_ip_op_tun_s2_uplink - 3d, 02
+**********
+Dumping entry 0x3c000035
+Match key:
+* vlan.vid            : EXACT     00b9
+Action entry: c_ingress.populate_ip_op_tun_s2_uplink - 3d, 02
+**********
+Dumping entry 0x3c000037
+Match key:
+* vlan.vid            : EXACT     00ff
+Action entry: c_ingress.populate_ip_op_tun_s2_uplink - 3d, 02
+**********
+Dumping entry 0x3c000038
+Match key:
+* vlan.vid            : EXACT     00c3
+Action entry: c_ingress.populate_ip_op_tun_s2_uplink - 3d, 02
+**********
+Dumping entry 0x3c000039
+Match key:
+* vlan.vid            : EXACT     0131
+Action entry: c_ingress.populate_ip_op_tun_s2_uplink - 3d, 02
+**********
+Dumping entry 0x3c00003a
+Match key:
+* vlan.vid            : EXACT     0140
+Action entry: c_ingress.populate_ip_op_tun_s2_uplink - 3d, 02
+**********
+Dumping entry 0x3c00003b
+Match key:
+* vlan.vid            : EXACT     011d
+Action entry: c_ingress.populate_ip_op_tun_s2_uplink - 3d, 02
+**********
+Dumping entry 0x3c00003c
+Match key:
+* vlan.vid            : EXACT     00be
+Action entry: c_ingress.populate_ip_op_tun_s2_uplink - 3d, 02
+**********
+Dumping entry 0x3c00003d
+Match key:
+* vlan.vid            : EXACT     00cd
+Action entry: c_ingress.populate_ip_op_tun_s2_uplink - 3d, 02
+**********
+Dumping entry 0x3c00003e
+Match key:
+* vlan.vid            : EXACT     00d2
+Action entry: c_ingress.populate_ip_op_tun_s2_uplink - 3d, 02
+**********
+Dumping entry 0x3c00003f
+Match key:
+* vlan.vid            : EXACT     013b
+Action entry: c_ingress.populate_ip_op_tun_s2_uplink - 3d, 02
+**********
+Dumping entry 0x3c000041
+Match key:
+* vlan.vid            : EXACT     014a
+Action entry: c_ingress.populate_ip_op_tun_s2_uplink - 3d, 02
+**********
+Dumping entry 0x3c000043
+Match key:
+* vlan.vid            : EXACT     0154
+Action entry: c_ingress.populate_ip_op_tun_s2_uplink - 3d, 02
+**********
+Dumping entry 0x3d000044
+Match key:
+* vlan.vid            : EXACT     0258
+Action entry: c_ingress.populate_ip_op_tun_s2_uplink - 3e, 02
+**********
+Dumping entry 0x3d000045
+Match key:
+* vlan.vid            : EXACT     027b
+Action entry: c_ingress.populate_ip_op_tun_s2_uplink - 3e, 02
+**********
+Dumping entry 0x3d000046
+Match key:
+* vlan.vid            : EXACT     0262
+Action entry: c_ingress.populate_ip_op_tun_s2_uplink - 3e, 02
+**********
+Dumping entry 0x3d000047
+Match key:
+* vlan.vid            : EXACT     0276
+Action entry: c_ingress.populate_ip_op_tun_s2_uplink - 3e, 02
+**********
+Dumping entry 0x3c000048
+Match key:
+* vlan.vid            : EXACT     00f0
+Action entry: c_ingress.populate_ip_op_tun_s2_uplink - 3d, 02
+**********
+Dumping entry 0x3d000049
+Match key:
+* vlan.vid            : EXACT     0267
+Action entry: c_ingress.populate_ip_op_tun_s2_uplink - 3e, 02
+**********
+Dumping entry 0x3d00004a
+Match key:
+* vlan.vid            : EXACT     0285
+Action entry: c_ingress.populate_ip_op_tun_s2_uplink - 3e, 02
+**********
+Dumping entry 0x3d00004b
+Match key:
+* vlan.vid            : EXACT     0280
+Action entry: c_ingress.populate_ip_op_tun_s2_uplink - 3e, 02
+**********
+Dumping entry 0x3d00004c
+Match key:
+* vlan.vid            : EXACT     0271
+Action entry: c_ingress.populate_ip_op_tun_s2_uplink - 3e, 02
+**********
+Dumping entry 0x3d00004d
+Match key:
+* vlan.vid            : EXACT     025d
+Action entry: c_ingress.populate_ip_op_tun_s2_uplink - 3e, 02
+**********
+Dumping entry 0x3d00004e
+Match key:
+* vlan.vid            : EXACT     026c
+Action entry: c_ingress.populate_ip_op_tun_s2_uplink - 3e, 02
+**********
+Dumping entry 0x3d000050
+Match key:
+* vlan.vid            : EXACT     028f
+Action entry: c_ingress.populate_ip_op_tun_s2_uplink - 3e, 02
+**********
+Dumping entry 0x3d000053
+Match key:
+* vlan.vid            : EXACT     02fd
+Action entry: c_ingress.populate_ip_op_tun_s2_uplink - 3e, 02
+**********
+Dumping entry 0x3c000054
+Match key:
+* vlan.vid            : EXACT     0163
+Action entry: c_ingress.populate_ip_op_tun_s2_uplink - 3d, 02
+**********
+Dumping entry 0x3d000058
+Match key:
+* vlan.vid            : EXACT     0311
+Action entry: c_ingress.populate_ip_op_tun_s2_uplink - 3e, 02
+**********
+Dumping entry 0x3c00005b
+Match key:
+* vlan.vid            : EXACT     015e
+Action entry: c_ingress.populate_ip_op_tun_s2_uplink - 3d, 02
+**********
+Dumping entry 0x3d00005c
+Match key:
+* vlan.vid            : EXACT     0307
+Action entry: c_ingress.populate_ip_op_tun_s2_uplink - 3e, 02
+**********
+Dumping entry 0x3c00005d
+Match key:
+* vlan.vid            : EXACT     014f
+Action entry: c_ingress.populate_ip_op_tun_s2_uplink - 3d, 02
+**********
+Dumping entry 0x3c00005e
+Match key:
+* vlan.vid            : EXACT     016d
+Action entry: c_ingress.populate_ip_op_tun_s2_uplink - 3d, 02
+**********
+Dumping entry 0x3c00005f
+Match key:
+* vlan.vid            : EXACT     0145
+Action entry: c_ingress.populate_ip_op_tun_s2_uplink - 3d, 02
+**********
+Dumping entry 0x3d000060
+Match key:
+* vlan.vid            : EXACT     031b
+Action entry: c_ingress.populate_ip_op_tun_s2_uplink - 3e, 02
+**********
+Dumping entry 0x3d000061
+Match key:
+* vlan.vid            : EXACT     0302
+Action entry: c_ingress.populate_ip_op_tun_s2_uplink - 3e, 02
+**********
+Dumping entry 0x3c000062
+Match key:
+* vlan.vid            : EXACT     00f5
+Action entry: c_ingress.populate_ip_op_tun_s2_uplink - 3d, 02
+**********
+Dumping entry 0x3d000063
+Match key:
+* vlan.vid            : EXACT     02ad
+Action entry: c_ingress.populate_ip_op_tun_s2_uplink - 3e, 02
+**********
+Dumping entry 0x3c000064
+Match key:
+* vlan.vid            : EXACT     00fa
+Action entry: c_ingress.populate_ip_op_tun_s2_uplink - 3d, 02
+**********
+Dumping entry 0x3d000066
+Match key:
+* vlan.vid            : EXACT     02e4
+Action entry: c_ingress.populate_ip_op_tun_s2_uplink - 3e, 02
+**********
+Dumping entry 0x3c000067
+Match key:
+* vlan.vid            : EXACT     00e6
+Action entry: c_ingress.populate_ip_op_tun_s2_uplink - 3d, 02
+**********
+Dumping entry 0x3d000068
+Match key:
+* vlan.vid            : EXACT     02f3
+Action entry: c_ingress.populate_ip_op_tun_s2_uplink - 3e, 02
+**********
+Dumping entry 0x3d000069
+Match key:
+* vlan.vid            : EXACT     02a3
+Action entry: c_ingress.populate_ip_op_tun_s2_uplink - 3e, 02
+**********
+Dumping entry 0x3d00006a
+Match key:
+* vlan.vid            : EXACT     02c6
+Action entry: c_ingress.populate_ip_op_tun_s2_uplink - 3e, 02
+**********
+Dumping entry 0x3c00006b
+Match key:
+* vlan.vid            : EXACT     0136
+Action entry: c_ingress.populate_ip_op_tun_s2_uplink - 3d, 02
+**********
+Dumping entry 0x3c00006c
+Match key:
+* vlan.vid            : EXACT     00a0
+Action entry: c_ingress.populate_ip_op_tun_s2_uplink - 3d, 02
+**********
+Dumping entry 0x3c00006d
+Match key:
+* vlan.vid            : EXACT     0159
+Action entry: c_ingress.populate_ip_op_tun_s2_uplink - 3d, 02
+**********
+Dumping entry 0x3c00006e
+Match key:
+* vlan.vid            : EXACT     00e1
+Action entry: c_ingress.populate_ip_op_tun_s2_uplink - 3d, 02
+**********
+Dumping entry 0x3d00006f
+Match key:
+* vlan.vid            : EXACT     032a
+Action entry: c_ingress.populate_ip_op_tun_s2_uplink - 3e, 02
+**********
+Dumping entry 0x3d000071
+Match key:
+* vlan.vid            : EXACT     02e9
+Action entry: c_ingress.populate_ip_op_tun_s2_uplink - 3e, 02
+**********
+Dumping entry 0x3d000072
+Match key:
+* vlan.vid            : EXACT     02da
+Action entry: c_ingress.populate_ip_op_tun_s2_uplink - 3e, 02
+**********
+Dumping entry 0x3d000073
+Match key:
+* vlan.vid            : EXACT     0320
+Action entry: c_ingress.populate_ip_op_tun_s2_uplink - 3e, 02
+**********
+Dumping entry 0x3d000074
+Match key:
+* vlan.vid            : EXACT     02b7
+Action entry: c_ingress.populate_ip_op_tun_s2_uplink - 3e, 02
+**********
+Dumping entry 0x3c000075
+Match key:
+* vlan.vid            : EXACT     00dc
+Action entry: c_ingress.populate_ip_op_tun_s2_uplink - 3d, 02
+**********
+Dumping entry 0x3d000076
+Match key:
+* vlan.vid            : EXACT     02a8
+Action entry: c_ingress.populate_ip_op_tun_s2_uplink - 3e, 02
+**********
+Dumping entry 0x3d000077
+Match key:
+* vlan.vid            : EXACT     02bc
+Action entry: c_ingress.populate_ip_op_tun_s2_uplink - 3e, 02
+**********
+Dumping entry 0x3d000078
+Match key:
+* vlan.vid            : EXACT     030c
+Action entry: c_ingress.populate_ip_op_tun_s2_uplink - 3e, 02
+**********
+Dumping entry 0x3d000079
+Match key:
+* vlan.vid            : EXACT     0294
+Action entry: c_ingress.populate_ip_op_tun_s2_uplink - 3e, 02
+**********
+Dumping entry 0x3d00007a
+Match key:
+* vlan.vid            : EXACT     029e
+Action entry: c_ingress.populate_ip_op_tun_s2_uplink - 3e, 02
+**********
+Dumping entry 0x3c00007b
+Match key:
+* vlan.vid            : EXACT     0113
+Action entry: c_ingress.populate_ip_op_tun_s2_uplink - 3d, 02
+**********
+Dumping entry 0x3d00007c
+Match key:
+* vlan.vid            : EXACT     02cb
+Action entry: c_ingress.populate_ip_op_tun_s2_uplink - 3e, 02
+**********
+Dumping entry 0x3d00007d
+Match key:
+* vlan.vid            : EXACT     02d5
+Action entry: c_ingress.populate_ip_op_tun_s2_uplink - 3e, 02
+**********
+Dumping entry 0x3d00007e
+Match key:
+* vlan.vid            : EXACT     02ee
+Action entry: c_ingress.populate_ip_op_tun_s2_uplink - 3e, 02
+**********
+Dumping entry 0x3d00007f
+Match key:
+* vlan.vid            : EXACT     02d0
+Action entry: c_ingress.populate_ip_op_tun_s2_uplink - 3e, 02
+**********
+Dumping entry 0x3d000080
+Match key:
+* vlan.vid            : EXACT     02df
+Action entry: c_ingress.populate_ip_op_tun_s2_uplink - 3e, 02
+**********
+Dumping entry 0x3d000081
+Match key:
+* vlan.vid            : EXACT     028a
+Action entry: c_ingress.populate_ip_op_tun_s2_uplink - 3e, 02
+**********
+Dumping entry 0x3d000082
+Match key:
+* vlan.vid            : EXACT     0299
+Action entry: c_ingress.populate_ip_op_tun_s2_uplink - 3e, 02
+**********
+Dumping entry 0x3d000083
+Match key:
+* vlan.vid            : EXACT     02f8
+Action entry: c_ingress.populate_ip_op_tun_s2_uplink - 3e, 02
+**********
+Dumping entry 0x3d000084
+Match key:
+* vlan.vid            : EXACT     02c1
+Action entry: c_ingress.populate_ip_op_tun_s2_uplink - 3e, 02
+**********
+Dumping entry 0x3d000085
+Match key:
+* vlan.vid            : EXACT     02b2
+Action entry: c_ingress.populate_ip_op_tun_s2_uplink - 3e, 02
+==========
+Dumping default entry
+Action entry: NoAction - 
+==========
+RuntimeCmd: 

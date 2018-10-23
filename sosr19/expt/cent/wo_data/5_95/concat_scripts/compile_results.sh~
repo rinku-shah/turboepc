@@ -1,0 +1,3 @@
+paste stats_1.csv stats_2.csv stats_3.csv |tr -s "," " " > tmp
+cat tmp| tail -n +2 > tmp_stats
+awk -f compile_results.awk tmp_stats > stats_delay.dat

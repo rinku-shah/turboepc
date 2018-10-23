@@ -1,0 +1,2 @@
+table_dump c_ingress.ip_op_tun_s2_uplink --thrift-port 9090
+table_dump c_ingress.ip_op_tun_s2_uplink --thrift-port 9090
