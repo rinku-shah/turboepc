@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+option java_package = "org.onosproject.grpc.ctl.dummy";
+
+package dummy;
+
+service DummyService {
+    rpc SayHello (DummyMessageThatNoOneWouldReallyUse) returns (DummyMessageThatNoOneWouldReallyUse) {
+    }
+}
+
+message DummyMessageThatNoOneWouldReallyUse {
+}
