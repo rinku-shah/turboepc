@@ -1,0 +1,12 @@
+Raw Send Socket created
+Raw Receive Socket created
+data len = 7
+SENDING - @:##:@
+My Print -- received13@:##:@10.127.1.5
+Received starting ip=10.127.1.5
+Allocating IPs. Please wait...
+inside multithreading_add_ip
+Generating IPs: bash ./ipgen.sh 10.127.1.5 /16 12 eth1
+starting ipgen
+returned from java
+time=1sec
