@@ -1,0 +1,5 @@
+# traffic_mix hit_latency(ms) miss_latency(ms) cent_latency(ms)
+1:99	1.239	4.416	4.73
+5:95	1.591	4.503	5.22
+10:90	1.868	4.736	5.441
+15:85	3.566	4.859	5.559
