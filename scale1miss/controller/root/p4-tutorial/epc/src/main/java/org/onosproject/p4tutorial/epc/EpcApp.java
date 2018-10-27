@@ -942,7 +942,7 @@ public class EpcApp {
                         // populates this map on SGW switch
                         DeviceId offload_SGWswitchName1 = Constants.getSgwswitchName(dgw_dpId);
 			// If ue_key is between UE_LB & UE_UB do not push state to switch
-			if (Integer.parseInt(tmpArray[2]) < Constants.UE_LB && Integer.parseInt(tmpArray[2]) > Constants.UE_UB) {
+			if (Integer.parseInt(tmpArray[2]) < Constants.UE_LB || Integer.parseInt(tmpArray[2]) > Constants.UE_UB) {
 	                        fr.populate_uekey_sgwteid_map(false,appId,flowRuleService,offload_SGWswitchName1,Integer.parseInt(tmpArray[2]),sgw_teid);
 			}
 
@@ -1051,7 +1051,7 @@ public class EpcApp {
                         // populate all these rules on SGW switch only
                         DeviceId offload_SGWswitchName2 = Constants.getSgwswitchName(dgw_dpId1);
                         ue_state = 1;
-			if (Integer.parseInt(tmpArray[2]) < Constants.UE_LB && Integer.parseInt(tmpArray[2]) > Constants.UE_UB) {
+			if (Integer.parseInt(tmpArray[2]) < Constants.UE_LB || Integer.parseInt(tmpArray[2]) > Constants.UE_UB) {
 	                        fr.populate_uekey_uestate_map(false,appId,flowRuleService,offload_SGWswitchName2,Integer.parseInt(tmpArray[2]),ue_state);
 	                        fr.populate_uekey_guti_map(false,appId,flowRuleService,offload_SGWswitchName2,Integer.parseInt(tmpArray[2]),(Integer.parseInt(tmpArray[2])+1000));
 			}
@@ -1218,7 +1218,7 @@ public class EpcApp {
 
                             // @offload design : remove populated auxilary tables from SGW switch in detach case
                             // while deleting rules we dont need match values so sendong match parameters as 0 in all cases
-			 if (Integer.parseInt(tmpArray[4]) < Constants.UE_LB && Integer.parseInt(tmpArray[4]) > Constants.UE_UB) {
+			 if (Integer.parseInt(tmpArray[4]) < Constants.UE_LB || Integer.parseInt(tmpArray[4]) > Constants.UE_UB) {
                             fr.populate_uekey_uestate_map(true,appId,flowRuleService,offload_SGWswitchName3,Integer.parseInt(tmpArray[4]),0);
                             fr.populate_uekey_guti_map(true,appId,flowRuleService,offload_SGWswitchName3,Integer.parseInt(tmpArray[4]),0);
                             fr.populate_uekey_sgwteid_map(true,appId,flowRuleService,offload_SGWswitchName3,Integer.parseInt(tmpArray[4]),0);
