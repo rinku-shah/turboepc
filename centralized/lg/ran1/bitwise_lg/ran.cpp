@@ -91,7 +91,7 @@ bool instrumentTptLat = false; //Instrument num_ue and response_time every 10 se
 /// DYNAMIC LOAD GENERATOR ///
 //  11 for ATTACH Detach and 0  for service request
 //10 for all service request
-// 9 for mix x:y--- tune loop1,loop2 in case 4
+// 9 for mix x:y--- tune loop1,loop2
 int mix_num=9;	//choose the traffix mix from above traffic_options -> {0,1,2}  // 11 means only attach request will be sent
 float a_prob = 0;
 float s_prob = 0;
@@ -141,6 +141,7 @@ unsigned long long prev_lat = 0; //To remember lat till previous period
 vector<unsigned long long> num_ue_per_thread;
 vector<unsigned long long> ue_registration_response_time;
 vector<unsigned long long> stored_ue_registration_response_time;//For delay distribution
+vector<unsigned long long> sr_registration_response_time;
 //long delay[1000][10000]; //For storing index of UE delays
 
 string rate;		// Rate at which each UE sends data
@@ -377,8 +378,8 @@ void* multithreading_func(void *arg){
 					checkIntegrity_t = false;
 					ueServiceRequest_t = true;
 					dataTime = 1;
-					loop1 = 50;    //outer loop---attach
-					loop2 = 50;   //inner loop---service-req
+					loop1 = 20;    //outer loop---attach
+					loop2 = 80;   //inner loop---service-req
 					break;
 
 			/* att-serv-req-data-loop2-det*/
@@ -408,7 +409,7 @@ void* multithreading_func(void *arg){
 			gettimeofday(&start, NULL);
 			//usleep(my_rand()+2000);
 			// usleep(200000);
-			usleep(100);
+			usleep(10000);
 			if(attach_with_mme(ue, user, checkIntegrity_t)){ 	// Authentication
 				//if(setUpTunnel_t || serviceRequestLoopFlag){
 					// Setup tunnel
@@ -453,7 +454,7 @@ void* multithreading_func(void *arg){
 								cout<<"Sending DATA - traffic_type = "<<traffic_type<<" DATA TIME = "<<dataTime<<endl;
 							}
 							usleep(10000);
-							send_socket_data(tmpArray[1].c_str());
+							//send_socket_data(tmpArray[1].c_str());
 
 							//currentPort = send_ue_data(ue, ue_num, rate, currentPort, startingPort, endPort, user, tmpArray, dataTime);
 							// usleep(100000);
@@ -461,7 +462,7 @@ void* multithreading_func(void *arg){
 						if(s1_release_t){
 							//cout<<"SLEEPING BEFORE s1 release"<<endl;
 							usleep(my_rand()+2000);		//200-700 usec
-							// usleep(100000);
+							usleep(40000);
 							//sreqNo++;
 							gettimeofday(&start2, NULL);
 							ue_context_release(ue, user, ue_num, tmpArray[1], tmpArray[2], tmpArray[3], currentPort, networkServiceRequest);
@@ -475,6 +476,7 @@ void* multithreading_func(void *arg){
 							mtime = ((seconds) * 1000000 + useconds);
 							lat_mtx.lock();
 							ue_registration_response_time[threadId] += mtime;
+							sr_registration_response_time[threadId] += mtime;
 							lat_mtx.unlock();
 						
 							if(DO_DEBUG){
@@ -499,9 +501,9 @@ void* multithreading_func(void *arg){
 								lat_mtx.unlock();
 								//cout<<"SLEEPING BEFORE service request"<<endl;
 								//usleep(my_rand());
-								//usleep(my_rand()+2000);
-								// usleep(100000);
 								usleep(my_rand()+2000);
+								usleep(40000);
+								//usleep(my_rand()+2000);
 								gettimeofday(&start2, NULL);
 								tmpArray[3] = ue_service_request(ue, user, ue_num, tmpArray[1]); //returns newly generated ue_teid
 									//////PRINT REG TIME TO ARRAY////
@@ -511,6 +513,7 @@ void* multithreading_func(void *arg){
 								mtime = ((seconds) * 1000000 + useconds);
 								lat_mtx.lock();
 								ue_registration_response_time[threadId] += mtime;
+								sr_registration_response_time[threadId] += mtime;
 								lat_mtx.unlock();
 								/*stored_ue_registration_response_time[j] = mtime;
 								j = j + 1;*/
@@ -827,6 +830,7 @@ int main(int argc, char *args[]){
 
 	num_ue_per_thread.resize(maxThreads, 0);
 	ue_registration_response_time.resize(maxThreads, 0);
+	sr_registration_response_time.resize(maxThreads, 0);
         //int ue_per_thr = 50000;
 	stored_ue_registration_response_time.resize(UE_PER_THREAD, 0);
 
@@ -900,6 +904,8 @@ int main(int argc, char *args[]){
 	int total_ue = 0;
 	unsigned long long total_reistration_time = 0;
 	double average_registration_time = 0.0;
+	unsigned long long total_sr_reistration_time = 0;
+        double average_sr_registration_time = 0.0;
 	double registrationThroughput = 0.0;
 
 	// Sleep for the specified simulation time
@@ -949,10 +955,12 @@ int main(int argc, char *args[]){
 	for(int i=0;i<maxThreads;i++){
 		total_ue += num_ue_per_thread[i];
 		total_reistration_time += ue_registration_response_time[i];
+		total_sr_reistration_time += sr_registration_response_time[i];
 		cout<<"num_ue_per_thread["<<i<<"] "<<num_ue_per_thread[i]<<endl;
 		cout<<"ue_registration_response_time["<<i<<"] "<<((ue_registration_response_time[i]*1.0)/num_ue_per_thread[i])<<" us"<<endl;
 	}
 	average_registration_time = (total_reistration_time*1.0)/(total_ue*1.0);
+	average_sr_registration_time = (total_sr_reistration_time*1.0)/(sreqNo*1.0);
 	registrationThroughput = (total_ue*1.0)/(actual_endTime - curTime);
 
 	cout<<"***************************************STATISTICS***************************************"<<endl;
@@ -969,6 +977,7 @@ int main(int argc, char *args[]){
 
 	average_registration_time = average_registration_time/1000000.0;
 	cout<<"Latency = "<<average_registration_time<<" secs"<<endl;
+	cout<<"Service Request Latency = "<<average_sr_registration_time<<" usecs"<<endl;
 	cout<<"Registration Throughput="<<registrationThroughput<<" registrations/sec"<<endl;
 	cout<<"Attach-Request= "<<attNo<<"  Detach-Request= "<< detNo<<"  Service-Request= "<<sreqNo<<endl;
 	cout << fixed;
@@ -1003,7 +1012,7 @@ int main(int argc, char *args[]){
 		data.append("#Attach").append(COMMA).append("#Detach").append(COMMA);
 		data.append("#Service_Requests").append(COMMA);
 		data.append("ATTACH_PERCENT").append(COMMA);
-		data.append("EPOCH_TPT").append(COMMA).append("EPOCH_DELAY_ms");
+		data.append("EPOCH_TPT").append(COMMA).append("EPOCH_DELAY_ms").append(COMMA).append("ServiceRequestLatency");
 		data.append("\n");
 	}
 	/*if(!fileExists(INST_FILE)){
@@ -1024,7 +1033,7 @@ int main(int argc, char *args[]){
 		data.append(to_string(UE_MEAN_DATA_SENDING_TIME)).append(COMMA).append(rate).append(COMMA);
 		data.append(to_string(attNo)).append(COMMA);
 		data.append(to_string(detNo)).append(COMMA).append(to_string(sreqNo)).append(COMMA);
-		data.append(to_string(traffic_percent));
+		data.append(to_string(traffic_percent)).append(COMMA).append(to_string(average_sr_registration_time));
 		if (dynLoad==true){
 			for (int i=0; i<=curr_mix_index; i++){
 				data.append(COMMA).append(to_string(tpt[i])).append(COMMA).append(to_string(lat[i]));
