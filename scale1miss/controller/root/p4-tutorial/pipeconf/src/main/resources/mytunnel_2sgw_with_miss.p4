@@ -625,7 +625,9 @@ control c_ingress(inout headers hdr,
             if (t_l3_fwd.apply().hit) {
                 // Packet hit an entry in t_l2_fwd table. A forwarding action
                 // has already been taken. No need to apply other tables, exit
-                // this control block.
+                // this control block. This table has entries to send all ROOT related 
+		// control messages to the controller(send_to_cpu) 
+		//Centralized mode: all messages Offload mode: Only messages that require central control
                 return;
             }
 
@@ -670,7 +672,15 @@ control c_ingress(inout headers hdr,
                             }
                             // UDP means control traffic
                             else if(hdr.ipv4.protocol == PROTO_UDP){
-                                    standard_metadata.egress_spec = 2;
+				//@rinku: Test the ue_key to decide egress spec as either 2(sgw1) or 3(sgw2)
+				    if(((hdr.ue_context_rel_req.ue_num >= 100) && (hdr.ue_context_rel_req.ue_num <= 101))|| ((hdr.initial_ctxt_setup_resp.ue_key >= 100) && (hdr.initial_ctxt_setup_resp.ue_key <= 101)) || ((hdr.ue_service_req.ue_key >= 100) && (hdr.ue_service_req.ue_key <= 101)) ) {
+	                                    standard_metadata.egress_spec = 2;
+				    }
+//((hdr.initial_ctxt_setup_resp.ue_key >= 102) && (hdr.initial_ctxt_setup_resp.ue_key <= 103))
+				    else 
+				        if(((hdr.ue_context_rel_req.ue_num >= 102) && (hdr.ue_context_rel_req.ue_num <= 103))|| ((hdr.initial_ctxt_setup_resp.ue_key >= 102) && (hdr.initial_ctxt_setup_resp.ue_key <= 103)) || ((hdr.ue_service_req.ue_key >= 102) && (hdr.ue_service_req.ue_key <= 103)) ) {
+	                                    standard_metadata.egress_spec = 3;
+				    }
                                     hdr.ipv4.ttl = hdr.ipv4.ttl - 1;
                                     // return;
                             }
@@ -691,10 +701,10 @@ control c_ingress(inout headers hdr,
                             // in all 3msg types reply back to RAN 
                             // clone the original packet, handle the cloned pkt at egress to send back to RAN
                             // forward the original packet to lcoal onos 
-			//All UEs from 100 to 103 will miss the table & processed at Root, when if... >103
-                  //if((hdr.ue_context_rel_req.ue_num > 103) || (hdr.initial_ctxt_setup_resp.ue_key > 103)|| (hdr.ue_service_req.ue_key > 103)) {  // The ue_context is not in this partition; miss
-                  // we use I2E_CLONE_SESSION_ID = 500 and set the out port as 1 in egress pipeline to reply back to RAN
-		  if((hdr.ue_context_rel_req.ue_num > 99) || (hdr.initial_ctxt_setup_resp.ue_key > 99)|| (hdr.ue_service_req.ue_key > 99)) { // HIT on the switch for uekey >99 i.e. all UE
+			//@rinku: All UEs from 100 to 103 will miss the table & processed at Root, when if... >103
+			//@rinku: In case of two SGWs put range of both partitions since only the request of specific partition arrive at a particular SGW
+                  if((hdr.ue_context_rel_req.ue_num > 103) || (hdr.initial_ctxt_setup_resp.ue_key > 103)|| (hdr.ue_service_req.ue_key > 103)) {  // The ue_context is not in this partition; miss
+                    // we use I2E_CLONE_SESSION_ID = 500 and set the out port as 1 in egress pipeline to reply back to RAN
                     clone3(CloneType.I2E, I2E_CLONE_SESSION_ID, standard_metadata);
 
                     // handle context release message 

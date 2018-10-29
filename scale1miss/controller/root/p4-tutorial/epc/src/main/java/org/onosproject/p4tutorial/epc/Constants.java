@@ -33,8 +33,15 @@ public class Constants {
 	//final static String UE_MAC = "00:16:3e:c6:a2:aa"; // MAC Address of UE/eNodeB Node  *
 	//final static String DEFAULT_GW_MAC = "00:16:3e:f7:4d:43"; //"12:b4:6f:db:03:28";//"00:16:3e:03:9d:5a"; // MAC Address of DGW int2 //1e:12:62:1d:67:a5     *
 
-	final static int UE_LB = 100; //Do not push UE state to switches when UE KEY is between UE_LB & UE_UB
-	final static int UE_UB = 103;
+	final static int UE_LB = 200; //Do not push UE state to switches when UE KEY is between UE_LB & UE_UB
+	final static int UE_UB = 203;
+
+	final static int LB1 = 100; //Select SGW1 when UE KEY is between LB1 & UB1
+        final static int UB1 = 200; //101;
+
+        final static int LB2 = 102; //Select SGW2 when UE KEY is between LB2 & UB2
+        final static int UB2 = 103;
+
 
 	final static boolean OFFLOAD_ATTACH = true; //false; //True=> We wish to offload attach components to local controller
 	final static String SINK_MAC = "00:16:3e:de:0a:60"; //"00:16:3e:42:b9:ea"; // MAC Address of SINK Node //40:8d:5c:76:d2:fa    *
@@ -407,6 +414,42 @@ public class Constants {
 					sgwName = Constants.SGW_NAME_6;
 				return 	sgwName;
 			}
+
+			public static DeviceId getSgwswitchNameScale(String dgw, int key){
+                                if(Constants.DEBUG) {
+                                        log.warn("in Constants.getSgwswitchName sgw = {}", dgw);
+                                }
+                                // int length = dgw.length();
+                                String swid1 = "";
+                                if(dgw.charAt(0)=='s'){
+                                        // means we get "s1", "s11" like switch numbers
+                                        //log.warn("got switch name ={}",dgw);
+                                        swid1=dgw.split("s")[1];
+
+                                }
+                                else{
+                                        // we got switch ID like "1", "2", "12"
+                                        //log.warn("got switch id ={}",dgw);
+                                        swid1 = dgw;
+                                }
+                                int swid = Integer.parseInt(swid1);
+                                DeviceId sgwName = DeviceId.deviceId("") ;
+                                if ((swid==(Constants.DEFAULT_SWITCH_ID_1)) && ((key >= Constants.LB1 && key <= Constants.UB1)) )
+                                        sgwName = Constants.SGW_NAME_1;
+				else if ((swid==(Constants.DEFAULT_SWITCH_ID_1)) && ((key >= Constants.LB2 && key <= Constants.UB2)) )
+                                        sgwName = Constants.SGW_NAME_2;
+                                else if (swid==(Constants.DEFAULT_SWITCH_ID_2))
+                                        sgwName = Constants.SGW_NAME_2;
+                                else if (swid==(Constants.DEFAULT_SWITCH_ID_3))
+                                        sgwName = Constants.SGW_NAME_3;
+                                else if (swid==(Constants.DEFAULT_SWITCH_ID_4))
+                                        sgwName = Constants.SGW_NAME_4;
+                                else if (swid==(Constants.DEFAULT_SWITCH_ID_5))
+                                        sgwName = Constants.SGW_NAME_5;
+                                else if (swid==(Constants.DEFAULT_SWITCH_ID_6))
+                                        sgwName = Constants.SGW_NAME_6;
+                                return  sgwName;
+                        }
 
 			public static String getDgwDpid(String sgw){
 //				log.info("received sgw = {}",sgw);

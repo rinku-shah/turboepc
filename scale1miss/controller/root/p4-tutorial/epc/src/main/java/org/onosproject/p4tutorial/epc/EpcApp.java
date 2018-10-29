@@ -940,7 +940,8 @@ public class EpcApp {
 
                         // @Offload design push sgw_teid to switch table
                         // populates this map on SGW switch
-                        DeviceId offload_SGWswitchName1 = Constants.getSgwswitchName(dgw_dpId);
+                        //DeviceId offload_SGWswitchName1 = Constants.getSgwswitchName(dgw_dpId);
+			DeviceId offload_SGWswitchName1 = Constants.getSgwswitchNameScale(dgw_dpId, Integer.parseInt(tmpArray[2]));
 			// If ue_key is between UE_LB & UE_UB do not push state to switch
 			if (Integer.parseInt(tmpArray[2]) < Constants.UE_LB || Integer.parseInt(tmpArray[2]) > Constants.UE_UB) {
 	                        fr.populate_uekey_sgwteid_map(false,appId,flowRuleService,offload_SGWswitchName1,Integer.parseInt(tmpArray[2]),sgw_teid);
@@ -1049,7 +1050,8 @@ public class EpcApp {
 
                             //@offload design 
                         // populate all these rules on SGW switch only
-                        DeviceId offload_SGWswitchName2 = Constants.getSgwswitchName(dgw_dpId1);
+                        //DeviceId offload_SGWswitchName2 = Constants.getSgwswitchName(dgw_dpId1);
+			DeviceId offload_SGWswitchName2 = Constants.getSgwswitchNameScale(dgw_dpId1, Integer.parseInt(tmpArray[2]));
                         ue_state = 1;
 			if (Integer.parseInt(tmpArray[2]) < Constants.UE_LB || Integer.parseInt(tmpArray[2]) > Constants.UE_UB) {
 	                        fr.populate_uekey_uestate_map(false,appId,flowRuleService,offload_SGWswitchName2,Integer.parseInt(tmpArray[2]),ue_state);
@@ -1214,7 +1216,8 @@ public class EpcApp {
                             if(Constants.DEBUG){
                                 log.info(" sending response in DETACH_REQUEST");
                             }
-                            DeviceId offload_SGWswitchName3 = Constants.getSgwswitchName(dw);
+                            //DeviceId offload_SGWswitchName3 = Constants.getSgwswitchName(dw);
+	                      DeviceId offload_SGWswitchName3 = Constants.getSgwswitchNameScale(dw, Integer.parseInt(tmpArray[4]));
 
                             // @offload design : remove populated auxilary tables from SGW switch in detach case
                             // while deleting rules we dont need match values so sendong match parameters as 0 in all cases
