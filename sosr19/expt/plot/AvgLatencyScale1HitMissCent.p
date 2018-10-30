@@ -17,7 +17,7 @@ set style histogram gap 2
 #set size 1,0.5
 #set key at 2,44
 #set xrange [0:]
-set yrange[0:7]
+set yrange[0:8.5]
 #set xtics border in scale 0,0 nomirror rotate by 45  offset character -1, -4, 0
 plot newhistogram fs pattern 1, 'scale1miss.dat' using 2:xtic(1) title 'Switch Table HIT' lc rgb 'red' lw 2  ,\
   'scale1miss.dat' using 3 title 'Switch Table MISS' lc rgb 'black' lw 2  , \
