@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/main/resources" isTestSource="false"  packagePrefix="apps.p4-tutorial.pipeconf_original.src.main.resources"/>
+
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="core_api" scope="COMPILE"  />
+    <orderEntry type="module" module-name="drivers_default" scope="COMPILE"  />
+    <orderEntry type="module" module-name="lib" scope="COMPILE"  />
+    <orderEntry type="module" module-name="protocols_p4runtime_api" scope="COMPILE"  />
+    <orderEntry type="module" module-name="protocols_p4runtime_model" scope="COMPILE"  />
+    <orderEntry type="module" module-name="utils_misc" scope="COMPILE"  />
+    <orderEntry type="module" module-name="utils_osgi" scope="COMPILE"  />
+    <orderEntry type="library" name="library_lib_commons_collections" scope="COMPILE" level="project"  />
+    <orderEntry type="library" name="library_lib_commons_configuration" scope="COMPILE" level="project"  />
+    <orderEntry type="library" name="library_lib_commons_io" scope="COMPILE" level="project"  />
+    <orderEntry type="library" name="library_lib_commons_lang" scope="COMPILE" level="project"  />
+    <orderEntry type="library" name="library_lib_commons_lang3" scope="COMPILE" level="project"  />
+    <orderEntry type="library" name="library_lib_commons_logging" scope="COMPILE" level="project"  />
+    <orderEntry type="library" name="library_lib_commons_pool" scope="COMPILE" level="project"  />
+    <orderEntry type="library" name="library_lib_guava" scope="COMPILE" level="project"  />
+    <orderEntry type="library" name="library_lib_jsr305" scope="COMPILE" level="project"  />
+    <orderEntry type="library" name="library_lib_minimal_json" scope="COMPILE" level="project"  />
+    <orderEntry type="library" name="library_lib_org_apache_felix_scr" scope="COMPILE" level="project"  />
+    <orderEntry type="library" name="library_lib_org_apache_felix_scr_annotations" scope="COMPILE" level="project"  />
+    <orderEntry type="library" name="library_lib_org_apache_karaf_features_core" scope="COMPILE" level="project"  />
+    <orderEntry type="library" name="library_lib_org_apache_karaf_system_core" scope="COMPILE" level="project"  />
+    <orderEntry type="library" name="library_lib_org_apache_servicemix_bundles_dom4j" scope="COMPILE" level="project"  />
+    <orderEntry type="library" name="library_lib_org_osgi_compendium" scope="COMPILE" level="project"  />
+    <orderEntry type="library" name="library_lib_osgi_core" scope="COMPILE" level="project"  />
+    <orderEntry type="library" name="library_lib_slf4j_api" scope="COMPILE" level="project"  />
+
+  </component>
+</module>
