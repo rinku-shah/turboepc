@@ -21,7 +21,7 @@ set style histogram gap 2
 set yrange[0:]
 set y2range[0:110]
 #set xtics border in scale 0,0 nomirror rotate by 45  offset character -1, -4, 0
-plot newhistogram fs pattern 1, 'DataVsServiceRequest.dat' using 2:xtic(1) title 'Service Request Throughput' lc rgb 'red' lw 2  ,\
+plot newhistogram fs pattern 1, 'DataVsServiceRequest.dat' using 7:xtic(1) title 'Service Request Throughput' lc rgb 'red' lw 2  ,\
          'DataVsServiceRequest.dat' using 5 axes x1y2 title '%CPU usage for Data traffic' lc rgb 'black' lw 2 with linespoint
 
 
