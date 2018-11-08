@@ -16,7 +16,7 @@ import org.onlab.packet.IPv4;
 public class Constants {
 	private static final Logger log = getLogger(EpcApp.class);
 	// Boolean flag to do the logging of events
-	static boolean DEBUG = false;
+	static boolean DEBUG = true;
 	static boolean DEBUG3 = false;
 	static boolean MYDEBUG = false;
 	static boolean MYDEBUG1 = false;
@@ -32,10 +32,10 @@ public class Constants {
 	static byte[] dstSinkIpAddr =  IPv4.toIPv4AddressBytes("192.168.4.5");
 
         final static int LB1 = 100; //Select SGW1 when UE KEY is between LB1 & UB1
-        final static int UB1 = 103; //101;
+        final static int UB1 = 100; //101;
 
-        final static int LB2 = 104; //Select SGW2 when UE KEY is between LB2 & UB2
-        final static int UB2 = 107;
+        final static int LB2 = 101; //Select SGW2 when UE KEY is between LB2 & UB2
+        final static int UB2 = 101;
 
 
 	/***************************Configurable parameters**********************************/

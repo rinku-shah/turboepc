@@ -16,9 +16,9 @@ import org.onlab.packet.IPv4;
 public class Constants {
 	private static final Logger log = getLogger(EpcApp.class);
 	// Boolean flag to do the logging of events
-	static boolean DEBUG = false;
+	static boolean DEBUG = true;
 	static boolean DEBUG3 = false;
-	static boolean MYDEBUG = false;
+	static boolean MYDEBUG = true;
 	static boolean MYDEBUG1 = false;
 	static boolean FRDEBUG = false;
 	static boolean BITWISE_DEBUG = false;

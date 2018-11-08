@@ -16,7 +16,7 @@ import org.onlab.packet.IPv4;
 public class Constants {
 	private static final Logger log = getLogger(EpcApp.class);
 	// Boolean flag to do the logging of events
-	static boolean DEBUG = false;
+	static boolean DEBUG = true;
 	static boolean DEBUG3 = false;
 	static boolean MYDEBUG = false;
 	static boolean MYDEBUG1 = false;
@@ -33,14 +33,14 @@ public class Constants {
 	//final static String UE_MAC = "00:16:3e:c6:a2:aa"; // MAC Address of UE/eNodeB Node  *
 	//final static String DEFAULT_GW_MAC = "00:16:3e:f7:4d:43"; //"12:b4:6f:db:03:28";//"00:16:3e:03:9d:5a"; // MAC Address of DGW int2 //1e:12:62:1d:67:a5     *
 
-	final static int UE_LB = 10000; //Do not push UE state to switches when UE KEY is between UE_LB & UE_UB
-	final static int UE_UB = 20000;
+	final static int UE_LB = 1000; //Do not push UE state to switches when UE KEY is between UE_LB & UE_UB
+	final static int UE_UB = 1010;
 
-	final static int LB1 = 100; //Select SGW1 when UE KEY is between LB1 & UB1
-        final static int UB1 = 103; //101;
+	final static int LB1 = 101; //Select SGW1 when UE KEY is between LB1 & UB1
+        final static int UB1 = 101; //101;
 
-        final static int LB2 = 104; //Select SGW2 when UE KEY is between LB2 & UB2
-        final static int UB2 = 107;
+        final static int LB2 = 100; //Select SGW2 when UE KEY is between LB2 & UB2
+        final static int UB2 = 100;
 
 
 	final static boolean OFFLOAD_ATTACH = true; //false; //True=> We wish to offload attach components to local controller
