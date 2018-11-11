@@ -520,7 +520,8 @@ control c_ingress(inout headers hdr,
                         //since its a miss, send to SGW2
                         else {
                             standard_metadata.egress_spec = 2;
-                            hdr.ipv4.ttl = hdr.ipv4.ttl - 1; 
+                            hdr.ipv4.ttl = hdr.ipv4.ttl - 1;
+			    return; 
                         }
 
                     }
@@ -659,11 +660,11 @@ control c_egress(inout headers hdr,
                 hdr.ipv4.dstAddr = hdr.ipv4.srcAddr;
 
                  // we need to send reply from sgw1,sgw2,sge3,sgw4 as per the chain
-                if(hdr.ethernet.srcAddr == ran1  && (tmp_ue_num >= 101 && tmp_ue_num <= 101)){
+                if(hdr.ethernet.srcAddr == ran1  && (tmp_ue_num >= 100 && tmp_ue_num <= 103)){
                     hdr.ethernet.srcAddr = sgw1;
                     hdr.ipv4.srcAddr = s1u_sgw_addr;
                 }
-		        else if(hdr.ethernet.srcAddr == ran1  && (tmp_ue_num >= 100 && tmp_ue_num <= 100)){
+		        else if(hdr.ethernet.srcAddr == ran1  && (tmp_ue_num >= 104 && tmp_ue_num <= 107)){
                     hdr.ethernet.srcAddr = sgw2;
                     hdr.ipv4.srcAddr = s2u_sgw_addr;
                 }
@@ -743,11 +744,11 @@ control c_egress(inout headers hdr,
                                     hdr.ipv4.dstAddr = hdr.ipv4.srcAddr;
 
                                     // we need to send reply from sgw1,sgw2,sge3,sgw4 as per the chain
-                                    if(hdr.ethernet.srcAddr == ran1 && (tmp_ue_num1 >= 101 && tmp_ue_num1 <= 101)){
+                                    if(hdr.ethernet.srcAddr == ran1 && (tmp_ue_num1 >= 100 && tmp_ue_num1 <= 103)){
                                          hdr.ethernet.srcAddr = sgw1;
                                         hdr.ipv4.srcAddr = s1u_sgw_addr;
                                     }
-			            else if(hdr.ethernet.srcAddr == ran1 && (tmp_ue_num1 >= 100 && tmp_ue_num1 <= 100)){
+			            else if(hdr.ethernet.srcAddr == ran1 && (tmp_ue_num1 >= 104 && tmp_ue_num1 <= 107)){
                                         hdr.ethernet.srcAddr = sgw2;
                                         hdr.ipv4.srcAddr = s2u_sgw_addr;
                                     }
@@ -806,12 +807,12 @@ control c_egress(inout headers hdr,
                                     hdr.ethernet.dstAddr =  hdr.ethernet.srcAddr;
                                     hdr.ipv4.dstAddr = hdr.ipv4.srcAddr;
 
-                                    if(hdr.ethernet.srcAddr == ran1 && (hdr.attach_accept.ue_key >= 101 && hdr.attach_accept.ue_key <= 101)){
+                                    if(hdr.ethernet.srcAddr == ran1 && (hdr.attach_accept.ue_key >= 100 && hdr.attach_accept.ue_key <= 103)){
                                          hdr.ethernet.srcAddr = sgw1;
                                         hdr.ipv4.srcAddr = s1u_sgw_addr;
 
                                     }
-				    else if(hdr.ethernet.srcAddr == ran1 && (hdr.attach_accept.ue_key >= 100 && hdr.attach_accept.ue_key <= 100)){
+				    else if(hdr.ethernet.srcAddr == ran1 && (hdr.attach_accept.ue_key >= 104 && hdr.attach_accept.ue_key <= 107)){
                                         hdr.ethernet.srcAddr = sgw2;
                                         hdr.ipv4.srcAddr = s2u_sgw_addr;
 

@@ -7,14 +7,9 @@
 #include "include/definitions.p4"
 #define MAX_PORTS 255
 
-#define IS_I2E_CLONE(std_meta) (std_meta.instance_type == BMV2_V1MODEL_INSTANCE_TYPE_INGRESS_CLONE)
-#define IS_E2E_CLONE(std_meta) (std_meta.instance_type == BMV2_V1MODEL_INSTANCE_TYPE_EGRESS_CLONE)
-
-    
 /*************************************************************************
 **************  I N G R E S S   P R O C E S S I N G   *******************
 *************************************************************************/
-
 
 control c_ingress(inout headers hdr,
                   inout metadata meta,
@@ -122,19 +117,18 @@ control c_ingress(inout headers hdr,
         hdr.ipv4.ttl = hdr.ipv4.ttl - 1;
     }
 
-    // dummy table is for testing purpose only
-    // action dummyaction(bit<9> egress_port){
-    //      standard_metadata.egress_spec = egress_port;
-    // }
-    // table dummy{
-    //     key={
-    //         hdr.auth_step_one.imsi : exact;
-    //     }
-    //     actions={
-    //         dummyaction;
-    //     }
-    //     size=1024;
-    // }
+    action dummyaction(bit<9> egress_port){
+         standard_metadata.egress_spec = egress_port;
+    }
+    table dummy{
+        key={
+            hdr.auth_step_one.imsi : exact;
+        }
+        actions={
+            dummyaction;
+        }
+        size=1024;
+    }
 
    table ip_op_tun_s1_uplink{
        key={
@@ -191,7 +185,7 @@ control c_ingress(inout headers hdr,
            populate_ip_op_tun_s2_uplink;
            NoAction;
        }
-       size = 2048;
+       size = 1024;
        default_action = NoAction();
    }
 
@@ -211,7 +205,7 @@ control c_ingress(inout headers hdr,
         // Downlink trafiic 
          if(hdr.inner_ipv4.srcAddr==sink_ip){
         // else if(standard_metadata.ingress_port==2){
-             if(hdr.tcp.src_port == 13001){
+            if(hdr.tcp.src_port == 13001){
                 hdr.ethernet.dstAddr = ran1;
             }
             else if(hdr.tcp.src_port == 23001){
@@ -239,6 +233,15 @@ control c_ingress(inout headers hdr,
             }
         }
 
+       
+
+        // no need to set udp header if inner_udp header is not valid 
+        // if (hdr.inner_udp.isValid()) {
+        //     hdr.udp = hdr.inner_udp;
+        // } else {
+        //     hdr.udp.setInvalid();
+        // }
+
         hdr.gtpu.setInvalid();
         hdr.gtpu_ipv4.setInvalid();
         hdr.gtpu_udp.setInvalid();
@@ -260,11 +263,32 @@ control c_ingress(inout headers hdr,
             populate_tun_egress_s3_uplink;
             NoAction;
         }
-        size = 4096;
+        size = 1024;
         default_action = NoAction();
     }
 
    // ***************** Downlink Tunnel(PGW->DGW) Setup *******************************
+
+//    action populate_ip_op_tun_s3_downlink(bit<12> op_tunnel_s3,bit<9> egress_port_s3){
+//         hdr.vlan.setValid();
+//         standard_metadata.egress_spec = egress_port_s3;
+//         hdr.vlan.vid = op_tunnel_s3;
+//         hdr.vlan.vlan_type = hdr.ethernet.etherType;
+//         hdr.ethernet.etherType = TYPE_VLAN;
+//         hdr.ipv4.ttl = hdr.ipv4.ttl - 1;
+//    }
+//    table ip_op_tun_s3_downlink{
+//       key={
+//           // match on the VLAN ID field vid and set the vid to the outgoing tunnel and set egress port
+//             hdr.ipv4.dstAddr:lpm;
+//       }
+//       actions={
+//           populate_ip_op_tun_s3_downlink;
+//           NoAction;
+//       }
+//       size = 1024;
+//       default_action = NoAction();
+//   }
 
    action populate_ip_op_tun_s2_downlink(bit<32> op_tunnel_s2,bit<9> egress_port_s2){
        standard_metadata.egress_spec = egress_port_s2;
@@ -298,11 +322,29 @@ control c_ingress(inout headers hdr,
           populate_ip_op_tun_s2_downlink;
           NoAction;
       }
-      size = 2048;
+      size = 1024;
       default_action = NoAction();
   }
 
-
+//    action populate_tun_egress_s1_downlink(bit<9> egress_port_s1){
+//        standard_metadata.egress_spec = egress_port_s1;
+//        hdr.ipv4.ttl = hdr.ipv4.ttl - 1;
+//        hdr.ethernet.etherType = hdr.vlan.vlan_type;
+//        hdr.vlan.setInvalid();
+//    }
+//    // tunnel to egress port map for s1 for Downlink
+//    table tun_egress_s1_downlink{
+//        key={
+//            // match on vlan ID field and set the corressponding egress port
+//             hdr.vlan.vid : exact;
+//        }
+//        actions={
+//            populate_tun_egress_s1_downlink;
+//            NoAction;
+//        }
+//        size = 1024;
+//        default_action = NoAction();
+//    }
 
 /* definig offload tables here which will be used on SGW for Context Release and Service Request */
     action populate_uekey_uestate_map(bit<8> uestate){
@@ -317,7 +359,7 @@ control c_ingress(inout headers hdr,
           populate_uekey_uestate_map;
           NoAction;
       }
-      size = 2048;
+      size = 1024;
       default_action = NoAction();
     }
 
@@ -333,7 +375,18 @@ control c_ingress(inout headers hdr,
           populate_uekey_guti_map;
           NoAction;
       }
-      size = 2048;
+      size = 1024;
+      default_action = NoAction();
+    }
+
+    // @offload esign : for now sending to local-onos which in turn will reply to RAN
+    table contextrelease{
+        key={}
+        actions={
+            send_to_cpu;
+            NoAction;
+        }
+      size = 1024;
       default_action = NoAction();
     }
 
@@ -369,13 +422,12 @@ control c_ingress(inout headers hdr,
           // @offload design : we can match on ue_key of service request as well as intial_ctxt_setup_setup_resp  using ternary match also but in that case we need to have different actions as well so for now splitting the table into two
             // hdr.uekey_sgwteid.ue_key : exact;
             hdr.ue_service_req.ue_key :  exact;
-            // hdr.ipv4.srcAddr : exact;
       }
       actions={
           populate_service_req_uekey_sgwteid_map;
           NoAction;
       }
-      size = 2048;
+      size = 1024;
       default_action = NoAction();
     }
 
@@ -411,16 +463,41 @@ control c_ingress(inout headers hdr,
           // @offload design : we can match on ue_key of service request as well as intial_ctxt_setup_setup_resp  using ternary match also but in that case we need to have different actions as well so for now splitting the table into two
             // hdr.uekey_sgwteid.ue_key : exact;
             hdr.initial_ctxt_setup_resp.ue_key :  exact;
-            // hdr.ipv4.srcAddr : exact;
-
       }
       actions={
           populate_ctxt_setup_uekey_sgwteid_map;
           NoAction;
       }
-      size = 2048;
+      size = 1024;
       default_action = NoAction();
     }
+
+    
+
+
+    // @offload esign : for now sending to local-onos which in turn will reply to RAN
+    // apart from this we need to do a lookup in populate_uekey_sgwteid_map and then append the new header and strip the old header and then send to local onos
+
+    // table servicerequest{
+    //     key={}
+    //     actions={
+    //         send_to_cpu;
+    //         NoAction;
+    //     }
+    //   size = 1024;
+    //   default_action = NoAction();
+    // }
+    
+    // table initialctxtsetupresponse{
+    //     key={}
+    //     actions={
+    //         send_to_cpu;
+    //         NoAction;
+    //     }
+    //   size = 1024;
+    //   default_action = NoAction();
+    // }
+
 
 
     apply {
@@ -445,15 +522,32 @@ control c_ingress(inout headers hdr,
             }
 
             // if the packet misses in the t_l3_fwd table then it means it either a Data packet or it is a cntxt release/ Service request packet 
+            
+          
           if (hdr.ipv4.isValid() && !hdr.gtpu.isValid()) {
               // if ttl = 64, it means we are on DGW (RAN-> SINK) for service request or data packet or at DGW(local onos -> RAN) or at PGW (Sink-> RAN)
                if(hdr.ipv4.ttl == 64){
-
-                    //  from RAN to local onos at DGW OR process reply from Sink to RAN at PGW 
+                    // from RAN to local onos at DGW OR process reply from Sink to RAN at PGW  
                    if(standard_metadata.ingress_port==1 || standard_metadata.ingress_port==7){
 
-                            // @clone design: we are at DGW so simply forward as of now
-
+                            //TC means data packet
+                            // if(hdr.ipv4.protocol == PROTO_TCP){
+                            //     ip_op_tun_s1_uplink.apply();
+                            //     return;
+                            // }
+                            //  // if it is a context relase/ service request packet and we are at DGW then forward it to sgw
+                            // else if(hdr.data.epc_traffic_code == 14 || hdr.data.epc_traffic_code == 17 || hdr.data.epc_traffic_code == 19 ){
+                            //     // here the SGW is connected on port 2 and we decrement the ttl
+                            //         standard_metadata.egress_spec = 2;
+                            //         hdr.ipv4.ttl = hdr.ipv4.ttl - 1;
+                            //         // return;
+                            // }
+                            // else it is a data packet to add GTP header to it and forward it to SGW
+                            // else{
+                                // Process only non-tunneled IPv4 packets.
+                                // ip_op_tun_s1_uplink.apply();
+                                // dummy.apply();
+                            // }
                             // @offload design: to be on safe side we are using ip proto to distinguish between data and control traffic 
                             //  if we use above code then sometimes it gets stuck because tcp data can also contain hdr.data.epc_traffic_code 
                             //TC means data packet
@@ -464,138 +558,68 @@ control c_ingress(inout headers hdr,
                             }
                             // UDP means control traffic
                             else if(hdr.ipv4.protocol == PROTO_UDP){
-                                // @serial : @DGW : directly forward the traffic to SGW1
                                     standard_metadata.egress_spec = 2;
                                     hdr.ipv4.ttl = hdr.ipv4.ttl - 1;
-                                   // // return;
+                                    // return;
                             }
+                            
                    }
-                    // @serial : @DGW : process downlink reply from local onos 1 & local onos 2 at DGW 
-                    // @SGW1 : process downlink reply from local ONOS of SGW2 or response packet from root ONOS via SGW2
-                    else if(standard_metadata.ingress_port==2 ){
+                    // process reply from local onos at DGW 
+                    else if(standard_metadata.ingress_port==2){
                                 standard_metadata.egress_spec = 1;
                                 hdr.ipv4.ttl = hdr.ipv4.ttl - 1;
                                 // return;
                     }
-
-                
                 }
                 // otherwise we are at SGW so we do a lookup on table service_req_uekey_sgwteid_map extract the sgwteid map append it to one of header fields and send it to local onos 
                 // clone the original pkt and reply backt o RAN 
                 else if(hdr.ipv4.ttl == 63){
+                    // handle context release message 
+                    if(hdr.data.epc_traffic_code == 14){
+                        // clone the packet and handle it at egress to reply back to RAN
+                        // clone(CloneType.I2E, CLONE_SESSION_ID);
+                        // send the original packet to local onos by matching on ??
 
-                    // @serial : @SGW1 uplink control packet 
-                    if(standard_metadata.ingress_port == 1){
-                        // do some lookup on hit clone and populate rules using local ONOS of SGW1 else on MISS forward to SGW2 on port 2
-                             // HIT on the switch for 100 <= ue_num <=103 
-                        if(((hdr.ue_context_rel_req.ue_num >= 100) && (hdr.ue_context_rel_req.ue_num <= 103))|| ((hdr.initial_ctxt_setup_resp.ue_key >= 100) && (hdr.initial_ctxt_setup_resp.ue_key <= 103)) || ((hdr.ue_service_req.ue_key >= 100) && (hdr.ue_service_req.ue_key <= 103)) ) {
-                             
-                                // clone packet and reply back to RAN in egress processing
-                                clone3(CloneType.I2E, I2E_CLONE_SESSION_ID, standard_metadata);
 
-                                // handle context release message 
-                                if(hdr.data.epc_traffic_code == 14){
-                                    // send the original packet back to RAN by appending the reply packet
-                                    standard_metadata.egress_spec = CPU_PORT;
-                                    // Packets sent to the controller needs to be prepended with the
-                                    // packet-in header. By setting it valid we make sure it will be
-                                    // deparsed on the wire (see c_deparser).
-                                    hdr.packet_in.setValid();
-                                    hdr.packet_in.ingress_port = standard_metadata.ingress_port;
-                                    // return;
-                                }
+                        // directly forward to local cpu
+                        // contextrelease.apply();
+                        standard_metadata.egress_spec = CPU_PORT;
+                        // Packets sent to the controller needs to be prepended with the
+                        // packet-in header. By setting it valid we make sure it will be
+                        // deparsed on the wire (see c_deparser).
+                        hdr.packet_in.setValid();
+                        hdr.packet_in.ingress_port = standard_metadata.ingress_port;
+                        // return;
 
-                                else if(hdr.data.epc_traffic_code == 17){
-                                    // send the original packet to local onos by appending the sgw_teid field
-                                    service_req_uekey_sgwteid_map.apply();
-                                    // return;
-                                }
-
-                                else if(hdr.data.epc_traffic_code == 19){
-                                    // send the original packet to local onos by appending the sgw_teid field
-                                    ctxt_setup_uekey_sgwteid_map.apply();
-                                    // return;
-                                }
-                        }
-                        //since its a miss, send to SGW2
-                        else {
-                            standard_metadata.egress_spec = 2;
-                            hdr.ipv4.ttl = hdr.ipv4.ttl - 1; 
-                        }
 
                     }
-                     // @serial : @DGW downlink control packet originating from SGW2 or root ONOS via SGW2 
-                    else if(standard_metadata.ingress_port == 2){
-                        // forward directly to RAN
-                        standard_metadata.egress_spec = 1;
-                        hdr.ipv4.ttl = hdr.ipv4.ttl - 1;
+                    else if(hdr.data.epc_traffic_code == 17){
+                        // clone the packet and handle it at egress to reply back to RAN by adding sgwteid also
+                        // clone(CloneType.I2E, CLONE_SESSION_ID);
+                        // send the original packet to local onos by matching on ??
+
+                        // append sgwteid to original packet header 
+                        // servicerequest.apply();
+                        service_req_uekey_sgwteid_map.apply();
+                        // return;
+
                     }
+                    else if(hdr.data.epc_traffic_code == 19){
+                        // clone the packet and handle it at egress to reply back to RAN by adding sgwteid also
+                        // clone(CloneType.I2E, CLONE_SESSION_ID);
+                        // send the original packet to local onos by matching on ??
 
-		        } // ttl = 63 if over
-
-                // @serial : @SGW2 : uplink control packet do table lookup on miss send to root ONOS
-                else if(hdr.ipv4.ttl == 62){
-                     // @serial : @SGW2 uplink control packet 
-                    if(standard_metadata.ingress_port == 1){
-                        // do some lookup else on MISS forward to root onos on send_to_cpu()
-                        if(((hdr.ue_context_rel_req.ue_num >= 104) && (hdr.ue_context_rel_req.ue_num <= 107))|| ((hdr.initial_ctxt_setup_resp.ue_key >= 104) && (hdr.initial_ctxt_setup_resp.ue_key <= 107)) || ((hdr.ue_service_req.ue_key >= 104) && (hdr.ue_service_req.ue_key <= 107)) ) {
-                                // clone packet and reply back to RAN in egress processing
-                                clone3(CloneType.I2E, I2E_CLONE_SESSION_ID, standard_metadata);
-
-                                // handle context release message 
-                                if(hdr.data.epc_traffic_code == 14){
-                                    // send the original packet back to RAN by appending the reply packet
-
-                                    standard_metadata.egress_spec = CPU_PORT;
-                                    // Packets sent to the controller needs to be prepended with the
-                                    // packet-in header. By setting it valid we make sure it will be
-                                    // deparsed on the wire (see c_deparser).
-                                    hdr.packet_in.setValid();
-                                    hdr.packet_in.ingress_port = standard_metadata.ingress_port;
-                                    // return;
-                                }
-
-                                else if(hdr.data.epc_traffic_code == 17){
-                                    // send the original packet to local onos by appending the sgw_teid field
-                                    service_req_uekey_sgwteid_map.apply();
-                                    // return;
-                                }
-
-                                else if(hdr.data.epc_traffic_code == 19){
-                                    // send the original packet to local onos by appending the sgw_teid field
-                                    ctxt_setup_uekey_sgwteid_map.apply();
-                                    // return;
-                                }
-                        }
-                        //since its a miss, send to SGW2
-                         else { //since its a miss, send to Controller, but change traffic code
-                            if(hdr.data.epc_traffic_code == 14){
-                                    hdr.data.epc_traffic_code=24;
-                            } 
-                            else if(hdr.data.epc_traffic_code == 17){    
-                                    hdr.data.epc_traffic_code=27;
-                            } 
-                            else if(hdr.data.epc_traffic_code == 19){    
-                                    hdr.data.epc_traffic_code=29;
-                            }
-
-                            standard_metadata.egress_spec = CPU_PORT;
-                            // Packets sent to the controller needs to be prepended with the
-                            // packet-in header. By setting it valid we make sure it will be
-                            // deparsed on the wire (see c_deparser).
-                            hdr.packet_in.setValid();
-                            hdr.packet_in.ingress_port = standard_metadata.ingress_port;
-                            return;
-                        }
-
-                    }  // standard metadata if over
-
+                        // initialctxtsetupresponse.apply();
+                        // append sgwteid to original packet header 
+                        ctxt_setup_uekey_sgwteid_map.apply();
+                        // return;
+                    }
                     
-                } // ttl 62 if over
-          }  // control packet if over
+                }
+          }
 
             // if (hdr.vlan.isValid()) {
-        if (hdr.gtpu.isValid()) {
+            if (hdr.gtpu.isValid()) {
                 // Process all tunneled packets at SGW
                 if(hdr.ipv4.ttl == 63){
                     // if ingress port is 1 on SGW it means it is a UPLINK tunnel packet (RAN -> Sink)
@@ -614,9 +638,9 @@ control c_ingress(inout headers hdr,
                     tun_egress_s3_uplink.apply();
                     return;
                 }
-        }
+            }
 
-            // compiler removes tables which are not used, to prevent offload tables from being removed lets make an if check with large ttl values so that it is not removed.
+            // compiler removes tables which are not used to prevednt offload tables from being removed lets make an if check with large ttl values so that it is not removed.
             if(hdr.ipv4.ttl == 250){
                 uekey_uestate_map.apply();
                 uekey_guti_map.apply();
@@ -639,225 +663,11 @@ control c_ingress(inout headers hdr,
 control c_egress(inout headers hdr,
                  inout metadata meta,
                  inout standard_metadata_t standard_metadata) {
-
-         // @offload design : handling service request at SGW for local onos processing
-        action populate_ctxt_release_uekey_sgwteid_map(bit<32> sgwteid){
-		
-		bit<32> tmp_ue_num;
-		tmp_ue_num =  hdr.ue_service_req.ue_key;
-                hdr.initial_ctxt_setup_req.setValid();
-                hdr.initial_ctxt_setup_req.epc_traffic_code = 18;
-                hdr.initial_ctxt_setup_req.sep1 = hdr.ue_service_req.sep1;
-                hdr.initial_ctxt_setup_req.sgw_teid = sgwteid;
-                // set invalid the incoming headers as we are appending new one
-                hdr.data.setInvalid();
-                hdr.ue_service_req.setInvalid();
-                standard_metadata.egress_spec = 1;
-
-                hdr.ipv4.ttl = 64;
-                hdr.ethernet.dstAddr =  hdr.ethernet.srcAddr;
-                hdr.ipv4.dstAddr = hdr.ipv4.srcAddr;
-
-                 // we need to send reply from sgw1,sgw2,sge3,sgw4 as per the chain
-                if(hdr.ethernet.srcAddr == ran1  && (tmp_ue_num >= 101 && tmp_ue_num <= 101)){
-                    hdr.ethernet.srcAddr = sgw1;
-                    hdr.ipv4.srcAddr = s1u_sgw_addr;
-                }
-		        else if(hdr.ethernet.srcAddr == ran1  && (tmp_ue_num >= 100 && tmp_ue_num <= 100)){
-                    hdr.ethernet.srcAddr = sgw2;
-                    hdr.ipv4.srcAddr = s2u_sgw_addr;
-                }
-                else if(hdr.ethernet.srcAddr == ran2){
-                    hdr.ethernet.srcAddr = sgw2;
-                    hdr.ipv4.srcAddr = s2u_sgw_addr;
-                }
-                else if(hdr.ethernet.srcAddr == ran3){
-                    hdr.ethernet.srcAddr = sgw3;
-                    hdr.ipv4.srcAddr = s3u_sgw_addr;
-
-                }
-                else if(hdr.ethernet.srcAddr == ran4){
-                    hdr.ethernet.srcAddr = sgw4;
-                    hdr.ipv4.srcAddr = s4u_sgw_addr;
-                }
-                else if(hdr.ethernet.srcAddr == ran5){
-                    hdr.ethernet.srcAddr = sgw5;
-                    hdr.ipv4.srcAddr = s5u_sgw_addr;
-
-                }
-                else if(hdr.ethernet.srcAddr == ran6){
-                        hdr.ethernet.srcAddr = sgw6;
-                    hdr.ipv4.srcAddr = s6u_sgw_addr;
-                }
-
-
-                hdr.tmpvar.tmpUdpPort = hdr.udp.srcPort;
-                hdr.udp.srcPort = hdr.udp.dstPort;
-                hdr.udp.dstPort = hdr.tmpvar.tmpUdpPort;
-                hdr.tmpvar.setInvalid();
-
-                hdr.udp.length_ = 11 + UDP_HDR_SIZE;
-                hdr.ipv4.totalLen =  hdr.udp.length_ + IPV4_HDR_SIZE;
-        }
-
-        table ctxt_release_uekey_sgwteid_map{
-            key={
-                // @offload design : we can match on ue_key of service request as well as intial_ctxt_setup_setup_resp  using ternary match also but in that case we need to have different actions as well so for now splitting the table into two
-                    // hdr.uekey_sgwteid.ue_key : exact;
-                    hdr.ue_service_req.ue_key :  exact;
-            }
-            actions={
-                populate_ctxt_release_uekey_sgwteid_map;
-                NoAction;
-            }
-            size = 2048;
-            default_action = NoAction();
-        }
-
         apply {
-                if (IS_I2E_CLONE(standard_metadata)) {
-                                    // @clone design: we are at SGW : beacuse ttl = 63 and we received a cloned packet in 
-                                    // we have got cloned packet
-                                    // output port is already set by mirrioring add using the CLI
-                                    // as per the msg type do lookup append the necessary headers and send to local ONOS
+        // Nothing to do here, we assume checksum is always correct.
+        }
 
-                            // since we hae already made the clone check checking ttl is overkill
-                            // if(hdr.ipv4.ttl == 63){
-
-                            // handle context release message 
-			                bit<32> tmp_ue_num1;
-                            if(hdr.data.epc_traffic_code == 14){
-                                    // send the packet back to RAN
-				    tmp_ue_num1 =  hdr.ue_context_rel_req.ue_num;
-                                    hdr.ue_context_rel_command.setValid();
-                                    hdr.ue_context_rel_command.epc_traffic_code = 15;
-                                    hdr.ue_context_rel_command.sep1 = hdr.ue_context_rel_req.sep1;
-                                    // set invalid the incoming headers as we are appending new one
-                                    hdr.data.setInvalid();
-                                    hdr.ue_context_rel_req.setInvalid();
-                                    standard_metadata.egress_spec = 1;
-
-                                    // setting ipv4 ttl back as 64 so that DGW can handle the packet                    
-                                    hdr.ipv4.ttl = 64;
-                                    hdr.ethernet.dstAddr =  hdr.ethernet.srcAddr;
-                                    hdr.ipv4.dstAddr = hdr.ipv4.srcAddr;
-
-                                    // we need to send reply from sgw1,sgw2,sge3,sgw4 as per the chain
-                                    if(hdr.ethernet.srcAddr == ran1 && (tmp_ue_num1 >= 101 && tmp_ue_num1 <= 101)){
-                                         hdr.ethernet.srcAddr = sgw1;
-                                        hdr.ipv4.srcAddr = s1u_sgw_addr;
-                                    }
-			            else if(hdr.ethernet.srcAddr == ran1 && (tmp_ue_num1 >= 100 && tmp_ue_num1 <= 100)){
-                                        hdr.ethernet.srcAddr = sgw2;
-                                        hdr.ipv4.srcAddr = s2u_sgw_addr;
-                                    }
-                                    else if(hdr.ethernet.srcAddr == ran2){
-                                         hdr.ethernet.srcAddr = sgw2;
-                                        hdr.ipv4.srcAddr = s2u_sgw_addr;
-                                    }
-                                    else if(hdr.ethernet.srcAddr == ran3){
-                                         hdr.ethernet.srcAddr = sgw3;
-                                        hdr.ipv4.srcAddr = s3u_sgw_addr;
-
-                                    }
-                                    else if(hdr.ethernet.srcAddr == ran4){
-                                         hdr.ethernet.srcAddr = sgw4;
-                                        hdr.ipv4.srcAddr = s4u_sgw_addr;
-                                    }
-                                     else if(hdr.ethernet.srcAddr == ran5){
-                                         hdr.ethernet.srcAddr = sgw5;
-                                        hdr.ipv4.srcAddr = s5u_sgw_addr;
-
-                                    }
-                                    else if(hdr.ethernet.srcAddr == ran6){
-                                         hdr.ethernet.srcAddr = sgw6;
-                                        hdr.ipv4.srcAddr = s6u_sgw_addr;
-                                    }
-
-
-                                    hdr.tmpvar.tmpUdpPort = hdr.udp.srcPort;
-                                    hdr.udp.srcPort = hdr.udp.dstPort;
-                                    hdr.udp.dstPort = hdr.tmpvar.tmpUdpPort;
-                                    hdr.tmpvar.setInvalid();
-
-                                    hdr.udp.length_ = 7 + UDP_HDR_SIZE;
-                                    hdr.ipv4.totalLen =  hdr.udp.length_ + IPV4_HDR_SIZE;
-
-                            }
-
-                            else if(hdr.data.epc_traffic_code == 17){
-                                    // send the packet back to RAN
-                                    ctxt_release_uekey_sgwteid_map.apply();
-                            }
-
-                            else if(hdr.data.epc_traffic_code == 19){
-                                    // send the packet back to RAN
-                                    hdr.attach_accept.setValid();
-                                    hdr.attach_accept.epc_traffic_code = 8;
-                                    hdr.attach_accept.sep1 = hdr.initial_ctxt_setup_resp.sep1;
-                                    hdr.attach_accept.ue_key = hdr.initial_ctxt_setup_resp.ue_key;
-                                    // set invalid the incoming headers as we are appending new one
-                                    hdr.data.setInvalid();
-                                    hdr.initial_ctxt_setup_resp.setInvalid();
-                                    // send the packet back to RAN
-                                    standard_metadata.egress_spec = 1;
-                                    hdr.ipv4.ttl = 64;
-
-                                    hdr.ethernet.dstAddr =  hdr.ethernet.srcAddr;
-                                    hdr.ipv4.dstAddr = hdr.ipv4.srcAddr;
-
-                                    if(hdr.ethernet.srcAddr == ran1 && (hdr.attach_accept.ue_key >= 101 && hdr.attach_accept.ue_key <= 101)){
-                                         hdr.ethernet.srcAddr = sgw1;
-                                        hdr.ipv4.srcAddr = s1u_sgw_addr;
-
-                                    }
-				    else if(hdr.ethernet.srcAddr == ran1 && (hdr.attach_accept.ue_key >= 100 && hdr.attach_accept.ue_key <= 100)){
-                                        hdr.ethernet.srcAddr = sgw2;
-                                        hdr.ipv4.srcAddr = s2u_sgw_addr;
-
-                                    }
-                                    else if(hdr.ethernet.srcAddr == ran2){
-                                         hdr.ethernet.srcAddr = sgw2;
-                                        hdr.ipv4.srcAddr = s2u_sgw_addr;
-
-                                    }
-                                    else if(hdr.ethernet.srcAddr == ran3){
-                                         hdr.ethernet.srcAddr = sgw3;
-                                        hdr.ipv4.srcAddr = s3u_sgw_addr;
-
-                                    }
-                                    else if(hdr.ethernet.srcAddr == ran4){
-                                         hdr.ethernet.srcAddr = sgw4;
-                                        hdr.ipv4.srcAddr = s4u_sgw_addr;
-
-                                    }
-                                    else if(hdr.ethernet.srcAddr == ran5){
-                                         hdr.ethernet.srcAddr = sgw5;
-                                        hdr.ipv4.srcAddr = s5u_sgw_addr;
-
-                                    }
-                                    else if(hdr.ethernet.srcAddr == ran6){
-                                         hdr.ethernet.srcAddr = sgw6;
-                                        hdr.ipv4.srcAddr = s6u_sgw_addr;
-                                    }
-
-                                    hdr.tmpvar.tmpUdpPort = hdr.udp.srcPort;
-                                    hdr.udp.srcPort = hdr.udp.dstPort;
-                                    hdr.udp.dstPort = hdr.tmpvar.tmpUdpPort;
-                                    hdr.tmpvar.setInvalid();
-
-                                    hdr.udp.length_ = 11 + UDP_HDR_SIZE;
-                                    hdr.ipv4.totalLen =  hdr.udp.length_ + IPV4_HDR_SIZE;
-                                     // return;
-                            }
-
-                }  // if close
-
-            }  // apply close
-
-} // egress control close
-
-
+}
 /*************************************************************************
 ***********************  S W I T C H  *******************************
 *************************************************************************/
@@ -867,4 +677,3 @@ V1Switch(c_parser(),
          c_egress(),
          c_compute_checksum(),
          c_deparser()) main;
-
