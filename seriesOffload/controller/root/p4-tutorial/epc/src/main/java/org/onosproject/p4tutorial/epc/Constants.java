@@ -33,14 +33,14 @@ public class Constants {
 	//final static String UE_MAC = "00:16:3e:c6:a2:aa"; // MAC Address of UE/eNodeB Node  *
 	//final static String DEFAULT_GW_MAC = "00:16:3e:f7:4d:43"; //"12:b4:6f:db:03:28";//"00:16:3e:03:9d:5a"; // MAC Address of DGW int2 //1e:12:62:1d:67:a5     *
 
-	final static int UE_LB = 1000; //Do not push UE state to switches when UE KEY is between UE_LB & UE_UB
-	final static int UE_UB = 1010;
+	final static int UE_LB = 100; //Do not push UE state to switches when UE KEY is between UE_LB & UE_UB
+	final static int UE_UB = 199;
 
-	final static int LB1 = 100; //Select SGW1 when UE KEY is between LB1 & UB1
-        final static int UB1 = 103; //101;
+	final static int LB1 = 200; //Select SGW1 when UE KEY is between LB1 & UB1
+        final static int UB1 = 299; //101;
 
-        final static int LB2 = 104; //Select SGW2 when UE KEY is between LB2 & UB2
-        final static int UB2 = 107;
+        final static int LB2 = 100; //Select SGW2 when UE KEY is between LB2 & UB2
+        final static int UB2 = 199;
 
 
 	final static boolean OFFLOAD_ATTACH = true; //false; //True=> We wish to offload attach components to local controller
@@ -231,7 +231,21 @@ public class Constants {
 			final static int DEFAULT_SWITCH_ID_4 = 8;
 			final static int DEFAULT_SWITCH_ID_5 = 10;
 			final static int DEFAULT_SWITCH_ID_6 = 12;
+
+			final static int DGW_ID_1 = 1;
+//			final static String DEFAULT_SWITCH_ID_1 = "s1";
+			final static int DGW_ID_2 = 4;
+			final static int DGW_ID_3 = 6;
+			final static int DGW_ID_4 = 8;
+			final static int DGW_ID_5 = 10;
+			final static int DGW_ID_6 = 12;
 			
+			final static DeviceId DGW_NAME_1 = DeviceId.deviceId("device:bmv2:s1");
+			final static DeviceId DGW_NAME_2 = DeviceId.deviceId("device:bmv2:s4");
+			final static DeviceId DGW_NAME_3 = DeviceId.deviceId("device:bmv2:s6");
+			final static DeviceId DGW_NAME_4 = DeviceId.deviceId("device:bmv2:s8");
+			final static DeviceId DGW_NAME_5 = DeviceId.deviceId("device:bmv2:s10");
+			final static DeviceId DGW_NAME_6 = DeviceId.deviceId("device:bmv2:s12");	
 			// DPID of SGW
 			final static int SGW_ID_1 = 2;
 			final static int SGW_ID_2 = 5;
@@ -514,7 +528,41 @@ public class Constants {
 					dgw = Integer.toString(Constants.DEFAULT_SWITCH_ID_6);
 				return dgw;
 			}
+			public static DeviceId getDgwswitchName(String dgw){
+				if(Constants.DEBUG) {
+					log.warn("in Constants.getDgwswitchName sgw = {}", dgw);
+				}
+				String swid1 = "";
+				if(dgw.charAt(0)=='s'){
+					// means we get "s1", "s11" like switch numbers
+					//log.warn("got switch name ={}",dgw);
+					swid1=dgw.split("s")[1];
 
+				}
+				else{
+					// we got switch ID like "1", "2", "12"
+					//log.warn("got switch id ={}",dgw);
+					swid1 = dgw;
+				}
+				int swid = Integer.parseInt(swid1);
+				DeviceId sgwName = DeviceId.deviceId("") ;
+				if (swid==(Constants.DGW_ID_1))
+					sgwName = Constants.DGW_NAME_1;
+				else if (swid==(Constants.DGW_ID_2)){
+					//sgwName =Constants.DGW_NAME_2;
+					sgwName =Constants.DGW_NAME_1;
+					}
+				else if (swid==(Constants.DGW_ID_3))
+					sgwName = Constants.DGW_NAME_3;
+				else if (swid==(Constants.DGW_ID_4))
+					sgwName = Constants.DGW_NAME_4;
+				else if (swid==(Constants.DGW_ID_5))
+					sgwName = Constants.DGW_NAME_5;
+				else if (swid==(Constants.DGW_ID_6))
+					sgwName = Constants.DGW_NAME_6;
+			// log.warn("in Constants.getDgwswitchName returning = {}", sgwName);
+				return 	sgwName;
+			}
 //			public static DatapathId getDgwDpidFromIp(String ip){
 			public static String getDgwDpidFromIp(String ip){
 //				DatapathId dgw = DatapathId.of(0);

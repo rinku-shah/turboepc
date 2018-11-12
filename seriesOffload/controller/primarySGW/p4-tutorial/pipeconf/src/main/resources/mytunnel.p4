@@ -488,7 +488,7 @@ control c_ingress(inout headers hdr,
                     if(standard_metadata.ingress_port == 1){
                         // do some lookup on hit clone and populate rules using local ONOS of SGW1 else on MISS forward to SGW2 on port 2
                              // HIT on the switch for 100 <= ue_num <=103 
-                        if(((hdr.ue_context_rel_req.ue_num >= 100) && (hdr.ue_context_rel_req.ue_num <= 103))|| ((hdr.initial_ctxt_setup_resp.ue_key >= 100) && (hdr.initial_ctxt_setup_resp.ue_key <= 103)) || ((hdr.ue_service_req.ue_key >= 100) && (hdr.ue_service_req.ue_key <= 103)) ) {
+                        if(((hdr.ue_context_rel_req.ue_num >= LB1) && (hdr.ue_context_rel_req.ue_num <= UB1))|| ((hdr.initial_ctxt_setup_resp.ue_key >= LB1) && (hdr.initial_ctxt_setup_resp.ue_key <= UB1)) || ((hdr.ue_service_req.ue_key >= LB1) && (hdr.ue_service_req.ue_key <= UB1)) ) {
                              
                                 // clone packet and reply back to RAN in egress processing
                                 clone3(CloneType.I2E, I2E_CLONE_SESSION_ID, standard_metadata);
@@ -518,12 +518,13 @@ control c_ingress(inout headers hdr,
                                 }
                         }
                         //since its a miss, send to SGW2
-                        else {
+
+                        else if(((hdr.ue_context_rel_req.ue_num >= LB2) && (hdr.ue_context_rel_req.ue_num <= UB2))|| ((hdr.initial_ctxt_setup_resp.ue_key >= LB2) && (hdr.initial_ctxt_setup_resp.ue_key <= UB2)) || ((hdr.ue_service_req.ue_key >= LB2) && (hdr.ue_service_req.ue_key <= UB2)) ) {
+                        
                             standard_metadata.egress_spec = 2;
                             hdr.ipv4.ttl = hdr.ipv4.ttl - 1;
-			    return; 
+			    //return; 
                         }
-
                     }
                      // @serial : @DGW downlink control packet originating from SGW2 or root ONOS via SGW2 
                     else if(standard_metadata.ingress_port == 2){
@@ -539,7 +540,7 @@ control c_ingress(inout headers hdr,
                      // @serial : @SGW2 uplink control packet 
                     if(standard_metadata.ingress_port == 1){
                         // do some lookup else on MISS forward to root onos on send_to_cpu()
-                        if(((hdr.ue_context_rel_req.ue_num >= 104) && (hdr.ue_context_rel_req.ue_num <= 107))|| ((hdr.initial_ctxt_setup_resp.ue_key >= 104) && (hdr.initial_ctxt_setup_resp.ue_key <= 107)) || ((hdr.ue_service_req.ue_key >= 104) && (hdr.ue_service_req.ue_key <= 107)) ) {
+                        if(((hdr.ue_context_rel_req.ue_num >= LB2) && (hdr.ue_context_rel_req.ue_num <= UB2))|| ((hdr.initial_ctxt_setup_resp.ue_key >= LB2) && (hdr.initial_ctxt_setup_resp.ue_key <= UB2)) || ((hdr.ue_service_req.ue_key >= LB2) && (hdr.ue_service_req.ue_key <= UB2)) ) {
                                 // clone packet and reply back to RAN in egress processing
                                 clone3(CloneType.I2E, I2E_CLONE_SESSION_ID, standard_metadata);
 
@@ -660,11 +661,11 @@ control c_egress(inout headers hdr,
                 hdr.ipv4.dstAddr = hdr.ipv4.srcAddr;
 
                  // we need to send reply from sgw1,sgw2,sge3,sgw4 as per the chain
-                if(hdr.ethernet.srcAddr == ran1  && (tmp_ue_num >= 100 && tmp_ue_num <= 103)){
+                if(hdr.ethernet.srcAddr == ran1  && (tmp_ue_num >= LB1 && tmp_ue_num <= UB1)){
                     hdr.ethernet.srcAddr = sgw1;
                     hdr.ipv4.srcAddr = s1u_sgw_addr;
                 }
-		        else if(hdr.ethernet.srcAddr == ran1  && (tmp_ue_num >= 104 && tmp_ue_num <= 107)){
+		        else if(hdr.ethernet.srcAddr == ran1  && (tmp_ue_num >= LB2 && tmp_ue_num <= UB2)){
                     hdr.ethernet.srcAddr = sgw2;
                     hdr.ipv4.srcAddr = s2u_sgw_addr;
                 }
@@ -744,11 +745,11 @@ control c_egress(inout headers hdr,
                                     hdr.ipv4.dstAddr = hdr.ipv4.srcAddr;
 
                                     // we need to send reply from sgw1,sgw2,sge3,sgw4 as per the chain
-                                    if(hdr.ethernet.srcAddr == ran1 && (tmp_ue_num1 >= 100 && tmp_ue_num1 <= 103)){
+                                    if(hdr.ethernet.srcAddr == ran1 && (tmp_ue_num1 >= LB1 && tmp_ue_num1 <= UB1)){
                                          hdr.ethernet.srcAddr = sgw1;
                                         hdr.ipv4.srcAddr = s1u_sgw_addr;
                                     }
-			            else if(hdr.ethernet.srcAddr == ran1 && (tmp_ue_num1 >= 104 && tmp_ue_num1 <= 107)){
+			            else if(hdr.ethernet.srcAddr == ran1 && (tmp_ue_num1 >= LB2 && tmp_ue_num1 <= UB2)){
                                         hdr.ethernet.srcAddr = sgw2;
                                         hdr.ipv4.srcAddr = s2u_sgw_addr;
                                     }
@@ -807,12 +808,12 @@ control c_egress(inout headers hdr,
                                     hdr.ethernet.dstAddr =  hdr.ethernet.srcAddr;
                                     hdr.ipv4.dstAddr = hdr.ipv4.srcAddr;
 
-                                    if(hdr.ethernet.srcAddr == ran1 && (hdr.attach_accept.ue_key >= 100 && hdr.attach_accept.ue_key <= 103)){
+                                    if(hdr.ethernet.srcAddr == ran1 && (hdr.attach_accept.ue_key >= LB1 && hdr.attach_accept.ue_key <= UB1)){
                                          hdr.ethernet.srcAddr = sgw1;
                                         hdr.ipv4.srcAddr = s1u_sgw_addr;
 
                                     }
-				    else if(hdr.ethernet.srcAddr == ran1 && (hdr.attach_accept.ue_key >= 104 && hdr.attach_accept.ue_key <= 107)){
+				    else if(hdr.ethernet.srcAddr == ran1 && (hdr.attach_accept.ue_key >= LB2 && hdr.attach_accept.ue_key <= UB2)){
                                         hdr.ethernet.srcAddr = sgw2;
                                         hdr.ipv4.srcAddr = s2u_sgw_addr;
 

@@ -171,7 +171,8 @@ public class PGW  {
             log.warn(" is = {}",pgw_teid);
 		}
 		String dgw_dp_id_temp = Constants.getDgwDpid(sgw_dpId);
-		String sgw_ip = Constants.getSgwIpDownlink(dgw_dp_id_temp);
+		//@not needed
+		//String sgw_ip = Constants.getSgwIpDownlink(dgw_dp_id_temp);
 		//install uplink and downlink rules
 		//System.out.println("PGW DPID " + pgw_dpId.getLong() + "SGW DPID " + sgw_dpId.getLong());
         /********************  Uplink rule is installed on PGW (PGW to sink) *************************/
