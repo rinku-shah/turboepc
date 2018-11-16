@@ -1,0 +1,6 @@
+# InputDataRate Throughput Delay(ms) ServiceRequestDelay(us)
+NoData	379.639 1.771 1134.65
+1K	292.145 1.624 1145.15
+1M	94.4098 2.26 1578.55
+5M	26.8548 6.447 5335.18
+7M	44.5738 7.513 6700.98
