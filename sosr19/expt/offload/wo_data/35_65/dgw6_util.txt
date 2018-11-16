@@ -1,4 +1,0 @@
-#UE DataRate Avg%CPU AvgMem(KiB) Avg%Wait
-12 0K 3.47 5428.00 0.00
-18 0K 3.45 5428.00 0.00
-24 0K 7.41 5428.00 0.00

@@ -1,3 +1,0 @@
-#MaxThreads,#UE,AvUE/Thread,ExecutionTime,RegistrationThroughput(registrations/sec),RegistrationLatency(sec),SetupTunnel(Yes/No),DO Detach (Yes/No),SendingData?(Yes/No),MeanDataSendingTime,SendingRate,#Attach,#Detach,#Service_Requests,ATTACH_PERCENT,EPOCH_TPT,EPOCH_DELAY_ms
-3,1887,629,300,6.290000,0.007921,No,No,Yes,1,0K,72,69,1746,7.472178
-4,51212,12803,300,170.706667,0.010797,No,No,Yes,1,0K,2327,2325,46560,9.083809
