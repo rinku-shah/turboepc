@@ -13,5 +13,5 @@ scale2miss- Scale the EPC system- RAN-DGW-SGW-PGW-SINK with two instances of SGW
 
 seriesOffload- RAN-DGW-SGW1-SGW2-PGW-SINK, i.e., two instances of SGW in series to scale the number of users in offload mode.
 
-FaultTolerantOffload- Single chain of RAN-DGW-SGW-PGW-SINK with SGW-FT instance where the UE state is mirrored so that under failures the state is not lost. This design also considers HIT & MISS scenario at the SGW switch for UE context/state.
+FaultTolerantOffload- Single chain of RAN-DGW-SGW-PGW-SINK with SGW-FT instance where the UE state is mirrored so that under failures the user state at the failed switch is not lost. This design also considers HIT & MISS scenario at the SGW switch for UE context/state.
 
