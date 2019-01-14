@@ -621,7 +621,7 @@ public class EpcApp {
                         fr.populate_uekey_uestate_map(appId,flowRuleService,deviceId,Integer.parseInt(tmpArray[4]),0);
 
                         if(Constants.offload_with_clone){
-                            // @offload design : since SFW has already replied to RAN by cloning packet no need to reply to RAN from local ONOS
+                            // @offload design : since SGW has already replied to RAN by cloning packet no need to reply to RAN from local ONOS
                         }
                         else{
                                 response = new StringBuilder();

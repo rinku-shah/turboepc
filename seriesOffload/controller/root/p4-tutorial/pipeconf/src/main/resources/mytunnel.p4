@@ -75,13 +75,7 @@ control c_ingress(inout headers hdr,
 
    // ***************** Uplink Tunnel(DGW->PGW) Setup *******************************
     action populate_ip_op_tun_s1_uplink(bit<32> op_tunnel_s1,bit<9> egress_port_s1){
-        //vlan based forwarding
-        // hdr.vlan.setValid();
-        // standard_metadata.egress_spec = egress_port_s1;
-        // hdr.vlan.vid = op_tunnel_s1;
-        // hdr.vlan.vlan_type = hdr.ethernet.etherType;
-        // hdr.ethernet.etherType = TYPE_VLAN;
-        // hdr.ipv4.ttl = hdr.ipv4.ttl - 1;
+     
 
         // gtp based forwarding
         hdr.gtpu_ipv4.setValid();
@@ -164,16 +158,7 @@ control c_ingress(inout headers hdr,
         hdr.udp.setInvalid();
 
 
-        // no need to set udp header if inner_udp header is not valid 
-        // if (hdr.inner_udp.isValid()) {
-        //     hdr.udp = hdr.inner_udp;
-        // } else {
-        //     hdr.udp.setInvalid();
-        // }
-
-        // not implementing this as we are not matching on any of ip based fields we are matching on gtp tunnel id
-        // hdr.gtpu_ipv4.srcAddr =s1u_sgw_addr;
-        // hdr.gtpu_ipv4.dstAddr = s1u_pgw_addr;
+       
         hdr.gtpu.teid = op_tunnel_s2;
         hdr.gtpu_ipv4.ttl = hdr.gtpu_ipv4.ttl - 1;
         hdr.ipv4.ttl = hdr.ipv4.ttl - 1;
@@ -422,6 +407,75 @@ control c_ingress(inout headers hdr,
       default_action = NoAction();
     }
 
+    //@vikas : To implement the if condition statement as match entry lookup we need a seperate tables for entry lookup.
+
+    /*************************** LOKKUP TABLES *************************************/
+    table ue_context_rel_req_lookup_lb1_ub1{
+        key={
+            hdr.ue_context_rel_req.ue_num : exact;
+        }
+        actions = {
+            NoAction;
+        }
+        size = 2048;
+        default_action = NoAction();
+    }
+
+    table initial_ctxt_setup_resp_lookup_lb1_ub1{
+        key={
+            hdr.initial_ctxt_setup_resp.ue_key : exact;
+        }
+        actions = {
+            NoAction;
+        }
+        size = 2048;
+        default_action = NoAction();
+    }
+
+    table ue_service_req_lookup_lb1_ub1{
+          key={
+            hdr.ue_service_req.ue_key : exact;
+        }
+        actions = {
+            NoAction;
+        }
+        size = 2048;
+        default_action = NoAction();
+    }
+
+     table ue_context_rel_req_lookup_lb2_ub2{
+        key={
+            hdr.ue_context_rel_req.ue_num : exact;
+        }
+        actions = {
+            NoAction;
+        }
+        size = 2048;
+        default_action = NoAction();
+    }
+
+    table initial_ctxt_setup_resp_lookup_lb2_ub2{
+        key={
+            hdr.initial_ctxt_setup_resp.ue_key : exact;
+        }
+        actions = {
+            NoAction;
+        }
+        size = 2048;
+        default_action = NoAction();
+    }
+
+    table ue_service_req_lookup_lb2_ub2{
+          key={
+            hdr.ue_service_req.ue_key : exact;
+        }
+        actions = {
+            NoAction;
+        }
+        size = 2048;
+        default_action = NoAction();
+    }
+
 
     apply {
         if (standard_metadata.ingress_port == CPU_PORT) {
@@ -486,18 +540,11 @@ control c_ingress(inout headers hdr,
 
                     // @serial : @SGW1 uplink control packet 
                     if(standard_metadata.ingress_port == 1){
+
                         // do some lookup on hit clone and populate rules using local ONOS of SGW1 else on MISS forward to SGW2 on port 2
                              // HIT on the switch for 100 <= ue_num <=103 
-                        if(((hdr.ue_context_rel_req.ue_num >= LB1) && (hdr.ue_context_rel_req.ue_num <= UB1))|| ((hdr.initial_ctxt_setup_resp.ue_key >= LB1) && (hdr.initial_ctxt_setup_resp.ue_key <= UB1)) || ((hdr.ue_service_req.ue_key >= LB1) && (hdr.ue_service_req.ue_key <= UB1)) ) {
+                        if((ue_context_rel_req_lookup_lb1_ub1.apply().hit)|| (initial_ctxt_setup_resp_lookup_lb1_ub1.apply().hit) || (ue_service_req_lookup_lb1_ub1.apply().hit)) {
                              
-                            standard_metadata.egress_spec = 2;
-                            hdr.ipv4.ttl = hdr.ipv4.ttl - 1;
-			    //return; 
-                        }
-                        //since its a miss, send to SGW2
-
-                        else if(((hdr.ue_context_rel_req.ue_num >= LB2) && (hdr.ue_context_rel_req.ue_num <= UB2))|| ((hdr.initial_ctxt_setup_resp.ue_key >= LB2) && (hdr.initial_ctxt_setup_resp.ue_key <= UB2)) || ((hdr.ue_service_req.ue_key >= LB2) && (hdr.ue_service_req.ue_key <= UB2)) ) {
-                        
                                 // clone packet and reply back to RAN in egress processing
                                 clone3(CloneType.I2E, I2E_CLONE_SESSION_ID, standard_metadata);
 
@@ -524,6 +571,13 @@ control c_ingress(inout headers hdr,
                                     ctxt_setup_uekey_sgwteid_map.apply();
                                     // return;
                                 }
+                        }
+
+                        //since its a miss, send to SGW2
+                        // else if((ue_context_rel_req_lookup_lb2_ub2.apply().hit)|| (initial_ctxt_setup_resp_lookup_lb2_ub2.apply().hit) || (ue_service_req_lookup_lb2_ub2.apply().hit)) {
+                        else{    
+                                standard_metadata.egress_spec = 2;
+                                hdr.ipv4.ttl = hdr.ipv4.ttl - 1;
                         }
                     }
                      // @serial : @DGW downlink control packet originating from SGW2 or root ONOS via SGW2 
@@ -540,8 +594,7 @@ control c_ingress(inout headers hdr,
                      // @serial : @SGW2 uplink control packet 
                     if(standard_metadata.ingress_port == 1){
                         // do some lookup else on MISS forward to root onos on send_to_cpu()
-                       // if(((hdr.ue_context_rel_req.ue_num >= LB1) && (hdr.ue_context_rel_req.ue_num <= UB1))|| ((hdr.initial_ctxt_setup_resp.ue_key >= LB1) && (hdr.initial_ctxt_setup_resp.ue_key <= UB1)) || ((hdr.ue_service_req.ue_key >= LB1) && (hdr.ue_service_req.ue_key <= UB1)) ) {
-                        if(((hdr.ue_context_rel_req.ue_num >= LB2) && (hdr.ue_context_rel_req.ue_num <= UB2))|| ((hdr.initial_ctxt_setup_resp.ue_key >= LB2) && (hdr.initial_ctxt_setup_resp.ue_key <= UB2)) || ((hdr.ue_service_req.ue_key >= LB2) && (hdr.ue_service_req.ue_key <= UB2)) ) {
+                        if((ue_context_rel_req_lookup_lb2_ub2.apply().hit)|| (initial_ctxt_setup_resp_lookup_lb2_ub2.apply().hit) || (ue_service_req_lookup_lb2_ub2.apply().hit)) {
                                 // clone packet and reply back to RAN in egress processing
                                 clone3(CloneType.I2E, I2E_CLONE_SESSION_ID, standard_metadata);
 
@@ -571,7 +624,7 @@ control c_ingress(inout headers hdr,
                                 }
                         }
                         //since its a miss, send to SGW2
-                         else { //since its a miss, send to Controller, but change traffic code
+                         else { //since its a miss, send to root Controller, but change traffic code
                             if(hdr.data.epc_traffic_code == 14){
                                     hdr.data.epc_traffic_code=24;
                             } 

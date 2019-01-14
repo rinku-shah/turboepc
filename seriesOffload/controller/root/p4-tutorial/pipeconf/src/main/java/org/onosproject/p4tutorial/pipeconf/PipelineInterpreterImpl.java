@@ -90,6 +90,15 @@ public final class PipelineInterpreterImpl
     private static final String T_ctxt_release_uekey_sgwteid_map = "ctxt_release_uekey_sgwteid_map";
     private static final String T_uekey_guti = "uekey_guti_map";
 
+    private static final String T_ue_context_rel_req_lookup_lb1_ub1 = "ue_context_rel_req_lookup_lb1_ub1";
+    private static final String T_initial_ctxt_setup_resp_lookup_lb1_ub1 = "initial_ctxt_setup_resp_lookup_lb1_ub1";
+    private static final String T_ue_service_req_lookup_lb1_ub1 = "ue_service_req_lookup_lb1_ub1";
+
+    private static final String T_ue_context_rel_req_lookup_lb2_ub2 = "ue_context_rel_req_lookup_lb2_ub2";
+    private static final String T_initial_ctxt_setup_resp_lookup_lb2_ub2 = "initial_ctxt_setup_resp_lookup_lb2_ub2";
+    private static final String T_ue_service_req_lookup_lb2_ub2 = "ue_service_req_lookup_lb2_ub2";
+
+
     
     private static final String EGRESS_PORT = "egress_port";
     private static final String INGRESS_PORT = "ingress_port";
@@ -98,6 +107,8 @@ public final class PipelineInterpreterImpl
     private static final String IPV4 = "ipv4";
     private static final String UDP = "udp";
     private static final String DATA = "data";
+//     private static final String UE_NUM = "ue_num";
+
 
     private static final String STANDARD_METADATA = "standard_metadata";
     private static final int PORT_FIELD_BITWIDTH = 9;
@@ -120,6 +131,15 @@ public final class PipelineInterpreterImpl
             PiMatchFieldId.of(HDR + DOT + ETHERNET + DOT + "etherType");
     private static final PiMatchFieldId EPC_CODE =
             PiMatchFieldId.of(HDR + DOT + DATA + DOT + "epc_traffic_code");
+
+    private static final PiMatchFieldId UE_NUM =
+            PiMatchFieldId.of(HDR + DOT + T_ue_context_rel_req_lookup_lb1_ub1 + DOT + "ue_num");
+
+        private static final PiMatchFieldId UE_KEY =
+            PiMatchFieldId.of(HDR + DOT + T_initial_ctxt_setup_resp_lookup_lb2_ub2 + DOT + "ue_key");
+
+        private static final PiMatchFieldId UE_KEY2 =
+            PiMatchFieldId.of(HDR + DOT + T_ue_service_req_lookup_lb1_ub1 + DOT + "ue_key");
     
 
     private static final PiTableId TABLE_L3_FWD_ID =
@@ -150,6 +170,31 @@ public final class PipelineInterpreterImpl
      
         private static final PiTableId TABLE_uekey_guti =
             PiTableId.of(C_INGRESS + DOT + T_uekey_guti);
+
+
+
+        // @vikas: LOOKUP tbales for if statement rewriting
+            /*************************** FOR LB1 UB1 *******************************/
+
+        private static final PiTableId TABLE_ue_context_rel_req_lookup_lb1_ub1 =
+            PiTableId.of(C_INGRESS + DOT + T_ue_context_rel_req_lookup_lb1_ub1);
+
+        private static final PiTableId TABLE_initial_ctxt_setup_resp_lookup_lb1_ub1 =
+            PiTableId.of(C_INGRESS + DOT + T_initial_ctxt_setup_resp_lookup_lb1_ub1);
+
+        private static final PiTableId TABLE_ue_service_req_lookup_lb1_ub1  =
+            PiTableId.of(C_INGRESS + DOT + T_ue_service_req_lookup_lb1_ub1 );
+
+            /*************************** FOR LB2 UB2 *******************************/
+
+        private static final PiTableId TABLE_ue_context_rel_req_lookup_lb2_ub2 =
+            PiTableId.of(C_INGRESS + DOT + T_ue_context_rel_req_lookup_lb2_ub2);
+
+        private static final PiTableId TABLE_initial_ctxt_setup_resp_lookup_lb2_ub2 =
+            PiTableId.of(C_INGRESS + DOT + T_ue_context_rel_req_lookup_lb2_ub2);
+
+        private static final PiTableId TABLE_ue_service_req_lookup_lb2_ub2=
+            PiTableId.of(C_INGRESS + DOT + T_ue_service_req_lookup_lb2_ub2);
 
 
     private static final PiActionId ACT_ID_NOP =

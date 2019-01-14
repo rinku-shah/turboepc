@@ -141,8 +141,154 @@ public class FR{
          else{
              insertPiFlowRule(appId,flowRuleService,switchId, tunnelIngressTableId, match, action);
          }
-        
+
+        }
+     public void populate_lookup_if_tables(boolean removeRule,int lookup_flag,ApplicationId appId,FlowRuleService flowRuleService,DeviceId switchId,int ue_key){
+
+    // ******************************************************   LOOKUP TBALES for if statements **************************************************
+
+         //lookup_flag tells which tables to be populated either lb1_ub1 tables or lb2_ub2 tables
+        if(lookup_flag==1){
+
+            PiTableId tunnelIngressTableId = PiTableId.of("c_ingress.ue_context_rel_req_lookup_lb1_ub1");
+            PiMatchFieldId ueKeyFieldId = PiMatchFieldId.of("hdr.ue_context_rel_req.ue_num");
+            PiCriterion match = PiCriterion.builder()
+                    .matchExact(ueKeyFieldId, ue_key)
+                    .build();
+            
+            // invoking default action which is NoAction()
+
+            PiActionId ingressActionId = PiActionId.of("NoAction");
+
+            PiAction action = PiAction.builder()
+                    .withId(ingressActionId)
+                    .build();
+
+            if (removeRule) {
+                removePiFlowRule(appId,flowRuleService,switchId, tunnelIngressTableId, match, action);
+            }
+            else{
+                insertPiFlowRule(appId,flowRuleService,switchId, tunnelIngressTableId, match, action);
+            }
+
+            // --------------------------------------------------------------------------------------------
+
+            tunnelIngressTableId = PiTableId.of("c_ingress.initial_ctxt_setup_resp_lookup_lb1_ub1");
+            ueKeyFieldId = PiMatchFieldId.of("hdr.initial_ctxt_setup_resp.ue_key");
+            match = PiCriterion.builder()
+                    .matchExact(ueKeyFieldId, ue_key)
+                    .build();
+            
+            //invoking default action which is NoAction()
+
+            ingressActionId = PiActionId.of("NoAction");
+
+            action = PiAction.builder()
+                    .withId(ingressActionId)
+                    .build();
+
+            if (removeRule) {
+                removePiFlowRule(appId,flowRuleService,switchId, tunnelIngressTableId, match, action);
+            }
+            else{
+                insertPiFlowRule(appId,flowRuleService,switchId, tunnelIngressTableId, match, action);
+            }
+
+            // --------------------------------------------------------------------------------------------
+            tunnelIngressTableId = PiTableId.of("c_ingress.ue_service_req_lookup_lb1_ub1");
+            ueKeyFieldId = PiMatchFieldId.of("hdr.ue_service_req.ue_key");
+            match = PiCriterion.builder()
+                    .matchExact(ueKeyFieldId, ue_key)
+                    .build();
+            
+            //invoking default action which is NoAction()            
+    
+            ingressActionId = PiActionId.of("NoAction");
+    
+            action = PiAction.builder()
+                    .withId(ingressActionId)
+                    .build();
+
+            if (removeRule) {
+                removePiFlowRule(appId,flowRuleService,switchId, tunnelIngressTableId, match, action);
+            }
+            else{
+                insertPiFlowRule(appId,flowRuleService,switchId, tunnelIngressTableId, match, action);
+            }
+        }
+
+
+        else if(lookup_flag==2){
+
+            PiTableId tunnelIngressTableId = PiTableId.of("c_ingress.ue_context_rel_req_lookup_lb2_ub2");
+            PiMatchFieldId ueKeyFieldId = PiMatchFieldId.of("hdr.ue_context_rel_req.ue_num");
+            PiCriterion match = PiCriterion.builder()
+                    .matchExact(ueKeyFieldId, ue_key)
+                    .build();
+
+            //invoking default action which is NoAction()
+            PiActionId ingressActionId = PiActionId.of("NoAction");
+
+            PiAction action = PiAction.builder()
+                    .withId(ingressActionId)
+                    .build();
+
+            if (removeRule) {
+                removePiFlowRule(appId,flowRuleService,switchId, tunnelIngressTableId, match, action);
+            }
+            else{
+                insertPiFlowRule(appId,flowRuleService,switchId, tunnelIngressTableId, match, action);
+            }
+
+            // --------------------------------------------------------------------------------------------
+
+            tunnelIngressTableId = PiTableId.of("c_ingress.initial_ctxt_setup_resp_lookup_lb2_ub2");
+            ueKeyFieldId = PiMatchFieldId.of("hdr.initial_ctxt_setup_resp.ue_key");
+            match = PiCriterion.builder()
+                    .matchExact(ueKeyFieldId, ue_key)
+                    .build();
+            
+            //invoking default action which is NoAction()
+
+            ingressActionId = PiActionId.of("NoAction");
+
+            action = PiAction.builder()
+                    .withId(ingressActionId)
+                    .build();
+
+            if (removeRule) {
+                removePiFlowRule(appId,flowRuleService,switchId, tunnelIngressTableId, match, action);
+            }
+            else{
+                insertPiFlowRule(appId,flowRuleService,switchId, tunnelIngressTableId, match, action);
+            }
+
+            // --------------------------------------------------------------------------------------------
+            tunnelIngressTableId = PiTableId.of("c_ingress.ue_service_req_lookup_lb2_ub2");
+            ueKeyFieldId = PiMatchFieldId.of("hdr.ue_service_req.ue_key");
+            match = PiCriterion.builder()
+                    .matchExact(ueKeyFieldId, ue_key)
+                    .build();
+            
+            //invoking default action which is NoAction()
+    
+            ingressActionId = PiActionId.of("NoAction");
+    
+            action = PiAction.builder()
+                    .withId(ingressActionId)
+                    .build();
+
+            if (removeRule) {
+                removePiFlowRule(appId,flowRuleService,switchId, tunnelIngressTableId, match, action);
+            }
+            else{
+                insertPiFlowRule(appId,flowRuleService,switchId, tunnelIngressTableId, match, action);
+            }
+
+        }
+                  
      }
+
 
      public void populate_uekey_uestate_map(boolean removeRule,ApplicationId appId,FlowRuleService flowRuleService,DeviceId switchId,int ue_key, int ue_state){
 
