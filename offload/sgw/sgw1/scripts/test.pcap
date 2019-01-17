@@ -1,7 +1,0 @@
-06:20:58.134327 IP 192.168.2.2.58417 > 192.168.2.3.2152: UDP, length 68
-06:20:59.151707 IP 192.168.2.2.58417 > 192.168.2.3.2152: UDP, length 68
-06:21:01.167715 IP 192.168.2.2.58417 > 192.168.2.3.2152: UDP, length 68
-06:21:05.423656 IP 192.168.2.2.58417 > 192.168.2.3.2152: UDP, length 68
-06:21:11.123554 IP6 fe80::216:3eff:fef7:4e43 > ff02::16: HBH ICMP6, multicast listener report v2, 1 group record(s), length 28
-06:21:11.175452 IP6 fe80::216:3eff:fef7:4e43 > ff02::16: HBH ICMP6, multicast listener report v2, 1 group record(s), length 28
-
