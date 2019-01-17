@@ -1,0 +1,32 @@
+COMPILE_DEPS = [
+    '//lib:CORE_DEPS',
+    '//apps/p4-tutorial/pipeconf:onos-apps-p4-tutorial-pipeconf',
+    '//protocols/p4runtime/model:onos-protocols-p4runtime-model',
+    '//protocols/p4runtime/api:onos-protocols-p4runtime-api',
+    '//utils/misc:onlab-misc',
+    
+]
+
+osgi_jar(
+       deps = COMPILE_DEPS,
+)
+
+BUNDLES = [
+    '//apps/p4-tutorial/epc:onos-apps-p4-tutorial-epc',
+]
+
+onos_app (
+    app_name = 'org.onosproject.p4tutorial.epc',
+    title = 'EPC Demo App',
+    category = 'Steering',
+    url = 'http://onosproject.org',
+    description = 'Provides forwarding between each pair of hosts via VLAN protocol in EPC',
+    included_bundles = BUNDLES,
+    required_apps = [
+        'org.onosproject.p4tutorial.pipeconf',
+        'org.onosproject.p4tutorial.pipeconf_sgw1',
+        'org.onosproject.p4tutorial.pipeconf_sgw2',
+        'org.onosproject.p4tutorial.pipeconf_pgw',        
+
+    ]
+)
