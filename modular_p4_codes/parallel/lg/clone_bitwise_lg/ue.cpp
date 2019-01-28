@@ -1377,6 +1377,7 @@ vector<string> UserEquipment::setupTunnel(Client &user, bool doEncryption){
 		time_t seconds;
 		seconds = time (NULL);
 		if(DO_DEBUG){
+			cout<<"in ue.cpp setupTunnel before returing tmparray = "<<tmpArray[0]<<" ------" <<tmpArray[1]<<endl;
 			printf ("%ld seconds since January 1, 1970 kk=%d\n", seconds, stoi(tmpArray[2]));
 		}
 	}
@@ -1805,10 +1806,10 @@ string UserEquipment::send_ue_service_request(Client& user, int ue_num, string u
 		// tmpArray = split(user.client_buffer, SEPARATOR);
 
 		// if(tmpArray[0] == INITIAL_CONTEXT_SETUP_REQUEST){
-		if(code_name1 == stoi(INITIAL_CONTEXT_SETUP_REQUEST)){
+		//if(code_name1 == stoi(INITIAL_CONTEXT_SETUP_REQUEST)){
 
 			if(DO_DEBUG){
-				// cout<<"Received INITIAL_CONTEXT_SETUP_REQUEST for UE with key="<<ue_num<<" SGW TEID="<<tmpArray[1]<<endl;
+			     cout<<"Received INITIAL_CONTEXT_SETUP_REQUEST for UE with key="<<ue_num<<" SGW TEID="<<tmpArray[1]<<endl;
 			}
 
 //			int ue_teid;
@@ -1896,7 +1897,7 @@ string UserEquipment::send_ue_service_request(Client& user, int ue_num, string u
 
 			// now write struct elemets to buffer one by one
 			bzero(user.client_buffer, BUFFER_SIZE);
-			int len=0;  // reset length which holds no of bytes written in buffer
+			len=0;  // reset length which holds no of bytes written in buffer
 
 			memcpy(user.client_buffer, &(ctxtresp.msg_id), sizeof(ctxtresp.msg_id));
 			len+=sizeof(ctxtresp.msg_id);
@@ -1973,10 +1974,10 @@ string UserEquipment::send_ue_service_request(Client& user, int ue_num, string u
 
 				// tmpArray[1] => ue key
 				if(DO_DEBUG){
-					// cout<<"CLEAR TO SEND DATA for ue with key ="<<tmpArray[1]<<endl;
+					 cout<<"CLEAR TO SEND DATA for ue with key ="<<tmpArray[1]<<endl;
 				}
 			}
-		}
+		//}
 	// }
 
 	return to_string(ue_teid);

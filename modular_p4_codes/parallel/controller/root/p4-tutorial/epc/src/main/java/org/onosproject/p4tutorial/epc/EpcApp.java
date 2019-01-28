@@ -492,6 +492,7 @@ public class EpcApp {
                         response = new StringBuilder();
                         response.append(Constants.SEND_STARTING_IP).append(Constants.SEPARATOR).append(ip);
 
+
                         if(Constants.DEBUG){
                             log.warn("Starting IP= {}",ip);
                             log.warn("Response to send = {}",response);
@@ -1384,7 +1385,6 @@ public class EpcApp {
                                              log.warn("UE_IP = {}" , ue_ipaddr2);
                                          }
 
- //                        DatapathId dw_ue_ser = Constants.getDgwDpidFromIp(srcIp.toString());
                          String dw_ue_ser = Constants.getDgwDpidFromIp(DGW_IPAddr);  // dw_ue_ser contains switches ID like "1", "2" etc
 
                          if(Constants.DEBUG){
@@ -1401,7 +1401,7 @@ public class EpcApp {
                              decArray = receiveDecryptedArray(tmpArray);
                          }
                          //sgw_dpId = Constants.getSgwDpid(dw_ue_ser);
-			            sgw_dpId = Constants.getSgwDpidScale(dw_ue_ser, Integer.parseInt(tmpArray[1]));
+			 sgw_dpId = Constants.getSgwDpidScale(dw_ue_ser, Integer.parseInt(tmpArray[1]));
                          ue_ip = tmpArray[3];
 
                          String sgw_dpid_sgw_teid = FT.get(dw_ue_ser,"uekey_sgw_teid_map",tmpArray[1]); // MAP key = UE KEY,  MAP value = SGW_DPID + SEPARATOR + SGW_TEID

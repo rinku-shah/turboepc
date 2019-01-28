@@ -1417,7 +1417,7 @@ public class EpcApp {
                         // int SGW_ID1 =  Integer.parseInt(Constants.getSgwDpid(dw_ue_ser));
                         // String getval1 = dw_ue_ser + Constants.SEPARATOR + SGW_ID1;
                         // int outPort1 =  Constants.ENODEB_SGW_PORT_MAP.get(getval1);
-                        // @offload design : hardcoding here value as 2 as all switches are conncected linearly
+                        // @vikas @parallel design : hardcoding here value as 2 as SGW1_1 is connected on port 2 of DGW
                         int outPort1 = 2;
 
                         byte[] UE_IPAddr1 = IPv4.toIPv4AddressBytes(tmpArray[3]);

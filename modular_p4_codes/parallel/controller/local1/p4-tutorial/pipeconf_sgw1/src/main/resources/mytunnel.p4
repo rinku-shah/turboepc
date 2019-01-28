@@ -270,18 +270,6 @@ control c_ingress(inout headers hdr,
       default_action = NoAction();
     }
 
-    
-
-    // @offload esign : for now sending to local-onos which in turn will reply to RAN
-    // table contextrelease{
-    //     key={}
-    //     actions={
-    //         send_to_cpu;
-    //         NoAction;
-    //     }
-    //   size = 1024;
-    //   default_action = NoAction();
-    // }
 
 
     apply {
@@ -477,10 +465,10 @@ control c_egress(inout headers hdr,
                             // if(hdr.ipv4.ttl == 63){
 
                             // handle context release message 
-			    bit<32> tmp_ue_num1;
+			                bit<32> tmp_ue_num1;
                             if(hdr.data.epc_traffic_code == 14){
                                     // send the packet back to RAN
-				    tmp_ue_num1 =  hdr.ue_context_rel_req.ue_num;
+				                    tmp_ue_num1 =  hdr.ue_context_rel_req.ue_num;
                                     hdr.ue_context_rel_command.setValid();
                                     hdr.ue_context_rel_command.epc_traffic_code = 15;
                                     hdr.ue_context_rel_command.sep1 = hdr.ue_context_rel_req.sep1;

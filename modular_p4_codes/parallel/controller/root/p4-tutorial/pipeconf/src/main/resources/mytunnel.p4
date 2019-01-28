@@ -320,8 +320,8 @@ control c_ingress(inout headers hdr,
           if (hdr.ipv4.isValid() && !hdr.gtpu.isValid()) {
               // if ttl = 64, it means we are on DGW (RAN-> SINK) for service request or data packet or at DGW(local onos -> RAN) or at PGW (Sink-> RAN)
 
-                    //  from RAN to local onos at DGW OR process reply from Sink to RAN at PGW 
-                   if(standard_metadata.ingress_port==1 || standard_metadata.ingress_port==7){
+                    //  from RAN to local onos at DGW 
+                   if(standard_metadata.ingress_port==1 ){
 
                          
 

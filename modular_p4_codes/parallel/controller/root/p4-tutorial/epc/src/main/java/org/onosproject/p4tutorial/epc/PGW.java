@@ -67,9 +67,7 @@ public class PGW  {
 		return elements;
 	}
 	
-//	public String returnStartingIPAddress(IOFSwitch sw){   // changes here
 	public String returnStartingIPAddress(String sw){
-//		DatapathId dp = sw.getId();
 		
 		return ip[Constants.getChainIDFromDGW(sw)];
 	}
@@ -126,7 +124,6 @@ public class PGW  {
 	/*
 	 * This method generates and allocates the UE IP address and PGW Tunnel ID (for this specific UE session)
 	 */
-//	public synchronized String allocateIPForUE(IOFSwitch pgw, int sgw_tunnelId, DatapathId sgw_dpId, DatapathId pgw_dpId, String apn){
 	public synchronized String allocateIPForUE(ApplicationId appId,FlowRuleService flowRuleService, int sgw_tunnelId, String sgw_dpId, String pgw_dpId, String apn){
 		int pgw_teid;
 		// resuing old tunnel ids
@@ -150,7 +147,6 @@ public class PGW  {
 		}
 		try {
 
-
 			if(reusable_ips[chainId].isEmpty()){
 				numIps++;
 				this.ip[chainId] = getNextIPAddress(ip[chainId]);
@@ -163,7 +159,6 @@ public class PGW  {
 			}
 		} catch (Exception e) {
 			log.info("some stacktrace");
-//			System.out.println(e.printStackTrace());
 		}
 
 		if(Constants.DEBUG){

@@ -33,14 +33,14 @@ public class Constants {
 	//final static String UE_MAC = "00:16:3e:c6:a2:aa"; // MAC Address of UE/eNodeB Node  *
 	//final static String DEFAULT_GW_MAC = "00:16:3e:f7:4d:43"; //"12:b4:6f:db:03:28";//"00:16:3e:03:9d:5a"; // MAC Address of DGW int2 //1e:12:62:1d:67:a5     *
 
-	final static int UE_LB = 200; //push UE state to switches when UE KEY is between UE_LB & UE_UB
-	final static int UE_UB = 299;
+	final static int UE_LB = 300; //push UE state to switches when UE KEY is between UE_LB & UE_UB
+	final static int UE_UB = 399;
 
-	final static int LB1 = 100; //Select SGW1 when UE KEY is between LB1 & UB1
-    final static int UB1 = 199; //101;
+	final static int LB1 = 200; //Select SGW1 when UE KEY is between LB1 & UB1
+    final static int UB1 = 299; //101;
 
-    final static int LB2 = 200; //Select SGW2 when UE KEY is between LB2 & UB2
-    final static int UB2 = 299;
+    final static int LB2 = 100; //Select SGW2 when UE KEY is between LB2 & UB2
+    final static int UB2 = 199;
 
 
 	final static boolean OFFLOAD_ATTACH = true; //false; //True=> We wish to offload attach components to local controller
@@ -570,8 +570,9 @@ public class Constants {
 				int swid = Integer.parseInt(swid1);
 				if (swid==(Constants.SGW_ID_1))
 					return 0;
+					// @vikas : @modular : in case of parallel code both SGW1_1 and SGW1_2 are part of chain 1 so returning 0 in case of SGW_ID_2 as well.
 				else if (swid==(Constants.SGW_ID_2))
-					return 1;
+					return 0;
 				else if (swid==(Constants.SGW_ID_3))
 					return 2;
 				else if (swid==(Constants.SGW_ID_4))
@@ -587,6 +588,8 @@ public class Constants {
 			}
 
 			public static int getChainIDFromDGW(String dgw){
+
+				//log.warn("in getChainIDfromDGW dgw = {}",dgw);
 
 				String swid1 =dgw.split("s")[1];  // assuming that switches will be from s1---s9 so char at position1 will give switchid which is an int
 				

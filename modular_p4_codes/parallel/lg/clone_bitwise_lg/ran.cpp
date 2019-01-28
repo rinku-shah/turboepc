@@ -421,7 +421,7 @@ void* multithreading_func(void *arg){
 					//usleep(my_rand()+200);
 					gettimeofday(&start1, NULL);
 					tmpArray = setup_tunnel(ue, user, doEncryption_t);
-					//  IP Address of UE="<<tmpArray[1]<<" and SGW TEID="<<tmpArray[2]
+					cout<<"IP Address of UE="<<tmpArray[1]<<" and SGW TEID="<<tmpArray[2]<<endl;
 					// string UE_IP = tmpArray[1];
 					//lat_mtx.lock();
 					//attNo++;
@@ -461,8 +461,8 @@ void* multithreading_func(void *arg){
 							}*/
 							usleep(20000);
 							//sleep(500);
-							//send_socket_data(tmpArray[1].c_str());
-
+							cout<<"IP address of UE = "<<tmpArray[1].c_str()<<endl;
+							send_socket_data(tmpArray[1].c_str());
 							//currentPort = send_ue_data(ue, ue_num, rate, currentPort, startingPort, endPort, user, tmpArray, dataTime);
 							// usleep(100000);
 						}

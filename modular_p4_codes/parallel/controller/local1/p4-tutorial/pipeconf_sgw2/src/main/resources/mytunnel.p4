@@ -270,20 +270,6 @@ control c_ingress(inout headers hdr,
       default_action = NoAction();
     }
 
-    
-
-    // @offload esign : for now sending to local-onos which in turn will reply to RAN
-    // table contextrelease{
-    //     key={}
-    //     actions={
-    //         send_to_cpu;
-    //         NoAction;
-    //     }
-    //   size = 1024;
-    //   default_action = NoAction();
-    // }
-
-
     apply {
         if (standard_metadata.ingress_port == CPU_PORT) {
             // Packet received from CPU_PORT, this is a packet-out sent by the

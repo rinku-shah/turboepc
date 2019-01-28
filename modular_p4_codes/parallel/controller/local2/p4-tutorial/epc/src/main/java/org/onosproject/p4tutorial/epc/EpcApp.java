@@ -1277,18 +1277,16 @@ public class EpcApp {
                         if(Constants.DEBUG){
                             log.info("UE IP as received from RAN = {}",tmpArray[1]);
                             log.info("Deleting ingress rule with deiveId = {}, UE_IPAddr = {}, sgw_teid = {},outPort = {}",deviceId,UE_IP1, Integer.parseInt(tmpArray[3]),outPort);
-                            log.warn("DGWswitchName3 Device ID {}", DGWswitchName3);
+                            log.warn("**********************DGWswitchName3 Device ID {}", DGWswitchName3);
 
                         }
 
                         /* UPLINK   => ipv4srcAddr = UE IP and ipv4dstAddr = Sink IP   */
 
                         /******************************** delete uplink flow rule on Ingress DGW( DGW -> SGW)********************************/
-			//@rinku
-                        //fr.insertUplinkTunnelIngressRule(true,appId,flowRuleService,DGWswitchName3,UE_IP1,Constants.dstSinkIpAddr,Integer.parseInt(tmpArray[3]),outPort);
+                        fr.insertUplinkTunnelIngressRule(true,appId,flowRuleService,DGWswitchName3,UE_IP1,Constants.dstSinkIpAddr,Integer.parseInt(tmpArray[3]),outPort);
 
 
-//                        deleteFlowRuleWithIP(dw_cr, uePort, tmpArray[1]); //tmpArray[1] ==> UE IP
                         if(Constants.DEBUG){
                             log.info("DEFAULT SWITCH deleting uplink rule with for UE with IP = {}",tmpArray[1]);
                         }
@@ -1296,17 +1294,14 @@ public class EpcApp {
                         // int DEFAULT_S_SGW_PORT = Constants.ENODEB_SGW_PORT_MAP.get(dw_cr + Constants.SEPARATOR + Constants.getSgwDpid(dw_cr)); //dpids[0] ==> SGW DPID
 
                         /***********************************delete downlink flow rule on Egress DGW( DGW -> RAN)*************************/
-                        //@rinku
-			//fr.insertUplinkTunnelForwardRule(true,appId, flowRuleService, DGWswitchName3,Integer.parseInt(tmpArray[2]), uePort,0,true);
+			fr.insertUplinkTunnelForwardRule(true,appId, flowRuleService, DGWswitchName3,Integer.parseInt(tmpArray[2]), uePort,0,true);
 
 
-//                        deleteFlowRuleWithTEID(dw_cr, DEFAULT_S_SGW_PORT, Integer.parseInt(tmpArray[2]), Constants.SINK_IP); //tmpArray[2] ==> UE VLAN ID
                         if(Constants.DEBUG){
                             log.info("DEFAULT SWITCH deleting downlink rule with for UE with IP = {} and UE TEID = {}",tmpArray[1],tmpArray[2]);
                         }
 
                         // dpids[0] ==> SGW DPID   & dpids[1]==> PGW DPID
-//                        public void releaseAccessBearersRequest(ApplicationId appId,FlowRuleService flowRuleService,DeviceId SGWswitchId, String sgw_dpId, int sgw_teid, String ue_ip){
 
                             /*****************************delete downlink flow rule on Transit SGW( SGW -> PGW)**************************************************/
 				        
@@ -1375,7 +1370,6 @@ public class EpcApp {
 
                                         }
 
-//                        DatapathId dw_ue_ser = Constants.getDgwDpidFromIp(srcIp.toString());
                         String dw_ue_ser = Constants.getSgwDpidFromIp(DGW_IPAddr);  // dw_ue_ser contains switches ID like "1", "2" etc
 
                         if(Constants.DEBUG){
@@ -1391,7 +1385,6 @@ public class EpcApp {
                         if(Constants.DO_ENCRYPTION){
                             decArray = receiveDecryptedArray(tmpArray);
                         }
-//                        sgw_dpId = DatapathId.of(Constants.getSgwDpid(defaultSwitch));
                         String sgw_dpId = Constants.getSgwDpid(dw_ue_ser);
                         String ue_ip = tmpArray[3];
 
@@ -1399,18 +1392,13 @@ public class EpcApp {
 
                         sgw_teid = Integer.parseInt(tmpArray[4]);
 
-                        // String sgw_dpid_sgw_teid = FT.get(dw_ue_ser,"uekey_sgw_teid_map",tmpArray[1]); // MAP key = UE KEY,  MAP value = SGW_DPID + SEPARATOR + SGW_TEID
-                        // tmpArray2 = sgw_dpid_sgw_teid.split(Constants.SEPARATOR);
-                        // sgw_teid = Integer.parseInt(tmpArray2[1]);
 
                         //install uplink rule on default switch
                         DeviceId DGWswitchName4 = Constants.getDgwswitchName(dw_ue_ser);
 
                         if(Constants.DEBUG){
-//                            System.out.println("DEFAULT SWITCH installing uplink rule on default switch dpid = "+dw_ue_ser.getLong()+" inport="+uePort+" and SRC IP = "+ue_ip+
-//                                                       " outPort = "+Constants.ENODEB_SGW_PORT_MAP.get(dw_ue_ser + Constants.SEPARATOR + sgw_dpId.getLong())+" and out SRC IP = "+Constants.getRanIp(dw_ue_ser)+" out teid= "+sgw_teid+" of UE key = "+tmpArray[1]);
-                        log.warn("DGWswitchName4 Device ID {}", DGWswitchName4);
-
+                        log.warn("***********DGWswitchName4 Device ID {}", DGWswitchName4);
+                        log.warn("*********** sgw_dpId =  {}", sgw_dpId);
                         }
 
 
@@ -1419,8 +1407,9 @@ public class EpcApp {
                         // int SGW_ID1 =  Integer.parseInt(Constants.getSgwDpid(dw_ue_ser));
                         // String getval1 = dw_ue_ser + Constants.SEPARATOR + SGW_ID1;
                         // int outPort1 =  Constants.ENODEB_SGW_PORT_MAP.get(getval1);
-                        // @offload design : hardcoding here value as 2 as all switches are conncected linearly
-                        int outPort1 = 2;
+                        //********************************************************* NOTE********************************************************************//
+			// @vikas @parallel design : hardcoding here value as 2 as SGW1_1 is connected on port 2 of DGW
+                        int outPort1 = 3;
 
                         byte[] UE_IPAddr1 = IPv4.toIPv4AddressBytes(tmpArray[3]);
 
@@ -1430,12 +1419,7 @@ public class EpcApp {
                         /**************************** Uplink flow rules here (DGW to SGW) on DGW switch ***************************/
 
                         /* UPLINK   => ipv4srcAddr = UE IP and ipv4dstAddr = Sink IP   */
-                        //fr.insertUplinkTunnelIngressRule(false,appId,flowRuleService,DGWswitchName4,UE_IPAddr1,Constants.dstSinkIpAddr, sgw_teid,outPort1);
-
-                        //        private void installFlowRuleWithIP(DatapathId dpId, int inPort, int outPort, int outTunnelId, String UE_IP, String srcIP, String dstIP, String dstMac){
-//                        installFlowRuleWithIP(dw_ue_ser, uePort, Constants.ENODEB_SGW_PORT_MAP.get(dw_ue_ser.getLong() + Constants.SEPARATOR + Constants.getSgwDpid(dw_ue_ser)), sgw_teid, ue_ip, Constants.getRanIp(dw_ue_ser), Constants.getSgwIpUplink(dw_ue_ser), Constants.SINK_MAC);
-
-                        
+                        fr.insertUplinkTunnelIngressRule(false,appId,flowRuleService,DGWswitchName4,UE_IPAddr1,Constants.dstSinkIpAddr, sgw_teid,outPort1);
 
                         if(Constants.DO_ENCRYPTION){
                             decArray = receiveDecryptedArray(tmpArray);
@@ -1521,14 +1505,9 @@ public class EpcApp {
                         // String sgw_dpId10 = Constants.getSgwDpid(dw_c_resp);
 
 
-//                      modifyBearerRequest(ApplicationId appId,FlowRuleService flowRuleService,DeviceId switchId,String sgw, String sgw_dpId, int sgw_teId, int ue_teId, String key){
 
 		        /******************************** Downlink flow rules on SGW (SGW to DGW) **************************************/
                         sgw.modifyBearerRequest(appId,flowRuleService, deviceId,dw_c_resp, dw_c_resp, sgw_teid, Integer.parseInt(tmpArray[1]), tmpArray[2]);
-
-
-//                        sgw.modifyBearerRequest(switch_mapping.get(DatapathId.of(tmpArray2[0])), DatapathId.of(tmpArray2[0]), Integer.parseInt(tmpArray2[1]), Integer.parseInt(tmpArray[1]), tmpArray[2]);
-
                         ue_ip = tmpArray[3];
 
                         if(Constants.DEBUG){
@@ -1542,11 +1521,11 @@ public class EpcApp {
                         /**************************** Downlink flow rules on DGW (DGW -> RAN) ***************************/
                         DeviceId DGWswitchName5 = Constants.getDgwswitchName(dw_c_resp);
 
-                        // log.warn("DGWswitchName5 Device ID {}", DGWswitchName5);
-
+                        if(Constants.DEBUG){
+                         log.warn("***************DGWswitchName5 Device ID {}", DGWswitchName5);
+			}
                         
-                        //fr.insertUplinkTunnelForwardRule(false,appId, flowRuleService,DGWswitchName5,Integer.parseInt(tmpArray[1]), uePort,0,true);
-//                        installFlowRule( DatapathId.of(Constants.getDgwDpid(DatapathId.of(tmpArray2[0]))), Constants.ENODEB_SGW_PORT_MAP.get(Constants.getDgwDpid(DatapathId.of(tmpArray2[0])) + Constants.SEPARATOR + DatapathId.of(tmpArray2[0]).getLong()), Integer.parseInt(tmpArray[1]), uePort, Integer.parseInt(tmpArray[1]), Constants.SINK_IP, ue_ip, Constants.getUeMac(dw_c_resp));
+                        fr.insertUplinkTunnelForwardRule(false,appId, flowRuleService,DGWswitchName5,Integer.parseInt(tmpArray[1]), uePort,0,true);
 
                         //NOT USED uekey_guti_map, not considered
 
@@ -1579,22 +1558,15 @@ public class EpcApp {
                         break;
 
 		case Constants.UE_CONTEXT_RELEASE_REQUEST_MISS:
-
-
-
 			break;
 
 
 		case Constants.UE_SERVICE_REQUEST_MISS:
-
-
 			break;
 
 		case Constants.INITIAL_CONTEXT_SETUP_RESPONSE_MISS:
-
-
-
 			break;
+
                     default:
                         if(Constants.DEBUG){
                            log.info("Inside case default");

@@ -481,6 +481,7 @@ public class Constants {
 					sgwName = Constants.DGW_NAME_1;
 				else if (swid==(Constants.SGW_ID_2)){
 					//sgwName =Constants.DGW_NAME_2;
+					//@vikas : @modular @parallel : since we are running parallel setup so the SGW1_1 and SGW1_2 are on same chain 1 hence have the same DGW
 					sgwName =Constants.DGW_NAME_1;
 					}
 				else if (swid==(Constants.SGW_ID_3))
@@ -603,7 +604,7 @@ public class Constants {
 				if (swid==(Constants.SGW_ID_1))
 					return 0;
 				else if (swid==(Constants.SGW_ID_2))
-					return 1;
+					return 0;  // // @vikas : @modular : in case of parallel code both SGW1_1 and SGW1_2 are part of chain 1 so returning 0 in case of SGW_ID_2 as well.
 				else if (swid==(Constants.SGW_ID_3))
 					return 2;
 				else if (swid==(Constants.SGW_ID_4))
