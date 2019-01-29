@@ -137,9 +137,7 @@ control c_ingress(inout headers hdr,
         hdr.ipv4 = hdr.inner_ipv4;
         hdr.tcp = hdr.inner_tcp;
 
-        // hdr.udp = hdr.inner_udp;
         hdr.udp.setInvalid();
-
 
         // hdr.gtpu_ipv4.srcAddr =s1u_sgw_addr;
         // hdr.gtpu_ipv4.dstAddr = s1u_pgw_addr;
@@ -397,24 +395,59 @@ control c_ingress(inout headers hdr,
                         hdr.ipv4.ttl = hdr.ipv4.ttl - 1;
                     }
 
-
           }  // control packet if over
+         //------------------------------------ Data packet tunneling logic  ---------------------------------------------
 
         if (hdr.gtpu.isValid()) {
                 // Process all tunneled packets at SGW
-                if(hdr.ipv4.ttl == 63){
                     // if ingress port is 1 on SGW it means it is a UPLINK tunnel packet (RAN -> Sink)
+                    //  @vikas: @modular : if the packet is hit in the tunnel table that means we are at SGW1/SGW2, 
+                    // else if it is a miss, then we are at SGW2/SGW1 and
+                    //  we directly forward it to next hop
                     if(standard_metadata.ingress_port==1){
-                            ip_op_tun_s2_uplink.apply();
-                            return;
+                            if(ip_op_tun_s2_uplink.apply().hit)
+                            {
+                                return;
+
+                            }
+                            else{
+				  // mapping between parser and deparser headers
+                                    hdr.gtpu_ipv4 = hdr.ipv4;
+                                    hdr.gtpu_udp = hdr.udp;
+                                    hdr.ipv4 = hdr.inner_ipv4;
+                                    hdr.tcp = hdr.inner_tcp;
+                                    hdr.udp.setInvalid();
+
+                                    hdr.ipv4.ttl = hdr.ipv4.ttl - 1;
+                                    hdr.gtpu_ipv4.ttl = hdr.gtpu_ipv4.ttl - 1;
+                                    standard_metadata.egress_spec = 2;
+                                    return;
+                            }
                     }
                     // if the ingress port is 2 then it a DOWNLINK tunnel packet (Sink -> RAN)
+                    //  @vikas: @modular : if the packet is hit in the tunnel table that means we are at SGW1/SGW2 depending on where the keys are populated, 
+                    // else if it is a miss, then we are at SGW2/SGW1 and
+                    //  we directly forward it to next hop
                     else if(standard_metadata.ingress_port==2){
-                            ip_op_tun_s2_downlink.apply();
-                            return;
+                            if(ip_op_tun_s2_downlink.apply().hit){
+                                return;
+                            }
+                            else{
+				    // mapping between parser and deparser headers
+                                    hdr.gtpu_ipv4 = hdr.ipv4;
+                                    hdr.gtpu_udp = hdr.udp;
+                                    hdr.ipv4 = hdr.inner_ipv4;
+                                    hdr.tcp = hdr.inner_tcp;
+			                        hdr.udp.setInvalid();
+
+                                    hdr.ipv4.ttl = hdr.ipv4.ttl - 1;
+                                    hdr.gtpu_ipv4.ttl = hdr.gtpu_ipv4.ttl - 1;
+                                    standard_metadata.egress_spec = 1;
+                                    return;
+                            }
                     }
-                }
         }
+         //--------------------------------------------------------------------------------------------------------------------
 
             // compiler removes tables which are not used, to prevent offload tables from being removed lets make an if check with large ttl values so that it is not removed.
             if(hdr.ipv4.ttl == 250){

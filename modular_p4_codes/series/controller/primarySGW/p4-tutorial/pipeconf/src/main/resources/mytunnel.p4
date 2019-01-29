@@ -76,7 +76,6 @@ control c_ingress(inout headers hdr,
    // ***************** Uplink Tunnel(DGW->PGW) Setup *******************************
     action populate_ip_op_tun_s1_uplink(bit<32> op_tunnel_s1,bit<9> egress_port_s1){
      
-
         // gtp based forwarding
         hdr.gtpu_ipv4.setValid();
         hdr.gtpu_ipv4.version = IP_VERSION_4;

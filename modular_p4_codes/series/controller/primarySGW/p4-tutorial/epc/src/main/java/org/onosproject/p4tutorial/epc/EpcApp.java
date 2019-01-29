@@ -831,7 +831,6 @@ public class EpcApp {
                         sgw.modifyBearerRequest(appId,flowRuleService, deviceId,dw_c_resp, dw_c_resp, sgw_teid, Integer.parseInt(tmpArray[1]), tmpArray[2]);
 
 
-//                        sgw.modifyBearerRequest(switch_mapping.get(DatapathId.of(tmpArray2[0])), DatapathId.of(tmpArray2[0]), Integer.parseInt(tmpArray2[1]), Integer.parseInt(tmpArray[1]), tmpArray[2]);
 
                         ue_ip = tmpArray[3];
 
@@ -840,8 +839,6 @@ public class EpcApp {
 //                                                       " in teid = " + Integer.parseInt(tmpArray[1]) +
 //                                                       " outPort = " + uePort + " out teid= " + Integer.parseInt(tmpArray[1]) + " of UE key = "+tmpArray[2]);
                         }
-//                        insertDownlinkTunnelForwardRule(ApplicationId appId,FlowRuleService flowRuleService,DeviceId switchId,int intunId,int outPort,int outtunId,boolean isEgress)
-                        // fr.insertDownlinkTunnelForwardRule(false,appId, flowRuleService, deviceId,Integer.parseInt(tmpArray[1]), uePort,0,true);
 
                         /**************************** Downlink flow rules on DGW (DGW -> RAN) ***************************/
                         DeviceId DGWswitchName5 = Constants.getDgwswitchName(dw_c_resp);
@@ -850,7 +847,6 @@ public class EpcApp {
 
                         
                         fr.insertUplinkTunnelForwardRule(false,appId, flowRuleService,DGWswitchName5,Integer.parseInt(tmpArray[1]), uePort,0,true);
-//                        installFlowRule( DatapathId.of(Constants.getDgwDpid(DatapathId.of(tmpArray2[0]))), Constants.ENODEB_SGW_PORT_MAP.get(Constants.getDgwDpid(DatapathId.of(tmpArray2[0])) + Constants.SEPARATOR + DatapathId.of(tmpArray2[0]).getLong()), Integer.parseInt(tmpArray[1]), uePort, Integer.parseInt(tmpArray[1]), Constants.SINK_IP, ue_ip, Constants.getUeMac(dw_c_resp));
 
                         //NOT USED uekey_guti_map, not considered
 

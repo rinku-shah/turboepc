@@ -192,7 +192,7 @@ public class SGW  {
 //			System.out.println("SGW installing downlink rule on S-GW dpid = "+sgw_dpId.getLong()+" inport="+Constants.SGW_PORT_MAP.get(sgw_dpId)[1]+" in teid = "+sgw_teId+
 //									   " outPort = "+Constants.SGW_PORT_MAP.get(sgw_dpId)[0]+" out teid= "+ue_teId+" of UE key = "+key);
 
-			log.warn("SGW installing downlink rule on S-GW dpid = {}",sgw_dpId);
+			log.warn("---------------------------------------SGW installing downlink rule on S-GW dpid = {}",sgw_dpId);
 			log.warn(" inport = {}",Constants.SGW_PORT_MAP.get(sgw_dpId)[1]);
 			log.warn(" in teid = {}",sgw_teId);
 			log.warn(" outPort = {}",Constants.SGW_PORT_MAP.get(sgw_dpId)[0]);

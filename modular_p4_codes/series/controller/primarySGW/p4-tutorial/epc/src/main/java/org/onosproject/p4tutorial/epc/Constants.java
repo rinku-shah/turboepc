@@ -31,11 +31,11 @@ public class Constants {
 
 	static byte[] dstSinkIpAddr =  IPv4.toIPv4AddressBytes("192.168.4.5");
 
-        final static int LB1 = 200; //Select SGW1 when UE KEY is between LB1 & UB1
-        final static int UB1 = 299; //101;
+        final static int LB1 = 100; //Select SGW1 when UE KEY is between LB1 & UB1
+        final static int UB1 = 199; //101;
 
-        final static int LB2 = 100; //Select SGW2 when UE KEY is between LB2 & UB2
-        final static int UB2 = 199;
+        final static int LB2 = 200; //Select SGW2 when UE KEY is between LB2 & UB2
+        final static int UB2 = 299;
 
 
 	/***************************Configurable parameters**********************************/

@@ -22,8 +22,6 @@ public class Constants {
 	static boolean MYDEBUG1 = false;
 	static boolean FRDEBUG = false;
 	static boolean BITWISE_DEBUG = false;
-	
-
 
 	static boolean offload_with_clone = true;
 
@@ -31,11 +29,11 @@ public class Constants {
 
 	static byte[] dstSinkIpAddr =  IPv4.toIPv4AddressBytes("192.168.4.5");
 
-        final static int LB1 = 200; //Select SGW1 when UE KEY is between LB1 & UB1
-        final static int UB1 = 299; //101;
+        final static int LB1 = 100; //Select SGW1 when UE KEY is between LB1 & UB1
+        final static int UB1 = 199; //101;
 
-        final static int LB2 = 100; //Select SGW2 when UE KEY is between LB2 & UB2
-        final static int UB2 = 199;
+        final static int LB2 = 200; //Select SGW2 when UE KEY is between LB2 & UB2
+        final static int UB2 = 299;
 
 
 	/***************************Configurable parameters**********************************/
@@ -224,7 +222,6 @@ public class Constants {
 		//=====================================
 			// DPID or unique ID of default switch 
 			final static int DEFAULT_SWITCH_ID_1 = 1;
-//			final static String DEFAULT_SWITCH_ID_1 = "s1";
 			final static int DEFAULT_SWITCH_ID_2 = 4;
 			final static int DEFAULT_SWITCH_ID_3 = 6;
 			final static int DEFAULT_SWITCH_ID_4 = 8;
@@ -408,7 +405,6 @@ public class Constants {
                                 if(Constants.DEBUG) {
                                         log.warn("in Constants.getSgwswitchName sgw = {}", dgw);
                                 }
-                                // int length = dgw.length();
                                 String swid1 = "";
                                 if(dgw.charAt(0)=='s'){
                                         // means we get "s1", "s11" like switch numbers
@@ -501,9 +497,7 @@ public class Constants {
 				return dgw;
 			}
 
-//			public static DatapathId getDgwDpidFromIp(String ip){
 			public static String getDgwDpidFromIp(String ip){
-//				DatapathId dgw = DatapathId.of(0);
 				String dgw = "";
 				if (ip.equals(Constants.RAN_IP_1))
 					dgw = Integer.toString(Constants.DEFAULT_SWITCH_ID_1);
@@ -523,26 +517,19 @@ public class Constants {
 
 
 			public static String getSgwDpidFromIp(String ip){
-				//				DatapathId dgw = DatapathId.of(0);
 								String dgw = "";
 								if (ip.equals(Constants.RAN_IP_1))
-				//					dgw = DatapathId.of(Constants.DEFAULT_SWITCH_ID_1);
 									dgw = Integer.toString(Constants.SGW_ID_1);
 								else if (ip.equals(Constants.RAN_IP_2))
 									dgw = Integer.toString(Constants.SGW_ID_2);
-				//				dgw = DatapathId.of(Constants.DEFAULT_SWITCH_ID_2);
 								else if (ip.equals(Constants.RAN_IP_3))
 									dgw = Integer.toString(Constants.SGW_ID_3);
-				//				dgw = DatapathId.of(Constants.DEFAULT_SWITCH_ID_3);
 								else if (ip.equals(Constants.RAN_IP_4))
 									dgw = Integer.toString(Constants.SGW_ID_4);
-				//					dgw = DatapathId.of(Constants.DEFAULT_SWITCH_ID_4);
 								else if (ip.equals(Constants.RAN_IP_5))
 									dgw = Integer.toString(Constants.SGW_ID_5);
-				//					dgw = DatapathId.of(Constants.DEFAULT_SWITCH_ID_5);
 								else if (ip.equals(Constants.RAN_IP_6))
 									dgw = Integer.toString(Constants.SGW_ID_6);
-				//					dgw = DatapathId.of(Constants.DEFAULT_SWITCH_ID_6);
 								return dgw;
 				}
 

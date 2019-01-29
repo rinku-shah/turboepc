@@ -20,7 +20,7 @@ onos_app (
     title = 'EPC Demo App',
     category = 'Steering',
     url = 'http://onosproject.org',
-    description = 'Provides forwarding between each pair of hosts via VLAN protocol in EPC',
+    description = 'Provides forwarding between each pair of hosts via GTP protocol in EPC',
     included_bundles = BUNDLES,
     required_apps = [
         'org.onosproject.p4tutorial.pipeconf',

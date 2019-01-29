@@ -36,11 +36,11 @@ public class Constants {
 	final static int UE_LB = 100; //push UE state to switches when UE KEY is between UE_LB & UE_UB
 	final static int UE_UB = 199;
 
-	final static int LB1 = 200; //Select SGW1 when UE KEY is between LB1 & UB1
-	final static int UB1 = 299; //101;
+	final static int LB1 = 100; //Select SGW1 when UE KEY is between LB1 & UB1
+	final static int UB1 = 199; //101;
 
-	final static int LB2 = 100; //Select SGW2 when UE KEY is between LB2 & UB2
-	final static int UB2 = 199;
+	final static int LB2 = 200; //Select SGW2 when UE KEY is between LB2 & UB2
+	final static int UB2 = 299;
 
 
 	final static boolean OFFLOAD_ATTACH = true; //false; //True=> We wish to offload attach components to local controller
@@ -316,9 +316,8 @@ public class Constants {
 			@SuppressWarnings("serial")
 			final static HashMap<String, Integer> ENODEB_SGW_PORT_MAP = new HashMap<String, Integer>()
 			{{
-				put(DEFAULT_SWITCH_ID_1 + SEPARATOR + SGW_ID_1, 2);// , 3// for switch S2(SGW-1) connected to S1(ENODEB) via port 3 of Default Switchi
-				//@rinku
-				put(DEFAULT_SWITCH_ID_1 + SEPARATOR + SGW_ID_2, 3);// , 3// for switch S2(SGW-1) connected to S1(ENODEB) via port 3 of Default Switch
+				put(DEFAULT_SWITCH_ID_1 + SEPARATOR + SGW_ID_1, 2);// @vikas : @modukar : @series SGW1_1 is connected to port 2 of DGW
+				put(DEFAULT_SWITCH_ID_1 + SEPARATOR + SGW_ID_2, 2);// , @vikas : @modular : @series SGW1_2 is connected to port 2 0f SGW1_1, hence SGW need to forward to port 2 itself
 				put(DEFAULT_SWITCH_ID_2 + SEPARATOR + SGW_ID_2, 2);// , 4// for switch S3(SGW-2) connected to S1(ENODEB) via port 4 of Default Switch
 				put(DEFAULT_SWITCH_ID_3 + SEPARATOR + SGW_ID_3, 2);// , 4// for switch S3(SGW-2) connected to S1(ENODEB) via port 4 of Default Switch
 				put(DEFAULT_SWITCH_ID_4 + SEPARATOR + SGW_ID_4, 2);// , 4// for switch S3(SGW-2) connected to S1(ENODEB) via port 4 of Default Switch
@@ -382,7 +381,6 @@ public class Constants {
 							swid1 = dgw;
 					}
 
-		//int key = Integer.parseInt(uekey);
                 int swid = Integer.parseInt(swid1);
                 int sgw = 0 ;
                 if (swid==(Constants.DEFAULT_SWITCH_ID_1) && ((key >= Constants.LB1 && key <= Constants.UB1)))
@@ -599,7 +597,8 @@ public class Constants {
 				if (swid==(Constants.SGW_ID_1))
 					return 0;
 				else if (swid==(Constants.SGW_ID_2))
-					return 1;
+                                    	// @vikas : @modular : in case of parallel code both SGW1_1 and SGW1_2 are part of chain 1 so returning 0 in case of SGW_ID_2 as well.
+					return 0;
 				else if (swid==(Constants.SGW_ID_3))
 					return 2;
 				else if (swid==(Constants.SGW_ID_4))

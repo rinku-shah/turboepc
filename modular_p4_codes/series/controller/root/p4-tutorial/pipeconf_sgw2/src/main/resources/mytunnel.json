@@ -11,12 +11,14 @@
       "fields" : [
         ["tmp", 32, false],
         ["tmp_0", 32, false],
-        ["tmp_5", 1, false],
-        ["tmp_6", 1, false],
         ["tmp_7", 1, false],
         ["tmp_8", 1, false],
         ["tmp_9", 1, false],
         ["tmp_10", 1, false],
+        ["tmp_11", 1, false],
+        ["tmp_12", 1, false],
+        ["tmp_13", 1, false],
+        ["tmp_14", 1, false],
         ["hasReturned_0", 1, false],
         ["tmp_ue_num", 32, false],
         ["tmp_ue_num1", 32, false],
@@ -33,7 +35,7 @@
         ["cond_4", 1, false],
         ["pred_4", 1, false],
         ["pred_5", 1, false],
-        ["_padding_2", 4, false]
+        ["_padding_2", 2, false]
       ]
     },
     {
@@ -2771,7 +2773,7 @@
           "parameters" : [
             {
               "type" : "field",
-              "value" : ["scalars", "tmp_5"]
+              "value" : ["scalars", "tmp_7"]
             },
             {
               "type" : "expression",
@@ -2801,7 +2803,7 @@
           "parameters" : [
             {
               "type" : "field",
-              "value" : ["scalars", "tmp_5"]
+              "value" : ["scalars", "tmp_7"]
             },
             {
               "type" : "expression",
@@ -2867,7 +2869,7 @@
           "parameters" : [
             {
               "type" : "field",
-              "value" : ["scalars", "tmp_6"]
+              "value" : ["scalars", "tmp_8"]
             },
             {
               "type" : "expression",
@@ -2897,7 +2899,7 @@
           "parameters" : [
             {
               "type" : "field",
-              "value" : ["scalars", "tmp_6"]
+              "value" : ["scalars", "tmp_8"]
             },
             {
               "type" : "expression",
@@ -2927,7 +2929,7 @@
           "parameters" : [
             {
               "type" : "field",
-              "value" : ["scalars", "tmp_7"]
+              "value" : ["scalars", "tmp_9"]
             },
             {
               "type" : "expression",
@@ -2963,7 +2965,7 @@
           "parameters" : [
             {
               "type" : "field",
-              "value" : ["scalars", "tmp_8"]
+              "value" : ["scalars", "tmp_10"]
             },
             {
               "type" : "expression",
@@ -2993,7 +2995,7 @@
           "parameters" : [
             {
               "type" : "field",
-              "value" : ["scalars", "tmp_8"]
+              "value" : ["scalars", "tmp_10"]
             },
             {
               "type" : "expression",
@@ -3023,7 +3025,7 @@
           "parameters" : [
             {
               "type" : "field",
-              "value" : ["scalars", "tmp_7"]
+              "value" : ["scalars", "tmp_9"]
             },
             {
               "type" : "expression",
@@ -3039,7 +3041,7 @@
                       "left" : null,
                       "right" : {
                         "type" : "field",
-                        "value" : ["scalars", "tmp_8"]
+                        "value" : ["scalars", "tmp_10"]
                       }
                     }
                   }
@@ -3066,7 +3068,7 @@
           "parameters" : [
             {
               "type" : "field",
-              "value" : ["scalars", "tmp_9"]
+              "value" : ["scalars", "tmp_11"]
             },
             {
               "type" : "expression",
@@ -3102,7 +3104,7 @@
           "parameters" : [
             {
               "type" : "field",
-              "value" : ["scalars", "tmp_10"]
+              "value" : ["scalars", "tmp_12"]
             },
             {
               "type" : "expression",
@@ -3132,7 +3134,7 @@
           "parameters" : [
             {
               "type" : "field",
-              "value" : ["scalars", "tmp_10"]
+              "value" : ["scalars", "tmp_12"]
             },
             {
               "type" : "expression",
@@ -3162,7 +3164,7 @@
           "parameters" : [
             {
               "type" : "field",
-              "value" : ["scalars", "tmp_9"]
+              "value" : ["scalars", "tmp_11"]
             },
             {
               "type" : "expression",
@@ -3178,7 +3180,7 @@
                       "left" : null,
                       "right" : {
                         "type" : "field",
-                        "value" : ["scalars", "tmp_10"]
+                        "value" : ["scalars", "tmp_12"]
                       }
                     }
                   }
@@ -3452,7 +3454,7 @@
           "parameters" : [
             {
               "type" : "field",
-              "value" : ["scalars", "hasReturned_0"]
+              "value" : ["scalars", "tmp_13"]
             },
             {
               "type" : "expression",
@@ -3468,19 +3470,43 @@
                 }
               }
             }
-          ],
-          "source_info" : {
-            "filename" : "mytunnel.p4",
-            "line" : 420,
-            "column" : 28,
-            "source_fragment" : "return"
-          }
+          ]
         }
       ]
     },
     {
       "name" : "act_20",
       "id" : 40,
+      "runtime_data" : [],
+      "primitives" : [
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "tmp_13"]
+            },
+            {
+              "type" : "expression",
+              "value" : {
+                "type" : "expression",
+                "value" : {
+                  "op" : "b2d",
+                  "left" : null,
+                  "right" : {
+                    "type" : "bool",
+                    "value" : false
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name" : "act_21",
+      "id" : 41,
       "runtime_data" : [],
       "primitives" : [
         {
@@ -3507,16 +3533,579 @@
           ],
           "source_info" : {
             "filename" : "mytunnel.p4",
-            "line" : 425,
-            "column" : 28,
+            "line" : 421,
+            "column" : 32,
             "source_fragment" : "return"
           }
         }
       ]
     },
     {
-      "name" : "act_21",
-      "id" : 41,
+      "name" : "act_22",
+      "id" : 42,
+      "runtime_data" : [],
+      "primitives" : [
+        {
+          "op" : "assign_header",
+          "parameters" : [
+            {
+              "type" : "header",
+              "value" : "gtpu_ipv4"
+            },
+            {
+              "type" : "header",
+              "value" : "ipv4"
+            }
+          ],
+          "source_info" : {
+            "filename" : "mytunnel.p4",
+            "line" : 426,
+            "column" : 36,
+            "source_fragment" : "hdr.gtpu_ipv4 = hdr.ipv4"
+          }
+        }
+      ]
+    },
+    {
+      "name" : "act_23",
+      "id" : 43,
+      "runtime_data" : [],
+      "primitives" : [
+        {
+          "op" : "assign_header",
+          "parameters" : [
+            {
+              "type" : "header",
+              "value" : "gtpu_udp"
+            },
+            {
+              "type" : "header",
+              "value" : "udp"
+            }
+          ],
+          "source_info" : {
+            "filename" : "mytunnel.p4",
+            "line" : 427,
+            "column" : 36,
+            "source_fragment" : "hdr.gtpu_udp = hdr.udp"
+          }
+        },
+        {
+          "op" : "assign_header",
+          "parameters" : [
+            {
+              "type" : "header",
+              "value" : "ipv4"
+            },
+            {
+              "type" : "header",
+              "value" : "inner_ipv4"
+            }
+          ],
+          "source_info" : {
+            "filename" : "mytunnel.p4",
+            "line" : 428,
+            "column" : 36,
+            "source_fragment" : "hdr.ipv4 = hdr.inner_ipv4"
+          }
+        },
+        {
+          "op" : "assign_header",
+          "parameters" : [
+            {
+              "type" : "header",
+              "value" : "tcp"
+            },
+            {
+              "type" : "header",
+              "value" : "inner_tcp"
+            }
+          ],
+          "source_info" : {
+            "filename" : "mytunnel.p4",
+            "line" : 429,
+            "column" : 36,
+            "source_fragment" : "hdr.tcp = hdr.inner_tcp"
+          }
+        },
+        {
+          "op" : "remove_header",
+          "parameters" : [
+            {
+              "type" : "header",
+              "value" : "udp"
+            }
+          ],
+          "source_info" : {
+            "filename" : "mytunnel.p4",
+            "line" : 430,
+            "column" : 36,
+            "source_fragment" : "hdr.udp.setInvalid()"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["ipv4", "ttl"]
+            },
+            {
+              "type" : "expression",
+              "value" : {
+                "type" : "expression",
+                "value" : {
+                  "op" : "&",
+                  "left" : {
+                    "type" : "expression",
+                    "value" : {
+                      "op" : "+",
+                      "left" : {
+                        "type" : "field",
+                        "value" : ["ipv4", "ttl"]
+                      },
+                      "right" : {
+                        "type" : "hexstr",
+                        "value" : "0xff"
+                      }
+                    }
+                  },
+                  "right" : {
+                    "type" : "hexstr",
+                    "value" : "0xff"
+                  }
+                }
+              }
+            }
+          ],
+          "source_info" : {
+            "filename" : "mytunnel.p4",
+            "line" : 432,
+            "column" : 36,
+            "source_fragment" : "hdr.ipv4.ttl = hdr.ipv4.ttl - 1"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["gtpu_ipv4", "ttl"]
+            },
+            {
+              "type" : "expression",
+              "value" : {
+                "type" : "expression",
+                "value" : {
+                  "op" : "&",
+                  "left" : {
+                    "type" : "expression",
+                    "value" : {
+                      "op" : "+",
+                      "left" : {
+                        "type" : "field",
+                        "value" : ["gtpu_ipv4", "ttl"]
+                      },
+                      "right" : {
+                        "type" : "hexstr",
+                        "value" : "0xff"
+                      }
+                    }
+                  },
+                  "right" : {
+                    "type" : "hexstr",
+                    "value" : "0xff"
+                  }
+                }
+              }
+            }
+          ],
+          "source_info" : {
+            "filename" : "mytunnel.p4",
+            "line" : 433,
+            "column" : 36,
+            "source_fragment" : "hdr.gtpu_ipv4.ttl = hdr.gtpu_ipv4.ttl - 1"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["standard_metadata", "egress_spec"]
+            },
+            {
+              "type" : "hexstr",
+              "value" : "0x0002"
+            }
+          ],
+          "source_info" : {
+            "filename" : "mytunnel.p4",
+            "line" : 434,
+            "column" : 36,
+            "source_fragment" : "standard_metadata.egress_spec = 2"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "hasReturned_0"]
+            },
+            {
+              "type" : "expression",
+              "value" : {
+                "type" : "expression",
+                "value" : {
+                  "op" : "b2d",
+                  "left" : null,
+                  "right" : {
+                    "type" : "bool",
+                    "value" : true
+                  }
+                }
+              }
+            }
+          ],
+          "source_info" : {
+            "filename" : "mytunnel.p4",
+            "line" : 435,
+            "column" : 36,
+            "source_fragment" : "return"
+          }
+        }
+      ]
+    },
+    {
+      "name" : "act_24",
+      "id" : 44,
+      "runtime_data" : [],
+      "primitives" : [
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "tmp_14"]
+            },
+            {
+              "type" : "expression",
+              "value" : {
+                "type" : "expression",
+                "value" : {
+                  "op" : "b2d",
+                  "left" : null,
+                  "right" : {
+                    "type" : "bool",
+                    "value" : true
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name" : "act_25",
+      "id" : 45,
+      "runtime_data" : [],
+      "primitives" : [
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "tmp_14"]
+            },
+            {
+              "type" : "expression",
+              "value" : {
+                "type" : "expression",
+                "value" : {
+                  "op" : "b2d",
+                  "left" : null,
+                  "right" : {
+                    "type" : "bool",
+                    "value" : false
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name" : "act_26",
+      "id" : 46,
+      "runtime_data" : [],
+      "primitives" : [
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "hasReturned_0"]
+            },
+            {
+              "type" : "expression",
+              "value" : {
+                "type" : "expression",
+                "value" : {
+                  "op" : "b2d",
+                  "left" : null,
+                  "right" : {
+                    "type" : "bool",
+                    "value" : true
+                  }
+                }
+              }
+            }
+          ],
+          "source_info" : {
+            "filename" : "mytunnel.p4",
+            "line" : 444,
+            "column" : 32,
+            "source_fragment" : "return"
+          }
+        }
+      ]
+    },
+    {
+      "name" : "act_27",
+      "id" : 47,
+      "runtime_data" : [],
+      "primitives" : [
+        {
+          "op" : "assign_header",
+          "parameters" : [
+            {
+              "type" : "header",
+              "value" : "gtpu_ipv4"
+            },
+            {
+              "type" : "header",
+              "value" : "ipv4"
+            }
+          ],
+          "source_info" : {
+            "filename" : "mytunnel.p4",
+            "line" : 449,
+            "column" : 36,
+            "source_fragment" : "hdr.gtpu_ipv4 = hdr.ipv4"
+          }
+        },
+        {
+          "op" : "assign_header",
+          "parameters" : [
+            {
+              "type" : "header",
+              "value" : "gtpu_udp"
+            },
+            {
+              "type" : "header",
+              "value" : "udp"
+            }
+          ],
+          "source_info" : {
+            "filename" : "mytunnel.p4",
+            "line" : 450,
+            "column" : 36,
+            "source_fragment" : "hdr.gtpu_udp = hdr.udp"
+          }
+        },
+        {
+          "op" : "assign_header",
+          "parameters" : [
+            {
+              "type" : "header",
+              "value" : "ipv4"
+            },
+            {
+              "type" : "header",
+              "value" : "inner_ipv4"
+            }
+          ],
+          "source_info" : {
+            "filename" : "mytunnel.p4",
+            "line" : 451,
+            "column" : 36,
+            "source_fragment" : "hdr.ipv4 = hdr.inner_ipv4"
+          }
+        },
+        {
+          "op" : "assign_header",
+          "parameters" : [
+            {
+              "type" : "header",
+              "value" : "tcp"
+            },
+            {
+              "type" : "header",
+              "value" : "inner_tcp"
+            }
+          ],
+          "source_info" : {
+            "filename" : "mytunnel.p4",
+            "line" : 452,
+            "column" : 36,
+            "source_fragment" : "hdr.tcp = hdr.inner_tcp"
+          }
+        },
+        {
+          "op" : "remove_header",
+          "parameters" : [
+            {
+              "type" : "header",
+              "value" : "udp"
+            }
+          ],
+          "source_info" : {
+            "filename" : "mytunnel.p4",
+            "line" : 453,
+            "column" : 36,
+            "source_fragment" : "hdr.udp.setInvalid()"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["ipv4", "ttl"]
+            },
+            {
+              "type" : "expression",
+              "value" : {
+                "type" : "expression",
+                "value" : {
+                  "op" : "&",
+                  "left" : {
+                    "type" : "expression",
+                    "value" : {
+                      "op" : "+",
+                      "left" : {
+                        "type" : "field",
+                        "value" : ["ipv4", "ttl"]
+                      },
+                      "right" : {
+                        "type" : "hexstr",
+                        "value" : "0xff"
+                      }
+                    }
+                  },
+                  "right" : {
+                    "type" : "hexstr",
+                    "value" : "0xff"
+                  }
+                }
+              }
+            }
+          ],
+          "source_info" : {
+            "filename" : "mytunnel.p4",
+            "line" : 455,
+            "column" : 36,
+            "source_fragment" : "hdr.ipv4.ttl = hdr.ipv4.ttl - 1"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["gtpu_ipv4", "ttl"]
+            },
+            {
+              "type" : "expression",
+              "value" : {
+                "type" : "expression",
+                "value" : {
+                  "op" : "&",
+                  "left" : {
+                    "type" : "expression",
+                    "value" : {
+                      "op" : "+",
+                      "left" : {
+                        "type" : "field",
+                        "value" : ["gtpu_ipv4", "ttl"]
+                      },
+                      "right" : {
+                        "type" : "hexstr",
+                        "value" : "0xff"
+                      }
+                    }
+                  },
+                  "right" : {
+                    "type" : "hexstr",
+                    "value" : "0xff"
+                  }
+                }
+              }
+            }
+          ],
+          "source_info" : {
+            "filename" : "mytunnel.p4",
+            "line" : 456,
+            "column" : 36,
+            "source_fragment" : "hdr.gtpu_ipv4.ttl = hdr.gtpu_ipv4.ttl - 1"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["standard_metadata", "egress_spec"]
+            },
+            {
+              "type" : "hexstr",
+              "value" : "0x0001"
+            }
+          ],
+          "source_info" : {
+            "filename" : "mytunnel.p4",
+            "line" : 457,
+            "column" : 36,
+            "source_fragment" : "standard_metadata.egress_spec = 1"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "hasReturned_0"]
+            },
+            {
+              "type" : "expression",
+              "value" : {
+                "type" : "expression",
+                "value" : {
+                  "op" : "b2d",
+                  "left" : null,
+                  "right" : {
+                    "type" : "bool",
+                    "value" : true
+                  }
+                }
+              }
+            }
+          ],
+          "source_info" : {
+            "filename" : "mytunnel.p4",
+            "line" : 458,
+            "column" : 36,
+            "source_fragment" : "return"
+          }
+        }
+      ]
+    },
+    {
+      "name" : "act_28",
+      "id" : 48,
       "runtime_data" : [],
       "primitives" : [
         {
@@ -3545,8 +4134,8 @@
       ]
     },
     {
-      "name" : "act_22",
-      "id" : 42,
+      "name" : "act_29",
+      "id" : 49,
       "runtime_data" : [],
       "primitives" : [
         {
@@ -3589,7 +4178,7 @@
           ],
           "source_info" : {
             "filename" : "mytunnel.p4",
-            "line" : 440,
+            "line" : 474,
             "column" : 17,
             "source_fragment" : "tx_port_counter.count((bit<32>) standard_metadata.egress_spec)"
           }
@@ -3597,8 +4186,8 @@
       ]
     },
     {
-      "name" : "act_23",
-      "id" : 43,
+      "name" : "act_30",
+      "id" : 50,
       "runtime_data" : [],
       "primitives" : [
         {
@@ -3641,7 +4230,7 @@
           ],
           "source_info" : {
             "filename" : "mytunnel.p4",
-            "line" : 443,
+            "line" : 477,
             "column" : 17,
             "source_fragment" : "rx_port_counter.count((bit<32>) standard_metadata.ingress_port)"
           }
@@ -3650,13 +4239,13 @@
     },
     {
       "name" : "NoAction",
-      "id" : 44,
+      "id" : 51,
       "runtime_data" : [],
       "primitives" : []
     },
     {
       "name" : "c_egress.populate_ctxt_release_uekey_sgwteid_map",
-      "id" : 45,
+      "id" : 52,
       "runtime_data" : [
         {
           "name" : "sgwteid",
@@ -3678,7 +4267,7 @@
           ],
           "source_info" : {
             "filename" : "mytunnel.p4",
-            "line" : 459,
+            "line" : 493,
             "column" : 2,
             "source_fragment" : "tmp_ue_num = hdr.ue_service_req.ue_key"
           }
@@ -3693,7 +4282,7 @@
           ],
           "source_info" : {
             "filename" : "mytunnel.p4",
-            "line" : 460,
+            "line" : 494,
             "column" : 16,
             "source_fragment" : "hdr.initial_ctxt_setup_req.setValid()"
           }
@@ -3712,7 +4301,7 @@
           ],
           "source_info" : {
             "filename" : "mytunnel.p4",
-            "line" : 461,
+            "line" : 495,
             "column" : 16,
             "source_fragment" : "hdr.initial_ctxt_setup_req.epc_traffic_code = 18"
           }
@@ -3731,7 +4320,7 @@
           ],
           "source_info" : {
             "filename" : "mytunnel.p4",
-            "line" : 462,
+            "line" : 496,
             "column" : 16,
             "source_fragment" : "hdr.initial_ctxt_setup_req.sep1 = hdr.ue_service_req.sep1"
           }
@@ -3750,7 +4339,7 @@
           ],
           "source_info" : {
             "filename" : "mytunnel.p4",
-            "line" : 463,
+            "line" : 497,
             "column" : 16,
             "source_fragment" : "hdr.initial_ctxt_setup_req.sgw_teid = sgwteid"
           }
@@ -3765,7 +4354,7 @@
           ],
           "source_info" : {
             "filename" : "mytunnel.p4",
-            "line" : 465,
+            "line" : 499,
             "column" : 16,
             "source_fragment" : "hdr.data.setInvalid()"
           }
@@ -3780,7 +4369,7 @@
           ],
           "source_info" : {
             "filename" : "mytunnel.p4",
-            "line" : 466,
+            "line" : 500,
             "column" : 16,
             "source_fragment" : "hdr.ue_service_req.setInvalid()"
           }
@@ -3799,7 +4388,7 @@
           ],
           "source_info" : {
             "filename" : "mytunnel.p4",
-            "line" : 467,
+            "line" : 501,
             "column" : 16,
             "source_fragment" : "standard_metadata.egress_spec = 1"
           }
@@ -3818,7 +4407,7 @@
           ],
           "source_info" : {
             "filename" : "mytunnel.p4",
-            "line" : 469,
+            "line" : 503,
             "column" : 16,
             "source_fragment" : "hdr.ipv4.ttl = 64"
           }
@@ -3837,7 +4426,7 @@
           ],
           "source_info" : {
             "filename" : "mytunnel.p4",
-            "line" : 470,
+            "line" : 504,
             "column" : 16,
             "source_fragment" : "hdr.ethernet.dstAddr = hdr.ethernet.srcAddr"
           }
@@ -3856,7 +4445,7 @@
           ],
           "source_info" : {
             "filename" : "mytunnel.p4",
-            "line" : 471,
+            "line" : 505,
             "column" : 16,
             "source_fragment" : "hdr.ipv4.dstAddr = hdr.ipv4.srcAddr"
           }
@@ -3907,7 +4496,7 @@
                               },
                               "right" : {
                                 "type" : "hexstr",
-                                "value" : "0x000000c8"
+                                "value" : "0x00000064"
                               }
                             }
                           },
@@ -3921,7 +4510,7 @@
                               },
                               "right" : {
                                 "type" : "hexstr",
-                                "value" : "0x0000012b"
+                                "value" : "0x000000c7"
                               }
                             }
                           }
@@ -3980,7 +4569,7 @@
                               },
                               "right" : {
                                 "type" : "hexstr",
-                                "value" : "0x000000c8"
+                                "value" : "0x00000064"
                               }
                             }
                           },
@@ -3994,7 +4583,7 @@
                               },
                               "right" : {
                                 "type" : "hexstr",
-                                "value" : "0x0000012b"
+                                "value" : "0x000000c7"
                               }
                             }
                           }
@@ -4060,7 +4649,7 @@
                               },
                               "right" : {
                                 "type" : "hexstr",
-                                "value" : "0x000000c8"
+                                "value" : "0x00000064"
                               }
                             }
                           },
@@ -4074,7 +4663,7 @@
                               },
                               "right" : {
                                 "type" : "hexstr",
-                                "value" : "0x0000012b"
+                                "value" : "0x000000c7"
                               }
                             }
                           }
@@ -4088,7 +4677,7 @@
           ],
           "source_info" : {
             "filename" : "mytunnel.p4",
-            "line" : 475,
+            "line" : 509,
             "column" : 20,
             "source_fragment" : "hdr.ethernet.srcAddr ="
           }
@@ -4131,7 +4720,7 @@
           ],
           "source_info" : {
             "filename" : "mytunnel.p4",
-            "line" : 476,
+            "line" : 510,
             "column" : 20,
             "source_fragment" : "hdr.ipv4.srcAddr ="
           }
@@ -4249,7 +4838,7 @@
                               },
                               "right" : {
                                 "type" : "hexstr",
-                                "value" : "0x00000064"
+                                "value" : "0x000000c8"
                               }
                             }
                           },
@@ -4263,7 +4852,7 @@
                               },
                               "right" : {
                                 "type" : "hexstr",
-                                "value" : "0x000000c7"
+                                "value" : "0x0000012b"
                               }
                             }
                           }
@@ -4337,7 +4926,7 @@
                                   },
                                   "right" : {
                                     "type" : "hexstr",
-                                    "value" : "0x00000064"
+                                    "value" : "0x000000c8"
                                   }
                                 }
                               },
@@ -4351,7 +4940,7 @@
                                   },
                                   "right" : {
                                     "type" : "hexstr",
-                                    "value" : "0x000000c7"
+                                    "value" : "0x0000012b"
                                   }
                                 }
                               }
@@ -4434,7 +5023,7 @@
                                   },
                                   "right" : {
                                     "type" : "hexstr",
-                                    "value" : "0x00000064"
+                                    "value" : "0x000000c8"
                                   }
                                 }
                               },
@@ -4448,7 +5037,7 @@
                                   },
                                   "right" : {
                                     "type" : "hexstr",
-                                    "value" : "0x000000c7"
+                                    "value" : "0x0000012b"
                                   }
                                 }
                               }
@@ -4464,7 +5053,7 @@
           ],
           "source_info" : {
             "filename" : "mytunnel.p4",
-            "line" : 479,
+            "line" : 513,
             "column" : 20,
             "source_fragment" : "hdr.ethernet.srcAddr ="
           }
@@ -4507,7 +5096,7 @@
           ],
           "source_info" : {
             "filename" : "mytunnel.p4",
-            "line" : 480,
+            "line" : 514,
             "column" : 20,
             "source_fragment" : "hdr.ipv4.srcAddr ="
           }
@@ -4771,7 +5360,7 @@
           ],
           "source_info" : {
             "filename" : "mytunnel.p4",
-            "line" : 483,
+            "line" : 517,
             "column" : 20,
             "source_fragment" : "hdr.ethernet.srcAddr ="
           }
@@ -4814,7 +5403,7 @@
           ],
           "source_info" : {
             "filename" : "mytunnel.p4",
-            "line" : 484,
+            "line" : 518,
             "column" : 20,
             "source_fragment" : "hdr.ipv4.srcAddr ="
           }
@@ -5129,7 +5718,7 @@
           ],
           "source_info" : {
             "filename" : "mytunnel.p4",
-            "line" : 487,
+            "line" : 521,
             "column" : 20,
             "source_fragment" : "hdr.ethernet.srcAddr ="
           }
@@ -5172,7 +5761,7 @@
           ],
           "source_info" : {
             "filename" : "mytunnel.p4",
-            "line" : 488,
+            "line" : 522,
             "column" : 20,
             "source_fragment" : "hdr.ipv4.srcAddr ="
           }
@@ -5538,7 +6127,7 @@
           ],
           "source_info" : {
             "filename" : "mytunnel.p4",
-            "line" : 492,
+            "line" : 526,
             "column" : 20,
             "source_fragment" : "hdr.ethernet.srcAddr ="
           }
@@ -5581,7 +6170,7 @@
           ],
           "source_info" : {
             "filename" : "mytunnel.p4",
-            "line" : 493,
+            "line" : 527,
             "column" : 20,
             "source_fragment" : "hdr.ipv4.srcAddr ="
           }
@@ -5998,7 +6587,7 @@
           ],
           "source_info" : {
             "filename" : "mytunnel.p4",
-            "line" : 496,
+            "line" : 530,
             "column" : 20,
             "source_fragment" : "hdr.ethernet.srcAddr ="
           }
@@ -6041,7 +6630,7 @@
           ],
           "source_info" : {
             "filename" : "mytunnel.p4",
-            "line" : 497,
+            "line" : 531,
             "column" : 20,
             "source_fragment" : "hdr.ipv4.srcAddr ="
           }
@@ -6476,7 +7065,7 @@
           ],
           "source_info" : {
             "filename" : "mytunnel.p4",
-            "line" : 501,
+            "line" : 535,
             "column" : 24,
             "source_fragment" : "hdr.ethernet.srcAddr ="
           }
@@ -6519,7 +7108,7 @@
           ],
           "source_info" : {
             "filename" : "mytunnel.p4",
-            "line" : 502,
+            "line" : 536,
             "column" : 20,
             "source_fragment" : "hdr.ipv4.srcAddr ="
           }
@@ -6538,7 +7127,7 @@
           ],
           "source_info" : {
             "filename" : "mytunnel.p4",
-            "line" : 506,
+            "line" : 540,
             "column" : 16,
             "source_fragment" : "hdr.tmpvar.tmpUdpPort = hdr.udp.srcPort"
           }
@@ -6557,7 +7146,7 @@
           ],
           "source_info" : {
             "filename" : "mytunnel.p4",
-            "line" : 507,
+            "line" : 541,
             "column" : 16,
             "source_fragment" : "hdr.udp.srcPort = hdr.udp.dstPort"
           }
@@ -6576,7 +7165,7 @@
           ],
           "source_info" : {
             "filename" : "mytunnel.p4",
-            "line" : 508,
+            "line" : 542,
             "column" : 16,
             "source_fragment" : "hdr.udp.dstPort = hdr.tmpvar.tmpUdpPort"
           }
@@ -6591,7 +7180,7 @@
           ],
           "source_info" : {
             "filename" : "mytunnel.p4",
-            "line" : 509,
+            "line" : 543,
             "column" : 16,
             "source_fragment" : "hdr.tmpvar.setInvalid()"
           }
@@ -6610,7 +7199,7 @@
           ],
           "source_info" : {
             "filename" : "mytunnel.p4",
-            "line" : 511,
+            "line" : 545,
             "column" : 16,
             "source_fragment" : "hdr.udp.length_ = 11 + 8"
           }
@@ -6629,7 +7218,7 @@
           ],
           "source_info" : {
             "filename" : "mytunnel.p4",
-            "line" : 512,
+            "line" : 546,
             "column" : 16,
             "source_fragment" : "hdr.ipv4.totalLen = hdr.udp.length_ + 20"
           }
@@ -6637,8 +7226,8 @@
       ]
     },
     {
-      "name" : "act_24",
-      "id" : 46,
+      "name" : "act_31",
+      "id" : 53,
       "runtime_data" : [],
       "primitives" : [
         {
@@ -6682,461 +7271,6 @@
       ]
     },
     {
-      "name" : "act_25",
-      "id" : 47,
-      "runtime_data" : [],
-      "primitives" : [
-        {
-          "op" : "assign",
-          "parameters" : [
-            {
-              "type" : "field",
-              "value" : ["ethernet", "srcAddr"]
-            },
-            {
-              "type" : "hexstr",
-              "value" : "0x00163e3f0d83"
-            }
-          ],
-          "source_info" : {
-            "filename" : "include/definitions.p4",
-            "line" : 49,
-            "column" : 21,
-            "source_fragment" : "0x00163e3f0d83; ..."
-          }
-        },
-        {
-          "op" : "assign",
-          "parameters" : [
-            {
-              "type" : "field",
-              "value" : ["ipv4", "srcAddr"]
-            },
-            {
-              "type" : "hexstr",
-              "value" : "0xc0a80603"
-            }
-          ],
-          "source_info" : {
-            "filename" : "include/definitions.p4",
-            "line" : 28,
-            "column" : 29,
-            "source_fragment" : "0xC0A80603; ..."
-          }
-        }
-      ]
-    },
-    {
-      "name" : "act_26",
-      "id" : 48,
-      "runtime_data" : [],
-      "primitives" : [
-        {
-          "op" : "assign",
-          "parameters" : [
-            {
-              "type" : "field",
-              "value" : ["ethernet", "srcAddr"]
-            },
-            {
-              "type" : "hexstr",
-              "value" : "0x00163e3f0d83"
-            }
-          ],
-          "source_info" : {
-            "filename" : "include/definitions.p4",
-            "line" : 49,
-            "column" : 21,
-            "source_fragment" : "0x00163e3f0d83; ..."
-          }
-        },
-        {
-          "op" : "assign",
-          "parameters" : [
-            {
-              "type" : "field",
-              "value" : ["ipv4", "srcAddr"]
-            },
-            {
-              "type" : "hexstr",
-              "value" : "0xc0a80603"
-            }
-          ],
-          "source_info" : {
-            "filename" : "include/definitions.p4",
-            "line" : 28,
-            "column" : 29,
-            "source_fragment" : "0xC0A80603; ..."
-          }
-        }
-      ]
-    },
-    {
-      "name" : "act_27",
-      "id" : 49,
-      "runtime_data" : [],
-      "primitives" : [
-        {
-          "op" : "assign",
-          "parameters" : [
-            {
-              "type" : "field",
-              "value" : ["ethernet", "srcAddr"]
-            },
-            {
-              "type" : "hexstr",
-              "value" : "0x00163ee0eb61"
-            }
-          ],
-          "source_info" : {
-            "filename" : "include/definitions.p4",
-            "line" : 50,
-            "column" : 21,
-            "source_fragment" : "0x00163ee0eb61; ..."
-          }
-        },
-        {
-          "op" : "assign",
-          "parameters" : [
-            {
-              "type" : "field",
-              "value" : ["ipv4", "srcAddr"]
-            },
-            {
-              "type" : "hexstr",
-              "value" : "0xc0a80803"
-            }
-          ],
-          "source_info" : {
-            "filename" : "include/definitions.p4",
-            "line" : 29,
-            "column" : 29,
-            "source_fragment" : "0xC0A80803; ..."
-          }
-        }
-      ]
-    },
-    {
-      "name" : "act_28",
-      "id" : 50,
-      "runtime_data" : [],
-      "primitives" : [
-        {
-          "op" : "assign",
-          "parameters" : [
-            {
-              "type" : "field",
-              "value" : ["ethernet", "srcAddr"]
-            },
-            {
-              "type" : "hexstr",
-              "value" : "0x00163e4c02a8"
-            }
-          ],
-          "source_info" : {
-            "filename" : "include/definitions.p4",
-            "line" : 51,
-            "column" : 21,
-            "source_fragment" : "0x00163e4c02a8; ..."
-          }
-        },
-        {
-          "op" : "assign",
-          "parameters" : [
-            {
-              "type" : "field",
-              "value" : ["ipv4", "srcAddr"]
-            },
-            {
-              "type" : "hexstr",
-              "value" : "0xc0a80c03"
-            }
-          ],
-          "source_info" : {
-            "filename" : "include/definitions.p4",
-            "line" : 30,
-            "column" : 29,
-            "source_fragment" : "0xC0A80C03; ..."
-          }
-        }
-      ]
-    },
-    {
-      "name" : "act_29",
-      "id" : 51,
-      "runtime_data" : [],
-      "primitives" : [
-        {
-          "op" : "assign",
-          "parameters" : [
-            {
-              "type" : "field",
-              "value" : ["ethernet", "srcAddr"]
-            },
-            {
-              "type" : "hexstr",
-              "value" : "0x00163ee90a21"
-            }
-          ],
-          "source_info" : {
-            "filename" : "include/definitions.p4",
-            "line" : 52,
-            "column" : 21,
-            "source_fragment" : "0x00163ee90a21; ..."
-          }
-        },
-        {
-          "op" : "assign",
-          "parameters" : [
-            {
-              "type" : "field",
-              "value" : ["ipv4", "srcAddr"]
-            },
-            {
-              "type" : "hexstr",
-              "value" : "0xc0a80f03"
-            }
-          ],
-          "source_info" : {
-            "filename" : "include/definitions.p4",
-            "line" : 31,
-            "column" : 29,
-            "source_fragment" : "0xC0A80F03; ..."
-          }
-        }
-      ]
-    },
-    {
-      "name" : "act_30",
-      "id" : 52,
-      "runtime_data" : [],
-      "primitives" : [
-        {
-          "op" : "assign",
-          "parameters" : [
-            {
-              "type" : "field",
-              "value" : ["ethernet", "srcAddr"]
-            },
-            {
-              "type" : "hexstr",
-              "value" : "0x00163edf5287"
-            }
-          ],
-          "source_info" : {
-            "filename" : "include/definitions.p4",
-            "line" : 53,
-            "column" : 21,
-            "source_fragment" : "0x00163edf5287; ..."
-          }
-        },
-        {
-          "op" : "assign",
-          "parameters" : [
-            {
-              "type" : "field",
-              "value" : ["ipv4", "srcAddr"]
-            },
-            {
-              "type" : "hexstr",
-              "value" : "0xc0a81103"
-            }
-          ],
-          "source_info" : {
-            "filename" : "include/definitions.p4",
-            "line" : 32,
-            "column" : 29,
-            "source_fragment" : "0xC0A81103; ..."
-          }
-        }
-      ]
-    },
-    {
-      "name" : "act_31",
-      "id" : 53,
-      "runtime_data" : [],
-      "primitives" : [
-        {
-          "op" : "assign",
-          "parameters" : [
-            {
-              "type" : "field",
-              "value" : ["scalars", "tmp_ue_num1"]
-            },
-            {
-              "type" : "field",
-              "value" : ["ue_context_rel_req", "ue_num"]
-            }
-          ],
-          "source_info" : {
-            "filename" : "mytunnel.p4",
-            "line" : 543,
-            "column" : 24,
-            "source_fragment" : "tmp_ue_num1 = hdr.ue_context_rel_req.ue_num"
-          }
-        },
-        {
-          "op" : "add_header",
-          "parameters" : [
-            {
-              "type" : "header",
-              "value" : "ue_context_rel_command"
-            }
-          ],
-          "source_info" : {
-            "filename" : "mytunnel.p4",
-            "line" : 544,
-            "column" : 36,
-            "source_fragment" : "hdr.ue_context_rel_command.setValid()"
-          }
-        },
-        {
-          "op" : "assign",
-          "parameters" : [
-            {
-              "type" : "field",
-              "value" : ["ue_context_rel_command", "epc_traffic_code"]
-            },
-            {
-              "type" : "hexstr",
-              "value" : "0x0f"
-            }
-          ],
-          "source_info" : {
-            "filename" : "mytunnel.p4",
-            "line" : 545,
-            "column" : 36,
-            "source_fragment" : "hdr.ue_context_rel_command.epc_traffic_code = 15"
-          }
-        },
-        {
-          "op" : "assign",
-          "parameters" : [
-            {
-              "type" : "field",
-              "value" : ["ue_context_rel_command", "sep1"]
-            },
-            {
-              "type" : "field",
-              "value" : ["ue_context_rel_req", "sep1"]
-            }
-          ],
-          "source_info" : {
-            "filename" : "mytunnel.p4",
-            "line" : 546,
-            "column" : 36,
-            "source_fragment" : "hdr.ue_context_rel_command.sep1 = hdr.ue_context_rel_req.sep1"
-          }
-        },
-        {
-          "op" : "remove_header",
-          "parameters" : [
-            {
-              "type" : "header",
-              "value" : "data"
-            }
-          ],
-          "source_info" : {
-            "filename" : "mytunnel.p4",
-            "line" : 548,
-            "column" : 36,
-            "source_fragment" : "hdr.data.setInvalid()"
-          }
-        },
-        {
-          "op" : "remove_header",
-          "parameters" : [
-            {
-              "type" : "header",
-              "value" : "ue_context_rel_req"
-            }
-          ],
-          "source_info" : {
-            "filename" : "mytunnel.p4",
-            "line" : 549,
-            "column" : 36,
-            "source_fragment" : "hdr.ue_context_rel_req.setInvalid()"
-          }
-        },
-        {
-          "op" : "assign",
-          "parameters" : [
-            {
-              "type" : "field",
-              "value" : ["standard_metadata", "egress_spec"]
-            },
-            {
-              "type" : "hexstr",
-              "value" : "0x0001"
-            }
-          ],
-          "source_info" : {
-            "filename" : "mytunnel.p4",
-            "line" : 550,
-            "column" : 36,
-            "source_fragment" : "standard_metadata.egress_spec = 1"
-          }
-        },
-        {
-          "op" : "assign",
-          "parameters" : [
-            {
-              "type" : "field",
-              "value" : ["ipv4", "ttl"]
-            },
-            {
-              "type" : "hexstr",
-              "value" : "0x40"
-            }
-          ],
-          "source_info" : {
-            "filename" : "mytunnel.p4",
-            "line" : 553,
-            "column" : 36,
-            "source_fragment" : "hdr.ipv4.ttl = 64"
-          }
-        },
-        {
-          "op" : "assign",
-          "parameters" : [
-            {
-              "type" : "field",
-              "value" : ["ethernet", "dstAddr"]
-            },
-            {
-              "type" : "field",
-              "value" : ["ethernet", "srcAddr"]
-            }
-          ],
-          "source_info" : {
-            "filename" : "mytunnel.p4",
-            "line" : 554,
-            "column" : 36,
-            "source_fragment" : "hdr.ethernet.dstAddr = hdr.ethernet.srcAddr"
-          }
-        },
-        {
-          "op" : "assign",
-          "parameters" : [
-            {
-              "type" : "field",
-              "value" : ["ipv4", "dstAddr"]
-            },
-            {
-              "type" : "field",
-              "value" : ["ipv4", "srcAddr"]
-            }
-          ],
-          "source_info" : {
-            "filename" : "mytunnel.p4",
-            "line" : 555,
-            "column" : 36,
-            "source_fragment" : "hdr.ipv4.dstAddr = hdr.ipv4.srcAddr"
-          }
-        }
-      ]
-    },
-    {
       "name" : "act_32",
       "id" : 54,
       "runtime_data" : [],
@@ -7146,90 +7280,18 @@
           "parameters" : [
             {
               "type" : "field",
-              "value" : ["tmpvar", "tmpUdpPort"]
-            },
-            {
-              "type" : "field",
-              "value" : ["udp", "srcPort"]
-            }
-          ],
-          "source_info" : {
-            "filename" : "mytunnel.p4",
-            "line" : 590,
-            "column" : 36,
-            "source_fragment" : "hdr.tmpvar.tmpUdpPort = hdr.udp.srcPort"
-          }
-        },
-        {
-          "op" : "assign",
-          "parameters" : [
-            {
-              "type" : "field",
-              "value" : ["udp", "srcPort"]
-            },
-            {
-              "type" : "field",
-              "value" : ["udp", "dstPort"]
-            }
-          ],
-          "source_info" : {
-            "filename" : "mytunnel.p4",
-            "line" : 591,
-            "column" : 36,
-            "source_fragment" : "hdr.udp.srcPort = hdr.udp.dstPort"
-          }
-        },
-        {
-          "op" : "assign",
-          "parameters" : [
-            {
-              "type" : "field",
-              "value" : ["udp", "dstPort"]
-            },
-            {
-              "type" : "field",
-              "value" : ["tmpvar", "tmpUdpPort"]
-            }
-          ],
-          "source_info" : {
-            "filename" : "mytunnel.p4",
-            "line" : 592,
-            "column" : 36,
-            "source_fragment" : "hdr.udp.dstPort = hdr.tmpvar.tmpUdpPort"
-          }
-        },
-        {
-          "op" : "remove_header",
-          "parameters" : [
-            {
-              "type" : "header",
-              "value" : "tmpvar"
-            }
-          ],
-          "source_info" : {
-            "filename" : "mytunnel.p4",
-            "line" : 593,
-            "column" : 36,
-            "source_fragment" : "hdr.tmpvar.setInvalid()"
-          }
-        },
-        {
-          "op" : "assign",
-          "parameters" : [
-            {
-              "type" : "field",
-              "value" : ["udp", "length_"]
+              "value" : ["ethernet", "srcAddr"]
             },
             {
               "type" : "hexstr",
-              "value" : "0x000f"
+              "value" : "0x00163e3f0d83"
             }
           ],
           "source_info" : {
-            "filename" : "mytunnel.p4",
-            "line" : 595,
-            "column" : 36,
-            "source_fragment" : "hdr.udp.length_ = 7 + 8"
+            "filename" : "include/definitions.p4",
+            "line" : 49,
+            "column" : 21,
+            "source_fragment" : "0x00163e3f0d83; ..."
           }
         },
         {
@@ -7237,18 +7299,18 @@
           "parameters" : [
             {
               "type" : "field",
-              "value" : ["ipv4", "totalLen"]
+              "value" : ["ipv4", "srcAddr"]
             },
             {
               "type" : "hexstr",
-              "value" : "0x0023"
+              "value" : "0xc0a80603"
             }
           ],
           "source_info" : {
-            "filename" : "mytunnel.p4",
-            "line" : 596,
-            "column" : 36,
-            "source_fragment" : "hdr.ipv4.totalLen = hdr.udp.length_ + 20"
+            "filename" : "include/definitions.p4",
+            "line" : 28,
+            "column" : 29,
+            "source_fragment" : "0xC0A80603; ..."
           }
         }
       ]
@@ -7267,14 +7329,14 @@
             },
             {
               "type" : "hexstr",
-              "value" : "0x00163e1f04f2"
+              "value" : "0x00163e3f0d83"
             }
           ],
           "source_info" : {
             "filename" : "include/definitions.p4",
-            "line" : 48,
+            "line" : 49,
             "column" : 21,
-            "source_fragment" : "0x00163e1f04f2; ..."
+            "source_fragment" : "0x00163e3f0d83; ..."
           }
         },
         {
@@ -7286,14 +7348,14 @@
             },
             {
               "type" : "hexstr",
-              "value" : "0xc0a80203"
+              "value" : "0xc0a80603"
             }
           ],
           "source_info" : {
             "filename" : "include/definitions.p4",
-            "line" : 27,
+            "line" : 28,
             "column" : 29,
-            "source_fragment" : "0xC0A80203; ..."
+            "source_fragment" : "0xC0A80603; ..."
           }
         }
       ]
@@ -7301,96 +7363,6 @@
     {
       "name" : "act_34",
       "id" : 56,
-      "runtime_data" : [],
-      "primitives" : [
-        {
-          "op" : "assign",
-          "parameters" : [
-            {
-              "type" : "field",
-              "value" : ["ethernet", "srcAddr"]
-            },
-            {
-              "type" : "hexstr",
-              "value" : "0x00163e3f0d83"
-            }
-          ],
-          "source_info" : {
-            "filename" : "include/definitions.p4",
-            "line" : 49,
-            "column" : 21,
-            "source_fragment" : "0x00163e3f0d83; ..."
-          }
-        },
-        {
-          "op" : "assign",
-          "parameters" : [
-            {
-              "type" : "field",
-              "value" : ["ipv4", "srcAddr"]
-            },
-            {
-              "type" : "hexstr",
-              "value" : "0xc0a80603"
-            }
-          ],
-          "source_info" : {
-            "filename" : "include/definitions.p4",
-            "line" : 28,
-            "column" : 29,
-            "source_fragment" : "0xC0A80603; ..."
-          }
-        }
-      ]
-    },
-    {
-      "name" : "act_35",
-      "id" : 57,
-      "runtime_data" : [],
-      "primitives" : [
-        {
-          "op" : "assign",
-          "parameters" : [
-            {
-              "type" : "field",
-              "value" : ["ethernet", "srcAddr"]
-            },
-            {
-              "type" : "hexstr",
-              "value" : "0x00163e3f0d83"
-            }
-          ],
-          "source_info" : {
-            "filename" : "include/definitions.p4",
-            "line" : 49,
-            "column" : 21,
-            "source_fragment" : "0x00163e3f0d83; ..."
-          }
-        },
-        {
-          "op" : "assign",
-          "parameters" : [
-            {
-              "type" : "field",
-              "value" : ["ipv4", "srcAddr"]
-            },
-            {
-              "type" : "hexstr",
-              "value" : "0xc0a80603"
-            }
-          ],
-          "source_info" : {
-            "filename" : "include/definitions.p4",
-            "line" : 28,
-            "column" : 29,
-            "source_fragment" : "0xC0A80603; ..."
-          }
-        }
-      ]
-    },
-    {
-      "name" : "act_36",
-      "id" : 58,
       "runtime_data" : [],
       "primitives" : [
         {
@@ -7434,8 +7406,8 @@
       ]
     },
     {
-      "name" : "act_37",
-      "id" : 59,
+      "name" : "act_35",
+      "id" : 57,
       "runtime_data" : [],
       "primitives" : [
         {
@@ -7479,8 +7451,8 @@
       ]
     },
     {
-      "name" : "act_38",
-      "id" : 60,
+      "name" : "act_36",
+      "id" : 58,
       "runtime_data" : [],
       "primitives" : [
         {
@@ -7524,8 +7496,8 @@
       ]
     },
     {
-      "name" : "act_39",
-      "id" : 61,
+      "name" : "act_37",
+      "id" : 59,
       "runtime_data" : [],
       "primitives" : [
         {
@@ -7569,23 +7541,42 @@
       ]
     },
     {
-      "name" : "act_40",
-      "id" : 62,
+      "name" : "act_38",
+      "id" : 60,
       "runtime_data" : [],
       "primitives" : [
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "tmp_ue_num1"]
+            },
+            {
+              "type" : "field",
+              "value" : ["ue_context_rel_req", "ue_num"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "mytunnel.p4",
+            "line" : 577,
+            "column" : 24,
+            "source_fragment" : "tmp_ue_num1 = hdr.ue_context_rel_req.ue_num"
+          }
+        },
         {
           "op" : "add_header",
           "parameters" : [
             {
               "type" : "header",
-              "value" : "attach_accept"
+              "value" : "ue_context_rel_command"
             }
           ],
           "source_info" : {
             "filename" : "mytunnel.p4",
-            "line" : 607,
+            "line" : 578,
             "column" : 36,
-            "source_fragment" : "hdr.attach_accept.setValid()"
+            "source_fragment" : "hdr.ue_context_rel_command.setValid()"
           }
         },
         {
@@ -7593,18 +7584,18 @@
           "parameters" : [
             {
               "type" : "field",
-              "value" : ["attach_accept", "epc_traffic_code"]
+              "value" : ["ue_context_rel_command", "epc_traffic_code"]
             },
             {
               "type" : "hexstr",
-              "value" : "0x08"
+              "value" : "0x0f"
             }
           ],
           "source_info" : {
             "filename" : "mytunnel.p4",
-            "line" : 608,
+            "line" : 579,
             "column" : 36,
-            "source_fragment" : "hdr.attach_accept.epc_traffic_code = 8"
+            "source_fragment" : "hdr.ue_context_rel_command.epc_traffic_code = 15"
           }
         },
         {
@@ -7612,37 +7603,18 @@
           "parameters" : [
             {
               "type" : "field",
-              "value" : ["attach_accept", "sep1"]
+              "value" : ["ue_context_rel_command", "sep1"]
             },
             {
               "type" : "field",
-              "value" : ["initial_ctxt_setup_resp", "sep1"]
+              "value" : ["ue_context_rel_req", "sep1"]
             }
           ],
           "source_info" : {
             "filename" : "mytunnel.p4",
-            "line" : 609,
+            "line" : 580,
             "column" : 36,
-            "source_fragment" : "hdr.attach_accept.sep1 = hdr.initial_ctxt_setup_resp.sep1"
-          }
-        },
-        {
-          "op" : "assign",
-          "parameters" : [
-            {
-              "type" : "field",
-              "value" : ["attach_accept", "ue_key"]
-            },
-            {
-              "type" : "field",
-              "value" : ["initial_ctxt_setup_resp", "ue_key"]
-            }
-          ],
-          "source_info" : {
-            "filename" : "mytunnel.p4",
-            "line" : 610,
-            "column" : 36,
-            "source_fragment" : "hdr.attach_accept.ue_key = hdr.initial_ctxt_setup_resp.ue_key"
+            "source_fragment" : "hdr.ue_context_rel_command.sep1 = hdr.ue_context_rel_req.sep1"
           }
         },
         {
@@ -7655,7 +7627,7 @@
           ],
           "source_info" : {
             "filename" : "mytunnel.p4",
-            "line" : 612,
+            "line" : 582,
             "column" : 36,
             "source_fragment" : "hdr.data.setInvalid()"
           }
@@ -7665,14 +7637,14 @@
           "parameters" : [
             {
               "type" : "header",
-              "value" : "initial_ctxt_setup_resp"
+              "value" : "ue_context_rel_req"
             }
           ],
           "source_info" : {
             "filename" : "mytunnel.p4",
-            "line" : 613,
+            "line" : 583,
             "column" : 36,
-            "source_fragment" : "hdr.initial_ctxt_setup_resp.setInvalid()"
+            "source_fragment" : "hdr.ue_context_rel_req.setInvalid()"
           }
         },
         {
@@ -7689,7 +7661,7 @@
           ],
           "source_info" : {
             "filename" : "mytunnel.p4",
-            "line" : 615,
+            "line" : 584,
             "column" : 36,
             "source_fragment" : "standard_metadata.egress_spec = 1"
           }
@@ -7708,7 +7680,7 @@
           ],
           "source_info" : {
             "filename" : "mytunnel.p4",
-            "line" : 616,
+            "line" : 587,
             "column" : 36,
             "source_fragment" : "hdr.ipv4.ttl = 64"
           }
@@ -7727,7 +7699,7 @@
           ],
           "source_info" : {
             "filename" : "mytunnel.p4",
-            "line" : 618,
+            "line" : 588,
             "column" : 36,
             "source_fragment" : "hdr.ethernet.dstAddr = hdr.ethernet.srcAddr"
           }
@@ -7746,7 +7718,7 @@
           ],
           "source_info" : {
             "filename" : "mytunnel.p4",
-            "line" : 619,
+            "line" : 589,
             "column" : 36,
             "source_fragment" : "hdr.ipv4.dstAddr = hdr.ipv4.srcAddr"
           }
@@ -7754,8 +7726,8 @@
       ]
     },
     {
-      "name" : "act_41",
-      "id" : 63,
+      "name" : "act_39",
+      "id" : 61,
       "runtime_data" : [],
       "primitives" : [
         {
@@ -7772,7 +7744,7 @@
           ],
           "source_info" : {
             "filename" : "mytunnel.p4",
-            "line" : 656,
+            "line" : 624,
             "column" : 36,
             "source_fragment" : "hdr.tmpvar.tmpUdpPort = hdr.udp.srcPort"
           }
@@ -7791,7 +7763,7 @@
           ],
           "source_info" : {
             "filename" : "mytunnel.p4",
-            "line" : 657,
+            "line" : 625,
             "column" : 36,
             "source_fragment" : "hdr.udp.srcPort = hdr.udp.dstPort"
           }
@@ -7810,7 +7782,7 @@
           ],
           "source_info" : {
             "filename" : "mytunnel.p4",
-            "line" : 658,
+            "line" : 626,
             "column" : 36,
             "source_fragment" : "hdr.udp.dstPort = hdr.tmpvar.tmpUdpPort"
           }
@@ -7825,7 +7797,624 @@
           ],
           "source_info" : {
             "filename" : "mytunnel.p4",
-            "line" : 659,
+            "line" : 627,
+            "column" : 36,
+            "source_fragment" : "hdr.tmpvar.setInvalid()"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["udp", "length_"]
+            },
+            {
+              "type" : "hexstr",
+              "value" : "0x000f"
+            }
+          ],
+          "source_info" : {
+            "filename" : "mytunnel.p4",
+            "line" : 629,
+            "column" : 36,
+            "source_fragment" : "hdr.udp.length_ = 7 + 8"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["ipv4", "totalLen"]
+            },
+            {
+              "type" : "hexstr",
+              "value" : "0x0023"
+            }
+          ],
+          "source_info" : {
+            "filename" : "mytunnel.p4",
+            "line" : 630,
+            "column" : 36,
+            "source_fragment" : "hdr.ipv4.totalLen = hdr.udp.length_ + 20"
+          }
+        }
+      ]
+    },
+    {
+      "name" : "act_40",
+      "id" : 62,
+      "runtime_data" : [],
+      "primitives" : [
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["ethernet", "srcAddr"]
+            },
+            {
+              "type" : "hexstr",
+              "value" : "0x00163e1f04f2"
+            }
+          ],
+          "source_info" : {
+            "filename" : "include/definitions.p4",
+            "line" : 48,
+            "column" : 21,
+            "source_fragment" : "0x00163e1f04f2; ..."
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["ipv4", "srcAddr"]
+            },
+            {
+              "type" : "hexstr",
+              "value" : "0xc0a80203"
+            }
+          ],
+          "source_info" : {
+            "filename" : "include/definitions.p4",
+            "line" : 27,
+            "column" : 29,
+            "source_fragment" : "0xC0A80203; ..."
+          }
+        }
+      ]
+    },
+    {
+      "name" : "act_41",
+      "id" : 63,
+      "runtime_data" : [],
+      "primitives" : [
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["ethernet", "srcAddr"]
+            },
+            {
+              "type" : "hexstr",
+              "value" : "0x00163e3f0d83"
+            }
+          ],
+          "source_info" : {
+            "filename" : "include/definitions.p4",
+            "line" : 49,
+            "column" : 21,
+            "source_fragment" : "0x00163e3f0d83; ..."
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["ipv4", "srcAddr"]
+            },
+            {
+              "type" : "hexstr",
+              "value" : "0xc0a80603"
+            }
+          ],
+          "source_info" : {
+            "filename" : "include/definitions.p4",
+            "line" : 28,
+            "column" : 29,
+            "source_fragment" : "0xC0A80603; ..."
+          }
+        }
+      ]
+    },
+    {
+      "name" : "act_42",
+      "id" : 64,
+      "runtime_data" : [],
+      "primitives" : [
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["ethernet", "srcAddr"]
+            },
+            {
+              "type" : "hexstr",
+              "value" : "0x00163e3f0d83"
+            }
+          ],
+          "source_info" : {
+            "filename" : "include/definitions.p4",
+            "line" : 49,
+            "column" : 21,
+            "source_fragment" : "0x00163e3f0d83; ..."
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["ipv4", "srcAddr"]
+            },
+            {
+              "type" : "hexstr",
+              "value" : "0xc0a80603"
+            }
+          ],
+          "source_info" : {
+            "filename" : "include/definitions.p4",
+            "line" : 28,
+            "column" : 29,
+            "source_fragment" : "0xC0A80603; ..."
+          }
+        }
+      ]
+    },
+    {
+      "name" : "act_43",
+      "id" : 65,
+      "runtime_data" : [],
+      "primitives" : [
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["ethernet", "srcAddr"]
+            },
+            {
+              "type" : "hexstr",
+              "value" : "0x00163ee0eb61"
+            }
+          ],
+          "source_info" : {
+            "filename" : "include/definitions.p4",
+            "line" : 50,
+            "column" : 21,
+            "source_fragment" : "0x00163ee0eb61; ..."
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["ipv4", "srcAddr"]
+            },
+            {
+              "type" : "hexstr",
+              "value" : "0xc0a80803"
+            }
+          ],
+          "source_info" : {
+            "filename" : "include/definitions.p4",
+            "line" : 29,
+            "column" : 29,
+            "source_fragment" : "0xC0A80803; ..."
+          }
+        }
+      ]
+    },
+    {
+      "name" : "act_44",
+      "id" : 66,
+      "runtime_data" : [],
+      "primitives" : [
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["ethernet", "srcAddr"]
+            },
+            {
+              "type" : "hexstr",
+              "value" : "0x00163e4c02a8"
+            }
+          ],
+          "source_info" : {
+            "filename" : "include/definitions.p4",
+            "line" : 51,
+            "column" : 21,
+            "source_fragment" : "0x00163e4c02a8; ..."
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["ipv4", "srcAddr"]
+            },
+            {
+              "type" : "hexstr",
+              "value" : "0xc0a80c03"
+            }
+          ],
+          "source_info" : {
+            "filename" : "include/definitions.p4",
+            "line" : 30,
+            "column" : 29,
+            "source_fragment" : "0xC0A80C03; ..."
+          }
+        }
+      ]
+    },
+    {
+      "name" : "act_45",
+      "id" : 67,
+      "runtime_data" : [],
+      "primitives" : [
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["ethernet", "srcAddr"]
+            },
+            {
+              "type" : "hexstr",
+              "value" : "0x00163ee90a21"
+            }
+          ],
+          "source_info" : {
+            "filename" : "include/definitions.p4",
+            "line" : 52,
+            "column" : 21,
+            "source_fragment" : "0x00163ee90a21; ..."
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["ipv4", "srcAddr"]
+            },
+            {
+              "type" : "hexstr",
+              "value" : "0xc0a80f03"
+            }
+          ],
+          "source_info" : {
+            "filename" : "include/definitions.p4",
+            "line" : 31,
+            "column" : 29,
+            "source_fragment" : "0xC0A80F03; ..."
+          }
+        }
+      ]
+    },
+    {
+      "name" : "act_46",
+      "id" : 68,
+      "runtime_data" : [],
+      "primitives" : [
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["ethernet", "srcAddr"]
+            },
+            {
+              "type" : "hexstr",
+              "value" : "0x00163edf5287"
+            }
+          ],
+          "source_info" : {
+            "filename" : "include/definitions.p4",
+            "line" : 53,
+            "column" : 21,
+            "source_fragment" : "0x00163edf5287; ..."
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["ipv4", "srcAddr"]
+            },
+            {
+              "type" : "hexstr",
+              "value" : "0xc0a81103"
+            }
+          ],
+          "source_info" : {
+            "filename" : "include/definitions.p4",
+            "line" : 32,
+            "column" : 29,
+            "source_fragment" : "0xC0A81103; ..."
+          }
+        }
+      ]
+    },
+    {
+      "name" : "act_47",
+      "id" : 69,
+      "runtime_data" : [],
+      "primitives" : [
+        {
+          "op" : "add_header",
+          "parameters" : [
+            {
+              "type" : "header",
+              "value" : "attach_accept"
+            }
+          ],
+          "source_info" : {
+            "filename" : "mytunnel.p4",
+            "line" : 641,
+            "column" : 36,
+            "source_fragment" : "hdr.attach_accept.setValid()"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["attach_accept", "epc_traffic_code"]
+            },
+            {
+              "type" : "hexstr",
+              "value" : "0x08"
+            }
+          ],
+          "source_info" : {
+            "filename" : "mytunnel.p4",
+            "line" : 642,
+            "column" : 36,
+            "source_fragment" : "hdr.attach_accept.epc_traffic_code = 8"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["attach_accept", "sep1"]
+            },
+            {
+              "type" : "field",
+              "value" : ["initial_ctxt_setup_resp", "sep1"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "mytunnel.p4",
+            "line" : 643,
+            "column" : 36,
+            "source_fragment" : "hdr.attach_accept.sep1 = hdr.initial_ctxt_setup_resp.sep1"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["attach_accept", "ue_key"]
+            },
+            {
+              "type" : "field",
+              "value" : ["initial_ctxt_setup_resp", "ue_key"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "mytunnel.p4",
+            "line" : 644,
+            "column" : 36,
+            "source_fragment" : "hdr.attach_accept.ue_key = hdr.initial_ctxt_setup_resp.ue_key"
+          }
+        },
+        {
+          "op" : "remove_header",
+          "parameters" : [
+            {
+              "type" : "header",
+              "value" : "data"
+            }
+          ],
+          "source_info" : {
+            "filename" : "mytunnel.p4",
+            "line" : 646,
+            "column" : 36,
+            "source_fragment" : "hdr.data.setInvalid()"
+          }
+        },
+        {
+          "op" : "remove_header",
+          "parameters" : [
+            {
+              "type" : "header",
+              "value" : "initial_ctxt_setup_resp"
+            }
+          ],
+          "source_info" : {
+            "filename" : "mytunnel.p4",
+            "line" : 647,
+            "column" : 36,
+            "source_fragment" : "hdr.initial_ctxt_setup_resp.setInvalid()"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["standard_metadata", "egress_spec"]
+            },
+            {
+              "type" : "hexstr",
+              "value" : "0x0001"
+            }
+          ],
+          "source_info" : {
+            "filename" : "mytunnel.p4",
+            "line" : 649,
+            "column" : 36,
+            "source_fragment" : "standard_metadata.egress_spec = 1"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["ipv4", "ttl"]
+            },
+            {
+              "type" : "hexstr",
+              "value" : "0x40"
+            }
+          ],
+          "source_info" : {
+            "filename" : "mytunnel.p4",
+            "line" : 650,
+            "column" : 36,
+            "source_fragment" : "hdr.ipv4.ttl = 64"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["ethernet", "dstAddr"]
+            },
+            {
+              "type" : "field",
+              "value" : ["ethernet", "srcAddr"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "mytunnel.p4",
+            "line" : 652,
+            "column" : 36,
+            "source_fragment" : "hdr.ethernet.dstAddr = hdr.ethernet.srcAddr"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["ipv4", "dstAddr"]
+            },
+            {
+              "type" : "field",
+              "value" : ["ipv4", "srcAddr"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "mytunnel.p4",
+            "line" : 653,
+            "column" : 36,
+            "source_fragment" : "hdr.ipv4.dstAddr = hdr.ipv4.srcAddr"
+          }
+        }
+      ]
+    },
+    {
+      "name" : "act_48",
+      "id" : 70,
+      "runtime_data" : [],
+      "primitives" : [
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["tmpvar", "tmpUdpPort"]
+            },
+            {
+              "type" : "field",
+              "value" : ["udp", "srcPort"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "mytunnel.p4",
+            "line" : 690,
+            "column" : 36,
+            "source_fragment" : "hdr.tmpvar.tmpUdpPort = hdr.udp.srcPort"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["udp", "srcPort"]
+            },
+            {
+              "type" : "field",
+              "value" : ["udp", "dstPort"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "mytunnel.p4",
+            "line" : 691,
+            "column" : 36,
+            "source_fragment" : "hdr.udp.srcPort = hdr.udp.dstPort"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["udp", "dstPort"]
+            },
+            {
+              "type" : "field",
+              "value" : ["tmpvar", "tmpUdpPort"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "mytunnel.p4",
+            "line" : 692,
+            "column" : 36,
+            "source_fragment" : "hdr.udp.dstPort = hdr.tmpvar.tmpUdpPort"
+          }
+        },
+        {
+          "op" : "remove_header",
+          "parameters" : [
+            {
+              "type" : "header",
+              "value" : "tmpvar"
+            }
+          ],
+          "source_info" : {
+            "filename" : "mytunnel.p4",
+            "line" : 693,
             "column" : 36,
             "source_fragment" : "hdr.tmpvar.setInvalid()"
           }
@@ -7844,7 +8433,7 @@
           ],
           "source_info" : {
             "filename" : "mytunnel.p4",
-            "line" : 661,
+            "line" : 695,
             "column" : 36,
             "source_fragment" : "hdr.udp.length_ = 11 + 8"
           }
@@ -7863,7 +8452,7 @@
           ],
           "source_info" : {
             "filename" : "mytunnel.p4",
-            "line" : 662,
+            "line" : 696,
             "column" : 36,
             "source_fragment" : "hdr.ipv4.totalLen = hdr.udp.length_ + 20"
           }
@@ -7893,14 +8482,14 @@
           "with_counters" : false,
           "support_timeout" : false,
           "direct_meters" : null,
-          "action_ids" : [41],
-          "actions" : ["act_21"],
+          "action_ids" : [48],
+          "actions" : ["act_28"],
           "base_default_next" : "node_3",
           "next_tables" : {
-            "act_21" : "node_3"
+            "act_28" : "node_3"
           },
           "default_entry" : {
-            "action_id" : 41,
+            "action_id" : 48,
             "action_const" : true,
             "action_data" : [],
             "action_entry_const" : true
@@ -7918,9 +8507,9 @@
           "direct_meters" : null,
           "action_ids" : [19],
           "actions" : ["act"],
-          "base_default_next" : "node_56",
+          "base_default_next" : "node_65",
           "next_tables" : {
-            "act" : "node_56"
+            "act" : "node_65"
           },
           "default_entry" : {
             "action_id" : 19,
@@ -8637,10 +9226,10 @@
           "direct_meters" : null,
           "action_ids" : [13, 1],
           "actions" : ["c_ingress.populate_ip_op_tun_s2_uplink", "NoAction"],
-          "base_default_next" : "tbl_act_20",
+          "base_default_next" : null,
           "next_tables" : {
-            "c_ingress.populate_ip_op_tun_s2_uplink" : "tbl_act_20",
-            "NoAction" : "tbl_act_20"
+            "__HIT__" : "tbl_act_20",
+            "__MISS__" : "tbl_act_21"
           },
           "default_entry" : {
             "action_id" : 1,
@@ -8661,9 +9250,9 @@
           "direct_meters" : null,
           "action_ids" : [39],
           "actions" : ["act_19"],
-          "base_default_next" : "node_52",
+          "base_default_next" : "node_49",
           "next_tables" : {
-            "act_19" : "node_52"
+            "act_19" : "node_49"
           },
           "default_entry" : {
             "action_id" : 39,
@@ -8673,8 +9262,100 @@
           }
         },
         {
-          "name" : "c_ingress.ip_op_tun_s2_downlink",
+          "name" : "tbl_act_21",
           "id" : 29,
+          "key" : [],
+          "match_type" : "exact",
+          "type" : "simple",
+          "max_size" : 1024,
+          "with_counters" : false,
+          "support_timeout" : false,
+          "direct_meters" : null,
+          "action_ids" : [40],
+          "actions" : ["act_20"],
+          "base_default_next" : "node_49",
+          "next_tables" : {
+            "act_20" : "node_49"
+          },
+          "default_entry" : {
+            "action_id" : 40,
+            "action_const" : true,
+            "action_data" : [],
+            "action_entry_const" : true
+          }
+        },
+        {
+          "name" : "tbl_act_22",
+          "id" : 30,
+          "key" : [],
+          "match_type" : "exact",
+          "type" : "simple",
+          "max_size" : 1024,
+          "with_counters" : false,
+          "support_timeout" : false,
+          "direct_meters" : null,
+          "action_ids" : [41],
+          "actions" : ["act_21"],
+          "base_default_next" : "node_52",
+          "next_tables" : {
+            "act_21" : "node_52"
+          },
+          "default_entry" : {
+            "action_id" : 41,
+            "action_const" : true,
+            "action_data" : [],
+            "action_entry_const" : true
+          }
+        },
+        {
+          "name" : "tbl_act_23",
+          "id" : 31,
+          "key" : [],
+          "match_type" : "exact",
+          "type" : "simple",
+          "max_size" : 1024,
+          "with_counters" : false,
+          "support_timeout" : false,
+          "direct_meters" : null,
+          "action_ids" : [42],
+          "actions" : ["act_22"],
+          "base_default_next" : "node_52",
+          "next_tables" : {
+            "act_22" : "node_52"
+          },
+          "default_entry" : {
+            "action_id" : 42,
+            "action_const" : true,
+            "action_data" : [],
+            "action_entry_const" : true
+          }
+        },
+        {
+          "name" : "tbl_act_24",
+          "id" : 32,
+          "key" : [],
+          "match_type" : "exact",
+          "type" : "simple",
+          "max_size" : 1024,
+          "with_counters" : false,
+          "support_timeout" : false,
+          "direct_meters" : null,
+          "action_ids" : [43],
+          "actions" : ["act_23"],
+          "base_default_next" : "node_61",
+          "next_tables" : {
+            "act_23" : "node_61"
+          },
+          "default_entry" : {
+            "action_id" : 43,
+            "action_const" : true,
+            "action_data" : [],
+            "action_entry_const" : true
+          }
+        },
+        {
+          "name" : "c_ingress.ip_op_tun_s2_downlink",
+          "id" : 33,
           "source_info" : {
             "filename" : "mytunnel.p4",
             "line" : 153,
@@ -8697,10 +9378,10 @@
           "direct_meters" : null,
           "action_ids" : [14, 2],
           "actions" : ["c_ingress.populate_ip_op_tun_s2_downlink", "NoAction"],
-          "base_default_next" : "tbl_act_21",
+          "base_default_next" : null,
           "next_tables" : {
-            "c_ingress.populate_ip_op_tun_s2_downlink" : "tbl_act_21",
-            "NoAction" : "tbl_act_21"
+            "__HIT__" : "tbl_act_25",
+            "__MISS__" : "tbl_act_26"
           },
           "default_entry" : {
             "action_id" : 2,
@@ -8710,8 +9391,8 @@
           }
         },
         {
-          "name" : "tbl_act_21",
-          "id" : 30,
+          "name" : "tbl_act_25",
+          "id" : 34,
           "key" : [],
           "match_type" : "exact",
           "type" : "simple",
@@ -8719,14 +9400,83 @@
           "with_counters" : false,
           "support_timeout" : false,
           "direct_meters" : null,
-          "action_ids" : [40],
-          "actions" : ["act_20"],
-          "base_default_next" : "node_52",
+          "action_ids" : [44],
+          "actions" : ["act_24"],
+          "base_default_next" : "node_58",
           "next_tables" : {
-            "act_20" : "node_52"
+            "act_24" : "node_58"
           },
           "default_entry" : {
-            "action_id" : 40,
+            "action_id" : 44,
+            "action_const" : true,
+            "action_data" : [],
+            "action_entry_const" : true
+          }
+        },
+        {
+          "name" : "tbl_act_26",
+          "id" : 35,
+          "key" : [],
+          "match_type" : "exact",
+          "type" : "simple",
+          "max_size" : 1024,
+          "with_counters" : false,
+          "support_timeout" : false,
+          "direct_meters" : null,
+          "action_ids" : [45],
+          "actions" : ["act_25"],
+          "base_default_next" : "node_58",
+          "next_tables" : {
+            "act_25" : "node_58"
+          },
+          "default_entry" : {
+            "action_id" : 45,
+            "action_const" : true,
+            "action_data" : [],
+            "action_entry_const" : true
+          }
+        },
+        {
+          "name" : "tbl_act_27",
+          "id" : 36,
+          "key" : [],
+          "match_type" : "exact",
+          "type" : "simple",
+          "max_size" : 1024,
+          "with_counters" : false,
+          "support_timeout" : false,
+          "direct_meters" : null,
+          "action_ids" : [46],
+          "actions" : ["act_26"],
+          "base_default_next" : "node_61",
+          "next_tables" : {
+            "act_26" : "node_61"
+          },
+          "default_entry" : {
+            "action_id" : 46,
+            "action_const" : true,
+            "action_data" : [],
+            "action_entry_const" : true
+          }
+        },
+        {
+          "name" : "tbl_act_28",
+          "id" : 37,
+          "key" : [],
+          "match_type" : "exact",
+          "type" : "simple",
+          "max_size" : 1024,
+          "with_counters" : false,
+          "support_timeout" : false,
+          "direct_meters" : null,
+          "action_ids" : [47],
+          "actions" : ["act_27"],
+          "base_default_next" : "node_61",
+          "next_tables" : {
+            "act_27" : "node_61"
+          },
+          "default_entry" : {
+            "action_id" : 47,
             "action_const" : true,
             "action_data" : [],
             "action_entry_const" : true
@@ -8734,7 +9484,7 @@
         },
         {
           "name" : "c_ingress.uekey_uestate_map",
-          "id" : 31,
+          "id" : 38,
           "source_info" : {
             "filename" : "mytunnel.p4",
             "line" : 175,
@@ -8771,7 +9521,7 @@
         },
         {
           "name" : "c_ingress.uekey_guti_map",
-          "id" : 32,
+          "id" : 39,
           "source_info" : {
             "filename" : "mytunnel.p4",
             "line" : 191,
@@ -8794,10 +9544,10 @@
           "direct_meters" : null,
           "action_ids" : [16, 4],
           "actions" : ["c_ingress.populate_uekey_guti_map", "NoAction"],
-          "base_default_next" : "node_56",
+          "base_default_next" : "node_65",
           "next_tables" : {
-            "c_ingress.populate_uekey_guti_map" : "node_56",
-            "NoAction" : "node_56"
+            "c_ingress.populate_uekey_guti_map" : "node_65",
+            "NoAction" : "node_65"
           },
           "default_entry" : {
             "action_id" : 4,
@@ -8807,8 +9557,8 @@
           }
         },
         {
-          "name" : "tbl_act_22",
-          "id" : 33,
+          "name" : "tbl_act_29",
+          "id" : 40,
           "key" : [],
           "match_type" : "exact",
           "type" : "simple",
@@ -8816,22 +9566,22 @@
           "with_counters" : false,
           "support_timeout" : false,
           "direct_meters" : null,
-          "action_ids" : [42],
-          "actions" : ["act_22"],
-          "base_default_next" : "node_59",
+          "action_ids" : [49],
+          "actions" : ["act_29"],
+          "base_default_next" : "node_68",
           "next_tables" : {
-            "act_22" : "node_59"
+            "act_29" : "node_68"
           },
           "default_entry" : {
-            "action_id" : 42,
+            "action_id" : 49,
             "action_const" : true,
             "action_data" : [],
             "action_entry_const" : true
           }
         },
         {
-          "name" : "tbl_act_23",
-          "id" : 34,
+          "name" : "tbl_act_30",
+          "id" : 41,
           "key" : [],
           "match_type" : "exact",
           "type" : "simple",
@@ -8839,14 +9589,14 @@
           "with_counters" : false,
           "support_timeout" : false,
           "direct_meters" : null,
-          "action_ids" : [43],
-          "actions" : ["act_23"],
+          "action_ids" : [50],
+          "actions" : ["act_30"],
           "base_default_next" : null,
           "next_tables" : {
-            "act_23" : null
+            "act_30" : null
           },
           "default_entry" : {
-            "action_id" : 43,
+            "action_id" : 50,
             "action_const" : true,
             "action_data" : [],
             "action_entry_const" : true
@@ -8891,7 +9641,7 @@
               "left" : null,
               "right" : {
                 "type" : "field",
-                "value" : ["scalars", "tmp_5"]
+                "value" : ["scalars", "tmp_7"]
               }
             }
           },
@@ -9005,7 +9755,7 @@
               "left" : null,
               "right" : {
                 "type" : "field",
-                "value" : ["scalars", "tmp_6"]
+                "value" : ["scalars", "tmp_8"]
               }
             }
           },
@@ -9022,7 +9772,7 @@
               "left" : null,
               "right" : {
                 "type" : "field",
-                "value" : ["scalars", "tmp_7"]
+                "value" : ["scalars", "tmp_9"]
               }
             }
           },
@@ -9039,7 +9789,7 @@
               "left" : null,
               "right" : {
                 "type" : "field",
-                "value" : ["scalars", "tmp_9"]
+                "value" : ["scalars", "tmp_11"]
               }
             }
           },
@@ -9224,15 +9974,15 @@
             }
           },
           "true_next" : "node_44",
-          "false_next" : "node_52"
+          "false_next" : "node_61"
         },
         {
           "name" : "node_44",
           "id" : 15,
           "source_info" : {
             "filename" : "mytunnel.p4",
-            "line" : 413,
-            "column" : 12,
+            "line" : 412,
+            "column" : 7,
             "source_fragment" : "hdr.gtpu.isValid()"
           },
           "expression" : {
@@ -9247,37 +9997,11 @@
             }
           },
           "true_next" : "node_45",
-          "false_next" : "node_52"
+          "false_next" : "node_61"
         },
         {
           "name" : "node_45",
           "id" : 16,
-          "source_info" : {
-            "filename" : "mytunnel.p4",
-            "line" : 416,
-            "column" : 19,
-            "source_fragment" : "hdr.ipv4.ttl == 63"
-          },
-          "expression" : {
-            "type" : "expression",
-            "value" : {
-              "op" : "==",
-              "left" : {
-                "type" : "field",
-                "value" : ["ipv4", "ttl"]
-              },
-              "right" : {
-                "type" : "hexstr",
-                "value" : "0x3f"
-              }
-            }
-          },
-          "true_next" : "node_46",
-          "false_next" : "node_52"
-        },
-        {
-          "name" : "node_46",
-          "id" : 17,
           "source_info" : {
             "filename" : "mytunnel.p4",
             "line" : 418,
@@ -9299,37 +10023,28 @@
             }
           },
           "true_next" : "c_ingress.ip_op_tun_s2_uplink",
-          "false_next" : "node_49"
+          "false_next" : "node_54"
         },
         {
           "name" : "node_49",
-          "id" : 18,
-          "source_info" : {
-            "filename" : "mytunnel.p4",
-            "line" : 423,
-            "column" : 28,
-            "source_fragment" : "standard_metadata.ingress_port==2"
-          },
+          "id" : 17,
           "expression" : {
             "type" : "expression",
             "value" : {
-              "op" : "==",
-              "left" : {
-                "type" : "field",
-                "value" : ["standard_metadata", "ingress_port"]
-              },
+              "op" : "d2b",
+              "left" : null,
               "right" : {
-                "type" : "hexstr",
-                "value" : "0x0002"
+                "type" : "field",
+                "value" : ["scalars", "tmp_13"]
               }
             }
           },
-          "true_next" : "c_ingress.ip_op_tun_s2_downlink",
-          "false_next" : "node_52"
+          "true_next" : "tbl_act_22",
+          "false_next" : "tbl_act_23"
         },
         {
           "name" : "node_52",
-          "id" : 19,
+          "id" : 18,
           "expression" : {
             "type" : "expression",
             "value" : {
@@ -9348,17 +10063,17 @@
               }
             }
           },
-          "true_next" : "node_53",
-          "false_next" : "node_56"
+          "true_next" : "tbl_act_24",
+          "false_next" : "node_61"
         },
         {
-          "name" : "node_53",
-          "id" : 20,
+          "name" : "node_54",
+          "id" : 19,
           "source_info" : {
             "filename" : "mytunnel.p4",
-            "line" : 432,
-            "column" : 15,
-            "source_fragment" : "hdr.ipv4.ttl == 250"
+            "line" : 442,
+            "column" : 28,
+            "source_fragment" : "standard_metadata.ingress_port==2"
           },
           "expression" : {
             "type" : "expression",
@@ -9366,19 +10081,36 @@
               "op" : "==",
               "left" : {
                 "type" : "field",
-                "value" : ["ipv4", "ttl"]
+                "value" : ["standard_metadata", "ingress_port"]
               },
               "right" : {
                 "type" : "hexstr",
-                "value" : "0xfa"
+                "value" : "0x0002"
               }
             }
           },
-          "true_next" : "c_ingress.uekey_uestate_map",
-          "false_next" : "node_56"
+          "true_next" : "c_ingress.ip_op_tun_s2_downlink",
+          "false_next" : "node_61"
         },
         {
-          "name" : "node_56",
+          "name" : "node_58",
+          "id" : 20,
+          "expression" : {
+            "type" : "expression",
+            "value" : {
+              "op" : "d2b",
+              "left" : null,
+              "right" : {
+                "type" : "field",
+                "value" : ["scalars", "tmp_14"]
+              }
+            }
+          },
+          "true_next" : "tbl_act_27",
+          "false_next" : "tbl_act_28"
+        },
+        {
+          "name" : "node_61",
           "id" : 21,
           "expression" : {
             "type" : "expression",
@@ -9398,15 +10130,65 @@
               }
             }
           },
-          "false_next" : null,
-          "true_next" : "node_57"
+          "true_next" : "node_62",
+          "false_next" : "node_65"
         },
         {
-          "name" : "node_57",
+          "name" : "node_62",
           "id" : 22,
           "source_info" : {
             "filename" : "mytunnel.p4",
-            "line" : 439,
+            "line" : 466,
+            "column" : 15,
+            "source_fragment" : "hdr.ipv4.ttl == 250"
+          },
+          "expression" : {
+            "type" : "expression",
+            "value" : {
+              "op" : "==",
+              "left" : {
+                "type" : "field",
+                "value" : ["ipv4", "ttl"]
+              },
+              "right" : {
+                "type" : "hexstr",
+                "value" : "0xfa"
+              }
+            }
+          },
+          "true_next" : "c_ingress.uekey_uestate_map",
+          "false_next" : "node_65"
+        },
+        {
+          "name" : "node_65",
+          "id" : 23,
+          "expression" : {
+            "type" : "expression",
+            "value" : {
+              "op" : "not",
+              "left" : null,
+              "right" : {
+                "type" : "expression",
+                "value" : {
+                  "op" : "d2b",
+                  "left" : null,
+                  "right" : {
+                    "type" : "field",
+                    "value" : ["scalars", "hasReturned_0"]
+                  }
+                }
+              }
+            }
+          },
+          "false_next" : null,
+          "true_next" : "node_66"
+        },
+        {
+          "name" : "node_66",
+          "id" : 24,
+          "source_info" : {
+            "filename" : "mytunnel.p4",
+            "line" : 473,
             "column" : 17,
             "source_fragment" : "standard_metadata.egress_spec < 255"
           },
@@ -9424,15 +10206,15 @@
               }
             }
           },
-          "true_next" : "tbl_act_22",
-          "false_next" : "node_59"
+          "true_next" : "tbl_act_29",
+          "false_next" : "node_68"
         },
         {
-          "name" : "node_59",
-          "id" : 23,
+          "name" : "node_68",
+          "id" : 25,
           "source_info" : {
             "filename" : "mytunnel.p4",
-            "line" : 442,
+            "line" : 476,
             "column" : 17,
             "source_fragment" : "standard_metadata.ingress_port < 255"
           },
@@ -9451,7 +10233,7 @@
             }
           },
           "false_next" : null,
-          "true_next" : "tbl_act_23"
+          "true_next" : "tbl_act_30"
         }
       ]
     },
@@ -9460,173 +10242,12 @@
       "id" : 1,
       "source_info" : {
         "filename" : "mytunnel.p4",
-        "line" : 451,
+        "line" : 485,
         "column" : 8,
         "source_fragment" : "c_egress"
       },
-      "init_table" : "node_63",
+      "init_table" : "node_72",
       "tables" : [
-        {
-          "name" : "tbl_act_24",
-          "id" : 35,
-          "key" : [],
-          "match_type" : "exact",
-          "type" : "simple",
-          "max_size" : 1024,
-          "with_counters" : false,
-          "support_timeout" : false,
-          "direct_meters" : null,
-          "action_ids" : [53],
-          "actions" : ["act_31"],
-          "base_default_next" : "node_66",
-          "next_tables" : {
-            "act_31" : "node_66"
-          },
-          "default_entry" : {
-            "action_id" : 53,
-            "action_const" : true,
-            "action_data" : [],
-            "action_entry_const" : true
-          }
-        },
-        {
-          "name" : "tbl_act_25",
-          "id" : 36,
-          "key" : [],
-          "match_type" : "exact",
-          "type" : "simple",
-          "max_size" : 1024,
-          "with_counters" : false,
-          "support_timeout" : false,
-          "direct_meters" : null,
-          "action_ids" : [46],
-          "actions" : ["act_24"],
-          "base_default_next" : "tbl_act_32",
-          "next_tables" : {
-            "act_24" : "tbl_act_32"
-          },
-          "default_entry" : {
-            "action_id" : 46,
-            "action_const" : true,
-            "action_data" : [],
-            "action_entry_const" : true
-          }
-        },
-        {
-          "name" : "tbl_act_26",
-          "id" : 37,
-          "key" : [],
-          "match_type" : "exact",
-          "type" : "simple",
-          "max_size" : 1024,
-          "with_counters" : false,
-          "support_timeout" : false,
-          "direct_meters" : null,
-          "action_ids" : [47],
-          "actions" : ["act_25"],
-          "base_default_next" : "tbl_act_32",
-          "next_tables" : {
-            "act_25" : "tbl_act_32"
-          },
-          "default_entry" : {
-            "action_id" : 47,
-            "action_const" : true,
-            "action_data" : [],
-            "action_entry_const" : true
-          }
-        },
-        {
-          "name" : "tbl_act_27",
-          "id" : 38,
-          "key" : [],
-          "match_type" : "exact",
-          "type" : "simple",
-          "max_size" : 1024,
-          "with_counters" : false,
-          "support_timeout" : false,
-          "direct_meters" : null,
-          "action_ids" : [48],
-          "actions" : ["act_26"],
-          "base_default_next" : "tbl_act_32",
-          "next_tables" : {
-            "act_26" : "tbl_act_32"
-          },
-          "default_entry" : {
-            "action_id" : 48,
-            "action_const" : true,
-            "action_data" : [],
-            "action_entry_const" : true
-          }
-        },
-        {
-          "name" : "tbl_act_28",
-          "id" : 39,
-          "key" : [],
-          "match_type" : "exact",
-          "type" : "simple",
-          "max_size" : 1024,
-          "with_counters" : false,
-          "support_timeout" : false,
-          "direct_meters" : null,
-          "action_ids" : [49],
-          "actions" : ["act_27"],
-          "base_default_next" : "tbl_act_32",
-          "next_tables" : {
-            "act_27" : "tbl_act_32"
-          },
-          "default_entry" : {
-            "action_id" : 49,
-            "action_const" : true,
-            "action_data" : [],
-            "action_entry_const" : true
-          }
-        },
-        {
-          "name" : "tbl_act_29",
-          "id" : 40,
-          "key" : [],
-          "match_type" : "exact",
-          "type" : "simple",
-          "max_size" : 1024,
-          "with_counters" : false,
-          "support_timeout" : false,
-          "direct_meters" : null,
-          "action_ids" : [50],
-          "actions" : ["act_28"],
-          "base_default_next" : "tbl_act_32",
-          "next_tables" : {
-            "act_28" : "tbl_act_32"
-          },
-          "default_entry" : {
-            "action_id" : 50,
-            "action_const" : true,
-            "action_data" : [],
-            "action_entry_const" : true
-          }
-        },
-        {
-          "name" : "tbl_act_30",
-          "id" : 41,
-          "key" : [],
-          "match_type" : "exact",
-          "type" : "simple",
-          "max_size" : 1024,
-          "with_counters" : false,
-          "support_timeout" : false,
-          "direct_meters" : null,
-          "action_ids" : [51],
-          "actions" : ["act_29"],
-          "base_default_next" : "tbl_act_32",
-          "next_tables" : {
-            "act_29" : "tbl_act_32"
-          },
-          "default_entry" : {
-            "action_id" : 51,
-            "action_const" : true,
-            "action_data" : [],
-            "action_entry_const" : true
-          }
-        },
         {
           "name" : "tbl_act_31",
           "id" : 42,
@@ -9637,14 +10258,14 @@
           "with_counters" : false,
           "support_timeout" : false,
           "direct_meters" : null,
-          "action_ids" : [52],
-          "actions" : ["act_30"],
-          "base_default_next" : "tbl_act_32",
+          "action_ids" : [60],
+          "actions" : ["act_38"],
+          "base_default_next" : "node_75",
           "next_tables" : {
-            "act_30" : "tbl_act_32"
+            "act_38" : "node_75"
           },
           "default_entry" : {
-            "action_id" : 52,
+            "action_id" : 60,
             "action_const" : true,
             "action_data" : [],
             "action_entry_const" : true
@@ -9660,11 +10281,34 @@
           "with_counters" : false,
           "support_timeout" : false,
           "direct_meters" : null,
+          "action_ids" : [53],
+          "actions" : ["act_31"],
+          "base_default_next" : "tbl_act_39",
+          "next_tables" : {
+            "act_31" : "tbl_act_39"
+          },
+          "default_entry" : {
+            "action_id" : 53,
+            "action_const" : true,
+            "action_data" : [],
+            "action_entry_const" : true
+          }
+        },
+        {
+          "name" : "tbl_act_33",
+          "id" : 44,
+          "key" : [],
+          "match_type" : "exact",
+          "type" : "simple",
+          "max_size" : 1024,
+          "with_counters" : false,
+          "support_timeout" : false,
+          "direct_meters" : null,
           "action_ids" : [54],
           "actions" : ["act_32"],
-          "base_default_next" : null,
+          "base_default_next" : "tbl_act_39",
           "next_tables" : {
-            "act_32" : null
+            "act_32" : "tbl_act_39"
           },
           "default_entry" : {
             "action_id" : 54,
@@ -9674,11 +10318,149 @@
           }
         },
         {
+          "name" : "tbl_act_34",
+          "id" : 45,
+          "key" : [],
+          "match_type" : "exact",
+          "type" : "simple",
+          "max_size" : 1024,
+          "with_counters" : false,
+          "support_timeout" : false,
+          "direct_meters" : null,
+          "action_ids" : [55],
+          "actions" : ["act_33"],
+          "base_default_next" : "tbl_act_39",
+          "next_tables" : {
+            "act_33" : "tbl_act_39"
+          },
+          "default_entry" : {
+            "action_id" : 55,
+            "action_const" : true,
+            "action_data" : [],
+            "action_entry_const" : true
+          }
+        },
+        {
+          "name" : "tbl_act_35",
+          "id" : 46,
+          "key" : [],
+          "match_type" : "exact",
+          "type" : "simple",
+          "max_size" : 1024,
+          "with_counters" : false,
+          "support_timeout" : false,
+          "direct_meters" : null,
+          "action_ids" : [56],
+          "actions" : ["act_34"],
+          "base_default_next" : "tbl_act_39",
+          "next_tables" : {
+            "act_34" : "tbl_act_39"
+          },
+          "default_entry" : {
+            "action_id" : 56,
+            "action_const" : true,
+            "action_data" : [],
+            "action_entry_const" : true
+          }
+        },
+        {
+          "name" : "tbl_act_36",
+          "id" : 47,
+          "key" : [],
+          "match_type" : "exact",
+          "type" : "simple",
+          "max_size" : 1024,
+          "with_counters" : false,
+          "support_timeout" : false,
+          "direct_meters" : null,
+          "action_ids" : [57],
+          "actions" : ["act_35"],
+          "base_default_next" : "tbl_act_39",
+          "next_tables" : {
+            "act_35" : "tbl_act_39"
+          },
+          "default_entry" : {
+            "action_id" : 57,
+            "action_const" : true,
+            "action_data" : [],
+            "action_entry_const" : true
+          }
+        },
+        {
+          "name" : "tbl_act_37",
+          "id" : 48,
+          "key" : [],
+          "match_type" : "exact",
+          "type" : "simple",
+          "max_size" : 1024,
+          "with_counters" : false,
+          "support_timeout" : false,
+          "direct_meters" : null,
+          "action_ids" : [58],
+          "actions" : ["act_36"],
+          "base_default_next" : "tbl_act_39",
+          "next_tables" : {
+            "act_36" : "tbl_act_39"
+          },
+          "default_entry" : {
+            "action_id" : 58,
+            "action_const" : true,
+            "action_data" : [],
+            "action_entry_const" : true
+          }
+        },
+        {
+          "name" : "tbl_act_38",
+          "id" : 49,
+          "key" : [],
+          "match_type" : "exact",
+          "type" : "simple",
+          "max_size" : 1024,
+          "with_counters" : false,
+          "support_timeout" : false,
+          "direct_meters" : null,
+          "action_ids" : [59],
+          "actions" : ["act_37"],
+          "base_default_next" : "tbl_act_39",
+          "next_tables" : {
+            "act_37" : "tbl_act_39"
+          },
+          "default_entry" : {
+            "action_id" : 59,
+            "action_const" : true,
+            "action_data" : [],
+            "action_entry_const" : true
+          }
+        },
+        {
+          "name" : "tbl_act_39",
+          "id" : 50,
+          "key" : [],
+          "match_type" : "exact",
+          "type" : "simple",
+          "max_size" : 1024,
+          "with_counters" : false,
+          "support_timeout" : false,
+          "direct_meters" : null,
+          "action_ids" : [61],
+          "actions" : ["act_39"],
+          "base_default_next" : null,
+          "next_tables" : {
+            "act_39" : null
+          },
+          "default_entry" : {
+            "action_id" : 61,
+            "action_const" : true,
+            "action_data" : [],
+            "action_entry_const" : true
+          }
+        },
+        {
           "name" : "c_egress.ctxt_release_uekey_sgwteid_map",
-          "id" : 44,
+          "id" : 51,
           "source_info" : {
             "filename" : "mytunnel.p4",
-            "line" : 515,
+            "line" : 549,
             "column" : 14,
             "source_fragment" : "ctxt_release_uekey_sgwteid_map"
           },
@@ -9696,7 +10478,7 @@
           "with_counters" : false,
           "support_timeout" : false,
           "direct_meters" : null,
-          "action_ids" : [45, 44],
+          "action_ids" : [52, 51],
           "actions" : ["c_egress.populate_ctxt_release_uekey_sgwteid_map", "NoAction"],
           "base_default_next" : null,
           "next_tables" : {
@@ -9704,171 +10486,10 @@
             "NoAction" : null
           },
           "default_entry" : {
-            "action_id" : 44,
+            "action_id" : 51,
             "action_const" : false,
             "action_data" : [],
             "action_entry_const" : false
-          }
-        },
-        {
-          "name" : "tbl_act_33",
-          "id" : 45,
-          "key" : [],
-          "match_type" : "exact",
-          "type" : "simple",
-          "max_size" : 1024,
-          "with_counters" : false,
-          "support_timeout" : false,
-          "direct_meters" : null,
-          "action_ids" : [62],
-          "actions" : ["act_40"],
-          "base_default_next" : "node_85",
-          "next_tables" : {
-            "act_40" : "node_85"
-          },
-          "default_entry" : {
-            "action_id" : 62,
-            "action_const" : true,
-            "action_data" : [],
-            "action_entry_const" : true
-          }
-        },
-        {
-          "name" : "tbl_act_34",
-          "id" : 46,
-          "key" : [],
-          "match_type" : "exact",
-          "type" : "simple",
-          "max_size" : 1024,
-          "with_counters" : false,
-          "support_timeout" : false,
-          "direct_meters" : null,
-          "action_ids" : [55],
-          "actions" : ["act_33"],
-          "base_default_next" : "tbl_act_41",
-          "next_tables" : {
-            "act_33" : "tbl_act_41"
-          },
-          "default_entry" : {
-            "action_id" : 55,
-            "action_const" : true,
-            "action_data" : [],
-            "action_entry_const" : true
-          }
-        },
-        {
-          "name" : "tbl_act_35",
-          "id" : 47,
-          "key" : [],
-          "match_type" : "exact",
-          "type" : "simple",
-          "max_size" : 1024,
-          "with_counters" : false,
-          "support_timeout" : false,
-          "direct_meters" : null,
-          "action_ids" : [56],
-          "actions" : ["act_34"],
-          "base_default_next" : "tbl_act_41",
-          "next_tables" : {
-            "act_34" : "tbl_act_41"
-          },
-          "default_entry" : {
-            "action_id" : 56,
-            "action_const" : true,
-            "action_data" : [],
-            "action_entry_const" : true
-          }
-        },
-        {
-          "name" : "tbl_act_36",
-          "id" : 48,
-          "key" : [],
-          "match_type" : "exact",
-          "type" : "simple",
-          "max_size" : 1024,
-          "with_counters" : false,
-          "support_timeout" : false,
-          "direct_meters" : null,
-          "action_ids" : [57],
-          "actions" : ["act_35"],
-          "base_default_next" : "tbl_act_41",
-          "next_tables" : {
-            "act_35" : "tbl_act_41"
-          },
-          "default_entry" : {
-            "action_id" : 57,
-            "action_const" : true,
-            "action_data" : [],
-            "action_entry_const" : true
-          }
-        },
-        {
-          "name" : "tbl_act_37",
-          "id" : 49,
-          "key" : [],
-          "match_type" : "exact",
-          "type" : "simple",
-          "max_size" : 1024,
-          "with_counters" : false,
-          "support_timeout" : false,
-          "direct_meters" : null,
-          "action_ids" : [58],
-          "actions" : ["act_36"],
-          "base_default_next" : "tbl_act_41",
-          "next_tables" : {
-            "act_36" : "tbl_act_41"
-          },
-          "default_entry" : {
-            "action_id" : 58,
-            "action_const" : true,
-            "action_data" : [],
-            "action_entry_const" : true
-          }
-        },
-        {
-          "name" : "tbl_act_38",
-          "id" : 50,
-          "key" : [],
-          "match_type" : "exact",
-          "type" : "simple",
-          "max_size" : 1024,
-          "with_counters" : false,
-          "support_timeout" : false,
-          "direct_meters" : null,
-          "action_ids" : [59],
-          "actions" : ["act_37"],
-          "base_default_next" : "tbl_act_41",
-          "next_tables" : {
-            "act_37" : "tbl_act_41"
-          },
-          "default_entry" : {
-            "action_id" : 59,
-            "action_const" : true,
-            "action_data" : [],
-            "action_entry_const" : true
-          }
-        },
-        {
-          "name" : "tbl_act_39",
-          "id" : 51,
-          "key" : [],
-          "match_type" : "exact",
-          "type" : "simple",
-          "max_size" : 1024,
-          "with_counters" : false,
-          "support_timeout" : false,
-          "direct_meters" : null,
-          "action_ids" : [60],
-          "actions" : ["act_38"],
-          "base_default_next" : "tbl_act_41",
-          "next_tables" : {
-            "act_38" : "tbl_act_41"
-          },
-          "default_entry" : {
-            "action_id" : 60,
-            "action_const" : true,
-            "action_data" : [],
-            "action_entry_const" : true
           }
         },
         {
@@ -9881,14 +10502,14 @@
           "with_counters" : false,
           "support_timeout" : false,
           "direct_meters" : null,
-          "action_ids" : [61],
-          "actions" : ["act_39"],
-          "base_default_next" : "tbl_act_41",
+          "action_ids" : [69],
+          "actions" : ["act_47"],
+          "base_default_next" : "node_94",
           "next_tables" : {
-            "act_39" : "tbl_act_41"
+            "act_47" : "node_94"
           },
           "default_entry" : {
-            "action_id" : 61,
+            "action_id" : 69,
             "action_const" : true,
             "action_data" : [],
             "action_entry_const" : true
@@ -9904,14 +10525,175 @@
           "with_counters" : false,
           "support_timeout" : false,
           "direct_meters" : null,
+          "action_ids" : [62],
+          "actions" : ["act_40"],
+          "base_default_next" : "tbl_act_48",
+          "next_tables" : {
+            "act_40" : "tbl_act_48"
+          },
+          "default_entry" : {
+            "action_id" : 62,
+            "action_const" : true,
+            "action_data" : [],
+            "action_entry_const" : true
+          }
+        },
+        {
+          "name" : "tbl_act_42",
+          "id" : 54,
+          "key" : [],
+          "match_type" : "exact",
+          "type" : "simple",
+          "max_size" : 1024,
+          "with_counters" : false,
+          "support_timeout" : false,
+          "direct_meters" : null,
           "action_ids" : [63],
           "actions" : ["act_41"],
-          "base_default_next" : null,
+          "base_default_next" : "tbl_act_48",
           "next_tables" : {
-            "act_41" : null
+            "act_41" : "tbl_act_48"
           },
           "default_entry" : {
             "action_id" : 63,
+            "action_const" : true,
+            "action_data" : [],
+            "action_entry_const" : true
+          }
+        },
+        {
+          "name" : "tbl_act_43",
+          "id" : 55,
+          "key" : [],
+          "match_type" : "exact",
+          "type" : "simple",
+          "max_size" : 1024,
+          "with_counters" : false,
+          "support_timeout" : false,
+          "direct_meters" : null,
+          "action_ids" : [64],
+          "actions" : ["act_42"],
+          "base_default_next" : "tbl_act_48",
+          "next_tables" : {
+            "act_42" : "tbl_act_48"
+          },
+          "default_entry" : {
+            "action_id" : 64,
+            "action_const" : true,
+            "action_data" : [],
+            "action_entry_const" : true
+          }
+        },
+        {
+          "name" : "tbl_act_44",
+          "id" : 56,
+          "key" : [],
+          "match_type" : "exact",
+          "type" : "simple",
+          "max_size" : 1024,
+          "with_counters" : false,
+          "support_timeout" : false,
+          "direct_meters" : null,
+          "action_ids" : [65],
+          "actions" : ["act_43"],
+          "base_default_next" : "tbl_act_48",
+          "next_tables" : {
+            "act_43" : "tbl_act_48"
+          },
+          "default_entry" : {
+            "action_id" : 65,
+            "action_const" : true,
+            "action_data" : [],
+            "action_entry_const" : true
+          }
+        },
+        {
+          "name" : "tbl_act_45",
+          "id" : 57,
+          "key" : [],
+          "match_type" : "exact",
+          "type" : "simple",
+          "max_size" : 1024,
+          "with_counters" : false,
+          "support_timeout" : false,
+          "direct_meters" : null,
+          "action_ids" : [66],
+          "actions" : ["act_44"],
+          "base_default_next" : "tbl_act_48",
+          "next_tables" : {
+            "act_44" : "tbl_act_48"
+          },
+          "default_entry" : {
+            "action_id" : 66,
+            "action_const" : true,
+            "action_data" : [],
+            "action_entry_const" : true
+          }
+        },
+        {
+          "name" : "tbl_act_46",
+          "id" : 58,
+          "key" : [],
+          "match_type" : "exact",
+          "type" : "simple",
+          "max_size" : 1024,
+          "with_counters" : false,
+          "support_timeout" : false,
+          "direct_meters" : null,
+          "action_ids" : [67],
+          "actions" : ["act_45"],
+          "base_default_next" : "tbl_act_48",
+          "next_tables" : {
+            "act_45" : "tbl_act_48"
+          },
+          "default_entry" : {
+            "action_id" : 67,
+            "action_const" : true,
+            "action_data" : [],
+            "action_entry_const" : true
+          }
+        },
+        {
+          "name" : "tbl_act_47",
+          "id" : 59,
+          "key" : [],
+          "match_type" : "exact",
+          "type" : "simple",
+          "max_size" : 1024,
+          "with_counters" : false,
+          "support_timeout" : false,
+          "direct_meters" : null,
+          "action_ids" : [68],
+          "actions" : ["act_46"],
+          "base_default_next" : "tbl_act_48",
+          "next_tables" : {
+            "act_46" : "tbl_act_48"
+          },
+          "default_entry" : {
+            "action_id" : 68,
+            "action_const" : true,
+            "action_data" : [],
+            "action_entry_const" : true
+          }
+        },
+        {
+          "name" : "tbl_act_48",
+          "id" : 60,
+          "key" : [],
+          "match_type" : "exact",
+          "type" : "simple",
+          "max_size" : 1024,
+          "with_counters" : false,
+          "support_timeout" : false,
+          "direct_meters" : null,
+          "action_ids" : [70],
+          "actions" : ["act_48"],
+          "base_default_next" : null,
+          "next_tables" : {
+            "act_48" : null
+          },
+          "default_entry" : {
+            "action_id" : 70,
             "action_const" : true,
             "action_data" : [],
             "action_entry_const" : true
@@ -9921,11 +10703,11 @@
       "action_profiles" : [],
       "conditionals" : [
         {
-          "name" : "node_63",
-          "id" : 24,
+          "name" : "node_72",
+          "id" : 26,
           "source_info" : {
             "filename" : "mytunnel.p4",
-            "line" : 530,
+            "line" : 564,
             "column" : 21,
             "source_fragment" : "standard_metadata.instance_type == BMV2_V1MODEL_INSTANCE_TYPE_INGRESS_CLONE"
           },
@@ -9944,14 +10726,14 @@
             }
           },
           "false_next" : null,
-          "true_next" : "node_64"
+          "true_next" : "node_73"
         },
         {
-          "name" : "node_64",
-          "id" : 25,
+          "name" : "node_73",
+          "id" : 27,
           "source_info" : {
             "filename" : "mytunnel.p4",
-            "line" : 541,
+            "line" : 575,
             "column" : 31,
             "source_fragment" : "hdr.data.epc_traffic_code == 14"
           },
@@ -9969,15 +10751,15 @@
               }
             }
           },
-          "true_next" : "tbl_act_24",
-          "false_next" : "node_81"
+          "true_next" : "tbl_act_31",
+          "false_next" : "node_90"
         },
         {
-          "name" : "node_66",
-          "id" : 26,
+          "name" : "node_75",
+          "id" : 28,
           "source_info" : {
             "filename" : "mytunnel.p4",
-            "line" : 558,
+            "line" : 592,
             "column" : 39,
             "source_fragment" : "hdr.ethernet.srcAddr == ran1 && (tmp_ue_num1 >= LB1 && tmp_ue_num1 <= UB1)"
           },
@@ -10013,7 +10795,7 @@
                       },
                       "right" : {
                         "type" : "hexstr",
-                        "value" : "0x000000c8"
+                        "value" : "0x00000064"
                       }
                     }
                   },
@@ -10027,7 +10809,7 @@
                       },
                       "right" : {
                         "type" : "hexstr",
-                        "value" : "0x0000012b"
+                        "value" : "0x000000c7"
                       }
                     }
                   }
@@ -10035,15 +10817,15 @@
               }
             }
           },
-          "true_next" : "tbl_act_25",
-          "false_next" : "node_68"
+          "true_next" : "tbl_act_32",
+          "false_next" : "node_77"
         },
         {
-          "name" : "node_68",
-          "id" : 27,
+          "name" : "node_77",
+          "id" : 29,
           "source_info" : {
             "filename" : "mytunnel.p4",
-            "line" : 562,
+            "line" : 596,
             "column" : 35,
             "source_fragment" : "hdr.ethernet.srcAddr == ran1 && (tmp_ue_num1 >= LB2 && tmp_ue_num1 <= UB2)"
           },
@@ -10079,7 +10861,7 @@
                       },
                       "right" : {
                         "type" : "hexstr",
-                        "value" : "0x00000064"
+                        "value" : "0x000000c8"
                       }
                     }
                   },
@@ -10093,7 +10875,7 @@
                       },
                       "right" : {
                         "type" : "hexstr",
-                        "value" : "0x000000c7"
+                        "value" : "0x0000012b"
                       }
                     }
                   }
@@ -10101,15 +10883,15 @@
               }
             }
           },
-          "true_next" : "tbl_act_26",
-          "false_next" : "node_70"
+          "true_next" : "tbl_act_33",
+          "false_next" : "node_79"
         },
         {
-          "name" : "node_70",
-          "id" : 28,
+          "name" : "node_79",
+          "id" : 30,
           "source_info" : {
             "filename" : "mytunnel.p4",
-            "line" : 566,
+            "line" : 600,
             "column" : 44,
             "source_fragment" : "hdr.ethernet.srcAddr == ran2"
           },
@@ -10127,15 +10909,15 @@
               }
             }
           },
-          "true_next" : "tbl_act_27",
-          "false_next" : "node_72"
+          "true_next" : "tbl_act_34",
+          "false_next" : "node_81"
         },
         {
-          "name" : "node_72",
-          "id" : 29,
+          "name" : "node_81",
+          "id" : 31,
           "source_info" : {
             "filename" : "mytunnel.p4",
-            "line" : 570,
+            "line" : 604,
             "column" : 44,
             "source_fragment" : "hdr.ethernet.srcAddr == ran3"
           },
@@ -10153,15 +10935,15 @@
               }
             }
           },
-          "true_next" : "tbl_act_28",
-          "false_next" : "node_74"
+          "true_next" : "tbl_act_35",
+          "false_next" : "node_83"
         },
         {
-          "name" : "node_74",
-          "id" : 30,
+          "name" : "node_83",
+          "id" : 32,
           "source_info" : {
             "filename" : "mytunnel.p4",
-            "line" : 575,
+            "line" : 609,
             "column" : 44,
             "source_fragment" : "hdr.ethernet.srcAddr == ran4"
           },
@@ -10179,15 +10961,15 @@
               }
             }
           },
-          "true_next" : "tbl_act_29",
-          "false_next" : "node_76"
+          "true_next" : "tbl_act_36",
+          "false_next" : "node_85"
         },
         {
-          "name" : "node_76",
-          "id" : 31,
+          "name" : "node_85",
+          "id" : 33,
           "source_info" : {
             "filename" : "mytunnel.p4",
-            "line" : 579,
+            "line" : 613,
             "column" : 45,
             "source_fragment" : "hdr.ethernet.srcAddr == ran5"
           },
@@ -10205,15 +10987,15 @@
               }
             }
           },
-          "true_next" : "tbl_act_30",
-          "false_next" : "node_78"
+          "true_next" : "tbl_act_37",
+          "false_next" : "node_87"
         },
         {
-          "name" : "node_78",
-          "id" : 32,
+          "name" : "node_87",
+          "id" : 34,
           "source_info" : {
             "filename" : "mytunnel.p4",
-            "line" : 584,
+            "line" : 618,
             "column" : 44,
             "source_fragment" : "hdr.ethernet.srcAddr == ran6"
           },
@@ -10231,15 +11013,15 @@
               }
             }
           },
-          "true_next" : "tbl_act_31",
-          "false_next" : "tbl_act_32"
+          "true_next" : "tbl_act_38",
+          "false_next" : "tbl_act_39"
         },
         {
-          "name" : "node_81",
-          "id" : 33,
+          "name" : "node_90",
+          "id" : 35,
           "source_info" : {
             "filename" : "mytunnel.p4",
-            "line" : 600,
+            "line" : 634,
             "column" : 36,
             "source_fragment" : "hdr.data.epc_traffic_code == 17"
           },
@@ -10258,14 +11040,14 @@
             }
           },
           "true_next" : "c_egress.ctxt_release_uekey_sgwteid_map",
-          "false_next" : "node_83"
+          "false_next" : "node_92"
         },
         {
-          "name" : "node_83",
-          "id" : 34,
+          "name" : "node_92",
+          "id" : 36,
           "source_info" : {
             "filename" : "mytunnel.p4",
-            "line" : 605,
+            "line" : 639,
             "column" : 36,
             "source_fragment" : "hdr.data.epc_traffic_code == 19"
           },
@@ -10284,16 +11066,82 @@
             }
           },
           "false_next" : null,
-          "true_next" : "tbl_act_33"
+          "true_next" : "tbl_act_40"
         },
         {
-          "name" : "node_85",
-          "id" : 35,
+          "name" : "node_94",
+          "id" : 37,
           "source_info" : {
             "filename" : "mytunnel.p4",
-            "line" : 621,
+            "line" : 655,
             "column" : 39,
             "source_fragment" : "hdr.ethernet.srcAddr == ran1 && (hdr.attach_accept.ue_key >= LB1 && hdr.attach_accept.ue_key <= UB1)"
+          },
+          "expression" : {
+            "type" : "expression",
+            "value" : {
+              "op" : "and",
+              "left" : {
+                "type" : "expression",
+                "value" : {
+                  "op" : "==",
+                  "left" : {
+                    "type" : "field",
+                    "value" : ["ethernet", "srcAddr"]
+                  },
+                  "right" : {
+                    "type" : "hexstr",
+                    "value" : "0x00163ec6a2aa"
+                  }
+                }
+              },
+              "right" : {
+                "type" : "expression",
+                "value" : {
+                  "op" : "and",
+                  "left" : {
+                    "type" : "expression",
+                    "value" : {
+                      "op" : ">=",
+                      "left" : {
+                        "type" : "field",
+                        "value" : ["attach_accept", "ue_key"]
+                      },
+                      "right" : {
+                        "type" : "hexstr",
+                        "value" : "0x00000064"
+                      }
+                    }
+                  },
+                  "right" : {
+                    "type" : "expression",
+                    "value" : {
+                      "op" : "<=",
+                      "left" : {
+                        "type" : "field",
+                        "value" : ["attach_accept", "ue_key"]
+                      },
+                      "right" : {
+                        "type" : "hexstr",
+                        "value" : "0x000000c7"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "true_next" : "tbl_act_41",
+          "false_next" : "node_96"
+        },
+        {
+          "name" : "node_96",
+          "id" : 38,
+          "source_info" : {
+            "filename" : "mytunnel.p4",
+            "line" : 660,
+            "column" : 33,
+            "source_fragment" : "hdr.ethernet.srcAddr == ran1 && (hdr.attach_accept.ue_key >= LB2 && hdr.attach_accept.ue_key <= UB2)"
           },
           "expression" : {
             "type" : "expression",
@@ -10349,81 +11197,15 @@
               }
             }
           },
-          "true_next" : "tbl_act_34",
-          "false_next" : "node_87"
+          "true_next" : "tbl_act_42",
+          "false_next" : "node_98"
         },
         {
-          "name" : "node_87",
-          "id" : 36,
+          "name" : "node_98",
+          "id" : 39,
           "source_info" : {
             "filename" : "mytunnel.p4",
-            "line" : 626,
-            "column" : 33,
-            "source_fragment" : "hdr.ethernet.srcAddr == ran1 && (hdr.attach_accept.ue_key >= LB2 && hdr.attach_accept.ue_key <= UB2)"
-          },
-          "expression" : {
-            "type" : "expression",
-            "value" : {
-              "op" : "and",
-              "left" : {
-                "type" : "expression",
-                "value" : {
-                  "op" : "==",
-                  "left" : {
-                    "type" : "field",
-                    "value" : ["ethernet", "srcAddr"]
-                  },
-                  "right" : {
-                    "type" : "hexstr",
-                    "value" : "0x00163ec6a2aa"
-                  }
-                }
-              },
-              "right" : {
-                "type" : "expression",
-                "value" : {
-                  "op" : "and",
-                  "left" : {
-                    "type" : "expression",
-                    "value" : {
-                      "op" : ">=",
-                      "left" : {
-                        "type" : "field",
-                        "value" : ["attach_accept", "ue_key"]
-                      },
-                      "right" : {
-                        "type" : "hexstr",
-                        "value" : "0x00000064"
-                      }
-                    }
-                  },
-                  "right" : {
-                    "type" : "expression",
-                    "value" : {
-                      "op" : "<=",
-                      "left" : {
-                        "type" : "field",
-                        "value" : ["attach_accept", "ue_key"]
-                      },
-                      "right" : {
-                        "type" : "hexstr",
-                        "value" : "0x000000c7"
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "true_next" : "tbl_act_35",
-          "false_next" : "node_89"
-        },
-        {
-          "name" : "node_89",
-          "id" : 37,
-          "source_info" : {
-            "filename" : "mytunnel.p4",
-            "line" : 631,
+            "line" : 665,
             "column" : 44,
             "source_fragment" : "hdr.ethernet.srcAddr == ran2"
           },
@@ -10441,15 +11223,15 @@
               }
             }
           },
-          "true_next" : "tbl_act_36",
-          "false_next" : "node_91"
+          "true_next" : "tbl_act_43",
+          "false_next" : "node_100"
         },
         {
-          "name" : "node_91",
-          "id" : 38,
+          "name" : "node_100",
+          "id" : 40,
           "source_info" : {
             "filename" : "mytunnel.p4",
-            "line" : 636,
+            "line" : 670,
             "column" : 44,
             "source_fragment" : "hdr.ethernet.srcAddr == ran3"
           },
@@ -10467,15 +11249,15 @@
               }
             }
           },
-          "true_next" : "tbl_act_37",
-          "false_next" : "node_93"
+          "true_next" : "tbl_act_44",
+          "false_next" : "node_102"
         },
         {
-          "name" : "node_93",
-          "id" : 39,
+          "name" : "node_102",
+          "id" : 41,
           "source_info" : {
             "filename" : "mytunnel.p4",
-            "line" : 641,
+            "line" : 675,
             "column" : 44,
             "source_fragment" : "hdr.ethernet.srcAddr == ran4"
           },
@@ -10493,15 +11275,15 @@
               }
             }
           },
-          "true_next" : "tbl_act_38",
-          "false_next" : "node_95"
+          "true_next" : "tbl_act_45",
+          "false_next" : "node_104"
         },
         {
-          "name" : "node_95",
-          "id" : 40,
+          "name" : "node_104",
+          "id" : 42,
           "source_info" : {
             "filename" : "mytunnel.p4",
-            "line" : 646,
+            "line" : 680,
             "column" : 44,
             "source_fragment" : "hdr.ethernet.srcAddr == ran5"
           },
@@ -10519,15 +11301,15 @@
               }
             }
           },
-          "true_next" : "tbl_act_39",
-          "false_next" : "node_97"
+          "true_next" : "tbl_act_46",
+          "false_next" : "node_106"
         },
         {
-          "name" : "node_97",
-          "id" : 41,
+          "name" : "node_106",
+          "id" : 43,
           "source_info" : {
             "filename" : "mytunnel.p4",
-            "line" : 651,
+            "line" : 685,
             "column" : 44,
             "source_fragment" : "hdr.ethernet.srcAddr == ran6"
           },
@@ -10545,8 +11327,8 @@
               }
             }
           },
-          "true_next" : "tbl_act_40",
-          "false_next" : "tbl_act_41"
+          "true_next" : "tbl_act_47",
+          "false_next" : "tbl_act_48"
         }
       ]
     }
