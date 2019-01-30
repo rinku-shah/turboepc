@@ -15,3 +15,5 @@ series- RAN-DGW-SGW1-SGW2-PGW-SINK, i.e., two instances of SGW in series to scal
 
 FT- Single chain of RAN-DGW-SGW-PGW-SINK with SGW-FT instance where the UE state is mirrored so that under failures the user state at the failed switch is not lost. This design also considers HIT & MISS scenario at the SGW switch for UE context/state.
 
+HANDOVER- In this setup the user registers, establishes session with chain 2, handover is done over chain 1, delete the tunnel created over chain 2 (delete pending as of now). case 6 in ran.cpp is used for this scenario. For only handovers, service_request and s1_release flags are kept false. loop 1 and loop 2 values are set to be 1.
+
