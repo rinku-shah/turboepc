@@ -63,8 +63,8 @@
 #include <atomic>
 using namespace std;
 
-#define DO_DEBUG 0
-#define MY_DEBUG 0
+#define DO_DEBUG 1
+#define MY_DEBUG 1
 #define WANT_DELAY_CDF 0
 #define UE_PER_THREAD 1000000
 /**************************************** Configurable parameters **********************************************/

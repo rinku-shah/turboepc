@@ -35,7 +35,7 @@ string NAS_STEP_TWO = "20";
 string PAGING_REQUEST = "21";
 string INITIATE_NETWORK_SERVICE_REQUEST = "22";
 string SINK_SERVICE_REQUEST = "23";
-//string APU_EXIT = "24";
+string APU_EXIT = "28";
 
 string SEND_APN_HO = "24";
 string SEND_IP_SGW_TEID_HO = "25";

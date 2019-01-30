@@ -297,7 +297,7 @@ public class SGW  {
 			int pgw_teid=0;
 	//		DatapathId dgwId = DatapathId.of(Constants.getDgwDpid(sgw_dpId));
 			//String dgwId = Constants.getDgwDpid(sgw_dpId);
-			String dgwId = 4;
+			String dgwId = "4";
 			//pgw_teid = SGW_PGW_TEID_MAP.get(sgw_teid);
 //			pgw_teid = Integer.parseInt(FT.get(dgwId, "SGW_PGW_TEID_MAP", String.valueOf(sgw_teid)));
 		// if(Constants.MYDEBUG){

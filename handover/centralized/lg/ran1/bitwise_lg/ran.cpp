@@ -415,10 +415,10 @@ void* multithreading_func(void *arg){
 					doDetach_t = true;
 					sendData_t = true;
 					assignIpToInterface_t = true;
-					s1_release_t = true;
+					s1_release_t = false;
 					doEncryption_t = false;
 					checkIntegrity_t = false;
-					ueServiceRequest_t = true;
+					ueServiceRequest_t = false;
 					handover_t = true;
 					dataTime = 1;
 					loop1 = 1;    //outer loop---attach
@@ -1050,6 +1050,7 @@ int main(int argc, char *args[]){
 	average_registration_time = average_registration_time/1000000.0;
 	cout<<"Latency = "<<average_registration_time<<" secs"<<endl;
 	cout<<"Service Request Latency = "<<average_sr_registration_time<<" usecs"<<endl;
+	cout<<"Handover Latency = "<<average_ho_registration_time<<" usecs"<<endl;
 	cout<<"Registration Throughput="<<registrationThroughput<<" registrations/sec"<<endl;
 	cout<<"Attach-Request= "<<attNo<<"  Detach-Request= "<< detNo<<"  Service-Request= "<<sreqNo<<" Handover-Request= "<<hoNo<<endl;
 	cout << fixed;
@@ -1101,13 +1102,15 @@ int main(int argc, char *args[]){
 		data.append(to_string((actual_endTime - curTime))).append(COMMA);
 		data.append(to_string(registrationThroughput)).append(COMMA);
 		data.append(to_string(average_registration_time)).append(COMMA);
-		data.append(setUpTunnel?"Yes":"No").append(COMMA);
-		data.append(doDetach?"Yes":"No").append(COMMA);
+		//data.append(setUpTunnel?"Yes":"No").append(COMMA);
+		//data.append(doDetach?"Yes":"No").append(COMMA);
 		data.append(sendData?"Yes":"No").append(COMMA);
 		data.append(to_string(UE_MEAN_DATA_SENDING_TIME)).append(COMMA).append(rate).append(COMMA);
 		data.append(to_string(attNo)).append(COMMA);
-		data.append(to_string(detNo)).append(COMMA).append(to_string(sreqNo)).append(COMMA);
-		data.append(to_string(traffic_percent)).append(COMMA).append(to_string(average_sr_registration_time));
+		data.append(to_string(detNo)).append(COMMA);
+		data.append(to_string(sreqNo)).append(COMMA);
+		data.append(to_string(traffic_percent)).append(COMMA);
+		data.append(to_string(average_sr_registration_time));
 		data.append(to_string(hoNo)).append(COMMA).append(to_string(average_ho_registration_time));
 		if (dynLoad==true){
 			for (int i=0; i<=curr_mix_index; i++){

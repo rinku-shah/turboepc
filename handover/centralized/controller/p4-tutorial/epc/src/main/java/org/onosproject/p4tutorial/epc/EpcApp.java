@@ -891,7 +891,7 @@ public class EpcApp {
                       
                         if(Constants.DEBUG){
                             log.info("Inside case SEND_APN");
-                            log.warn("array1[2] = {}",array1[2]); //hardcoding  array1[2] contains switches  like "s1", "s2" etc
+                           // log.warn("array1[2] = {}",array1[2]); //hardcoding  array1[2] contains switches  like "s1", "s2" etc
                             log.warn("dgw_dpId = {}",dgw_dpId); //hardcoding  array1[2] contains switches  like "s1", "s2" etc
                             step = 3;
                             d1 = d2 = null;
@@ -1251,23 +1251,23 @@ public class EpcApp {
 
                         case Constants.SEND_APN_HO:
 
-                                    byte [] b53 =Arrays.copyOfRange(p, 7, 15); //apn
-                                    byte [] b54 = Arrays.copyOfRange(p, 15, 21); //sep2
-                                    byte [] b55 =Arrays.copyOfRange(p, 21, 25); //ue_key
+                                    byte [] b63 =Arrays.copyOfRange(p, 7, 15); //apn
+                                    byte [] b64 = Arrays.copyOfRange(p, 15, 21); //sep2
+                                    byte [] b65 =Arrays.copyOfRange(p, 21, 25); //ue_key
 
-                                    Long apn = ByteBuffer.wrap(b53).getLong();
+                                    Long apn1 = ByteBuffer.wrap(b63).getLong();
                                     
-                                    String sep52 = new String(b54, StandardCharsets.UTF_8); //6 byte
+                                    String sep62 = new String(b64, StandardCharsets.UTF_8); //6 byte
                                     
-                                    int ue_key = ByteBuffer.wrap(b55).getInt();
+                                    int ue_key1 = ByteBuffer.wrap(b65).getInt();
                                     if(Constants.BITWISE_DEBUG){
                                         log.info("insisde SEND_APN");
-                                        log.warn("imsi = {}" , apn);
-                                        log.warn("sep2 = {}" , sep52);
-                                        log.warn("ue_key = {}" , ue_key);
+                                        log.warn("imsi = {}" , apn1);
+                                        log.warn("sep2 = {}" , sep62);
+                                        log.warn("ue_key = {}" , ue_key1);
                                     }
-                                    tmpArray[1] = Long.toString(apn);
-                                    tmpArray[2] = Integer.toString(ue_key);
+                                    tmpArray[1] = Long.toString(apn1);
+                                    tmpArray[2] = Integer.toString(ue_key1);
                     
 //                        DatapathId dgw_dpId = Constants.getDgwDpidFromIp(srcIp.toString()); // returns switchid 1 which corresponds to our connectpoint swid
                         /* String dgw_dpId = (String)connectPoint.deviceId().toString();  //hardcoding  Device ID format = device:bmv2:s1
@@ -1275,10 +1275,10 @@ public class EpcApp {
 
                         dgw_dpId = array1[2]; */
                         //@HO
-                        dgw_dpId = s4; //hardcode this to s2 to attach to second chain
+                        dgw_dpId = "s4"; //hardcode this to s2 to attach to second chain
                         if(Constants.DEBUG){
                             log.info("Inside case SEND_APN");
-                            log.warn("array1[2] = {}",array1[2]); //hardcoding  array1[2] contains switches  like "s1", "s2" etc
+                            //log.warn("array1[2] = {}",array1[2]); //hardcoding  array1[2] contains switches  like "s1", "s2" etc
                             log.warn("dgw_dpId = {}",dgw_dpId); //hardcoding  array1[2] contains switches  like "s1", "s2" etc
                             step = 3;
                             d1 = d2 = null;
@@ -1293,17 +1293,17 @@ public class EpcApp {
                             log.warn("received apn={}",tmpArray[1]);
                         }
                         // storing src port of udp packet to identify the specific UE, when MME wants to initiate connection with this UE.
-                        FT.put(Integer.parseInt(Constants.SEND_APN),dgw_dpId, "uekey_udp_src_port_map", tmpArray[2], Integer.toString(udp_srcport));
+                        FT.put(Integer.parseInt(Constants.SEND_APN_HO),dgw_dpId, "uekey_udp_src_port_map", tmpArray[2], Integer.toString(udp_srcport));
 
-                        String pgw_dpId = hss.getPGateway(tmpArray[1]);  // returns 4 for all apn
+                        String pgw_dpId1 = hss.getPGateway(tmpArray[1]);  // returns 4 for all apn
                         /********************* defaultSwitch is DGW ******************************/
 //                        String sgw_dpId = DatapathId.of(Constants.getSgwDpid(defaultSwitch));
-                        String sgw_dpId = Constants.getSgwDpid(dgw_dpId);
-                        DeviceId sgwswitchName = Constants.getSgwswitchName(dgw_dpId);
+                        String sgw_dpId1 = Constants.getSgwDpid(dgw_dpId);
+                        DeviceId sgwswitchName1 = Constants.getSgwswitchName(dgw_dpId);
 //                        String ip_sgw = sgw.contactPGW(switch_mapping.get(sgw_dpId),switch_mapping.get(pgw_dpId), sgw_dpId, pgw_dpId, tmpArray[1]); //tmpArray[1] => apn of UE
                         /*******************install uplink rules on SGW and PGW in this method********************/
-                        String ip_sgw;
-                        ip_sgw = sgw.contactPGW(appId,flowRuleService,sgwswitchName,sgw_dpId, pgw_dpId, tmpArray[1]); //tmpArray[1] => apn of UE
+                        String ip_sgw1;
+                        ip_sgw1 = sgw.contactPGW(appId,flowRuleService,sgwswitchName1,sgw_dpId1, pgw_dpId1, tmpArray[1]); //tmpArray[1] => apn of UE
                         // counter++;
                         // if(Constants.MYDEBUG1){
                         //     log.warn("counter = {}",counter);
@@ -1311,14 +1311,14 @@ public class EpcApp {
             //log.warn("Ip SGWteid = {}",ip_sgw);
 
                         response = new StringBuilder();
-                        response.append(Constants.SEND_IP_SGW_TEID_HO).append(Constants.SEPARATOR).append(ip_sgw).append(Constants.SEPARATOR) ;
+                        response.append(Constants.SEND_IP_SGW_TEID_HO).append(Constants.SEPARATOR).append(ip_sgw1).append(Constants.SEPARATOR) ;
 
                         if(Constants.DO_ENCRYPTION){
                             Utils.aesEncrypt(response.toString(), Constants.SAMPLE_ENC_KEY);
                             Utils.hmacDigest(response.toString(), Constants.SAMPLE_ENC_KEY);
                         }
             //Arrays.fill(tmpArray2, null);
-            tmpArray2 = ip_sgw.split(Constants.SEPARATOR);
+            tmpArray2 = ip_sgw1.split(Constants.SEPARATOR);
                         sgw_teid = Integer.parseInt(tmpArray2[1]);
             //response.append(tmpArray2[0]).append(Constants.SEPARATOR).append(tmpArray2[1]).append("");
 
@@ -1329,26 +1329,26 @@ public class EpcApp {
                         }
                         /**************************** Uplink flow rules here (DGW to SGW) on DGW switch ***************************/
 //                        String SGW_ID =  Integer.parseInt(Constants.getSgwDpid(dgw_dpId));
-                        int SGW_ID =  Integer.parseInt(Constants.getSgwDpid(dgw_dpId));
+                        int SGW_ID3 =  Integer.parseInt(Constants.getSgwDpid(dgw_dpId));
                         // String getval = Character.toString(dgw_dpId.charAt(1)) + Constants.SEPARATOR + SGW_ID;
-                        String getval = dgw_dpId.split("s")[1] + Constants.SEPARATOR + SGW_ID;
+                        String getval3 = dgw_dpId.split("s")[1] + Constants.SEPARATOR + SGW_ID3;
 
-                        outPort =  Constants.ENODEB_SGW_PORT_MAP.get(getval);
+                        outPort =  Constants.ENODEB_SGW_PORT_MAP.get(getval3);
 //                        byte[] UE_IPAddr = {10,0,0,3} ;
-                        byte[] UE_IPAddr = IPv4.toIPv4AddressBytes(tmpArray2[0]);
+                        byte[] UE_IPAddr2 = IPv4.toIPv4AddressBytes(tmpArray2[0]);
                         if(Constants.DEBUG){
                             log.info("#####################################");
                             log.warn("dgw_dpid = {}",dgw_dpId);
-                            log.warn("SGW_ID = {}",SGW_ID);
-                            log.warn("getval = {}",getval);
+                            log.warn("SGW_ID = {}",SGW_ID3);
+                            log.warn("getval = {}",getval3);
                             log.info("outPort  ############=  {}",outPort);
-                            log.info("UE_IPAddr = {}",UE_IPAddr);
+                            log.info("UE_IPAddr = {}",UE_IPAddr2);
                         }
                         // deviceId is DGW switch name
                         // install flow rules by matching on UE_IP
                         
                         /* UPLINK   => ipv4srcAddr = UE IP and ipv4dstAddr = Sink IP   */
-                        fr.insertUplinkTunnelIngressRule(false, appId, flowRuleService, deviceId,UE_IPAddr, Constants.dstSinkIpAddr, sgw_teid, outPort);
+                        fr.insertUplinkTunnelIngressRule(false, appId, flowRuleService, deviceId,UE_IPAddr2, Constants.dstSinkIpAddr, sgw_teid, outPort);
 
 
 
@@ -1374,38 +1374,38 @@ public class EpcApp {
 
                     case Constants.SEND_UE_TEID_HO:
 
-                                    byte [] b73 =Arrays.copyOfRange(p, 7, 11); //ue_teid
-                                    byte [] b74 = Arrays.copyOfRange(p, 11, 17); //sep2
-                                    byte [] b75 =Arrays.copyOfRange(p, 17, 21); //ue_key
+                                    byte [] b83 =Arrays.copyOfRange(p, 7, 11); //ue_teid
+                                    byte [] b84 = Arrays.copyOfRange(p, 11, 17); //sep2
+                                    byte [] b85 =Arrays.copyOfRange(p, 17, 21); //ue_key
                                     
-                                    int ue_teid = ByteBuffer.wrap(b73).getInt();
+                                    int ue_teid1 = ByteBuffer.wrap(b83).getInt();
                                     
-                                    String sep72 = new String(b74, StandardCharsets.UTF_8); //6 byte
+                                    String sep82 = new String(b84, StandardCharsets.UTF_8); //6 byte
                                     
-                                    int ue_key7 = ByteBuffer.wrap(b75).getInt();
+                                    int ue_key8 = ByteBuffer.wrap(b85).getInt();
                                     if(Constants.BITWISE_DEBUG){
                                         log.info("SEND_UE_TEID_HO");
-                                        log.warn("ue_teid = {}" ,ue_teid);
-                                        log.warn("sep2 = {}" , sep72);
-                                        log.warn("imsi = {}" , ue_key7);
+                                        log.warn("ue_teid = {}" ,ue_teid1);
+                                        log.warn("sep2 = {}" , sep82);
+                                        log.warn("imsi = {}" , ue_key8);
                                     }
 
-                                    tmpArray[1] = Integer.toString(ue_teid);
-                                    tmpArray[2] = Integer.toString(ue_key7);
+                                    tmpArray[1] = Integer.toString(ue_teid1);
+                                    tmpArray[2] = Integer.toString(ue_key8);
                     
 //                        DatapathId send_ue_teid_dgw = Constants.getDgwDpidFromIp(srcIp.toString());
                         /*String dgw_dpId1 = (String)connectPoint.deviceId().toString();  //hardcoding  Device ID format = device:bmv2:s1
                         String array5[]= dgw_dpId1.split(":");  //parsing the connectpoint to get switch ID
                         dgw_dpId1 = array5[2];*/
                         //@HO
-                        dgw_dpId1 = s4; //hardcode this to s2 to attach to second chain
+                        dgw_dpId1 = "s4"; //hardcode this to s2 to attach to second chain
                         //String send_ue_teid_dgw = Constants.getDgwDpidFromIp(DGW_IPAddr);  // send_ue_teid_dgw contains switches ID like "1", "2" etc
                         //@HO
-                        String send_ue_teid_dgw = "4" //hardcode this to s2 to attach to second chain
+                        String send_ue_teid_dgw1 = "4"; //hardcode this to s2 to attach to second chain
 
                         if(Constants.DEBUG){
                             log.info("Inside case SEND_UE_TEID_HO");
-                            log.warn("send_ue_teid_dgw = {}",send_ue_teid_dgw); // send_ue_teid_dgw contains switches ID like "1", "2" etc
+                            log.warn("send_ue_teid_dgw = {}",send_ue_teid_dgw1); // send_ue_teid_dgw contains switches ID like "1", "2" etc
                             step = 4;
                             d1 = d2 = null;
                             d1 = new Date();
@@ -1415,9 +1415,9 @@ public class EpcApp {
                         }
 
                         //MAP key = UE KEY,  MAP value = SGW_DPID + SEPARATOR + SGW_TEID
-                        String tmp = FT.get(send_ue_teid_dgw, "uekey_sgw_teid_map", tmpArray[2]); // tmpArray[2] => ue key
+                        String tmp1 = FT.get(send_ue_teid_dgw1, "uekey_sgw_teid_map", tmpArray[2]); // tmpArray[2] => ue key
                         //Arrays.fill(tmpArray2, null);
-                         tmpArray2 = tmp.split(Constants.SEPARATOR);
+                         tmpArray2 = tmp1.split(Constants.SEPARATOR);
 
                         //tmpArray[1] => ue_teId and tmpArray[2] => ue key
                         //tmpArray2[0] => sgw_dpId  and tmpArray2[1] => sgw_teID
@@ -1429,13 +1429,13 @@ public class EpcApp {
                         }
 
 //                      modifyBearerRequest(ApplicationId appId,FlowRuleService flowRuleService,DeviceId switchId,String sgw, String sgw_dpId, int sgw_teId, int ue_teId, String key){
-                        DeviceId SGWswitchName1 = Constants.getSgwswitchName(dgw_dpId1);
+                        DeviceId SGWswitchName8 = Constants.getSgwswitchName(dgw_dpId1);
                         //synchronized (this) {
-                            sgw.modifyBearerRequest(appId, flowRuleService, SGWswitchName1, tmpArray2[0], tmpArray2[0], Integer.parseInt(tmpArray2[1]), Integer.parseInt(tmpArray[1]), tmpArray[2]);
+                            sgw.modifyBearerRequest(appId, flowRuleService, SGWswitchName8, tmpArray2[0], tmpArray2[0], Integer.parseInt(tmpArray2[1]), Integer.parseInt(tmpArray[1]), tmpArray[2]);
                         //}
 
                         //String ue_ip = uekey_ueip_map.get(tmpArray[2]); // tmpArray[2] => ue key
-                        String ue_ip = FT.get(send_ue_teid_dgw, "uekey_ueip_map", tmpArray[2]); // tmpArray[2] => ue key
+                        String ue_ip1 = FT.get(send_ue_teid_dgw1, "uekey_ueip_map", tmpArray[2]); // tmpArray[2] => ue key
 
 
                         if(Constants.DEBUG){
@@ -1460,7 +1460,7 @@ public class EpcApp {
                         response = new StringBuilder();
                         //NOT USED LATER uekey_guti_map, so not considered in state calc
                         uekey_guti_map.put(tmpArray[2], (Integer.parseInt(tmpArray[2])+1000)+"");
-                        FT.put(Integer.parseInt(Constants.SEND_UE_TEID_HO),send_ue_teid_dgw, "ue_state", tmpArray[2], "1");
+                        FT.put(Integer.parseInt(Constants.SEND_UE_TEID_HO),send_ue_teid_dgw1, "ue_state", tmpArray[2], "1");
 
                         response.append(Constants.ATTACH_ACCEPT_HO).append(Constants.SEPARATOR).append(Integer.parseInt(tmpArray[2])+1000).append(""); // Sending GUTI
 
