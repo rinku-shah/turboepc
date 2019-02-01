@@ -288,8 +288,19 @@ control c_ingress(inout headers hdr,
     //@vikas : To implement the if condition statement as match entry lookup we need a seperate tables for entry lookup.
 
     /*************************** LOKKUP TABLES *************************************/
-   
 
+     table uekey_lookup_lb2_ub2{
+        key={
+            meta.metakey : exact;
+        }
+        actions = {
+            NoAction;
+        }
+        size = 2048;
+        default_action = NoAction();
+    }
+
+    /*
      table ue_context_rel_req_lookup_lb2_ub2{
         key={
             hdr.ue_context_rel_req.ue_num : exact;
@@ -322,7 +333,7 @@ control c_ingress(inout headers hdr,
         size = 2048;
         default_action = NoAction();
     }
-
+    */
 
     apply {
         if (standard_metadata.ingress_port == CPU_PORT) {
@@ -353,8 +364,20 @@ control c_ingress(inout headers hdr,
 
                      // @serial : @SGW2 uplink control packet 
                     if(standard_metadata.ingress_port == 1){
+
+                         if(hdr.data.epc_traffic_code == 14){
+                            meta.metakey = hdr.ue_context_rel_req.ue_num;
+                        }
+                        else if(hdr.data.epc_traffic_code == 17){
+                            meta.metakey = hdr.initial_ctxt_setup_resp.ue_key;
+                        }
+                        else{
+                            meta.metakey = hdr.ue_service_req.ue_key;
+                        }
+
                         // do some lookup else on MISS forward to root onos on send_to_cpu()
-                        if((ue_context_rel_req_lookup_lb2_ub2.apply().hit)|| (initial_ctxt_setup_resp_lookup_lb2_ub2.apply().hit) || (ue_service_req_lookup_lb2_ub2.apply().hit)) {
+                        // if((ue_context_rel_req_lookup_lb2_ub2.apply().hit)|| (initial_ctxt_setup_resp_lookup_lb2_ub2.apply().hit) || (ue_service_req_lookup_lb2_ub2.apply().hit)) {
+                        if(uekey_lookup_lb2_ub2.apply().hit){                        
                                 // clone packet and reply back to RAN in egress processing
                                 clone3(CloneType.I2E, I2E_CLONE_SESSION_ID, standard_metadata);
 

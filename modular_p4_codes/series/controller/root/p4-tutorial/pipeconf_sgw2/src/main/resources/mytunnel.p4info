@@ -171,47 +171,13 @@ tables {
 }
 tables {
   preamble {
-    id: 33566094
-    name: "c_ingress.ue_context_rel_req_lookup_lb2_ub2"
-    alias: "ue_context_rel_req_lookup_lb2_ub2"
+    id: 33574977
+    name: "c_ingress.uekey_lookup_lb2_ub2"
+    alias: "uekey_lookup_lb2_ub2"
   }
   match_fields {
     id: 1
-    name: "hdr.ue_context_rel_req.ue_num"
-    bitwidth: 32
-    match_type: EXACT
-  }
-  action_refs {
-    id: 16800567
-  }
-  size: 2048
-}
-tables {
-  preamble {
-    id: 33588920
-    name: "c_ingress.initial_ctxt_setup_resp_lookup_lb2_ub2"
-    alias: "initial_ctxt_setup_resp_lookup_lb2_ub2"
-  }
-  match_fields {
-    id: 1
-    name: "hdr.initial_ctxt_setup_resp.ue_key"
-    bitwidth: 32
-    match_type: EXACT
-  }
-  action_refs {
-    id: 16800567
-  }
-  size: 2048
-}
-tables {
-  preamble {
-    id: 33559259
-    name: "c_ingress.ue_service_req_lookup_lb2_ub2"
-    alias: "ue_service_req_lookup_lb2_ub2"
-  }
-  match_fields {
-    id: 1
-    name: "hdr.ue_service_req.ue_key"
+    name: "meta.metakey"
     bitwidth: 32
     match_type: EXACT
   }

@@ -92,7 +92,7 @@ bool instrumentTptLat = false; //Instrument num_ue and response_time every 10 se
 //  11 for ATTACH Detach and 0  for service request
 //10 for all service request
 // 9 for mix x:y--- tune loop1,loop2
-int mix_num=9;	//choose the traffix mix from above traffic_options -> {0,1,2}  // 11 means only attach request will be sent
+int mix_num=1;	//choose the traffix mix from above traffic_options -> {0,1,2}  // 11 means only attach request will be sent
 float a_prob = 0;
 float s_prob = 0;
 //0%  att/serv == att=0.01,serv=0.99 ==>0.7%

@@ -207,12 +207,8 @@ control c_ingress(inout headers hdr,
     // tunnel to egress port map for s3
     table tun_egress_s3_uplink{
         key={
-            // match on vlan ID field and set the corressponding egress port
-            //  hdr.vlan.vid : exact;
-
             // match on gtp teid field and set the corressponding egress port
             hdr.gtpu.teid : exact;
-
         }
         actions={
             populate_tun_egress_s3_uplink;
@@ -226,6 +222,28 @@ control c_ingress(inout headers hdr,
     //@vikas : To implement the if condition statement as match entry lookup we need a seperate tables for entry lookup.
 
     /*************************** LOKKUP TABLES *************************************/
+    table uekey_lookup_lb1_ub1{
+        key={
+            meta.metakey : exact;
+        }
+        actions = {
+            NoAction;
+        }
+        size = 2048;
+        default_action = NoAction();
+    }
+
+    table uekey_lookup_lb2_ub2{
+        key={
+            meta.metakey : exact;
+        }
+        actions = {
+            NoAction;
+        }
+        size = 2048;
+        default_action = NoAction();
+    }
+    /*
     table ue_context_rel_req_lookup_lb1_ub1{
         key={
             hdr.ue_context_rel_req.ue_num : exact;
@@ -291,7 +309,7 @@ control c_ingress(inout headers hdr,
         size = 2048;
         default_action = NoAction();
     }
-
+    */
 
     apply {
         if (standard_metadata.ingress_port == CPU_PORT) {
@@ -323,8 +341,17 @@ control c_ingress(inout headers hdr,
                     //  from RAN to local onos at DGW 
                    if(standard_metadata.ingress_port==1 ){
 
-                         
+                                if(hdr.data.epc_traffic_code == 14){
+                                    meta.metakey = hdr.ue_context_rel_req.ue_num;
+                                }
+                                else if(hdr.data.epc_traffic_code == 17){
+                                    meta.metakey = hdr.initial_ctxt_setup_resp.ue_key;
+                                }
+                                else{
+                                    meta.metakey = hdr.ue_service_req.ue_key;
+                                }
 
+                        
                             // @offload design: to be on safe side we are using ip proto to distinguish between data and control traffic 
                             //  if we use above code then sometimes it gets stuck because tcp data can also contain hdr.data.epc_traffic_code 
                             //TC means data packet
@@ -337,11 +364,13 @@ control c_ingress(inout headers hdr,
                             else if(hdr.ipv4.protocol == PROTO_UDP){
 
                                     // @vikas: in case of modular p4 code we are doing table lookup to decide whether to forward the packet on link 2(SGW1) or link3(SGW2)
-                                    if((ue_context_rel_req_lookup_lb1_ub1.apply().hit)|| (initial_ctxt_setup_resp_lookup_lb1_ub1.apply().hit) || (ue_service_req_lookup_lb1_ub1.apply().hit)) {
+                                    // if((ue_context_rel_req_lookup_lb1_ub1.apply().hit)|| (initial_ctxt_setup_resp_lookup_lb1_ub1.apply().hit) || (ue_service_req_lookup_lb1_ub1.apply().hit)) {
+                                    if(uekey_lookup_lb1_ub1.apply().hit){
                                             standard_metadata.egress_spec = 2;
                                             hdr.ipv4.ttl = hdr.ipv4.ttl - 1;
                                     }
-                                    else if((ue_context_rel_req_lookup_lb2_ub2.apply().hit)|| (initial_ctxt_setup_resp_lookup_lb2_ub2.apply().hit) || (ue_service_req_lookup_lb2_ub2.apply().hit)) {
+                                    // else if((ue_context_rel_req_lookup_lb2_ub2.apply().hit)|| (initial_ctxt_setup_resp_lookup_lb2_ub2.apply().hit) || (ue_service_req_lookup_lb2_ub2.apply().hit)) {
+                                    else if(uekey_lookup_lb2_ub2.apply().hit){
                                             standard_metadata.egress_spec = 3;
                                             hdr.ipv4.ttl = hdr.ipv4.ttl - 1;
                                     }

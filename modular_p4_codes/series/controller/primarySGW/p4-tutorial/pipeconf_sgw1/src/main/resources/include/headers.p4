@@ -236,8 +236,7 @@ header tmpvar_t{
 }
 
 struct metadata {
-    /* empty */
-     
+    bit<32> metakey; // this is used for table lookup in the if statements in the ingress control block
 }
 
 struct headers {

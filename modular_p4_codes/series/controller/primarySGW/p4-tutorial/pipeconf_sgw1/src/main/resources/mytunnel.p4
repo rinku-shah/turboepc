@@ -284,9 +284,10 @@ control c_ingress(inout headers hdr,
     //@vikas : To implement the if condition statement as match entry lookup we need a seperate tables for entry lookup.
 
     /*************************** LOKKUP TABLES *************************************/
-    table ue_context_rel_req_lookup_lb1_ub1{
+    table uekey_lookup_lb1_ub1{
         key={
-            hdr.ue_context_rel_req.ue_num : exact;
+            // hdr.ue_context_rel_req.ue_num : exact;
+            meta.metakey : exact;
         }
         actions = {
             NoAction;
@@ -295,27 +296,29 @@ control c_ingress(inout headers hdr,
         default_action = NoAction();
     }
 
-    table initial_ctxt_setup_resp_lookup_lb1_ub1{
-        key={
-            hdr.initial_ctxt_setup_resp.ue_key : exact;
-        }
-        actions = {
-            NoAction;
-        }
-        size = 2048;
-        default_action = NoAction();
-    }
+    // table initial_ctxt_setup_resp_lookup_lb1_ub1{
+    //     key={
+    //         // hdr.initial_ctxt_setup_resp.ue_key : exact;
+    //         meta.metakey : exact;
+    //     }
+    //     actions = {
+    //         NoAction;
+    //     }
+    //     size = 2048;
+    //     default_action = NoAction();
+    // }
 
-    table ue_service_req_lookup_lb1_ub1{
-          key={
-            hdr.ue_service_req.ue_key : exact;
-        }
-        actions = {
-            NoAction;
-        }
-        size = 2048;
-        default_action = NoAction();
-    }
+    // table ue_service_req_lookup_lb1_ub1{
+    //       key={
+    //         // hdr.ue_service_req.ue_key : exact;
+    //         meta.metakey : exact;
+    //     }
+    //     actions = {
+    //         NoAction;
+    //     }
+    //     size = 2048;
+    //     default_action = NoAction();
+    // }
 
 
 
@@ -349,10 +352,21 @@ control c_ingress(inout headers hdr,
                     // @serial : @SGW1 uplink control packet 
                     if(standard_metadata.ingress_port == 1){
 
+                        if(hdr.data.epc_traffic_code == 14){
+                            meta.metakey = hdr.ue_context_rel_req.ue_num;
+                        }
+                        else if(hdr.data.epc_traffic_code == 17){
+                            meta.metakey = hdr.initial_ctxt_setup_resp.ue_key;
+                        }
+                        else{
+                            meta.metakey = hdr.ue_service_req.ue_key;
+                        }
+
+
                         // do some lookup on hit clone and populate rules using local ONOS of SGW1 else on MISS forward to SGW2 on port 2
                              // HIT on the switch for 100 <= ue_num <=103 
-                        if((ue_context_rel_req_lookup_lb1_ub1.apply().hit)|| (initial_ctxt_setup_resp_lookup_lb1_ub1.apply().hit) || (ue_service_req_lookup_lb1_ub1.apply().hit)) {
-                             
+                        // if((ue_context_rel_req_lookup_lb1_ub1.apply().hit)|| (initial_ctxt_setup_resp_lookup_lb1_ub1.apply().hit) || (ue_service_req_lookup_lb1_ub1.apply().hit)) {
+                        if(uekey_lookup_lb1_ub1.apply().hit){
                                 // clone packet and reply back to RAN in egress processing
                                 clone3(CloneType.I2E, I2E_CLONE_SESSION_ID, standard_metadata);
 
@@ -408,10 +422,9 @@ control c_ingress(inout headers hdr,
                             if(ip_op_tun_s2_uplink.apply().hit)
                             {
                                 return;
-
                             }
                             else{
-				  // mapping between parser and deparser headers
+				                // mapping between parser and deparser headers
                                     hdr.gtpu_ipv4 = hdr.ipv4;
                                     hdr.gtpu_udp = hdr.udp;
                                     hdr.ipv4 = hdr.inner_ipv4;
@@ -433,7 +446,7 @@ control c_ingress(inout headers hdr,
                                 return;
                             }
                             else{
-				    // mapping between parser and deparser headers
+				                // mapping between parser and deparser headers
                                     hdr.gtpu_ipv4 = hdr.ipv4;
                                     hdr.gtpu_udp = hdr.udp;
                                     hdr.ipv4 = hdr.inner_ipv4;
