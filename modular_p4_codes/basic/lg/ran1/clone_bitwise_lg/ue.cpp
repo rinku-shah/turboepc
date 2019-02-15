@@ -1630,7 +1630,9 @@ void UserEquipment::initiate_ue_context_release(Client &user, int ue_num, string
 	//int code_name = (int)(user.my_client_byte_buffer[0]);
 	 int code_name = user.my_client_byte_buffer[0];
 	char sep = (char)user.my_client_byte_buffer[1];
-
+        string tmpStr;
+	tmpStr += user.my_client_byte_buffer[0];
+	tmpStr += user.my_client_byte_buffer[1];
 	if(DO_DEBUG){
 		cout<<"UE INITIATED CONTEXT RELEASE REQUEST:  IP Address of UE="<<ue_ip<<" and UE TEID="<<ue_teid<<" SGW TEID"<<sgw_teid<<endl;
 		cout<<" received data UE CONTEXT RELEASE COMMAND my_client_byte_buffer = "<<user.my_client_byte_buffer<<endl;
@@ -1649,7 +1651,8 @@ void UserEquipment::initiate_ue_context_release(Client &user, int ue_num, string
 	// if(tmpArray[0] == UE_CONTEXT_RELEASE_COMMAND){
 	
 
-	if(code_name == stoi(UE_CONTEXT_RELEASE_COMMAND)){
+		if((code_name == stoi(UE_CONTEXT_RELEASE_COMMAND)) || (stoi(tmpStr) == stoi(UE_CONTEXT_RELEASE_COMMAND))){
+//if(code_name == stoi(UE_CONTEXT_RELEASE_COMMAND)){
 	//if (stoi(tmpArray[0])== stoi(UE_CONTEXT_RELEASE_COMMAND)) {
 	//if (tmpArray[0].compare(UE_CONTEXT_RELEASE_COMMAND) == 0) {
 	

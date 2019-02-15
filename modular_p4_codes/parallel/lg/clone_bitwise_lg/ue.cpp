@@ -1287,7 +1287,7 @@ vector<string> UserEquipment::setupTunnel(Client &user, bool doEncryption){
 	}
 	if(tmpArray[0] == SEND_IP_SGW_TEID){
 		if(DO_DEBUG){
-			cout<<" IP Address of UE="<<tmpArray[1]<<" and SGW TEID="<<tmpArray[2]<<" ue TEID="<<ue_teid<<endl;
+			//cout<<" IP Address of UE="<<tmpArray[1]<<" and SGW TEID="<<tmpArray[2]<<" ue TEID="<<ue_teid<<endl;
 		}
 		//tmpArray.push_back(to_string(ue_teid));
 		tmpArray[3] = to_string(ue_teid);

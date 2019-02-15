@@ -90,7 +90,7 @@ bool instrumentTptLat = false; //Instrument num_ue and response_time every 10 se
 //vector<vector<int>> traffic_shape={{2,1},{3,3}}; //States for the first two minutes mix_num=1 & for next 3 minutes mix_num=3
 /// DYNAMIC LOAD GENERATOR ///
 //  11 for ATTACH Detach and 10  for service request, 9 for other mixes
-int mix_num=10;	//choose the traffix mix from above traffic_options -> {0,1,2}  // 11 means only attach request will be sent
+int mix_num=9;	//choose the traffix mix from above traffic_options -> {0,1,2}  // 11 means only attach request will be sent
 float a_prob = 0;
 float s_prob = 0;
 //0%  att/serv == att=0.01,serv=0.99 ==>0.7%
@@ -375,8 +375,8 @@ void* multithreading_func(void *arg){
 					checkIntegrity_t = false;
 					ueServiceRequest_t = true;
 					dataTime = 1;
-					loop1 = 10;    //outer loop---attach
-					loop2 = 90;   //inner loop---service-req
+					loop1 = 97;    //outer loop---attach
+					loop2 = 3;   //inner loop---service-req
 					break;
 
 			/* att-serv-req-data-loop2-det*/
@@ -393,7 +393,7 @@ void* multithreading_func(void *arg){
 					//loop1 = 1;  //outer loop---attach
 					//loop2 = 100;   //inner loop---service-req
 					loop1 = 1; //1;  //outer loop---attach
-					loop2 = 100; //100;   //inner loop---service-req
+					loop2 = 99; //100;   //inner loop---service-req
 					break;
 		}
 		do {
@@ -406,7 +406,7 @@ void* multithreading_func(void *arg){
 			gettimeofday(&start, NULL);
 			//usleep(my_rand()+2000);
 			// usleep(200000);
-			usleep(10000);
+			usleep(25000);
 			if(attach_with_mme(ue, user, checkIntegrity_t)){ 	// Authentication
 				//if(setUpTunnel_t || serviceRequestLoopFlag){
 					// Setup tunnel
@@ -421,7 +421,7 @@ void* multithreading_func(void *arg){
 					//usleep(my_rand()+200);
 					gettimeofday(&start1, NULL);
 					tmpArray = setup_tunnel(ue, user, doEncryption_t);
-					cout<<"IP Address of UE="<<tmpArray[1]<<" and SGW TEID="<<tmpArray[2]<<endl;
+					//cout<<"IP Address of UE="<<tmpArray[1]<<" and SGW TEID="<<tmpArray[2]<<endl;
 					// string UE_IP = tmpArray[1];
 					//lat_mtx.lock();
 					//attNo++;
@@ -459,17 +459,17 @@ void* multithreading_func(void *arg){
 							/*if(ue_num == 100){
 								sleep(1000);
 							}*/
-							usleep(20000);
+							//usleep(20000);
 							//sleep(500);
-							cout<<"IP address of UE = "<<tmpArray[1].c_str()<<endl;
-							send_socket_data(tmpArray[1].c_str());
+							//cout<<"IP address of UE = "<<tmpArray[1].c_str()<<endl;
+							//send_socket_data(tmpArray[1].c_str());
 							//currentPort = send_ue_data(ue, ue_num, rate, currentPort, startingPort, endPort, user, tmpArray, dataTime);
 							// usleep(100000);
 						}
 						if(s1_release_t){
 							//cout<<"SLEEPING BEFORE s1 release"<<endl;
-							usleep(my_rand()+2000);		//200-700 usec
-							usleep(20000);
+							//usleep(my_rand()+2000);		//200-700 usec
+							usleep(25000);
 							//sreqNo++;
 							gettimeofday(&start2, NULL);
 							ue_context_release(ue, user, ue_num, tmpArray[1], tmpArray[2], tmpArray[3], currentPort, networkServiceRequest);
@@ -514,8 +514,8 @@ void* multithreading_func(void *arg){
 								//cout<<"SLEEPING BEFORE service request"<<endl;
 								//usleep(my_rand());
 								//usleep(my_rand()+2000);
-								usleep(20000);
-								usleep(my_rand()+2000);
+								usleep(25000);
+								//usleep(my_rand()+2000);
 								gettimeofday(&start2, NULL);
 								tmpArray[3] = ue_service_request(ue, user, ue_num, tmpArray[1]); //returns newly generated ue_teid
 									//////PRINT REG TIME TO ARRAY////
@@ -569,6 +569,7 @@ void* multithreading_func(void *arg){
 						if(!s1_release_t && !sendData_t)
 							usleep(my_rand()+2000);
 						att_done=false;
+						usleep(25000);
 						gettimeofday(&start3, NULL);
 						detach_ue(ue, user, ue_num, tmpArray[1], tmpArray[2], tmpArray[3]);
 						// sleep(300);
