@@ -24,12 +24,14 @@ const bit<32> s1u_dgw_addr = 0xC0A80202;
 // s3u - 3rd chain
 // s4u - 4th chain
 
-const bit<32> s1u_sgw_addr = 0xC0A80203;
-const bit<32> s2u_sgw_addr = 0xC0A80603;
-const bit<32> s3u_sgw_addr = 0xC0A80803;
-const bit<32> s4u_sgw_addr = 0xC0A80C03;
-const bit<32> s5u_sgw_addr = 0xC0A80F03;
-const bit<32> s6u_sgw_addr = 0xC0A81103;
+const bit<32> s11_sgw_ipaddr = 0xc0a80202;  //192.168.2.2
+const bit<32> s12_sgw_ipaddr = 0xc0a80402;  //192.168.4.2
+const bit<32> s21_sgw_ipaddr = 0xc0a80702; //192.168.7.2
+const bit<32> s22_sgw_ipaddr = 0xc0a80902; //192.168.9.2
+const bit<32> s31_sgw_ipaddr = 0xc0a80c02;  //192.168.12.2
+const bit<32> s32_sgw_ipaddr = 0xc0a80e02; //192.168.14.2
+const bit<32> s41_sgw_ipaddr = 0xc0a81102;  // 192.168.17.2
+const bit<32> s42_sgw_ipaddr = 0xc0a81302; //192.168.19.2
 
 
 const bit<32> s1u_pgw_addr =0xC0A80304;
@@ -45,13 +47,14 @@ const bit<48> ran5 = 0x00163e8dccbe;
 const bit<48> ran6 = 0x00163e714c4f;
 
 // MAC addresses of SGWs
-const bit<48> sgw1 = 0x00163e1f04f2;
-const bit<48> sgw2 = 0x00163e3f0d83;
-const bit<48> sgw3 = 0x00163ee0eb61;
-const bit<48> sgw4 = 0x00163e4c02a8;
-const bit<48> sgw5 = 0x00163ee90a21;
-const bit<48> sgw6 = 0x00163edf5287;
-
+const bit<48> sgw11 = 0x00163e1f04f2;
+const bit<48> sgw12 = 0x00163e3f0d83;
+const bit<48> sgw21 = 0x00163ee95b4f;
+const bit<48> sgw22 = 0x00163e727ffe;
+const bit<48> sgw31 = 0x00163e208eec;
+const bit<48> sgw32 = 0x00163ec500af;
+const bit<48> sgw41 = 0x00163eaeea4c;
+const bit<48> sgw42 = 0x00163ecec691;
 
 const bit<48> pgw = 0x00163e48994c;
 
@@ -97,5 +100,20 @@ const bit<32> LB1 = 200;
 const bit<32> UB1 = 299;
 const bit<32> LB2 = 100;
 const bit<32> UB2 = 199;
+
+const bit<32> LB3 = 200;
+const bit<32> UB3 = 299;
+const bit<32> LB4 = 100;
+const bit<32> UB4 = 199;
+
+const bit<32> LB5 = 200;
+const bit<32> UB5 = 299;
+const bit<32> LB6 = 100;
+const bit<32> UB6 = 199;
+
+const bit<32> LB7 = 200;
+const bit<32> UB7 = 299;
+const bit<32> LB8 = 100;
+const bit<32> UB8 = 199;
 
 #endif

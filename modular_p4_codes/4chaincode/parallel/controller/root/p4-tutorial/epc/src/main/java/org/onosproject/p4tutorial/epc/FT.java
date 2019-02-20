@@ -32,44 +32,9 @@ import java.util.concurrent.Future;
 import org.slf4j.Logger;
 import static org.slf4j.LoggerFactory.getLogger;
 
-//import net.floodlightcontroller.core.FloodlightContext;
-//import net.floodlightcontroller.core.IOFMessageListener;
-//import net.floodlightcontroller.core.IOFSwitch;
-//import net.floodlightcontroller.core.IOFSwitchListener;
-//import net.floodlightcontroller.core.PortChangeType;
-//import net.floodlightcontroller.core.internal.FloodlightProvider;
-//import net.floodlightcontroller.core.internal.IOFSwitchService;
-//import net.floodlightcontroller.core.module.FloodlightModuleContext;
-//import net.floodlightcontroller.core.module.FloodlightModuleException;
-//import net.floodlightcontroller.core.module.IFloodlightModule;
-//import net.floodlightcontroller.core.module.IFloodlightService;
-//import net.floodlightcontroller.debugcounter.IDebugCounter;
-//import net.floodlightcontroller.storage.IStorageSourceService;
-//
-//import org.projectfloodlight.openflow.protocol.OFControllerRole;
-//import org.projectfloodlight.openflow.protocol.OFMessage;
-//import org.projectfloodlight.openflow.protocol.OFPortDesc;
-//import org.projectfloodlight.openflow.protocol.OFRoleReply;
-//import org.projectfloodlight.openflow.protocol.OFType;
-//import org.projectfloodlight.openflow.types.DatapathId;
-//import org.projectfloodlight.openflow.types.TransportPort;
-//import org.sdnplatform.sync.IStoreClient;
-//import org.sdnplatform.sync.IStoreListener;
-//import org.sdnplatform.sync.ISyncService;
-//import org.sdnplatform.sync.ISyncService.Scope;
-//import org.sdnplatform.sync.Versioned;
-//import org.sdnplatform.sync.error.SyncException;
-//import org.sdnplatform.sync.internal.rpc.IRPCListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-//import org.sdnplatform.sync.internal.SyncManager;
 
-//public class FT implements
-//IOFMessageListener,
-//IFloodlightModule,
-//IStoreListener<String>,
-//IOFSwitchListener,
-//IRPCListener
 public class FT{
 	private static final Logger log = getLogger(EpcApp.class);
 
@@ -166,7 +131,6 @@ public class FT{
 //			e.printStackTrace();
 //		}
 //	}
-//	public static void put(int msgId,DatapathId dgwDpId, String mapName, String key, String val){
 	public static void put(int msgId,String dgwDpId, String mapName, String key, String val){
 		putCount++;
 		putArr[msgId]++;
@@ -179,6 +143,9 @@ public class FT{
 				log.warn("received tmpStore = {}", tmpStore);
 			}
 //			String tmpStore = "storeEPC1"; // for now hardcoding it
+			if(Constants.DEBUG){
+				log.warn("Inserting in mapName = {}, key = {},value = {}, dgwDpId = {}",mapName,key,val,dgwDpId);
+			}
 			StringBuilder k = new StringBuilder();
 			k.append(tmpStore).append(Constants.STOREKEYSEPARATOR).append(key);
 			if(mapName.equals("uekey_sgw_teid_map")){

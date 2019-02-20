@@ -170,7 +170,9 @@ public class PGW  {
 		//install uplink and downlink rules
 		//System.out.println("PGW DPID " + pgw_dpId.getLong() + "SGW DPID " + sgw_dpId.getLong());
         /********************  Uplink rule is installed on PGW (PGW to sink) *************************/
-		DeviceId pgwSwitchName = DeviceId.deviceId("device:bmv2:s3");
+		// DeviceId pgwSwitchName = DeviceId.deviceId("device:bmv2:s3");
+		DeviceId pgwSwitchName = Constants.PGW_NAME;
+
 //		sgw.insertTunnelForwardRule(ApplicationId appId,FlowRuleService flowRuleService,DeviceId switchId,int intunId,int outPort,int outtunId,true);
 		fr.insertUplinkTunnelForwardRule(false,appId, flowRuleService,pgwSwitchName,pgw_teid, pgw_sink_port,0,true);
 
@@ -181,6 +183,7 @@ public class PGW  {
 		if(Constants.DEBUG) {
 			log.warn("PGW reusing IP = {}", ip[chainId]);
 			log.warn("IP rule ############## {}", UE_IPAddr);
+			log.warn("installing rules on PGW switch = {}",pgwSwitchName);
 		}
 
 		//log.info("pgw_dpId + Constants.SEPARATOR + sgw_dpId = {}",pgw_dpId + Constants.SEPARATOR+ sgw_dpId);

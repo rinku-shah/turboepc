@@ -975,6 +975,7 @@ public class EpcApp {
                                         log.warn("ue_teid = {}" ,ue_teid);
                                         log.warn("sep2 = {}" , sep72);
                                         log.warn("imsi = {}" , ue_key7);
+                                        log.warn("DGW IP ADDress = {}",DGW_IPAddr);
                                     }
 
                                     tmpArray[1] = Integer.toString(ue_teid);
@@ -1000,7 +1001,9 @@ public class EpcApp {
 
                         //MAP key = UE KEY,  MAP value = SGW_DPID + SEPARATOR + SGW_TEID
                         String tmp = FT.get(send_ue_teid_dgw, "uekey_sgw_teid_map", tmpArray[2]); // tmpArray[2] => ue key
-                        //log.warn("tmp uekey_sgw_teid_map = {}",tmp);
+                        if(Constants.DEBUG){
+                            log.warn("tmp uekey_sgw_teid_map = {}",tmp);
+                        }
                         tmpArray2 = tmp.split(Constants.SEPARATOR);
 
                         //tmpArray[1] => ue_teId and tmpArray[2] => ue key
