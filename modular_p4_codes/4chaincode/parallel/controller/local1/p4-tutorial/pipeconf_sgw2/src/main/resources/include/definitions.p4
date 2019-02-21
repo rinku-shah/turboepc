@@ -106,14 +106,14 @@ const bit<32> UB3 = 299;
 const bit<32> LB4 = 100;
 const bit<32> UB4 = 199;
 
-const bit<32> LB5 = 200;
-const bit<32> UB5 = 299;
-const bit<32> LB6 = 100;
-const bit<32> UB6 = 199;
+const bit<32> LB5 = 300;
+const bit<32> UB5 = 399;
+const bit<32> LB6 = 400;
+const bit<32> UB6 = 499;
 
-const bit<32> LB7 = 200;
-const bit<32> UB7 = 299;
-const bit<32> LB8 = 100;
-const bit<32> UB8 = 199;
+const bit<32> LB7 = 400;
+const bit<32> UB7 = 499;
+const bit<32> LB8 = 500;
+const bit<32> UB8 = 599;
 
 #endif

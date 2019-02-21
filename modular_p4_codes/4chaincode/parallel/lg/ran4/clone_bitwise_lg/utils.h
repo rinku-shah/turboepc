@@ -70,10 +70,10 @@ using namespace std;
 /**************************************** Configurable parameters **********************************************/
 
 #define DEFAULT_IF  "eth1"   // Default network interface name                                                *
-#define DGW_IP "192.168.1.2"    // IP address of DGW machine
-#define RAN_IP "192.168.1.1"   // IP address of RAN machine
+#define DGW_IP "192.168.16.2"    // IP address of DGW machine
+#define RAN_IP "192.168.16.1"   // IP address of RAN machine
 
-#define SINK_IP "192.168.4.5"   // IP address of Sink machine; TCP server at sink listens on this IP
+#define SINK_IP "192.168.21.2"   // IP address of Sink machine; TCP server at sink listens on this IP
 
 #define SINK_SERVER_NETMASK "/16"   // Sink subnet netmask
 #define UE_MEAN_DATA_SENDING_TIME 1   // Mean time for which a UE sends data

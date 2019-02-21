@@ -29,36 +29,34 @@ public class Constants {
 	static byte[] dstSinkIpAddr =  IPv4.toIPv4AddressBytes("192.168.21.2");
 
 	/***************************Configurable parameters**********************************/
-	//40:8d:5c:76:d2:67 UE MAC 00:16:3e:1f:c0:12 
-	//final static String UE_MAC = "00:16:3e:c6:a2:aa"; // MAC Address of UE/eNodeB Node  *
-	//final static String DEFAULT_GW_MAC = "00:16:3e:f7:4d:43"; //"12:b4:6f:db:03:28";//"00:16:3e:03:9d:5a"; // MAC Address of DGW int2 //1e:12:62:1d:67:a5     *
-
+	//global chain
 	final static int UE_LB = 300; //push UE state to switches when UE KEY is between UE_LB & UE_UB
 	final static int UE_UB = 399;
-
+	
+	//chain1
 	final static int LB1 = 200; //Select SGW11 when UE KEY is between LB1 & UB1
     final static int UB1 = 299; 
 
     final static int LB2 = 100; //Select SGW12 when UE KEY is between LB2 & UB2
 	final static int UB2 = 199;
-	
+	//chain2	
 	final static int LB3 = 200; //Select SGW21 when UE KEY is between LB3 & UB3
     final static int UB3 = 299; 
 
     final static int LB4 = 100; //Select SGW22 when UE KEY is between LB4 & UB4
 	final static int UB4 = 199;
-	
-	final static int LB5 = 200; //Select SGW31 when UE KEY is between LB5 & UB5
-    final static int UB5 = 299; 
+	// chain3 
+	final static int LB5 = 300; //Select SGW31 when UE KEY is between LB5 & UB5
+    final static int UB5 = 399; 
 
-    final static int LB6 = 100; //Select SGW32 when UE KEY is between LB6 & UB6
-	final static int UB6 = 199;
-	
-	final static int LB7 = 200; //Select SGW41 when UE KEY is between LB7 & UB7
-    final static int UB7 = 299; 
+    final static int LB6 = 400; //Select SGW32 when UE KEY is between LB6 & UB6
+	final static int UB6 = 499;
+	//chain4
+	final static int LB7 = 400; //Select SGW41 when UE KEY is between LB7 & UB7
+    final static int UB7 = 499; 
 
-    final static int LB8 = 100; //Select SGW42 when UE KEY is between LB8 & UB8
-    final static int UB8 = 199;
+    final static int LB8 = 500; //Select SGW42 when UE KEY is between LB8 & UB8
+    final static int UB8 = 599;
 
 
 	final static boolean OFFLOAD_ATTACH = true; //false; //True=> We wish to offload attach components to local controller
@@ -371,6 +369,7 @@ public class Constants {
 			public static String getSgwDpidScale(String dgw, int key){
 					if(Constants.DEBUG) {
 							log.warn("in Constants.getSgwDpidScale dgw = {}", dgw);
+							log.warn("in Constants.getSgwDpidScale key = {}",key);
 					}
 					String swid1 = "";
 					if(dgw.charAt(0)=='s'){
@@ -405,7 +404,9 @@ public class Constants {
 						sgw = Constants.SGW_ID_41;
 					else if (swid==(Constants.DEFAULT_SWITCH_ID_4) && ((key >= Constants.LB8 && key <= Constants.UB8)))
 						sgw = Constants.SGW_ID_42;
-					
+					if(Constants.DEBUG) {
+						log.warn("in Constants.getSGwDpidScale returning sgw = {}",sgw);
+					}
 					return Integer.toString(sgw);
             }
 
@@ -449,6 +450,7 @@ public class Constants {
 								sgwName = Constants.SGW_NAME_41;
 						else if ((swid==(Constants.DEFAULT_SWITCH_ID_4)) && ((key >= Constants.LB8 && key <= Constants.UB8)) )
 								sgwName = Constants.SGW_NAME_42;
+						//log.warn("returning sgwName  = {}", sgwName);
 						return  sgwName;
 			}
 			
