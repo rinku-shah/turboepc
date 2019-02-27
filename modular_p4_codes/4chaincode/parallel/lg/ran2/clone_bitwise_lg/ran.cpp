@@ -194,7 +194,7 @@ int send_socket_data(const char *ip)
     int portno,nbytes;
     struct sockaddr_in server_addr;
     struct hostent *server;
-    portno = atoi("13001");
+    portno = atoi("23001");
     int sockfd = socket(AF_INET,SOCK_STREAM,0);
     if(sockfd<0){
       perror("Error opening socket");

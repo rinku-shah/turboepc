@@ -16,25 +16,37 @@ const bit<8> DEFAULT_IPV4_TTL = 64;
 
 // hex format works
 
-const bit<32> s1u_dgw_addr = 0xC0A80202;
+const bit<32> s1u_dgw_ipaddr = 0xc0a80201;  // 192.168.2.1
+
 
 // IP address of 1st,2nd,3rd,3th chains in SGW
-// s1u - 1st chain
-// s2u - 2nd chain
-// s3u - 3rd chain
-// s4u - 4th chain
+// s11,s12 - 1st chain
+// s21,s22 - 2nd chain
+// s31,s32 - 3rd chain
+// s41,s42 - 4th chain
 
-const bit<32> s1u_sgw_addr = 0xC0A80203;
-const bit<32> s2u_sgw_addr = 0xC0A80603;
-const bit<32> s3u_sgw_addr = 0xC0A80803;
-const bit<32> s4u_sgw_addr = 0xC0A80C03;
-const bit<32> s5u_sgw_addr = 0xC0A80F03;
-const bit<32> s6u_sgw_addr = 0xC0A81103;
+const bit<32> s11_sgw_ipaddr = 0xc0a80202;  //192.168.2.2
+const bit<32> s12_sgw_ipaddr = 0xc0a80302;  //192.168.3.2
+const bit<32> s21_sgw_ipaddr = 0xc0a80602; //192.168.6.2
+const bit<32> s22_sgw_ipaddr = 0xc0a80702; //192.168.7.2
+const bit<32> s31_sgw_ipaddr = 0xc0a80a02;  //192.168.10.2
+const bit<32> s32_sgw_ipaddr = 0xc0a80b02; //192.168.11.2
+const bit<32> s41_sgw_ipaddr = 0xc0a80e02;  // 192.168.14.2
+const bit<32> s42_sgw_ipaddr = 0xc0a80f02; //192.168.15.2
 
 
-const bit<32> s1u_pgw_addr =0xC0A80304;
+const bit<32> sink_ip =0xc0a81502;  // 192.168.21.2
 
-const bit<32> sink_ip =0xC0A80405;
+
+// MAC addresses of SGWs
+const bit<48> sgw11 = 0x00163e416103;
+const bit<48> sgw12 = 0x00163e8f0eae;
+const bit<48> sgw21 = 0x00163e73b569;
+const bit<48> sgw22 = 0x00163e750e1c;
+const bit<48> sgw31 = 0x00163e362217;
+const bit<48> sgw32 = 0x00163e65bbf4;
+const bit<48> sgw41 = 0x00163e4646a8;
+const bit<48> sgw42 = 0x00163e2fd5eb;
 
 // MAC addresses of RANs
 const bit<48> ran1 = 0x00163ec6a2aa;
@@ -44,21 +56,12 @@ const bit<48> ran4 = 0x00163e73d06d;
 const bit<48> ran5 = 0x00163e8dccbe;
 const bit<48> ran6 = 0x00163e714c4f;
 
-// MAC addresses of SGWs
-const bit<48> sgw1 = 0x00163e1f04f2;
-const bit<48> sgw2 = 0x00163e3f0d83;
-const bit<48> sgw3 = 0x00163ee0eb61;
-const bit<48> sgw4 = 0x00163e4c02a8;
-const bit<48> sgw5 = 0x00163ee90a21;
-const bit<48> sgw6 = 0x00163edf5287;
-
 
 const bit<48> pgw = 0x00163e48994c;
 
 const bit<48> sink = 0x00163ede0a60;
 
 const bit<48> bcast = 0xffffffffffff;
-
 
 #define IPV4_HDR_SIZE 20
 #define UDP_HDR_SIZE 8
@@ -93,8 +96,25 @@ const bit<32> BMV2_V1MODEL_INSTANCE_TYPE_RESUBMIT      = 6;
 
 const bit<32> I2E_CLONE_SESSION_ID = 500;
 
-const bit<32> LB1 = 100;
-const bit<32> UB1 = 199;
-const bit<32> LB2 = 200;
-const bit<32> UB2 = 299;
+
+const bit<32> LB1 = 200;
+const bit<32> UB1 = 299;
+const bit<32> LB2 = 100;
+const bit<32> UB2 = 199;
+
+const bit<32> LB3 = 200;
+const bit<32> UB3 = 299;
+const bit<32> LB4 = 100;
+const bit<32> UB4 = 199;
+
+const bit<32> LB5 = 300;
+const bit<32> UB5 = 399;
+const bit<32> LB6 = 400;
+const bit<32> UB6 = 499;
+
+const bit<32> LB7 = 400;
+const bit<32> UB7 = 499;
+const bit<32> LB8 = 500;
+const bit<32> UB8 = 599;
+
 #endif

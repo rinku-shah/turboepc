@@ -1,5 +1,5 @@
 {
-  "program" : "mytunnel.p4",
+  "program" : "epc_4chainseries_dgw.p4",
   "__meta__" : {
     "version" : [2, 7],
     "compiler" : "https://github.com/p4lang/p4c"
@@ -1175,7 +1175,7 @@
       "name" : "c_ingress.tx_port_counter",
       "id" : 0,
       "source_info" : {
-        "filename" : "mytunnel.p4",
+        "filename" : "epc_4chainseries_dgw.p4",
         "line" : 25,
         "column" : 48,
         "source_fragment" : "tx_port_counter"
@@ -1187,7 +1187,7 @@
       "name" : "c_ingress.rx_port_counter",
       "id" : 1,
       "source_info" : {
-        "filename" : "mytunnel.p4",
+        "filename" : "epc_4chainseries_dgw.p4",
         "line" : 26,
         "column" : 48,
         "source_fragment" : "rx_port_counter"
@@ -1481,7 +1481,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "mytunnel.p4",
+            "filename" : "epc_4chainseries_dgw.p4",
             "line" : 31,
             "column" : 8,
             "source_fragment" : "standard_metadata.egress_spec = port"
@@ -1522,8 +1522,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "mytunnel.p4",
-            "line" : 43,
+            "filename" : "epc_4chainseries_dgw.p4",
+            "line" : 40,
             "column" : 8,
             "source_fragment" : "hdr.packet_in.setValid()"
           }
@@ -1541,8 +1541,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "mytunnel.p4",
-            "line" : 44,
+            "filename" : "epc_4chainseries_dgw.p4",
+            "line" : 41,
             "column" : 8,
             "source_fragment" : "hdr.packet_in.ingress_port = standard_metadata.ingress_port"
           }
@@ -1558,8 +1558,8 @@
           "op" : "drop",
           "parameters" : [],
           "source_info" : {
-            "filename" : "mytunnel.p4",
-            "line" : 48,
+            "filename" : "epc_4chainseries_dgw.p4",
+            "line" : 45,
             "column" : 8,
             "source_fragment" : "mark_to_drop()"
           }
@@ -1589,8 +1589,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "mytunnel.p4",
-            "line" : 80,
+            "filename" : "epc_4chainseries_dgw.p4",
+            "line" : 77,
             "column" : 8,
             "source_fragment" : "hdr.gtpu_ipv4.setValid()"
           }
@@ -1608,8 +1608,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "mytunnel.p4",
-            "line" : 81,
+            "filename" : "epc_4chainseries_dgw.p4",
+            "line" : 78,
             "column" : 8,
             "source_fragment" : "hdr.gtpu_ipv4.version = 4"
           }
@@ -1628,7 +1628,7 @@
           ],
           "source_info" : {
             "filename" : "include/definitions.p4",
-            "line" : 68,
+            "line" : 72,
             "column" : 28,
             "source_fragment" : "5; ..."
           }
@@ -1646,8 +1646,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "mytunnel.p4",
-            "line" : 83,
+            "filename" : "epc_4chainseries_dgw.p4",
+            "line" : 80,
             "column" : 8,
             "source_fragment" : "hdr.gtpu_ipv4.diffserv = 0"
           }
@@ -1688,8 +1688,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "mytunnel.p4",
-            "line" : 84,
+            "filename" : "epc_4chainseries_dgw.p4",
+            "line" : 81,
             "column" : 8,
             "source_fragment" : "hdr.gtpu_ipv4.totalLen = hdr.ipv4.totalLen ..."
           }
@@ -1707,8 +1707,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "mytunnel.p4",
-            "line" : 86,
+            "filename" : "epc_4chainseries_dgw.p4",
+            "line" : 83,
             "column" : 8,
             "source_fragment" : "hdr.gtpu_ipv4.identification = 0"
           }
@@ -1726,8 +1726,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "mytunnel.p4",
-            "line" : 87,
+            "filename" : "epc_4chainseries_dgw.p4",
+            "line" : 84,
             "column" : 8,
             "source_fragment" : "hdr.gtpu_ipv4.flags = 0"
           }
@@ -1745,8 +1745,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "mytunnel.p4",
-            "line" : 88,
+            "filename" : "epc_4chainseries_dgw.p4",
+            "line" : 85,
             "column" : 8,
             "source_fragment" : "hdr.gtpu_ipv4.fragOffset = 0"
           }
@@ -1787,8 +1787,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "mytunnel.p4",
-            "line" : 89,
+            "filename" : "epc_4chainseries_dgw.p4",
+            "line" : 86,
             "column" : 8,
             "source_fragment" : "hdr.gtpu_ipv4.ttl = hdr.ipv4.ttl-1"
           }
@@ -1807,7 +1807,7 @@
           ],
           "source_info" : {
             "filename" : "include/definitions.p4",
-            "line" : 70,
+            "line" : 74,
             "column" : 25,
             "source_fragment" : "17; ..."
           }
@@ -1821,14 +1821,14 @@
             },
             {
               "type" : "hexstr",
-              "value" : "0xc0a80202"
+              "value" : "0xc0a80201"
             }
           ],
           "source_info" : {
             "filename" : "include/definitions.p4",
             "line" : 19,
-            "column" : 29,
-            "source_fragment" : "0xC0A80202; ..."
+            "column" : 31,
+            "source_fragment" : "0xc0a80201; // 192.168.2.1 ..."
           }
         },
         {
@@ -1840,14 +1840,14 @@
             },
             {
               "type" : "hexstr",
-              "value" : "0xc0a80203"
+              "value" : "0xc0a80202"
             }
           ],
           "source_info" : {
             "filename" : "include/definitions.p4",
-            "line" : 27,
-            "column" : 29,
-            "source_fragment" : "0xC0A80203; ..."
+            "line" : 28,
+            "column" : 31,
+            "source_fragment" : "0xc0a80202; //192.168.2.2 ..."
           }
         },
         {
@@ -1863,8 +1863,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "mytunnel.p4",
-            "line" : 93,
+            "filename" : "epc_4chainseries_dgw.p4",
+            "line" : 90,
             "column" : 8,
             "source_fragment" : "hdr.gtpu_ipv4.hdrChecksum = 0"
           }
@@ -1878,8 +1878,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "mytunnel.p4",
-            "line" : 95,
+            "filename" : "epc_4chainseries_dgw.p4",
+            "line" : 92,
             "column" : 8,
             "source_fragment" : "hdr.gtpu_udp.setValid()"
           }
@@ -1897,8 +1897,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "mytunnel.p4",
-            "line" : 97,
+            "filename" : "epc_4chainseries_dgw.p4",
+            "line" : 94,
             "column" : 8,
             "source_fragment" : "hdr.gtpu_udp.srcPort = hdr.tcp.src_port"
           }
@@ -1916,8 +1916,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "mytunnel.p4",
-            "line" : 98,
+            "filename" : "epc_4chainseries_dgw.p4",
+            "line" : 95,
             "column" : 8,
             "source_fragment" : "hdr.gtpu_udp.dstPort = 2152"
           }
@@ -1958,8 +1958,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "mytunnel.p4",
-            "line" : 99,
+            "filename" : "epc_4chainseries_dgw.p4",
+            "line" : 96,
             "column" : 8,
             "source_fragment" : "hdr.gtpu_udp.length_= hdr.ipv4.totalLen ..."
           }
@@ -1977,8 +1977,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "mytunnel.p4",
-            "line" : 101,
+            "filename" : "epc_4chainseries_dgw.p4",
+            "line" : 98,
             "column" : 8,
             "source_fragment" : "hdr.gtpu_udp.checksum = 0"
           }
@@ -1992,8 +1992,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "mytunnel.p4",
-            "line" : 103,
+            "filename" : "epc_4chainseries_dgw.p4",
+            "line" : 100,
             "column" : 8,
             "source_fragment" : "hdr.gtpu.setValid()"
           }
@@ -2011,8 +2011,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "mytunnel.p4",
-            "line" : 104,
+            "filename" : "epc_4chainseries_dgw.p4",
+            "line" : 101,
             "column" : 8,
             "source_fragment" : "hdr.gtpu.version = 0x01"
           }
@@ -2030,8 +2030,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "mytunnel.p4",
-            "line" : 105,
+            "filename" : "epc_4chainseries_dgw.p4",
+            "line" : 102,
             "column" : 8,
             "source_fragment" : "hdr.gtpu.pt = 0x01"
           }
@@ -2049,8 +2049,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "mytunnel.p4",
-            "line" : 106,
+            "filename" : "epc_4chainseries_dgw.p4",
+            "line" : 103,
             "column" : 8,
             "source_fragment" : "hdr.gtpu.x = 0"
           }
@@ -2068,8 +2068,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "mytunnel.p4",
-            "line" : 107,
+            "filename" : "epc_4chainseries_dgw.p4",
+            "line" : 104,
             "column" : 8,
             "source_fragment" : "hdr.gtpu.ex_flag = 0"
           }
@@ -2087,8 +2087,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "mytunnel.p4",
-            "line" : 108,
+            "filename" : "epc_4chainseries_dgw.p4",
+            "line" : 105,
             "column" : 8,
             "source_fragment" : "hdr.gtpu.seq_flag = 0"
           }
@@ -2106,8 +2106,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "mytunnel.p4",
-            "line" : 109,
+            "filename" : "epc_4chainseries_dgw.p4",
+            "line" : 106,
             "column" : 8,
             "source_fragment" : "hdr.gtpu.npdu_flag = 0"
           }
@@ -2125,8 +2125,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "mytunnel.p4",
-            "line" : 110,
+            "filename" : "epc_4chainseries_dgw.p4",
+            "line" : 107,
             "column" : 8,
             "source_fragment" : "hdr.gtpu.msgtype = 0xff"
           }
@@ -2144,8 +2144,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "mytunnel.p4",
-            "line" : 111,
+            "filename" : "epc_4chainseries_dgw.p4",
+            "line" : 108,
             "column" : 8,
             "source_fragment" : "hdr.gtpu.msglen = hdr.ipv4.totalLen"
           }
@@ -2163,8 +2163,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "mytunnel.p4",
-            "line" : 112,
+            "filename" : "epc_4chainseries_dgw.p4",
+            "line" : 109,
             "column" : 8,
             "source_fragment" : "hdr.gtpu.teid = op_tunnel_s1"
           }
@@ -2182,8 +2182,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "mytunnel.p4",
-            "line" : 114,
+            "filename" : "epc_4chainseries_dgw.p4",
+            "line" : 111,
             "column" : 8,
             "source_fragment" : "standard_metadata.egress_spec = egress_port_s1"
           }
@@ -2224,8 +2224,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "mytunnel.p4",
-            "line" : 115,
+            "filename" : "epc_4chainseries_dgw.p4",
+            "line" : 112,
             "column" : 8,
             "source_fragment" : "hdr.ipv4.ttl = hdr.ipv4.ttl - 1"
           }
@@ -2255,8 +2255,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "mytunnel.p4",
-            "line" : 148,
+            "filename" : "epc_4chainseries_dgw.p4",
+            "line" : 132,
             "column" : 8,
             "source_fragment" : "standard_metadata.egress_spec = egress_port_s3"
           }
@@ -2274,8 +2274,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "mytunnel.p4",
-            "line" : 154,
+            "filename" : "epc_4chainseries_dgw.p4",
+            "line" : 138,
             "column" : 8,
             "source_fragment" : "hdr.ipv4 = hdr.inner_ipv4"
           }
@@ -2293,8 +2293,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "mytunnel.p4",
-            "line" : 155,
+            "filename" : "epc_4chainseries_dgw.p4",
+            "line" : 139,
             "column" : 8,
             "source_fragment" : "hdr.tcp = hdr.inner_tcp"
           }
@@ -2308,8 +2308,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "mytunnel.p4",
-            "line" : 158,
+            "filename" : "epc_4chainseries_dgw.p4",
+            "line" : 142,
             "column" : 8,
             "source_fragment" : "hdr.udp.setInvalid()"
           }
@@ -2349,7 +2349,7 @@
                           },
                           "right" : {
                             "type" : "hexstr",
-                            "value" : "0xc0a80405"
+                            "value" : "0xc0a81502"
                           }
                         }
                       },
@@ -2374,8 +2374,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "mytunnel.p4",
-            "line" : 164,
+            "filename" : "epc_4chainseries_dgw.p4",
+            "line" : 148,
             "column" : 16,
             "source_fragment" : "hdr.ethernet.dstAddr ="
           }
@@ -2419,7 +2419,7 @@
                               },
                               "right" : {
                                 "type" : "hexstr",
-                                "value" : "0xc0a80405"
+                                "value" : "0xc0a81502"
                               }
                             }
                           },
@@ -2467,8 +2467,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "mytunnel.p4",
-            "line" : 167,
+            "filename" : "epc_4chainseries_dgw.p4",
+            "line" : 151,
             "column" : 16,
             "source_fragment" : "hdr.ethernet.dstAddr ="
           }
@@ -2516,7 +2516,7 @@
                                   },
                                   "right" : {
                                     "type" : "hexstr",
-                                    "value" : "0xc0a80405"
+                                    "value" : "0xc0a81502"
                                   }
                                 }
                               },
@@ -2587,8 +2587,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "mytunnel.p4",
-            "line" : 170,
+            "filename" : "epc_4chainseries_dgw.p4",
+            "line" : 154,
             "column" : 16,
             "source_fragment" : "hdr.ethernet.dstAddr ="
           }
@@ -2640,7 +2640,7 @@
                                       },
                                       "right" : {
                                         "type" : "hexstr",
-                                        "value" : "0xc0a80405"
+                                        "value" : "0xc0a81502"
                                       }
                                     }
                                   },
@@ -2734,8 +2734,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "mytunnel.p4",
-            "line" : 173,
+            "filename" : "epc_4chainseries_dgw.p4",
+            "line" : 157,
             "column" : 16,
             "source_fragment" : "hdr.ethernet.dstAddr ="
           }
@@ -2791,7 +2791,7 @@
                                           },
                                           "right" : {
                                             "type" : "hexstr",
-                                            "value" : "0xc0a80405"
+                                            "value" : "0xc0a81502"
                                           }
                                         }
                                       },
@@ -2908,8 +2908,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "mytunnel.p4",
-            "line" : 176,
+            "filename" : "epc_4chainseries_dgw.p4",
+            "line" : 160,
             "column" : 16,
             "source_fragment" : "hdr.ethernet.dstAddr ="
           }
@@ -2969,7 +2969,7 @@
                                               },
                                               "right" : {
                                                 "type" : "hexstr",
-                                                "value" : "0xc0a80405"
+                                                "value" : "0xc0a81502"
                                               }
                                             }
                                           },
@@ -3109,8 +3109,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "mytunnel.p4",
-            "line" : 179,
+            "filename" : "epc_4chainseries_dgw.p4",
+            "line" : 163,
             "column" : 16,
             "source_fragment" : "hdr.ethernet.dstAddr ="
           }
@@ -3159,7 +3159,7 @@
                                   },
                                   "right" : {
                                     "type" : "hexstr",
-                                    "value" : "0xc0a80405"
+                                    "value" : "0xc0a81502"
                                   }
                                 }
                               }
@@ -3402,8 +3402,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "mytunnel.p4",
-            "line" : 187,
+            "filename" : "epc_4chainseries_dgw.p4",
+            "line" : 171,
             "column" : 16,
             "source_fragment" : "hdr.ethernet.dstAddr ="
           }
@@ -3417,8 +3417,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "mytunnel.p4",
-            "line" : 191,
+            "filename" : "epc_4chainseries_dgw.p4",
+            "line" : 175,
             "column" : 8,
             "source_fragment" : "hdr.gtpu.setInvalid()"
           }
@@ -3432,8 +3432,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "mytunnel.p4",
-            "line" : 192,
+            "filename" : "epc_4chainseries_dgw.p4",
+            "line" : 176,
             "column" : 8,
             "source_fragment" : "hdr.gtpu_ipv4.setInvalid()"
           }
@@ -3447,8 +3447,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "mytunnel.p4",
-            "line" : 193,
+            "filename" : "epc_4chainseries_dgw.p4",
+            "line" : 177,
             "column" : 8,
             "source_fragment" : "hdr.gtpu_udp.setInvalid()"
           }
@@ -3489,8 +3489,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "mytunnel.p4",
-            "line" : 195,
+            "filename" : "epc_4chainseries_dgw.p4",
+            "line" : 179,
             "column" : 8,
             "source_fragment" : "hdr.ipv4.ttl = hdr.ipv4.ttl - 1"
           }
@@ -3515,8 +3515,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "mytunnel.p4",
-            "line" : 295,
+            "filename" : "epc_4chainseries_dgw.p4",
+            "line" : 208,
             "column" : 12,
             "source_fragment" : "standard_metadata.egress_spec = hdr.packet_out.egress_port"
           }
@@ -3530,8 +3530,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "mytunnel.p4",
-            "line" : 297,
+            "filename" : "epc_4chainseries_dgw.p4",
+            "line" : 210,
             "column" : 12,
             "source_fragment" : "hdr.packet_out.setInvalid()"
           }
@@ -3559,8 +3559,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "mytunnel.p4",
-            "line" : 298,
+            "filename" : "epc_4chainseries_dgw.p4",
+            "line" : 211,
             "column" : 12,
             "source_fragment" : "return"
           }
@@ -3655,8 +3655,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "mytunnel.p4",
-            "line" : 307,
+            "filename" : "epc_4chainseries_dgw.p4",
+            "line" : 220,
             "column" : 16,
             "source_fragment" : "return"
           }
@@ -3691,8 +3691,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "mytunnel.p4",
-            "line" : 325,
+            "filename" : "epc_4chainseries_dgw.p4",
+            "line" : 238,
             "column" : 32,
             "source_fragment" : "return"
           }
@@ -3717,8 +3717,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "mytunnel.p4",
-            "line" : 330,
+            "filename" : "epc_4chainseries_dgw.p4",
+            "line" : 243,
             "column" : 36,
             "source_fragment" : "standard_metadata.egress_spec = 2"
           }
@@ -3759,8 +3759,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "mytunnel.p4",
-            "line" : 331,
+            "filename" : "epc_4chainseries_dgw.p4",
+            "line" : 244,
             "column" : 36,
             "source_fragment" : "hdr.ipv4.ttl = hdr.ipv4.ttl - 1"
           }
@@ -3785,8 +3785,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "mytunnel.p4",
-            "line" : 338,
+            "filename" : "epc_4chainseries_dgw.p4",
+            "line" : 251,
             "column" : 32,
             "source_fragment" : "standard_metadata.egress_spec = 1"
           }
@@ -3827,8 +3827,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "mytunnel.p4",
-            "line" : 339,
+            "filename" : "epc_4chainseries_dgw.p4",
+            "line" : 252,
             "column" : 32,
             "source_fragment" : "hdr.ipv4.ttl = hdr.ipv4.ttl - 1"
           }
@@ -3863,8 +3863,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "mytunnel.p4",
-            "line" : 350,
+            "filename" : "epc_4chainseries_dgw.p4",
+            "line" : 263,
             "column" : 20,
             "source_fragment" : "return"
           }
@@ -3945,8 +3945,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "mytunnel.p4",
-            "line" : 362,
+            "filename" : "epc_4chainseries_dgw.p4",
+            "line" : 271,
             "column" : 17,
             "source_fragment" : "tx_port_counter.count((bit<32>) standard_metadata.egress_spec)"
           }
@@ -3997,8 +3997,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "mytunnel.p4",
-            "line" : 365,
+            "filename" : "epc_4chainseries_dgw.p4",
+            "line" : 274,
             "column" : 17,
             "source_fragment" : "rx_port_counter.count((bit<32>) standard_metadata.ingress_port)"
           }
@@ -4011,7 +4011,7 @@
       "name" : "ingress",
       "id" : 0,
       "source_info" : {
-        "filename" : "mytunnel.p4",
+        "filename" : "epc_4chainseries_dgw.p4",
         "line" : 19,
         "column" : 8,
         "source_fragment" : "c_ingress"
@@ -4068,8 +4068,8 @@
           "name" : "c_ingress.t_l3_fwd",
           "id" : 2,
           "source_info" : {
-            "filename" : "mytunnel.p4",
-            "line" : 55,
+            "filename" : "epc_4chainseries_dgw.p4",
+            "line" : 52,
             "column" : 10,
             "source_fragment" : "t_l3_fwd"
           },
@@ -4198,8 +4198,8 @@
           "name" : "c_ingress.ip_op_tun_s1_uplink",
           "id" : 6,
           "source_info" : {
-            "filename" : "mytunnel.p4",
-            "line" : 132,
+            "filename" : "epc_4chainseries_dgw.p4",
+            "line" : 116,
             "column" : 9,
             "source_fragment" : "ip_op_tun_s1_uplink"
           },
@@ -4310,8 +4310,8 @@
           "name" : "c_ingress.tun_egress_s3_uplink",
           "id" : 10,
           "source_info" : {
-            "filename" : "mytunnel.p4",
-            "line" : 199,
+            "filename" : "epc_4chainseries_dgw.p4",
+            "line" : 183,
             "column" : 10,
             "source_fragment" : "tun_egress_s3_uplink"
           },
@@ -4419,8 +4419,8 @@
           "name" : "node_3",
           "id" : 0,
           "source_info" : {
-            "filename" : "mytunnel.p4",
-            "line" : 290,
+            "filename" : "epc_4chainseries_dgw.p4",
+            "line" : 203,
             "column" : 12,
             "source_fragment" : "standard_metadata.ingress_port == CPU_PORT"
           },
@@ -4486,8 +4486,8 @@
           "name" : "node_11",
           "id" : 3,
           "source_info" : {
-            "filename" : "mytunnel.p4",
-            "line" : 311,
+            "filename" : "epc_4chainseries_dgw.p4",
+            "line" : 224,
             "column" : 16,
             "source_fragment" : "hdr.ipv4.isValid() && !hdr.gtpu.isValid()"
           },
@@ -4533,8 +4533,8 @@
           "name" : "node_12",
           "id" : 4,
           "source_info" : {
-            "filename" : "mytunnel.p4",
-            "line" : 315,
+            "filename" : "epc_4chainseries_dgw.p4",
+            "line" : 228,
             "column" : 22,
             "source_fragment" : "standard_metadata.ingress_port==1"
           },
@@ -4559,8 +4559,8 @@
           "name" : "node_13",
           "id" : 5,
           "source_info" : {
-            "filename" : "mytunnel.p4",
-            "line" : 323,
+            "filename" : "epc_4chainseries_dgw.p4",
+            "line" : 236,
             "column" : 31,
             "source_fragment" : "hdr.ipv4.protocol == PROTO_TCP"
           },
@@ -4585,8 +4585,8 @@
           "name" : "node_16",
           "id" : 6,
           "source_info" : {
-            "filename" : "mytunnel.p4",
-            "line" : 328,
+            "filename" : "epc_4chainseries_dgw.p4",
+            "line" : 241,
             "column" : 36,
             "source_fragment" : "hdr.ipv4.protocol == PROTO_UDP"
           },
@@ -4611,8 +4611,8 @@
           "name" : "node_18",
           "id" : 7,
           "source_info" : {
-            "filename" : "mytunnel.p4",
-            "line" : 337,
+            "filename" : "epc_4chainseries_dgw.p4",
+            "line" : 250,
             "column" : 28,
             "source_fragment" : "standard_metadata.ingress_port==2"
           },
@@ -4661,8 +4661,8 @@
           "name" : "node_21",
           "id" : 9,
           "source_info" : {
-            "filename" : "mytunnel.p4",
-            "line" : 345,
+            "filename" : "epc_4chainseries_dgw.p4",
+            "line" : 258,
             "column" : 16,
             "source_fragment" : "hdr.gtpu.isValid()"
           },
@@ -4708,8 +4708,8 @@
           "name" : "node_25",
           "id" : 11,
           "source_info" : {
-            "filename" : "mytunnel.p4",
-            "line" : 361,
+            "filename" : "epc_4chainseries_dgw.p4",
+            "line" : 270,
             "column" : 17,
             "source_fragment" : "standard_metadata.egress_spec < 255"
           },
@@ -4734,8 +4734,8 @@
           "name" : "node_27",
           "id" : 12,
           "source_info" : {
-            "filename" : "mytunnel.p4",
-            "line" : 364,
+            "filename" : "epc_4chainseries_dgw.p4",
+            "line" : 273,
             "column" : 17,
             "source_fragment" : "standard_metadata.ingress_port < 255"
           },
@@ -4762,8 +4762,8 @@
       "name" : "egress",
       "id" : 1,
       "source_info" : {
-        "filename" : "mytunnel.p4",
-        "line" : 373,
+        "filename" : "epc_4chainseries_dgw.p4",
+        "line" : 282,
         "column" : 8,
         "source_fragment" : "c_egress"
       },

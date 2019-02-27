@@ -1,4 +1,4 @@
-all: mytunnel
+all: epc_pgw
 
-mytunnel: mytunnel.p4
-	p4c-bm2-ss -o mytunnel.json --p4runtime-file mytunnel.p4info --p4runtime-format text mytunnel.p4
+epc_pgw: epc_4chainseries_pgw.p4
+	p4c-bm2-ss -o mytunnel.json --p4runtime-file mytunnel.p4info --p4runtime-format text epc_4chainseries_pgw.p4
