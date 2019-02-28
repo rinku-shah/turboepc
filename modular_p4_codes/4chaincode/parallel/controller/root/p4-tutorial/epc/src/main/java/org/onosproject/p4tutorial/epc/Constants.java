@@ -161,8 +161,6 @@ public class Constants {
 			final static String PGW_IP_5_UPLINK= "192.168.100.4";	// PGW
 			final static String PGW_IP_6_UPLINK= "192.168.100.6";	// PGW	
 			final static String PGW_IP_DOWNLINK = "192.168.4.4";
-			//final static String PGW_IP_UPLINK = "10.129.41.95";	// PGW							*
-			//final static String PGW_IP_DOWNLINK = "10.129.41.95";	// PGW						*
 			final static String SINK_IP = "192.168.4.5";	// SINK								*
 
 			// The starting IP address which is allocated to the first UE connecting to our		*
@@ -350,7 +348,7 @@ public class Constants {
 			{{
 				//@vikas : 4chainsetup
 				// chain1 
-				put(DEFAULT_SWITCH_ID_1 + SEPARATOR + SGW_ID_11, 2);// for switch S2(SGW-1)  connected to S1(ENODEB) via port 2 of Default Switch
+				put(DEFAULT_SWITCH_ID_1 + SEPARATOR + SGW_ID_11, 2);// for switch S2(SGW-11)  connected to S1(ENODEB) via port 2 of Default Switch
 				put(DEFAULT_SWITCH_ID_1 + SEPARATOR + SGW_ID_12, 3);// for switch S3(SGW-12) connected to S1(ENODEB) via port 3 of Default Switch
 				// chain2
 				put(DEFAULT_SWITCH_ID_2 + SEPARATOR + SGW_ID_21, 2);// for switch S5(SGW-21) connected to S2(ENODEB) via port 2 of Default Switch

@@ -593,7 +593,6 @@ public class EpcApp {
                             log.info("DEFAULT SWITCH deleting uplink rule with for UE with IP = {}",tmpArray[1]);
                         }
 
-                        // int DEFAULT_S_SGW_PORT = Constants.ENODEB_SGW_PORT_MAP.get(dw_cr + Constants.SEPARATOR + Constants.getSgwDpid(dw_cr)); //dpids[0] ==> SGW DPID
 
                         /***********************************delete downlink flow rule on Egress DGW( DGW -> RAN)*************************/
                         fr.insertUplinkTunnelForwardRule(true,appId, flowRuleService, DGWswitchName3,Integer.parseInt(tmpArray[2]), uePort,0,true);
@@ -703,8 +702,6 @@ public class EpcApp {
                         DeviceId DGWswitchName4 = Constants.getDgwswitchName(dw_ue_ser);
 
                         if(Constants.DEBUG){
-//                            System.out.println("DEFAULT SWITCH installing uplink rule on default switch dpid = "+dw_ue_ser.getLong()+" inport="+uePort+" and SRC IP = "+ue_ip+
-//                                                       " outPort = "+Constants.ENODEB_SGW_PORT_MAP.get(dw_ue_ser + Constants.SEPARATOR + sgw_dpId.getLong())+" and out SRC IP = "+Constants.getRanIp(dw_ue_ser)+" out teid= "+sgw_teid+" of UE key = "+tmpArray[1]);
                         log.warn("DGWswitchName4 Device ID {}", DGWswitchName4);
 
                         }
@@ -714,7 +711,6 @@ public class EpcApp {
 //                        String SGW_ID =  Integer.parseInt(Constants.getSgwDpid(dgw_dpId));
                         // int SGW_ID1 =  Integer.parseInt(Constants.getSgwDpid(dw_ue_ser));
                         // String getval1 = dw_ue_ser + Constants.SEPARATOR + SGW_ID1;
-                        // int outPort1 =  Constants.ENODEB_SGW_PORT_MAP.get(getval1);
                         // @vikas @parallel design : hardcoding here value as 2 as SGW1_1 is connected on port 2 of DGW
                         int outPort1 = 2;
 
@@ -727,11 +723,6 @@ public class EpcApp {
 
                         /* UPLINK   => ipv4srcAddr = UE IP and ipv4dstAddr = Sink IP   */
                         fr.insertUplinkTunnelIngressRule(false,appId,flowRuleService,DGWswitchName4,UE_IPAddr1,Constants.dstSinkIpAddr, sgw_teid,outPort1);
-
-                        //        private void installFlowRuleWithIP(DatapathId dpId, int inPort, int outPort, int outTunnelId, String UE_IP, String srcIP, String dstIP, String dstMac){
-//                        installFlowRuleWithIP(dw_ue_ser, uePort, Constants.ENODEB_SGW_PORT_MAP.get(dw_ue_ser.getLong() + Constants.SEPARATOR + Constants.getSgwDpid(dw_ue_ser)), sgw_teid, ue_ip, Constants.getRanIp(dw_ue_ser), Constants.getSgwIpUplink(dw_ue_ser), Constants.SINK_MAC);
-
-                        
 
                         if(Constants.DO_ENCRYPTION){
                             decArray = receiveDecryptedArray(tmpArray);
@@ -822,13 +813,6 @@ public class EpcApp {
 
                         ue_ip = tmpArray[3];
 
-                        if(Constants.DEBUG){
-//                            System.out.println("DEFAULT SWITCH installing downlink rule on default switch dpid = "+dw_c_resp.getLong()+" inport="+Constants.ENODEB_SGW_PORT_MAP.get(dw_c_resp.getLong() + Constants.SEPARATOR + DatapathId.of(tmpArray2[0]).getLong())+
-//                                                       " in teid = " + Integer.parseInt(tmpArray[1]) +
-//                                                       " outPort = " + uePort + " out teid= " + Integer.parseInt(tmpArray[1]) + " of UE key = "+tmpArray[2]);
-                        }
-//                        insertDownlinkTunnelForwardRule(ApplicationId appId,FlowRuleService flowRuleService,DeviceId switchId,int intunId,int outPort,int outtunId,boolean isEgress)
-                        // fr.insertDownlinkTunnelForwardRule(false,appId, flowRuleService, deviceId,Integer.parseInt(tmpArray[1]), uePort,0,true);
 
                         /**************************** Downlink flow rules on DGW (DGW -> RAN) ***************************/
                         DeviceId DGWswitchName5 = Constants.getDgwswitchName(dw_c_resp);

@@ -3,15 +3,11 @@
  ***********************************************************************/
 package org.onosproject.p4tutorial.epc;
 
-
 import java.util.HashMap;
 import org.slf4j.Logger;
 import static org.slf4j.LoggerFactory.getLogger;
 import org.onosproject.net.DeviceId;
 import org.onlab.packet.IPv4;
-
-
-//import org.projectfloodlight.openflow.types.DatapathId;
 
 public class Constants {
 	private static final Logger log = getLogger(EpcApp.class);
@@ -29,7 +25,7 @@ public class Constants {
 
 	static final int FLOW_RULE_PRIORITY = 100;
 
-	static byte[] dstSinkIpAddr =  IPv4.toIPv4AddressBytes("192.168.4.5");
+	static byte[] dstSinkIpAddr =  IPv4.toIPv4AddressBytes("192.168.21.2");
 
         // final static int LB1 = 100; //Select SGW1 when UE KEY is between LB1 & UB1
         // final static int UB1 = 103; //101;
@@ -328,23 +324,6 @@ public class Constants {
 				put(Integer.toString(SGW_ID_42), new int[]{1,2}); // new int[]{SGW-INPORT, SGW-OUTPORT}
 			}};
 
-			@SuppressWarnings("serial")
-			final static HashMap<String, Integer> ENODEB_SGW_PORT_MAP = new HashMap<String, Integer>()
-			{{
-				//@vikas : 4chainsetup
-				// chain1 
-				put(DEFAULT_SWITCH_ID_1 + SEPARATOR + SGW_ID_11, 2);// for switch S2(SGW-1)  connected to S1(ENODEB) via port 2 of Default Switch
-				put(DEFAULT_SWITCH_ID_1 + SEPARATOR + SGW_ID_12, 3);// for switch S3(SGW-12) connected to S1(ENODEB) via port 3 of Default Switch
-				// chain2
-				put(DEFAULT_SWITCH_ID_2 + SEPARATOR + SGW_ID_21, 2);// for switch S5(SGW-21) connected to S2(ENODEB) via port 2 of Default Switch
-				put(DEFAULT_SWITCH_ID_2 + SEPARATOR + SGW_ID_22, 3);// for switch S6(SGW-22) connected to S2(ENODEB) via port 3 of Default Switch
-				// chain3
-				put(DEFAULT_SWITCH_ID_3 + SEPARATOR + SGW_ID_31, 2);// for switch S8(SGW-31) connected to S3(ENODEB) via port 2 of Default Switch
-				put(DEFAULT_SWITCH_ID_3 + SEPARATOR + SGW_ID_32, 3);// for switch S9(SGW-32) connected to S3(ENODEB) via port 3 of Default Switch
-				// chain4
-				put(DEFAULT_SWITCH_ID_4 + SEPARATOR + SGW_ID_41, 2);// for switch S11(SGW-41) connected to S4(ENODEB) via port 2 of Default Switch
-				put(DEFAULT_SWITCH_ID_4 + SEPARATOR + SGW_ID_42, 3);// for switch S12(SGW-42) connected to S4(ENODEB) via port 3 of Default Switch
-			}};
 
 
 //            getSgwDpid() fn can get "1", "s1", "s2", "s10", "12"

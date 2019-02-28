@@ -26,22 +26,38 @@ public class Constants {
 
 	static final int FLOW_RULE_PRIORITY = 100;
 
-	static byte[] dstSinkIpAddr =  IPv4.toIPv4AddressBytes("192.168.4.5");
+	static byte[] dstSinkIpAddr =  IPv4.toIPv4AddressBytes("192.168.21.2");
 
 	/***************************Configurable parameters**********************************/
-	//40:8d:5c:76:d2:67 UE MAC 00:16:3e:1f:c0:12 
-	//final static String UE_MAC = "00:16:3e:c6:a2:aa"; // MAC Address of UE/eNodeB Node  *
-	//final static String DEFAULT_GW_MAC = "00:16:3e:f7:4d:43"; //"12:b4:6f:db:03:28";//"00:16:3e:03:9d:5a"; // MAC Address of DGW int2 //1e:12:62:1d:67:a5     *
+	
+	//global chain
+	final static int UE_LB = 300; //push UE state to switches when UE KEY is between UE_LB & UE_UB
+	final static int UE_UB = 399;
+	
+	//chain1
+	final static int LB1 = 200; //Select SGW11 when UE KEY is between LB1 & UB1
+    final static int UB1 = 299; 
 
-	final static int UE_LB = 100; //push UE state to switches when UE KEY is between UE_LB & UE_UB
-	final static int UE_UB = 199;
+    final static int LB2 = 100; //Select SGW12 when UE KEY is between LB2 & UB2
+	final static int UB2 = 199;
+	//chain2	
+	final static int LB3 = 200; //Select SGW21 when UE KEY is between LB3 & UB3
+    final static int UB3 = 299; 
 
-	final static int LB1 = 100; //Select SGW1 when UE KEY is between LB1 & UB1
-	final static int UB1 = 199; //101;
+    final static int LB4 = 100; //Select SGW22 when UE KEY is between LB4 & UB4
+	final static int UB4 = 199;
+	// chain3 
+	final static int LB5 = 300; //Select SGW31 when UE KEY is between LB5 & UB5
+    final static int UB5 = 399; 
 
-	final static int LB2 = 200; //Select SGW2 when UE KEY is between LB2 & UB2
-	final static int UB2 = 299;
+    final static int LB6 = 400; //Select SGW32 when UE KEY is between LB6 & UB6
+	final static int UB6 = 499;
+	//chain4
+	final static int LB7 = 400; //Select SGW41 when UE KEY is between LB7 & UB7
+    final static int UB7 = 499; 
 
+    final static int LB8 = 500; //Select SGW42 when UE KEY is between LB8 & UB8
+    final static int UB8 = 599;
 
 	final static boolean OFFLOAD_ATTACH = true; //false; //True=> We wish to offload attach components to local controller
 	final static String SINK_MAC = "00:16:3e:de:0a:60"; //"00:16:3e:42:b9:ea"; // MAC Address of SINK Node //40:8d:5c:76:d2:fa    *
@@ -145,8 +161,6 @@ public class Constants {
 			final static String PGW_IP_5_UPLINK= "192.168.100.4";	// PGW
 			final static String PGW_IP_6_UPLINK= "192.168.100.6";	// PGW	
 			final static String PGW_IP_DOWNLINK = "192.168.4.4";
-			//final static String PGW_IP_UPLINK = "10.129.41.95";	// PGW							*
-			//final static String PGW_IP_DOWNLINK = "10.129.41.95";	// PGW						*
 			final static String SINK_IP = "192.168.4.5";	// SINK								*
 
 			// The starting IP address which is allocated to the first UE connecting to our		*
@@ -191,8 +205,8 @@ public class Constants {
 			final static String SINK_SERVICE_REQUEST = "23";
 			
 			final static String UE_CONTEXT_RELEASE_REQUEST_MISS = "24";
-                        final static String UE_SERVICE_REQUEST_MISS = "27";
-                        final static String INITIAL_CONTEXT_SETUP_RESPONSE_MISS = "29";
+            final static String UE_SERVICE_REQUEST_MISS = "27";
+            final static String INITIAL_CONTEXT_SETUP_RESPONSE_MISS = "29";
 
 			final static String MAPKEYSEPARATOR = "@#";
 			final static String STOREKEYSEPARATOR = "@@";
@@ -214,10 +228,6 @@ public class Constants {
 			
 			// DPID or unique ID of SGW switch (assuming only one sgw in the network)
 			//final static int SGW_DPID = 2;
-			/*final static int SGW_DPID_1 = 2;
-			final static int SGW_DPID_2 = 6;
-			final static int SGW_DPID_3 = 8;
-			final static int SGW_DPID_4 = 3;*/
 			
 			// boolean flags which control whether encryption and integrity checks needs to be performed or not.
 			static boolean DO_ENCRYPTION = false;
@@ -227,63 +237,67 @@ public class Constants {
 			final static int DEFAULT_SWITCH_ID_1 = 1;
 //			final static String DEFAULT_SWITCH_ID_1 = "s1";
 			final static int DEFAULT_SWITCH_ID_2 = 4;
-			final static int DEFAULT_SWITCH_ID_3 = 6;
-			final static int DEFAULT_SWITCH_ID_4 = 8;
-			final static int DEFAULT_SWITCH_ID_5 = 10;
-			final static int DEFAULT_SWITCH_ID_6 = 12;
+			final static int DEFAULT_SWITCH_ID_3 = 7;
+			final static int DEFAULT_SWITCH_ID_4 = 10;
+			final static int DEFAULT_SWITCH_ID_5 = 13;
+			final static int DEFAULT_SWITCH_ID_6 = 16;
 
 			final static int DGW_ID_1 = 1;
-//			final static String DEFAULT_SWITCH_ID_1 = "s1";
 			final static int DGW_ID_2 = 4;
-			final static int DGW_ID_3 = 6;
-			final static int DGW_ID_4 = 8;
-			final static int DGW_ID_5 = 10;
-			final static int DGW_ID_6 = 12;
+			final static int DGW_ID_3 = 7;
+			final static int DGW_ID_4 = 10;
+			final static int DGW_ID_5 = 13;
+			final static int DGW_ID_6 = 16;
 			
 			final static DeviceId DGW_NAME_1 = DeviceId.deviceId("device:bmv2:s1");
 			final static DeviceId DGW_NAME_2 = DeviceId.deviceId("device:bmv2:s4");
-			final static DeviceId DGW_NAME_3 = DeviceId.deviceId("device:bmv2:s6");
-			final static DeviceId DGW_NAME_4 = DeviceId.deviceId("device:bmv2:s8");
-			final static DeviceId DGW_NAME_5 = DeviceId.deviceId("device:bmv2:s10");
-			final static DeviceId DGW_NAME_6 = DeviceId.deviceId("device:bmv2:s12");	
+			final static DeviceId DGW_NAME_3 = DeviceId.deviceId("device:bmv2:s7");
+			final static DeviceId DGW_NAME_4 = DeviceId.deviceId("device:bmv2:s10");
+			final static DeviceId DGW_NAME_5 = DeviceId.deviceId("device:bmv2:s13");
+			final static DeviceId DGW_NAME_6 = DeviceId.deviceId("device:bmv2:s16");	
 			// DPID of SGW
-			final static int SGW_ID_1 = 2;
-			final static int SGW_ID_2 = 5;
-			final static int SGW_ID_3 = 7;
-			final static int SGW_ID_4 = 9;
-			final static int SGW_ID_5 = 11;
-			final static int SGW_ID_6 = 13;
+			// final static int SGW_ID_1 = 2;
+			// final static int SGW_ID_2 = 5;
+			// final static int SGW_ID_3 = 7;
+			// final static int SGW_ID_4 = 9;
+			// final static int SGW_ID_5 = 11;
+			// final static int SGW_ID_6 = 13;
 
-			final static DeviceId SGW_NAME_1 = DeviceId.deviceId("device:bmv2:s2");
-			final static DeviceId SGW_NAME_2 = DeviceId.deviceId("device:bmv2:s5");
-			final static DeviceId SGW_NAME_3 = DeviceId.deviceId("device:bmv2:s7");
-			final static DeviceId SGW_NAME_4 = DeviceId.deviceId("device:bmv2:s9");
-			final static DeviceId SGW_NAME_5 = DeviceId.deviceId("device:bmv2:s11");
-			final static DeviceId SGW_NAME_6 = DeviceId.deviceId("device:bmv2:s13");
+			final static int SGW_ID_11 = 2;
+			final static int SGW_ID_12 = 3;
+			final static int SGW_ID_21 = 5;
+			final static int SGW_ID_22 = 6;
+			final static int SGW_ID_31 = 8;
+			final static int SGW_ID_32 = 9;
+			final static int SGW_ID_41 = 11;
+			final static int SGW_ID_42 = 12;
 
+			// final static DeviceId SGW_NAME_1 = DeviceId.deviceId("device:bmv2:s2");
+			// final static DeviceId SGW_NAME_2 = DeviceId.deviceId("device:bmv2:s5");
+			// final static DeviceId SGW_NAME_3 = DeviceId.deviceId("device:bmv2:s7");
+			// final static DeviceId SGW_NAME_4 = DeviceId.deviceId("device:bmv2:s9");
+			// final static DeviceId SGW_NAME_5 = DeviceId.deviceId("device:bmv2:s11");
+			// final static DeviceId SGW_NAME_6 = DeviceId.deviceId("device:bmv2:s13");
 
-			//final static int SGW_ID = 0;
-			
-			// DPID of PGW
-			final static int PGW_ID = 4;
-			
-			// its the source port to be used by MME while sending UDP packets to UE
-			final static int DEFAULT_CONTROL_TRAFFIC_UDP_PORT = 9876;
+			// @vikas : in 4chain series setup we have 2 SGWs in 1 chain 
+			final static DeviceId SGW_NAME_11 = DeviceId.deviceId("device:bmv2:s2");
+			final static DeviceId SGW_NAME_12 = DeviceId.deviceId("device:bmv2:s3");
+			final static DeviceId SGW_NAME_21 = DeviceId.deviceId("device:bmv2:s5");
+			final static DeviceId SGW_NAME_22 = DeviceId.deviceId("device:bmv2:s6");
+			final static DeviceId SGW_NAME_31 = DeviceId.deviceId("device:bmv2:s8");
+			final static DeviceId SGW_NAME_32 = DeviceId.deviceId("device:bmv2:s9");
+			final static DeviceId SGW_NAME_41 = DeviceId.deviceId("device:bmv2:s11");
+			final static DeviceId SGW_NAME_42 = DeviceId.deviceId("device:bmv2:s12");
+
+			// DPID of PGW : since PGW switch is device:bmv2:s13
+			final static int PGW_ID = 13;
+
 
 			// Port of Default switch with which UE is connected
 			final static int DEFAULT_SWITCH_UE_PORT = 1;
 			
 			// Port of pgw with which sink is connected
-			final static int PGW_SINK_PORT = 7;  // SINK s3 connected on eth2 of PGW in container setup
-
-			//Controller IDs
-			final static int CONTROLLER_ID_ROOT = 1;
-			final static int CONTROLLER_ID_LOCAL_1 = 2;
-			final static int CONTROLLER_ID_LOCAL_2 = 3;
-			final static int CONTROLLER_ID_LOCAL_3 = 4;
-			final static int CONTROLLER_ID_LOCAL_4 = 5;
-			final static int CONTROLLER_ID_LOCAL_5 = 6;
-			final static int CONTROLLER_ID_LOCAL_6 = 7;
+			final static int PGW_SINK_PORT = 5;  // SINK s3 connected on eth5 of PGW in container setup
 			
 			// We have assumed there are two SGWs viz. SGW-1 and SGW-2 between our default switch and PGW.
 			// Note: One one SGW would also work, just the port number with with it is connected to default
@@ -291,79 +305,58 @@ public class Constants {
 			@SuppressWarnings("serial")
 			final static HashMap<String, Integer> PGW_SGW_PORT_MAP = new HashMap<String, Integer>()
 			{{
-				put(PGW_ID + SEPARATOR + SGW_ID_1, 1); // for switch S1(SGW-1) connected to S4(PGW) via port 1 of PGW
-				put(PGW_ID + SEPARATOR + SGW_ID_2, 2); // for switch S2(SGW-2) connected to S4(PGW) via port 1 of PGW
-				put(PGW_ID + SEPARATOR + SGW_ID_3, 3); // for switch S3(SGW-3) connected to S4(PGW) via port 1 of PGW
-				put(PGW_ID + SEPARATOR + SGW_ID_4, 4); // for switch S3(SGW-4) connected to S4(PGW) via port 1 of PGW
-				put(PGW_ID + SEPARATOR + SGW_ID_5, 5); // for switch S3(SGW-4) connected to S4(PGW) via port 1 of PGW
-				put(PGW_ID + SEPARATOR + SGW_ID_6, 6); // for switch S3(SGW-4) connected to S4(PGW) via port 1 of PGW
+				// put(PGW_ID + SEPARATOR + SGW_ID_1, 1); // for switch S1(SGW-1) connected to S4(PGW) via port 1 of PGW
+
+				put(PGW_ID + SEPARATOR + SGW_ID_11, 1); // for switch S2(SGW-11) connected to S13(PGW) via port 1 of PGW
+				put(PGW_ID + SEPARATOR + SGW_ID_12, 1); // for switch S3(SGW-12) connected to S13(PGW) via port 1 of PGW
+				put(PGW_ID + SEPARATOR + SGW_ID_21, 2); // for switch S5(SGW-21) connected to S13(PGW) via port 2 of PGW
+				put(PGW_ID + SEPARATOR + SGW_ID_22, 2); // for switch S6(SGW-22) connected to S13(PGW) via port 2 of PGW
+				put(PGW_ID + SEPARATOR + SGW_ID_31, 3); // for switch S8(SGW-31) connected to S13(PGW) via port 3 of PGW
+				put(PGW_ID + SEPARATOR + SGW_ID_32, 3); // for switch S9(SGW-32) connected to S13(PGW) via port  3 of PGW
+				put(PGW_ID + SEPARATOR + SGW_ID_41, 4); // for switch S11(SGW-41) connected to S13(PGW) via port 4 of PGW
+				put(PGW_ID + SEPARATOR + SGW_ID_42, 4); // for switch S12(SGW-42) connected to S13(PGW) via port 4 of PGW
 			}};
-//
 			@SuppressWarnings("serial")
-//			final static HashMap<DatapathId, int[]> SGW_PORT_MAP = new HashMap<DatapathId, int[]>()
 			final static HashMap<String, int[]> SGW_PORT_MAP = new HashMap<String, int[]>()
 			{{
-//				put(DatapathId.of(SGW_ID_1), new int[]{3,4}); // new int[]{SGW-INPORT, SGW-OUTPORT}
-				put(Integer.toString(SGW_ID_1), new int[]{1,2}); // new int[]{SGW-INPORT, SGW-OUTPORT}
-				put(Integer.toString(SGW_ID_2), new int[]{1,2}); // new int[]{SGW-INPORT, SGW-OUTPORT}
-				put(Integer.toString(SGW_ID_3), new int[]{1,2}); // new int[]{SGW-INPORT, SGW-OUTPORT}
-				put(Integer.toString(SGW_ID_4), new int[]{1,2}); // new int[]{SGW-INPORT, SGW-OUTPORT}
-				put(Integer.toString(SGW_ID_5), new int[]{1,2}); // new int[]{SGW-INPORT, SGW-OUTPORT}
-				put(Integer.toString(SGW_ID_6), new int[]{1,2}); // new int[]{SGW-INPORT, SGW-OUTPORT}
+				put(Integer.toString(SGW_ID_11), new int[]{1,2}); // new int[]{SGW-INPORT, SGW-OUTPORT}
+				put(Integer.toString(SGW_ID_12), new int[]{1,2}); // new int[]{SGW-INPORT, SGW-OUTPORT}
+				put(Integer.toString(SGW_ID_21), new int[]{1,2}); // new int[]{SGW-INPORT, SGW-OUTPORT}
+				put(Integer.toString(SGW_ID_22), new int[]{1,2}); // new int[]{SGW-INPORT, SGW-OUTPORT}
+				put(Integer.toString(SGW_ID_31), new int[]{1,2}); // new int[]{SGW-INPORT, SGW-OUTPORT}
+				put(Integer.toString(SGW_ID_32), new int[]{1,2}); // new int[]{SGW-INPORT, SGW-OUTPORT}
+				put(Integer.toString(SGW_ID_41), new int[]{1,2}); // new int[]{SGW-INPORT, SGW-OUTPORT}
+				put(Integer.toString(SGW_ID_42), new int[]{1,2}); // new int[]{SGW-INPORT, SGW-OUTPORT}
 			}};
 
-			//final static int UE_PORT = 3; //port with which default switch is connected to UE
 			@SuppressWarnings("serial")
 			final static HashMap<String, Integer> ENODEB_SGW_PORT_MAP = new HashMap<String, Integer>()
 			{{
-				put(DEFAULT_SWITCH_ID_1 + SEPARATOR + SGW_ID_1, 2);// @vikas : @modukar : @series SGW1_1 is connected to port 2 of DGW
-				put(DEFAULT_SWITCH_ID_1 + SEPARATOR + SGW_ID_2, 2);// , @vikas : @modular : @series SGW1_2 is connected to port 2 0f SGW1_1, hence SGW need to forward to port 2 itself
-				put(DEFAULT_SWITCH_ID_2 + SEPARATOR + SGW_ID_2, 2);// , 4// for switch S3(SGW-2) connected to S1(ENODEB) via port 4 of Default Switch
-				put(DEFAULT_SWITCH_ID_3 + SEPARATOR + SGW_ID_3, 2);// , 4// for switch S3(SGW-2) connected to S1(ENODEB) via port 4 of Default Switch
-				put(DEFAULT_SWITCH_ID_4 + SEPARATOR + SGW_ID_4, 2);// , 4// for switch S3(SGW-2) connected to S1(ENODEB) via port 4 of Default Switch
-				put(DEFAULT_SWITCH_ID_5 + SEPARATOR + SGW_ID_5, 2);// , 4// for switch S3(SGW-2) connected to S1(ENODEB) via port 4 of Default Switch
-				put(DEFAULT_SWITCH_ID_6 + SEPARATOR + SGW_ID_6, 2);// , 4// for switch S3(SGW-2) connected to S1(ENODEB) via port 4 of Default Switch
+				// put(DEFAULT_SWITCH_ID_1 + SEPARATOR + SGW_ID_1, 2);// @vikas : @modukar : @series SGW1_1 is connected to port 2 of DGW
+				// put(DEFAULT_SWITCH_ID_1 + SEPARATOR + SGW_ID_2, 2);// , @vikas : @modular : @series SGW1_2 is connected to port 2 0f SGW1_1, hence SGW need to forward to port 2 itself
+				// put(DEFAULT_SWITCH_ID_2 + SEPARATOR + SGW_ID_2, 2);// , 4// for switch S3(SGW-2) connected to S1(ENODEB) via port 4 of Default Switch
+				// put(DEFAULT_SWITCH_ID_3 + SEPARATOR + SGW_ID_3, 2);// , 4// for switch S3(SGW-2) connected to S1(ENODEB) via port 4 of Default Switch
+				// put(DEFAULT_SWITCH_ID_4 + SEPARATOR + SGW_ID_4, 2);// , 4// for switch S3(SGW-2) connected to S1(ENODEB) via port 4 of Default Switch
+				// put(DEFAULT_SWITCH_ID_5 + SEPARATOR + SGW_ID_5, 2);// , 4// for switch S3(SGW-2) connected to S1(ENODEB) via port 4 of Default Switch
+				// put(DEFAULT_SWITCH_ID_6 + SEPARATOR + SGW_ID_6, 2);// , 4// for switch S3(SGW-2) connected to S1(ENODEB) via port 4 of Default Switch
+
+				//@vikas : 4chainsetup
+				// chain1 
+				put(DEFAULT_SWITCH_ID_1 + SEPARATOR + SGW_ID_11, 2);// for switch S2(SGW-11)  connected to S1(ENODEB) via port 2 of Default Switch
+				put(DEFAULT_SWITCH_ID_1 + SEPARATOR + SGW_ID_12, 2);// for switch S3(SGW-12) connected to S1(ENODEB) via port 2 of Default Switch
+				// chain2
+				put(DEFAULT_SWITCH_ID_2 + SEPARATOR + SGW_ID_21, 2);// for switch S5(SGW-21) connected to S2(ENODEB) via port 2 of Default Switch
+				put(DEFAULT_SWITCH_ID_2 + SEPARATOR + SGW_ID_22, 2);// for switch S6(SGW-22) connected to S2(ENODEB) via port 2 of Default Switch
+				// chain3
+				put(DEFAULT_SWITCH_ID_3 + SEPARATOR + SGW_ID_31, 2);// for switch S8(SGW-31) connected to S3(ENODEB) via port 2 of Default Switch
+				put(DEFAULT_SWITCH_ID_3 + SEPARATOR + SGW_ID_32, 2);// for switch S9(SGW-32) connected to S3(ENODEB) via port 2 of Default Switch
+				// chain4
+				put(DEFAULT_SWITCH_ID_4 + SEPARATOR + SGW_ID_41, 2);// for switch S11(SGW-41) connected to S4(ENODEB) via port 2 of Default Switch
+				put(DEFAULT_SWITCH_ID_4 + SEPARATOR + SGW_ID_42, 2);// for switch S12(SGW-42) connected to S4(ENODEB) via port 2 of Default Switch
 			}};
 
 
-//            getSgwDpid() fn can get "1", "s1", "s2", "s10", "12"
-			public static String getSgwDpid(String dgw){
-				if(Constants.DEBUG) {
-					log.warn("in Constants.getSgwDpid dgw = {}", dgw);
-				}
-				String swid1 = "";
-				if(dgw.charAt(0)=='s'){
-					// means we get "s1", "s11" like switch numbers
-					// log.warn("got switch name ={}",dgw);
-					swid1=dgw.split("s")[1];
-
-				}
-				else{
-					// we got switch ID like "1", "2", "12"
-					// log.warn("got switch id ={}",dgw);
-					swid1 = dgw;
-				}
-
-
-                int swid = Integer.parseInt(swid1);
-                int sgw = 0 ;
-                if (swid==(Constants.DEFAULT_SWITCH_ID_1) )
-                    sgw = Constants.SGW_ID_1;
-                else if (swid==(Constants.DEFAULT_SWITCH_ID_2))
-					sgw =  Constants.SGW_ID_2;
-                else if (swid==(Constants.DEFAULT_SWITCH_ID_3))
-					sgw =  Constants.SGW_ID_3;
-                else if (swid==(Constants.DEFAULT_SWITCH_ID_4))
-					sgw =  Constants.SGW_ID_4;
-                else if (swid==(Constants.DEFAULT_SWITCH_ID_5))
-					sgw =  Constants.SGW_ID_5;
-                else if (swid==(Constants.DEFAULT_SWITCH_ID_6))
-					sgw =  Constants.SGW_ID_6;
-				return Integer.toString(sgw);
-			}
-
-
-//            getSgwDpid() fn can get "1", "s1", "s2", "s10", "12"
+//            getSgwDpidScale() fn can get "1", "s1", "s2", "s10", "12"
 			public static String getSgwDpidScale(String dgw, int key){
 					if(Constants.DEBUG) {
 							log.warn("in Constants.getSgwDpidScale dgw = {}", dgw);
@@ -373,7 +366,6 @@ public class Constants {
 							// means we get "s1", "s11" like switch numbers
 							// log.warn("got switch name ={}",dgw);
 							swid1=dgw.split("s")[1];
-
 					}
 					else{
 							// we got switch ID like "1", "2", "12"
@@ -383,57 +375,29 @@ public class Constants {
 
                 int swid = Integer.parseInt(swid1);
                 int sgw = 0 ;
-                if (swid==(Constants.DEFAULT_SWITCH_ID_1) && ((key >= Constants.LB1 && key <= Constants.UB1)))
-                    sgw = Constants.SGW_ID_1;
-                else if (swid==(Constants.DEFAULT_SWITCH_ID_1) && ((key >= Constants.LB2 && key <= Constants.UB2)))
-                    sgw = Constants.SGW_ID_2;
-                else if (swid==(Constants.DEFAULT_SWITCH_ID_2))
-                                        sgw =  Constants.SGW_ID_2;
-                else if (swid==(Constants.DEFAULT_SWITCH_ID_3))
-                                        sgw =  Constants.SGW_ID_3;
-                else if (swid==(Constants.DEFAULT_SWITCH_ID_4))
-                                        sgw =  Constants.SGW_ID_4;
-                else if (swid==(Constants.DEFAULT_SWITCH_ID_5))
-                                        sgw =  Constants.SGW_ID_5;
-                else if (swid==(Constants.DEFAULT_SWITCH_ID_6))
-                                        sgw =  Constants.SGW_ID_6;
-                                return Integer.toString(sgw);
-                        }
+				if (swid==(Constants.DEFAULT_SWITCH_ID_1) && ((key >= Constants.LB1 && key <= Constants.UB1)))
+				sgw = Constants.SGW_ID_11;
+				else if (swid==(Constants.DEFAULT_SWITCH_ID_1) && ((key >= Constants.LB2 && key <= Constants.UB2)))
+					sgw = Constants.SGW_ID_12;
+				
+				else if (swid==(Constants.DEFAULT_SWITCH_ID_2) && ((key >= Constants.LB3 && key <= Constants.UB3)))
+					sgw = Constants.SGW_ID_21;
+				else if (swid==(Constants.DEFAULT_SWITCH_ID_2) && ((key >= Constants.LB4 && key <= Constants.UB4)))
+					sgw = Constants.SGW_ID_22;
 
+				else if (swid==(Constants.DEFAULT_SWITCH_ID_3) && ((key >= Constants.LB5 && key <= Constants.UB5)))
+					sgw = Constants.SGW_ID_31;
+				else if (swid==(Constants.DEFAULT_SWITCH_ID_3) && ((key >= Constants.LB6 && key <= Constants.UB6)))
+					sgw = Constants.SGW_ID_32;
 
-			public static DeviceId getSgwswitchName(String dgw){
-				if(Constants.DEBUG) {
-					log.warn("in Constants.getSgwswitchName sgw = {}", dgw);
-				}
-				// int length = dgw.length();
-				String swid1 = "";
-				if(dgw.charAt(0)=='s'){
-					// means we get "s1", "s11" like switch numbers
-					//log.warn("got switch name ={}",dgw);
-					swid1=dgw.split("s")[1];
+				else if (swid==(Constants.DEFAULT_SWITCH_ID_4) && ((key >= Constants.LB7 && key <= Constants.UB7)))
+					sgw = Constants.SGW_ID_41;
+				else if (swid==(Constants.DEFAULT_SWITCH_ID_4) && ((key >= Constants.LB8 && key <= Constants.UB8)))
+					sgw = Constants.SGW_ID_42;
+			
+				return Integer.toString(sgw);
+            }
 
-				}
-				else{
-					// we got switch ID like "1", "2", "12"
-					//log.warn("got switch id ={}",dgw);
-					swid1 = dgw;
-				}
-				int swid = Integer.parseInt(swid1);
-				DeviceId sgwName = DeviceId.deviceId("") ;
-				if (swid==(Constants.DEFAULT_SWITCH_ID_1))
-					sgwName = Constants.SGW_NAME_1;
-				else if (swid==(Constants.DEFAULT_SWITCH_ID_2))
-					sgwName = Constants.SGW_NAME_2;
-				else if (swid==(Constants.DEFAULT_SWITCH_ID_3))
-					sgwName = Constants.SGW_NAME_3;
-				else if (swid==(Constants.DEFAULT_SWITCH_ID_4))
-					sgwName = Constants.SGW_NAME_4;
-				else if (swid==(Constants.DEFAULT_SWITCH_ID_5))
-					sgwName = Constants.SGW_NAME_5;
-				else if (swid==(Constants.DEFAULT_SWITCH_ID_6))
-					sgwName = Constants.SGW_NAME_6;
-				return 	sgwName;
-			}
 
 			public static DeviceId getSgwswitchNameScale(String dgw, int key){
 					if(Constants.DEBUG) {
@@ -445,7 +409,6 @@ public class Constants {
 							// means we get "s1", "s11" like switch numbers
 							//log.warn("got switch name ={}",dgw);
 							swid1=dgw.split("s")[1];
-
 					}
 					else{
 							// we got switch ID like "1", "2", "12"
@@ -455,19 +418,25 @@ public class Constants {
 					int swid = Integer.parseInt(swid1);
 					DeviceId sgwName = DeviceId.deviceId("") ;
 					if ((swid==(Constants.DEFAULT_SWITCH_ID_1)) && ((key >= Constants.LB1 && key <= Constants.UB1)) )
-							sgwName = Constants.SGW_NAME_1;
+								sgwName = Constants.SGW_NAME_11;
 					else if ((swid==(Constants.DEFAULT_SWITCH_ID_1)) && ((key >= Constants.LB2 && key <= Constants.UB2)) )
-							sgwName = Constants.SGW_NAME_2;
-					else if (swid==(Constants.DEFAULT_SWITCH_ID_2))
-							sgwName = Constants.SGW_NAME_2;
-					else if (swid==(Constants.DEFAULT_SWITCH_ID_3))
-							sgwName = Constants.SGW_NAME_3;
-					else if (swid==(Constants.DEFAULT_SWITCH_ID_4))
-							sgwName = Constants.SGW_NAME_4;
-					else if (swid==(Constants.DEFAULT_SWITCH_ID_5))
-							sgwName = Constants.SGW_NAME_5;
-					else if (swid==(Constants.DEFAULT_SWITCH_ID_6))
-							sgwName = Constants.SGW_NAME_6;
+							sgwName = Constants.SGW_NAME_12;
+
+					else if ((swid==(Constants.DEFAULT_SWITCH_ID_2)) && ((key >= Constants.LB3 && key <= Constants.UB3)) )
+							sgwName = Constants.SGW_NAME_21;
+					else if ((swid==(Constants.DEFAULT_SWITCH_ID_2)) && ((key >= Constants.LB4 && key <= Constants.UB4)) )
+							sgwName = Constants.SGW_NAME_22;
+
+					else if ((swid==(Constants.DEFAULT_SWITCH_ID_3)) && ((key >= Constants.LB5 && key <= Constants.UB5)) )
+							sgwName = Constants.SGW_NAME_31;
+					else if ((swid==(Constants.DEFAULT_SWITCH_ID_3)) && ((key >= Constants.LB6 && key <= Constants.UB6)) )
+							sgwName = Constants.SGW_NAME_32;
+
+					else if ((swid==(Constants.DEFAULT_SWITCH_ID_4)) && ((key >= Constants.LB7 && key <= Constants.UB7)) )
+							sgwName = Constants.SGW_NAME_41;
+					else if ((swid==(Constants.DEFAULT_SWITCH_ID_4)) && ((key >= Constants.LB8 && key <= Constants.UB8)) )
+							sgwName = Constants.SGW_NAME_42;
+
 					return  sgwName;
 			}
 			
@@ -492,25 +461,29 @@ public class Constants {
 				int swid = Integer.parseInt(swid1);
 				DeviceId sgwName = DeviceId.deviceId("") ;
 				if ((swid==(Constants.DEFAULT_SWITCH_ID_1)) && ((key >= Constants.LB1 && key <= Constants.UB1)) ){
-						sgwName = Constants.SGW_NAME_1;
-						lookup_flag = 1;
+					lookup_flag = 1;
 				}
-
 				else if ((swid==(Constants.DEFAULT_SWITCH_ID_1)) && ((key >= Constants.LB2 && key <= Constants.UB2)) ){
-					sgwName = Constants.SGW_NAME_2;
 					lookup_flag = 2;
-
 				}
-				else if (swid==(Constants.DEFAULT_SWITCH_ID_2))
-						sgwName = Constants.SGW_NAME_2;
-				else if (swid==(Constants.DEFAULT_SWITCH_ID_3))
-						sgwName = Constants.SGW_NAME_3;
-				else if (swid==(Constants.DEFAULT_SWITCH_ID_4))
-						sgwName = Constants.SGW_NAME_4;
-				else if (swid==(Constants.DEFAULT_SWITCH_ID_5))
-						sgwName = Constants.SGW_NAME_5;
-				else if (swid==(Constants.DEFAULT_SWITCH_ID_6))
-						sgwName = Constants.SGW_NAME_6;
+				else if (swid==(Constants.DEFAULT_SWITCH_ID_2)  && ((key >= Constants.LB3 && key <= Constants.UB3)) ){
+					lookup_flag = 1;
+				}
+				else if ((swid==(Constants.DEFAULT_SWITCH_ID_2)) && ((key >= Constants.LB4 && key <= Constants.UB4)) ){
+					lookup_flag = 2;
+				}
+				else if (swid==(Constants.DEFAULT_SWITCH_ID_3)  && ((key >= Constants.LB5 && key <= Constants.UB5)) ){
+					lookup_flag = 1;
+				}
+				else if ((swid==(Constants.DEFAULT_SWITCH_ID_3)) && ((key >= Constants.LB6 && key <= Constants.UB6)) ){
+					lookup_flag = 2;
+				}
+				else if (swid==(Constants.DEFAULT_SWITCH_ID_4)  && ((key >= Constants.LB7 && key <= Constants.UB7)) ){
+					lookup_flag = 1;
+				}
+				else if ((swid==(Constants.DEFAULT_SWITCH_ID_4)) && ((key >= Constants.LB8 && key <= Constants.UB8)) ){
+					lookup_flag = 2;
+				}
 				return  lookup_flag;
 			}
 
@@ -520,20 +493,21 @@ public class Constants {
 				String swid1 = sgw;  // assuming that switches will be from s1---s9 so char at position1 will give switchid which is an int
 				int swid = Integer.parseInt(swid1);
 				String dgw="";
-				if (swid==(Constants.SGW_ID_1))
+				if ( (swid==(Constants.SGW_ID_11)) || (swid==(Constants.SGW_ID_12)) ) 
 					dgw = Integer.toString(Constants.DEFAULT_SWITCH_ID_1);
-				else if (swid==(Constants.SGW_ID_2))
-					dgw = Integer.toString(Constants.DEFAULT_SWITCH_ID_1); //changed
-				else if (swid==(Constants.SGW_ID_3))
+				// chain2
+				else if ( (swid==(Constants.SGW_ID_21)) || (swid==(Constants.SGW_ID_22)) ) 
+					dgw = Integer.toString(Constants.DEFAULT_SWITCH_ID_2);
+				// chain3
+				else if ( (swid==(Constants.SGW_ID_31)) || (swid==(Constants.SGW_ID_32)) ) 
 					dgw = Integer.toString(Constants.DEFAULT_SWITCH_ID_3);
-				else if (swid==(Constants.SGW_ID_4))
+				// chain 4
+				else if ( (swid==(Constants.SGW_ID_41)) || (swid==(Constants.SGW_ID_42)) ) 
 					dgw = Integer.toString(Constants.DEFAULT_SWITCH_ID_4);
-				else if (swid==(Constants.SGW_ID_5))
-					dgw = Integer.toString(Constants.DEFAULT_SWITCH_ID_5);
-				else if (swid==(Constants.SGW_ID_6))
-					dgw = Integer.toString(Constants.DEFAULT_SWITCH_ID_6);
+
 				return dgw;
 			}
+
 			public static DeviceId getDgwswitchName(String dgw){
 				if(Constants.DEBUG) {
 					log.warn("in Constants.getDgwswitchName sgw = {}", dgw);
@@ -543,7 +517,6 @@ public class Constants {
 					// means we get "s1", "s11" like switch numbers
 					//log.warn("got switch name ={}",dgw);
 					swid1=dgw.split("s")[1];
-
 				}
 				else{
 					// we got switch ID like "1", "2", "12"
@@ -555,8 +528,8 @@ public class Constants {
 				if (swid==(Constants.DGW_ID_1))
 					sgwName = Constants.DGW_NAME_1;
 				else if (swid==(Constants.DGW_ID_2)){
-					//sgwName =Constants.DGW_NAME_2;
-					sgwName =Constants.DGW_NAME_1;
+					sgwName =Constants.DGW_NAME_2;
+					// sgwName =Constants.DGW_NAME_1;
 					}
 				else if (swid==(Constants.DGW_ID_3))
 					sgwName = Constants.DGW_NAME_3;
@@ -569,9 +542,8 @@ public class Constants {
 			// log.warn("in Constants.getDgwswitchName returning = {}", sgwName);
 				return 	sgwName;
 			}
-//			public static DatapathId getDgwDpidFromIp(String ip){
+
 			public static String getDgwDpidFromIp(String ip){
-//				DatapathId dgw = DatapathId.of(0);
 				String dgw = "";
 				if (ip.equals(Constants.RAN_IP_1))
 					dgw = Integer.toString(Constants.DEFAULT_SWITCH_ID_1);
@@ -594,22 +566,18 @@ public class Constants {
 //				String swid1 = Character.toString(sgw.charAt(1));  // assuming that switches will be from s1---s9 so char at position1 will give switchid which is an int
 				String swid1 = sgw;  // assuming that switches will be from s1---s9 so char at position1 will give switchid which is an int
 				int swid = Integer.parseInt(swid1);
-				if (swid==(Constants.SGW_ID_1))
+				// @vikas : @modular 4chain : in case of series code both SGW1_1 and SGW1_2 are part of chain 1 so returning 0 in case of SGW_ID_2 as well.
+				if ( (swid==(Constants.SGW_ID_11)) ||  (swid==(Constants.SGW_ID_12)) )
 					return 0;
-				else if (swid==(Constants.SGW_ID_2))
-                                    	// @vikas : @modular : in case of parallel code both SGW1_1 and SGW1_2 are part of chain 1 so returning 0 in case of SGW_ID_2 as well.
-					return 0;
-				else if (swid==(Constants.SGW_ID_3))
+				else if ( (swid==(Constants.SGW_ID_21)) ||  (swid==(Constants.SGW_ID_22)) )
+					return 1;
+				else if ( (swid==(Constants.SGW_ID_31)) ||  (swid==(Constants.SGW_ID_32)) )
 					return 2;
-				else if (swid==(Constants.SGW_ID_4))
+				else if ( (swid==(Constants.SGW_ID_41)) ||  (swid==(Constants.SGW_ID_42)) )
 					return 3;
-				else if (swid==(Constants.SGW_ID_5))
-					return 4;
-				else if (swid==(Constants.SGW_ID_6))
-					return 5;
 				else
-					if(DEBUG)
-						System.out.println("GOT INVALID SGW DPID!!!");
+					// if(DEBUG)
+						log.warn("GOT INVALID SGW DPID!!!");
 					return 0;
 			}
 
@@ -626,79 +594,16 @@ public class Constants {
 					return 2;
 				else if (swid==(Constants.DEFAULT_SWITCH_ID_4))
 					return 3;
-				else if (swid==(Constants.DEFAULT_SWITCH_ID_5))
-					return 4;
-				else if (swid==(Constants.DEFAULT_SWITCH_ID_6))
-					return 5;
+				// else if (swid==(Constants.DEFAULT_SWITCH_ID_5))
+				// 	return 4;
+				// else if (swid==(Constants.DEFAULT_SWITCH_ID_6))
+				// 	return 5;
 				else
-					if(DEBUG)
+					// if(DEBUG)
 						log.info("GOT INVALID DGW DPID!!!");
 					return 0;
 			}
 
-
-//			public static String getSgwIpDownlink(DatapathId dgw){
-			public static String getSgwIpDownlink(String dgw){
-				String ip = "";
-				String swid1 = ""; 
-				if(dgw.charAt(0)=='s'){
-					// means we get "s1", "s11" like switch numbers
-					// log.warn("getSgwIpDownlink got switch name ={}",dgw);
-					swid1=dgw.split("s")[1];
-
-				}
-				else{
-					// we got switch ID like "1", "2", "12"
-					// log.warn("getSgwIpDownlink got switch id ={}",dgw);
-					swid1 = dgw;
-				}
-				int swid = Integer.parseInt(swid1);
-				if (swid==(Constants.DEFAULT_SWITCH_ID_1))
-					ip = Constants.SGW_IP_1_DOWNLINK;
-				else if (swid==(Constants.DEFAULT_SWITCH_ID_2))
-					ip = Constants.SGW_IP_2_DOWNLINK;
-				else if (swid==(Constants.DEFAULT_SWITCH_ID_3))
-					ip = Constants.SGW_IP_3_DOWNLINK;
-				else if (swid==(Constants.DEFAULT_SWITCH_ID_4))
-					ip = Constants.SGW_IP_4_DOWNLINK;
-				else if (swid==(Constants.DEFAULT_SWITCH_ID_5))
-					ip = Constants.SGW_IP_6_DOWNLINK;
-				else if (swid==(Constants.DEFAULT_SWITCH_ID_6))
-					ip = Constants.SGW_IP_6_DOWNLINK;
-				return ip;
-			}
-
-			public static String getPgwIpUplink(String sgw){
-                // int length = sgw.length();
-				String swid1 = "";
-				if(sgw.charAt(0)=='s'){
-					// means we get "s1", "s11" like switch numbers
-					//log.warn("got switch name ={}",sgw);
-					swid1=sgw.split("s")[1];
-
-				}
-				else{
-					// we got switch ID like "1", "2", "12"
-					//log.warn("got switch id ={}",sgw);
-					swid1 = sgw;
-				}
-                int swid = Integer.parseInt(swid1);
-
-				String ip = "";
-				if (swid == SGW_ID_1)
-					ip = Constants.PGW_IP_1_UPLINK;
-				else if (swid == SGW_ID_2)
-                    ip = Constants.PGW_IP_2_UPLINK;
-                else if (swid == SGW_ID_3)
-                    ip = Constants.PGW_IP_3_UPLINK;
-                else if (swid == SGW_ID_4)
-                    ip = Constants.PGW_IP_4_UPLINK;
-                else if (swid == SGW_ID_5)
-                    ip = Constants.PGW_IP_5_UPLINK;
-                else if (swid == SGW_ID_6)
-                    ip = Constants.PGW_IP_6_UPLINK;
-				return ip;
-			}
 
 			@SuppressWarnings("serial")
 			final static HashMap<String, Integer> CIPHER_ALGO_MAP = new HashMap<String, Integer>()	
