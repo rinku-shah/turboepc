@@ -375,8 +375,8 @@ void* multithreading_func(void *arg){
 					checkIntegrity_t = false;
 					ueServiceRequest_t = true;
 					dataTime = 1;
-					loop1 = 97;    //outer loop---attach
-					loop2 = 3;   //inner loop---service-req
+					loop1 = 1;    //outer loop---attach
+					loop2 = 99;   //inner loop---service-req
 					break;
 
 			/* att-serv-req-data-loop2-det*/
@@ -406,7 +406,7 @@ void* multithreading_func(void *arg){
 			gettimeofday(&start, NULL);
 			//usleep(my_rand()+2000);
 			// usleep(200000);
-			usleep(25000);
+			usleep(my_rand()+25000);
 			if(attach_with_mme(ue, user, checkIntegrity_t)){ 	// Authentication
 				//if(setUpTunnel_t || serviceRequestLoopFlag){
 					// Setup tunnel
@@ -469,7 +469,7 @@ void* multithreading_func(void *arg){
 						if(s1_release_t){
 							//cout<<"SLEEPING BEFORE s1 release"<<endl;
 							//usleep(my_rand()+2000);		//200-700 usec
-							usleep(25000);
+							usleep(my_rand()+25000);
 							//sreqNo++;
 							gettimeofday(&start2, NULL);
 							ue_context_release(ue, user, ue_num, tmpArray[1], tmpArray[2], tmpArray[3], currentPort, networkServiceRequest);
@@ -514,7 +514,7 @@ void* multithreading_func(void *arg){
 								//cout<<"SLEEPING BEFORE service request"<<endl;
 								//usleep(my_rand());
 								//usleep(my_rand()+2000);
-								usleep(25000);
+								usleep(my_rand()+25000);
 								//usleep(my_rand()+2000);
 								gettimeofday(&start2, NULL);
 								tmpArray[3] = ue_service_request(ue, user, ue_num, tmpArray[1]); //returns newly generated ue_teid
@@ -569,7 +569,7 @@ void* multithreading_func(void *arg){
 						if(!s1_release_t && !sendData_t)
 							usleep(my_rand()+2000);
 						att_done=false;
-						usleep(25000);
+						usleep(my_rand()+25000);
 						gettimeofday(&start3, NULL);
 						detach_ue(ue, user, ue_num, tmpArray[1], tmpArray[2], tmpArray[3]);
 						// sleep(300);

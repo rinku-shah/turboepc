@@ -79,7 +79,7 @@ int my_rand(){
   srand (time(NULL));
 
   /* generate secret number between 1 and 1000: */
-  num = rand() % 200 + 1;
+  num = rand() % 20 + 1;
   //num = num + 400;
   //num = 900;
   //num = 1200;
