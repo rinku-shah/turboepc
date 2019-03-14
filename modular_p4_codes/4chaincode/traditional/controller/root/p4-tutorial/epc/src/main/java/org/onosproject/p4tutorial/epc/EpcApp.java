@@ -880,6 +880,8 @@ public class EpcApp {
                             log.info("Inside case SEND_APN");
                             log.warn("array1[2] = {}",array1[2]); //hardcoding  array1[2] contains switches  like "s1", "s2" etc
                             log.warn("dgw_dpId = {}",dgw_dpId); //hardcoding  array1[2] contains switches  like "s1", "s2" etc
+                            log.warn("tmpArray[1] =  {}",tmpArray[1]); 
+                            log.warn("tmpArray[2] =  {}",tmpArray[2]); 
                             step = 3;
                             d1 = d2 = null;
                             d1 = new Date();
@@ -895,7 +897,8 @@ public class EpcApp {
                         // storing src port of udp packet to identify the specific UE, when MME wants to initiate connection with this UE.
                         FT.put(Integer.parseInt(Constants.SEND_APN),dgw_dpId, "uekey_udp_src_port_map", tmpArray[2], Integer.toString(udp_srcport));
 
-                        String pgw_dpId = hss.getPGateway(tmpArray[1]);  // returns 4 for all apn
+                        String pgw_dpId = hss.getPGateway(tmpArray[1]);  // returns 13 for all apn
+			//log.info("pgw_dpid = {}",pgw_dpId);
                         /********************* defaultSwitch is DGW ******************************/
 //                        String sgw_dpId = DatapathId.of(Constants.getSgwDpid(defaultSwitch));
                         String sgw_dpId = Constants.getSgwDpid(dgw_dpId);

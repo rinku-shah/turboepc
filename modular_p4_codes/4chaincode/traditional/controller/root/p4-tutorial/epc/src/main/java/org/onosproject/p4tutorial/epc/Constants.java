@@ -232,13 +232,16 @@ public class Constants {
 			final static DeviceId SGW_NAME_4 = DeviceId.deviceId("device:bmv2:s9");
 			final static DeviceId SGW_NAME_5 = DeviceId.deviceId("device:bmv2:s11");
 			final static DeviceId SGW_NAME_6 = DeviceId.deviceId("device:bmv2:s13");
+			
+
+			final static DeviceId PGW_Switch_Name =  DeviceId.deviceId("device:bmv2:s13");
 
 
 	//final static int DEFAULT_SWITCH_ID = 0;
 			//final static int SGW_ID = 0;
 			
 			// DPID of PGW
-			final static int PGW_ID = 4;
+			final static int PGW_ID = 13;
 			
 			// its the source port to be used by MME while sending UDP packets to UE
 			final static int DEFAULT_CONTROL_TRAFFIC_UDP_PORT = 9876;
