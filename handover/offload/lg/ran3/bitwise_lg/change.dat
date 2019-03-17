@@ -1,0 +1,4 @@
+ran.cpp
+Client user(threadId+2), sink_user(threadId+2);
+UserEquipment ue(threadId+2);
+args->starting_ue_id = 2 + i * gap;

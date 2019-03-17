@@ -1,0 +1,28 @@
+COMPILE_DEPS = [
+    '//lib:CORE_DEPS',
+    '//lib:minimal-json',
+    '//protocols/p4runtime/model:onos-protocols-p4runtime-model',
+    '//drivers/default:onos-drivers-default',
+    '//protocols/p4runtime/api:onos-protocols-p4runtime-api',
+]
+
+osgi_jar (
+    deps = COMPILE_DEPS,
+)
+
+BUNDLES = [
+    '//apps/p4-tutorial/pipeconf_pgw:onos-apps-p4-tutorial-pipeconf_pgw',
+]
+
+onos_app (
+    app_name = 'org.onosproject.p4tutorial.pipeconf_pgw',
+    title = 'P4 Tutorial Pipeconf for PGW switch',
+    category = 'Pipeconf',
+    url = 'http://onosproject.org',
+    description = 'Provides pipeconf for the EpcApp for PGW switch',
+    included_bundles = BUNDLES,
+    required_apps = [
+        'org.onosproject.drivers.p4runtime',
+    ]
+)
+

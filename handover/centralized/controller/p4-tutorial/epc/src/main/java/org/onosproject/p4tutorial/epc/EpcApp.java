@@ -1,4 +1,4 @@
-/*
+    /*
  * Copyright 2017-present Open Networking Foundation
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -120,9 +120,7 @@ public class EpcApp {
     // Default priority used for flow rules installed by this app.
     private static final int FLOW_RULE_PRIORITY = 100;
 
-//    private final HostListener hostListener = new InternalHostListener();
     private ApplicationId appId;
-//    private AtomicInteger nextTunnelId = new AtomicInteger();
 
     private static final Logger log = getLogger(EpcApp.class);
 
@@ -138,9 +136,6 @@ public class EpcApp {
 
     @Reference(cardinality = ReferenceCardinality.MANDATORY_UNARY)
     private TopologyService topologyService;
-
-    // @Reference(cardinality = ReferenceCardinality.MANDATORY_UNARY)
-    // private HostService hostService;
 
     @Reference(cardinality = ReferenceCardinality.MANDATORY_UNARY)
     protected PacketService packetService;
@@ -161,7 +156,6 @@ public class EpcApp {
         packetService.addProcessor(processor, PacketProcessor.director(2));
         requestIntercepts();
         
-//        hostService.addListener(hostListener);
         log.info("STARTED EpcApp...", appId.id());
     }
 
@@ -170,7 +164,6 @@ public class EpcApp {
         // Remove listeners and clean-up flow rules.
         log.info("Stopping...");
         withdrawIntercepts();
-//        hostService.removeListener(hostListener);
         flowRuleService.removeFlowRulesById(appId);
         packetService.removeProcessor(processor);
         processor = null;
@@ -261,35 +254,25 @@ public class EpcApp {
                 .matchTernary(epcCode, epc_code,PORTMASK)
                 .build();
         packetService.requestPackets(selector.matchPi(match).build(), PacketPriority.REACTIVE, appId);
+
+        epc_code = 54; //UE_CONTEXT_RELEASE_REQUEST_HO
+        match = PiCriterion.builder()
+                .matchTernary(epcCode, epc_code,PORTMASK)
+                .build();
+        packetService.requestPackets(selector.matchPi(match).build(), PacketPriority.REACTIVE, appId);
+
+        epc_code = 57; //UE_SERVICE_REQUEST_HO
+        match = PiCriterion.builder()
+                .matchTernary(epcCode, epc_code,PORTMASK)
+                .build();
+        packetService.requestPackets(selector.matchPi(match).build(), PacketPriority.REACTIVE, appId);
+
+        epc_code = 59; //INITIAL_CONTEXT_SETUP_RESPONSE_HO
+        match = PiCriterion.builder()
+                .matchTernary(epcCode, epc_code,PORTMASK)
+                .build();
+        packetService.requestPackets(selector.matchPi(match).build(), PacketPriority.REACTIVE, appId);
         
-        // byte[] dstIpAddr =  IPv4.toIPv4AddressBytes("192.168.1.2");
-        // PiMatchFieldId ipDestMatchFieldId = PiMatchFieldId.of("hdr.ipv4.dstAddr");
-
-        // PiCriterion match = PiCriterion.builder()
-        //         .matchLpm(ipDestMatchFieldId, dstIpAddr, 32)
-        //         .build();
-        // packetService.requestPackets(selector.matchPi(match).build(), PacketPriority.REACTIVE, appId);
-
-        // dstIpAddr =  IPv4.toIPv4AddressBytes("192.168.5.2");
-        
-        // match = PiCriterion.builder()
-        //         .matchLpm(ipDestMatchFieldId, dstIpAddr, 32)
-        //         .build();
-        // packetService.requestPackets(selector.matchPi(match).build(), PacketPriority.REACTIVE, appId);
-
-        // dstIpAddr =  IPv4.toIPv4AddressBytes("192.168.7.2");
-
-        // match = PiCriterion.builder()
-        //         .matchLpm(ipDestMatchFieldId, dstIpAddr, 32)
-        //         .build();
-        // packetService.requestPackets(selector.matchPi(match).build(), PacketPriority.REACTIVE, appId);
-
-        // dstIpAddr =  IPv4.toIPv4AddressBytes("192.168.11.2");
-
-        // match = PiCriterion.builder()
-        //         .matchLpm(ipDestMatchFieldId, dstIpAddr, 32)
-        //         .build();
-        // packetService.requestPackets(selector.matchPi(match).build(), PacketPriority.REACTIVE, appId);
     }
     /**
      * Cancel request for packet in via packet service.
@@ -362,7 +345,6 @@ public class EpcApp {
                 log.warn("srcMACAddres = {}", srcMac);
                 log.warn("dstMACAddres = {}", dstMac);
             }
-//            log.warn("srcMACAddres = {}",dstMac.getClass().getName());     // gives org.onlab.packet.MacAddress
 
 
             //parse the incoming packet as IP packet
@@ -401,18 +383,12 @@ public class EpcApp {
 
                  DGW_IPAddr = ipv4Packet.fromIPv4Address(ipv4SourceAddress);  // returns string IP of DGW_IPAddr
 
-                //    log.warn("ipv4srcAddres = {}", matchIp4SrcPrefix);
-                //    log.warn("ipv4dstAddres = {}", matchIp4DstPrefix);
-
-
-
-//            log.warn("ipv4srcAddrestype = {}",matchIp4SrcPrefix.getClass().getName());  // gives org.onlab.packet.Ip4Prefix
                 if(Constants.DEBUG) {
-                   log.warn("ipv4srcAddres = {}", matchIp4SrcPrefix);
-                   log.warn("ipv4dstAddres = {}", matchIp4DstPrefix);
-//                    log.warn("ipv4Packet class = {}",ipv4Packet.getClass().getName());
-//                    log.warn("ipv4SourceAddress value = {}",ipv4SourceAddress);
-//                    log.warn("dstip clas = {}",dstip.getClass().getName());
+                    log.warn("ipv4srcAddres = {}", matchIp4SrcPrefix);
+                    log.warn("ipv4dstAddres = {}", matchIp4DstPrefix);
+                    log.warn("ipv4Packet class = {}",ipv4Packet.getClass().getName());
+                    log.warn("ipv4SourceAddress value = {}",ipv4SourceAddress);
+                    log.warn("dstip clas = {}",dstip.getClass().getName());
                 }
 
 
@@ -460,34 +436,20 @@ public class EpcApp {
                 
 
             ByteBuffer bb = ByteBuffer.wrap(((Data)final_payload).getData());
-            // int first = bb.getShort(); //pull off a 16 bit short (1, 5)
-            // int second = bb.get(); //pull off the next byte (5)
-            // log.warn("msg id  = {}",second);
-            // String third = Integer.toString(bb.getInt()); //pull off the next 32 bit int (0, 1, 0, 5)
-            // log.warn("sep = {}",third);
-            // System.out.println(first + " " + second + " " + third);
             payload = new String((((Data)final_payload).getData()),  Charset.forName("UTF-8"));
             if (ethPkt == null) {
                 return;
             }
             else{
-//                log.warn("Packet contains !!!!! {}",ethPkt.toString());
                 // if(Constants.DEBUG) {
                 if(Constants.DEBUG) {
+                    // log.warn("Packet contains !!!!! {}",ethPkt.toString());
                     log.warn(" {}", ipheader);
                     log.warn(" {}", tcp_udp_header);
                     log.warn("Packet payload = {}",payload);
 
                 }
-                // returns org.onlab.packet.Data as type of final_payload
-                // final_payload is ASCII encoded bytearray
-//                log.warn("Packet contains ????? {}",final_payload.getClass().getName());    // gives org.onlab.packet.Data
             }
-            
-
-            // how to parse packet payload??
-    
-
 
             @SuppressWarnings("unused")
             String tmpArray[], tmpArray2[], decArray[], NAS_Keys[];
@@ -501,7 +463,6 @@ public class EpcApp {
             /************************************************************************************/
 
             if(payload.contains(Constants.SEPARATOR)){
-		//Arrays.fill(tmpArray, null);
                 tmpArray = payload.split(Constants.SEPARATOR);
                 Date d1 = null, d2 = null;
                 int step = 0;
@@ -514,7 +475,6 @@ public class EpcApp {
                     
                     case Constants.REQUEST_STARTING_IP:
                         if(Constants.DEBUG){
-//                            System.out.println("Inside case REQUEST_STARTING_IP");
                             log.warn("Inside case REQUEST_STARTING_IP");
                             log.warn("Request Starting IP address from PGW via SGW");
                             step = 6;
@@ -537,7 +497,6 @@ public class EpcApp {
                             log.warn("Response to send = {}",response);
                         }
 
-//                        sendPacket(sw, inPort, destMac, sourceMac, dstIp, srcIp,  IpProtocol.UDP, dstPort, srcPort, response.toString());
                         build_response_pkt(connectPoint,srcMac,dstMac,ipv4Protocol,ipv4SourceAddress,udp_dstport,udp_srcport,response.toString());
 
                         response = null;
@@ -547,7 +506,6 @@ public class EpcApp {
 
                     case Constants.AUTHENTICATION_STEP_ONE:
                         if(Constants.DEBUG){
-//                            System.out.println("Inside case AUTHENTICATION_STEP_ONE");
                             log.info("Inside case AUTHENTICATION_STEP_ONE");
                             step = 1;
                             d1 = d2 = null;
@@ -619,18 +577,6 @@ public class EpcApp {
                             Date d4 = new Date();
                             timeDiff(d3, d4, 11);
                         } 
-                        /*if(payload != null && payload.contains(Constants.SEPARATOR)){
-								tmpArray2 = payload.split(Constants.SEPARATOR);
-								// tmpArray2[0]: xres, tmpArray2[1]: autn, tmpArray2[2]: rand, tmpArray2[3]: K_ASME
-								xres = tmpArray2[0];
-								autn = tmpArray2[1];
-								rand = tmpArray2[2];
-								K_ASME = tmpArray2[3];*/
-							
-								/*xres = av.xres;
-								autn = av.autn;
-								rand = av.rand;
-								K_ASME = av.kasme;*/
                             if(Constants.DEBUG){
                                 System.out.println("INITIAL imsi="+imsi+" msisdn="+ ue_nw_capability);
                             }
@@ -655,16 +601,7 @@ public class EpcApp {
                             KSI_ASME = "1";
                             //System.out.println("Rand="+rand+" AUTN="+autn+" K_ASME="+K_ASME);
                             response = new StringBuilder();
-                            /*response.append(Constants.AUTHENTICATION_STEP_TWO).append(Constants.SEPARATOR).append(strTohex(rand, 16)).append(Constants.SEPARATOR);
-                            response.append(strTohex(autn, 16));
-                            response.append(Constants.SEPARATOR).append(strTohex(K_ASME,32));*/
-                            
-                            /*StringBuilder randS = new StringBuilder();
-                            System.out.print("RAND INT ARRAY: ");
-                            for(int j=0; j<16;j++){
-                                randS.append(rand[j]).append(Constants.SEPARATOR);
-                            }
-                            System.out.println(randS);*/
+                           
                             StringBuilder randS = new StringBuilder();
                             for(int j=0; j<16;j++){
                                 if(j !=15){
@@ -682,11 +619,7 @@ public class EpcApp {
                                     autnS.append(av.autn[j]);
                                 }
                             }
-                            //System.out.println("autnS= "+ autnS);
-                            /*response.append(Constants.AUTHENTICATION_STEP_TWO).append(Constants.SEPARATOR).append(rand.toString()).append(Constants.SEPARATOR);
-                            response.append(autn.toString());
-                            response.append(Constants.SEPARATOR).append(K_ASME.toString());*/
-                            
+                           
                             response.append(Constants.AUTHENTICATION_STEP_TWO).append(Constants.SEPARATOR).append(randS).append(Constants.SEPARATOR);
                             response.append(autnS);
                             response.append(Constants.SEPARATOR).append(KSI_ASME).append("") ; //K_ASME
@@ -694,54 +627,10 @@ public class EpcApp {
                             if(Constants.DEBUG){
                                 System.out.println(response.toString());
                             }
-                            /*response = new StringBuilder();
-                            response.append(Constants.AUTHENTICATION_STEP_TWO).append(Constants.SEPARATOR).append("1234").append(Constants.SEPARATOR);
-                            response.append("1234");
-                            response.append(Constants.SEPARATOR).append("1");*/
-                            // sendPacket(sw, inPort, destMac, sourceMac, dstIp, srcIp, IpProtocol.UDP, dstPort, srcPort, response.toString());
+                           
                             build_response_pkt(connectPoint,srcMac,dstMac,ipv4Protocol,ipv4SourceAddress,udp_dstport,udp_srcport,response.toString());
                             response = null;
-                        /*}else{
-                            System.out.println("ERROR:: STEP ONE AUTHENTICATION failure with imsi="+imsi+" and msisdn="+ue_nw_capability+" temp="+payload);
-                            sendPacket(sw, inPort, destMac, sourceMac, dstIp, srcIp,  IpProtocol.UDP, dstPort, srcPort, Constants.AUTHENTICATION_FAILURE);
-                            //System.exit(1);
-                        }*/
-                        
-                                                        //                         if(Constants.DEBUG){
-                                                        //                             log.warn("got payload from HSS = {}",payload);
-                                                        //                             Date d4 = new Date();
-                                                        //                             timeDiff(d3, d4, 11);
-                                                        //                         }
-
-                                                        //                         if(payload != null && payload.contains(Constants.SEPARATOR)){
-                                                        //                             tmpArray2 = payload.split(Constants.SEPARATOR);
-                                                        //                             // tmpArray2[0]: xres, tmpArray2[1]: autn, tmpArray2[2]: rand, tmpArray2[3]: K_ASME
-                                                        //                             xres = tmpArray2[0];
-                                                        //                             autn = tmpArray2[1];
-                                                        //                             rand = tmpArray2[2];
-                                                        //                             K_ASME = tmpArray2[3];
-                                                        //                             if(Constants.DEBUG){
-                                                        //                                 log.warn("INITIAL imsi = {}",imsi);
-                                                        //                                 log.warn(" msisdn = {}", ue_nw_capability);
-                                                        //                             }
-                                                        //                             imsi_xres_mapping.put(imsi, xres);
-                                                        //                             uekey_nas_keys_map.put(imsi, new String[]{K_ASME, "", ""});
-                                                        //                             KSI_ASME = "1";
-                                                        //                             response = new StringBuilder();
-                                                        //                             response.append(Constants.AUTHENTICATION_STEP_TWO).append(Constants.SEPARATOR).append(rand).append(Constants.SEPARATOR);
-                                                        //                             response.append(autn);
-                                                        //                             response.append(Constants.SEPARATOR).append(KSI_ASME);
-                                                        // //                            sendPacket(sw, inPort, destMac, sourceMac, dstIp, srcIp, IpProtocol.UDP, dstPort, srcPort, response.toString());
-                                                        //                             build_response_pkt(connectPoint,srcMac,dstMac,ipv4Protocol,ipv4SourceAddress,udp_dstport,udp_srcport,response.toString());
-                                                        //                             response = null;
-                                                        //                         }else{
-                                                        //                             log.warn("ERROR:: STEP ONE AUTHENTICATION failure with imsi={}",imsi);
-                                                        //                             log.warn(" and msisdn={}",ue_nw_capability);
-                                                        //                             log.warn(" temp = {}",payload);
-                                                        // //                            sendPacket(sw, inPort, destMac, sourceMac, dstIp, srcIp,  IpProtocol.UDP, dstPort, srcPort, Constants.AUTHENTICATION_FAILURE);
-                                                        //                             build_response_pkt(connectPoint,srcMac,dstMac,ipv4Protocol,ipv4SourceAddress,udp_dstport,udp_srcport,Constants.AUTHENTICATION_FAILURE);
-                                                        //                             //System.exit(1);
-                                                        //                         }
+                      
                         if(Constants.DEBUG)
                             d2 = new Date();
                         break;
@@ -812,14 +701,12 @@ public class EpcApp {
                                 // K_ASME = uekey_nas_keys_map.get(imsi)[0];
 								k = uekey_nas_keys_map.get(imsi)[0];
 
-                                // String NAS_keys[] = KDF_NAS(Integer.parseInt(K_ASME), NAS_integrity_algo_id, NAS_cipher_algo_id);		// NAS_keys[0]: Integrity key K_NAS_int, NAS_keys[1]: Encryption key K_NAS_enc
                                 String NAS_keys[] = KDF_NAS(k, NAS_integrity_algo_id, NAS_cipher_algo_id);		// NAS_keys[0]: Integrity key K_NAS_int, NAS_keys[1]: Encryption key K_NAS_enc
 
                                 if(Constants.DEBUG){
                                     log.warn("AUTHENTICATION_STEP_THREE: INT_KEY= {}", NAS_keys[0]);
                                     log.warn(" ENC_KEY = {}", NAS_keys[1]);
                                 }
-                                // uekey_nas_keys_map.put(imsi, new String[]{K_ASME, NAS_keys[0], NAS_keys[1]});
 								uekey_nas_keys_map.put(imsi, new String[]{k, NAS_keys[0], NAS_keys[1]});
 
                                 response = new StringBuilder();
@@ -830,7 +717,6 @@ public class EpcApp {
                                     log.warn("AUTHENTICATION_STEP_THREE: Generated NAS MAC= {}", NAS_MAC);
                                 }
                                 response.append(Constants.SEPARATOR).append(NAS_MAC).append("") ;
-//                                sendPacket(sw, inPort, destMac, sourceMac, dstIp, srcIp,  IpProtocol.UDP, dstPort, srcPort, response.toString());
                                 build_response_pkt(connectPoint,srcMac,dstMac,ipv4Protocol,ipv4SourceAddress,udp_dstport,udp_srcport,response.toString());
                                 response = null;
                             }else{
@@ -843,26 +729,24 @@ public class EpcApp {
                                     log.warn("AUTHENTICATION_STEP_THREE: Generated NAS MAC= {}", NAS_MAC);
                                 }
                                 response.append(Constants.SEPARATOR).append(NAS_MAC).append("") ;
-                                //response.append(Constants.SEPARATOR).append("938e5f317c9de51b");
                                 if(Constants.DEBUG){
                                     log.warn(response.toString());
                                 }
-//                                sendPacket(sw, inPort, destMac, sourceMac, dstIp, srcIp,  IpProtocol.UDP, dstPort, srcPort, Constants.AUTHENTICATION_FAILURE);
                                 build_response_pkt(connectPoint,srcMac,dstMac,ipv4Protocol,ipv4SourceAddress,udp_dstport,udp_srcport,response.toString());
-				response = null;
+				                response = null;
                                 System.exit(1);
                             }
                         }else{
                             log.info("AUTHENTICATION_STEP_THREE failure");
-//                            sendPacket(sw, inPort, destMac, sourceMac, dstIp, srcIp,  IpProtocol.UDP, dstPort, srcPort, Constants.AUTHENTICATION_FAILURE);
                             build_response_pkt(connectPoint,srcMac,dstMac,ipv4Protocol,ipv4SourceAddress,udp_dstport,udp_srcport,Constants.AUTHENTICATION_FAILURE);
-			    response = null;
+			                response = null;
                             System.exit(1);
                         }
                         if(Constants.DEBUG)
                             d2 = new Date();
                         break;
-
+                        
+                    // attach with chain1 during handover 
                     case Constants.SEND_APN:
 
                                     byte [] b53 =Arrays.copyOfRange(p, 7, 15); //apn
@@ -883,7 +767,6 @@ public class EpcApp {
                                     tmpArray[1] = Long.toString(apn);
                                     tmpArray[2] = Integer.toString(ue_key);
 					
-//                        DatapathId dgw_dpId = Constants.getDgwDpidFromIp(srcIp.toString()); // returns switchid 1 which corresponds to our connectpoint swid
                         String dgw_dpId = (String)connectPoint.deviceId().toString();  //hardcoding  Device ID format = device:bmv2:s1
                         String array1[]= dgw_dpId.split(":");  //parsing the connectpoint to get switch ID
 
@@ -905,23 +788,14 @@ public class EpcApp {
                         if(Constants.DEBUG){
                             log.warn("received apn={}",tmpArray[1]);
                         }
-                        // storing src port of udp packet to identify the specific UE, when MME wants to initiate connection with this UE.
-                        FT.put(Integer.parseInt(Constants.SEND_APN),dgw_dpId, "uekey_udp_src_port_map", tmpArray[2], Integer.toString(udp_srcport));
 
-                        String pgw_dpId = hss.getPGateway(tmpArray[1]);  // returns 4 for all apn
+                        String pgw_dpId = hss.getPGateway(tmpArray[1]);  // returns 13 for all apn as hardcoded in the MySQL database
                         /********************* defaultSwitch is DGW ******************************/
-//                        String sgw_dpId = DatapathId.of(Constants.getSgwDpid(defaultSwitch));
                         String sgw_dpId = Constants.getSgwDpid(dgw_dpId);
                         DeviceId sgwswitchName = Constants.getSgwswitchName(dgw_dpId);
-//                        String ip_sgw = sgw.contactPGW(switch_mapping.get(sgw_dpId),switch_mapping.get(pgw_dpId), sgw_dpId, pgw_dpId, tmpArray[1]); //tmpArray[1] => apn of UE
                         /*******************install uplink rules on SGW and PGW in this method********************/
                         String ip_sgw;
                         ip_sgw = sgw.contactPGW(appId,flowRuleService,sgwswitchName,sgw_dpId, pgw_dpId, tmpArray[1]); //tmpArray[1] => apn of UE
-                        // counter++;
-                        // if(Constants.MYDEBUG1){
-                        //     log.warn("counter = {}",counter);
-                        // }
-			//log.warn("Ip SGWteid = {}",ip_sgw);
 
                         response = new StringBuilder();
                         response.append(Constants.SEND_IP_SGW_TEID).append(Constants.SEPARATOR).append(ip_sgw).append(Constants.SEPARATOR) ;
@@ -930,24 +804,14 @@ public class EpcApp {
                             Utils.aesEncrypt(response.toString(), Constants.SAMPLE_ENC_KEY);
                             Utils.hmacDigest(response.toString(), Constants.SAMPLE_ENC_KEY);
                         }
-			//Arrays.fill(tmpArray2, null);
-			tmpArray2 = ip_sgw.split(Constants.SEPARATOR);
+            			tmpArray2 = ip_sgw.split(Constants.SEPARATOR);
                         sgw_teid = Integer.parseInt(tmpArray2[1]);
-			//response.append(tmpArray2[0]).append(Constants.SEPARATOR).append(tmpArray2[1]).append("");
 
-                        if(Constants.DEBUG){
-//                            log.info("DEFAULT SWITCH installing uplink rule on default switch dpid = {} inport = {} and SRC IP = {} outPort = {}, and out SRC IP = {}, out teid = {}, of UE key = {}"
-//                                    ,defaultSwitch.getLong(),uePort,tmpArray2[0],Constants.ENODEB_SGW_PORT_MAP.get(defaultSwitch.getLong() + Constants.SEPARATOR + Constants.getSgwDpid(defaultSwitch)),Constants.getRanIp(defaultSwitch),sgw_teid,tmpArray[2]);
-
-                        }
                         /**************************** Uplink flow rules here (DGW to SGW) on DGW switch ***************************/
-//                        String SGW_ID =  Integer.parseInt(Constants.getSgwDpid(dgw_dpId));
                         int SGW_ID =  Integer.parseInt(Constants.getSgwDpid(dgw_dpId));
-                        // String getval = Character.toString(dgw_dpId.charAt(1)) + Constants.SEPARATOR + SGW_ID;
                         String getval = dgw_dpId.split("s")[1] + Constants.SEPARATOR + SGW_ID;
 
                         outPort =  Constants.ENODEB_SGW_PORT_MAP.get(getval);
-//                        byte[] UE_IPAddr = {10,0,0,3} ;
                         byte[] UE_IPAddr = IPv4.toIPv4AddressBytes(tmpArray2[0]);
                         if(Constants.DEBUG){
                             log.info("#####################################");
@@ -963,9 +827,6 @@ public class EpcApp {
                         /* UPLINK   => ipv4srcAddr = UE IP and ipv4dstAddr = Sink IP   */
                         fr.insertUplinkTunnelIngressRule(false, appId, flowRuleService, deviceId,UE_IPAddr, Constants.dstSinkIpAddr, sgw_teid, outPort);
 
-
-
-//                        installFlowRuleWithIP(dgw_dpId, uePort, Constants.ENODEB_SGW_PORT_MAP.get(dgw_dpId.getLong() + Constants.SEPARATOR + Constants.getSgwDpid(dgw_dpId)), sgw_teid, tmpArray2[0], Constants.getRanIp(dgw_dpId), Constants.getSgwIpUplink(dgw_dpId), Constants.SINK_MAC);
                          // key: tmpArray[2] => UE Key, Value: tmpArray2[0] => UE IP
                         FT.put(Integer.parseInt(Constants.SEND_APN),dgw_dpId, "uekey_ueip_map", tmpArray[2], tmpArray2[0]); // key: tmpArray[2] => UE Key, Value: tmpArray2[0] => UE IP
 
@@ -974,17 +835,16 @@ public class EpcApp {
 
                         FT.put(Integer.parseInt(Constants.SEND_APN),dgw_dpId, "sgw_teid_uekey_map", tmpArray2[1], tmpArray[2]);
 
-//                        sendPacket(sw, inPort, destMac, sourceMac, dstIp, srcIp,  IpProtocol.UDP, dstPort, srcPort, response.toString());
-
                         build_response_pkt(connectPoint,srcMac,dstMac,ipv4Protocol,ipv4SourceAddress,udp_dstport,udp_srcport,response.toString());
-			//log.warn("Ip SGWteid response= {}", response.toString());
-                        response = null;
                         if(Constants.DEBUG){
+            			    log.warn("Ip SGWteid response= {}", response.toString());
                             log.info("Send APN done");
                             d2 = new Date();
                         }
+                        response = null;
                         break;
 
+                    //  attach with chain1 during handover
                     case Constants.SEND_UE_TEID:
 
                                     byte [] b73 =Arrays.copyOfRange(p, 7, 11); //ue_teid
@@ -1006,7 +866,6 @@ public class EpcApp {
                                     tmpArray[1] = Integer.toString(ue_teid);
                                     tmpArray[2] = Integer.toString(ue_key7);
 					
-//                        DatapathId send_ue_teid_dgw = Constants.getDgwDpidFromIp(srcIp.toString());
                         String dgw_dpId1 = (String)connectPoint.deviceId().toString();  //hardcoding  Device ID format = device:bmv2:s1
                         String array5[]= dgw_dpId1.split(":");  //parsing the connectpoint to get switch ID
                         dgw_dpId1 = array5[2];
@@ -1037,211 +896,71 @@ public class EpcApp {
                             log.warn("sgw_teId = {}",tmpArray2[1]);
                         }
 
-//                      modifyBearerRequest(ApplicationId appId,FlowRuleService flowRuleService,DeviceId switchId,String sgw, String sgw_dpId, int sgw_teId, int ue_teId, String key){
                         DeviceId SGWswitchName1 = Constants.getSgwswitchName(dgw_dpId1);
-                        //synchronized (this) {
-                            sgw.modifyBearerRequest(appId, flowRuleService, SGWswitchName1, tmpArray2[0], tmpArray2[0], Integer.parseInt(tmpArray2[1]), Integer.parseInt(tmpArray[1]), tmpArray[2]);
-                        //}
+                        sgw.modifyBearerRequest(appId, flowRuleService, SGWswitchName1, tmpArray2[0], tmpArray2[0], Integer.parseInt(tmpArray2[1]), Integer.parseInt(tmpArray[1]), tmpArray[2]);
 
-                        //String ue_ip = uekey_ueip_map.get(tmpArray[2]); // tmpArray[2] => ue key
                         String ue_ip = FT.get(send_ue_teid_dgw, "uekey_ueip_map", tmpArray[2]); // tmpArray[2] => ue key
 
-
-                        if(Constants.DEBUG){
-                            //install downlink rule on default switch
-//                            System.out.println("DEFAULT SWITCH installing downlink rule on default switch dpid = "+send_ue_teid_dgw.getLong()+" inport="+Constants.ENODEB_SGW_PORT_MAP.get(send_ue_teid_dgw.getLong() + Constants.SEPARATOR + DatapathId.of(tmpArray2[0]).getLong())+
-//                                                       " in teid = " + Integer.parseInt(tmpArray[1]) +
-//                                                       " outPort = " + uePort + " out teid= " + Integer.parseInt(tmpArray[1]) + " of UE key = "+tmpArray[2]);
-                        }
-                        //System.out.println(DatapathId.of(tmpArray2[0]).getLong());
-
                         /**************************** Downlinkl flow rules on DGW (DGW -> RAN) ***************************/
-//                        insertDownlinkTunnelForwardRule(ApplicationId appId,FlowRuleService flowRuleService,DeviceId switchId,int intunId,int outPort,int outtunId,boolean isEgress)
-                            // fr.insertDownlinkTunnelForwardRule(false,appId, flowRuleService, deviceId,Integer.parseInt(tmpArray[1]), uePort,0,true);
                         fr.insertUplinkTunnelForwardRule(false,appId, flowRuleService, deviceId,Integer.parseInt(tmpArray[1]), uePort,0,true);
-
-
-//                       installFlowRule(DatapathId dpId, int inPort, int inTunnelId, int outPort, int outTunnelId, String srcIP, String dstIP, String dstMac){
-//                      installFlowRule(DatapathId.of(Constants.getDgwDpid(DatapathId.of(tmpArray2[0]))),
-//                                                    Constants.ENODEB_SGW_PORT_MAP.get(Constants.getDgwDpid(DatapathId.of(tmpArray2[0])) + Constants.SEPARATOR + DatapathId.of(tmpArray2[0]).getLong()),
-//                                                    Integer.parseInt(tmpArray[1]), uePort, Integer.parseInt(tmpArray[1]), Constants.SINK_IP, ue_ip, Constants.getUeMac(send_ue_teid_dgw));
 
                         response = new StringBuilder();
                         //NOT USED LATER uekey_guti_map, so not considered in state calc
                         uekey_guti_map.put(tmpArray[2], (Integer.parseInt(tmpArray[2])+1000)+"");
                         FT.put(Integer.parseInt(Constants.SEND_UE_TEID),send_ue_teid_dgw, "ue_state", tmpArray[2], "1");
 
-                        //@HO: Add detach_tunnel code here--- detach tunnel from chain 2
-                        //////////// DETACH tunnel code for chain 2 starts here //////////////////////////
 
-//                                        byte [] b93 =Arrays.copyOfRange(p, 7, 11); //ue ip
-//                                         byte [] b94 =Arrays.copyOfRange(p, 11, 17); //sep
-//                                         byte [] b95 =Arrays.copyOfRange(p, 17, 21); //ue teid
-//                                         byte [] b96 =Arrays.copyOfRange(p, 21, 27); //sep
-//                                         byte [] b97 =Arrays.copyOfRange(p, 27, 31); //sgw teid
-//                                         byte [] b98 =Arrays.copyOfRange(p, 31, 37); //sep
-//                                         byte [] b99 =Arrays.copyOfRange(p, 37, 41); //ue num
-                                        
-//                                         int ipv4add = IPv4.toIPv4Address(b93);
-//                                         String ue_ipaddr = IPv4.fromIPv4Address(ipv4add);
-                                        
-//                                         String sep92 = new String(b94, StandardCharsets.UTF_8); //6 byte
-                                        
-//                                         int ue_teid9 = ByteBuffer.wrap(b95).getInt();
-                                        
-//                                         String sep96 = new String(b96, StandardCharsets.UTF_8); //6 byte
-                                        
-//                                         int sgw_teid9 = ByteBuffer.wrap(b97).getInt();
-                                        
-//                                         String sep98 = new String(b98, StandardCharsets.UTF_8); //6 byte
-                                        
-//                                         int ue_key9 = ByteBuffer.wrap(b99).getInt();
-//                                         if(Constants.BITWISE_DEBUG){
-//                                             log.info("DETACH_REQUEST");
-//                                             log.warn("sep2 = {}" , sep92);
-//                                             log.warn("ue_teid = {}" , ue_teid9);
-//                                             log.warn("sep3 = {}" , sep96);
-//                                             log.warn("sgw_teid = {}" , sgw_teid9);
-//                                             log.warn("sep4 = {}" , sep98);
-//                                             log.warn("ue_key = {}" , ue_key9);
-//                                         }
+                        /*@HO: Add detach_tunnel code here-------------------------------------- detach tunnel from chain 2         --------------------------*************************************/
+                        /********************************  DETACH tunnel code for chain 2 starts here ***********************************/
 
-//                         //tmpArray[1] => UE IP, tmpArray[2] => UE TEID, tmpArray[3] => SGW TEID, tmpArray[4] => UE_KEY
-//                         tmpArray[1] = ue_ipaddr;
-//                         tmpArray[2] = Integer.toString(ue_teid9);
-//                         tmpArray[3] = Integer.toString(sgw_teid9);
-//                         tmpArray[4] = Integer.toString(ue_key9);
-
-//                         String dw = (String)connectPoint.deviceId().toString();  //hardcoding
-//                         String array3[]= dw.split(":");  //hardcoding
-//                         dw = array3[2];
-//                         if(Constants.DEBUG){
-//                             log.info("Inside case DETACH_REQUEST");
-//                             log.warn("array3[2] = {}",array3[2]); //hardcoding  array3[2] contains switches  like "s1", "s2" etc
-//                             log.warn(" in DETACH_REQUEST dw = {}",dw); //hardcoding  dw contains switches  like "s1", "s2" etc
-//                             step = 5;
-//                             d1 = d2 = null;
-//                             d1 = new Date();
-//                         }
-
-//                         if(Constants.DO_ENCRYPTION){
-//                             decArray = receiveDecryptedArray(tmpArray);
-//                         }
-
-//                         //tmpArray[1] => UE IP, tmpArray[2] => UE TEID, tmpArray[3] => SGW TEID, tmpArray[4] => UE_KEY
-//                         if(Constants.DEBUG){
-// //                            System.out.println("RECEIVED DETACH REQUEST from UE with ip=" + tmpArray[1] + " TEID=" + tmpArray[2] + " corresponding SGW TEID=" + tmpArray[3] + " UE_KEY=" + tmpArray[4]);
-//                             log.warn("RECEIVED DETACH REQUEST from UE with ip = {} ",tmpArray[1]);
-//                                      log.warn("TEID = {}", tmpArray[2]);
-//                                               log.warn("corresponding SGW TEID = {}", tmpArray[3]);
-//                                                        log.warn("UE_KEY = {}", tmpArray[4]);
-//                         }
-//                         //removing the port mapping between UE key and its source port (UDP) used for control traffic
-//                         // tmpArray[4] => UE KEY
-//                         FT.del(Integer.parseInt(Constants.DETACH_REQUEST),dw, "uekey_udp_src_port_map", tmpArray[4]); // tmpArray[4] => UE KEY
-
-// //                        DatapathId pgw_dpid = DatapathId.of(Constants.PGW_ID);
-//                         String pgw_dpid = Integer.toString(Constants.PGW_ID);
-
-//                         // newly added.. because can't remove in SEND_UE_TEID step.. due to re-establishment of tunnel
-//                         FT.del(Integer.parseInt(Constants.DETACH_REQUEST),dw, "uekey_sgw_teid_map", tmpArray[4]);// newly added.. because can't remove in SEND_UE_TEID step.. due to re-establishment of tunnel
-
-//                         // key is sgw teid and value is ue key
-//                         FT.del(Integer.parseInt(Constants.DETACH_REQUEST),dw, "sgw_teid_uekey_map", tmpArray[3]); // key is sgw teid and value is ue key
-
-//                         //
-//                         FT.del(Integer.parseInt(Constants.DETACH_REQUEST),dw,"uekey_ueip_map", tmpArray[4]);        // key is UE Key and value is UE IP
+                        String pgw_dpid = Integer.toString(Constants.PGW_ID);
+                        
+                        // @HO: find UE IP, and sgw_teid from uekey_sgw_teid_map, and uekey_ueip_map : already found above so reusing
+                        // @HO: ue_teid (need to remember prev ue_teid, if not forget the last flow remove)   : UE is sedning ue_teid in Send_ue_teid message itself reusing it here
 
                         //delete uplink rule
                         /******************************** delete uplink flow rule on Ingress DGW( DGW -> SGW)********************************/
-                        // tmpArray[2] contains UE IP as string convert it to byte array
-                        //tmpArray[1] => UE IP, tmpArray[2] => UE TEID, tmpArray[3] => SGW TEID, tmpArray[4] => UE_KEY
-                        //int SGW_ID2 =  Integer.parseInt(Constants.getSgwDpid(dw));
-                        
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//                         int SGW_ID2 = 5; //@HO: chk number
-//                         // String getval2 = Character.toString(dw.charAt(1)) + Constants.SEPARATOR + SGW_ID2;
-//                         //String getval2 = dw.split("s")[1] + Constants.SEPARATOR + SGW_ID2;
-//                         String getval2 = "4" + Constants.SEPARATOR + SGW_ID2;
-//                         outPort =  Constants.ENODEB_SGW_PORT_MAP.get(getval2);
-//                         // @HO: find UE IP, and sgw_teid from uekey_sgw_teid_map, and uekey_ueip_map
-//                         // @HO: ue_teid (need to remember prev ue_teid, if not forget the last flow remove)
-//                         byte [] UE_IP = IPv4.toIPv4AddressBytes(tmpArray[1]);
-//                         if(Constants.DEBUG){
-//                             log.info("UE IP as received from RAN = {}",tmpArray[1]);
-//                             log.info("Deleting ingress rule with deiveId = {}, UE_IPAddr = {}, sgw_teid = {},outPort = {}",deviceId,UE_IP, Integer.parseInt(tmpArray[3]),outPort);
-//                         }
+                        byte [] UE_IP =  IPv4.toIPv4AddressBytes((ue_ip);
+                        String DGWDeviceId_chain2 = Constants.DGW_NAME_chain2;
+                        if(Constants.DEBUG){
+                            log.info("UE IP in Send_ue_teid_HO = {}",UE_IP);
+                            log.info("Deleting ingress rule with deiveId = {}, UE_IPAddr = {}, sgw_teid = {},outPort = {}",DGWDeviceId_chain2,UE_IP,0,0);
+                        }
 
-//                         /* UPLINK   => ipv4srcAddr = UE IP and ipv4dstAddr = Sink IP tmpArray[3] = sgw_teid  */
-//                         fr.insertUplinkTunnelIngressRule(true, appId, flowRuleService, deviceId, UE_IP,Constants.dstSinkIpAddr, Integer.parseInt(tmpArray[3]), outPort);
+                        /* UPLINK   => ipv4srcAddr = UE IP and ipv4dstAddr = Sink IP tmpArray[3] = sgw_teid  */
+                        // @HO : we need only match field while deleting rules
+                        fr.insertUplinkTunnelIngressRule(true, appId, flowRuleService, DGWDeviceId_chain2, UE_IP,Constants.dstSinkIpAddr, 0, 0);
 
-// //                        deleteFlowRuleWithIP(dw, uePort, tmpArray[1]); // tmpArray[1] => UE IP
-//                         if(Constants.DEBUG){
-//                             log.warn("DEFAULT SWITCH deleting uplink rule with for UE with IP = {}",tmpArray[1]);
-//                         }
-// //                        int DEFAULT_S_SGW_PORT = Constants.ENODEB_SGW_PORT_MAP.get(dw.getLong() + Constants.SEPARATOR + Constants.getSgwDpid(dw)); //dpids[0] ==> SGW DPID
-//                         // int DEFAULT_S_SGW_PORT = Constants.ENODEB_SGW_PORT_MAP.get(Character.toString(dw.charAt(1)) + Constants.SEPARATOR + Constants.getSgwDpid(dw)); //dpids[0] ==> SGW DPID
-//                         int DEFAULT_S_SGW_PORT = Constants.ENODEB_SGW_PORT_MAP.get(dw.split("s")[1] + Constants.SEPARATOR + Constants.getSgwDpid(dw)); //dpids[0] ==> SGW DPID
+                        if(Constants.DEBUG){
+                            log.warn("DEFAULT SWITCH deleting uplink rule with for UE with IP = {}",tmpArray[1]);
+                        }
 
+                        //delete downlink rule
+                        /***********************************delete downlink flow rule on Egress DGW( DGW -> RAN)*************************/
+                        // tmpArray[1] is ue_teid which is match field
+                        fr.insertUplinkTunnelForwardRule(true, appId, flowRuleService, DGWDeviceId_chain2, Integer.parseInt(tmpArray[1]), uePort, 0, true);
 
-//                         //delete downlink rule
-//                         /***********************************delete downlink flow rule on Egress DGW( DGW -> RAN)*************************/
-// //                        insertDownlinkTunnelForwardRule(boolean removeRule,ApplicationId appId,FlowRuleService flowRuleService,DeviceId switchId,int intunId,int outPort,int outtunId,boolean isEgress) {
-//                         //synchronized (this) {
-//                             // fr.insertDownlinkTunnelForwardRule(true, appId, flowRuleService, deviceId, Integer.parseInt(tmpArray[2]), uePort, 0, true);
-//                             fr.insertUplinkTunnelForwardRule(true, appId, flowRuleService, deviceId, Integer.parseInt(tmpArray[2]), uePort, 0, true);
+                        if(Constants.DEBUG){
+                            log.warn("DEFAULT SWITCH deleting downlink rule with for UE with IP = {}",tmpArray[1]);
+                            log.warn(" and UE TEID = {}",tmpArray[2]);
+                        }
 
-//                         //}
+                        // dpids[0] ==> SGW DPID   & dpids[1]==> PGW DPID
+                        DeviceId SGWswitchName_chain2 = Constants.SGW_NAME_chain2;
+                        String sgwdpId_chain2 = Integer.toString(SGW_SWITCH_ID_chain2);
 
-// //                        deleteFlowRuleWithTEID(dw, DEFAULT_S_SGW_PORT, Integer.parseInt(tmpArray[2]), Constants.SINK_IP); //tmpArray[2] ==> UE VLAN ID
-//                         if(Constants.DEBUG){
-// //                            System.out.println("DEFAULT SWITCH deleting downlink rule with for UE with IP="+tmpArray[1]+" and UE TEID="+tmpArray[2]);
-//                             log.warn("DEFAULT SWITCH deleting downlink rule with for UE with IP = {}",tmpArray[1]);
-//                             log.warn(" and UE TEID = {}",tmpArray[2]);
-//                         }
+                        boolean status = sgw.detachUEFromSGW_ho(appId,flowRuleService,SGWswitchName_chain2,sgwdpId_chain2, pgw_dpid, tmpArray2[1], ue_ip);
+                        if(!status){
+                            log.warn("Deleting rules during handover from chain2 is unsuccessful !!");
+                        }
 
-//                         // dpids[0] ==> SGW DPID   & dpids[1]==> PGW DPID
-// //                        boolean status = sgw.detachUEFromSGW(switch_mapping.get(DatapathId.of(Constants.getSgwDpid(dw))), switch_mapping.get(pgw_dpid), DatapathId.of(Constants.getSgwDpid(dw)), pgw_dpid, Integer.parseInt(tmpArray[3]), tmpArray[1]);
-//                         dw = s4;
-//                         DeviceId SGWswitchName2 = Constants.getSgwswitchName(dw);
-// //                        public boolean detachUEFromSGW(String sgw_dpId, String pgw_dpId, int sgw_teid, String ue_ip) {
-//                         boolean status = sgw.detachUEFromSGW_ho(appId,flowRuleService,SGWswitchName2,Constants.getSgwDpid(dw), pgw_dpid, Integer.parseInt(tmpArray[3]), tmpArray[1]);
-// //                         response = new StringBuilder();
-// //                         if(status){
-// //                             response.append(Constants.DETACH_ACCEPT).append(Constants.SEPARATOR).append("");
-// //                             if(Constants.DO_ENCRYPTION){
-// //                                 Utils.aesEncrypt(response.toString(), Constants.SAMPLE_ENC_KEY);
-// //                                 Utils.hmacDigest(response.toString(), Constants.SAMPLE_ENC_KEY);
-// //                             }
-// // //                            sendPacket(sw, inPort, destMac, sourceMac, dstIp, srcIp,  IpProtocol.UDP, dstPort, srcPort, response.toString());
-// //                             if(Constants.DEBUG) {
-// //                                 log.info(" sending response in DETACH_REQUEST");
-// //                             }
-// //                             build_response_pkt(connectPoint,srcMac,dstMac,ipv4Protocol,ipv4SourceAddress,udp_dstport,udp_srcport,response.toString());
+                        /******************************************------------------- DETACH tunnel code ends here for HandOver ends here ------------------------******************************************/
 
-// //                         }else{
-// //                             response.append(Constants.DETACH_FAILURE).append(Constants.SEPARATOR);
-// //                             if(Constants.DO_ENCRYPTION){
-// //                                 Utils.aesEncrypt(response.toString(), Constants.SAMPLE_ENC_KEY);
-// //                                 Utils.hmacDigest(response.toString(), Constants.SAMPLE_ENC_KEY);
-// //                             }
-// // //                            sendPacket(sw, inPort, destMac, sourceMac, dstIp, srcIp,  IpProtocol.UDP, dstPort, srcPort, response.toString());
-// //                             build_response_pkt(connectPoint,srcMac,dstMac,ipv4Protocol,ipv4SourceAddress,udp_dstport,udp_srcport,response.toString());
-
-// // //                            System.out.println("ERROR: DETACH_FAILURE");
-// //                             log.info("ERROR: DETACH_FAILURE");
-// //                             //System.exit(1);
-// //                         }
-//                         response = null;
-                        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-                        //////////// DETACH tunnel code ends here //////////////////////////
                         response.append(Constants.ATTACH_ACCEPT).append(Constants.SEPARATOR).append(Integer.parseInt(tmpArray[2])+1000).append("");	// Sending GUTI
 
                         if(Constants.DO_ENCRYPTION){
                             decArray = receiveDecryptedArray(tmpArray);
                         }
-//                        sendPacket(sw, inPort, destMac, sourceMac, dstIp, srcIp,  IpProtocol.UDP, dstPort, srcPort, response.toString());
                         build_response_pkt(connectPoint,srcMac,dstMac,ipv4Protocol,ipv4SourceAddress,udp_dstport,udp_srcport,response.toString());
 
                         response = null;
@@ -1249,6 +968,7 @@ public class EpcApp {
                             d2 = new Date();
                         break;
 
+                        // attach with chain 2 before handover
                         case Constants.SEND_APN_HO:
 
                                     byte [] b63 =Arrays.copyOfRange(p, 7, 15); //apn
@@ -1269,13 +989,8 @@ public class EpcApp {
                                     tmpArray[1] = Long.toString(apn1);
                                     tmpArray[2] = Integer.toString(ue_key1);
                     
-//                        DatapathId dgw_dpId = Constants.getDgwDpidFromIp(srcIp.toString()); // returns switchid 1 which corresponds to our connectpoint swid
-                        /* String dgw_dpId = (String)connectPoint.deviceId().toString();  //hardcoding  Device ID format = device:bmv2:s1
-                        String array1[]= dgw_dpId.split(":");  //parsing the connectpoint to get switch ID
-
-                        dgw_dpId = array1[2]; */
-                        //@HO
-                        dgw_dpId = "s4"; //hardcode this to s2 to attach to second chain
+                        //@HO : since attach has to be done on chain2 so we use DGW of chain2 
+                        String dgw_dpId = "s4"; //hardcode this to s2 to attach to second chain
                         if(Constants.DEBUG){
                             log.info("Inside case SEND_APN");
                             //log.warn("array1[2] = {}",array1[2]); //hardcoding  array1[2] contains switches  like "s1", "s2" etc
@@ -1297,18 +1012,11 @@ public class EpcApp {
 
                         String pgw_dpId1 = hss.getPGateway(tmpArray[1]);  // returns 4 for all apn
                         /********************* defaultSwitch is DGW ******************************/
-//                        String sgw_dpId = DatapathId.of(Constants.getSgwDpid(defaultSwitch));
                         String sgw_dpId1 = Constants.getSgwDpid(dgw_dpId);
                         DeviceId sgwswitchName1 = Constants.getSgwswitchName(dgw_dpId);
-//                        String ip_sgw = sgw.contactPGW(switch_mapping.get(sgw_dpId),switch_mapping.get(pgw_dpId), sgw_dpId, pgw_dpId, tmpArray[1]); //tmpArray[1] => apn of UE
                         /*******************install uplink rules on SGW and PGW in this method********************/
                         String ip_sgw1;
                         ip_sgw1 = sgw.contactPGW(appId,flowRuleService,sgwswitchName1,sgw_dpId1, pgw_dpId1, tmpArray[1]); //tmpArray[1] => apn of UE
-                        // counter++;
-                        // if(Constants.MYDEBUG1){
-                        //     log.warn("counter = {}",counter);
-                        // }
-            //log.warn("Ip SGWteid = {}",ip_sgw);
 
                         response = new StringBuilder();
                         response.append(Constants.SEND_IP_SGW_TEID_HO).append(Constants.SEPARATOR).append(ip_sgw1).append(Constants.SEPARATOR) ;
@@ -1317,10 +1025,9 @@ public class EpcApp {
                             Utils.aesEncrypt(response.toString(), Constants.SAMPLE_ENC_KEY);
                             Utils.hmacDigest(response.toString(), Constants.SAMPLE_ENC_KEY);
                         }
-            //Arrays.fill(tmpArray2, null);
-            tmpArray2 = ip_sgw1.split(Constants.SEPARATOR);
+                        //Arrays.fill(tmpArray2, null);
+                        tmpArray2 = ip_sgw1.split(Constants.SEPARATOR);
                         sgw_teid = Integer.parseInt(tmpArray2[1]);
-            //response.append(tmpArray2[0]).append(Constants.SEPARATOR).append(tmpArray2[1]).append("");
 
                         if(Constants.DEBUG){
 //                            log.info("DEFAULT SWITCH installing uplink rule on default switch dpid = {} inport = {} and SRC IP = {} outPort = {}, and out SRC IP = {}, out teid = {}, of UE key = {}"
@@ -1328,13 +1035,10 @@ public class EpcApp {
 
                         }
                         /**************************** Uplink flow rules here (DGW to SGW) on DGW switch ***************************/
-//                        String SGW_ID =  Integer.parseInt(Constants.getSgwDpid(dgw_dpId));
                         int SGW_ID3 =  Integer.parseInt(Constants.getSgwDpid(dgw_dpId));
-                        // String getval = Character.toString(dgw_dpId.charAt(1)) + Constants.SEPARATOR + SGW_ID;
                         String getval3 = dgw_dpId.split("s")[1] + Constants.SEPARATOR + SGW_ID3;
 
                         outPort =  Constants.ENODEB_SGW_PORT_MAP.get(getval3);
-//                        byte[] UE_IPAddr = {10,0,0,3} ;
                         byte[] UE_IPAddr2 = IPv4.toIPv4AddressBytes(tmpArray2[0]);
                         if(Constants.DEBUG){
                             log.info("#####################################");
@@ -1350,9 +1054,6 @@ public class EpcApp {
                         /* UPLINK   => ipv4srcAddr = UE IP and ipv4dstAddr = Sink IP   */
                         fr.insertUplinkTunnelIngressRule(false, appId, flowRuleService, deviceId,UE_IPAddr2, Constants.dstSinkIpAddr, sgw_teid, outPort);
 
-
-
-//                        installFlowRuleWithIP(dgw_dpId, uePort, Constants.ENODEB_SGW_PORT_MAP.get(dgw_dpId.getLong() + Constants.SEPARATOR + Constants.getSgwDpid(dgw_dpId)), sgw_teid, tmpArray2[0], Constants.getRanIp(dgw_dpId), Constants.getSgwIpUplink(dgw_dpId), Constants.SINK_MAC);
                          // key: tmpArray[2] => UE Key, Value: tmpArray2[0] => UE IP
                         FT.put(Integer.parseInt(Constants.SEND_APN_HO),dgw_dpId, "uekey_ueip_map", tmpArray[2], tmpArray2[0]); // key: tmpArray[2] => UE Key, Value: tmpArray2[0] => UE IP
 
@@ -1361,10 +1062,7 @@ public class EpcApp {
 
                         FT.put(Integer.parseInt(Constants.SEND_APN_HO),dgw_dpId, "sgw_teid_uekey_map", tmpArray2[1], tmpArray[2]);
 
-//                        sendPacket(sw, inPort, destMac, sourceMac, dstIp, srcIp,  IpProtocol.UDP, dstPort, srcPort, response.toString());
-
                         build_response_pkt(connectPoint,srcMac,dstMac,ipv4Protocol,ipv4SourceAddress,udp_dstport,udp_srcport,response.toString());
-            //log.warn("Ip SGWteid response= {}", response.toString());
                         response = null;
                         if(Constants.DEBUG){
                             log.info("Send APN done");
@@ -1372,6 +1070,7 @@ public class EpcApp {
                         }
                         break;
 
+                    // attach with chain 2 before handover
                     case Constants.SEND_UE_TEID_HO:
 
                                     byte [] b83 =Arrays.copyOfRange(p, 7, 11); //ue_teid
@@ -1393,7 +1092,6 @@ public class EpcApp {
                                     tmpArray[1] = Integer.toString(ue_teid1);
                                     tmpArray[2] = Integer.toString(ue_key8);
                     
-//                        DatapathId send_ue_teid_dgw = Constants.getDgwDpidFromIp(srcIp.toString());
                         /*String dgw_dpId1 = (String)connectPoint.deviceId().toString();  //hardcoding  Device ID format = device:bmv2:s1
                         String array5[]= dgw_dpId1.split(":");  //parsing the connectpoint to get switch ID
                         dgw_dpId1 = array5[2];*/
@@ -1416,7 +1114,6 @@ public class EpcApp {
 
                         //MAP key = UE KEY,  MAP value = SGW_DPID + SEPARATOR + SGW_TEID
                         String tmp1 = FT.get(send_ue_teid_dgw1, "uekey_sgw_teid_map", tmpArray[2]); // tmpArray[2] => ue key
-                        //Arrays.fill(tmpArray2, null);
                          tmpArray2 = tmp1.split(Constants.SEPARATOR);
 
                         //tmpArray[1] => ue_teId and tmpArray[2] => ue key
@@ -1428,13 +1125,9 @@ public class EpcApp {
                             log.warn("sgw_teId = {}",tmpArray2[1]);
                         }
 
-//                      modifyBearerRequest(ApplicationId appId,FlowRuleService flowRuleService,DeviceId switchId,String sgw, String sgw_dpId, int sgw_teId, int ue_teId, String key){
                         DeviceId SGWswitchName8 = Constants.getSgwswitchName(dgw_dpId1);
-                        //synchronized (this) {
-                            sgw.modifyBearerRequest(appId, flowRuleService, SGWswitchName8, tmpArray2[0], tmpArray2[0], Integer.parseInt(tmpArray2[1]), Integer.parseInt(tmpArray[1]), tmpArray[2]);
-                        //}
+                        sgw.modifyBearerRequest(appId, flowRuleService, SGWswitchName8, tmpArray2[0], tmpArray2[0], Integer.parseInt(tmpArray2[1]), Integer.parseInt(tmpArray[1]), tmpArray[2]);
 
-                        //String ue_ip = uekey_ueip_map.get(tmpArray[2]); // tmpArray[2] => ue key
                         String ue_ip1 = FT.get(send_ue_teid_dgw1, "uekey_ueip_map", tmpArray[2]); // tmpArray[2] => ue key
 
 
@@ -1444,18 +1137,10 @@ public class EpcApp {
 //                                                       " in teid = " + Integer.parseInt(tmpArray[1]) +
 //                                                       " outPort = " + uePort + " out teid= " + Integer.parseInt(tmpArray[1]) + " of UE key = "+tmpArray[2]);
                         }
-                        //System.out.println(DatapathId.of(tmpArray2[0]).getLong());
 
                         /**************************** Downlinkl flow rules on DGW (DGW -> RAN) ***************************/
-//                        insertDownlinkTunnelForwardRule(ApplicationId appId,FlowRuleService flowRuleService,DeviceId switchId,int intunId,int outPort,int outtunId,boolean isEgress)
-                            // fr.insertDownlinkTunnelForwardRule(false,appId, flowRuleService, deviceId,Integer.parseInt(tmpArray[1]), uePort,0,true);
+                        // deviceId is DGW switch Name
                         fr.insertUplinkTunnelForwardRule(false,appId, flowRuleService, deviceId,Integer.parseInt(tmpArray[1]), uePort,0,true);
-
-
-//                       installFlowRule(DatapathId dpId, int inPort, int inTunnelId, int outPort, int outTunnelId, String srcIP, String dstIP, String dstMac){
-//                      installFlowRule(DatapathId.of(Constants.getDgwDpid(DatapathId.of(tmpArray2[0]))),
-//                                                    Constants.ENODEB_SGW_PORT_MAP.get(Constants.getDgwDpid(DatapathId.of(tmpArray2[0])) + Constants.SEPARATOR + DatapathId.of(tmpArray2[0]).getLong()),
-//                                                    Integer.parseInt(tmpArray[1]), uePort, Integer.parseInt(tmpArray[1]), Constants.SINK_IP, ue_ip, Constants.getUeMac(send_ue_teid_dgw));
 
                         response = new StringBuilder();
                         //NOT USED LATER uekey_guti_map, so not considered in state calc
@@ -1467,7 +1152,6 @@ public class EpcApp {
                         if(Constants.DO_ENCRYPTION){
                             decArray = receiveDecryptedArray(tmpArray);
                         }
-//                        sendPacket(sw, inPort, destMac, sourceMac, dstIp, srcIp,  IpProtocol.UDP, dstPort, srcPort, response.toString());
                         build_response_pkt(connectPoint,srcMac,dstMac,ipv4Protocol,ipv4SourceAddress,udp_dstport,udp_srcport,response.toString());
 
                         response = null;
@@ -1476,7 +1160,6 @@ public class EpcApp {
                         break;
 
                     case Constants.DETACH_REQUEST:
-//                        DatapathId dw = Constants.getDgwDpidFromIp(srcIp.toString());
                                         byte [] b93 =Arrays.copyOfRange(p, 7, 11); //ue ip
                                         byte [] b94 =Arrays.copyOfRange(p, 11, 17); //sep
                                         byte [] b95 =Arrays.copyOfRange(p, 17, 21); //ue teid
@@ -1533,7 +1216,6 @@ public class EpcApp {
 
                         //tmpArray[1] => UE IP, tmpArray[2] => UE TEID, tmpArray[3] => SGW TEID, tmpArray[4] => UE_KEY
                         if(Constants.DEBUG){
-//                            System.out.println("RECEIVED DETACH REQUEST from UE with ip=" + tmpArray[1] + " TEID=" + tmpArray[2] + " corresponding SGW TEID=" + tmpArray[3] + " UE_KEY=" + tmpArray[4]);
                             log.warn("RECEIVED DETACH REQUEST from UE with ip = {} ",tmpArray[1]);
                                      log.warn("TEID = {}", tmpArray[2]);
                                               log.warn("corresponding SGW TEID = {}", tmpArray[3]);
@@ -1541,9 +1223,8 @@ public class EpcApp {
                         }
                         //removing the port mapping between UE key and its source port (UDP) used for control traffic
                         // tmpArray[4] => UE KEY
-                        FT.del(Integer.parseInt(Constants.DETACH_REQUEST),dw, "uekey_udp_src_port_map", tmpArray[4]); // tmpArray[4] => UE KEY
+                        // FT.del(Integer.parseInt(Constants.DETACH_REQUEST),dw, "uekey_udp_src_port_map", tmpArray[4]); // tmpArray[4] => UE KEY
 
-//                        DatapathId pgw_dpid = DatapathId.of(Constants.PGW_ID);
                         String pgw_dpid = Integer.toString(Constants.PGW_ID);
 
                         // newly added.. because can't remove in SEND_UE_TEID step.. due to re-establishment of tunnel
@@ -1555,12 +1236,14 @@ public class EpcApp {
                         //
                         FT.del(Integer.parseInt(Constants.DETACH_REQUEST),dw,"uekey_ueip_map", tmpArray[4]);		// key is UE Key and value is UE IP
 
+                        // removing guti corresponding to uekey
+                        uekey_guti_map.remove(tmpArray[4]);
+
                         //delete uplink rule
                         /******************************** delete uplink flow rule on Ingress DGW( DGW -> SGW)********************************/
                         // tmpArray[2] contains UE IP as string convert it to byte array
                         //tmpArray[1] => UE IP, tmpArray[2] => UE TEID, tmpArray[3] => SGW TEID, tmpArray[4] => UE_KEY
                         int SGW_ID2 =  Integer.parseInt(Constants.getSgwDpid(dw));
-                        // String getval2 = Character.toString(dw.charAt(1)) + Constants.SEPARATOR + SGW_ID2;
                         String getval2 = dw.split("s")[1] + Constants.SEPARATOR + SGW_ID2;
                         outPort =  Constants.ENODEB_SGW_PORT_MAP.get(getval2);
                         byte [] UE_IP = IPv4.toIPv4AddressBytes(tmpArray[1]);
@@ -1572,35 +1255,23 @@ public class EpcApp {
                         /* UPLINK   => ipv4srcAddr = UE IP and ipv4dstAddr = Sink IP   */
                         fr.insertUplinkTunnelIngressRule(true, appId, flowRuleService, deviceId, UE_IP,Constants.dstSinkIpAddr, Integer.parseInt(tmpArray[3]), outPort);
 
-//                        deleteFlowRuleWithIP(dw, uePort, tmpArray[1]); // tmpArray[1] => UE IP
                         if(Constants.DEBUG){
                             log.warn("DEFAULT SWITCH deleting uplink rule with for UE with IP = {}",tmpArray[1]);
                         }
-//                        int DEFAULT_S_SGW_PORT = Constants.ENODEB_SGW_PORT_MAP.get(dw.getLong() + Constants.SEPARATOR + Constants.getSgwDpid(dw)); //dpids[0] ==> SGW DPID
-                        // int DEFAULT_S_SGW_PORT = Constants.ENODEB_SGW_PORT_MAP.get(Character.toString(dw.charAt(1)) + Constants.SEPARATOR + Constants.getSgwDpid(dw)); //dpids[0] ==> SGW DPID
                         int DEFAULT_S_SGW_PORT = Constants.ENODEB_SGW_PORT_MAP.get(dw.split("s")[1] + Constants.SEPARATOR + Constants.getSgwDpid(dw)); //dpids[0] ==> SGW DPID
 
 
                         //delete downlink rule
                         /***********************************delete downlink flow rule on Egress DGW( DGW -> RAN)*************************/
-//                        insertDownlinkTunnelForwardRule(boolean removeRule,ApplicationId appId,FlowRuleService flowRuleService,DeviceId switchId,int intunId,int outPort,int outtunId,boolean isEgress) {
-                        //synchronized (this) {
-                            // fr.insertDownlinkTunnelForwardRule(true, appId, flowRuleService, deviceId, Integer.parseInt(tmpArray[2]), uePort, 0, true);
                             fr.insertUplinkTunnelForwardRule(true, appId, flowRuleService, deviceId, Integer.parseInt(tmpArray[2]), uePort, 0, true);
 
-                        //}
-
-//                        deleteFlowRuleWithTEID(dw, DEFAULT_S_SGW_PORT, Integer.parseInt(tmpArray[2]), Constants.SINK_IP); //tmpArray[2] ==> UE VLAN ID
                         if(Constants.DEBUG){
-//                            System.out.println("DEFAULT SWITCH deleting downlink rule with for UE with IP="+tmpArray[1]+" and UE TEID="+tmpArray[2]);
                             log.warn("DEFAULT SWITCH deleting downlink rule with for UE with IP = {}",tmpArray[1]);
                             log.warn(" and UE TEID = {}",tmpArray[2]);
                         }
 
                         // dpids[0] ==> SGW DPID   & dpids[1]==> PGW DPID
-//                        boolean status = sgw.detachUEFromSGW(switch_mapping.get(DatapathId.of(Constants.getSgwDpid(dw))), switch_mapping.get(pgw_dpid), DatapathId.of(Constants.getSgwDpid(dw)), pgw_dpid, Integer.parseInt(tmpArray[3]), tmpArray[1]);
                         DeviceId SGWswitchName2 = Constants.getSgwswitchName(dw);
-//                        public boolean detachUEFromSGW(String sgw_dpId, String pgw_dpId, int sgw_teid, String ue_ip) {
                         boolean status = sgw.detachUEFromSGW(appId,flowRuleService,SGWswitchName2,Constants.getSgwDpid(dw), pgw_dpid, Integer.parseInt(tmpArray[3]), tmpArray[1]);
                         response = new StringBuilder();
                         if(status){
@@ -1609,7 +1280,6 @@ public class EpcApp {
                                 Utils.aesEncrypt(response.toString(), Constants.SAMPLE_ENC_KEY);
                                 Utils.hmacDigest(response.toString(), Constants.SAMPLE_ENC_KEY);
                             }
-//                            sendPacket(sw, inPort, destMac, sourceMac, dstIp, srcIp,  IpProtocol.UDP, dstPort, srcPort, response.toString());
                             if(Constants.DEBUG) {
                                 log.info(" sending response in DETACH_REQUEST");
                             }
@@ -1621,12 +1291,10 @@ public class EpcApp {
                                 Utils.aesEncrypt(response.toString(), Constants.SAMPLE_ENC_KEY);
                                 Utils.hmacDigest(response.toString(), Constants.SAMPLE_ENC_KEY);
                             }
-//                            sendPacket(sw, inPort, destMac, sourceMac, dstIp, srcIp,  IpProtocol.UDP, dstPort, srcPort, response.toString());
                             build_response_pkt(connectPoint,srcMac,dstMac,ipv4Protocol,ipv4SourceAddress,udp_dstport,udp_srcport,response.toString());
 
-//                            System.out.println("ERROR: DETACH_FAILURE");
                             log.info("ERROR: DETACH_FAILURE");
-                            //System.exit(1);
+                            // System.exit(1);
                         }
                         response = null;
                         if(Constants.DEBUG)
@@ -1635,7 +1303,16 @@ public class EpcApp {
 
                     /************************************************* CONTEXT RELEASE ****************************************************/
 
+                    // @HO : UE_CONTEXT_RELEASE_REQUEST the epc traffic codes are different at RAN
+                    // @HO : if HO is done(after handover) then we do Context Release - Service Request on chain 1 
+                    case Constants.UE_CONTEXT_RELEASE_REQUEST_HO:
+                    // all the packets come from chain1 DGW
+
+                        // break;
+                    // @HO : if HO is not done(before handover) then we do Context Release - Service Request on chain 2
                     case Constants.UE_CONTEXT_RELEASE_REQUEST:
+                    // all the packets come from chain1 DGW but we need to do UE_CONTEXT_RELEASE_REQUEST on chain 2
+
                                 byte [] b143 =Arrays.copyOfRange(p, 7, 11); //ue ip
                                 byte [] b144 =Arrays.copyOfRange(p, 11, 17); //sep
                                 byte [] b145 =Arrays.copyOfRange(p, 17, 21); //ue teid
@@ -1644,12 +1321,6 @@ public class EpcApp {
                                 byte [] b148 =Arrays.copyOfRange(p, 31, 37); //sep
                                 byte [] b149 =Arrays.copyOfRange(p, 37, 41); //ue num
                                 
-                                // int[] ip14 = new int[4];
-                                // System.out.print("IP = ");
-                                // for(int i=0; i<4; i++){
-                                //     ip14[i] = b143[i]& 0xFF;
-                                //     System.out.print(ip14[i]);
-                                // }
 
                                 int ipv4add1 = IPv4.toIPv4Address(b143);
                                 String ue_ipaddr1 = IPv4.fromIPv4Address(ipv4add1);
@@ -1681,8 +1352,17 @@ public class EpcApp {
                                     log.warn("ue_num = {}" , ue_num14);
                                 }
 
-//                        DatapathId dw_cr = Constants.getDgwDpidFromIp(srcIp.toString());
-                        String dw_cr = Constants.getDgwDpidFromIp(DGW_IPAddr);  // dw_cr contains switches ID like "1", "2" etc
+                        String dw_cr = ""; 
+
+                        if(Integer.toString(type)==Constants.UE_CONTEXT_RELEASE_REQUEST_HO){
+                            // all the packets come from chain1 DGW - Service Request on chain 1 
+                            dw_cr = Constants.getDgwDpidFromIp(DGW_IPAddr);  // dw_ue_ser contains switches ID like "1", "2" etc
+                        }
+                        else if(Integer.toString(type)==Constants.UE_CONTEXT_RELEASE_REQUEST){
+                            // all the packets come from chain1 DGW - Service Request on chain 2 
+                            dw_cr = Constants.getDgwDpidFromIp(Constants.RAN_IP_2);  // dw_ue_ser contains switches ID like "1", "2" etc
+                        }
+
                         if(Constants.DEBUG){
                             log.info("Inside case UE_CONTEXT_RELEASE_REQUEST");
                             //tmpArray[1]==> UE IP  &  tmpArray[2] ==> UE TEID  &  tmpArray[3] ==> SGW TEID &  tmpArray[4] ==> UE_KEY
@@ -1703,8 +1383,6 @@ public class EpcApp {
                         /* UPLINK   => ipv4srcAddr = UE IP and ipv4dstAddr = Sink IP   */
                         fr.insertUplinkTunnelIngressRule(true,appId,flowRuleService,deviceId,UE_IP1,Constants.dstSinkIpAddr,Integer.parseInt(tmpArray[3]),outPort);
 
-
-//                        deleteFlowRuleWithIP(dw_cr, uePort, tmpArray[1]); //tmpArray[1] ==> UE IP
                         if(Constants.DEBUG){
                             log.info("DEFAULT SWITCH deleting uplink rule with for UE with IP = {}",tmpArray[1]);
                         }
@@ -1714,14 +1392,11 @@ public class EpcApp {
                         /***********************************delete downlink flow rule on Egress DGW( DGW -> RAN)*************************/
                         fr.insertUplinkTunnelForwardRule(true,appId, flowRuleService, deviceId,Integer.parseInt(tmpArray[2]), uePort,0,true);
 
-
-//                        deleteFlowRuleWithTEID(dw_cr, DEFAULT_S_SGW_PORT, Integer.parseInt(tmpArray[2]), Constants.SINK_IP); //tmpArray[2] ==> UE VLAN ID
                         if(Constants.DEBUG){
                             log.info("DEFAULT SWITCH deleting downlink rule with for UE with IP = {} and UE TEID = {}",tmpArray[1],tmpArray[2]);
                         }
 
                         // dpids[0] ==> SGW DPID   & dpids[1]==> PGW DPID
-//                        public void releaseAccessBearersRequest(ApplicationId appId,FlowRuleService flowRuleService,DeviceId SGWswitchId, String sgw_dpId, int sgw_teid, String ue_ip){
                         DeviceId SGWswitchName3 = Constants.getSgwswitchName(dw_cr);
                         sgw.releaseAccessBearersRequest(appId,flowRuleService,SGWswitchName3, Constants.getSgwDpid(dw_cr), Integer.parseInt(tmpArray[3]), tmpArray[1]);
 
@@ -1729,18 +1404,24 @@ public class EpcApp {
                         FT.put(Integer.parseInt(Constants.UE_CONTEXT_RELEASE_REQUEST),dw_cr, "ue_state", tmpArray[4], "0");
 
                         response.append(Constants.UE_CONTEXT_RELEASE_COMMAND).append(Constants.SEPARATOR).append("");
-//                        private void build_response_pkt(ConnectPoint connectPoint,MacAddress srcMac,MacAddress dstMac,byte ipv4Protocol,int ipv4SourceAddress,int udp_dstport,int udp_srcport,String response){
                         build_response_pkt(connectPoint,srcMac,dstMac,ipv4Protocol,ipv4SourceAddress,udp_dstport,udp_srcport,response.toString());
 
-//                        sendPacket(sw, inPort, destMac, sourceMac, dstIp, srcIp,  IpProtocol.UDP, dstPort, srcPort, response.toString());
                         response = null;
                         if(Constants.DEBUG)
                             d2 = new Date();
                         break;
 
                     /**********************************  UE_INITIATED SERVICE REQUEST ***************************************/
-
+                    // @HO : service request the epc traffic codes are different at RAN
+                    // @HO : if HO is done(after handover) then we do Context Release - Service Request on chain 1 
+                    case Constants.UE_SERVICE_REQUEST_HO:
+                        // all the packets come from chain1 DGW
+                        
+                        // break;
+                    // @HO : if HO is not done(before handover) then we do Context Release - Service Request on chain 2
                     case Constants.UE_SERVICE_REQUEST:
+                    // all the packets come from chain1 DGW but we need to do UE_SERVICE_REQUEST on chain 2
+
 
                                         byte [] b173 =Arrays.copyOfRange(p, 7, 11); //ue num
                                         byte [] b174 =Arrays.copyOfRange(p, 11, 17); //sep
@@ -1758,14 +1439,6 @@ public class EpcApp {
                                         
                                         String sep176 = new String(b176, StandardCharsets.UTF_8); //6 byte
                                         
-                                        // int[] ip17 = new int[4];
-                                        // System.out.print("IP = ");
-                                        // for(int i=0; i<4; i++){
-                                        //     ip17[i] = b177[i]& 0xFF;
-                                        //     System.out.print(ip17[i]);
-                                        // }
-                                        // System.out.println();
-
                                         int ipv4add2 = IPv4.toIPv4Address(b177);
                                         String ue_ipaddr2 = IPv4.fromIPv4Address(ipv4add2);
                                         tmpArray[3]=ue_ipaddr2;
@@ -1778,9 +1451,15 @@ public class EpcApp {
                                             log.warn("sep2 = {}" , sep176);
                                             log.warn("UE_IP = {}" , ue_ipaddr2);
                                         }
-
-//                        DatapathId dw_ue_ser = Constants.getDgwDpidFromIp(srcIp.toString());
-                        String dw_ue_ser = Constants.getDgwDpidFromIp(DGW_IPAddr);  // dw_ue_ser contains switches ID like "1", "2" etc
+                        String dw_ue_ser="";
+                        if(Integer.toString(type)==Constants.UE_SERVICE_REQUEST_HO){
+                            // all the packets come from chain1 DGW - Service Request on chain 1 
+                            dw_ue_ser = Constants.getDgwDpidFromIp(DGW_IPAddr);  // dw_ue_ser contains switches ID like "1", "2" etc
+                        }
+                        else if(Integer.toString(type)==Constants.UE_SERVICE_REQUEST){
+                            // all the packets come from chain1 DGW - Service Request on chain 2 
+                            dw_ue_ser = Constants.getDgwDpidFromIp(Constants.RAN_IP_2);  // dw_ue_ser contains switches ID like "1", "2" etc
+                        }
 
                         if(Constants.DEBUG){
                             log.info("Inside case UE_SERVICE_REQUEST");
@@ -1795,7 +1474,6 @@ public class EpcApp {
                         if(Constants.DO_ENCRYPTION){
                             decArray = receiveDecryptedArray(tmpArray);
                         }
-//                        sgw_dpId = DatapathId.of(Constants.getSgwDpid(defaultSwitch));
                         sgw_dpId = Constants.getSgwDpid(dw_ue_ser);
                         ue_ip = tmpArray[3];
 
@@ -1804,13 +1482,8 @@ public class EpcApp {
                         sgw_teid = Integer.parseInt(tmpArray2[1]);
 
                         //install uplink rule on default switch
-                        if(Constants.DEBUG){
-//                            System.out.println("DEFAULT SWITCH installing uplink rule on default switch dpid = "+dw_ue_ser.getLong()+" inport="+uePort+" and SRC IP = "+ue_ip+
-//                                                       " outPort = "+Constants.ENODEB_SGW_PORT_MAP.get(dw_ue_ser + Constants.SEPARATOR + sgw_dpId.getLong())+" and out SRC IP = "+Constants.getRanIp(dw_ue_ser)+" out teid= "+sgw_teid+" of UE key = "+tmpArray[1]);
-                        }
 
                         /**************************** Uplink flow rules here (DGW to SGW) on DGW switch ***************************/
-//                        String SGW_ID =  Integer.parseInt(Constants.getSgwDpid(dgw_dpId));
                         int SGW_ID1 =  Integer.parseInt(Constants.getSgwDpid(dw_ue_ser));
                         String getval1 = dw_ue_ser + Constants.SEPARATOR + SGW_ID1;
                         int outPort1 =  Constants.ENODEB_SGW_PORT_MAP.get(getval1);
@@ -1823,9 +1496,6 @@ public class EpcApp {
                         /* UPLINK   => ipv4srcAddr = UE IP and ipv4dstAddr = Sink IP   */
                         fr.insertUplinkTunnelIngressRule(false,appId,flowRuleService,deviceId,UE_IPAddr1,Constants.dstSinkIpAddr, sgw_teid,outPort1);
 
-                        //        private void installFlowRuleWithIP(DatapathId dpId, int inPort, int outPort, int outTunnelId, String UE_IP, String srcIP, String dstIP, String dstMac){
-//                        installFlowRuleWithIP(dw_ue_ser, uePort, Constants.ENODEB_SGW_PORT_MAP.get(dw_ue_ser.getLong() + Constants.SEPARATOR + Constants.getSgwDpid(dw_ue_ser)), sgw_teid, ue_ip, Constants.getRanIp(dw_ue_ser), Constants.getSgwIpUplink(dw_ue_ser), Constants.SINK_MAC);
-
                         response = new StringBuilder();
                         response.append(Constants.INITIAL_CONTEXT_SETUP_REQUEST).append(Constants.SEPARATOR).append(sgw_teid).append("");
 
@@ -1833,14 +1503,22 @@ public class EpcApp {
                             decArray = receiveDecryptedArray(tmpArray);
                         }
 
-//                        sendPacket(sw, inPort, destMac, sourceMac, dstIp, srcIp,  IpProtocol.UDP, dstPort, srcPort, response.toString());
                         build_response_pkt(connectPoint,srcMac,dstMac,ipv4Protocol,ipv4SourceAddress,udp_dstport,udp_srcport,response.toString());
                         response = null;
                         if(Constants.DEBUG)
                             d2 = new Date();
                         break;
 
+                    // @HO : Initial context setup response the epc traffic codes are different at RAN
+                    // @HO : if HO is done(after handover) then we do Context Release - Service Request on chain 1 
+                    case Constants.INITIAL_CONTEXT_SETUP_RESPONSE_HO:
+                        // all the packets come from chain1 DGW
+                        // break;
+
+                    // @HO : if HO is not done(before handover) then we do Context Release - Service Request on chain 2
                     case Constants.INITIAL_CONTEXT_SETUP_RESPONSE:
+                        // all the packets come from chain1 DGW but we need to do INITIAL_CONTEXT_SETUP_RESPONSE on chain 2
+
 
                                     byte [] b193 =Arrays.copyOfRange(p, 7, 11); //ue teid
                                     byte [] b194 =Arrays.copyOfRange(p, 11, 17); //sep
@@ -1862,14 +1540,6 @@ public class EpcApp {
                                     String sep193 = new String(b196, StandardCharsets.UTF_8); //6 byte
                                     System.out.println("sep3 = " + sep193);
                                     
-                                    // int[] ip19 = new int[4];
-                                    // System.out.print("IP = ");
-                                    // for(int i=0; i<4; i++){
-                                    //     ip19[i] = b197[i]& 0xFF;
-                                    //     System.out.print(ip19[i]);
-                                    // }
-                                    // System.out.println();
-
                                     int ipv4add3 = IPv4.toIPv4Address(b197);
                                     String ue_ipaddr3 = IPv4.fromIPv4Address(ipv4add3);
                                     tmpArray[3]=ue_ipaddr3;
@@ -1883,7 +1553,17 @@ public class EpcApp {
                                         log.warn("UE_IP = {}" , tmpArray[3]);
                                     }
 
-                        String dw_c_resp = Constants.getDgwDpidFromIp(DGW_IPAddr);
+                        String dw_c_resp = "";
+
+                        if(Integer.toString(type)==Constants.INITIAL_CONTEXT_SETUP_RESPONSE_HO){
+                            // all the packets come from chain1 DGW - Service Request on chain 1
+                            dw_c_resp = Constants.getDgwDpidFromIp(DGW_IPAddr);  // dw_ue_ser contains switches ID like "1", "2" etc
+                        }
+                        else if(Integer.toString(type)==Constants.INITIAL_CONTEXT_SETUP_RESPONSE){
+                            // all the packets come from chain1 DGW - Service Request on chain 2
+                            dw_c_resp = Constants.getDgwDpidFromIp(Constants.RAN_IP_2);  // dw_ue_ser contains switches ID "4" for chain 2
+                        }
+
                         if(Constants.DEBUG){
                             log.info("Inside case INITIAL_CONTEXT_SETUP_RESPONSE");
                             step = 10;
@@ -1900,55 +1580,33 @@ public class EpcApp {
                         }
 
                         tmp = FT.get(dw_c_resp, "uekey_sgw_teid_map", tmpArray[2]); // tmpArray[2] => ue key
-                        //Arrays.fill(tmpArray2, null);
-			tmpArray2 = tmp.split(Constants.SEPARATOR);
+			            tmpArray2 = tmp.split(Constants.SEPARATOR);
                         //tmpArray2[0] => sgw_dpId  and tmpArray2[1] => sgw_teID
 
-
-//                      modifyBearerRequest(ApplicationId appId,FlowRuleService flowRuleService,DeviceId switchId,String sgw, String sgw_dpId, int sgw_teId, int ue_teId, String key){
-                        DeviceId SGWswitchName4 = Constants.getSgwswitchName(dw_c_resp);
+                        DeviceId SGWswitchName4 = Constants.getSgwswitchName(dw_c_resp);  // SGWswitchName4 contains "device:bmv2:s5" in case of chain 2 and "device:bmv2:s2" in case of chain 1
                         sgw.modifyBearerRequest(appId,flowRuleService,SGWswitchName4,tmpArray2[0], tmpArray2[0], Integer.parseInt(tmpArray2[1]), Integer.parseInt(tmpArray[1]), tmpArray[2]);
-
-
-//                        sgw.modifyBearerRequest(switch_mapping.get(DatapathId.of(tmpArray2[0])), DatapathId.of(tmpArray2[0]), Integer.parseInt(tmpArray2[1]), Integer.parseInt(tmpArray[1]), tmpArray[2]);
-
                         ue_ip = tmpArray[3];
 
-                        if(Constants.DEBUG){
-//                            System.out.println("DEFAULT SWITCH installing downlink rule on default switch dpid = "+dw_c_resp.getLong()+" inport="+Constants.ENODEB_SGW_PORT_MAP.get(dw_c_resp.getLong() + Constants.SEPARATOR + DatapathId.of(tmpArray2[0]).getLong())+
-//                                                       " in teid = " + Integer.parseInt(tmpArray[1]) +
-//                                                       " outPort = " + uePort + " out teid= " + Integer.parseInt(tmpArray[1]) + " of UE key = "+tmpArray[2]);
-                        }
-//                        insertDownlinkTunnelForwardRule(ApplicationId appId,FlowRuleService flowRuleService,DeviceId switchId,int intunId,int outPort,int outtunId,boolean isEgress)
-                        // fr.insertDownlinkTunnelForwardRule(false,appId, flowRuleService, deviceId,Integer.parseInt(tmpArray[1]), uePort,0,true);
 
                         /**************************** Downlink flow rules on Egress DGW (DGW -> RAN) ***************************/
                         fr.insertUplinkTunnelForwardRule(false,appId, flowRuleService, deviceId,Integer.parseInt(tmpArray[1]), uePort,0,true);
 
-
-
-//                        installFlowRule( DatapathId.of(Constants.getDgwDpid(DatapathId.of(tmpArray2[0]))), Constants.ENODEB_SGW_PORT_MAP.get(Constants.getDgwDpid(DatapathId.of(tmpArray2[0])) + Constants.SEPARATOR + DatapathId.of(tmpArray2[0]).getLong()), Integer.parseInt(tmpArray[1]), uePort, Integer.parseInt(tmpArray[1]), Constants.SINK_IP, ue_ip, Constants.getUeMac(dw_c_resp));
-
                         response = new StringBuilder();
                         //NOT USED uekey_guti_map, not considered
-                        uekey_guti_map.put(tmpArray[2], (Integer.parseInt(tmpArray[2])+1000)+"");
+                        // uekey_guti is already added in SEND_UE_TEID and removed only at Detach
+                        // uekey_guti_map.put(tmpArray[2], (Integer.parseInt(tmpArray[2])+1000)+"");
                         FT.put(Integer.parseInt(Constants.INITIAL_CONTEXT_SETUP_RESPONSE),dw_c_resp, "ue_state", tmpArray[2], "1");
                         response.append(Constants.ATTACH_ACCEPT).append(Constants.SEPARATOR).append(tmpArray[2]).append("");
 
                         if(Constants.DO_ENCRYPTION){
                             decArray = receiveDecryptedArray(tmpArray);
                         }
-
-//                        sendPacket(sw, inPort, destMac, sourceMac, dstIp, srcIp,  IpProtocol.UDP, dstPort, srcPort, response.toString());
                         build_response_pkt(connectPoint,srcMac,dstMac,ipv4Protocol,ipv4SourceAddress,udp_dstport,udp_srcport,response.toString());
 
                         response = null;
                         if(Constants.DEBUG)
                             d2 = new Date();
                         break;
-
-
-
 
 
                     default:
@@ -2010,30 +1668,11 @@ public class EpcApp {
                 if(Constants.DEBUG)
                     timeDiff(d1, d2, step);
             }
-
-
-
-
-
-
         }
 
         // Used for measuring execution time of procedures; uncomment it if needed for debugging purpose
         private void timeDiff(Date d1, Date d2, int step){
-		/*if(d1 == null || d2 == null){
-			System.out.println("Step " + step + " ****** " + d1 + " ----------- " + d2);
-			System.exit(1);
-		}
-		long diff = d2.getTime() - d1.getTime();
-		case_cnt[step-1]++;
-		case_sum[step-1] += diff;
-
-		if (case_cnt[step-1] % MOD == 0){
-			System.out.println(getStepName(step) + " Average over "+ MOD + " no of steps is " + (case_sum[step-1]*1.0/case_cnt[step-1]) +" ms");
-			case_cnt[step-1] = case_sum[step-1] = 0;
-			if(step == 5)
-				System.out.println();
-		}*/
+		
         }
         @SuppressWarnings("unused")
         private String getStepName(int step){
@@ -2084,7 +1723,7 @@ public class EpcApp {
             Data payload_data = new Data();
             //payload_data.setData(response.getBytes());
 	    //byte[] b = string.getBytes("UTF-8")
-	    payload_data.setData(response.getBytes(Charset.forName("UTF-8")));
+	         payload_data.setData(response.getBytes(Charset.forName("UTF-8")));
             UDP udp = new UDP();
             udp.setSourcePort(udp_dstport);
             udp.setDestinationPort(udp_srcport);
@@ -2123,40 +1762,7 @@ public class EpcApp {
             }
 
             packetService.emit(outboundPacket);
-
         }
-
-        // uplink rule
-//        private void installFlowRuleWithIP(DatapathId dpId, int inPort, int outPort, int outTunnelId, String UE_IP, String srcIP, String dstIP, String dstMac){
-//            //if(sw == null){
-//            sw = switchService.getSwitch(dpId);
-//            //}
-//            OFFlowMod.Builder fmb = sw.getOFFactory().buildFlowAdd();
-//            Match.Builder mb = sw.getOFFactory().buildMatch();
-//
-//
-//            mb.setExact(MatchField.ETH_TYPE, EthType.IPv4);
-//            mb.setExact(MatchField.IN_PORT, OFPort.of(inPort));
-//            mb.setExact(MatchField.IPV4_SRC, IPv4Address.of(UE_IP));
-//
-//            List<OFAction> actions = new ArrayList<OFAction>();
-//            actions.add(sw.getOFFactory().actions().setVlanVid(VlanVid.ofVlan(outTunnelId)));
-//
-//            if(dstIP != "")
-//                actions.add(sw.getOFFactory().actions().setNwDst(IPv4Address.of(dstIP)));
-//
-//            actions.add(sw.getOFFactory().actions().setDlDst(MacAddress.of(dstMac)));
-//            actions.add(sw.getOFFactory().actions().output(OFPort.of(outPort), Integer.MAX_VALUE)); // FLOOD is a more selective/efficient version of ALL
-//            fmb.setActions(actions);
-//
-//            fmb.setHardTimeout(0)
-//                    .setIdleTimeout(0)
-//                    .setPriority(1)
-//                    .setBufferId(OFBufferId.NO_BUFFER)
-//                    .setMatch(mb.build());
-//
-//            sw.write(fmb.build());
-//        }
     }
 
     // Indicates whether this is a control packet, e.g. LLDP, BDDP
@@ -2165,209 +1771,4 @@ public class EpcApp {
         return type == Ethernet.TYPE_LLDP || type == Ethernet.TYPE_BSN;
     }
 
-            /**
-             * Provisions a tunnel between the given source and destination host with
-             * the given tunnel ID. The tunnel is established using a randomly picked
-             * shortest path based on the given topology snapshot.
-             *
-             * @param tunId   tunnel ID
-             * @param srcHost tunnel source host
-             * @param dstHost tunnel destination host
-             * @param topo    topology snapshot
-             */
-//    private void provisionTunnel(int tunId, Host srcHost, Host dstHost, Topology topo) {
-//
-//        // Get all shortest paths between switches connected to source and
-//        // destination hosts.
-//        DeviceId srcSwitch = srcHost.location().deviceId();
-//        DeviceId dstSwitch = dstHost.location().deviceId();
-//
-//        List<Link> pathLinks;
-//        if (srcSwitch.equals(dstSwitch)) {
-//            // Source and dest hosts are connected to the same switch.
-//            pathLinks = Collections.emptyList();
-//        } else {
-//            // Compute shortest path.
-//            Set<Path> allPaths = topologyService.getPaths(topo, srcSwitch, dstSwitch);
-//            if (allPaths.size() == 0) {
-//                log.warn("No paths between {} and {}", srcHost.id(), dstHost.id());
-//                return;
-//            }
-//            // If many shortest paths are available, pick a random one.
-//            pathLinks = pickRandomPath(allPaths).links();
-//        }
-//
-//        // Tunnel ingress rules.
-//        for (IpAddress dstIpAddr : dstHost.ipAddresses()) {
-//            // In ONOS discovered hosts can have multiple IP addresses.
-//            // Insert tunnel ingress rule for each IP address.
-//            // Next switches will forward based only on tunnel ID.
-//            insertTunnelIngressRule(srcSwitch, dstIpAddr, tunId);
-//        }
-//
-//        // Insert tunnel transit rules on all switches in the path, excluded the
-//        // last one.
-//        for (Link link : pathLinks) {
-//            DeviceId sw = link.src().deviceId();
-//            PortNumber port = link.src().port();
-//            insertTunnelForwardRule(sw, port, tunId, false);
-//        }
-//
-//        // Tunnel egress rule.
-//        PortNumber egressSwitchPort = dstHost.location().port();
-//        insertTunnelForwardRule(dstSwitch, egressSwitchPort, tunId, true);
-//
-//        log.info("** Completed provisioning of tunnel {} (srcHost={} dstHost={})",
-//                 tunId, srcHost.id(), dstHost.id());
-//    }
-//
-//    /**
-//     * Generates and insert a flow rule to perform the tunnel INGRESS function
-//     * for the given switch, destination IP address and tunnel ID.
-//     *
-//     * @param switchId  switch ID
-//     * @param dstIpAddr IP address to forward inside the tunnel
-//     * @param tunId     tunnel ID
-//     */
-//    private void insertTunnelIngressRule(DeviceId switchId,
-//                                         IpAddress dstIpAddr,
-//                                         int tunId) {
-//
-//
-//        PiTableId tunnelIngressTableId = PiTableId.of("c_ingress.t_tunnel_ingress");
-//
-//        // Longest prefix match on IPv4 dest address.
-//        PiMatchFieldId ipDestMatchFieldId = PiMatchFieldId.of("hdr.ipv4.dst_addr");
-//        PiCriterion match = PiCriterion.builder()
-//                .matchLpm(ipDestMatchFieldId, dstIpAddr.toOctets(), 32)
-//                .build();
-//
-//        PiActionParam tunIdParam = new PiActionParam(PiActionParamId.of("tun_id"), tunId);
-//
-//        PiActionId ingressActionId = PiActionId.of("c_ingress.my_tunnel_ingress");
-//        PiAction action = PiAction.builder()
-//                .withId(ingressActionId)
-//                .withParameter(tunIdParam)
-//                .build();
-//
-//        log.info("Inserting INGRESS rule on switch {}: table={}, match={}, action={}",
-//                 switchId, tunnelIngressTableId, match, action);
-//
-//        insertPiFlowRule(switchId, tunnelIngressTableId, match, action);
-//    }
-//
-//    /**
-//     * Generates and insert a flow rule to perform the tunnel FORWARD/EGRESS
-//     * function for the given switch, output port address and tunnel ID.
-//     *
-//     * @param switchId switch ID
-//     * @param outPort  output port where to forward tunneled packets
-//     * @param tunId    tunnel ID
-//     * @param isEgress if true, perform tunnel egress action, otherwise forward
-//     *                 packet as is to port
-//     */
-//    private void insertTunnelForwardRule(DeviceId switchId,
-//                                         PortNumber outPort,
-//                                         int tunId,
-//                                         boolean isEgress) {
-//
-//        PiTableId tunnelForwardTableId = PiTableId.of("c_ingress.t_tunnel_fwd");
-//
-//        // Exact match on tun_id
-//        PiMatchFieldId tunIdMatchFieldId = PiMatchFieldId.of("hdr.my_tunnel.tun_id");
-//        PiCriterion match = PiCriterion.builder()
-//                .matchExact(tunIdMatchFieldId, tunId)
-//                .build();
-//
-//        // Action depend on isEgress parameter.
-//        // if true, perform tunnel egress action on the given outPort, otherwise
-//        // simply forward packet as is (set_out_port action).
-//        PiActionParamId portParamId = PiActionParamId.of("port");
-//        PiActionParam portParam = new PiActionParam(portParamId, (short) outPort.toLong());
-//
-//        final PiAction action;
-//        if (isEgress) {
-//            // Tunnel egress action.
-//            // Remove MyTunnel header and forward to outPort.
-//            PiActionId egressActionId = PiActionId.of("c_ingress.my_tunnel_egress");
-//            action = PiAction.builder()
-//                    .withId(egressActionId)
-//                    .withParameter(portParam)
-//                    .build();
-//        } else {
-//            // Tunnel transit action.
-//            // Forward the packet as is to outPort.
-//            PiActionId egressActionId = PiActionId.of("c_ingress.set_out_port");
-//            action = PiAction.builder()
-//                    .withId(egressActionId)
-//                    .withParameter(portParam)
-//                    .build();
-//        }
-//
-//        log.info("Inserting {} rule on switch {}: table={}, match={}, action={}",
-//                 isEgress ? "EGRESS" : "TRANSIT",
-//                 switchId, tunnelForwardTableId, match, action);
-//
-//        insertPiFlowRule(switchId, tunnelForwardTableId, match, action);
-//    }
-//
-//    /**
-//     * Inserts a flow rule in the system that using a PI criterion and action.
-//     *
-//     * @param switchId    switch ID
-//     * @param tableId     table ID
-//     * @param piCriterion PI criterion
-//     * @param piAction    PI action
-//     */
-//    private void insertPiFlowRule(DeviceId switchId, PiTableId tableId,
-//                                  PiCriterion piCriterion, PiAction piAction) {
-//        FlowRule rule = DefaultFlowRule.builder()
-//                .forDevice(switchId)
-//                .forTable(tableId)
-//                .fromApp(appId)
-//                .withPriority(FLOW_RULE_PRIORITY)
-//                .makePermanent()
-//                .withSelector(DefaultTrafficSelector.builder()
-//                                      .matchPi(piCriterion).build())
-//                .withTreatment(DefaultTrafficTreatment.builder()
-//                                       .piTableAction(piAction).build())
-//                .build();
-//        flowRuleService.applyFlowRules(rule);
-//    }
-//
-//    private int getNewTunnelId() {
-//        return nextTunnelId.incrementAndGet();
-//    }
-//
-//    private Path pickRandomPath(Set<Path> paths) {
-//        int item = new Random().nextInt(paths.size());
-//        List<Path> pathList = Lists.newArrayList(paths);
-//        return pathList.get(item);
-//    }
-
-    /**
-     * A listener of host events that provisions two tunnels for each pair of
-     * hosts when a new host is discovered.
-     */
-//    private class InternalHostListener implements HostListener {
-//
-//        @Override
-//        public void event(HostEvent event) {
-//            if (event.type() != HostEvent.Type.HOST_ADDED) {
-//                // Ignore other host events.
-//                return;
-//            }
-//            synchronized (this) {
-//                // Synchronizing here is an overkill, but safer for demo purposes.
-//                Host host = event.subject();
-//                Topology topo = topologyService.currentTopology();
-//                for (Host otherHost : hostService.getHosts()) {
-//                    if (!host.equals(otherHost)) {
-//                        provisionTunnel(getNewTunnelId(), host, otherHost, topo);
-//                        provisionTunnel(getNewTunnelId(), otherHost, host, topo);
-//                    }
-//                }
-//            }
-//        }
-//    }
 }
