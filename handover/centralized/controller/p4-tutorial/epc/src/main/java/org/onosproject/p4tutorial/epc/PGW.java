@@ -155,14 +155,14 @@ public class PGW  {
 		}
 
 		if(Constants.DEBUG){
-			log.warn("P GW TUNNEL ID of UE = {}",apn);
-            log.warn(" is = {}",pgw_teid);
+			log.warn("in PGW.java apn of UE = {}",apn);
+	                log.warn(" PGW TEID is = {}",pgw_teid);
 		}
 		String dgw_dp_id_temp = Constants.getDgwDpid(sgw_dpId);
 		String sgw_ip = Constants.getSgwIpDownlink(dgw_dp_id_temp);
 		//install uplink and downlink rules
         /********************  Uplink rule is installed on PGW (PGW to sink) *************************/
-		DeviceId pgwSwitchName = DeviceId.deviceId("device:bmv2:s3");
+		DeviceId pgwSwitchName = Constants.PGW_Switch_Name;
 		fr.insertUplinkTunnelForwardRule(false,appId, flowRuleService,pgwSwitchName,pgw_teid, pgw_sink_port,0,true);
 
 		/********************  Downlink rule is installed on PGW (sink to PGW) *************************/

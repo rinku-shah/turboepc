@@ -220,7 +220,6 @@ public class SGW  {
 
 			//delete uplink rule
 			/***********************************delete uplink flow rule on Transit SGW( SGW -> PGW) *********************************************/
-			/*******************while deleting we only need match field confirm??????????????***************************************/
 
 			fr.insertUplinkTunnelForwardRule(true,appId,flowRuleService,SGWswitchId,sgw_teid,Constants.SGW_PORT_MAP.get(sgw_dpId)[1],pgw_teid,false);
 
@@ -288,7 +287,7 @@ public class SGW  {
 			reusable_teids[chainId].add(sgw_teid);
 
 			//@HO: call pgw function if we remember prev pgw-teid
-			return pg.detachUEFromPGW_HO(appId,flowRuleService,sgw_dpId, pgw_dpId, pgw_teid, ue_ip);
+			return pg.detachUEFromPGW(appId,flowRuleService,sgw_dpId, pgw_dpId, pgw_teid, ue_ip);
 	}
 
 	/**

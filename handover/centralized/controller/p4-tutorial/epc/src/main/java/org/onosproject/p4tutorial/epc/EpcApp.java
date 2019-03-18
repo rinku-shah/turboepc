@@ -388,7 +388,7 @@ public class EpcApp {
                     log.warn("ipv4dstAddres = {}", matchIp4DstPrefix);
                     log.warn("ipv4Packet class = {}",ipv4Packet.getClass().getName());
                     log.warn("ipv4SourceAddress value = {}",ipv4SourceAddress);
-                    log.warn("dstip clas = {}",dstip.getClass().getName());
+                    //log.warn("dstip clas = {}",dstip.getClass().getName());
                 }
 
 
@@ -884,8 +884,7 @@ public class EpcApp {
 
                         //MAP key = UE KEY,  MAP value = SGW_DPID + SEPARATOR + SGW_TEID
                         String tmp = FT.get(send_ue_teid_dgw, "uekey_sgw_teid_map", tmpArray[2]); // tmpArray[2] => ue key
-                        //Arrays.fill(tmpArray2, null);
-			             tmpArray2 = tmp.split(Constants.SEPARATOR);
+			tmpArray2 = tmp.split(Constants.SEPARATOR);
 
                         //tmpArray[1] => ue_teId and tmpArray[2] => ue key
                         //tmpArray2[0] => sgw_dpId  and tmpArray2[1] => sgw_teID
@@ -915,13 +914,15 @@ public class EpcApp {
 
                         String pgw_dpid = Integer.toString(Constants.PGW_ID);
                         
+                        tmp = FT.get(Integer.toString(4), "uekey_sgw_teid_map", tmpArray[2]); // tmpArray[2] => ue key
+			tmpArray2 = tmp.split(Constants.SEPARATOR);
                         // @HO: find UE IP, and sgw_teid from uekey_sgw_teid_map, and uekey_ueip_map : already found above so reusing
                         // @HO: ue_teid (need to remember prev ue_teid, if not forget the last flow remove)   : UE is sedning ue_teid in Send_ue_teid message itself reusing it here
 
                         //delete uplink rule
                         /******************************** delete uplink flow rule on Ingress DGW( DGW -> SGW)********************************/
-                        byte [] UE_IP =  IPv4.toIPv4AddressBytes((ue_ip);
-                        String DGWDeviceId_chain2 = Constants.DGW_NAME_chain2;
+                        byte [] UE_IP =  IPv4.toIPv4AddressBytes(ue_ip);
+                        DeviceId DGWDeviceId_chain2 = Constants.DGW_NAME_chain2;
                         if(Constants.DEBUG){
                             log.info("UE IP in Send_ue_teid_HO = {}",UE_IP);
                             log.info("Deleting ingress rule with deiveId = {}, UE_IPAddr = {}, sgw_teid = {},outPort = {}",DGWDeviceId_chain2,UE_IP,0,0);
@@ -947,9 +948,9 @@ public class EpcApp {
 
                         // dpids[0] ==> SGW DPID   & dpids[1]==> PGW DPID
                         DeviceId SGWswitchName_chain2 = Constants.SGW_NAME_chain2;
-                        String sgwdpId_chain2 = Integer.toString(SGW_SWITCH_ID_chain2);
+                        String sgwdpId_chain2 = Integer.toString(Constants.SGW_SWITCH_ID_chain2);
 
-                        boolean status = sgw.detachUEFromSGW_ho(appId,flowRuleService,SGWswitchName_chain2,sgwdpId_chain2, pgw_dpid, tmpArray2[1], ue_ip);
+                        boolean status = sgw.detachUEFromSGW_ho(appId,flowRuleService,SGWswitchName_chain2,sgwdpId_chain2, pgw_dpid, Integer.parseInt(tmpArray2[1]), ue_ip);
                         if(!status){
                             log.warn("Deleting rules during handover from chain2 is unsuccessful !!");
                         }
@@ -981,7 +982,7 @@ public class EpcApp {
                                     
                                     int ue_key1 = ByteBuffer.wrap(b65).getInt();
                                     if(Constants.BITWISE_DEBUG){
-                                        log.info("insisde SEND_APN");
+                                        log.info("insisde SEND_APN_HO");
                                         log.warn("imsi = {}" , apn1);
                                         log.warn("sep2 = {}" , sep62);
                                         log.warn("ue_key = {}" , ue_key1);
@@ -990,9 +991,9 @@ public class EpcApp {
                                     tmpArray[2] = Integer.toString(ue_key1);
                     
                         //@HO : since attach has to be done on chain2 so we use DGW of chain2 
-                        String dgw_dpId = "s4"; //hardcode this to s2 to attach to second chain
+                        dgw_dpId = "s4"; //hardcode this to s2 to attach to second chain
                         if(Constants.DEBUG){
-                            log.info("Inside case SEND_APN");
+                            log.info("Inside case SEND_APN_HO");
                             //log.warn("array1[2] = {}",array1[2]); //hardcoding  array1[2] contains switches  like "s1", "s2" etc
                             log.warn("dgw_dpId = {}",dgw_dpId); //hardcoding  array1[2] contains switches  like "s1", "s2" etc
                             step = 3;
@@ -1052,7 +1053,8 @@ public class EpcApp {
                         // install flow rules by matching on UE_IP
                         
                         /* UPLINK   => ipv4srcAddr = UE IP and ipv4dstAddr = Sink IP   */
-                        fr.insertUplinkTunnelIngressRule(false, appId, flowRuleService, deviceId,UE_IPAddr2, Constants.dstSinkIpAddr, sgw_teid, outPort);
+			// @HO : installing rules on DGW switch of chain2 
+                        fr.insertUplinkTunnelIngressRule(false, appId, flowRuleService, Constants.DGW_NAME_chain2,UE_IPAddr2, Constants.dstSinkIpAddr, sgw_teid, outPort);
 
                          // key: tmpArray[2] => UE Key, Value: tmpArray2[0] => UE IP
                         FT.put(Integer.parseInt(Constants.SEND_APN_HO),dgw_dpId, "uekey_ueip_map", tmpArray[2], tmpArray2[0]); // key: tmpArray[2] => UE Key, Value: tmpArray2[0] => UE IP
@@ -1139,8 +1141,8 @@ public class EpcApp {
                         }
 
                         /**************************** Downlinkl flow rules on DGW (DGW -> RAN) ***************************/
-                        // deviceId is DGW switch Name
-                        fr.insertUplinkTunnelForwardRule(false,appId, flowRuleService, deviceId,Integer.parseInt(tmpArray[1]), uePort,0,true);
+                        // @HO :  DGW_NAME_chain2 is DGW switch Name of chain2
+                        fr.insertUplinkTunnelForwardRule(false,appId, flowRuleService, Constants.DGW_NAME_chain2,Integer.parseInt(tmpArray[1]), uePort,0,true);
 
                         response = new StringBuilder();
                         //NOT USED LATER uekey_guti_map, so not considered in state calc
@@ -1225,7 +1227,7 @@ public class EpcApp {
                         // tmpArray[4] => UE KEY
                         // FT.del(Integer.parseInt(Constants.DETACH_REQUEST),dw, "uekey_udp_src_port_map", tmpArray[4]); // tmpArray[4] => UE KEY
 
-                        String pgw_dpid = Integer.toString(Constants.PGW_ID);
+                        pgw_dpid = Integer.toString(Constants.PGW_ID);
 
                         // newly added.. because can't remove in SEND_UE_TEID step.. due to re-establishment of tunnel
                         FT.del(Integer.parseInt(Constants.DETACH_REQUEST),dw, "uekey_sgw_teid_map", tmpArray[4]);// newly added.. because can't remove in SEND_UE_TEID step.. due to re-establishment of tunnel
@@ -1246,7 +1248,7 @@ public class EpcApp {
                         int SGW_ID2 =  Integer.parseInt(Constants.getSgwDpid(dw));
                         String getval2 = dw.split("s")[1] + Constants.SEPARATOR + SGW_ID2;
                         outPort =  Constants.ENODEB_SGW_PORT_MAP.get(getval2);
-                        byte [] UE_IP = IPv4.toIPv4AddressBytes(tmpArray[1]);
+                        UE_IP = IPv4.toIPv4AddressBytes(tmpArray[1]);
                         if(Constants.DEBUG){
                             log.info("UE IP as received from RAN = {}",tmpArray[1]);
                             log.info("Deleting ingress rule with deiveId = {}, UE_IPAddr = {}, sgw_teid = {},outPort = {}",deviceId,UE_IP, Integer.parseInt(tmpArray[3]),outPort);
@@ -1272,7 +1274,7 @@ public class EpcApp {
 
                         // dpids[0] ==> SGW DPID   & dpids[1]==> PGW DPID
                         DeviceId SGWswitchName2 = Constants.getSgwswitchName(dw);
-                        boolean status = sgw.detachUEFromSGW(appId,flowRuleService,SGWswitchName2,Constants.getSgwDpid(dw), pgw_dpid, Integer.parseInt(tmpArray[3]), tmpArray[1]);
+                        status = sgw.detachUEFromSGW(appId,flowRuleService,SGWswitchName2,Constants.getSgwDpid(dw), pgw_dpid, Integer.parseInt(tmpArray[3]), tmpArray[1]);
                         response = new StringBuilder();
                         if(status){
                             response.append(Constants.DETACH_ACCEPT).append(Constants.SEPARATOR).append("");
@@ -1350,15 +1352,17 @@ public class EpcApp {
                                     log.warn("sgw_teid = {}" , sgw_teid14);
                                     log.warn("sep4 = {}" , sep148);
                                     log.warn("ue_num = {}" , ue_num14);
+				    log.warn("type = {}",type);
                                 }
 
                         String dw_cr = ""; 
 
-                        if(Integer.toString(type)==Constants.UE_CONTEXT_RELEASE_REQUEST_HO){
+                        //if(Integer.toString(type)==Constants.UE_CONTEXT_RELEASE_REQUEST_HO){
+                        if(Integer.toString(type).equals(Constants.UE_CONTEXT_RELEASE_REQUEST_HO)){
                             // all the packets come from chain1 DGW - Service Request on chain 1 
                             dw_cr = Constants.getDgwDpidFromIp(DGW_IPAddr);  // dw_ue_ser contains switches ID like "1", "2" etc
                         }
-                        else if(Integer.toString(type)==Constants.UE_CONTEXT_RELEASE_REQUEST){
+                        else if(Integer.toString(type).equals(Constants.UE_CONTEXT_RELEASE_REQUEST)){
                             // all the packets come from chain1 DGW - Service Request on chain 2 
                             dw_cr = Constants.getDgwDpidFromIp(Constants.RAN_IP_2);  // dw_ue_ser contains switches ID like "1", "2" etc
                         }
@@ -1452,11 +1456,11 @@ public class EpcApp {
                                             log.warn("UE_IP = {}" , ue_ipaddr2);
                                         }
                         String dw_ue_ser="";
-                        if(Integer.toString(type)==Constants.UE_SERVICE_REQUEST_HO){
+                        if(Integer.toString(type).equals(Constants.UE_SERVICE_REQUEST_HO)){
                             // all the packets come from chain1 DGW - Service Request on chain 1 
                             dw_ue_ser = Constants.getDgwDpidFromIp(DGW_IPAddr);  // dw_ue_ser contains switches ID like "1", "2" etc
                         }
-                        else if(Integer.toString(type)==Constants.UE_SERVICE_REQUEST){
+                        else if(Integer.toString(type).equals(Constants.UE_SERVICE_REQUEST)){
                             // all the packets come from chain1 DGW - Service Request on chain 2 
                             dw_ue_ser = Constants.getDgwDpidFromIp(Constants.RAN_IP_2);  // dw_ue_ser contains switches ID like "1", "2" etc
                         }
@@ -1555,11 +1559,11 @@ public class EpcApp {
 
                         String dw_c_resp = "";
 
-                        if(Integer.toString(type)==Constants.INITIAL_CONTEXT_SETUP_RESPONSE_HO){
+                        if(Integer.toString(type).equals(Constants.INITIAL_CONTEXT_SETUP_RESPONSE_HO)){
                             // all the packets come from chain1 DGW - Service Request on chain 1
                             dw_c_resp = Constants.getDgwDpidFromIp(DGW_IPAddr);  // dw_ue_ser contains switches ID like "1", "2" etc
                         }
-                        else if(Integer.toString(type)==Constants.INITIAL_CONTEXT_SETUP_RESPONSE){
+                        else if(Integer.toString(type).equals(Constants.INITIAL_CONTEXT_SETUP_RESPONSE)){
                             // all the packets come from chain1 DGW - Service Request on chain 2
                             dw_c_resp = Constants.getDgwDpidFromIp(Constants.RAN_IP_2);  // dw_ue_ser contains switches ID "4" for chain 2
                         }

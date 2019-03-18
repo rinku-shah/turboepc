@@ -415,10 +415,10 @@ void* multithreading_func(void *arg){
 					doDetach_t = true;
 					sendData_t = true;
 					assignIpToInterface_t = true;
-					s1_release_t = false;
+					s1_release_t = true;
 					doEncryption_t = false;
 					checkIntegrity_t = false;
-					ueServiceRequest_t = false;
+					ueServiceRequest_t = true;
 					handover_t = true;
 					dataTime = 1;
 					loop1 = 1;    //outer loop---attach
@@ -475,7 +475,6 @@ void* multithreading_func(void *arg){
 				// usleep(200000);
 				if(tmpArray.size()>=5){
 
-					do{ //for while(loop2>0)
 						if(sendData_t){
 								// Send data
 							if(DO_DEBUG){
@@ -486,6 +485,7 @@ void* multithreading_func(void *arg){
 
 							//currentPort = send_ue_data(ue, ue_num, rate, currentPort, startingPort, endPort, user, tmpArray, dataTime);
 							// usleep(100000);
+							//sleep(60);
 						}
 						do{
 							if(handover_t){
@@ -552,7 +552,16 @@ void* multithreading_func(void *arg){
 										cout<<"NETWORK SERVICE REQUEST DONE with UE NUM="<<ue_num<<endl;
 									}
 								}
-							/************************************************ @HO: END : Context Release-  Service Request loop with chain 2 ***********************************************/
+							
+						}
+						loop3--;
+						}
+
+						}while(loop3>0);
+							//sleep(60);
+						if(handover_t){
+
+						/************************************************ @HO: END : Context Release-  Service Request loop with chain 2 ***********************************************/
 
 
 							/***************************************************  in HANDOVER, Attach to 1st chain of DGW-SGW  **********************************************/
@@ -590,11 +599,10 @@ void* multithreading_func(void *arg){
 
 							///  After this the detach should be performed for second chain, attach is still done with first chain
 						}
-						loop3--;
-						}
+						sleep(60);
 
-						}while(loop3>0);
-					
+					do{ //for while(loop2>0)
+
 						if(s1_release_t){
 							//cout<<"SLEEPING BEFORE s1 release"<<endl;
 							usleep(my_rand()+2000);		//200-700 usec
