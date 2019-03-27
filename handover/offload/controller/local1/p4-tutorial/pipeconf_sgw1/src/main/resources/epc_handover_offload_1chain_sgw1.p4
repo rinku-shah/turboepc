@@ -278,8 +278,8 @@ control c_ingress(inout headers hdr,
                     clone3(CloneType.I2E, I2E_CLONE_SESSION_ID, standard_metadata);
 
                     // handle context release message 
-                    // @HO : sgw2 will only get service context release BEFORE handover with original epc traffic code
-                    if(hdr.data.epc_traffic_code == 14){
+                    // @HO : sgw1 will only get service context release AFTER handover with changed epc traffic code
+                    if(hdr.data.epc_traffic_code == 54){
                         // send the original packet back to RAN by appending the reply packet
 
                         standard_metadata.egress_spec = CPU_PORT;
@@ -290,14 +290,14 @@ control c_ingress(inout headers hdr,
                         hdr.packet_in.ingress_port = standard_metadata.ingress_port;
                         // return;
                     }
-                    // @HO : sgw2 will only get service context release BEFORE handover with original epc traffic code
-                    else if(hdr.data.epc_traffic_code == 17){
+                    // @HO : sgw1 will only get service request AFTER handover with changed epc traffic code
+                    else if(hdr.data.epc_traffic_code == 57){
                         // send the original packet to local onos by appending the sgw_teid field
                         service_req_uekey_sgwteid_map.apply();
                         // return;
                     }
-                    // @HO : sgw2 will only get service context release BEFORE handover with original epc traffic code
-                    else if(hdr.data.epc_traffic_code == 19){
+                    // @HO : sgw1 will only get service request AFTER handover with changed epc traffic code
+                    else if(hdr.data.epc_traffic_code == 59){
                         // send the original packet to local onos by appending the sgw_teid field
                         ctxt_setup_uekey_sgwteid_map.apply();
                         // return;
@@ -450,6 +450,7 @@ control c_egress(inout headers hdr,
                                     else if(hdr.ethernet.srcAddr == ran3){
                                          hdr.ethernet.srcAddr = sgw3;
                                         hdr.ipv4.srcAddr = s3u_sgw_addr;
+
                                     }
                                     else if(hdr.ethernet.srcAddr == ran4){
                                          hdr.ethernet.srcAddr = sgw4;
@@ -458,6 +459,7 @@ control c_egress(inout headers hdr,
                                      else if(hdr.ethernet.srcAddr == ran5){
                                          hdr.ethernet.srcAddr = sgw5;
                                         hdr.ipv4.srcAddr = s5u_sgw_addr;
+
                                     }
                                     else if(hdr.ethernet.srcAddr == ran6){
                                          hdr.ethernet.srcAddr = sgw6;
@@ -499,22 +501,27 @@ control c_egress(inout headers hdr,
                                     if(hdr.ethernet.srcAddr == ran1){
                                          hdr.ethernet.srcAddr = sgw1;
                                         hdr.ipv4.srcAddr = s1u_sgw_addr;
+
                                     }
                                     else if(hdr.ethernet.srcAddr == ran2){
                                          hdr.ethernet.srcAddr = sgw2;
                                         hdr.ipv4.srcAddr = s2u_sgw_addr;
+
                                     }
                                     else if(hdr.ethernet.srcAddr == ran3){
                                          hdr.ethernet.srcAddr = sgw3;
                                         hdr.ipv4.srcAddr = s3u_sgw_addr;
+
                                     }
                                     else if(hdr.ethernet.srcAddr == ran4){
                                          hdr.ethernet.srcAddr = sgw4;
                                         hdr.ipv4.srcAddr = s4u_sgw_addr;
+
                                     }
                                     else if(hdr.ethernet.srcAddr == ran5){
                                          hdr.ethernet.srcAddr = sgw5;
                                         hdr.ipv4.srcAddr = s5u_sgw_addr;
+
                                     }
                                     else if(hdr.ethernet.srcAddr == ran6){
                                          hdr.ethernet.srcAddr = sgw6;
@@ -530,8 +537,11 @@ control c_egress(inout headers hdr,
                                     hdr.ipv4.totalLen =  hdr.udp.length_ + IPV4_HDR_SIZE;
                                      // return;
                             }
+
                 }  // if close
+
             }  // apply close
+
 } // egress control close
 
 

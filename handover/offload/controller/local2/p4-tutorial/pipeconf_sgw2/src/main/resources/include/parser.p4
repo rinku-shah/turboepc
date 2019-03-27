@@ -80,15 +80,15 @@ parser c_parser(packet_in packet,
             7  : parse_send_ue_teid;
             26  : parse_send_ue_teid;
             9  : parse_detach_req;
-            // 14 : parse_ue_context_release;
-            // @HO : sgw1 will only get service request AFTER handover with changed epc traffic code
-            54 : parse_ue_context_release;
-            // 17 : parse_ue_service_req;
-            // @HO : sgw1 will only get service request AFTER handover with changed epc traffic code
-            57 : parse_ue_service_req;
-            // 19 : parse_initial_ctxt_setup_resp;
-            // @HO : sgw1 will only get service request AFTER handover with changed epc traffic code
-            59 : parse_initial_ctxt_setup_resp;
+            // @HO : sgw2 will only get service request BEFORE handover with original epc traffic code for chain2
+            14 : parse_ue_context_release;
+            // 54 : parse_ue_context_release;
+            // @HO : sgw2 will only get service request BEFORE handover with original epc traffic code for chain2
+            17 : parse_ue_service_req;
+            // 57 : parse_ue_service_req;
+            // @HO : sgw2 will only get service request BEFORE handover with original epc traffic code for chain2
+            19 : parse_initial_ctxt_setup_resp;
+            // 59 : parse_initial_ctxt_setup_resp;
             // deafult is 12(request_starting_ip) so accept it 
             default : accept;
         }
