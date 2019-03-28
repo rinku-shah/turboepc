@@ -3,7 +3,6 @@
  ***********************************************************************/
 package org.onosproject.p4tutorial.epc;
 
-
 import java.util.HashMap;
 import org.slf4j.Logger;
 import static org.slf4j.LoggerFactory.getLogger;
@@ -35,7 +34,7 @@ public class Constants {
 	final static boolean OFFLOAD_ATTACH = true; //false; //True=> We wish to offload attach components to local controller
 	final static String SINK_MAC = "00:16:3e:de:0a:60"; //"00:16:3e:42:b9:ea"; // MAC Address of SINK Node //40:8d:5c:76:d2:fa    *
 	final static int NUM_CHAINS = 6;
-	final static String CONTROLLER_IP = "192.168.100.100";  // static controller IP
+	final static String CONTROLLER_IP = "192.168.100.101";  // static controller IP
 	final static int NUM_MSG = 11; //Number of messages arriving at the controller
 	static int NUM_OFF_MSG =0; // Number of offloadable messages
 	static int NUM_NONOFF_MSG = 0; // Number of offloadable messages
@@ -235,8 +234,9 @@ public class Constants {
 
 			//final static int SGW_ID = 0;
 			
+			final static DeviceId PGW_NAME = DeviceId.deviceId("device:bmv2:s13");
 			// DPID of PGW
-			final static int PGW_ID = 4;
+			final static int PGW_ID = 13;
 			
 			// its the source port to be used by MME while sending UDP packets to UE
 			final static int DEFAULT_CONTROL_TRAFFIC_UDP_PORT = 9876;

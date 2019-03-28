@@ -38,7 +38,7 @@ const bit<32> sink_ip =0xC0A80405;
 
 // MAC addresses of RANs
 const bit<48> ran1 = 0x00163ec6a2aa;
-const bit<48> ran2 = 0x00163e982233;
+const bit<48> ran2 = 0x00163e7e6ec0;
 const bit<48> ran3 = 0x00163e5f329a;
 const bit<48> ran4 = 0x00163e73d06d;
 const bit<48> ran5 = 0x00163e8dccbe;
