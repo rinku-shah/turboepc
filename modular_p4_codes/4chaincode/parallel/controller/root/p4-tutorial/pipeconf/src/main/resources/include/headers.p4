@@ -80,6 +80,7 @@ header gtpu_t{
 @controller_header("packet_in")
 header packet_in_header_t {
     bit<9> ingress_port;
+    bit<8> reason_code;
 }
 
 // Packet-out header. Prepended to packets received by the controller and used
@@ -222,6 +223,11 @@ header attach_accept_t{
     bit<8> epc_traffic_code; 
     bit<48> sep1;
     bit<32> ue_key;
+}
+
+header meta_t{
+    // used for remembering key temporarily
+     bit<32> metakey; // this is used for table lookup in the if statements in the ingress control block
 }
 
 // key value header

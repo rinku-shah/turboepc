@@ -30,33 +30,33 @@ public class Constants {
 
 	/***************************Configurable parameters**********************************/
 	//global chain
-	final static int UE_LB = 300; //push UE state to switches when UE KEY is between UE_LB & UE_UB
-	final static int UE_UB = 399;
+	final static int UE_LB = 100; //push UE state to switches when UE KEY is between UE_LB & UE_UB
+	final static int UE_UB = 499;
 	
 	//chain1
-	final static int LB1 = 200; //Select SGW11 when UE KEY is between LB1 & UB1
-    final static int UB1 = 299; 
+	final static int LB1 = 100; //Select SGW11 when UE KEY is between LB1 & UB1
+    final static int UB1 = 149; 
 
-    final static int LB2 = 100; //Select SGW12 when UE KEY is between LB2 & UB2
+    final static int LB2 = 150; //Select SGW12 when UE KEY is between LB2 & UB2
 	final static int UB2 = 199;
 	//chain2	
 	final static int LB3 = 200; //Select SGW21 when UE KEY is between LB3 & UB3
-    final static int UB3 = 299; 
+    final static int UB3 = 249; 
 
-    final static int LB4 = 100; //Select SGW22 when UE KEY is between LB4 & UB4
-	final static int UB4 = 199;
+    final static int LB4 = 250; //Select SGW22 when UE KEY is between LB4 & UB4
+	final static int UB4 = 299;
 	// chain3 
 	final static int LB5 = 300; //Select SGW31 when UE KEY is between LB5 & UB5
-    final static int UB5 = 399; 
+    final static int UB5 = 349; 
 
-    final static int LB6 = 400; //Select SGW32 when UE KEY is between LB6 & UB6
-	final static int UB6 = 499;
+    final static int LB6 = 350; //Select SGW32 when UE KEY is between LB6 & UB6
+	final static int UB6 = 399;
 	//chain4
 	final static int LB7 = 400; //Select SGW41 when UE KEY is between LB7 & UB7
-    final static int UB7 = 499; 
+    final static int UB7 = 449; 
 
-    final static int LB8 = 500; //Select SGW42 when UE KEY is between LB8 & UB8
-    final static int UB8 = 599;
+    final static int LB8 = 450; //Select SGW42 when UE KEY is between LB8 & UB8
+    final static int UB8 = 499;
 
 
 	final static boolean OFFLOAD_ATTACH = true; //false; //True=> We wish to offload attach components to local controller

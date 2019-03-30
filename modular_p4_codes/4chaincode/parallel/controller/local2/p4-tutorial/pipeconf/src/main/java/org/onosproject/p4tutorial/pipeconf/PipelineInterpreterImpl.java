@@ -98,6 +98,7 @@ public final class PipelineInterpreterImpl
     private static final String IPV4 = "ipv4";
     private static final String UDP = "udp";
     private static final String DATA = "data";
+    private static final String META = "meta";
 
     private static final String STANDARD_METADATA = "standard_metadata";
     private static final int PORT_FIELD_BITWIDTH = 9;
@@ -120,6 +121,9 @@ public final class PipelineInterpreterImpl
             PiMatchFieldId.of(HDR + DOT + ETHERNET + DOT + "etherType");
     private static final PiMatchFieldId EPC_CODE =
             PiMatchFieldId.of(HDR + DOT + DATA + DOT + "epc_traffic_code");
+    private static final PiMatchFieldId METAKEY =
+            PiMatchFieldId.of(HDR + DOT + META + DOT + "metakey");
+
     
 
     private static final PiTableId TABLE_L3_FWD_ID =

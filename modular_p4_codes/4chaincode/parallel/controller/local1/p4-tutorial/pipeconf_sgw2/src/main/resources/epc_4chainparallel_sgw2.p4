@@ -43,6 +43,7 @@ control c_ingress(inout headers hdr,
         // deparsed on the wire (see c_deparser).
         hdr.packet_in.setValid();
         hdr.packet_in.ingress_port = standard_metadata.ingress_port;
+        hdr.packet_in.reason_code = 100; // reason_code 100 means packet_in is for ROOT onos processing
     }
 
     action _drop() {
@@ -210,6 +211,7 @@ control c_ingress(inout headers hdr,
         // deparsed on the wire (see c_deparser).
         hdr.packet_in.setValid();
         hdr.packet_in.ingress_port = standard_metadata.ingress_port;
+        hdr.packet_in.reason_code = 50; // reason_code 50 means packet_in is for LOCAL onos processing
     }
 
     table service_req_uekey_sgwteid_map{
@@ -252,6 +254,7 @@ control c_ingress(inout headers hdr,
         // deparsed on the wire (see c_deparser).
         hdr.packet_in.setValid();
         hdr.packet_in.ingress_port = standard_metadata.ingress_port;
+        hdr.packet_in.reason_code = 50; // reason_code 50 means packet_in is for LOCAL onos processing
     }
 
     table ctxt_setup_uekey_sgwteid_map{
@@ -319,19 +322,20 @@ control c_ingress(inout headers hdr,
                         // deparsed on the wire (see c_deparser).
                         hdr.packet_in.setValid();
                         hdr.packet_in.ingress_port = standard_metadata.ingress_port;
-                        // return;
+        		hdr.packet_in.reason_code = 50; // reason_code 50 means packet_in is for LOCAL onos processing
+                        return;
                     }
 
                     else if(hdr.data.epc_traffic_code == 17){
                         // send the original packet to local onos by appending the sgw_teid field
                         service_req_uekey_sgwteid_map.apply();
-                        // return;
+                        return;
                     }
 
                     else if(hdr.data.epc_traffic_code == 19){
                         // send the original packet to local onos by appending the sgw_teid field
                         ctxt_setup_uekey_sgwteid_map.apply();
-                        // return;
+                        return;
                     }
                     
             }
