@@ -36,6 +36,7 @@ control c_ingress(inout headers hdr,
         // deparsed on the wire (see c_deparser).
         hdr.packet_in.setValid();
         hdr.packet_in.ingress_port = standard_metadata.ingress_port;
+	hdr.packet_in.reason_code = 100;
     }
 
     action _drop() {
@@ -191,6 +192,7 @@ control c_ingress(inout headers hdr,
         // deparsed on the wire (see c_deparser).
         hdr.packet_in.setValid();
         hdr.packet_in.ingress_port = standard_metadata.ingress_port;
+	hdr.packet_in.reason_code = 50;
     }
 
     table service_req_uekey_sgwteid_map{
@@ -230,6 +232,7 @@ control c_ingress(inout headers hdr,
         // deparsed on the wire (see c_deparser).
         hdr.packet_in.setValid();
         hdr.packet_in.ingress_port = standard_metadata.ingress_port;
+	hdr.packet_in.reason_code = 50;
     }
 
     table ctxt_setup_uekey_sgwteid_map{
@@ -288,6 +291,7 @@ control c_ingress(inout headers hdr,
                         // deparsed on the wire (see c_deparser).
                         hdr.packet_in.setValid();
                         hdr.packet_in.ingress_port = standard_metadata.ingress_port;
+			hdr.packet_in.reason_code = 50;
                         // return;
                     }
 

@@ -76,13 +76,13 @@ public final class PipelineInterpreterImpl
 
     private static final String C_EGRESS = "c_egress";
     private static final String T_L3_FWD = "t_l3_fwd";
-    //private static final String T_S1_UPLINK = "ip_op_tun_s1_uplink";
+    private static final String T_S1_UPLINK = "ip_op_tun_s1_uplink";
     private static final String T_S2_UPLINK = "ip_op_tun_s2_uplink";
-    //private static final String T_S3_UPLINK = "tun_egress_s3_uplink";
+    private static final String T_S3_UPLINK = "tun_egress_s3_uplink";
 
-    //private static final String T_S1_DOWNLINK = "tun_egress_s1_downlink";
+    private static final String T_S1_DOWNLINK = "tun_egress_s1_downlink";
     private static final String T_S2_DOWNLINK = "ip_op_tun_s2_downlink";
-    //private static final String T_S3_DOWNLINK = "ip_op_tun_s3_downlink";
+    private static final String T_S3_DOWNLINK = "ip_op_tun_s3_downlink";
 
     private static final String T_uekey_uestate = "uekey_uestate_map";
     private static final String T_service_req_uekey_sgwteid_map = "service_req_uekey_sgwteid_map";
@@ -124,21 +124,21 @@ public final class PipelineInterpreterImpl
 
     private static final PiTableId TABLE_L3_FWD_ID =
             PiTableId.of(C_INGRESS + DOT + T_L3_FWD);
-    //private static final PiTableId TABLE_S1_UPLINK =
-      //      PiTableId.of(C_INGRESS + DOT + T_S1_UPLINK);
+    private static final PiTableId TABLE_S1_UPLINK =
+            PiTableId.of(C_INGRESS + DOT + T_S1_UPLINK);
     private static final PiTableId TABLE_S2_UPLINK =
             PiTableId.of(C_INGRESS + DOT + T_S2_UPLINK);
-    //private static final PiTableId TABLE_S3_UPLINK =
-      //      PiTableId.of(C_INGRESS + DOT + T_S3_UPLINK);
+    private static final PiTableId TABLE_S3_UPLINK =
+            PiTableId.of(C_INGRESS + DOT + T_S3_UPLINK);
 
-    //private static final PiTableId TABLE_S1_DOWNLINK =
-      //      PiTableId.of(C_INGRESS + DOT + T_S1_DOWNLINK);
+    private static final PiTableId TABLE_S1_DOWNLINK =
+            PiTableId.of(C_INGRESS + DOT + T_S1_DOWNLINK);
     private static final PiTableId TABLE_S2_DOWNLINK =
             PiTableId.of(C_INGRESS + DOT + T_S2_DOWNLINK);
-    //private static final PiTableId TABLE_S3_DOWNLINK =
-      //      PiTableId.of(C_INGRESS + DOT + T_S3_DOWNLINK);
+    private static final PiTableId TABLE_S3_DOWNLINK =
+            PiTableId.of(C_INGRESS + DOT + T_S3_DOWNLINK);
 
-        /*    // @offload tables
+            // @offload tables
         private static final PiTableId TABLE_uekey_uestate =
             PiTableId.of(C_INGRESS + DOT + T_uekey_uestate);
         private static final PiTableId TABLE_service_req_uekey_sgwteid_map =
@@ -151,7 +151,7 @@ public final class PipelineInterpreterImpl
         private static final PiTableId TABLE_uekey_guti =
             PiTableId.of(C_INGRESS + DOT + T_uekey_guti);
 
-	*/
+
     private static final PiActionId ACT_ID_NOP =
             PiActionId.of("NoAction");
     private static final PiActionId ACT_ID_SEND_TO_CPU =

@@ -229,22 +229,19 @@ public class Constants {
 			final static DeviceId DGW_NAME_chain2 = DeviceId.deviceId("device:bmv2:s4");
 			final static String DGW_NAME_chain2_s4 = "s4";
 
-
-
-			final static DeviceId SGW_NAME_chain2 = DeviceId.deviceId("device:bmv2:s5");
-
-			final static int SGW_SWITCH_ID_chain2 = 5;
+			final static DeviceId SGW_NAME_chain2 = DeviceId.deviceId("device:bmv2:s3");
+			final static int SGW_SWITCH_ID_chain2 = 3;
 			
 			// DPID of SGW
 			final static int SGW_ID_1 = 2;
-			final static int SGW_ID_2 = 5;
+			final static int SGW_ID_2 = 3;
 			final static int SGW_ID_3 = 7;
 			final static int SGW_ID_4 = 9;
 			final static int SGW_ID_5 = 11;
 			final static int SGW_ID_6 = 13;
 
 			final static DeviceId SGW_NAME_1 = DeviceId.deviceId("device:bmv2:s2");
-			final static DeviceId SGW_NAME_2 = DeviceId.deviceId("device:bmv2:s5");
+			final static DeviceId SGW_NAME_2 = DeviceId.deviceId("device:bmv2:s3");
 			final static DeviceId SGW_NAME_3 = DeviceId.deviceId("device:bmv2:s7");
 			final static DeviceId SGW_NAME_4 = DeviceId.deviceId("device:bmv2:s9");
 			final static DeviceId SGW_NAME_5 = DeviceId.deviceId("device:bmv2:s11");

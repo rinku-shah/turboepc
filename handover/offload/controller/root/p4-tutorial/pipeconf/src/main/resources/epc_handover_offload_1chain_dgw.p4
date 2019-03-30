@@ -206,8 +206,6 @@ control c_ingress(inout headers hdr,
             // if the packet misses in the t_l3_fwd table then it means it either a Data packet or it is a cntxt release/ Service request packet 
             
           if (hdr.ipv4.isValid() && !hdr.gtpu.isValid()) {
-              // if ttl = 64, it means we are on DGW (RAN-> SINK) for service request or data packet or at DGW(local onos -> RAN) or at PGW (Sink-> RAN)
-            //    if(hdr.ipv4.ttl == 64){
 
                     //  from RAN to local onos at DGW 
                    if(standard_metadata.ingress_port==1 ){
@@ -222,11 +220,11 @@ control c_ingress(inout headers hdr,
                             // UDP means control traffic
                             else if(hdr.ipv4.protocol == PROTO_UDP){
                                     // before handover the normal service request and context release packets are sent to SGW2(chain2) for processing
-                                    if(hdr.data.epc_traffic_code==14 || hdr.data.epc_traffic_code==17 hdr.data.epc_traffic_code==19){
+                                    if(hdr.data.epc_traffic_code==14 || hdr.data.epc_traffic_code==17 || hdr.data.epc_traffic_code==19){
                                         standard_metadata.egress_spec = 3;
                                     }
                                     // AFTER handover the normal service request and context release packets are sent to SGW1(chain1) for processing
-                                    else if(hdr.data.epc_traffic_code==54 || hdr.data.epc_traffic_code==57 hdr.data.epc_traffic_code==59){
+                                    else if(hdr.data.epc_traffic_code==54 || hdr.data.epc_traffic_code==57 || hdr.data.epc_traffic_code==59){
                                         standard_metadata.egress_spec = 2;
                                     }
                                     hdr.ipv4.ttl = hdr.ipv4.ttl - 1;
@@ -239,7 +237,6 @@ control c_ingress(inout headers hdr,
                                 hdr.ipv4.ttl = hdr.ipv4.ttl - 1;
                                 // return;
                     }
-                // }
           }
 
             if (hdr.gtpu.isValid()) {
