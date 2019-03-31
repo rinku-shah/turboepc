@@ -266,7 +266,7 @@ public class SGW  {
 		fr.insertDownlinkTunnelForwardRule(true,appId,flowRuleService,SGWswitchId,sgw_teid,0,ue_teId);
 
 		if(Constants.DEBUG){
-			log.warn(" SGW deleting downlink rule with SGW TEID = {}",sgw_teid);
+			// log.warn(" SGW deleting downlink rule with SGW TEID = {}",sgw_teid);
 			log.warn(" for UE with IP = {}",ue_ip);
 		}
 
@@ -275,7 +275,7 @@ public class SGW  {
 		reusable_teids[chainId].add(sgw_teid);
 
 		//@HO: call pgw function if we remember prev pgw-teid
-		return pg.detachUEFromPGW(appId,flowRuleService,sgw_dpId, pgw_dpId, pgw_teid, ue_ip);
+		return pg.detachUEFromPGW_HO(appId,flowRuleService,sgw_dpId, pgw_dpId, pgw_teid, ue_ip);
 	}
 
 	/**

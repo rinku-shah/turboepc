@@ -278,7 +278,7 @@ control c_ingress(inout headers hdr,
                     clone3(CloneType.I2E, I2E_CLONE_SESSION_ID, standard_metadata);
 
                     // handle context release message 
-                    // @HO : sgw2 will only get service context release BEFORE handover with original epc traffic code
+                    // @HO : sgw2 will only get service context release AFTER handover with changed epc traffic code
                     if(hdr.data.epc_traffic_code == 14){
                         // send the original packet back to RAN by appending the reply packet
 
@@ -290,13 +290,13 @@ control c_ingress(inout headers hdr,
                         hdr.packet_in.ingress_port = standard_metadata.ingress_port;
                         // return;
                     }
-                    // @HO : sgw2 will only get service context release BEFORE handover with original epc traffic code
+                    // @HO : sgw2 will only get service request AFTER handover with changed epc traffic code
                     else if(hdr.data.epc_traffic_code == 17){
                         // send the original packet to local onos by appending the sgw_teid field
                         service_req_uekey_sgwteid_map.apply();
                         // return;
                     }
-                    // @HO : sgw2 will only get service context release BEFORE handover with original epc traffic code
+                    // @HO : sgw2 will only get service request AFTER handover with changed epc traffic code
                     else if(hdr.data.epc_traffic_code == 19){
                         // send the original packet to local onos by appending the sgw_teid field
                         ctxt_setup_uekey_sgwteid_map.apply();

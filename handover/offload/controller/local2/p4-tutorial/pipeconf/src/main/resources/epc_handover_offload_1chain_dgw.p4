@@ -108,6 +108,20 @@ control c_ingress(inout headers hdr,
         hdr.ipv4.ttl = hdr.ipv4.ttl - 1;
     }
 
+    // dummy table is for testing purpose only
+    // action dummyaction(bit<9> egress_port){
+    //      standard_metadata.egress_spec = egress_port;
+    // }
+    // table dummy{
+    //     key={
+    //         hdr.auth_step_one.imsi : exact;
+    //     }
+    //     actions={
+    //         dummyaction;
+    //     }
+    //     size=1024;
+    // }
+
    table ip_op_tun_s1_uplink{
        key={
            // need to match on dstaddr to form ingress tunnel
@@ -166,6 +180,7 @@ control c_ingress(inout headers hdr,
         hdr.gtpu.setInvalid();
         hdr.gtpu_ipv4.setInvalid();
         hdr.gtpu_udp.setInvalid();
+
         hdr.ipv4.ttl = hdr.ipv4.ttl - 1;
     }
 
@@ -206,6 +221,8 @@ control c_ingress(inout headers hdr,
             // if the packet misses in the t_l3_fwd table then it means it either a Data packet or it is a cntxt release/ Service request packet 
             
           if (hdr.ipv4.isValid() && !hdr.gtpu.isValid()) {
+              // if ttl = 64, it means we are on DGW (RAN-> SINK) for service request or data packet or at DGW(local onos -> RAN) or at PGW (Sink-> RAN)
+            //    if(hdr.ipv4.ttl == 64){
 
                     //  from RAN to local onos at DGW 
                    if(standard_metadata.ingress_port==1 ){
@@ -219,14 +236,7 @@ control c_ingress(inout headers hdr,
                             }
                             // UDP means control traffic
                             else if(hdr.ipv4.protocol == PROTO_UDP){
-                                    // before handover the normal service request and context release packets are sent to SGW2(chain2) for processing
-                                    if(hdr.data.epc_traffic_code==14 || hdr.data.epc_traffic_code==17 || hdr.data.epc_traffic_code==19){
-                                        standard_metadata.egress_spec = 3;
-                                    }
-                                    // AFTER handover the normal service request and context release packets are sent to SGW1(chain1) for processing
-                                    else if(hdr.data.epc_traffic_code==54 || hdr.data.epc_traffic_code==57 || hdr.data.epc_traffic_code==59){
-                                        standard_metadata.egress_spec = 2;
-                                    }
+                                    standard_metadata.egress_spec = 2;
                                     hdr.ipv4.ttl = hdr.ipv4.ttl - 1;
                                     // return;
                             }
@@ -237,14 +247,17 @@ control c_ingress(inout headers hdr,
                                 hdr.ipv4.ttl = hdr.ipv4.ttl - 1;
                                 // return;
                     }
+                // }
           }
 
+            // if (hdr.vlan.isValid()) {
             if (hdr.gtpu.isValid()) {
                 // Process all tunneled packets at DGW
                 // to identify DGW switch during uplink with GTP header we use ttl 62
                 // else if(hdr.ipv4.ttl == 62){
                     tun_egress_s3_uplink.apply();
                     return;
+                // }
             }
          }
              // Update port counters at index = ingress or egress port.
@@ -264,7 +277,9 @@ control c_egress(inout headers hdr,
                  inout metadata meta,
                  inout standard_metadata_t standard_metadata) {
         apply {
+
         }  // apply close
+
 } // egress control close
 
 

@@ -75,27 +75,12 @@ parser c_parser(packet_in packet,
             1  : parse_auth_step_one;
             3  : parse_auth_step_three;
             20 : parse_nas_step_two;
-
             5  : parse_send_apn;
-            // @HO : SEND_APN_HO traffic code for attach on chain2 before handover
-            24  : parse_send_apn;
-
             7  : parse_send_ue_teid;
-            // @HO : SEND_UE_TEID_HO traffic code for attach on chain2 before handover
-            26  : parse_send_ue_teid;
-
             9  : parse_detach_req;
-            // @HO : context release has 2 traffic codes in handover 14 : before handover for chain2 / 54: after handover for chain1
             14 : parse_ue_context_release;
-            54 : parse_ue_context_release;
-
-            // @HO : ue_service_req has 2 traffic codes in handover 17 : before handover for chain2 / 57: after handover for chain1
             17 : parse_ue_service_req;
-            57 : parse_ue_service_req;
-
-            // @HO : initial_ctxt_setup_resp has 2 traffic codes in handover 19 : before handover for chain2 / 59: after handover for chain1
             19 : parse_initial_ctxt_setup_resp;
-            59 : parse_initial_ctxt_setup_resp;
             // deafult is 12(request_starting_ip) so accept it 
             default : accept;
         }
@@ -156,6 +141,10 @@ parser c_parser(packet_in packet,
         transition accept;
     }
 
+    // state parse_kv{
+    //     packet.extract(hdr.kv);
+    //     transition accept;
+    // }
 }
 
 /*************************************************************************
