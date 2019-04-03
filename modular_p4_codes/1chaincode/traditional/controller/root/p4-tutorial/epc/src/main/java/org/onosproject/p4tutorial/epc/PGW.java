@@ -175,7 +175,7 @@ public class PGW  {
 		//install uplink and downlink rules
 		//System.out.println("PGW DPID " + pgw_dpId.getLong() + "SGW DPID " + sgw_dpId.getLong());
         /********************  Uplink rule is installed on PGW (PGW to sink) *************************/
-		DeviceId pgwSwitchName = DeviceId.deviceId("device:bmv2:s3");
+		DeviceId pgwSwitchName = Constants.PGW_NAME;
 //		sgw.insertTunnelForwardRule(ApplicationId appId,FlowRuleService flowRuleService,DeviceId switchId,int intunId,int outPort,int outtunId,true);
 		fr.insertUplinkTunnelForwardRule(false,appId, flowRuleService,pgwSwitchName,pgw_teid, pgw_sink_port,0,true);
 
@@ -210,7 +210,7 @@ public class PGW  {
 		//delete uplink rule
 		int chainId = Constants.getChainIDFromSGW(sgw_dpId);
 		/******************** Remove  Uplink rule is installed on PGW (PGW to sink) *************************/
-		DeviceId pgwSwitchName = DeviceId.deviceId("device:bmv2:s3");
+		DeviceId pgwSwitchName = Constants.PGW_NAME;
 		int pgw_sink_port = 0 ; // dont need outPort while deleting flow rule
 		fr.insertUplinkTunnelForwardRule(true,appId, flowRuleService,pgwSwitchName,pgw_teid, pgw_sink_port,0,true);
 
