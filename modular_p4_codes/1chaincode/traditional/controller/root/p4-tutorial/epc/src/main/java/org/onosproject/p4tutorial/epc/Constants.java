@@ -224,14 +224,14 @@ public class Constants {
 			final static int SGW_ID_3 = 7;
 			final static int SGW_ID_4 = 9;
 			final static int SGW_ID_5 = 11;
-			//final static int SGW_ID_6 = 13;
+			final static int SGW_ID_6 = 13;
 
 			final static DeviceId SGW_NAME_1 = DeviceId.deviceId("device:bmv2:s2");
 			final static DeviceId SGW_NAME_2 = DeviceId.deviceId("device:bmv2:s5");
 			final static DeviceId SGW_NAME_3 = DeviceId.deviceId("device:bmv2:s7");
 			final static DeviceId SGW_NAME_4 = DeviceId.deviceId("device:bmv2:s9");
 			final static DeviceId SGW_NAME_5 = DeviceId.deviceId("device:bmv2:s11");
-			//final static DeviceId SGW_NAME_6 = DeviceId.deviceId("device:bmv2:s13");
+			final static DeviceId SGW_NAME_6 = DeviceId.deviceId("device:bmv2:s13");
 
 			final static DeviceId PGW_NAME = DeviceId.deviceId("device:bmv2:s13");
 
