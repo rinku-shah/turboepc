@@ -43,9 +43,6 @@ public class PGW  {
 	private static ConcurrentLinkedQueue<String>[] makeClqArray(int size) {
 	    return (ConcurrentLinkedQueue<String>[]) new ConcurrentLinkedQueue[size];
 	}
-	
-
-	
 	public PGW() {
 		// port of pgw which is connected to sink
 		pgw_sink_port = Constants.PGW_SINK_PORT; 

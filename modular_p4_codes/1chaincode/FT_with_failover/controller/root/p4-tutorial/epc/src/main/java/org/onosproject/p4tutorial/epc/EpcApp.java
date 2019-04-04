@@ -922,7 +922,7 @@ public class EpcApp extends AbstractProvider implements LinkProvider{
 
                         //@ft : get secondary SGW id
                         DeviceId offload_BackupSGWswitchName1 = Constants.getBackupSgwswitchName(dgw_dpId);
-                        // populate rules on primary sgw switch 
+                        // populate rules on backup sgw switch 
                         fr.populate_uekey_sgwteid_map(false,appId,flowRuleService,offload_BackupSGWswitchName1,Integer.parseInt(tmpArray[2]),sgw_teid);
 
                         build_response_pkt(connectPoint,srcMac,dstMac,ipv4Protocol,ipv4SourceAddress,udp_dstport,udp_srcport,response.toString());
@@ -989,8 +989,6 @@ public class EpcApp extends AbstractProvider implements LinkProvider{
                         sgw.modifyBearerRequest(appId, flowRuleService, SGWswitchName1, tmpArray2[0], tmpArray2[0], Integer.parseInt(tmpArray2[1]), Integer.parseInt(tmpArray[1]), tmpArray[2]);
 
                         String ue_ip = FT.get(send_ue_teid_dgw, "uekey_ueip_map", tmpArray[2]); // tmpArray[2] => ue key
-
-
                       
                         /**************************** Downlinkl flow rules on DGW (DGW -> RAN) ***************************/
                         fr.insertUplinkTunnelForwardRule(false,appId, flowRuleService, deviceId,Integer.parseInt(tmpArray[1]), uePort,0,true);
@@ -1021,13 +1019,9 @@ public class EpcApp extends AbstractProvider implements LinkProvider{
                         }
 
                         build_response_pkt(connectPoint,srcMac,dstMac,ipv4Protocol,ipv4SourceAddress,udp_dstport,udp_srcport,response.toString());
-
                         response = null;
                         if(Constants.DEBUG)
                             d2 = new Date();
-
-                    
-
 
                         break;
 
@@ -1199,17 +1193,11 @@ public class EpcApp extends AbstractProvider implements LinkProvider{
 
                     case Constants.UE_SERVICE_REQUEST:
                         // @offload design it will be handled by local onos controller
-
                         break;
 
                     case Constants.INITIAL_CONTEXT_SETUP_RESPONSE:
                         // @offload design it will be handled by local onos controller
-
                         break;
-
-
-
-
 
                     default:
                         if(Constants.DEBUG){
@@ -1275,20 +1263,7 @@ public class EpcApp extends AbstractProvider implements LinkProvider{
 
         // Used for measuring execution time of procedures; uncomment it if needed for debugging purpose
         private void timeDiff(Date d1, Date d2, int step){
-		/*if(d1 == null || d2 == null){
-			System.out.println("Step " + step + " ****** " + d1 + " ----------- " + d2);
-			System.exit(1);
-		}
-		long diff = d2.getTime() - d1.getTime();
-		case_cnt[step-1]++;
-		case_sum[step-1] += diff;
-
-		if (case_cnt[step-1] % MOD == 0){
-			System.out.println(getStepName(step) + " Average over "+ MOD + " no of steps is " + (case_sum[step-1]*1.0/case_cnt[step-1]) +" ms");
-			case_cnt[step-1] = case_sum[step-1] = 0;
-			if(step == 5)
-				System.out.println();
-		}*/
+		
         }
         @SuppressWarnings("unused")
         private String getStepName(int step){
@@ -1374,42 +1349,9 @@ public class EpcApp extends AbstractProvider implements LinkProvider{
             if(Constants.DEBUG) {
                 log.debug("Processing outbound packet: {}", outboundPacket);
             }
-
             packetService.emit(outboundPacket);
 
         }
-
-        // uplink rule
-//        private void installFlowRuleWithIP(DatapathId dpId, int inPort, int outPort, int outTunnelId, String UE_IP, String srcIP, String dstIP, String dstMac){
-//            //if(sw == null){
-//            sw = switchService.getSwitch(dpId);
-//            //}
-//            OFFlowMod.Builder fmb = sw.getOFFactory().buildFlowAdd();
-//            Match.Builder mb = sw.getOFFactory().buildMatch();
-//
-//
-//            mb.setExact(MatchField.ETH_TYPE, EthType.IPv4);
-//            mb.setExact(MatchField.IN_PORT, OFPort.of(inPort));
-//            mb.setExact(MatchField.IPV4_SRC, IPv4Address.of(UE_IP));
-//
-//            List<OFAction> actions = new ArrayList<OFAction>();
-//            actions.add(sw.getOFFactory().actions().setVlanVid(VlanVid.ofVlan(outTunnelId)));
-//
-//            if(dstIP != "")
-//                actions.add(sw.getOFFactory().actions().setNwDst(IPv4Address.of(dstIP)));
-//
-//            actions.add(sw.getOFFactory().actions().setDlDst(MacAddress.of(dstMac)));
-//            actions.add(sw.getOFFactory().actions().output(OFPort.of(outPort), Integer.MAX_VALUE)); // FLOOD is a more selective/efficient version of ALL
-//            fmb.setActions(actions);
-//
-//            fmb.setHardTimeout(0)
-//                    .setIdleTimeout(0)
-//                    .setPriority(1)
-//                    .setBufferId(OFBufferId.NO_BUFFER)
-//                    .setMatch(mb.build());
-//
-//            sw.write(fmb.build());
-//        }
     }
 
     // Indicates whether this is a control packet, e.g. LLDP, BDDP
@@ -1418,209 +1360,4 @@ public class EpcApp extends AbstractProvider implements LinkProvider{
         return type == Ethernet.TYPE_LLDP || type == Ethernet.TYPE_BSN;
     }
 
-            /**
-             * Provisions a tunnel between the given source and destination host with
-             * the given tunnel ID. The tunnel is established using a randomly picked
-             * shortest path based on the given topology snapshot.
-             *
-             * @param tunId   tunnel ID
-             * @param srcHost tunnel source host
-             * @param dstHost tunnel destination host
-             * @param topo    topology snapshot
-             */
-//    private void provisionTunnel(int tunId, Host srcHost, Host dstHost, Topology topo) {
-//
-//        // Get all shortest paths between switches connected to source and
-//        // destination hosts.
-//        DeviceId srcSwitch = srcHost.location().deviceId();
-//        DeviceId dstSwitch = dstHost.location().deviceId();
-//
-//        List<Link> pathLinks;
-//        if (srcSwitch.equals(dstSwitch)) {
-//            // Source and dest hosts are connected to the same switch.
-//            pathLinks = Collections.emptyList();
-//        } else {
-//            // Compute shortest path.
-//            Set<Path> allPaths = topologyService.getPaths(topo, srcSwitch, dstSwitch);
-//            if (allPaths.size() == 0) {
-//                log.warn("No paths between {} and {}", srcHost.id(), dstHost.id());
-//                return;
-//            }
-//            // If many shortest paths are available, pick a random one.
-//            pathLinks = pickRandomPath(allPaths).links();
-//        }
-//
-//        // Tunnel ingress rules.
-//        for (IpAddress dstIpAddr : dstHost.ipAddresses()) {
-//            // In ONOS discovered hosts can have multiple IP addresses.
-//            // Insert tunnel ingress rule for each IP address.
-//            // Next switches will forward based only on tunnel ID.
-//            insertTunnelIngressRule(srcSwitch, dstIpAddr, tunId);
-//        }
-//
-//        // Insert tunnel transit rules on all switches in the path, excluded the
-//        // last one.
-//        for (Link link : pathLinks) {
-//            DeviceId sw = link.src().deviceId();
-//            PortNumber port = link.src().port();
-//            insertTunnelForwardRule(sw, port, tunId, false);
-//        }
-//
-//        // Tunnel egress rule.
-//        PortNumber egressSwitchPort = dstHost.location().port();
-//        insertTunnelForwardRule(dstSwitch, egressSwitchPort, tunId, true);
-//
-//        log.info("** Completed provisioning of tunnel {} (srcHost={} dstHost={})",
-//                 tunId, srcHost.id(), dstHost.id());
-//    }
-//
-//    /**
-//     * Generates and insert a flow rule to perform the tunnel INGRESS function
-//     * for the given switch, destination IP address and tunnel ID.
-//     *
-//     * @param switchId  switch ID
-//     * @param dstIpAddr IP address to forward inside the tunnel
-//     * @param tunId     tunnel ID
-//     */
-//    private void insertTunnelIngressRule(DeviceId switchId,
-//                                         IpAddress dstIpAddr,
-//                                         int tunId) {
-//
-//
-//        PiTableId tunnelIngressTableId = PiTableId.of("c_ingress.t_tunnel_ingress");
-//
-//        // Longest prefix match on IPv4 dest address.
-//        PiMatchFieldId ipDestMatchFieldId = PiMatchFieldId.of("hdr.ipv4.dst_addr");
-//        PiCriterion match = PiCriterion.builder()
-//                .matchLpm(ipDestMatchFieldId, dstIpAddr.toOctets(), 32)
-//                .build();
-//
-//        PiActionParam tunIdParam = new PiActionParam(PiActionParamId.of("tun_id"), tunId);
-//
-//        PiActionId ingressActionId = PiActionId.of("c_ingress.my_tunnel_ingress");
-//        PiAction action = PiAction.builder()
-//                .withId(ingressActionId)
-//                .withParameter(tunIdParam)
-//                .build();
-//
-//        log.info("Inserting INGRESS rule on switch {}: table={}, match={}, action={}",
-//                 switchId, tunnelIngressTableId, match, action);
-//
-//        insertPiFlowRule(switchId, tunnelIngressTableId, match, action);
-//    }
-//
-//    /**
-//     * Generates and insert a flow rule to perform the tunnel FORWARD/EGRESS
-//     * function for the given switch, output port address and tunnel ID.
-//     *
-//     * @param switchId switch ID
-//     * @param outPort  output port where to forward tunneled packets
-//     * @param tunId    tunnel ID
-//     * @param isEgress if true, perform tunnel egress action, otherwise forward
-//     *                 packet as is to port
-//     */
-//    private void insertTunnelForwardRule(DeviceId switchId,
-//                                         PortNumber outPort,
-//                                         int tunId,
-//                                         boolean isEgress) {
-//
-//        PiTableId tunnelForwardTableId = PiTableId.of("c_ingress.t_tunnel_fwd");
-//
-//        // Exact match on tun_id
-//        PiMatchFieldId tunIdMatchFieldId = PiMatchFieldId.of("hdr.my_tunnel.tun_id");
-//        PiCriterion match = PiCriterion.builder()
-//                .matchExact(tunIdMatchFieldId, tunId)
-//                .build();
-//
-//        // Action depend on isEgress parameter.
-//        // if true, perform tunnel egress action on the given outPort, otherwise
-//        // simply forward packet as is (set_out_port action).
-//        PiActionParamId portParamId = PiActionParamId.of("port");
-//        PiActionParam portParam = new PiActionParam(portParamId, (short) outPort.toLong());
-//
-//        final PiAction action;
-//        if (isEgress) {
-//            // Tunnel egress action.
-//            // Remove MyTunnel header and forward to outPort.
-//            PiActionId egressActionId = PiActionId.of("c_ingress.my_tunnel_egress");
-//            action = PiAction.builder()
-//                    .withId(egressActionId)
-//                    .withParameter(portParam)
-//                    .build();
-//        } else {
-//            // Tunnel transit action.
-//            // Forward the packet as is to outPort.
-//            PiActionId egressActionId = PiActionId.of("c_ingress.set_out_port");
-//            action = PiAction.builder()
-//                    .withId(egressActionId)
-//                    .withParameter(portParam)
-//                    .build();
-//        }
-//
-//        log.info("Inserting {} rule on switch {}: table={}, match={}, action={}",
-//                 isEgress ? "EGRESS" : "TRANSIT",
-//                 switchId, tunnelForwardTableId, match, action);
-//
-//        insertPiFlowRule(switchId, tunnelForwardTableId, match, action);
-//    }
-//
-//    /**
-//     * Inserts a flow rule in the system that using a PI criterion and action.
-//     *
-//     * @param switchId    switch ID
-//     * @param tableId     table ID
-//     * @param piCriterion PI criterion
-//     * @param piAction    PI action
-//     */
-//    private void insertPiFlowRule(DeviceId switchId, PiTableId tableId,
-//                                  PiCriterion piCriterion, PiAction piAction) {
-//        FlowRule rule = DefaultFlowRule.builder()
-//                .forDevice(switchId)
-//                .forTable(tableId)
-//                .fromApp(appId)
-//                .withPriority(FLOW_RULE_PRIORITY)
-//                .makePermanent()
-//                .withSelector(DefaultTrafficSelector.builder()
-//                                      .matchPi(piCriterion).build())
-//                .withTreatment(DefaultTrafficTreatment.builder()
-//                                       .piTableAction(piAction).build())
-//                .build();
-//        flowRuleService.applyFlowRules(rule);
-//    }
-//
-//    private int getNewTunnelId() {
-//        return nextTunnelId.incrementAndGet();
-//    }
-//
-//    private Path pickRandomPath(Set<Path> paths) {
-//        int item = new Random().nextInt(paths.size());
-//        List<Path> pathList = Lists.newArrayList(paths);
-//        return pathList.get(item);
-//    }
-
-    /**
-     * A listener of host events that provisions two tunnels for each pair of
-     * hosts when a new host is discovered.
-     */
-//    private class InternalHostListener implements HostListener {
-//
-//        @Override
-//        public void event(HostEvent event) {
-//            if (event.type() != HostEvent.Type.HOST_ADDED) {
-//                // Ignore other host events.
-//                return;
-//            }
-//            synchronized (this) {
-//                // Synchronizing here is an overkill, but safer for demo purposes.
-//                Host host = event.subject();
-//                Topology topo = topologyService.currentTopology();
-//                for (Host otherHost : hostService.getHosts()) {
-//                    if (!host.equals(otherHost)) {
-//                        provisionTunnel(getNewTunnelId(), host, otherHost, topo);
-//                        provisionTunnel(getNewTunnelId(), otherHost, host, topo);
-//                    }
-//                }
-//            }
-//        }
-//    }
 }
