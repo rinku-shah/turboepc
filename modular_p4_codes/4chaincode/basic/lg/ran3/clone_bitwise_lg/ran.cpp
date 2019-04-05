@@ -43,8 +43,9 @@ bool networkServiceRequest = false;	// Network initiated service request (downli
 //mix of traffic types
 /* attach-detach, context-rel/service-req, att-data_all_the_time-det, att-data(default=1s)-det-loop, att-serv_req-data-loop2-det-loop1, att-serv-req-data-loop2-det*/
 // vector<vector<int>> traffic_mix={{0,100,0,0,0},{499,99501,0,0,0},{1499,98501,0,0,0},{2999,97001,0,0,0},{6999,93001,0,0,0},{8999,91001,0,0,0},{10999,89001,0,0,0},{30999,69001,0,0,0},{40999,59001,0,0,0},{50999,49001,0,0,0},{60999,39001,0,0,0},{100,0,0,0,0}};
-vector<vector<int>> traffic_mix={{0,0,0,74999,0,25001},{499,99501,0,0,0,0},{1499,98501,0,0,0,0},{2999,97001,0,0,0,0},{6999,93001,0,0,0,0},{8999,91001,0,0,0,0},{10999,89001,0,0,0,0},{30999,69001,0,0,0,0},{40999,59001,0,0,0,0},{0,0,0,0,100,0},{0,0,0,0,0,100},{0,0,0,100,0,0}};
-
+vector<vector<int>> traffic_mix={{0,0,0,9909,90991,0},{499,0,0,0,99501,0},{1499,98501,0,0,0,0},{2999,97001,0,0,0,0},{6999,93001,0,0,0,0},{8999,91001,0,0,0,0},{10999,89001,0,0,0,0},{30999,69001,0,0,0,0},{40999,59001,0,0,0,0},{0,0,0,0,100,0},{0,0,0,0,0,100},{0,0,0,100,0,0}};
+int start_ue = 300;
+int wait_latency = 28000;
 //2_98,0
 //5_95,1
 //6_94,2
@@ -89,8 +90,8 @@ bool dynLoad = false;
 bool instrumentTptLat = false; //Instrument num_ue and response_time every 10 sec
 //vector<vector<int>> traffic_shape={{2,1},{3,3}}; //States for the first two minutes mix_num=1 & for next 3 minutes mix_num=3
 /// DYNAMIC LOAD GENERATOR ///
-//  11 for ATTACH Detach and 0  for service request
-int mix_num=9;	//choose the traffix mix from above traffic_options -> {0,1,2}  // 11 means only attach request will be sent
+// 1=> 1:99
+int mix_num = 9; //9;	//choose the traffix mix from above traffic_options -> {0,1,2}  // 11 means only attach request will be sent
 float a_prob = 0;
 float s_prob = 0;
 //0%  att/serv == att=0.01,serv=0.99 ==>0.7%
@@ -139,6 +140,7 @@ unsigned long long prev_tpt = 0; //To remember tpt till previous period
 unsigned long long prev_lat = 0; //To remember lat till previous period
 vector<unsigned long long> num_ue_per_thread;
 vector<unsigned long long> ue_registration_response_time;
+vector<unsigned long long> sr_registration_response_time;
 vector<unsigned long long> stored_ue_registration_response_time;//For delay distribution
 //long delay[1000][10000]; //For storing index of UE delays
 
@@ -193,7 +195,7 @@ int send_socket_data(const char *ip)
     int portno,nbytes;
     struct sockaddr_in server_addr;
     struct hostent *server;
-    portno = atoi("33001");
+    portno = atoi("13001");
     int sockfd = socket(AF_INET,SOCK_STREAM,0);
     if(sockfd<0){
       perror("Error opening socket");
@@ -292,7 +294,7 @@ void* multithreading_func(void *arg){
 	size_t idleSleepTime, serviceRequestSleepTime;
 
 	// Client user(threadId+1), sink_user(threadId+1);
-	Client user(threadId+300), sink_user(threadId+300);
+	Client user(threadId+start_ue), sink_user(threadId+start_ue);
 	vector<string> tmpArray;
 	vector<string> service_response;
 	bool att_done=false;
@@ -318,7 +320,7 @@ void* multithreading_func(void *arg){
 					checkIntegrity_t = false;
 					ueServiceRequest_t = false;
 					loop1 = 100;
-					loop2 = 1;
+					loop2 = 0;
 					break;
 
 			/* context-rel/service-req, only*/ 
@@ -374,10 +376,8 @@ void* multithreading_func(void *arg){
 					checkIntegrity_t = false;
 					ueServiceRequest_t = true;
 					dataTime = 1;
-					loop1 = 50;    //outer loop---attach
-					loop2 = 50;   //inner loop---service-req
-					//loop1 = 75;    //outer loop---attach
-					//loop2 = 125;   //inner loop---service-req
+					loop1 = 1;    //outer loop---attach
+					loop2 = 99;   //inner loop---service-req
 					break;
 
 			/* att-serv-req-data-loop2-det*/
@@ -393,13 +393,13 @@ void* multithreading_func(void *arg){
 					// max time is service request only 
 					//loop1 = 1;  //outer loop---attach
 					//loop2 = 100;   //inner loop---service-req
-					loop1 = 1;  //outer loop---attach
-					loop2 = 100;   //inner loop---service-req
+					loop1 = 1; //1;  //outer loop---attach
+					loop2 = 99; //100;   //inner loop---service-req
 					break;
 		}
 		do {
 			// UserEquipment ue(threadId+1);
-			UserEquipment ue(threadId+300);
+			UserEquipment ue(threadId+start_ue);
 			//user.input_server_details(g_mme_port, g_mme_address);
 			if(DO_DEBUG){
 				cout<<"Attaching with MME"<<endl;
@@ -407,7 +407,7 @@ void* multithreading_func(void *arg){
 			gettimeofday(&start, NULL);
 			//usleep(my_rand()+2000);
 			// usleep(200000);
-			usleep(15000);
+			usleep(my_rand()+wait_latency);
 			if(attach_with_mme(ue, user, checkIntegrity_t)){ 	// Authentication
 				//if(setUpTunnel_t || serviceRequestLoopFlag){
 					// Setup tunnel
@@ -422,12 +422,12 @@ void* multithreading_func(void *arg){
 					//usleep(my_rand()+200);
 					gettimeofday(&start1, NULL);
 					tmpArray = setup_tunnel(ue, user, doEncryption_t);
-					//  IP Address of UE="<<tmpArray[1]<<" and SGW TEID="<<tmpArray[2]
+					//cout<<"IP Address of UE="<<tmpArray[1]<<" and SGW TEID="<<tmpArray[2]<<endl;
 					// string UE_IP = tmpArray[1];
-					lat_mtx.lock();
-					attNo++;
-					num_ue_per_thread[threadId] += 1; //Increment completion num for att req
-					lat_mtx.unlock();
+					//lat_mtx.lock();
+					//attNo++;
+					//num_ue_per_thread[threadId] += 1; //Increment completion num for att req
+					//lat_mtx.unlock();
 					//////PRINT REG TIME TO ARRAY////
 					gettimeofday(&end1, NULL);
 					seconds  = end1.tv_sec  - start1.tv_sec;
@@ -436,8 +436,13 @@ void* multithreading_func(void *arg){
 					lat_mtx.lock();
 					ue_registration_response_time[threadId] += mtime;
 					lat_mtx.unlock();
+					//cout<<"a:"<<mtime<<endl;
+					lat_mtx.lock();
+                                        attNo++;
+                                        num_ue_per_thread[threadId] += 1; //Increment completion num for att req
+                                        lat_mtx.unlock();
 					/*stored_ue_registration_response_time[j] = mtime;
-					j =// j + 1;*/
+					j = j + 1;*/
 						////////////////////////////////////
 						// sleep(300);
 				}
@@ -452,31 +457,41 @@ void* multithreading_func(void *arg){
 								cout<<"traffic_type = "<<traffic_type<<" DATA TIME = "<<dataTime<<endl;
 
 							}
-							usleep(15000);
+							/*if(ue_num == 100){
+								sleep(1000);
+							}*/
+							//usleep(20000);
+							//sleep(500);
+							//cout<<"IP address of UE = "<<tmpArray[1].c_str()<<endl;
 							//send_socket_data(tmpArray[1].c_str());
-
 							//currentPort = send_ue_data(ue, ue_num, rate, currentPort, startingPort, endPort, user, tmpArray, dataTime);
 							// usleep(100000);
 						}
 						if(s1_release_t){
 							//cout<<"SLEEPING BEFORE s1 release"<<endl;
-							usleep(my_rand()+15000);		//200-700 usec
-							// usleep(100000);
+							//usleep(my_rand()+2000);		//200-700 usec
+							usleep(my_rand()+wait_latency);
 							//sreqNo++;
 							gettimeofday(&start2, NULL);
 							ue_context_release(ue, user, ue_num, tmpArray[1], tmpArray[2], tmpArray[3], currentPort, networkServiceRequest);
-							lat_mtx.lock();
-							num_ue_per_thread[threadId] += 1;//Increment completion num for serv req
-							sreqNo++;
-							lat_mtx.unlock();
+							//lat_mtx.lock();
+							//num_ue_per_thread[threadId] += 1;//Increment completion num for serv req
+							//sreqNo++;
+							//lat_mtx.unlock();
 							gettimeofday(&end2, NULL);
 							seconds  = end2.tv_sec  - start2.tv_sec;
 							useconds = end2.tv_usec - start2.tv_usec;
 							mtime = ((seconds) * 1000000 + useconds);
 							lat_mtx.lock();
 							ue_registration_response_time[threadId] += mtime;
+							sr_registration_response_time[threadId] += mtime;
 							lat_mtx.unlock();
-						//
+							//cout<<"c:"<<mtime<<endl;	
+							lat_mtx.lock();
+                                                        num_ue_per_thread[threadId] += 1;//Increment completion num for serv req
+                                                        sreqNo++;
+                                                        lat_mtx.unlock();
+
 							if(DO_DEBUG){
 								cout<<"UE CONTEXT RELEASE DONE with UE NUM="<<ue_num<<endl;
 							}
@@ -500,8 +515,8 @@ void* multithreading_func(void *arg){
 								//cout<<"SLEEPING BEFORE service request"<<endl;
 								//usleep(my_rand());
 								//usleep(my_rand()+2000);
-								// usleep(100000);
-								usleep(my_rand()+15000);
+								usleep(my_rand()+wait_latency);
+								//usleep(my_rand()+2000);
 								gettimeofday(&start2, NULL);
 								tmpArray[3] = ue_service_request(ue, user, ue_num, tmpArray[1]); //returns newly generated ue_teid
 									//////PRINT REG TIME TO ARRAY////
@@ -511,7 +526,10 @@ void* multithreading_func(void *arg){
 								mtime = ((seconds) * 1000000 + useconds);
 								lat_mtx.lock();
 								ue_registration_response_time[threadId] += mtime;
+								sr_registration_response_time[threadId] += mtime;
 								lat_mtx.unlock();
+
+								//cout<<"s:"<<mtime<<endl;
 								/*stored_ue_registration_response_time[j] = mtime;
 								j = j + 1;*/
 								////////////////////////////////////
@@ -550,8 +568,9 @@ void* multithreading_func(void *arg){
 						//cout<<"SLEEPING BEFORE detach"<<endl;
 						//usleep(my_rand()+200);			//sleep for 200-700 usec
 						if(!s1_release_t && !sendData_t)
-							usleep(my_rand()+2000);
+							usleep(my_rand()+wait_latency);
 						att_done=false;
+						usleep(my_rand()+wait_latency);
 						gettimeofday(&start3, NULL);
 						detach_ue(ue, user, ue_num, tmpArray[1], tmpArray[2], tmpArray[3]);
 						// sleep(300);
@@ -795,7 +814,7 @@ int main(int argc, char *args[]){
 	if(sendData || networkServiceRequest){
 		// Get the starting UE IP address from controller
 		// UserEquipment ue(1);
-		UserEquipment ue(300);
+		UserEquipment ue(start_ue);
 		Client user(2001);
 		// Client user(1);
 		//user.input_server_details(g_mme_port, g_mme_address);
@@ -826,6 +845,7 @@ int main(int argc, char *args[]){
 
 	num_ue_per_thread.resize(maxThreads, 0);
 	ue_registration_response_time.resize(maxThreads, 0);
+	sr_registration_response_time.resize(maxThreads, 0);
         //int ue_per_thr = 50000;
 	stored_ue_registration_response_time.resize(UE_PER_THREAD, 0);
 
@@ -887,7 +907,7 @@ int main(int argc, char *args[]){
 		args->threadId = i;
 		args->serverPort = SINK_SERVER_STARTING_PORT + i * port_gap;
 		args->port_gap = port_gap;
-		args->starting_ue_id = 300 + i * gap;
+		args->starting_ue_id = start_ue + i * gap;
 		args->ue_id_gap = gap;
 		args->num_threads = maxThreads;
 
@@ -899,6 +919,8 @@ int main(int argc, char *args[]){
 	int total_ue = 0;
 	unsigned long long total_reistration_time = 0;
 	double average_registration_time = 0.0;
+	unsigned long long total_sr_reistration_time = 0;
+        double average_sr_registration_time = 0.0;
 	double registrationThroughput = 0.0;
 
 	// Sleep for the specified simulation time
@@ -948,9 +970,11 @@ int main(int argc, char *args[]){
 	for(int i=0;i<maxThreads;i++){
 		total_ue += num_ue_per_thread[i];
 		total_reistration_time += ue_registration_response_time[i];
+		total_sr_reistration_time += sr_registration_response_time[i];
 		cout<<"num_ue_per_thread["<<i<<"] "<<num_ue_per_thread[i]<<endl;
 		cout<<"ue_registration_response_time["<<i<<"] "<<((ue_registration_response_time[i]*1.0)/num_ue_per_thread[i])<<" us"<<endl;
 	}
+	average_sr_registration_time = (total_sr_reistration_time*1.0)/(sreqNo*1.0);
 	average_registration_time = (total_reistration_time*1.0)/(total_ue*1.0);
 	registrationThroughput = (total_ue*1.0)/(actual_endTime - curTime);
 
@@ -968,6 +992,7 @@ int main(int argc, char *args[]){
 
 	average_registration_time = average_registration_time/1000000.0;
 	cout<<"Latency = "<<average_registration_time<<" secs"<<endl;
+	cout<<"Service Request Latency = "<<average_sr_registration_time<<" secs"<<endl;
 	cout<<"Registration Throughput="<<registrationThroughput<<" registrations/sec"<<endl;
 	cout<<"Attach-Request= "<<attNo<<"  Detach-Request= "<< detNo<<"  Service-Request= "<<sreqNo<<endl;
 	cout << fixed;
@@ -1002,7 +1027,7 @@ int main(int argc, char *args[]){
 		data.append("#Attach").append(COMMA).append("#Detach").append(COMMA);
 		data.append("#Service_Requests").append(COMMA);
 		data.append("ATTACH_PERCENT").append(COMMA);
-		data.append("EPOCH_TPT").append(COMMA).append("EPOCH_DELAY_ms");
+		data.append("EPOCH_TPT").append(COMMA).append("EPOCH_DELAY_ms").append(COMMA).append("ServiceRequestLatency");
 		data.append("\n");
 	}
 	/*if(!fileExists(INST_FILE)){
@@ -1023,7 +1048,7 @@ int main(int argc, char *args[]){
 		data.append(to_string(UE_MEAN_DATA_SENDING_TIME)).append(COMMA).append(rate).append(COMMA);
 		data.append(to_string(attNo)).append(COMMA);
 		data.append(to_string(detNo)).append(COMMA).append(to_string(sreqNo)).append(COMMA);
-		data.append(to_string(traffic_percent));
+		data.append(to_string(traffic_percent)).append(COMMA).append(to_string(average_sr_registration_time));
 		if (dynLoad==true){
 			for (int i=0; i<=curr_mix_index; i++){
 				data.append(COMMA).append(to_string(tpt[i])).append(COMMA).append(to_string(lat[i]));

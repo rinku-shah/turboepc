@@ -231,7 +231,7 @@ public class Constants {
 			final static DeviceId SGW_NAME_5 = DeviceId.deviceId("device:bmv2:s11");
 			final static DeviceId SGW_NAME_6 = DeviceId.deviceId("device:bmv2:s13");
 
-
+			final static DeviceId PGW_NAME = DeviceId.deviceId("device:bmv2:s13");
 			//final static int SGW_ID = 0;
 			
 			final static DeviceId PGW_NAME = DeviceId.deviceId("device:bmv2:s13");
