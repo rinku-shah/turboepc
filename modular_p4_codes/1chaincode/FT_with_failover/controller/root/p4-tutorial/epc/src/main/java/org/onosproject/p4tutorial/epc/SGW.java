@@ -161,7 +161,7 @@ public class SGW  {
 		/****************************uplink rule on SGW (SGW to PGW) ************************************/
 		fr.insertUplinkTunnelForwardRule(false,appId,flowRuleService,switchId,sgw_teid,Constants.SGW_PORT_MAP.get(sgw_dpId)[1],pgw_teid,false);
 		// @FT_with_failover : populating intial rules on both primary and backup SGW
-		fr.insertUplinkTunnelForwardRule(false,appId,flowRuleService,BSGW_NAME_1,sgw_teid,Constants.SGW_PORT_MAP.get(sgw_dpId)[1],pgw_teid,false);
+		fr.insertUplinkTunnelForwardRule(false,appId,flowRuleService,Constants.BSGW_NAME_1,sgw_teid,Constants.SGW_PORT_MAP.get(sgw_dpId)[1],pgw_teid,false);
 
 		// tmpArray[0] => IP for UE
 		return tmpArray[0] + Constants.SEPARATOR + sgw_teid;
@@ -186,7 +186,7 @@ public class SGW  {
 		/******************************** Downlink flow rules on SGW (SGW to DGW) **************************************/
 		fr.insertDownlinkTunnelForwardRule(false,appId,flowRuleService,SGWswitchId,sgw_teId,Constants.SGW_PORT_MAP.get(sgw_dpId)[0],ue_teId);
 		// @FT_with_failover : populating intial rules on both primary and backup SGW
-		fr.insertDownlinkTunnelForwardRule(false,appId,flowRuleService,BSGW_NAME_1,sgw_teId,Constants.SGW_PORT_MAP.get(sgw_dpId)[0],ue_teId);
+		fr.insertDownlinkTunnelForwardRule(false,appId,flowRuleService,Constants.BSGW_NAME_1,sgw_teId,Constants.SGW_PORT_MAP.get(sgw_dpId)[0],ue_teId);
 	}
 
 
@@ -229,7 +229,7 @@ public class SGW  {
 
 			fr.insertUplinkTunnelForwardRule(true,appId,flowRuleService,SGWswitchId,sgw_teid,Constants.SGW_PORT_MAP.get(sgw_dpId)[1],pgw_teid,false);
 			// @FT_with_failover : populating intial rules on both primary and backup SGW
-			fr.insertUplinkTunnelForwardRule(true,appId,flowRuleService,BSGW_NAME_1,sgw_teid,Constants.SGW_PORT_MAP.get(sgw_dpId)[1],pgw_teid,false);
+			fr.insertUplinkTunnelForwardRule(true,appId,flowRuleService,Constants.BSGW_NAME_1,sgw_teid,Constants.SGW_PORT_MAP.get(sgw_dpId)[1],pgw_teid,false);
 
 
 			if(Constants.DEBUG){
@@ -241,7 +241,7 @@ public class SGW  {
 			int ue_teId = 0; // we dont need action parameters while deleting flow rules
 			fr.insertDownlinkTunnelForwardRule(true,appId,flowRuleService,SGWswitchId,sgw_teid,Constants.SGW_PORT_MAP.get(sgw_dpId)[0],ue_teId);
 			// @FT_with_failover : populating intial rules on both primary and backup SGW
-			fr.insertDownlinkTunnelForwardRule(true,appId,flowRuleService,BSGW_NAME_1,sgw_teid,Constants.SGW_PORT_MAP.get(sgw_dpId)[0],ue_teId);
+			fr.insertDownlinkTunnelForwardRule(true,appId,flowRuleService,Constants.BSGW_NAME_1,sgw_teid,Constants.SGW_PORT_MAP.get(sgw_dpId)[0],ue_teId);
 
 
 			if(Constants.DEBUG){
@@ -250,10 +250,7 @@ public class SGW  {
 			}
 			int chainId = Constants.getChainIDFromSGW(sgw_dpId);
 			reusable_teids[chainId].add(sgw_teid);
-
 			return pg.detachUEFromPGW(appId,flowRuleService,sgw_dpId, pgw_dpId, pgw_teid, ue_ip);
-
-
 	}
 
 	/**
@@ -267,7 +264,7 @@ public class SGW  {
 		int ue_teId = 0; // we dont need action parameters while deleting flow rules
 		fr.insertDownlinkTunnelForwardRule(true,appId,flowRuleService,SGWswitchId,sgw_teid,Constants.SGW_PORT_MAP.get(sgw_dpId)[0],ue_teId);
 		// @FT_with_failover : populating intial rules on both primary and backup SGW
-		fr.insertDownlinkTunnelForwardRule(true,appId,flowRuleService,BSGW_NAME_1,sgw_teid,Constants.SGW_PORT_MAP.get(sgw_dpId)[0],ue_teId);
+		fr.insertDownlinkTunnelForwardRule(true,appId,flowRuleService,Constants.BSGW_NAME_1,sgw_teid,Constants.SGW_PORT_MAP.get(sgw_dpId)[0],ue_teId);
 
 		if(Constants.DEBUG){
 			log.info("SGW deleting downlink rule with SGW TEID = {} for UE with IP = {}",sgw_teid,ue_ip);

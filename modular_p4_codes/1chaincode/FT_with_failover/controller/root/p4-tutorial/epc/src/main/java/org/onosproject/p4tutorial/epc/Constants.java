@@ -94,8 +94,6 @@ public class Constants {
 			final static String DGW_IP_6_UPLINK = "192.168.16.2";	// DGW
 			final static String DGW_IP_6_DOWNLINK = "192.168.17.2";
 			
-			//final static String DSWITCH_IP_UPLINK = "10.127.41.4";	// DGW						*
-			//final static String DSWITCH_IP_DOWNLINK =final static String SGW_IP_2_DOWNLINK = "10.129.2.219"; "10.127.41.4";	// DGW
 			final static String SGW_IP_1_UPLINK = "192.168.2.3";	// SGW	*
 			final static String SGW_IP_1_DOWNLINK = "192.168.3.3";	
 			final static String SGW_IP_2_UPLINK = "192.168.6.3";	// SGW	*
@@ -141,7 +139,6 @@ public class Constants {
 			// The starting IP address which is allocated to the first UE connecting to our		*
 			// network. After this addresses are assigned in monotonically increasing order.	*
 			final static String STARTING_UE_IP_1 = "10.127.1.1"; //"10.129.41.103";
-//			final static String STARTING_UE_IP_1 = "10.0.0.1"; //"10.129.41.103";
 			final static String STARTING_UE_IP_2 = "10.127.2.1"; //"10.129.41.103";
 			final static String STARTING_UE_IP_3 = "10.127.3.1"; //"10.129.41.103";  
 			final static String STARTING_UE_IP_4 = "10.127.4.1"; //"10.129.41.103";  
@@ -197,17 +194,11 @@ public class Constants {
 			final static int MIN_TEID = 1;
 			final static int MAX_TEID = 4095;
 			
-			// DPID or unique ID of SGW switch (assuming only one sgw in the network)
-			//final static int SGW_DPID = 2;
-			/*final static int SGW_DPID_1 = 2;
-			final static int SGW_DPID_2 = 6;
-			final static int SGW_DPID_3 = 8;
-			final static int SGW_DPID_4 = 3;*/
 			
 			// boolean flags which control whether encryption and integrity checks needs to be performed or not.
 			static boolean DO_ENCRYPTION = false;
 			static boolean CHECK_INTEGRITY = false;
-		//=====================================
+			//=====================================
 			// DPID or unique ID of default switch 
 			final static int DEFAULT_SWITCH_ID_1 = 1;
 			final static int DEFAULT_SWITCH_ID_2 = 4;

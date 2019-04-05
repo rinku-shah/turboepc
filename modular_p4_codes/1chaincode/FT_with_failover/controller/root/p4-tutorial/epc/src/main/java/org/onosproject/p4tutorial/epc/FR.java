@@ -227,9 +227,7 @@ public class FR{
         PiMatchFieldId ipSrcMatchFieldId = PiMatchFieldId.of("hdr.ipv4.srcAddr");
         PiMatchFieldId ipDestMatchFieldId = PiMatchFieldId.of("hdr.ipv4.dstAddr");
         PiCriterion match = PiCriterion.builder()
-//				.matchLpm(ipDestMatchFieldId, dstIpAddr.toOctets(), 32)
                 .matchExact(ipSrcMatchFieldId, srcIpAddr)
-                // .matchLpm(ipDestMatchFieldId, dstIpAddr, 32)
                 .matchExact(ipDestMatchFieldId, dstIpAddr)
                 .build();
 
@@ -432,113 +430,4 @@ public class FR{
 
 }
 
-/******************************************************************** EXTRA ****************************************************************/
-// public void insertDownlinkTunnelIngressRule(boolean removeRule,ApplicationId appId,FlowRuleService flowRuleService,DeviceId switchId,byte[] dstIpAddr, int tunId, int outPort) {
-
-//     PiTableId tunnelIngressTableId = PiTableId.of("c_ingress.ip_op_tun_s3_downlink");
-
-//     // Longest prefix match on IPv4 dest address.
-//     PiMatchFieldId ipDestMatchFieldId = PiMatchFieldId.of("hdr.ipv4.dstAddr");
-//     PiCriterion match = PiCriterion.builder()
-// //				.matchLpm(ipDestMatchFieldId, dstIpAddr.toOctets(), 32)
-//             .matchLpm(ipDestMatchFieldId, dstIpAddr, 32)
-//             .build();
-
-//     PiActionParam tunIdParam = new PiActionParam(PiActionParamId.of("op_tunnel_s3"), tunId);
-//     PiActionParam portIdParam = new PiActionParam(PiActionParamId.of("egress_port_s3"), outPort);
-
-
-//     PiActionId ingressActionId = PiActionId.of("c_ingress.populate_ip_op_tun_s3_downlink");
-//     PiAction action = PiAction.builder()
-//             .withId(ingressActionId)
-//             .withParameter(tunIdParam)
-//             .withParameter(portIdParam)
-//             .build();
-//     if(Constants.FRDEBUG) {
-//         log.info("{} INGRESS rule on switch {}: table={}, match={}, action={}",
-//                  removeRule ? "REMOVING" : "INSERTING", switchId, tunnelIngressTableId, match, action);
-//     }
-
-//     if(removeRule){
-//         removePiFlowRule(appId,flowRuleService,switchId, tunnelIngressTableId, match, action);
-//     }
-//     else{
-//         insertPiFlowRule(appId,flowRuleService,switchId, tunnelIngressTableId, match, action);
-//     }
-// }
-
-
-
-// public void insertDownlinkTunnelForwardRule(boolean removeRule,ApplicationId appId,FlowRuleService flowRuleService,DeviceId switchId,int intunId,int outPort,int outtunId,boolean isEgress) {
-
-//     PiTableId tunnelForwardTableId = PiTableId.of("c_ingress.ip_op_tun_s2_downlink");
-
-//     // Exact match on tun_id
-//     // PiMatchFieldId tunIdMatchFieldId = PiMatchFieldId.of("hdr.vlan.vid");
-//     PiMatchFieldId tunIdMatchFieldId = PiMatchFieldId.of("hdr.gtpu.teid");
-
-//     PiCriterion match = PiCriterion.builder()
-//             .matchExact(tunIdMatchFieldId, intunId)
-//             .build();
-
-//     // Action depend on isEgress parameter.
-//     // if true, perform tunnel egress action on the given outPort, otherwise
-//     // simply forward packet as is (set_out_port action).
-//     PiActionParamId portParamId = PiActionParamId.of("egress_port_s2");
-//     PiActionParam portParam = new PiActionParam(portParamId,  outPort);
-
-//     PiActionParamId outtunParamId = PiActionParamId.of("op_tunnel_s2");
-//     PiActionParam outtunParam = new PiActionParam(outtunParamId, outtunId);
-
-
-
-
-//     final PiAction action;
-//     if (isEgress) {
-
-//         PiTableId egresstunnelForwardTableId = PiTableId.of("c_ingress.tun_egress_s1_downlink");
-
-//         PiActionParamId egressportParamId = PiActionParamId.of("egress_port_s1");
-//         PiActionParam egressportParam = new PiActionParam(egressportParamId,  outPort);
-//         // Tunnel egress action.
-//         // Remove MyTunnel header and forward to outPort.
-//         PiActionId egressActionId = PiActionId.of("c_ingress.populate_tun_egress_s1_downlink");
-//         action = PiAction.builder()
-//                 .withId(egressActionId)
-//                 .withParameter(egressportParam)
-//                 .build();
-//         if(Constants.FRDEBUG) {
-//             log.info("{} {} rule on switch {}: table={}, match={}, action={}",
-//                      removeRule ? "REMOVING" : "INSERTING", isEgress ? "EGRESS" : "TRANSIT",
-//                      switchId, egresstunnelForwardTableId, match, action);
-//         }
-//         if (removeRule) {
-//             removePiFlowRule(appId, flowRuleService, switchId, egresstunnelForwardTableId, match, action);
-//         } else {
-//             insertPiFlowRule(appId, flowRuleService, switchId, egresstunnelForwardTableId, match, action);
-//         }
-
-//     } else {
-//         // Tunnel transit action.
-//         // Forward the packet as is to outPort.
-//         PiActionId egressActionId = PiActionId.of("c_ingress.populate_ip_op_tun_s2_downlink");
-//         action = PiAction.builder()
-//                 .withId(egressActionId)
-//                 .withParameter(portParam)
-//                 .withParameter(outtunParam)
-//                 .build();
-//         if(Constants.FRDEBUG) {
-//             log.info("{} {} rule on switch {}: table={}, match={}, action={}",
-//                      removeRule ? "REMOVING" : "INSERTING", isEgress ? "EGRESS" : "TRANSIT",
-//                      switchId, tunnelForwardTableId, match, action);
-//         }
-
-//         if (removeRule) {
-//             removePiFlowRule(appId, flowRuleService, switchId, tunnelForwardTableId, match, action);
-//         } else {
-//             insertPiFlowRule(appId, flowRuleService, switchId, tunnelForwardTableId, match, action);
-//         }
-//     }
-
-// }
 

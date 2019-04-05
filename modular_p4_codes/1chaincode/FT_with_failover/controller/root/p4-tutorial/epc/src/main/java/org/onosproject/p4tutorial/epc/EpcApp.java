@@ -112,6 +112,7 @@ import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.Iterator;
 import java.util.concurrent.ConcurrentHashMap;
 
 import static org.slf4j.LoggerFactory.getLogger;
@@ -177,6 +178,7 @@ public class EpcApp extends AbstractProvider implements LinkProvider{
 	}
     
     FR fr = new FR();
+    FT ft = new FT();
 
     //--------------------------------------------------------------------------
     //--------------------------------------------------------------------------
@@ -323,8 +325,27 @@ public class EpcApp extends AbstractProvider implements LinkProvider{
                                 // ue_service_req
                                 fr.populate_dgw_failover_table(appId,flowRuleService,DGW_deviceId,17,Constants.DGW_to_backup_SGW_port);
                                 // initial_ctxt_setup_resp
-                				fr.populate_dgw_failover_table(appId,flowRuleService,DGW_deviceId,19,Constants.DGW_to_backup_SGW_port);
-                            
+                                fr.populate_dgw_failover_table(appId,flowRuleService,DGW_deviceId,19,Constants.DGW_to_backup_SGW_port);
+                                
+                                // @FT_with_failover : We need to change the Uplink GTP tunnel table on DGW as well 
+                                // Match key : (UE_IPAddr, Constants.dstSinkIpAddr)
+                                // Action fields : (sgw_teid, outPort)
+                                // once primary goes down the outPort has to be changed to DGW_to_backup_SGW_port.
+                                // For this we need to iterate over hashmaps "uekey_sgw_teid_map", "uekey_ueip_map"
+                                Iterator<String> uekey_sgwteid_it = ft.uekey_sgw_teid_map.keySet().iterator();
+                                // Iterator<String> uekey_ueip_it = ft.uekey_sgw_teid_map.keySet().iterator();
+                                int outPort = Constants.DGW_to_backup_SGW_port;
+
+                                while(uekey_sgwteid_it.hasNext()){
+                                    String uekey = uekey_sgwteid_it.next();
+                                    String sgwteid_value = ft.uekey_sgw_teid_map.get(uekey);
+                                    String ueip = ft.uekey_ueip_map.get(uekey);
+                                    byte[] UE_IPAddr = IPv4.toIPv4AddressBytes(ueip);
+                                    /**************************** Uplink flow rules here (DGW to SGW) on DGW switch ***************************/
+                                    fr.insertUplinkTunnelIngressRule(false, appId, flowRuleService, DGW_deviceId, UE_IPAddr, Constants.dstSinkIpAddr, Integer.parseInt(sgwteid_value), outPort);
+
+                                }
+
 			                    log.info("============== Switching over to secondary (backup SGW) ===============================");
                 			}
                 		}
@@ -381,7 +402,6 @@ public class EpcApp extends AbstractProvider implements LinkProvider{
         private ConcurrentHashMap<String, String[]> uekey_nas_keys_map = new ConcurrentHashMap<String, String[]>();		// Key = IMSI, Value = [0]: K_ASME, [1]: NAS Integrity key, NAS Encryption key
         HSS hss = new HSS();
         SGW sgw = new SGW();
-        FT ft = new FT();
 
         int uePort = Constants.DEFAULT_SWITCH_UE_PORT;
 
@@ -901,8 +921,8 @@ public class EpcApp extends AbstractProvider implements LinkProvider{
                         // deviceId is DGW switch name
                         // install flow rules by matching on UE_IP
                         
-                        /* UPLINK   => ipv4srcAddr = UE IP and ipv4dstAddr = Sink IP   */
-                        fr.insertUplinkTunnelIngressRule(false, appId, flowRuleService, deviceId,UE_IPAddr, Constants.dstSinkIpAddr, sgw_teid, outPort);
+                        /* UPLINK   => ipv4srcAddr = UE IP and ipv4dstAddr = Sink IP  */
+                        fr.insertUplinkTunnelIngressRule(false, appId, flowRuleService, deviceId, UE_IPAddr, Constants.dstSinkIpAddr, sgw_teid, outPort);
 
                          // key: tmpArray[2] => UE Key, Value: tmpArray2[0] => UE IP
                         FT.put(Integer.parseInt(Constants.SEND_APN),dgw_dpId, "uekey_ueip_map", tmpArray[2], tmpArray2[0]); // key: tmpArray[2] => UE Key, Value: tmpArray2[0] => UE IP
