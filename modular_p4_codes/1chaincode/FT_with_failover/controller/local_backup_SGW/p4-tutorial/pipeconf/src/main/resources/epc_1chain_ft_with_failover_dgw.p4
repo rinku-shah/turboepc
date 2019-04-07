@@ -36,6 +36,8 @@ control c_ingress(inout headers hdr,
         // deparsed on the wire (see c_deparser).
         hdr.packet_in.setValid();
         hdr.packet_in.ingress_port = standard_metadata.ingress_port;
+	// reason_code 100 means packet_in has to be sent to root contoller 
+	hdr.packet_in.reason_code = 100; 
     }
 
     action _drop() {
@@ -246,24 +248,24 @@ control c_ingress(inout headers hdr,
                             else if(hdr.ipv4.protocol == PROTO_UDP){
 
                                     if(hdr.data.epc_traffic_code == 14){
-                                        meta.metakey = hdr.ue_context_rel_req.ue_num;
+                                        meta.metakey = hdr.data.epc_traffic_code;
                                     }
                                     else if(hdr.data.epc_traffic_code == 17){
-                                        meta.metakey = hdr.ue_service_req.ue_key;
+                                        meta.metakey = hdr.data.epc_traffic_code;
                                     }
                                     else if(hdr.data.epc_traffic_code == 19){
-                                        meta.metakey = hdr.initial_ctxt_setup_resp.ue_key;
+                                        meta.metakey = hdr.data.epc_traffic_code;
                                     }
                                     // apply toggle table to forward to primary or backup SGW as per the controller decision for failover handling
                                     //@FT_with_failover:  before failover, we forward the packets from RAN to SGW1_1 via port 2 and after failover we forward the packets to SGW1_2 via port 3 of DGW
                                     toggle_primary_backup_sgw.apply();
-                                    // return;
+                                    return;
                             }
                    }
                     // process reply from local onos at DGW 
                     // @FT_with_failover : the reply can be from SGW1_1(before failover) or SGW1_2(after failover) from port 2 and 3 respectively. 
                     else if( standard_metadata.ingress_port==2 || standard_metadata.ingress_port==3){
-                                standard_metadata.egress_spec = 2;
+                                standard_metadata.egress_spec = 1;
                                 hdr.ipv4.ttl = hdr.ipv4.ttl - 1;
                                 // return;
                     }

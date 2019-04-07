@@ -220,7 +220,7 @@ public class Constants {
 			final static int SGW_ID_6 = 13;
 
 			// @ft : DPID of Secondary (Backup) SGW
-			final static int BSGW_ID_1 = 5;
+			final static int BSGW_ID_1 = 3;
 			final static int BSGW_ID_2 = 5;
 			final static int BSGW_ID_3 = 7;
 			final static int BSGW_ID_4 = 9;
@@ -235,7 +235,7 @@ public class Constants {
 			final static DeviceId SGW_NAME_6 = DeviceId.deviceId("device:bmv2:s13");
 
 			//@ft : backup sgw names
-			final static DeviceId BSGW_NAME_1 = DeviceId.deviceId("device:bmv2:s5");
+			final static DeviceId BSGW_NAME_1 = DeviceId.deviceId("device:bmv2:s3");
 			final static DeviceId BSGW_NAME_2 = DeviceId.deviceId("device:bmv2:s5");
 			final static DeviceId BSGW_NAME_3 = DeviceId.deviceId("device:bmv2:s7");
 			final static DeviceId BSGW_NAME_4 = DeviceId.deviceId("device:bmv2:s9");

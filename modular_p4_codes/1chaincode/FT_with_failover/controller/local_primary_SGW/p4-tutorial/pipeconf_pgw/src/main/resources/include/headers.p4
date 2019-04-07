@@ -80,6 +80,7 @@ header gtpu_t{
 @controller_header("packet_in")
 header packet_in_header_t {
     bit<9> ingress_port;
+    bit<8> reason_code;
 }
 
 // Packet-out header. Prepended to packets received by the controller and used

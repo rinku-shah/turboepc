@@ -125,7 +125,7 @@ import static org.slf4j.LoggerFactory.getLogger;
  * discovered, it provisions a tunnel between that host and all the others.
  */
 @Component(immediate = true)
-@Service(value = EpcApp.class)
+//@Service(value = EpcApp.class)
 public class EpcApp extends AbstractProvider implements LinkProvider{
 
     private static final String APP_NAME = "org.onosproject.p4tutorial.epc";
@@ -190,8 +190,8 @@ public class EpcApp extends AbstractProvider implements LinkProvider{
         appId = coreService.registerApplication(APP_NAME);
         packetService.addProcessor(processor, PacketProcessor.director(2));
         deviceService.addListener(deviceListener);
-		linkService.addListener(linkListener);
-		providerService = registry.register(this);
+	linkService.addListener(linkListener);
+	providerService = registry.register(this);
         for (int i=1; i <=3; i++)
         {
         	devIds[i] = org.onosproject.net.DeviceId.deviceId("device:bmv2:s"+Integer.toString(i));
@@ -206,8 +206,8 @@ public class EpcApp extends AbstractProvider implements LinkProvider{
         // Remove listeners and clean-up flow rules.
         log.info("Stopping...");
         deviceService.removeListener(deviceListener);
-		linkService.removeListener(linkListener);
-		registry.unregister(this);
+	linkService.removeListener(linkListener);
+	registry.unregister(this);
         withdrawIntercepts();
         flowRuleService.removeFlowRulesById(appId);
         packetService.removeProcessor(processor);
@@ -289,6 +289,7 @@ public class EpcApp extends AbstractProvider implements LinkProvider{
         //         .build();
         // packetService.requestPackets(selector.matchPi(match).build(), PacketPriority.REACTIVE, appId);
         
+        
     }
     /**
      * Cancel request for packet in via packet service.
@@ -305,8 +306,10 @@ public class EpcApp extends AbstractProvider implements LinkProvider{
     private class InternalDeviceListener implements DeviceListener {
         @Override
         public void event(DeviceEvent event) {
+            //log.warn("*********************************** ALERT we are in event fn of DeviceListner in EpcApp");
             DeviceId DGW_deviceId = Constants.DGW_Switch_Name;
             DeviceEvent.Type type = event.type();
+	    //log.warn("**************************** event Type = {}",type.toString());
             Device device = event.subject();
             DeviceId devId = device.id();
             // log.warn("=========== Type : " + type.toString() + " " + device.toString() + " ============");
@@ -338,7 +341,11 @@ public class EpcApp extends AbstractProvider implements LinkProvider{
 
                                 while(uekey_sgwteid_it.hasNext()){
                                     String uekey = uekey_sgwteid_it.next();
+				    log.warn("Moving uekey = {} to backup egress port",uekey);
                                     String sgwteid_value = ft.uekey_sgw_teid_map.get(uekey);
+                                    String tmpArray2[] = sgwteid_value.split(Constants.SEPARATOR);
+				    // tmpArray2[0] = sgw_dpId and tmpArray2[1] = sgw_teid
+			            sgwteid_value =  tmpArray2[1]; // sgw_teid	
                                     String ueip = ft.uekey_ueip_map.get(uekey);
                                     byte[] UE_IPAddr = IPv4.toIPv4AddressBytes(ueip);
                                     /**************************** Uplink flow rules here (DGW to SGW) on DGW switch ***************************/
@@ -355,11 +362,11 @@ public class EpcApp extends AbstractProvider implements LinkProvider{
             }
             else if (type == DeviceEvent.Type.DEVICE_ADDED) {
                 // processPortLinks(device, event.port());
-                log.info("------------- Device added -------------");
+                log.warn("------------- Device added -------------");
                 for (int i=1;i<=3; i++) {
                 	if (devId.equals(devIds[i])) {
                 		dev[i] = true;
-                		log.info("***************** Device Added : " + devId.toString() + " **********************");
+                		log.warn("***************** Device Added : " + devId.toString() + " **********************");
                 		if (i==Constants.DEFAULT_SWITCH_ID_1) {
                                 // populating DGW to forward all packets(Context Release and Service Request) to primary SGW
                                 // ue_context_rel_req
@@ -367,9 +374,9 @@ public class EpcApp extends AbstractProvider implements LinkProvider{
                                 // ue_service_req
                                 fr.populate_dgw_failover_table(appId,flowRuleService,DGW_deviceId,17,Constants.DGW_to_primary_SGW_port);
                                 // initial_ctxt_setup_resp
-                				fr.populate_dgw_failover_table(appId,flowRuleService,DGW_deviceId,19,Constants.DGW_to_primary_SGW_port);
+                		fr.populate_dgw_failover_table(appId,flowRuleService,DGW_deviceId,19,Constants.DGW_to_primary_SGW_port);
                             
-					        log.info("=============== Primary table entries pushed at DGW ======================");
+			        log.warn("=============== Primary table entries pushed at DGW ======================");
                 		}
                 	}
                 }

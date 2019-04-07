@@ -35,6 +35,8 @@ control c_ingress(inout headers hdr,
         // deparsed on the wire (see c_deparser).
         hdr.packet_in.setValid();
         hdr.packet_in.ingress_port = standard_metadata.ingress_port;
+        // reason_code 100 means packet_in has to be sent to root contoller 
+	hdr.packet_in.reason_code = 100;
     }
 
     action _drop() {
@@ -184,6 +186,8 @@ control c_ingress(inout headers hdr,
         // deparsed on the wire (see c_deparser).
         hdr.packet_in.setValid();
         hdr.packet_in.ingress_port = standard_metadata.ingress_port;
+	hdr.packet_in.reason_code = 50; // reason code 50 means packet_in has to be sent to LOCAL onos controller running on switch
+
     }
 
     table service_req_uekey_sgwteid_map{
@@ -224,7 +228,8 @@ control c_ingress(inout headers hdr,
         // deparsed on the wire (see c_deparser).
         hdr.packet_in.setValid();
         hdr.packet_in.ingress_port = standard_metadata.ingress_port;
-    }
+    	hdr.packet_in.reason_code = 50; // reason code 50 means packet_in has to be sent to LOCAL onos controller running on switch
+}
 
     table ctxt_setup_uekey_sgwteid_map{
       key={
@@ -284,7 +289,8 @@ control c_ingress(inout headers hdr,
                             // deparsed on the wire (see c_deparser).
                             hdr.packet_in.setValid();
                             hdr.packet_in.ingress_port = standard_metadata.ingress_port;
-                            // return;
+                            hdr.packet_in.reason_code = 50; // reason code 50 means packet_in has to be sent to LOCAL onos controller running on switch
+			   // return;
                         }
 
                         else if(hdr.data.epc_traffic_code == 17){

@@ -74,7 +74,8 @@ import org.onosproject.net.packet.OutboundPacket;
 import org.onosproject.net.packet.PacketService;
 import org.onosproject.net.flow.DefaultTrafficTreatment;
 import org.onosproject.net.flow.TrafficTreatment;
-
+import org.onosproject.net.ElementId;
+import org.onosproject.net.ConnectPoint;
 import org.slf4j.Logger;
 
 import java.util.Collections;
@@ -238,7 +239,7 @@ public class EpcApp {
             //  if primary is down, then we recive ingress port as 1, as all the packets are directly forwarded from DGW to SGW1_2 
             long ingressPort = connectPoint.port().toLong();
             // @FT_with_failover: if primary is active then we send the PACKET OUT via the same port from which Packet IN came  
-            boolean primary_active;
+            boolean primary_active=true;
             if(ingressPort == Constants.primary_to_backup_SGW_Port){
                 primary_active = true;
             }
@@ -247,17 +248,20 @@ public class EpcApp {
                 primary_active = false;
                 log.warn("************* PRIMARY Switch is DEAD. Failover successful!!!!");
             }
+	    DeviceId deviceId;
 
             // @TODO : this might not be needed, need to check.
             if(primary_active==false){
                 //@FT_with_failover:  since primary is DEAD so we send the PACKET OUT messages directly to DGW.
                 ElementId eid = connectPoint.elementId();
-                PortNumber portNumber(Constants.DGW_to_backup_SGW_Port);
-                deviceId = ConnectPoint(eid,portNumber);
+                //PortNumber portNumber = new PortNumber(Constants.DGW_to_backup_SGW_Port1);
+                PortNumber portnumber = PortNumber.portNumber(Constants.DGW_to_backup_SGW_Port1);
+                //portNumber.PortNumber(Constants.DGW_to_backup_SGW_Port1);
+                deviceId = new ConnectPoint(eid,portnumber).deviceId();
             }
 
             /******************************************************************************************************************************/
-            DeviceId deviceId = pkt.receivedFrom().deviceId();
+            deviceId = pkt.receivedFrom().deviceId();
             if(Constants.DEBUG) {
                 log.warn("Packet received from {}", connectPoint);
                 log.warn("Device ID {}", deviceId);

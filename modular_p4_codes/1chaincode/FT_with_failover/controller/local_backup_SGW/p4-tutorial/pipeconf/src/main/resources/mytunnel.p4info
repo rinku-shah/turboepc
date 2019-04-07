@@ -104,7 +104,7 @@ tables {
   match_fields {
     id: 1
     name: "meta.metakey"
-    bitwidth: 32
+    bitwidth: 8
     match_type: EXACT
   }
   action_refs {
@@ -232,6 +232,11 @@ controller_packet_metadata {
     id: 1
     name: "ingress_port"
     bitwidth: 9
+  }
+  metadata {
+    id: 2
+    name: "reason_code"
+    bitwidth: 8
   }
 }
 controller_packet_metadata {

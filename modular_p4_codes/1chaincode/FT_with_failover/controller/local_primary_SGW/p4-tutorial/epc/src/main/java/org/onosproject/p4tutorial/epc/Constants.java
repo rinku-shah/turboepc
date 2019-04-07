@@ -34,7 +34,7 @@ public class Constants {
 	final static boolean OFFLOAD_ATTACH = true; //false; //True=> We wish to offload attach components to local controller
 	final static String SINK_MAC = "00:16:3e:de:0a:60"; //"00:16:3e:42:b9:ea"; // MAC Address of SINK Node //40:8d:5c:76:d2:fa    *
 	final static int NUM_CHAINS = 6;
-	final static String CONTROLLER_IP = "192.168.100.100";  // static controller IP
+	final static String CONTROLLER_IP = "192.168.100.12";  // static controller IP
 	final static int NUM_MSG = 11; //Number of messages arriving at the controller
 	static int NUM_OFF_MSG =0; // Number of offloadable messages
 	static int NUM_NONOFF_MSG = 0; // Number of offloadable messages
@@ -196,12 +196,6 @@ public class Constants {
 			final static int MIN_TEID = 1;
 			final static int MAX_TEID = 4095;
 			
-			// DPID or unique ID of SGW switch (assuming only one sgw in the network)
-			//final static int SGW_DPID = 2;
-			/*final static int SGW_DPID_1 = 2;
-			final static int SGW_DPID_2 = 6;
-			final static int SGW_DPID_3 = 8;
-			final static int SGW_DPID_4 = 3;*/
 			
 			// boolean flags which control whether encryption and integrity checks needs to be performed or not.
 			static boolean DO_ENCRYPTION = false;
@@ -209,7 +203,6 @@ public class Constants {
 		//=====================================
 			// DPID or unique ID of default switch 
 			final static int DEFAULT_SWITCH_ID_1 = 1;
-//			final static String DEFAULT_SWITCH_ID_1 = "s1";
 			final static int DEFAULT_SWITCH_ID_2 = 4;
 			final static int DEFAULT_SWITCH_ID_3 = 6;
 			final static int DEFAULT_SWITCH_ID_4 = 8;
