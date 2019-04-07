@@ -1,3 +1,4 @@
+					    return;
 /***********************************************************************
  * This file contains all the constants used in the controller's code  *
  ***********************************************************************/
@@ -234,7 +235,6 @@ public class Constants {
 			final static DeviceId PGW_NAME = DeviceId.deviceId("device:bmv2:s13");
 			//final static int SGW_ID = 0;
 			
-			final static DeviceId PGW_NAME = DeviceId.deviceId("device:bmv2:s13");
 			// DPID of PGW
 			final static int PGW_ID = 13;
 			
