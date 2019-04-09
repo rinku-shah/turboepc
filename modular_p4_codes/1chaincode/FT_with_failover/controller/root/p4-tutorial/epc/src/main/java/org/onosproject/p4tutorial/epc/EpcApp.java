@@ -173,6 +173,7 @@ public class EpcApp extends AbstractProvider implements LinkProvider{
     private int num_devices = 3;
 	private boolean [] dev = new boolean[num_devices+1];
     DeviceId [] devIds = new DeviceId[num_devices+1];
+    private boolean primary_crashed = false;
     public EpcApp() {
         super(new ProviderId("epcapp", "org.onosproject.p4tutorial.epc"));
 	}
@@ -190,8 +191,8 @@ public class EpcApp extends AbstractProvider implements LinkProvider{
         appId = coreService.registerApplication(APP_NAME);
         packetService.addProcessor(processor, PacketProcessor.director(2));
         deviceService.addListener(deviceListener);
-	linkService.addListener(linkListener);
-	providerService = registry.register(this);
+	    linkService.addListener(linkListener);
+	    providerService = registry.register(this);
         for (int i=1; i <=3; i++)
         {
         	devIds[i] = org.onosproject.net.DeviceId.deviceId("device:bmv2:s"+Integer.toString(i));
@@ -206,8 +207,8 @@ public class EpcApp extends AbstractProvider implements LinkProvider{
         // Remove listeners and clean-up flow rules.
         log.info("Stopping...");
         deviceService.removeListener(deviceListener);
-	linkService.removeListener(linkListener);
-	registry.unregister(this);
+	    linkService.removeListener(linkListener);
+	    registry.unregister(this);
         withdrawIntercepts();
         flowRuleService.removeFlowRulesById(appId);
         packetService.removeProcessor(processor);
@@ -323,6 +324,7 @@ public class EpcApp extends AbstractProvider implements LinkProvider{
                 			dev[i] = false;
                 			if (i==Constants.SGW_ID_1) {
                                 // if the primary SGW goes down then we forward all packets(Context Release and Service Request) to backup SGW from DGW
+                                primary_crashed = true;
                                 // ue_context_rel_req
                                 fr.populate_dgw_failover_table(appId,flowRuleService,DGW_deviceId,14,Constants.DGW_to_backup_SGW_port);
                                 // ue_service_req
@@ -341,16 +343,15 @@ public class EpcApp extends AbstractProvider implements LinkProvider{
 
                                 while(uekey_sgwteid_it.hasNext()){
                                     String uekey = uekey_sgwteid_it.next();
-				    log.warn("Moving uekey = {} to backup egress port",uekey);
+				                    log.warn("Moving uekey = {} to backup egress port",uekey);
                                     String sgwteid_value = ft.uekey_sgw_teid_map.get(uekey);
                                     String tmpArray2[] = sgwteid_value.split(Constants.SEPARATOR);
-				    // tmpArray2[0] = sgw_dpId and tmpArray2[1] = sgw_teid
-			            sgwteid_value =  tmpArray2[1]; // sgw_teid	
+				                    // tmpArray2[0] = sgw_dpId and tmpArray2[1] = sgw_teid
+			                        sgwteid_value =  tmpArray2[1]; // sgw_teid	
                                     String ueip = ft.uekey_ueip_map.get(uekey);
                                     byte[] UE_IPAddr = IPv4.toIPv4AddressBytes(ueip);
                                     /**************************** Uplink flow rules here (DGW to SGW) on DGW switch ***************************/
                                     fr.insertUplinkTunnelIngressRule(false, appId, flowRuleService, DGW_deviceId, UE_IPAddr, Constants.dstSinkIpAddr, Integer.parseInt(sgwteid_value), outPort);
-
                                 }
 
 			                    log.info("============== Switching over to secondary (backup SGW) ===============================");
@@ -899,7 +900,7 @@ public class EpcApp extends AbstractProvider implements LinkProvider{
                         DeviceId sgwswitchName = Constants.getSgwswitchName(dgw_dpId);
                         /*******************install uplink rules on SGW and PGW in this method********************/
                         String ip_sgw;
-                        ip_sgw = sgw.contactPGW(appId,flowRuleService,sgwswitchName,sgw_dpId, pgw_dpId, tmpArray[1]); //tmpArray[1] => apn of UE
+                        ip_sgw = sgw.contactPGW(appId,flowRuleService,sgwswitchName,sgw_dpId, pgw_dpId, tmpArray[1],primary_crashed); //tmpArray[1] => apn of UE
                        
                         response = new StringBuilder();
                         response.append(Constants.SEND_IP_SGW_TEID).append(Constants.SEPARATOR).append(ip_sgw).append(Constants.SEPARATOR).append("1").append(Constants.SEPARATOR);
@@ -945,11 +946,12 @@ public class EpcApp extends AbstractProvider implements LinkProvider{
                         // populates this map on SGW switch
                         DeviceId offload_SGWswitchName1 = Constants.getSgwswitchName(dgw_dpId);
                         // populate rules on primary sgw switch 
-                        fr.populate_uekey_sgwteid_map(false,appId,flowRuleService,offload_SGWswitchName1,Integer.parseInt(tmpArray[2]),sgw_teid);
-
+                        if(primary_crashed==false){
+                            fr.populate_uekey_sgwteid_map(false,appId,flowRuleService,offload_SGWswitchName1,Integer.parseInt(tmpArray[2]),sgw_teid);
+                        }
                         //@ft : get secondary SGW id
                         DeviceId offload_BackupSGWswitchName1 = Constants.getBackupSgwswitchName(dgw_dpId);
-                        // populate rules on backup sgw switch 
+                        // @FT_with_failover : populate rules on backup sgw switch 
                         fr.populate_uekey_sgwteid_map(false,appId,flowRuleService,offload_BackupSGWswitchName1,Integer.parseInt(tmpArray[2]),sgw_teid);
 
                         build_response_pkt(connectPoint,srcMac,dstMac,ipv4Protocol,ipv4SourceAddress,udp_dstport,udp_srcport,response.toString());
@@ -1013,7 +1015,7 @@ public class EpcApp extends AbstractProvider implements LinkProvider{
                         }
 
                         DeviceId SGWswitchName1 = Constants.getSgwswitchName(dgw_dpId1);
-                        sgw.modifyBearerRequest(appId, flowRuleService, SGWswitchName1, tmpArray2[0], tmpArray2[0], Integer.parseInt(tmpArray2[1]), Integer.parseInt(tmpArray[1]), tmpArray[2]);
+                        sgw.modifyBearerRequest(appId, flowRuleService, SGWswitchName1, tmpArray2[0], tmpArray2[0], Integer.parseInt(tmpArray2[1]), Integer.parseInt(tmpArray[1]), tmpArray[2],primary_crashed);
 
                         String ue_ip = FT.get(send_ue_teid_dgw, "uekey_ueip_map", tmpArray[2]); // tmpArray[2] => ue key
                       
@@ -1031,9 +1033,10 @@ public class EpcApp extends AbstractProvider implements LinkProvider{
                         // populate all these rules on SGW switch only
                         DeviceId offload_SGWswitchName2 = Constants.getSgwswitchName(dgw_dpId1);
                         ue_state = 1;
-                        fr.populate_uekey_uestate_map(false,appId,flowRuleService,offload_SGWswitchName2,Integer.parseInt(tmpArray[2]),ue_state);
-                        fr.populate_uekey_guti_map(false,appId,flowRuleService,offload_SGWswitchName2,Integer.parseInt(tmpArray[2]),(Integer.parseInt(tmpArray[2])+1000));
-
+                        if(primary_crashed==false){
+                            fr.populate_uekey_uestate_map(false,appId,flowRuleService,offload_SGWswitchName2,Integer.parseInt(tmpArray[2]),ue_state);
+                            fr.populate_uekey_guti_map(false,appId,flowRuleService,offload_SGWswitchName2,Integer.parseInt(tmpArray[2]),(Integer.parseInt(tmpArray[2])+1000));
+                        }
                         // @ft : populate tables on backup SGW switch as well
                         DeviceId offload_BackupSGWswitchName2 = Constants.getBackupSgwswitchName(dgw_dpId1);
                         fr.populate_uekey_uestate_map(false,appId,flowRuleService,offload_BackupSGWswitchName2,Integer.parseInt(tmpArray[2]),ue_state);
@@ -1118,8 +1121,6 @@ public class EpcApp extends AbstractProvider implements LinkProvider{
                         // tmpArray[4] => UE KEY
                         // @Offload design map not needed
 
-                        // FT.del(Integer.parseInt(Constants.DETACH_REQUEST),dw, "uekey_udp_src_port_map", tmpArray[4]); // tmpArray[4] => UE KEY
-
                         String pgw_dpid = Integer.toString(Constants.PGW_ID);
 
                         // newly added.. because can't remove in SEND_UE_TEID step.. due to re-establishment of tunnel
@@ -1164,7 +1165,7 @@ public class EpcApp extends AbstractProvider implements LinkProvider{
 
                         // dpids[0] ==> SGW DPID   & dpids[1]==> PGW DPID
                         DeviceId SGWswitchName2 = Constants.getSgwswitchName(dw);
-                        boolean status = sgw.detachUEFromSGW(appId,flowRuleService,SGWswitchName2,Constants.getSgwDpid(dw), pgw_dpid, Integer.parseInt(tmpArray[3]), tmpArray[1]);
+                        boolean status = sgw.detachUEFromSGW(appId,flowRuleService,SGWswitchName2,Constants.getSgwDpid(dw), pgw_dpid, Integer.parseInt(tmpArray[3]), tmpArray[1],primary_crashed);
                         response = new StringBuilder();
                         
                         if(status){
@@ -1180,10 +1181,11 @@ public class EpcApp extends AbstractProvider implements LinkProvider{
 
                             // @offload design : remove populated auxilary tables from SGW switch in detach case
                             // while deleting rules we dont need match values so sendong match parameters as 0 in all cases
-                            fr.populate_uekey_uestate_map(true,appId,flowRuleService,offload_SGWswitchName3,Integer.parseInt(tmpArray[4]),0);
-                            fr.populate_uekey_guti_map(true,appId,flowRuleService,offload_SGWswitchName3,Integer.parseInt(tmpArray[4]),0);
-                            fr.populate_uekey_sgwteid_map(true,appId,flowRuleService,offload_SGWswitchName3,Integer.parseInt(tmpArray[4]),0);
-
+                            if(primary_crashed==false){
+                                    fr.populate_uekey_uestate_map(true,appId,flowRuleService,offload_SGWswitchName3,Integer.parseInt(tmpArray[4]),0);
+                                    fr.populate_uekey_guti_map(true,appId,flowRuleService,offload_SGWswitchName3,Integer.parseInt(tmpArray[4]),0);
+                                    fr.populate_uekey_sgwteid_map(true,appId,flowRuleService,offload_SGWswitchName3,Integer.parseInt(tmpArray[4]),0);
+                            }
                             DeviceId offload_BackupSGWswitchName3 = Constants.getBackupSgwswitchName(dw);
 
                             //@ft : remove rules from backup SGW as well
@@ -1203,7 +1205,6 @@ public class EpcApp extends AbstractProvider implements LinkProvider{
                             build_response_pkt(connectPoint,srcMac,dstMac,ipv4Protocol,ipv4SourceAddress,udp_dstport,udp_srcport,response.toString());
 
                             log.info("ERROR: DETACH_FAILURE");
-                            //System.exit(1);
                         }
                         response = null;
                         if(Constants.DEBUG)
