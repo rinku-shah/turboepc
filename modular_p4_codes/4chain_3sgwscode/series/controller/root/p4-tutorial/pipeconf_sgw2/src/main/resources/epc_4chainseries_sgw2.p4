@@ -335,27 +335,10 @@ control c_ingress(inout headers hdr,
                                     // return;
                                 }
                         }
-                        //since its a miss, send to root Controller, but change traffic code
+                        //since its a miss, send to root SGW3, 
                          else { 
-                            if(hdr.data.epc_traffic_code == 14){
-                                    hdr.data.epc_traffic_code=24;
-                            } 
-                            else if(hdr.data.epc_traffic_code == 17){    
-                                    hdr.data.epc_traffic_code=27;
-                            } 
-                            else if(hdr.data.epc_traffic_code == 19){    
-                                    hdr.data.epc_traffic_code=29;
-                            }
-
-                            standard_metadata.egress_spec = CPU_PORT;
-                            // Packets sent to the controller needs to be prepended with the
-                            // packet-in header. By setting it valid we make sure it will be
-                            // deparsed on the wire (see c_deparser).
-                            hdr.packet_in.setValid();
-                            hdr.packet_in.ingress_port = standard_metadata.ingress_port;
-                             // reason_code 50 means packet_in has to be sent to local SGW1 contoller 
-                            hdr.packet_in.reason_code = 50;
-                            return;
+                                standard_metadata.egress_spec = 2;
+                                hdr.ipv4.ttl = hdr.ipv4.ttl - 1;
                         }
 
                     }  // standard metadata if over
