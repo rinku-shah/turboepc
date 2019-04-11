@@ -121,15 +121,6 @@ public class SGW  {
 
 	}
 
-	/*
-	 * This is a utility method requiring to know the starting IP address PGW-C will be using.
-	 * This method is needed so that we can preallocate the IP addresses that will be used in this 
-	 * experiment onto the interface of UE machine. This is to avoid wasting time and CPU on this later
-	 * that is, during the main experiment.
-	 */
-	public String getStartingIPAddress(String sw){
-		return pg.returnStartingIPAddress(sw);
-	}
 
 	/**
 	 * This method is used to simulate UE idle timeout. When UE remains idle for specified amount of time, we delete the downlink rule between SDG-D

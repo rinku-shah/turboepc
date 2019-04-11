@@ -556,7 +556,7 @@ public class EpcApp {
                                         }
 
                         // @series : this fn returns the backup SGW switch ID 
-                        String dw_ue_ser = Constants.getSgwDpidFromIp_SeriesBackup(DGW_IPAddr);  // dw_ue_ser contains switches ID like "1", "2" etc
+                        String dw_ue_ser = Constants.getSgwDpidFromIp(DGW_IPAddr);  // dw_ue_ser contains switches ID like "1", "2" etc
 
                         if(Constants.DEBUG){
                             log.info("Inside case UE_SERVICE_REQUEST");
@@ -660,7 +660,7 @@ public class EpcApp {
                                         log.warn("SGW_TEID = {}" , tmpArray[4]);
                                     }
                         // @series : getting backup SGW1_2 Switch ID
-                        String dw_c_resp = Constants.getSgwDpidFromIp_SeriesBackup(DGW_IPAddr);
+                        String dw_c_resp = Constants.getSgwDpidFromIp(DGW_IPAddr);
                         if(Constants.DEBUG){
                             log.info("Inside case INITIAL_CONTEXT_SETUP_RESPONSE");
                             step = 10;
