@@ -1287,7 +1287,7 @@ vector<string> UserEquipment::setupTunnel(Client &user, bool doEncryption){
 	}
 	if(tmpArray[0] == SEND_IP_SGW_TEID){
 		if(DO_DEBUG){
-			//cout<<" IP Address of UE="<<tmpArray[1]<<" and SGW TEID="<<tmpArray[2]<<" ue TEID="<<ue_teid<<endl;
+			cout<<" IP Address of UE="<<tmpArray[1]<<" and SGW TEID="<<tmpArray[2]<<" ue TEID="<<ue_teid<<endl;
 		}
 		//tmpArray.push_back(to_string(ue_teid));
 		tmpArray[3] = to_string(ue_teid);
@@ -1377,7 +1377,6 @@ vector<string> UserEquipment::setupTunnel(Client &user, bool doEncryption){
 		time_t seconds;
 		seconds = time (NULL);
 		if(DO_DEBUG){
-			cout<<"in ue.cpp setupTunnel before returing tmparray = "<<tmpArray[0]<<" ------" <<tmpArray[1]<<endl;
 			printf ("%ld seconds since January 1, 1970 kk=%d\n", seconds, stoi(tmpArray[2]));
 		}
 	}
@@ -1631,7 +1630,9 @@ void UserEquipment::initiate_ue_context_release(Client &user, int ue_num, string
 	//int code_name = (int)(user.my_client_byte_buffer[0]);
 	 int code_name = user.my_client_byte_buffer[0];
 	char sep = (char)user.my_client_byte_buffer[1];
-
+        string tmpStr;
+	tmpStr += user.my_client_byte_buffer[0];
+	tmpStr += user.my_client_byte_buffer[1];
 	if(DO_DEBUG){
 		cout<<"UE INITIATED CONTEXT RELEASE REQUEST:  IP Address of UE="<<ue_ip<<" and UE TEID="<<ue_teid<<" SGW TEID"<<sgw_teid<<endl;
 		cout<<" received data UE CONTEXT RELEASE COMMAND my_client_byte_buffer = "<<user.my_client_byte_buffer<<endl;
@@ -1640,9 +1641,7 @@ void UserEquipment::initiate_ue_context_release(Client &user, int ue_num, string
 		cout<<"code_name = "<<code_name<<endl;
 		cout<<"sep = "<<sep<<endl;
 	}
-	string tmpStr;
-	tmpStr += user.my_client_byte_buffer[0];
-	tmpStr += user.my_client_byte_buffer[1];
+	
         //receive = (user.my_client_byte_buffer);
         //tmpArray = split((char*)user.my_client_byte_buffer, SEPARATOR);
 
@@ -1651,8 +1650,9 @@ void UserEquipment::initiate_ue_context_release(Client &user, int ue_num, string
 	//tmpArray = split(user.client_buffer, SEPARATOR);
 	// if(tmpArray[0] == UE_CONTEXT_RELEASE_COMMAND){
 	
-	if((code_name == stoi(UE_CONTEXT_RELEASE_COMMAND)) || (stoi(tmpStr) == stoi(UE_CONTEXT_RELEASE_COMMAND))){
 
+		if((code_name == stoi(UE_CONTEXT_RELEASE_COMMAND)) || (stoi(tmpStr) == stoi(UE_CONTEXT_RELEASE_COMMAND))){
+//if(code_name == stoi(UE_CONTEXT_RELEASE_COMMAND)){
 	//if (stoi(tmpArray[0])== stoi(UE_CONTEXT_RELEASE_COMMAND)) {
 	//if (tmpArray[0].compare(UE_CONTEXT_RELEASE_COMMAND) == 0) {
 	
@@ -1806,10 +1806,10 @@ string UserEquipment::send_ue_service_request(Client& user, int ue_num, string u
 		// tmpArray = split(user.client_buffer, SEPARATOR);
 
 		// if(tmpArray[0] == INITIAL_CONTEXT_SETUP_REQUEST){
-		//if(code_name1 == stoi(INITIAL_CONTEXT_SETUP_REQUEST)){
+		if(code_name1 == stoi(INITIAL_CONTEXT_SETUP_REQUEST)){
 
 			if(DO_DEBUG){
-			     cout<<"Received INITIAL_CONTEXT_SETUP_REQUEST for UE with key="<<ue_num<<" SGW TEID="<<tmpArray[1]<<endl;
+				// cout<<"Received INITIAL_CONTEXT_SETUP_REQUEST for UE with key="<<ue_num<<" SGW TEID="<<tmpArray[1]<<endl;
 			}
 
 //			int ue_teid;
@@ -1897,7 +1897,7 @@ string UserEquipment::send_ue_service_request(Client& user, int ue_num, string u
 
 			// now write struct elemets to buffer one by one
 			bzero(user.client_buffer, BUFFER_SIZE);
-			len=0;  // reset length which holds no of bytes written in buffer
+			int len=0;  // reset length which holds no of bytes written in buffer
 
 			memcpy(user.client_buffer, &(ctxtresp.msg_id), sizeof(ctxtresp.msg_id));
 			len+=sizeof(ctxtresp.msg_id);
@@ -1974,10 +1974,10 @@ string UserEquipment::send_ue_service_request(Client& user, int ue_num, string u
 
 				// tmpArray[1] => ue key
 				if(DO_DEBUG){
-					 cout<<"CLEAR TO SEND DATA for ue with key ="<<tmpArray[1]<<endl;
+					// cout<<"CLEAR TO SEND DATA for ue with key ="<<tmpArray[1]<<endl;
 				}
 			}
-		//}
+		}
 	// }
 
 	return to_string(ue_teid);

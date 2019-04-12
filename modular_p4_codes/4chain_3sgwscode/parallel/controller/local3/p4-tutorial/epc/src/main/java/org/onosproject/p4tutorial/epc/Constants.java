@@ -238,7 +238,7 @@ public class Constants {
 			final static int SGW_ID_43 = 12;
 
 			final static int DGW_to_SGW1_1_Port = 2;  // remember it
-
+			final static int DGW_to_SGW1_3_Port = 4;
 			
 			// @vikas : in 4chain setup we have 2 SGWs in 1 chain 
 			final static DeviceId SGW_NAME_11 = DeviceId.deviceId("device:bmv2:s2");

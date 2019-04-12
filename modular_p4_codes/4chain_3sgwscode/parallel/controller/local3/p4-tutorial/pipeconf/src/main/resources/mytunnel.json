@@ -11,12 +11,13 @@
       "fields" : [
         ["tmp", 32, false],
         ["tmp_0", 32, false],
-        ["tmp_2", 1, false],
         ["tmp_3", 1, false],
         ["tmp_4", 1, false],
+        ["tmp_5", 1, false],
+        ["tmp_6", 1, false],
         ["hasReturned_0", 1, false],
         ["metadata.metakey", 32, false],
-        ["_padding_2", 4, false]
+        ["_padding_2", 3, false]
       ]
     },
     {
@@ -1475,8 +1476,14 @@
       "primitives" : []
     },
     {
-      "name" : "c_ingress.ipv4_forward",
+      "name" : "NoAction",
       "id" : 5,
+      "runtime_data" : [],
+      "primitives" : []
+    },
+    {
+      "name" : "c_ingress.ipv4_forward",
+      "id" : 6,
       "runtime_data" : [
         {
           "name" : "port",
@@ -1507,7 +1514,7 @@
     },
     {
       "name" : "c_ingress.send_to_cpu",
-      "id" : 6,
+      "id" : 7,
       "runtime_data" : [],
       "primitives" : [
         {
@@ -1586,7 +1593,7 @@
     },
     {
       "name" : "c_ingress._drop",
-      "id" : 7,
+      "id" : 8,
       "runtime_data" : [],
       "primitives" : [
         {
@@ -1603,7 +1610,7 @@
     },
     {
       "name" : "c_ingress.populate_ip_op_tun_s1_uplink",
-      "id" : 8,
+      "id" : 9,
       "runtime_data" : [
         {
           "name" : "op_tunnel_s1",
@@ -2269,7 +2276,7 @@
     },
     {
       "name" : "c_ingress.populate_tun_egress_s3_uplink",
-      "id" : 9,
+      "id" : 10,
       "runtime_data" : [
         {
           "name" : "egress_port_s3",
@@ -3574,7 +3581,7 @@
     },
     {
       "name" : "act",
-      "id" : 10,
+      "id" : 11,
       "runtime_data" : [],
       "primitives" : [
         {
@@ -3591,7 +3598,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainparallel_dgw.p4",
-            "line" : 229,
+            "line" : 240,
             "column" : 12,
             "source_fragment" : "standard_metadata.egress_spec = hdr.packet_out.egress_port"
           }
@@ -3606,7 +3613,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainparallel_dgw.p4",
-            "line" : 231,
+            "line" : 242,
             "column" : 12,
             "source_fragment" : "hdr.packet_out.setInvalid()"
           }
@@ -3635,7 +3642,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainparallel_dgw.p4",
-            "line" : 232,
+            "line" : 243,
             "column" : 12,
             "source_fragment" : "return"
           }
@@ -3644,7 +3651,7 @@
     },
     {
       "name" : "act_0",
-      "id" : 11,
+      "id" : 12,
       "runtime_data" : [],
       "primitives" : [
         {
@@ -3652,7 +3659,7 @@
           "parameters" : [
             {
               "type" : "field",
-              "value" : ["scalars", "tmp_2"]
+              "value" : ["scalars", "tmp_3"]
             },
             {
               "type" : "expression",
@@ -3674,7 +3681,7 @@
     },
     {
       "name" : "act_1",
-      "id" : 12,
+      "id" : 13,
       "runtime_data" : [],
       "primitives" : [
         {
@@ -3682,7 +3689,7 @@
           "parameters" : [
             {
               "type" : "field",
-              "value" : ["scalars", "tmp_2"]
+              "value" : ["scalars", "tmp_3"]
             },
             {
               "type" : "expression",
@@ -3704,42 +3711,6 @@
     },
     {
       "name" : "act_2",
-      "id" : 13,
-      "runtime_data" : [],
-      "primitives" : [
-        {
-          "op" : "assign",
-          "parameters" : [
-            {
-              "type" : "field",
-              "value" : ["scalars", "hasReturned_0"]
-            },
-            {
-              "type" : "expression",
-              "value" : {
-                "type" : "expression",
-                "value" : {
-                  "op" : "b2d",
-                  "left" : null,
-                  "right" : {
-                    "type" : "bool",
-                    "value" : true
-                  }
-                }
-              }
-            }
-          ],
-          "source_info" : {
-            "filename" : "epc_4chainparallel_dgw.p4",
-            "line" : 241,
-            "column" : 16,
-            "source_fragment" : "return"
-          }
-        }
-      ]
-    },
-    {
-      "name" : "act_3",
       "id" : 14,
       "runtime_data" : [],
       "primitives" : [
@@ -3767,7 +3738,43 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainparallel_dgw.p4",
-            "line" : 259,
+            "line" : 252,
+            "column" : 16,
+            "source_fragment" : "return"
+          }
+        }
+      ]
+    },
+    {
+      "name" : "act_3",
+      "id" : 15,
+      "runtime_data" : [],
+      "primitives" : [
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "hasReturned_0"]
+            },
+            {
+              "type" : "expression",
+              "value" : {
+                "type" : "expression",
+                "value" : {
+                  "op" : "b2d",
+                  "left" : null,
+                  "right" : {
+                    "type" : "bool",
+                    "value" : true
+                  }
+                }
+              }
+            }
+          ],
+          "source_info" : {
+            "filename" : "epc_4chainparallel_dgw.p4",
+            "line" : 270,
             "column" : 32,
             "source_fragment" : "return"
           }
@@ -3776,7 +3783,7 @@
     },
     {
       "name" : "act_4",
-      "id" : 15,
+      "id" : 16,
       "runtime_data" : [],
       "primitives" : [
         {
@@ -3793,7 +3800,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainparallel_dgw.p4",
-            "line" : 265,
+            "line" : 276,
             "column" : 36,
             "source_fragment" : "meta.metakey = hdr.ue_context_rel_req.ue_num"
           }
@@ -3802,32 +3809,6 @@
     },
     {
       "name" : "act_5",
-      "id" : 16,
-      "runtime_data" : [],
-      "primitives" : [
-        {
-          "op" : "assign",
-          "parameters" : [
-            {
-              "type" : "field",
-              "value" : ["scalars", "metadata.metakey"]
-            },
-            {
-              "type" : "field",
-              "value" : ["initial_ctxt_setup_resp", "ue_key"]
-            }
-          ],
-          "source_info" : {
-            "filename" : "epc_4chainparallel_dgw.p4",
-            "line" : 268,
-            "column" : 36,
-            "source_fragment" : "meta.metakey = hdr.initial_ctxt_setup_resp.ue_key"
-          }
-        }
-      ]
-    },
-    {
-      "name" : "act_6",
       "id" : 17,
       "runtime_data" : [],
       "primitives" : [
@@ -3845,7 +3826,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainparallel_dgw.p4",
-            "line" : 271,
+            "line" : 279,
             "column" : 36,
             "source_fragment" : "meta.metakey = hdr.ue_service_req.ue_key"
           }
@@ -3853,7 +3834,7 @@
       ]
     },
     {
-      "name" : "act_7",
+      "name" : "act_6",
       "id" : 18,
       "runtime_data" : [],
       "primitives" : [
@@ -3862,7 +3843,33 @@
           "parameters" : [
             {
               "type" : "field",
-              "value" : ["scalars", "tmp_4"]
+              "value" : ["scalars", "metadata.metakey"]
+            },
+            {
+              "type" : "field",
+              "value" : ["initial_ctxt_setup_resp", "ue_key"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "epc_4chainparallel_dgw.p4",
+            "line" : 282,
+            "column" : 36,
+            "source_fragment" : "meta.metakey = hdr.initial_ctxt_setup_resp.ue_key"
+          }
+        }
+      ]
+    },
+    {
+      "name" : "act_7",
+      "id" : 19,
+      "runtime_data" : [],
+      "primitives" : [
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "tmp_6"]
             },
             {
               "type" : "expression",
@@ -3884,7 +3891,7 @@
     },
     {
       "name" : "act_8",
-      "id" : 19,
+      "id" : 20,
       "runtime_data" : [],
       "primitives" : [
         {
@@ -3892,7 +3899,7 @@
           "parameters" : [
             {
               "type" : "field",
-              "value" : ["scalars", "tmp_4"]
+              "value" : ["scalars", "tmp_6"]
             },
             {
               "type" : "expression",
@@ -3914,7 +3921,7 @@
     },
     {
       "name" : "act_9",
-      "id" : 20,
+      "id" : 21,
       "runtime_data" : [],
       "primitives" : [
         {
@@ -3931,7 +3938,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainparallel_dgw.p4",
-            "line" : 276,
+            "line" : 288,
             "column" : 44,
             "source_fragment" : "standard_metadata.egress_spec = 2"
           }
@@ -3973,7 +3980,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainparallel_dgw.p4",
-            "line" : 277,
+            "line" : 289,
             "column" : 44,
             "source_fragment" : "hdr.ipv4.ttl = hdr.ipv4.ttl - 1"
           }
@@ -4002,8 +4009,8 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainparallel_dgw.p4",
-            "line" : 278,
-            "column" : 9,
+            "line" : 290,
+            "column" : 29,
             "source_fragment" : "return"
           }
         }
@@ -4011,7 +4018,7 @@
     },
     {
       "name" : "act_10",
-      "id" : 21,
+      "id" : 22,
       "runtime_data" : [],
       "primitives" : [
         {
@@ -4019,7 +4026,7 @@
           "parameters" : [
             {
               "type" : "field",
-              "value" : ["scalars", "tmp_3"]
+              "value" : ["scalars", "tmp_5"]
             },
             {
               "type" : "expression",
@@ -4041,7 +4048,7 @@
     },
     {
       "name" : "act_11",
-      "id" : 22,
+      "id" : 23,
       "runtime_data" : [],
       "primitives" : [
         {
@@ -4049,7 +4056,7 @@
           "parameters" : [
             {
               "type" : "field",
-              "value" : ["scalars", "tmp_3"]
+              "value" : ["scalars", "tmp_5"]
             },
             {
               "type" : "expression",
@@ -4071,7 +4078,7 @@
     },
     {
       "name" : "act_12",
-      "id" : 23,
+      "id" : 24,
       "runtime_data" : [],
       "primitives" : [
         {
@@ -4088,7 +4095,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainparallel_dgw.p4",
-            "line" : 282,
+            "line" : 294,
             "column" : 44,
             "source_fragment" : "standard_metadata.egress_spec = 3"
           }
@@ -4130,7 +4137,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainparallel_dgw.p4",
-            "line" : 283,
+            "line" : 295,
             "column" : 44,
             "source_fragment" : "hdr.ipv4.ttl = hdr.ipv4.ttl - 1"
           }
@@ -4159,8 +4166,8 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainparallel_dgw.p4",
-            "line" : 284,
-            "column" : 9,
+            "line" : 296,
+            "column" : 29,
             "source_fragment" : "return"
           }
         }
@@ -4168,7 +4175,164 @@
     },
     {
       "name" : "act_13",
-      "id" : 24,
+      "id" : 25,
+      "runtime_data" : [],
+      "primitives" : [
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "tmp_4"]
+            },
+            {
+              "type" : "expression",
+              "value" : {
+                "type" : "expression",
+                "value" : {
+                  "op" : "b2d",
+                  "left" : null,
+                  "right" : {
+                    "type" : "bool",
+                    "value" : true
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name" : "act_14",
+      "id" : 26,
+      "runtime_data" : [],
+      "primitives" : [
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "tmp_4"]
+            },
+            {
+              "type" : "expression",
+              "value" : {
+                "type" : "expression",
+                "value" : {
+                  "op" : "b2d",
+                  "left" : null,
+                  "right" : {
+                    "type" : "bool",
+                    "value" : false
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name" : "act_15",
+      "id" : 27,
+      "runtime_data" : [],
+      "primitives" : [
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["standard_metadata", "egress_spec"]
+            },
+            {
+              "type" : "hexstr",
+              "value" : "0x0004"
+            }
+          ],
+          "source_info" : {
+            "filename" : "epc_4chainparallel_dgw.p4",
+            "line" : 299,
+            "column" : 44,
+            "source_fragment" : "standard_metadata.egress_spec = 4"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["ipv4", "ttl"]
+            },
+            {
+              "type" : "expression",
+              "value" : {
+                "type" : "expression",
+                "value" : {
+                  "op" : "&",
+                  "left" : {
+                    "type" : "expression",
+                    "value" : {
+                      "op" : "+",
+                      "left" : {
+                        "type" : "field",
+                        "value" : ["ipv4", "ttl"]
+                      },
+                      "right" : {
+                        "type" : "hexstr",
+                        "value" : "0xff"
+                      }
+                    }
+                  },
+                  "right" : {
+                    "type" : "hexstr",
+                    "value" : "0xff"
+                  }
+                }
+              }
+            }
+          ],
+          "source_info" : {
+            "filename" : "epc_4chainparallel_dgw.p4",
+            "line" : 300,
+            "column" : 44,
+            "source_fragment" : "hdr.ipv4.ttl = hdr.ipv4.ttl - 1"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "hasReturned_0"]
+            },
+            {
+              "type" : "expression",
+              "value" : {
+                "type" : "expression",
+                "value" : {
+                  "op" : "b2d",
+                  "left" : null,
+                  "right" : {
+                    "type" : "bool",
+                    "value" : true
+                  }
+                }
+              }
+            }
+          ],
+          "source_info" : {
+            "filename" : "epc_4chainparallel_dgw.p4",
+            "line" : 301,
+            "column" : 29,
+            "source_fragment" : "return"
+          }
+        }
+      ]
+    },
+    {
+      "name" : "act_16",
+      "id" : 28,
       "runtime_data" : [],
       "primitives" : [
         {
@@ -4185,7 +4349,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainparallel_dgw.p4",
-            "line" : 290,
+            "line" : 307,
             "column" : 48,
             "source_fragment" : "hdr.data.epc_traffic_code=24"
           }
@@ -4193,8 +4357,8 @@
       ]
     },
     {
-      "name" : "act_14",
-      "id" : 25,
+      "name" : "act_17",
+      "id" : 29,
       "runtime_data" : [],
       "primitives" : [
         {
@@ -4211,7 +4375,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainparallel_dgw.p4",
-            "line" : 293,
+            "line" : 310,
             "column" : 48,
             "source_fragment" : "hdr.data.epc_traffic_code=27"
           }
@@ -4219,8 +4383,8 @@
       ]
     },
     {
-      "name" : "act_15",
-      "id" : 26,
+      "name" : "act_18",
+      "id" : 30,
       "runtime_data" : [],
       "primitives" : [
         {
@@ -4237,7 +4401,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainparallel_dgw.p4",
-            "line" : 296,
+            "line" : 313,
             "column" : 48,
             "source_fragment" : "hdr.data.epc_traffic_code=29"
           }
@@ -4245,8 +4409,8 @@
       ]
     },
     {
-      "name" : "act_16",
-      "id" : 27,
+      "name" : "act_19",
+      "id" : 31,
       "runtime_data" : [],
       "primitives" : [
         {
@@ -4278,7 +4442,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainparallel_dgw.p4",
-            "line" : 303,
+            "line" : 320,
             "column" : 40,
             "source_fragment" : "hdr.packet_in.setValid()"
           }
@@ -4297,7 +4461,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainparallel_dgw.p4",
-            "line" : 304,
+            "line" : 321,
             "column" : 40,
             "source_fragment" : "hdr.packet_in.ingress_port = standard_metadata.ingress_port"
           }
@@ -4316,8 +4480,8 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainparallel_dgw.p4",
-            "line" : 305,
-            "column" : 5,
+            "line" : 322,
+            "column" : 25,
             "source_fragment" : "hdr.packet_in.reason_code = 100"
           }
         },
@@ -4345,7 +4509,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainparallel_dgw.p4",
-            "line" : 306,
+            "line" : 323,
             "column" : 40,
             "source_fragment" : "return"
           }
@@ -4353,8 +4517,8 @@
       ]
     },
     {
-      "name" : "act_17",
-      "id" : 28,
+      "name" : "act_20",
+      "id" : 32,
       "runtime_data" : [],
       "primitives" : [
         {
@@ -4371,7 +4535,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainparallel_dgw.p4",
-            "line" : 313,
+            "line" : 330,
             "column" : 32,
             "source_fragment" : "standard_metadata.egress_spec = 1"
           }
@@ -4413,7 +4577,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainparallel_dgw.p4",
-            "line" : 314,
+            "line" : 331,
             "column" : 32,
             "source_fragment" : "hdr.ipv4.ttl = hdr.ipv4.ttl - 1"
           }
@@ -4442,7 +4606,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainparallel_dgw.p4",
-            "line" : 315,
+            "line" : 332,
             "column" : 11,
             "source_fragment" : "return"
           }
@@ -4450,8 +4614,8 @@
       ]
     },
     {
-      "name" : "act_18",
-      "id" : 29,
+      "name" : "act_21",
+      "id" : 33,
       "runtime_data" : [],
       "primitives" : [
         {
@@ -4478,7 +4642,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainparallel_dgw.p4",
-            "line" : 326,
+            "line" : 343,
             "column" : 20,
             "source_fragment" : "return"
           }
@@ -4486,8 +4650,8 @@
       ]
     },
     {
-      "name" : "act_19",
-      "id" : 30,
+      "name" : "act_22",
+      "id" : 34,
       "runtime_data" : [],
       "primitives" : [
         {
@@ -4516,8 +4680,8 @@
       ]
     },
     {
-      "name" : "act_20",
-      "id" : 31,
+      "name" : "act_23",
+      "id" : 35,
       "runtime_data" : [],
       "primitives" : [
         {
@@ -4560,7 +4724,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainparallel_dgw.p4",
-            "line" : 332,
+            "line" : 349,
             "column" : 17,
             "source_fragment" : "tx_port_counter.count((bit<32>) standard_metadata.egress_spec)"
           }
@@ -4568,8 +4732,8 @@
       ]
     },
     {
-      "name" : "act_21",
-      "id" : 32,
+      "name" : "act_24",
+      "id" : 36,
       "runtime_data" : [],
       "primitives" : [
         {
@@ -4612,7 +4776,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainparallel_dgw.p4",
-            "line" : 335,
+            "line" : 352,
             "column" : 17,
             "source_fragment" : "rx_port_counter.count((bit<32>) standard_metadata.ingress_port)"
           }
@@ -4642,14 +4806,14 @@
           "with_counters" : false,
           "support_timeout" : false,
           "direct_meters" : null,
-          "action_ids" : [30],
-          "actions" : ["act_19"],
+          "action_ids" : [34],
+          "actions" : ["act_22"],
           "base_default_next" : "node_3",
           "next_tables" : {
-            "act_19" : "node_3"
+            "act_22" : "node_3"
           },
           "default_entry" : {
-            "action_id" : 30,
+            "action_id" : 34,
             "action_const" : true,
             "action_data" : [],
             "action_entry_const" : true
@@ -4665,14 +4829,14 @@
           "with_counters" : false,
           "support_timeout" : false,
           "direct_meters" : null,
-          "action_ids" : [10],
+          "action_ids" : [11],
           "actions" : ["act"],
-          "base_default_next" : "node_46",
+          "base_default_next" : "node_51",
           "next_tables" : {
-            "act" : "node_46"
+            "act" : "node_51"
           },
           "default_entry" : {
-            "action_id" : 10,
+            "action_id" : 11,
             "action_const" : true,
             "action_data" : [],
             "action_entry_const" : true
@@ -4725,7 +4889,7 @@
           "with_counters" : true,
           "support_timeout" : false,
           "direct_meters" : null,
-          "action_ids" : [5, 6, 7, 0],
+          "action_ids" : [6, 7, 8, 0],
           "actions" : ["c_ingress.ipv4_forward", "c_ingress.send_to_cpu", "c_ingress._drop", "NoAction"],
           "base_default_next" : null,
           "next_tables" : {
@@ -4749,14 +4913,14 @@
           "with_counters" : false,
           "support_timeout" : false,
           "direct_meters" : null,
-          "action_ids" : [11],
+          "action_ids" : [12],
           "actions" : ["act_0"],
           "base_default_next" : "node_8",
           "next_tables" : {
             "act_0" : "node_8"
           },
           "default_entry" : {
-            "action_id" : 11,
+            "action_id" : 12,
             "action_const" : true,
             "action_data" : [],
             "action_entry_const" : true
@@ -4772,14 +4936,14 @@
           "with_counters" : false,
           "support_timeout" : false,
           "direct_meters" : null,
-          "action_ids" : [12],
+          "action_ids" : [13],
           "actions" : ["act_1"],
           "base_default_next" : "node_8",
           "next_tables" : {
             "act_1" : "node_8"
           },
           "default_entry" : {
-            "action_id" : 12,
+            "action_id" : 13,
             "action_const" : true,
             "action_data" : [],
             "action_entry_const" : true
@@ -4795,14 +4959,14 @@
           "with_counters" : false,
           "support_timeout" : false,
           "direct_meters" : null,
-          "action_ids" : [13],
+          "action_ids" : [14],
           "actions" : ["act_2"],
           "base_default_next" : "node_10",
           "next_tables" : {
             "act_2" : "node_10"
           },
           "default_entry" : {
-            "action_id" : 13,
+            "action_id" : 14,
             "action_const" : true,
             "action_data" : [],
             "action_entry_const" : true
@@ -4837,7 +5001,7 @@
           "with_counters" : false,
           "support_timeout" : false,
           "direct_meters" : null,
-          "action_ids" : [8, 1],
+          "action_ids" : [9, 1],
           "actions" : ["c_ingress.populate_ip_op_tun_s1_uplink", "NoAction"],
           "base_default_next" : "tbl_act_4",
           "next_tables" : {
@@ -4861,14 +5025,14 @@
           "with_counters" : false,
           "support_timeout" : false,
           "direct_meters" : null,
-          "action_ids" : [14],
+          "action_ids" : [15],
           "actions" : ["act_3"],
-          "base_default_next" : "node_42",
+          "base_default_next" : "node_47",
           "next_tables" : {
-            "act_3" : "node_42"
+            "act_3" : "node_47"
           },
           "default_entry" : {
-            "action_id" : 14,
+            "action_id" : 15,
             "action_const" : true,
             "action_data" : [],
             "action_entry_const" : true
@@ -4884,14 +5048,14 @@
           "with_counters" : false,
           "support_timeout" : false,
           "direct_meters" : null,
-          "action_ids" : [15],
+          "action_ids" : [16],
           "actions" : ["act_4"],
           "base_default_next" : "c_ingress.uekey_lookup_lb1_ub1",
           "next_tables" : {
             "act_4" : "c_ingress.uekey_lookup_lb1_ub1"
           },
           "default_entry" : {
-            "action_id" : 15,
+            "action_id" : 16,
             "action_const" : true,
             "action_data" : [],
             "action_entry_const" : true
@@ -4907,14 +5071,14 @@
           "with_counters" : false,
           "support_timeout" : false,
           "direct_meters" : null,
-          "action_ids" : [16],
+          "action_ids" : [17],
           "actions" : ["act_5"],
           "base_default_next" : "c_ingress.uekey_lookup_lb1_ub1",
           "next_tables" : {
             "act_5" : "c_ingress.uekey_lookup_lb1_ub1"
           },
           "default_entry" : {
-            "action_id" : 16,
+            "action_id" : 17,
             "action_const" : true,
             "action_data" : [],
             "action_entry_const" : true
@@ -4930,14 +5094,14 @@
           "with_counters" : false,
           "support_timeout" : false,
           "direct_meters" : null,
-          "action_ids" : [17],
+          "action_ids" : [18],
           "actions" : ["act_6"],
           "base_default_next" : "c_ingress.uekey_lookup_lb1_ub1",
           "next_tables" : {
             "act_6" : "c_ingress.uekey_lookup_lb1_ub1"
           },
           "default_entry" : {
-            "action_id" : 17,
+            "action_id" : 18,
             "action_const" : true,
             "action_data" : [],
             "action_entry_const" : true
@@ -4990,14 +5154,14 @@
           "with_counters" : false,
           "support_timeout" : false,
           "direct_meters" : null,
-          "action_ids" : [18],
+          "action_ids" : [19],
           "actions" : ["act_7"],
           "base_default_next" : "node_26",
           "next_tables" : {
             "act_7" : "node_26"
           },
           "default_entry" : {
-            "action_id" : 18,
+            "action_id" : 19,
             "action_const" : true,
             "action_data" : [],
             "action_entry_const" : true
@@ -5013,14 +5177,14 @@
           "with_counters" : false,
           "support_timeout" : false,
           "direct_meters" : null,
-          "action_ids" : [19],
+          "action_ids" : [20],
           "actions" : ["act_8"],
           "base_default_next" : "node_26",
           "next_tables" : {
             "act_8" : "node_26"
           },
           "default_entry" : {
-            "action_id" : 19,
+            "action_id" : 20,
             "action_const" : true,
             "action_data" : [],
             "action_entry_const" : true
@@ -5036,14 +5200,14 @@
           "with_counters" : false,
           "support_timeout" : false,
           "direct_meters" : null,
-          "action_ids" : [20],
+          "action_ids" : [21],
           "actions" : ["act_9"],
-          "base_default_next" : "node_42",
+          "base_default_next" : "node_47",
           "next_tables" : {
-            "act_9" : "node_42"
+            "act_9" : "node_47"
           },
           "default_entry" : {
-            "action_id" : 20,
+            "action_id" : 21,
             "action_const" : true,
             "action_data" : [],
             "action_entry_const" : true
@@ -5096,14 +5260,14 @@
           "with_counters" : false,
           "support_timeout" : false,
           "direct_meters" : null,
-          "action_ids" : [21],
+          "action_ids" : [22],
           "actions" : ["act_10"],
           "base_default_next" : "node_31",
           "next_tables" : {
             "act_10" : "node_31"
           },
           "default_entry" : {
-            "action_id" : 21,
+            "action_id" : 22,
             "action_const" : true,
             "action_data" : [],
             "action_entry_const" : true
@@ -5119,14 +5283,14 @@
           "with_counters" : false,
           "support_timeout" : false,
           "direct_meters" : null,
-          "action_ids" : [22],
+          "action_ids" : [23],
           "actions" : ["act_11"],
           "base_default_next" : "node_31",
           "next_tables" : {
             "act_11" : "node_31"
           },
           "default_entry" : {
-            "action_id" : 22,
+            "action_id" : 23,
             "action_const" : true,
             "action_data" : [],
             "action_entry_const" : true
@@ -5142,34 +5306,11 @@
           "with_counters" : false,
           "support_timeout" : false,
           "direct_meters" : null,
-          "action_ids" : [23],
-          "actions" : ["act_12"],
-          "base_default_next" : "node_42",
-          "next_tables" : {
-            "act_12" : "node_42"
-          },
-          "default_entry" : {
-            "action_id" : 23,
-            "action_const" : true,
-            "action_data" : [],
-            "action_entry_const" : true
-          }
-        },
-        {
-          "name" : "tbl_act_14",
-          "id" : 19,
-          "key" : [],
-          "match_type" : "exact",
-          "type" : "simple",
-          "max_size" : 1024,
-          "with_counters" : false,
-          "support_timeout" : false,
-          "direct_meters" : null,
           "action_ids" : [24],
-          "actions" : ["act_13"],
-          "base_default_next" : "tbl_act_17",
+          "actions" : ["act_12"],
+          "base_default_next" : "node_47",
           "next_tables" : {
-            "act_13" : "tbl_act_17"
+            "act_12" : "node_47"
           },
           "default_entry" : {
             "action_id" : 24,
@@ -5179,7 +5320,44 @@
           }
         },
         {
-          "name" : "tbl_act_15",
+          "name" : "c_ingress.uekey_lookup_lb3_ub3",
+          "id" : 19,
+          "source_info" : {
+            "filename" : "epc_4chainparallel_dgw.p4",
+            "line" : 223,
+            "column" : 10,
+            "source_fragment" : "uekey_lookup_lb3_ub3"
+          },
+          "key" : [
+            {
+              "match_type" : "exact",
+              "name" : "meta.metakey",
+              "target" : ["scalars", "metadata.metakey"],
+              "mask" : null
+            }
+          ],
+          "match_type" : "exact",
+          "type" : "simple",
+          "max_size" : 2048,
+          "with_counters" : false,
+          "support_timeout" : false,
+          "direct_meters" : null,
+          "action_ids" : [5],
+          "actions" : ["NoAction"],
+          "base_default_next" : null,
+          "next_tables" : {
+            "__HIT__" : "tbl_act_14",
+            "__MISS__" : "tbl_act_15"
+          },
+          "default_entry" : {
+            "action_id" : 5,
+            "action_const" : false,
+            "action_data" : [],
+            "action_entry_const" : false
+          }
+        },
+        {
+          "name" : "tbl_act_14",
           "id" : 20,
           "key" : [],
           "match_type" : "exact",
@@ -5189,10 +5367,10 @@
           "support_timeout" : false,
           "direct_meters" : null,
           "action_ids" : [25],
-          "actions" : ["act_14"],
-          "base_default_next" : "tbl_act_17",
+          "actions" : ["act_13"],
+          "base_default_next" : "node_36",
           "next_tables" : {
-            "act_14" : "tbl_act_17"
+            "act_13" : "node_36"
           },
           "default_entry" : {
             "action_id" : 25,
@@ -5202,7 +5380,7 @@
           }
         },
         {
-          "name" : "tbl_act_16",
+          "name" : "tbl_act_15",
           "id" : 21,
           "key" : [],
           "match_type" : "exact",
@@ -5212,10 +5390,10 @@
           "support_timeout" : false,
           "direct_meters" : null,
           "action_ids" : [26],
-          "actions" : ["act_15"],
-          "base_default_next" : "tbl_act_17",
+          "actions" : ["act_14"],
+          "base_default_next" : "node_36",
           "next_tables" : {
-            "act_15" : "tbl_act_17"
+            "act_14" : "node_36"
           },
           "default_entry" : {
             "action_id" : 26,
@@ -5225,7 +5403,7 @@
           }
         },
         {
-          "name" : "tbl_act_17",
+          "name" : "tbl_act_16",
           "id" : 22,
           "key" : [],
           "match_type" : "exact",
@@ -5235,10 +5413,10 @@
           "support_timeout" : false,
           "direct_meters" : null,
           "action_ids" : [27],
-          "actions" : ["act_16"],
-          "base_default_next" : "node_42",
+          "actions" : ["act_15"],
+          "base_default_next" : "node_47",
           "next_tables" : {
-            "act_16" : "node_42"
+            "act_15" : "node_47"
           },
           "default_entry" : {
             "action_id" : 27,
@@ -5248,7 +5426,7 @@
           }
         },
         {
-          "name" : "tbl_act_18",
+          "name" : "tbl_act_17",
           "id" : 23,
           "key" : [],
           "match_type" : "exact",
@@ -5258,10 +5436,10 @@
           "support_timeout" : false,
           "direct_meters" : null,
           "action_ids" : [28],
-          "actions" : ["act_17"],
-          "base_default_next" : "node_42",
+          "actions" : ["act_16"],
+          "base_default_next" : "tbl_act_20",
           "next_tables" : {
-            "act_17" : "node_42"
+            "act_16" : "tbl_act_20"
           },
           "default_entry" : {
             "action_id" : 28,
@@ -5271,8 +5449,100 @@
           }
         },
         {
-          "name" : "c_ingress.tun_egress_s3_uplink",
+          "name" : "tbl_act_18",
           "id" : 24,
+          "key" : [],
+          "match_type" : "exact",
+          "type" : "simple",
+          "max_size" : 1024,
+          "with_counters" : false,
+          "support_timeout" : false,
+          "direct_meters" : null,
+          "action_ids" : [29],
+          "actions" : ["act_17"],
+          "base_default_next" : "tbl_act_20",
+          "next_tables" : {
+            "act_17" : "tbl_act_20"
+          },
+          "default_entry" : {
+            "action_id" : 29,
+            "action_const" : true,
+            "action_data" : [],
+            "action_entry_const" : true
+          }
+        },
+        {
+          "name" : "tbl_act_19",
+          "id" : 25,
+          "key" : [],
+          "match_type" : "exact",
+          "type" : "simple",
+          "max_size" : 1024,
+          "with_counters" : false,
+          "support_timeout" : false,
+          "direct_meters" : null,
+          "action_ids" : [30],
+          "actions" : ["act_18"],
+          "base_default_next" : "tbl_act_20",
+          "next_tables" : {
+            "act_18" : "tbl_act_20"
+          },
+          "default_entry" : {
+            "action_id" : 30,
+            "action_const" : true,
+            "action_data" : [],
+            "action_entry_const" : true
+          }
+        },
+        {
+          "name" : "tbl_act_20",
+          "id" : 26,
+          "key" : [],
+          "match_type" : "exact",
+          "type" : "simple",
+          "max_size" : 1024,
+          "with_counters" : false,
+          "support_timeout" : false,
+          "direct_meters" : null,
+          "action_ids" : [31],
+          "actions" : ["act_19"],
+          "base_default_next" : "node_47",
+          "next_tables" : {
+            "act_19" : "node_47"
+          },
+          "default_entry" : {
+            "action_id" : 31,
+            "action_const" : true,
+            "action_data" : [],
+            "action_entry_const" : true
+          }
+        },
+        {
+          "name" : "tbl_act_21",
+          "id" : 27,
+          "key" : [],
+          "match_type" : "exact",
+          "type" : "simple",
+          "max_size" : 1024,
+          "with_counters" : false,
+          "support_timeout" : false,
+          "direct_meters" : null,
+          "action_ids" : [32],
+          "actions" : ["act_20"],
+          "base_default_next" : "node_47",
+          "next_tables" : {
+            "act_20" : "node_47"
+          },
+          "default_entry" : {
+            "action_id" : 32,
+            "action_const" : true,
+            "action_data" : [],
+            "action_entry_const" : true
+          }
+        },
+        {
+          "name" : "c_ingress.tun_egress_s3_uplink",
+          "id" : 28,
           "source_info" : {
             "filename" : "epc_4chainparallel_dgw.p4",
             "line" : 185,
@@ -5293,12 +5563,12 @@
           "with_counters" : false,
           "support_timeout" : false,
           "direct_meters" : null,
-          "action_ids" : [9, 2],
+          "action_ids" : [10, 2],
           "actions" : ["c_ingress.populate_tun_egress_s3_uplink", "NoAction"],
-          "base_default_next" : "tbl_act_19",
+          "base_default_next" : "tbl_act_22",
           "next_tables" : {
-            "c_ingress.populate_tun_egress_s3_uplink" : "tbl_act_19",
-            "NoAction" : "tbl_act_19"
+            "c_ingress.populate_tun_egress_s3_uplink" : "tbl_act_22",
+            "NoAction" : "tbl_act_22"
           },
           "default_entry" : {
             "action_id" : 2,
@@ -5308,8 +5578,8 @@
           }
         },
         {
-          "name" : "tbl_act_19",
-          "id" : 25,
+          "name" : "tbl_act_22",
+          "id" : 29,
           "key" : [],
           "match_type" : "exact",
           "type" : "simple",
@@ -5317,60 +5587,60 @@
           "with_counters" : false,
           "support_timeout" : false,
           "direct_meters" : null,
-          "action_ids" : [29],
-          "actions" : ["act_18"],
-          "base_default_next" : "node_46",
-          "next_tables" : {
-            "act_18" : "node_46"
-          },
-          "default_entry" : {
-            "action_id" : 29,
-            "action_const" : true,
-            "action_data" : [],
-            "action_entry_const" : true
-          }
-        },
-        {
-          "name" : "tbl_act_20",
-          "id" : 26,
-          "key" : [],
-          "match_type" : "exact",
-          "type" : "simple",
-          "max_size" : 1024,
-          "with_counters" : false,
-          "support_timeout" : false,
-          "direct_meters" : null,
-          "action_ids" : [31],
-          "actions" : ["act_20"],
-          "base_default_next" : "node_49",
-          "next_tables" : {
-            "act_20" : "node_49"
-          },
-          "default_entry" : {
-            "action_id" : 31,
-            "action_const" : true,
-            "action_data" : [],
-            "action_entry_const" : true
-          }
-        },
-        {
-          "name" : "tbl_act_21",
-          "id" : 27,
-          "key" : [],
-          "match_type" : "exact",
-          "type" : "simple",
-          "max_size" : 1024,
-          "with_counters" : false,
-          "support_timeout" : false,
-          "direct_meters" : null,
-          "action_ids" : [32],
+          "action_ids" : [33],
           "actions" : ["act_21"],
+          "base_default_next" : "node_51",
+          "next_tables" : {
+            "act_21" : "node_51"
+          },
+          "default_entry" : {
+            "action_id" : 33,
+            "action_const" : true,
+            "action_data" : [],
+            "action_entry_const" : true
+          }
+        },
+        {
+          "name" : "tbl_act_23",
+          "id" : 30,
+          "key" : [],
+          "match_type" : "exact",
+          "type" : "simple",
+          "max_size" : 1024,
+          "with_counters" : false,
+          "support_timeout" : false,
+          "direct_meters" : null,
+          "action_ids" : [35],
+          "actions" : ["act_23"],
+          "base_default_next" : "node_54",
+          "next_tables" : {
+            "act_23" : "node_54"
+          },
+          "default_entry" : {
+            "action_id" : 35,
+            "action_const" : true,
+            "action_data" : [],
+            "action_entry_const" : true
+          }
+        },
+        {
+          "name" : "tbl_act_24",
+          "id" : 31,
+          "key" : [],
+          "match_type" : "exact",
+          "type" : "simple",
+          "max_size" : 1024,
+          "with_counters" : false,
+          "support_timeout" : false,
+          "direct_meters" : null,
+          "action_ids" : [36],
+          "actions" : ["act_24"],
           "base_default_next" : null,
           "next_tables" : {
-            "act_21" : null
+            "act_24" : null
           },
           "default_entry" : {
-            "action_id" : 32,
+            "action_id" : 36,
             "action_const" : true,
             "action_data" : [],
             "action_entry_const" : true
@@ -5384,7 +5654,7 @@
           "id" : 0,
           "source_info" : {
             "filename" : "epc_4chainparallel_dgw.p4",
-            "line" : 224,
+            "line" : 235,
             "column" : 12,
             "source_fragment" : "standard_metadata.ingress_port == CPU_PORT"
           },
@@ -5415,7 +5685,7 @@
               "left" : null,
               "right" : {
                 "type" : "field",
-                "value" : ["scalars", "tmp_2"]
+                "value" : ["scalars", "tmp_3"]
               }
             }
           },
@@ -5444,14 +5714,14 @@
             }
           },
           "true_next" : "node_11",
-          "false_next" : "node_42"
+          "false_next" : "node_47"
         },
         {
           "name" : "node_11",
           "id" : 3,
           "source_info" : {
             "filename" : "epc_4chainparallel_dgw.p4",
-            "line" : 246,
+            "line" : 257,
             "column" : 14,
             "source_fragment" : "hdr.ipv4.isValid() && !hdr.gtpu.isValid()"
           },
@@ -5491,14 +5761,14 @@
             }
           },
           "true_next" : "node_12",
-          "false_next" : "node_42"
+          "false_next" : "node_47"
         },
         {
           "name" : "node_12",
           "id" : 4,
           "source_info" : {
             "filename" : "epc_4chainparallel_dgw.p4",
-            "line" : 250,
+            "line" : 261,
             "column" : 22,
             "source_fragment" : "standard_metadata.ingress_port==1"
           },
@@ -5517,14 +5787,14 @@
             }
           },
           "true_next" : "node_13",
-          "false_next" : "node_40"
+          "false_next" : "node_45"
         },
         {
           "name" : "node_13",
           "id" : 5,
           "source_info" : {
             "filename" : "epc_4chainparallel_dgw.p4",
-            "line" : 257,
+            "line" : 268,
             "column" : 31,
             "source_fragment" : "hdr.ipv4.protocol == PROTO_TCP"
           },
@@ -5550,7 +5820,7 @@
           "id" : 6,
           "source_info" : {
             "filename" : "epc_4chainparallel_dgw.p4",
-            "line" : 262,
+            "line" : 273,
             "column" : 36,
             "source_fragment" : "hdr.ipv4.protocol == PROTO_UDP"
           },
@@ -5569,14 +5839,14 @@
             }
           },
           "true_next" : "node_17",
-          "false_next" : "node_42"
+          "false_next" : "node_47"
         },
         {
           "name" : "node_17",
           "id" : 7,
           "source_info" : {
             "filename" : "epc_4chainparallel_dgw.p4",
-            "line" : 264,
+            "line" : 275,
             "column" : 35,
             "source_fragment" : "hdr.data.epc_traffic_code == 14"
           },
@@ -5602,33 +5872,7 @@
           "id" : 8,
           "source_info" : {
             "filename" : "epc_4chainparallel_dgw.p4",
-            "line" : 267,
-            "column" : 40,
-            "source_fragment" : "hdr.data.epc_traffic_code == 19"
-          },
-          "expression" : {
-            "type" : "expression",
-            "value" : {
-              "op" : "==",
-              "left" : {
-                "type" : "field",
-                "value" : ["data", "epc_traffic_code"]
-              },
-              "right" : {
-                "type" : "hexstr",
-                "value" : "0x13"
-              }
-            }
-          },
-          "true_next" : "tbl_act_6",
-          "false_next" : "node_21"
-        },
-        {
-          "name" : "node_21",
-          "id" : 9,
-          "source_info" : {
-            "filename" : "epc_4chainparallel_dgw.p4",
-            "line" : 270,
+            "line" : 278,
             "column" : 40,
             "source_fragment" : "hdr.data.epc_traffic_code == 17"
           },
@@ -5646,6 +5890,32 @@
               }
             }
           },
+          "true_next" : "tbl_act_6",
+          "false_next" : "node_21"
+        },
+        {
+          "name" : "node_21",
+          "id" : 9,
+          "source_info" : {
+            "filename" : "epc_4chainparallel_dgw.p4",
+            "line" : 281,
+            "column" : 40,
+            "source_fragment" : "hdr.data.epc_traffic_code == 19"
+          },
+          "expression" : {
+            "type" : "expression",
+            "value" : {
+              "op" : "==",
+              "left" : {
+                "type" : "field",
+                "value" : ["data", "epc_traffic_code"]
+              },
+              "right" : {
+                "type" : "hexstr",
+                "value" : "0x13"
+              }
+            }
+          },
           "true_next" : "tbl_act_7",
           "false_next" : "c_ingress.uekey_lookup_lb1_ub1"
         },
@@ -5659,7 +5929,7 @@
               "left" : null,
               "right" : {
                 "type" : "field",
-                "value" : ["scalars", "tmp_4"]
+                "value" : ["scalars", "tmp_6"]
               }
             }
           },
@@ -5676,19 +5946,36 @@
               "left" : null,
               "right" : {
                 "type" : "field",
-                "value" : ["scalars", "tmp_3"]
+                "value" : ["scalars", "tmp_5"]
               }
             }
           },
           "true_next" : "tbl_act_13",
-          "false_next" : "node_33"
+          "false_next" : "c_ingress.uekey_lookup_lb3_ub3"
         },
         {
-          "name" : "node_33",
+          "name" : "node_36",
           "id" : 12,
+          "expression" : {
+            "type" : "expression",
+            "value" : {
+              "op" : "d2b",
+              "left" : null,
+              "right" : {
+                "type" : "field",
+                "value" : ["scalars", "tmp_4"]
+              }
+            }
+          },
+          "true_next" : "tbl_act_16",
+          "false_next" : "node_38"
+        },
+        {
+          "name" : "node_38",
+          "id" : 13,
           "source_info" : {
             "filename" : "epc_4chainparallel_dgw.p4",
-            "line" : 289,
+            "line" : 306,
             "column" : 43,
             "source_fragment" : "hdr.data.epc_traffic_code == 14"
           },
@@ -5706,15 +5993,15 @@
               }
             }
           },
-          "true_next" : "tbl_act_14",
-          "false_next" : "node_35"
+          "true_next" : "tbl_act_17",
+          "false_next" : "node_40"
         },
         {
-          "name" : "node_35",
-          "id" : 13,
+          "name" : "node_40",
+          "id" : 14,
           "source_info" : {
             "filename" : "epc_4chainparallel_dgw.p4",
-            "line" : 292,
+            "line" : 309,
             "column" : 48,
             "source_fragment" : "hdr.data.epc_traffic_code == 17"
           },
@@ -5732,15 +6019,15 @@
               }
             }
           },
-          "true_next" : "tbl_act_15",
-          "false_next" : "node_37"
+          "true_next" : "tbl_act_18",
+          "false_next" : "node_42"
         },
         {
-          "name" : "node_37",
-          "id" : 14,
+          "name" : "node_42",
+          "id" : 15,
           "source_info" : {
             "filename" : "epc_4chainparallel_dgw.p4",
-            "line" : 295,
+            "line" : 312,
             "column" : 48,
             "source_fragment" : "hdr.data.epc_traffic_code == 19"
           },
@@ -5758,17 +6045,17 @@
               }
             }
           },
-          "true_next" : "tbl_act_16",
-          "false_next" : "tbl_act_17"
+          "true_next" : "tbl_act_19",
+          "false_next" : "tbl_act_20"
         },
         {
-          "name" : "node_40",
-          "id" : 15,
+          "name" : "node_45",
+          "id" : 16,
           "source_info" : {
             "filename" : "epc_4chainparallel_dgw.p4",
-            "line" : 312,
+            "line" : 329,
             "column" : 28,
-            "source_fragment" : "standard_metadata.ingress_port==2 || standard_metadata.ingress_port==3"
+            "source_fragment" : "standard_metadata.ingress_port==2 || standard_metadata.ingress_port==3 || standard_metadata.ingress_port==4"
           },
           "expression" : {
             "type" : "expression",
@@ -5777,14 +6064,34 @@
               "left" : {
                 "type" : "expression",
                 "value" : {
-                  "op" : "==",
+                  "op" : "or",
                   "left" : {
-                    "type" : "field",
-                    "value" : ["standard_metadata", "ingress_port"]
+                    "type" : "expression",
+                    "value" : {
+                      "op" : "==",
+                      "left" : {
+                        "type" : "field",
+                        "value" : ["standard_metadata", "ingress_port"]
+                      },
+                      "right" : {
+                        "type" : "hexstr",
+                        "value" : "0x0002"
+                      }
+                    }
                   },
                   "right" : {
-                    "type" : "hexstr",
-                    "value" : "0x0002"
+                    "type" : "expression",
+                    "value" : {
+                      "op" : "==",
+                      "left" : {
+                        "type" : "field",
+                        "value" : ["standard_metadata", "ingress_port"]
+                      },
+                      "right" : {
+                        "type" : "hexstr",
+                        "value" : "0x0003"
+                      }
+                    }
                   }
                 }
               },
@@ -5798,18 +6105,18 @@
                   },
                   "right" : {
                     "type" : "hexstr",
-                    "value" : "0x0003"
+                    "value" : "0x0004"
                   }
                 }
               }
             }
           },
-          "true_next" : "tbl_act_18",
-          "false_next" : "node_42"
+          "true_next" : "tbl_act_21",
+          "false_next" : "node_47"
         },
         {
-          "name" : "node_42",
-          "id" : 16,
+          "name" : "node_47",
+          "id" : 17,
           "expression" : {
             "type" : "expression",
             "value" : {
@@ -5828,15 +6135,15 @@
               }
             }
           },
-          "true_next" : "node_43",
-          "false_next" : "node_46"
+          "true_next" : "node_48",
+          "false_next" : "node_51"
         },
         {
-          "name" : "node_43",
-          "id" : 17,
+          "name" : "node_48",
+          "id" : 18,
           "source_info" : {
             "filename" : "epc_4chainparallel_dgw.p4",
-            "line" : 321,
+            "line" : 338,
             "column" : 16,
             "source_fragment" : "hdr.gtpu.isValid()"
           },
@@ -5852,11 +6159,11 @@
             }
           },
           "true_next" : "c_ingress.tun_egress_s3_uplink",
-          "false_next" : "node_46"
+          "false_next" : "node_51"
         },
         {
-          "name" : "node_46",
-          "id" : 18,
+          "name" : "node_51",
+          "id" : 19,
           "expression" : {
             "type" : "expression",
             "value" : {
@@ -5876,14 +6183,14 @@
             }
           },
           "false_next" : null,
-          "true_next" : "node_47"
+          "true_next" : "node_52"
         },
         {
-          "name" : "node_47",
-          "id" : 19,
+          "name" : "node_52",
+          "id" : 20,
           "source_info" : {
             "filename" : "epc_4chainparallel_dgw.p4",
-            "line" : 331,
+            "line" : 348,
             "column" : 17,
             "source_fragment" : "standard_metadata.egress_spec < 255"
           },
@@ -5901,15 +6208,15 @@
               }
             }
           },
-          "true_next" : "tbl_act_20",
-          "false_next" : "node_49"
+          "true_next" : "tbl_act_23",
+          "false_next" : "node_54"
         },
         {
-          "name" : "node_49",
-          "id" : 20,
+          "name" : "node_54",
+          "id" : 21,
           "source_info" : {
             "filename" : "epc_4chainparallel_dgw.p4",
-            "line" : 334,
+            "line" : 351,
             "column" : 17,
             "source_fragment" : "standard_metadata.ingress_port < 255"
           },
@@ -5928,7 +6235,7 @@
             }
           },
           "false_next" : null,
-          "true_next" : "tbl_act_21"
+          "true_next" : "tbl_act_24"
         }
       ]
     },
@@ -5937,7 +6244,7 @@
       "id" : 1,
       "source_info" : {
         "filename" : "epc_4chainparallel_dgw.p4",
-        "line" : 343,
+        "line" : 360,
         "column" : 8,
         "source_fragment" : "c_egress"
       },

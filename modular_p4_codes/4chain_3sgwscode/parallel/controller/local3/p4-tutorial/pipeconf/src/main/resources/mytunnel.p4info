@@ -129,6 +129,23 @@ tables {
   }
   size: 2048
 }
+tables {
+  preamble {
+    id: 33584891
+    name: "c_ingress.uekey_lookup_lb3_ub3"
+    alias: "uekey_lookup_lb3_ub3"
+  }
+  match_fields {
+    id: 1
+    name: "meta.metakey"
+    bitwidth: 32
+    match_type: EXACT
+  }
+  action_refs {
+    id: 16800567
+  }
+  size: 2048
+}
 actions {
   preamble {
     id: 16800567

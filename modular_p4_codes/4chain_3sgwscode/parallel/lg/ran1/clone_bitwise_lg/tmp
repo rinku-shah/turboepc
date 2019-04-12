@@ -1,1642 +1,1872 @@
-Allocating IPs. Please wait...
-inside multithreading_add_ip
-starting ipgen
-returned from java
-time=1sec
-***************STARTING NOW***************
-a:25934
-c:4096
-s:3421
-c:5431
-s:4584
-c:5112
-s:5678
-c:8313
-s:5193
-c:6968
-s:5961
-c:7192
-s:5220
-c:6978
-s:7006
-c:6944
-s:5039
-c:7307
-s:5292
-c:7242
-s:6241
-c:6907
-s:5157
-c:7091
-s:5148
-c:8212
-s:5190
-c:6953
-s:5141
-c:6862
-s:5074
-c:6975
-s:5151
-c:14199
-s:3705
-c:5102
-s:4721
-c:5099
-s:4605
-c:5241
-s:4598
-c:5185
-s:4473
-c:6600
-s:3640
-c:6450
-s:4958
-c:5026
-s:4529
-c:5091
-s:5215
-c:6902
-s:5203
-c:8024
-s:5518
-c:7055
-s:5214
-c:12587
-s:5160
-c:4144
-s:3731
-c:5178
-s:6140
-c:5161
-s:5212
-c:6863
-s:5298
-c:7386
-s:5902
-c:6555
-s:5571
-c:6172
-s:6148
-c:6264
-s:5345
-c:6428
-s:5684
-c:6335
-s:5887
-c:6332
-s:5686
-c:7419
-s:5708
-c:7698
-s:15171
-c:7408
-s:4513
-c:6340
-s:5061
-c:7676
-s:5595
-c:7691
-s:5656
-c:6277
-s:5662
-c:7859
-s:5798
-c:7670
-s:7026
-c:7837
-s:5768
-c:7585
-s:5012
-c:7969
-s:5999
-c:7745
-s:5757
-c:7785
-s:5719
-c:17576
-s:5675
-c:7886
-s:20994
-c:7832
-s:5732
-c:8546
-s:5779
-c:7808
-s:5748
-c:7511
-s:5667
-c:7955
-s:20070
-c:4061
-s:3436
-c:3821
-s:3369
-c:5768
-s:3246
-c:3720
-s:3443
-c:3720
-s:3359
-c:3749
-s:3404
-c:3699
-s:3350
-c:4990
-s:3365
-c:5324
-s:3453
-c:5627
-s:3502
-c:5034
-s:3484
-c:3921
-s:3538
-c:3898
-s:3441
-c:3610
-s:3462
-c:3807
-s:3553
-c:3872
-s:3510
-c:4037
-s:3596
-c:3839
-s:3528
-c:3853
-s:3368
-c:7033
-s:3386
-c:3733
-s:3690
-c:3703
-s:3363
-c:3760
-s:3480
-c:3783
-s:3404
-c:6449
-s:3543
-c:3767
-s:3464
-c:3718
-s:3350
-c:3708
-s:3458
-c:3649
-s:3333
-a:6567
-c:15440
-s:3298
-a:5757
-c:3708
-s:3266
-a:5643
-c:3699
-s:3383
-a:5597
-c:3631
-s:3428
-a:7224
-c:4239
-s:3073
-a:10706
-c:3587
-s:3406
-a:6278
-c:3629
-s:3351
-a:9111
-c:3605
-s:3347
-a:10456
-c:3601
-s:3379
-a:5805
-c:3626
-s:3352
-c:6413
-s:3417
-c:3547
-s:3352
-c:3551
-s:3321
-c:4940
-s:3421
-c:3785
-s:3471
-c:3761
-s:3410
-c:3722
-s:4909
-c:3780
-s:3442
-c:3494
-s:3381
-c:3521
-s:3280
-c:3649
-s:3354
-c:3723
-s:3360
-c:3617
-s:3309
-c:3650
-s:3367
-c:3684
-s:3257
-c:3680
-s:3340
-c:3525
-s:3339
-c:3678
-s:3368
-c:3560
-s:3348
-c:3567
-s:3481
-c:3531
-s:3412
-c:3516
-s:3390
-c:4445
-s:3453
-c:3604
-s:3346
-c:3563
-s:3313
-c:3501
-s:3390
-c:7523
-s:3254
-c:3693
-s:3300
-c:3684
-s:3321
-c:3724
-s:3349
-c:3654
-s:3716
-c:3655
-s:3306
-c:3611
-s:3290
-c:3531
-s:3330
-c:3500
-s:3385
-c:3588
-s:3348
-c:3562
-s:3360
-c:3501
-s:3320
-c:3760
-s:3325
-c:3652
-s:3265
-c:4057
-s:3318
-c:3653
-s:3383
-c:3674
-s:3245
-c:3903
-s:3385
-c:3692
-s:3591
-c:3884
-s:3354
-c:3784
-s:3345
-c:3852
-s:3492
-c:3782
-s:3313
-c:3842
-s:3339
-c:3838
-s:3334
-c:3790
-s:3504
-c:3904
-s:3392
-c:3887
-s:3410
-c:3844
-s:3415
-c:5197
-s:4552
-c:4846
-s:4307
-c:6255
-s:4402
-c:5096
-s:4510
-c:5025
-s:4961
-c:6081
-s:5536
-c:7539
-s:5555
-c:7950
-s:6750
-c:7594
-s:5657
-c:7702
-s:5598
-c:7483
-s:5652
-c:7743
-s:5476
-c:10373
-s:5582
-c:7601
-s:6636
-c:7479
-s:5707
-c:15008
-s:5683
-c:7709
-s:5616
-c:7564
-s:5516
-c:7524
-s:6624
-c:7749
-s:5561
-c:7698
-s:5656
-c:7529
-s:5663
-c:7679
-s:4359
-c:7770
-s:4283
-c:4981
-s:4533
-c:5086
-s:4249
-c:5347
-s:4339
-c:5312
-s:4178
-c:5094
-s:4534
-c:5449
-s:4594
-c:4852
-s:4571
-c:5041
-s:4414
-c:4867
-s:4368
-c:4894
-s:4457
-a:18648
-c:7414
-s:5601
-a:10320
-c:7307
-s:5640
-a:11965
-c:4118
-s:4455
-a:9922
-c:6750
-s:5084
-a:11454
-c:4553
-s:4512
-a:9833
-c:3638
-s:3397
-a:7872
-c:5063
-s:4368
-a:11249
-c:6691
-s:5046
-a:12463
-c:4845
-s:4417
-a:8748
-c:6837
-s:5090
-c:6838
-s:5190
-c:6913
-s:6105
-c:7302
-s:5234
-c:7011
-s:5097
-c:9373
-s:5098
-c:6766
-s:5158
-c:6774
-s:5098
-c:6891
-s:5055
-c:7107
-s:4523
-c:6758
-s:5122
-c:6817
-s:5112
-c:6708
-s:5055
-c:5130
-s:5749
-c:5786
-s:5509
-c:5769
-s:5520
-c:16080
-s:4946
-c:6127
-s:5522
-c:6115
-s:5336
-c:5765
-s:5504
-c:5748
-s:5650
-c:5923
-s:5496
-c:5715
-s:5617
-c:5815
-s:5357
-c:5701
-s:5409
-c:5604
-s:5595
-c:5899
-s:5515
-c:5692
-s:5425
-c:5460
-s:5060
-c:5582
-s:5115
-c:5540
-s:4955
-c:5493
-s:4870
-c:5276
-s:5036
-c:5586
-s:4977
-c:5694
-s:4972
-c:5523
-s:4933
-c:5278
-s:5222
-c:5584
-s:5081
-c:5568
-s:5240
-c:5620
-s:5110
-c:5548
-s:5164
-c:5559
-s:5112
-c:5555
-s:5124
-c:5604
-s:5142
-c:5521
-s:5055
-c:5455
-s:5008
-c:5487
-s:7541
-c:5405
-s:8453
-c:5265
-s:6074
-c:5644
-s:5191
-c:5570
-s:5082
-c:6587
-s:5232
-c:5498
-s:5092
-c:5442
-s:5120
-c:5347
-s:5086
-c:10947
-s:5091
-c:5334
-s:4922
-c:7755
-s:5077
-c:5458
-s:6184
-c:5570
-s:4977
-c:5391
-s:4957
-c:5406
-s:4828
-c:6060
-s:5102
-c:5477
-s:4968
-c:5537
-s:5104
-c:5466
-s:5058
-c:5558
-s:5085
-c:5396
-s:4989
-c:5539
-s:4927
-c:5278
-s:5087
-c:5522
-s:5099
-c:11291
-s:5141
-c:5507
-s:4970
-c:15307
-s:3509
-c:3623
-s:3433
-c:3778
-s:3394
-c:3667
-s:3506
-c:3618
-s:3423
-c:3786
-s:3558
-c:3722
-s:3424
-c:3558
-s:3409
-c:3510
-s:3509
-c:3592
-s:3859
-c:3710
-s:3766
-c:3566
-s:3348
-c:3596
-s:3583
-c:3685
-s:3620
-c:3610
-s:3496
-c:3648
-s:3553
-c:3484
-s:4451
-a:9814
-c:6646
-s:5033
-a:9812
-c:6511
-s:5276
-a:9259
-c:6492
-s:5083
-a:8630
-c:6150
-s:5118
-a:8664
-c:6787
-s:5116
-a:8926
-c:6475
-s:5049
-a:8958
-c:6743
-s:5053
-a:8909
-c:6466
-s:5085
-a:13822
-c:4669
-s:5441
-a:9510
-c:6679
-s:5102
-c:7561
-s:5275
-c:6821
-s:5173
-c:7480
-s:5105
-c:6959
-s:5075
-c:6703
-s:5020
-c:6793
-s:5197
-c:6934
-s:5035
-c:6715
-s:5090
-c:6807
-s:5014
-c:6805
-s:5160
-c:6951
-s:5105
-c:7061
-s:5127
-c:9305
-s:5175
-c:6286
-s:5186
-c:6717
-s:5212
-c:6687
-s:5100
-c:7088
-s:5107
-c:6777
-s:5217
-c:6844
-s:5173
-c:6857
-s:5108
-c:6822
-s:5142
-c:6762
-s:4950
-c:6841
-s:4950
-c:6970
-s:5128
-c:6930
-s:5082
-c:6857
-s:5166
-c:7655
-s:4976
-c:6725
-s:5149
-c:8575
-s:4752
-c:6716
-s:5044
-c:6510
-s:5102
-c:6570
-s:4975
-c:6722
-s:4990
-c:6886
-s:4393
-c:6518
-s:5043
-c:7145
-s:5326
-c:6876
-s:4980
-c:6726
-s:4883
-c:7093
-s:5084
-c:6626
-s:4892
-c:6558
-s:5479
-c:6876
-s:5183
-c:6703
-s:5087
-c:8999
-s:4826
-c:6862
-s:4951
-c:10872
-s:4954
-c:8472
-s:4824
-c:6668
-s:5031
-c:6764
-s:5048
-c:6717
-s:4990
-c:6557
-s:5071
-c:6836
-s:5100
-c:7558
-s:5027
-c:6698
-s:4955
-c:6699
-s:5156
-c:6878
-s:19463
-c:6762
-s:5232
-c:7692
-s:5072
-c:6678
-s:4940
-c:6584
-s:5136
-c:6740
-s:5029
-c:6683
-s:9196
-c:6690
-s:4983
-c:6999
-s:4996
-c:6754
-s:4940
-c:6693
-s:5030
-c:6698
-s:11073
-c:6836
-s:5772
-c:6634
-s:5098
-c:6517
-s:5051
-c:7437
-s:5093
-c:6841
-s:5103
-c:8331
-s:5143
-c:6844
-s:5170
-c:6913
-s:5035
-c:6892
-s:5137
-c:6781
-s:5241
-c:6805
-s:4965
-c:6900
-s:5143
-c:6816
-s:5134
-c:6706
-s:6112
-c:6866
-s:5068
-c:6754
-s:4355
-c:16843
-s:3326
-c:3642
-s:3860
-c:4824
-s:4390
-c:12363
-s:5691
-c:7435
-s:5455
-c:7543
-s:5692
-a:10882
-c:6483
-s:5368
-a:9678
-c:7255
-s:4989
-a:10041
-c:6725
-s:5063
-a:9456
-c:7610
-s:4926
-a:10234
-c:6210
-s:5189
-a:9372
-c:6656
-s:5094
-a:9613
-c:7241
-s:5068
-a:9261
-c:7797
-s:4984
-a:11867
-c:6512
-s:5103
-a:9094
-c:6550
-s:5093
-c:6747
-s:15442
-c:5216
-s:4494
-c:4839
-s:4092
-c:5974
-s:5481
-c:7572
-s:5465
-c:7423
-s:5686
-c:7731
-s:9467
-c:4770
-s:4282
-c:4801
-s:4238
-c:7748
-s:5501
-c:7426
-s:5553
-c:9795
-s:5346
-c:7563
-s:5486
-c:7154
-s:5482
-c:7645
-s:6310
-c:7375
-s:5478
-c:7622
-s:5509
-c:7444
-s:5615
-c:7240
-s:5437
-c:7557
-s:5478
-c:7323
-s:5443
-c:7513
-s:5464
-c:7573
-s:4195
-c:4685
-s:3953
-c:4844
-s:4273
-c:4752
-s:4250
-c:4809
-s:4403
-c:4834
-s:4302
-c:4693
-s:4068
-c:4999
-s:4325
-c:4532
-s:4308
-c:4813
-s:4259
-c:4684
-s:4182
-c:4983
-s:4191
-c:4838
-s:4344
-c:4739
-s:4967
-c:4760
-s:4315
-c:5478
-s:4170
-c:6490
-s:4250
-c:4797
-s:3442
-c:4768
-s:4410
-c:4953
-s:4201
-c:4830
-s:4112
-c:4771
-s:5421
-c:4830
-s:4226
-c:5259
-s:4223
-c:4921
-s:4230
-c:4877
-s:5398
-c:7238
-s:4064
-c:4862
-s:4265
-c:4869
-s:4320
-c:4778
-s:4279
-c:7342
-s:4233
-c:4936
-s:4264
-c:5029
-s:4153
-c:5013
-s:5305
-c:4737
-s:4086
-c:4680
-s:4248
-c:4649
-s:4115
-c:5119
-s:4107
-c:4699
-s:5229
-c:4848
-s:4204
-c:4582
-s:5486
-c:4703
-s:4211
-c:5413
-s:5591
-c:4684
-s:4003
-c:4595
-s:4129
-c:4838
-s:3897
-c:4911
-s:4191
-c:4653
-s:4124
-c:4835
-s:4145
-c:4583
-s:5727
-c:4698
-s:3928
-c:4682
-s:4146
-c:4685
-s:4183
-c:4711
-s:4140
-c:4594
-s:4256
-c:4734
-s:4535
-c:4551
-s:4237
-c:4612
-s:4195
-c:4559
-s:4066
-c:4824
-s:4398
-c:4695
-s:4131
-c:5699
-s:4365
-c:4696
-s:4913
-c:4833
-s:15786
-c:3643
-s:3354
-c:3748
-s:4120
-c:4800
-s:4474
-a:9924
-c:6516
-s:4855
-a:12527
-c:7178
-s:5301
-a:30910
-c:3778
-s:3588
-a:9034
-c:6518
-s:4771
-a:8639
-c:6563
-s:5020
-a:8278
-c:6367
-s:4332
-a:8245
-c:6363
-s:5078
-a:8633
-c:6308
-s:5084
-a:8885
-c:6474
-s:4801
-a:8280
-c:6501
-s:4967
-c:6567
-s:4956
-c:6583
-s:4983
-c:6555
-s:5635
-c:6381
-s:4731
-c:6672
-s:4834
-c:6618
-s:4876
-c:6631
-s:4992
-c:7191
-s:4905
-c:17232
-s:3310
-c:3602
-s:3250
-c:6377
-s:4229
-c:4708
-s:4578
-c:6073
-s:3283
-c:3599
-s:3357
-c:3554
-s:3534
-c:3580
-s:3366
-c:3631
-s:3251
-c:4265
-s:4190
-c:4716
-s:4062
-c:4912
-s:5538
-c:6493
-s:5397
-c:6786
-s:5418
-c:7130
-s:5407
-c:7293
-s:5419
-c:7354
-s:6242
-c:6667
-s:5406
-c:7010
-s:5223
-c:7878
-s:5552
-c:7332
-s:5469
-c:7380
-s:5504
-c:7330
-s:5422
-c:7476
-s:5466
-c:7410
-s:5033
-c:6990
-s:5280
-c:7282
-s:5403
-c:7448
-s:4983
-c:7391
-s:4174
-c:7164
-s:4941
-c:4709
-s:4258
-c:4524
-s:4234
-c:4889
-s:4074
-c:4629
-s:4320
-c:4649
-s:4265
-c:4808
-s:3707
-c:4671
-s:4396
-c:4704
-s:4147
-c:4952
-s:4192
-c:4552
-s:5427
-c:4717
-s:4159
-c:4602
-s:4134
-c:4611
-s:4264
-c:4741
-s:3782
-c:4603
-s:4177
-c:4622
-s:4020
-c:4917
-s:4273
-c:17385
-s:4353
-c:7395
-s:4146
-c:4835
-s:4374
-c:4759
-s:4316
-c:4871
-s:4179
-c:4641
-s:4324
-c:4806
-s:4141
-c:4629
-s:4203
-c:5398
-s:4048
-c:7355
-s:4074
-c:7266
-s:4168
-c:6247
-s:4266
-c:4886
-s:4184
-c:4642
-s:5597
-c:4706
-s:3723
-c:4835
-s:4167
-c:4691
-s:4177
-c:7226
-s:5005
-c:4723
-s:4214
-c:4636
-s:4279
-c:4712
-s:3725
-c:4680
-s:4783
-c:4750
-s:4136
-c:4748
-s:4285
-c:4643
-s:4165
-c:8111
-s:4171
-c:4633
-s:4221
-c:4890
-s:4330
-c:4662
-s:4217
-c:4694
-s:4191
-c:7144
-s:4261
-c:4642
-s:4218
-c:4622
-s:4244
-c:4821
-s:4136
-a:5722
-c:7393
-s:5440
-a:8985
-c:7312
-s:5423
-a:9378
-c:7351
-s:5160
-a:9125
-c:7396
-s:6425
-a:14608
-c:7317
-s:5388
-a:18828
-c:6613
-s:5121
-a:9126
-c:6515
-s:4964
-a:11467
-c:6593
-s:5010
-a:23609
-c:4204
-s:4201
-a:10418
-c:6560
-s:4043
-c:12022
-s:3281
-c:3627
-s:3593
-c:5101
-s:4317
-c:4442
-s:4373
-c:5233
-s:5002
-c:5338
-s:4890
-c:5398
-s:4937
-c:5389
-s:4876
-c:5443
-s:4930
-c:5538
-s:4908
-c:5487
-s:4821
-c:5401
-s:4807
-c:5364
-s:4598
-c:5420
-s:5069
-c:5454
-s:5020
-c:5373
-s:5001
-c:5333
-s:4966
-c:5441
-s:5045
-c:5541
-s:5043
-c:17593
-s:4081
-c:4536
-s:4302
-c:4411
-s:4924
-c:5400
-s:4925
-c:5382
-s:4863
-c:5342
-s:5568
-c:5265
-s:4831
-c:5437
-s:4988
-c:5271
-s:4893
-c:5419
-s:5821
-c:5404
-s:4947
-c:5484
-s:5030
-c:5331
-s:4998
-c:5366
-s:5703
-c:15295
-s:3264
-c:3692
-s:3321
-c:3727
-s:3376
-c:3526
-s:3840
-c:3373
-s:3284
-c:3301
-s:3251
-c:3318
-s:3258
-c:3412
-s:3235
-c:3446
-s:3520
-c:5340
-s:4365
-c:4551
-s:4083
-c:5206
-s:4859
-c:5361
-s:5486
-c:5911
-s:4783
-c:5246
-s:4766
-c:5437
-s:4807
-c:5395
-s:4955
-c:5800
-s:4785
-c:5012
-s:4927
-c:5357
-s:4908
-c:5399
-s:5010
-c:5740
-s:4975
-c:5218
-s:4653
-c:5471
-s:5084
-c:5323
-s:5054
-c:9300
-s:4976
-c:5332
-s:4768
-c:5435
-s:4976
-c:5231
-s:5002
-c:5229
-s:4803
-c:5317
-s:4879
-c:5356
-s:6043
-c:5384
-s:5089
-c:5241
-s:4983
-c:5457
-s:4998
-c:5604
-s:4893
-c:5061
-s:5125
-c:5281
-s:4908
-c:5319
-s:4848
-c:5167
-s:5452
-c:5148
-s:4916
-c:5132
-s:4842
-c:5202
-s:4806
-c:5405
-s:4981
-c:5236
-s:4930
-c:5049
-s:4864
-c:5279
-s:4838
-c:5208
-s:4739
-c:5264
-s:4810
-c:5337
-s:4938
-c:5337
-s:4764
-c:5223
-s:4905
-c:5371
-s:4851
-c:5456
-s:4990
-c:5217
-s:4802
-c:5321
-s:4887
-a:11032
-c:6682
-s:4937
-a:10378
-c:6195
-s:4866
-a:14364
-c:5985
-s:4856
-a:8824
-c:5865
-s:4762
-a:8354
-c:5960
-s:4944
-a:8490
-c:6443
-s:4904
-a:10539
-c:6154
-s:4713
-a:7963
-c:6014
-s:5308
-a:8907
-c:6243
-s:4836
-a:11269
-c:6246
-s:4668
-c:6171
-s:4820
-c:6446
-s:5084
-c:6444
-s:4870
-c:6598
-s:4926
-c:6538
-s:4914
-c:6342
-s:4655
-c:6328
-s:4829
-c:6804
-s:4938
-c:6451
-s:4934
-c:6406
-s:4853
-c:6440
-s:4861
-c:6495
-s:4862
-c:6465
-s:4842
-c:6489
-s:4790
-c:6791
-s:4937
-c:6343
-s:5635
-c:6440
-s:4642
-c:6353
-s:4678
-c:7267
-s:4754
-c:6415
-s:4776
-c:6784
-s:4946
-c:15298
-s:4929
-c:6607
-s:4816
-c:6551
-s:4849
-c:6631
-s:4834
-c:6418
-s:5318
-c:6281
-s:4786
-c:6404
-s:4850
-c:6410
-s:6045
-c:6383
-s:4635
-c:6319
-s:4888
-c:7171
-s:4787
-c:6400
-s:4924
-c:6992
-s:4970
-c:6457
-s:4720
-c:6473
-s:4750
-c:6649
-s:4709
-c:6418
-s:4153
-c:6227
-s:4963
-c:6416
-s:4939
-c:8052
-s:5081
-c:6624
-s:5039
-c:6607
-s:4973
-c:6560
-s:4840
-c:6515
-s:4883
-c:6720
-s:4960
-c:6926
-s:5003
-c:6590
-s:4989
-c:6621
-s:4761
-c:6686
-s:5679
-c:6590
-s:4874
-c:6580
-s:4620
-c:7431
-s:4810
-c:6585
-s:4895
-c:6449
-s:4973
-c:6537
-s:4950
-c:6365
-s:4935
-c:6572
-s:4963
-c:6363
-s:18757
-c:6421
-s:4769
-c:6554
-s:4887
-c:7226
-s:4777
-c:6494
-s:5039
-c:6424
-s:4940
-c:6325
-s:4903
-c:6473
-s:4924
-c:6359
-s:4834
-c:6547
-s:4836
-c:6479
-s:4980
-c:6588
-s:4910
-c:6346
-s:4904
-c:6503
-s:4891
-c:6369
-s:5288
-c:6639
-s:5022
-c:6349
-s:4798
-c:6494
-s:4714
-c:6498
-s:5024
-c:6268
-s:4868
-num_ue_per_thread[0] 1685
-ue_registration_response_time[0] 5671.3 us
-***************************************STATISTICS***************************************
-Total Number of Threads=1
-Total Number of UE=1685
-Average Number of UE per Thread=1685
-Total Execution Time=60 sec
-Latency = 0.0056713 secs
-Service Request Latency = 5388.53 secs
-Registration Throughput=28.0833 registrations/sec
-Attach-Request= 71  Detach-Request= 70  Service-Request= 1544
-Attach Percentage= 8.37
+/*************************************************************************
 
- ******* verify traffic distribution 
-0--->0
-1--->0
-2--->0
-3--->0
-4--->8
-5--->0
-EPOCH 0Tpt= 0.00 LAT(ms)= 0.00
+* * This file contains all the socket level functions that is used by UE.  *************************************************************************/
+
+#include "client.h"
+//#include "utils.h"
+//Below are the files included for raw packets
+#include<stdio.h> //for printf
+#include<string.h> //memset
+#include<sys/socket.h>    //for socket ofcourse
+#include<stdlib.h> //for exit(0);
+#include<errno.h> //For errno - the error number
+#include<netinet/udp.h>   //Provides declarations for udp header
+#include<netinet/ip.h>    //Provides declarations for ip header
+#include <unistd.h> //Used to get PID of current process
+#include<netinet/ip_icmp.h>   //Provides declarations for icmp header
+//#include<netinet/udp.h>   //Provides declarations for udp header
+#include<netinet/tcp.h>   //Provides declarations for tcp header
+//#include<netinet/ip.h>    //Provides declarations for ip header
+#include<netinet/if_ether.h>  //For ETH_P_ALL
+#include<net/ethernet.h>  //For ether_header
+//#include<sys/socket.h>
+#include<arpa/inet.h>
+#include<sys/ioctl.h>
+#include<sys/time.h>
+#include<sys/types.h>
+//#include<unistd.h>
+
+/*void ProcessPacket(unsigned char* , int);
+void print_ip_header(unsigned char* , int);
+void print_tcp_packet(unsigned char * , int );
+void print_udp_packet(unsigned char * , int );
+void print_icmp_packet(unsigned char* , int );
+void PrintData (unsigned char* , int);
+void PrintDataPayload (unsigned char* , int);*/
+//FILE *logfile; 
+
+/*
+ *Constructor: Create a UDP socket.
+ */
+//int tID;
+
+/*
+AUTHENTICATION_STEP_ONE..1
+AUTHENTICATION_STEP_THREE..3
+NAS_STEP_TWO..20
+SEND_APN..5
+SEND_UE_TEID..7
+DETACH_REQUEST..9
+UE_CONTEXT_RELEASE_REQUEST..14
+UE_SERVICE_REQUEST..17
+INITIAL_CONTEXT_SETUP_RESPONSE..19
+REQUEST_STARTING_IP..12
+*/
+
+/*float timeout = 5;
+time_t curT;
+time_t endT;*/
+
+ Client::Client(int ID){
+	
+	tID=2000+ID; //use global tID to distinguish between threads
+
+        //Create a raw socket of type IPPROTO
+        client_socket = socket (AF_INET, SOCK_RAW, IPPROTO_RAW);
+	if(MY_DEBUG){
+        cout << "Raw Send Socket created"<<endl;
+	}
+        //client_socket = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
+ 	 if(client_socket < 0){
+    	cout << "ERROR opening UDP socket" << endl;
+    exit(1);
+  }
+
+	sock_raw = socket( AF_PACKET , SOCK_RAW , htons(ETH_P_ALL)) ;
+	if(MY_DEBUG){
+	cout << "Raw Receive Socket created"<<endl;
+	}
+        //int sock_raw = socket( AF_PACKET , SOCK_RAW , htons(ETH_P_ALL)) ;
+        //setsockopt(sock_raw , SOL_SOCKET , SO_BINDTODEVICE , "eth1" , strlen("eth1")+ 1 );
+     
+       if(sock_raw < 0)
+       {
+        //Print the error with proper message
+        perror("Socket Error");
+        //return 1;
+       }
+ }
+
+
+struct pseudo_header
+{
+    u_int32_t source_address;
+    u_int32_t dest_address;
+    u_int8_t placeholder;
+    u_int8_t protocol;
+    u_int16_t udp_length;
+};
+ 
+/*
+    Generic checksum calculation function
+*/
+unsigned short csum(unsigned short *ptr,int nbytes) 
+{
+    register long sum;
+    unsigned short oddbyte;
+    register short answer;
+ 
+    sum=0;
+    while(nbytes>1) {
+        sum+=*ptr++;
+        nbytes-=2;
+    }
+    if(nbytes==1) {
+        oddbyte=0;
+        *((u_char*)&oddbyte)=*(u_char*)ptr;
+        sum+=oddbyte;
+    }
+ 
+    sum = (sum>>16)+(sum & 0xffff);
+    sum = sum + (sum>>16);
+    answer=(short)~sum;
+     
+    return(answer);
+}
+
+/*
+ * This function configures the port number and IP address of the created socket.
+ */
+ void Client::input_server_details(int server_port, const char *server_address){
+        int status;
+        this->server_port = server_port;
+        this->server_address = server_address;
+        bzero((char*)&server_sock_addr, sizeof(server_sock_addr));
+        server_sock_addr.sin_family = AF_INET;
+        server_sock_addr.sin_port = htons(server_port);
+        // Store this IP address in server_sock_addr; pton supports IPv6 while aton does not
+        status = inet_pton(AF_INET, server_address, &(server_sock_addr.sin_addr));
+        if(status == 0){
+                cout<<"ERROR: Invalid IP address"<<endl;
+                exit(EXIT_FAILURE);
+        }
+ }
+
+
+/*
+ * This function reads from the UDP socket.
+ */
+ void Client::read_data(){
+        int status=0;
+        unsigned char* my_buffer;
+	//bzero(client_buffer, BUFFER_SIZE);
+
+	//int saddr_size , data_size;
+        //struct sockaddr saddr;
+	
+    /*logfile=fopen("log.txt","w");
+    if(logfile==NULL) 
+    {
+        printf("Unable to create log.txt file.");
+    }*/
+        //struct ethhdr *eth = (struct ethhdr *)client_buffer;
+        //struct iphdr *iph = (struct iphdr *)(client_buffer  + sizeof(struct ethhdr) );
+        //struct udphdr *udph = (struct udphdr*)(client_buffer + sizeof(struct iphdr) + sizeof(struct ethhdr));
+	
+	/*sock_raw = socket( AF_PACKET , SOCK_RAW , htons(ETH_P_ALL)) ;
+        //int sock_raw = socket( AF_PACKET , SOCK_RAW , htons(ETH_P_ALL)) ;
+        //setsockopt(sock_raw , SOL_SOCKET , SO_BINDTODEVICE , "eth0" , strlen("eth0")+ 1 );
+     
+       if(sock_raw < 0)
+       {
+        //Print the error with proper message
+        perror("Socket Error");
+        //return 1;
+       }*/
+	
+	/*saddr_size = sizeof saddr;
+	struct sockaddr_in client_sock_addr;
+     
+    //some address resolution
+    //strcpy(source_ip , RAN_IP); //Source IP
+   
+    client_sock_addr.sin_family = AF_INET;
+    client_sock_addr.sin_port = htons(RAN_UDP_PORT);
+    client_sock_addr.sin_addr.s_addr = inet_addr(RAN_IP); //Dest IP
+    //setsockopt(sock_raw , SOL_SOCKET , SO_BINDTODEVICE , "eth1" , strlen("eth0")+ 1 );
+    //Bind the client socket to UDP port 
+    //bind(sock_raw, (struct sockaddr *)& client_sock_addr, sizeof(client_sock_addr)); */
+
+        //Receive a packet
+        int c=0;
+	//while(status!=17 || !flag || !tflag){
+	
+	/*time(&curT);
+	endT = curT + (int) timeout;*/
+	while(status!=17 || !tflag ){	
+	 bzero(client_buffer, BUFFER_SIZE);
+         data_size = recvfrom(sock_raw, client_buffer , BUFFER_SIZE-1 , 0 , &saddr , (socklen_t*)&saddr_size);
+       //cout<<(string)client_buffer<<endl;
+       //cout<<status;
+        //Now process the packet
+         
+        status=ProcessPacket((unsigned char*)client_buffer , data_size); 
+	/*time(&curT);
+	if (curT > endT) {
+		cout<<"Read Timed out"<<endl;
+	}*/
+	//cout<<"Status "<<status<<endl;
+	//cout<<"c= "<<c++<<"flag = "<<flag<<endl;
+	}
+	
+	//cout<<"Outside c= "<<c++<<"flag = "<<flag<<endl;
+	//flag=false;
+			
+        //status = recvfrom(client_socket, client_buffer, BUFFER_SIZE-1, 0, NULL, NULL);
+        //cout<<data_size<<endl;
+        //fclose(logfile);
+        //report_error(data_size);
+	//close(sock_raw);
+ }
+
+
+int Client::ProcessPacket(unsigned char* buffer, int size)
+{   
+    
+    int tcp=0,udp=0,icmp=0,others=0,igmp=0,total=0,i,j; 
+   
+    //cout<<"Inside process packet"<<endl;
+    ++total;
+    //struct ethhdr *eth = (struct ethhdr *)buffer;
+    //Get the IP Header part of this packet , excluding the ethernet header
+    struct iphdr *iph = (struct iphdr*)(buffer + sizeof(struct ethhdr));
+    //cout<<"Inside process packet:before switch"<<endl;
+
+    switch (iph->protocol) //Check the Protocol and do accordingly...
+    {   //cout<<"Inside process packet:inside switch"<<endl;
+       /* case 1:  //ICMP Protocol
+	    //cout<<"Inside process packet:ICMP";
+            ++icmp;
+            //print_icmp_packet( buffer , size);
+            break;
+         
+        case 2:  //IGMP Protocol
+            //cout<<"Inside process packet:IGMP";
+            ++igmp;
+            break;
+         
+        case 6:  //TCP Protocol
+            //cout<<"Inside process packet:TCP";
+            ++tcp;
+            //print_tcp_packet(buffer , size);
+            break; */
+         
+        case 17: //UDP Protocol
+	    //cout<<"Inside process packet:UDP"<<endl;
+            //++udp;
+            print_udp_packet(buffer , size);
+	    return(17);
+            break;
+         
+        default: //Some Other Protocol like ARP etc.
+            //cout<<"Inside process packet:others";
+            //++others;
+	    return(0);
+            break;
+    }
+    //printf("TCP : %d   UDP : %d   ICMP : %d   IGMP : %d   Others : %d   Total : %d\r", tcp , udp , icmp , igmp , others , total);
+}
+ 
+/*void Client::print_ethernet_header(unsigned char* Buffer, int Size)
+{
+    struct ethhdr *eth = (struct ethhdr *)Buffer;
+     
+    fprintf(logfile , "\n");
+    fprintf(logfile , "Ethernet Header\n");
+    fprintf(logfile , "   |-Destination Address : %.2X-%.2X-%.2X-%.2X-%.2X-%.2X \n", eth->h_dest[0] , eth->h_dest[1] , eth->h_dest[2] , eth->h_dest[3] , eth->h_dest[4] , eth->h_dest[5] );
+    fprintf(logfile , "   |-Source Address      : %.2X-%.2X-%.2X-%.2X-%.2X-%.2X \n", eth->h_source[0] , eth->h_source[1] , eth->h_source[2] , eth->h_source[3] , eth->h_source[4] , eth->h_source[5] );
+    fprintf(logfile , "   |-Protocol            : %u \n",(unsigned short)eth->h_proto);
+}*/
+ 
+void Client::print_ip_header(unsigned char* Buffer, int Size)
+{
+    //print_ethernet_header(Buffer , Size);
+   
+    unsigned short iphdrlen;
+         
+    struct iphdr *iph = (struct iphdr *)(Buffer  + sizeof(struct ethhdr) );
+    iphdrlen =iph->ihl*4;
+     
+    memset(&source, 0, sizeof(source));
+    source.sin_addr.s_addr = iph->saddr;
+     
+    memset(&dest, 0, sizeof(dest));
+    dest.sin_addr.s_addr = iph->daddr;
+     
+    /*fprintf(logfile , "\n");
+    fprintf(logfile , "IP Header\n");
+    fprintf(logfile , "   |-IP Version        : %d\n",(unsigned int)iph->version);
+    fprintf(logfile , "   |-IP Header Length  : %d DWORDS or %d Bytes\n",(unsigned int)iph->ihl,((unsigned int)(iph->ihl))*4);
+    fprintf(logfile , "   |-Type Of Service   : %d\n",(unsigned int)iph->tos);
+    fprintf(logfile , "   |-IP Total Length   : %d  Bytes(Size of Packet)\n",ntohs(iph->tot_len));
+    fprintf(logfile , "   |-Identification    : %d\n",ntohs(iph->id));
+    //fprintf(logfile , "   |-Reserved ZERO Field   : %d\n",(unsigned int)iphdr->ip_reserved_zero);
+    //fprintf(logfile , "   |-Dont Fragment Field   : %d\n",(unsigned int)iphdr->ip_dont_fragment);
+    //fprintf(logfile , "   |-More Fragment Field   : %d\n",(unsigned int)iphdr->ip_more_fragment);
+    fprintf(logfile , "   |-TTL      : %d\n",(unsigned int)iph->ttl);
+    fprintf(logfile , "   |-Protocol : %d\n",(unsigned int)iph->protocol);
+    fprintf(logfile , "   |-Checksum : %d\n",ntohs(iph->check));
+    fprintf(logfile , "   |-Source IP        : %s\n",inet_ntoa(source.sin_addr));
+    fprintf(logfile , "   |-Destination IP   : %s\n",inet_ntoa(dest.sin_addr));*/
+   /* if ((string)inet_ntoa(dest.sin_addr) == "10.127.41.2") {
+	//cout<<"Dest IP= "<<inet_ntoa(dest.sin_addr)<<endl;
+	flag=true;
+    }
+    else 
+	flag=false;	*/
+}
+ 
+/*void Client::print_tcp_packet(unsigned char* Buffer, int Size)
+{
+    unsigned short iphdrlen;
+     
+    struct iphdr *iph = (struct iphdr *)( Buffer  + sizeof(struct ethhdr) );
+    iphdrlen = iph->ihl*4;
+     
+    struct tcphdr *tcph=(struct tcphdr*)(Buffer + iphdrlen + sizeof(struct ethhdr));
+             
+    int header_size =  sizeof(struct ethhdr) + iphdrlen + tcph->doff*4;
+     
+    fprintf(logfile , "\n\n***********************TCP Packet*************************\n");  
+         
+    print_ip_header(Buffer,Size);
+         
+    fprintf(logfile , "\n");
+    fprintf(logfile , "TCP Header\n");
+    fprintf(logfile , "   |-Source Port      : %u\n",ntohs(tcph->source));
+    fprintf(logfile , "   |-Destination Port : %u\n",ntohs(tcph->dest));
+    fprintf(logfile , "   |-Sequence Number    : %u\n",ntohl(tcph->seq));
+    fprintf(logfile , "   |-Acknowledge Number : %u\n",ntohl(tcph->ack_seq));
+    fprintf(logfile , "   |-Header Length      : %d DWORDS or %d BYTES\n" ,(unsigned int)tcph->doff,(unsigned int)tcph->doff*4);
+    //fprintf(logfile , "   |-CWR Flag : %d\n",(unsigned int)tcph->cwr);
+    //fprintf(logfile , "   |-ECN Flag : %d\n",(unsigned int)tcph->ece);
+    fprintf(logfile , "   |-Urgent Flag          : %d\n",(unsigned int)tcph->urg);
+    fprintf(logfile , "   |-Acknowledgement Flag : %d\n",(unsigned int)tcph->ack);
+    fprintf(logfile , "   |-Push Flag            : %d\n",(unsigned int)tcph->psh);
+    fprintf(logfile , "   |-Reset Flag           : %d\n",(unsigned int)tcph->rst);
+    fprintf(logfile , "   |-Synchronise Flag     : %d\n",(unsigned int)tcph->syn);
+    fprintf(logfile , "   |-Finish Flag          : %d\n",(unsigned int)tcph->fin);
+    fprintf(logfile , "   |-Window         : %d\n",ntohs(tcph->window));
+    fprintf(logfile , "   |-Checksum       : %d\n",ntohs(tcph->check));
+    fprintf(logfile , "   |-Urgent Pointer : %d\n",tcph->urg_ptr);
+    fprintf(logfile , "\n");
+    fprintf(logfile , "                        DATA Dump                         ");
+    fprintf(logfile , "\n");
+         
+    fprintf(logfile , "IP Header\n");
+    PrintData(Buffer,iphdrlen);
+         
+    fprintf(logfile , "TCP Header\n");
+    PrintData(Buffer+iphdrlen,tcph->doff*4);
+         
+    fprintf(logfile , "Data Payload\n");    
+    PrintData(Buffer + header_size , Size - header_size );
+                         
+    fprintf(logfile , "\n###########################################################");
+}*/
+ 
+void Client::print_udp_packet(unsigned char *Buffer , int Size)
+{
+     
+    unsigned short iphdrlen;
+     
+    struct iphdr *iph = (struct iphdr *)(Buffer +  sizeof(struct ethhdr));
+    iphdrlen = iph->ihl*4;
+     
+    struct udphdr *udph = (struct udphdr*)(Buffer + iphdrlen  + sizeof(struct ethhdr));
+     
+    int header_size =  sizeof(struct ethhdr) + iphdrlen + sizeof udph;
+     
+    //fprintf(logfile , "\n\n***********************UDP Packet*************************\n");
+     
+    print_ip_header(Buffer,Size);           
+     
+    /*fprintf(logfile , "\nUDP Header\n");
+    fprintf(logfile , "   |-Source Port      : %d\n" , ntohs(udph->source));
+    fprintf(logfile , "   |-Destination Port : %d\n" , ntohs(udph->dest));
+    fprintf(logfile , "   |-UDP Length       : %d\n" , ntohs(udph->len));
+    fprintf(logfile , "   |-UDP Checksum     : %d\n" , ntohs(udph->check));
+     
+    fprintf(logfile , "\n");
+    fprintf(logfile , "IP Header\n");
+    PrintData(Buffer , iphdrlen);
+         
+    fprintf(logfile , "UDP Header\n");
+    PrintData(Buffer+iphdrlen , sizeof udph);
+         
+    fprintf(logfile , "Data Payload\n");    
+     
+    //Move the pointer ahead and reduce the size of string
+    PrintData(Buffer + header_size , Size - header_size);
+     
+    PrintDataPayload(Buffer + header_size , Size - header_size);
+    unsigned char *temp_buffer;
+    temp_buffer = Buffer + header_size;*/
+
+        if ((int)ntohs(udph->dest) == tID) {
+		tflag=true;
+    }
+    else 
+	tflag=false;
+
+    strcpy(client_buffer, (const char*) Buffer + header_size);
+    /*int c = 0;
+ 	while (temp_buffer[c] != '\0') {
+ 	     client_buffer[c] = temp_buffer[c];
+	      c++;
+   	}
+   client_buffer[c] = '\0';*/
+    
+//    fprintf(logfile , "\n###########################################################");
+}
+
+/*void Client::PrintDataPayload (unsigned char* data , int Size)
+{
+    int i , j;
+    fprintf(logfile , "%s\n",(unsigned char*)data);
+    for(i=0 ; i < Size ; i++)
+    {
+        fprintf(logfile , "%c",(unsigned char)data[i]);
+        /*if( i!=0 && i%16==0)   //if one line of hex printing is complete...
+        {
+            fprintf(logfile , "         ");
+            for(j=i-16 ; j<i ; j++)
+            {
+                if(data[j]>=32 && data[j]<=128)
+                    fprintf(logfile , "%c",(unsigned char)data[j]); //if its a number or alphabet
+                 
+                else fprintf(logfile , "."); //otherwise print a dot
+            }
+            fprintf(logfile , "\n");
+        } 
+         
+        if(i%16==0) fprintf(logfile , "   ");
+            fprintf(logfile , " %02X",(unsigned int)data[i]);
+                 
+        if( i==Size-1)  //print the last spaces
+        {
+            for(j=0;j<15-i%16;j++) 
+            {
+              fprintf(logfile , "   "); //extra spaces
+            }
+             
+            fprintf(logfile , "         ");
+             
+            for(j=i-i%16 ; j<=i ; j++)
+            {
+                if(data[j]>=32 && data[j]<=128) 
+                {
+                  fprintf(logfile , "%c",(unsigned char)data[j]);
+                }
+                else
+                {
+                  fprintf(logfile , ".");
+                }
+            }
+             
+            fprintf(logfile ,  "\n" );
+        }*/
+//    }
+//}
+ 
+/*void Client::print_icmp_packet(unsigned char* Buffer , int Size)
+{
+    unsigned short iphdrlen;
+     
+    struct iphdr *iph = (struct iphdr *)(Buffer  + sizeof(struct ethhdr));
+    iphdrlen = iph->ihl * 4;
+     
+    struct icmphdr *icmph = (struct icmphdr *)(Buffer + iphdrlen  + sizeof(struct ethhdr));
+     
+    int header_size =  sizeof(struct ethhdr) + iphdrlen + sizeof icmph;
+     
+    fprintf(logfile , "\n\n***********************ICMP Packet*************************\n"); 
+     
+    print_ip_header(Buffer , Size);
+             
+    fprintf(logfile , "\n");
+         
+    fprintf(logfile , "ICMP Header\n");
+    fprintf(logfile , "   |-Type : %d",(unsigned int)(icmph->type));
+             
+    if((unsigned int)(icmph->type) == 11)
+    {
+        fprintf(logfile , "  (TTL Expired)\n");
+    }
+    else if((unsigned int)(icmph->type) == ICMP_ECHOREPLY)
+    {
+        fprintf(logfile , "  (ICMP Echo Reply)\n");
+    }
+     
+    fprintf(logfile , "   |-Code : %d\n",(unsigned int)(icmph->code));
+    fprintf(logfile , "   |-Checksum : %d\n",ntohs(icmph->checksum));
+    //fprintf(logfile , "   |-ID       : %d\n",ntohs(icmph->id));
+    //fprintf(logfile , "   |-Sequence : %d\n",ntohs(icmph->sequence));
+    fprintf(logfile , "\n");
+ 
+    fprintf(logfile , "IP Header\n");
+    PrintData(Buffer,iphdrlen);
+         
+    fprintf(logfile , "UDP Header\n");
+    PrintData(Buffer + iphdrlen , sizeof icmph);
+         
+    fprintf(logfile , "Data Payload\n");    
+     
+    //Move the pointer ahead and reduce the size of string
+    PrintData(Buffer + header_size , (Size - header_size) );
+     
+    fprintf(logfile , "\n###########################################################");
+}*/
+ 
+/*void Client::PrintData (unsigned char* data , int Size)
+{
+    int i , j;
+    for(i=0 ; i < Size ; i++)
+    {
+        if( i!=0 && i%16==0)   //if one line of hex printing is complete...
+        {
+            fprintf(logfile , "         ");
+            for(j=i-16 ; j<i ; j++)
+            {
+                if(data[j]>=32 && data[j]<=128)
+                    fprintf(logfile , "%c",(unsigned char)data[j]); //if its a number or alphabet
+                 
+                else fprintf(logfile , "."); //otherwise print a dot
+            }
+            fprintf(logfile , "\n");
+        } 
+         
+        if(i%16==0) fprintf(logfile , "   ");
+            fprintf(logfile , " %02X",(unsigned int)data[i]);
+                 
+        if( i==Size-1)  //print the last spaces
+        {
+            for(j=0;j<15-i%16;j++) 
+            {
+              fprintf(logfile , "   "); //extra spaces
+            }
+             
+            fprintf(logfile , "         ");
+             
+            for(j=i-i%16 ; j<=i ; j++)
+            {
+                if(data[j]>=32 && data[j]<=128) 
+                {
+                  fprintf(logfile , "%c",(unsigned char)data[j]);
+                }
+                else
+                {
+                  fprintf(logfile , ".");
+                }
+            }
+             
+            fprintf(logfile ,  "\n" );
+        }
+    }
+}*/
+
+/*
+ * This function writes to the UDP socket.
+ */
+ void Client::write_data(string msg_id){
+   
+    //Datagram to represent the packet
+    char datagram[4096] , source_ip[32] , *data , *pseudogram;
+     
+    //zero out the packet buffer
+    memset (datagram, 0, 4096);
+     
+    //IP header
+    struct iphdr *iph = (struct iphdr *) datagram;
+     
+    //UDP header
+    struct udphdr *udph = (struct udphdr *) (datagram + sizeof (struct ip));
+     
+    struct sockaddr_in server_sock_addr;
+    struct pseudo_header psh;
+     
+    //Data part
+    //char client_data[BUFFER_SIZE];
+    //strcpy(client_data, client_buffer);
+    //bzero(client_buffer, BUFFER_SIZE);
+    data = datagram + sizeof(struct iphdr) + sizeof(struct udphdr);
+    //strcpy(data , client_data);
+    strcpy(data , client_buffer);
+    bzero(client_buffer, BUFFER_SIZE);
+    if(MY_DEBUG){	
+    cout<<"SENDING - "<<data<<endl;
+    }
+    //cout<<"Thread ID- "<<tID<<endl;
+    /*int c = 0;
+    while (client_buffer[c] != '\0') {
+      data[c] = client_buffer[c];
+      c++;
+    }
+    data[c] = '\0';*/
+
+    //some address resolution
+    strcpy(source_ip , RAN_IP); //Source IP
+   
+    server_sock_addr.sin_family = AF_INET;
+    server_sock_addr.sin_port = htons(g_mme_port);
+    server_sock_addr.sin_addr.s_addr = inet_addr(DGW_IP); //Dest IP
+     
+    //Bind the client socket to UDP port 
+    //bind(client_socket, (struct sockaddr *)& server_sock_addr, sizeof(server_sock_addr)); 
+
+   //Tell the kernel that we build our own packets
+   /*int one = 1;
+   const int *val = &one;
+    if(setsockopt(client_socket, IPPROTO_IP, IP_HDRINCL, val, sizeof(one)) < 0){
+		perror("setsockopt() error");
+		exit(-1);
+    }*/
+
+    //Fill in the IP Header
+    iph->ihl = 5;
+    iph->version = 4;
+    iph->tos = stoi(msg_id)*4; //16;
+    iph->tot_len = sizeof (struct iphdr) + sizeof (struct udphdr) + strlen(data);
+    iph->id = htonl(0); //htonl (12345); //Id of this packet
+    iph->frag_off = 0;
+    iph->ttl = 255;
+    iph->protocol = IPPROTO_UDP;
+    iph->check = 0;      //Set to 0 before calculating checksum
+    iph->saddr = inet_addr(source_ip);    //Spoof the source ip address
+    iph->daddr = server_sock_addr.sin_addr.s_addr;
+     
+    //Ip checksum
+    iph->check = csum ((unsigned short *) datagram, iph->tot_len);
+    
+    //int pid = getpid();
+    //int parentsPID = getppid();     
+
+    //UDP header
+    //udph->source = htons (RAN_UDP_PORT);
+    udph->source = htons (tID);
+    udph->dest = htons (g_mme_port);// htons(stoi(msg_id)+2000);
+    udph->len = htons(8 + strlen(data)); //tcp header size
+    udph->check = 0; //leave checksum 0 now, filled later by pseudo header
+     
+    //Now the UDP checksum using the pseudo header
+    psh.source_address = inet_addr( source_ip );
+    psh.dest_address = server_sock_addr.sin_addr.s_addr;
+    psh.placeholder = 0;
+    psh.protocol = IPPROTO_UDP;
+    psh.udp_length = htons(sizeof(struct udphdr) + strlen(data) );
+     
+    int psize = sizeof(struct pseudo_header) + sizeof(struct udphdr) + strlen(data);
+    pseudogram =(char*) malloc(psize);
+     
+    memcpy(pseudogram , (char*) &psh , sizeof (struct pseudo_header));
+    memcpy(pseudogram + sizeof(struct pseudo_header) , udph , sizeof(struct udphdr) + strlen(data));
+     
+    udph->check = csum( (unsigned short*) pseudogram , psize);
+
+	 int status;
+        status = sendto(client_socket, datagram, iph->tot_len, 0 , (struct sockaddr*) &server_sock_addr, sizeof(server_sock_addr));
+	
+        report_error(status);
+
+ }
+
+/*
+ * This function reads from the UDP socket in the form of unsigned char.
+ */
+ void Client::read_byte(){
+        int status;
+        bzero(client_byte_buffer, BUFFER_SIZE);
+        status = recvfrom(client_socket, client_byte_buffer, BUFFER_SIZE-1, 0, NULL, NULL);
+        report_error(status);
+ }
+
+/*
+ * This function writes to the UDP socket in the form of unsigned char.
+ */
+ void Client::write_byte(){
+        int status;
+        status = sendto(client_socket, client_byte_buffer, strlen((char*)client_byte_buffer), 0,(struct sockaddr*)&server_sock_addr, sizeof(server_sock_addr));
+        report_error(status);
+ }
+
+/*
+ * This function generates TCP traffic at given rate using iperf3 for the specified duration of time.
+ */
+ int Client::sendUEData(int ue_num, string srcIp, string dstIp, int portnum, int startingPort, int endPort, string rate, size_t meanTime){
+        //meanTime = 300; //10;
+        //cout<<"MEAN DATA TIME="<<meanTime<<endl;
+
+        const char *srcIpptr = srcIp.c_str();
+        char c = tolower(rate[rate.size()-1]);
+        string dstNetwork(SINK_SERVER_NETMASK);
+        string format(1,c);
+
+        //string f = "iperf3 -c "+dstIp+" -p "+to_string(portnum)+" -b "+rate+" -M "+to_string(LINK_MTU)+" -f "+format+" -B "+srcIp;
+                                                                                                                                                                                                                         
+ string f = "iperf3 -c "+dstIp+" -p "+to_string(portnum)+" -b "+rate+" -M "+to_string(LINK_MTU)+" -f "+format+" -t "+to_string(meanTime)+" -B "+srcIp;
+
+//      string f = "iperf3 -c "+dstIp+" -p "+to_string(portnum)+" -b "+rate+" -M "+to_string(LINK_MTU)+" -f "+format+" -t 120"+" -B "+srcIp;
+
+        if(DO_DEBUG){
+                cout<<"SOURCE IP="<<srcIp<<endl;
+                cout<<"DESTINATION IP="<<dstIp<<endl;
+		cout<<"*** client.cpp DATA TIME _--- "<<meanTime<<endl;
+                cout<<f<<endl;
+        }
+
+        bool done = false, loopedOnce = false;
+        int count = 0, tmp_port, ret, realCounter = 0;
+        int port_gap = endPort - startingPort;
+        int numGlobaltriedPorts = 0;
+
+        do{
+        
+	string g = runIperfCommand("iperf3 -c "+dstIp+" -p "+to_string(portnum)+" -b "+rate+" -M "+to_string(LINK_MTU)+" -f "+format+" -t "+to_string(meanTime)+" -B "+srcIp, srcIp);
+//      string g = GetStdoutFromCommand("iperf3 -c "+dstIp+" -p "+to_string(portnum)+" -b "+rate+" -M "+to_string(LINK_MTU)+" -f "+format+" -t 60"+" -B "+srcIp);
+        string cmd1 = "iperf3 -c "+dstIp+" -p "+to_string(portnum)+" -b "+rate+" -M "+to_string(LINK_MTU)+" -f "+format+" -t "+to_string(meanTime)+" -B "+srcIp;
+
+		size_t f = g.find("Connecting to host");
+                size_t found = g.find("iperf3: error - the server is busy running a test");
+                size_t timeout = g.find("iperf3: error - unable to connect to server:");
+
+                if(f == std::string::npos && found == std::string::npos && timeout != std::string::npos){
+                        cout<<"FAILURE FOR "<<cmd1<<endl;
+                        cout<<"iperf3 output: "<<g<<"\n for cmd "<<cmd1<<endl;
+                        //return portnum;
+			exit(1);
+                }
+                if(found != std::string::npos){
+                        cout<<"iperf3 output: "<<g<<endl;
+                        cout<< "Using local port " << portnum<<" "<<" count="<<count<<" real counter="<<realCounter<<endl;
+                        portnum++;
+                        if(portnum >= endPort){
+                                if(count < port_gap){
+                                        portnum = startingPort;
+                                }else{
+                                        loopedOnce = true;
+                                        tmp_port = startingPort;
+                                }
+                        }
+                        if(count >= port_gap && numGlobaltriedPorts <= NUM_GLOBAL_PORTS){
+                                numGlobaltriedPorts++;
+                                // Use global ports
+                                ret = pthread_mutex_lock(&request_mutex);
+                                if(ret < 0)
+                                {
+                                        perror("ERROR: mutex lock failed");
+                                        exit(1);
+                                }
+                                portnum = global_ports[globalPortsIndex];
+                                if(globalPortsIndex < NUM_GLOBAL_PORTS-1){
+                                        globalPortsIndex++;
+                                }else{
+                                        globalPortsIndex = 0;
+                                }
+
+                                // Releasing lock
+                                ret = pthread_mutex_unlock(&request_mutex);
+                                if(ret < 0)
+                                {
+                                        perror("ERROR: mutex unlock failed");
+                                        exit(1);
+                                }
+                                cout<<"Global port ="<<portnum<<" used approx index="<<(globalPortsIndex-1)<<endl;
+                        }else if(count >= port_gap && numGlobaltriedPorts > NUM_GLOBAL_PORTS){
+                                numGlobaltriedPorts = 0;
+                                count = 0;
+                                portnum = tmp_port;
+                        }
+ 			count++;
+                        realCounter++;
+                }else{
+                        if(realCounter != 0){
+                                cout<< "Using global port " << portnum<<" "<<realCounter<<" DONE"<<endl;
+                        }
+                        done = true;
+                }
+        }while(!done);
+	if(DO_DEBUG)
+		cout<<"SENT DATA with SRC IP "<<srcIp<<endl;
+        if(loopedOnce){
+                portnum = tmp_port;
+        }
+	/*string get_pid = "ps -aux | grep -E 'iperf3.*"+srcIp+"'|grep -v 'grep'| tr -s \" \"| cut -d \" \" -f 2";
+	cout<<"GET PID COMMAND --- "<<get_pid<<endl;
+	string pid = GetStdoutFromCommand(get_pid);
+	cout<<"\nPROCESS TO KILL - "<<pid<<endl; 	
+	if(!pid.empty()){
+		cout<<"\ninside PROCESS TO KILL - "<<pid<<endl; 		
+		string kill_out = GetStdoutFromCommand("sudo kill -9 "+pid);
+		cout<<"KILL OUTPUT ---- "<<kill_out<<endl;
+	}*/
+//	const char* kill_cmd = ("sudo kill $(ps -aux | grep -E 'iperf3.*"+srcIp+"'|grep -v 'grep'| tr -s \" \"| cut -d \" \" -f 2)").c_str();
+//	system(kill_cmd);
+
+        return portnum;
+ }
+
+/*
+ * This function executes the specified command and returns its output.
+ */
+ string Client::runIperfCommand(string cmd, string srcIp) {
+        string data;
+        FILE * stream;
+        const int max_buffer = 256;
+        char buffer[max_buffer];
+        //cout<<"Entered getstdout"<<endl;
+
+        cmd.append(" 2>&1");
+
+        stream = popen(cmd.c_str(), "r");
+	/*int fd = fileno(stream);
+	int flags;
+	flags = fcntl(fd, F_GETFL, 0);
+	flags |= O_NONBLOCK;
+	fcntl(fd, F_SETFL, flags);*/
+
+
+
+        //cout<<"After popen"<<endl;
+
+        if (stream) {
+                //cout<<"inside if stream"<<endl;
+                while (!feof(stream)){
+                        //cout<<"inside !feof stream "<<cmd<<endl;
+
+                        if (fgets(buffer, max_buffer, stream) != NULL) data.append(buffer);
+                }
+		string get_pid = "ps -aux | grep -E 'iperf3.*"+srcIp+"'|grep -v 'grep'| tr -s \" \"| cut -d \" \" -f 2";
+		//cout<<"client --- GET PID COMMAND --- "<<get_pid<<endl;
+		string pid = GetStdoutFromCommand(get_pid);
+		//cout<<"\nclient --- PROCESS TO KILL - "<<pid<<endl; 	
+		if(!pid.empty()){
+			//cout<<"\ninside PROCESS TO KILL - "<<pid<<endl; 		
+			string kill_out = GetStdoutFromCommand("sudo kill -9 "+pid);
+			//cout<<"KILL OUTPUT ---- "<<kill_out<<endl;
+		}		
+
+
+		pclose(stream);
+        }
+//      cout<<"before return"<<endl;
+
+        return data;
+ }
+
+string Client::GetStdoutFromCommand(string cmd) {
+        string data;
+        FILE * stream;
+        const int max_buffer = 256;
+        char buffer[max_buffer];
+        //cout<<"Entered getstdout"<<endl;
+
+        cmd.append(" 2>&1");
+
+        stream = popen(cmd.c_str(), "r");
+
+        //cout<<"After popen"<<endl;
+
+        if (stream) {
+                //cout<<"inside if stream"<<endl;
+                while (!feof(stream)){
+                        //cout<<"inside !feof stream "<<cmd<<endl;
+
+                        if (fgets(buffer, max_buffer, stream) != NULL) data.append(buffer);
+                }
+		
+		pclose(stream);
+        }
+//      cout<<"before return"<<endl;
+
+        return data;
+ }
+
+// Destructor: Close the UDP client socket
+Client::~Client(){
+        close(client_socket);
+	close(sock_raw);
+}
+                                                                                                                                                                                                                         
+
+#ifndef UTILS_H
+#define UTILS_H
+#include <fcntl.h>
+#include "utils.h"
+#endif
+
+class Client{
+public:
+	int tID;
+	int client_socket;
+        char client_buffer[BUFFER_SIZE];
+        char write_client_buffer[BUFFER_SIZE];
+	char write_client_byte_buffer[BUFFER_SIZE];
+	int sock_raw; //To receive raw packets
+	int saddr_size , data_size;
+	struct sockaddr saddr;
+	// Byte array in C++
+	unsigned char client_byte_buffer[BUFFER_SIZE];	
+
+	int server_port;
+	const char *server_address;
+	struct sockaddr_in server_sock_addr;
+	struct sockaddr_in source,dest;
+	//bool flag=false; //flag to test the right dest IP for rcv data 
+	bool tflag=false; //flag to test dest UDP port for demux of packets
+	
+
+	// Constructor
+	Client(int);
+
+	// Socket methods
+	void input_server_details(int,const char*);
+	void read_data();
+	void write_data(string);
+	void read_byte();
+	void write_byte();
+
+	int sendUEData(int, string, string, int, int, int, string, size_t);
+
+	// Utility functions
+	string GetStdoutFromCommand(string cmd);
+	string runIperfCommand(string cmd,string srcIp);	
+
+	//Raw packet functions
+
+	int ProcessPacket(unsigned char* , int);
+	void print_ip_header(unsigned char* , int);
+	//void print_tcp_packet(unsigned char * , int );
+	void print_udp_packet(unsigned char * , int );
+	//void print_icmp_packet(unsigned char* , int );
+	//void PrintData (unsigned char* , int);
+	//void PrintDataPayload (unsigned char* , int);
+	//void print_ethernet_header(unsigned char*, int);
+
+	// Destructor
+	~Client();		
+};
+#include "ran.h"
+#define NO_EPOCH 6 
+#define INST_ARR_LEN 300
+#define INST_PERIOD 10 // period in secs
+// Boolean values corresponding to various LTE procedures
+bool setUpTunnel = false;
+bool doDetach = false;			
+bool sendData = true;			//keep either doDetach, or s1_release true for sending data
+bool assignIpToInterface = true; //For data traffic only
+bool s1_release = false;		// UE initiated S1 Release
+bool doEncryption = false;
+bool checkIntegrity = false;
+bool ueServiceRequest = false;	// UE initiated service request (uplink traffic)
+bool networkServiceRequest = false;	// Network initiated service request (downlink traffic)
+//mix of traffic types
+/*centralized control, local control, short data({72999,27000,0,1,0}), long data*/
+vector<vector<int>> traffic_mix={{1499,98501,0,0,0},{3999,95001,0,0,0},{10999,89001,0,0,0},{30999,69001,0,0,0},{50999,49001,0,0,0},{70999,29001,0,0,0},{0,99999,0,0,0},{19000,80999,0,0,1},{0,0,0,100,0},{0,0,100,0,0},{0,100,0,0,0}/*,{750,200,0,50,0},{100,0,0,0,0}*/};
+//{1999,98001,0,0,0}:ATTACH=10-15% mix=0
+//{4999,95001,0,0,0}:ATTACH=      mix=1
+//{11999,88001,0,0,0}:ATTACH=25-30% mix=2
+//{31999,68001,0,0,0}:ATTACH=40-45% mix=3
+//{51999,48001,0,0,0}:ATTACH=60-65% mix=4
+//{71999,28001,0,0,0}:ATTACH=80-85% mix=5
+//{0,99999,0,0,0}: ATTACH=2% mix=6
+//mix0 -> 80-20 wrt time, mix2 -> 20-80 wrt time
+
+/// DYNAMIC LOAD GENERATOR ///
+std::mutex traffic_mtx; 
+std::mutex inst_mtx;
+std::mutex lat_mtx;
+int traffic_shape_size = NO_EPOCH;
+//traffic_shape[5][2] = {{4,3},{4,0},{4,3},{4,1},{4,2}};
+//traffic_shape[3][2] = {{4,0},{6,3},{4,0}};
+//traffic_shape[5][2] = {{4,3},{6,0},{4,3},{7,0}};
+int traffic_shape[5][2] = {{4,3},{4,0},{4,2},{4,1},{4,4}}; //States for the first two minutes mix_num=1 & for next 3 minutes mix_num=3 <time, mix_num>
+int curr_mix_index=0;
+bool dynLoad = false;
+bool instrumentTptLat = false; //Instrument num_ue and response_time every 10 sec
+//vector<vector<int>> traffic_shape={{2,1},{3,3}}; //States for the first two minutes mix_num=1 & for next 3 minutes mix_num=3
+/// DYNAMIC LOAD GENERATOR ///
+
+int mix_num=0;	//choose the traffix mix from above traffic_options -> {0,1,2}
+float a_prob = 0;
+float s_prob = 0;
+//0%  att/serv == att=0.01,serv=0.99 ==>0.7%
+//25% att/serv == att=0.25,serv=0.75 ==>24.6%
+//50% att/serv == att=0.5,serv=0.5
+//75% att/serv == att=0.75,serv=0.25 ==>75%
+//100% att/serv == att=1,serv=0
+
+//bool serviceRequestLoopFlag = true; //set this true only for service requests, for long service-req traffic only
+//int fracServ = 60; //fraction of time for Service requests before next attach
+//int servno = 100;
+
+//TRAFFIC MIX 1: attach-wait-servicereq-wait-detach..repeat
+//TRAFFIC MIX 2: attach-wait-servreq-wait-servreq-wait..repeat-detach..repeat
+//Only registration: setUpTunnel, doDetach== true, doEncryption,checkIntegrity could be anything
+//Service request: s1_release=true, ueServiceRequest OR networkServiceRequest =true
+//Data traffic: setUpTunnel, doDetach, sendData, assignIpToInterface =true, s1_release AND ueServiceRequest AND networkServiceRequest==false
+
+
+struct _threadArgs {
+	int threadId;
+	int serverPort;
+	int port_gap;
+	int starting_ue_id;
+	int ue_id_gap;		// Number of ids of UE initially allocated to each thread
+	int num_threads;
+        //long delay[1000][10000]; //For storing index ofserviceRequestLoopFlag UE delays
+        //int j; //secondary index for delay matrix
+};
+
+struct _ipArgs {
+	string startingIp;
+	long numIps;
+};
+
+// To store the statistics for the simulation
+float tpt[NO_EPOCH] = {0};
+float lat[NO_EPOCH] = {0};
+unsigned long long num_ue_per_epoch[NO_EPOCH] = {0};
+unsigned long long ue_response_time_per_epoch[NO_EPOCH] = {0};
+double num_ue_inst[INST_ARR_LEN] = {0};  // Enough to store 50 min data if captured after every 10 sec
+double resp_time_inst[INST_ARR_LEN] = {0};  // Enough to store 50 min data if captured after every 10 sec
+int instIndex = 0; // Index to remember number of entries in instr arrays
+unsigned long long prev_tpt = 0; //To remember tpt till previous period
+unsigned long long prev_lat = 0; //To remember lat till previous period
+vector<unsigned long long> num_ue_per_thread;
+vector<unsigned long long> ue_registration_response_time;
+vector<unsigned long long> stored_ue_registration_response_time;//For delay distribution
+//long delay[1000][10000]; //For storing index of UE delays
+
+string rate;		// Rate at which each UE sends data
+time_t endTime;		// Simulation end time
+time_t mix_endTime; //End time of current traffic mix
+time_t inst_endTime; //End time of instrumenting current period (10sec)
+//time_t servReqTime; //Service Request time for traffic mix containing multiple service requests
+int cnt = 0;
+int attNo, detNo, sreqNo = 0;//Counts number of requests served
+float traffic_percent=0.0; // For Attach%:ServiceReq%, "traffic_percent" provides attach%
+//int servTime; //Delta service time, to increment curTime, used for long serv-req traffic
+int j = 0; //For storing index of UE delays
+//int tID=0; //Thread ID
+vector<int> distr_check(5,0);
+// Thread function for each simulated UE
+void* multithreading_func(void *arg){
+	bool setUpTunnel_t = false;
+	bool doDetach_t = false;			
+	bool sendData_t = false;			//keep either doDetach, or s1_release true for sending data
+	bool assignIpToInterface_t = false; //For data traffic only
+	bool s1_release_t = false;		// UE initiated S1 Release
+	bool doEncryption_t = false;
+	bool checkIntegrity_t = false;
+	bool ueServiceRequest_t = false;	// UE initiated service request (uplink traffic)
+	bool networkServiceRequest_t = false;	// Network initiated service request (downlink traffic)
+	struct _threadArgs *args = (struct _threadArgs *)arg;
+	int threadId = args->threadId;
+	int startingPort = args->serverPort;
+	int ue_num = args->starting_ue_id;
+	int port_gap =  args->port_gap;
+	int gap = args->ue_id_gap;
+	int maxThreads = args->num_threads;
+	//int j = args->j;
+	//long delay[1000][10000] = args->delay;
+	time_t curTime;
+	time(&curTime);
+	int currentPort = startingPort;
+	int endPort = startingPort + port_gap;
+	pthread_setcancelstate(PTHREAD_CANCEL_ENABLE, NULL);
+	pthread_setcanceltype(PTHREAD_CANCEL_ASYNCHRONOUS, NULL);
+	//struct timeval start, end;
+	struct timeval start, start1, start2, start3, end, end1, end2, end3;
+	long mtime, useconds, seconds;
+	size_t idleSleepTime, serviceRequestSleepTime;
+
+	Client user(threadId+1), sink_user(threadId+1);
+	vector<string> tmpArray;
+	vector<string> service_response;
+	bool att_done=false;
+	int loop1,loop2;
+	int dataTime;
+	
+	while(curTime < endTime){
+		int traffic_type = get_mix(traffic_mix[mix_num]); 	//weighted random selection for the traffic type for particular ue
+		distr_check[traffic_type]++;
+		if(DO_DEBUG){
+			cout<<"\n selected traffic type = "<<traffic_type<<endl;
+		}
+		switch(traffic_type){
+			case 0: setUpTunnel_t = true;
+					doDetach_t = true;			
+					sendData_t = false;			
+					assignIpToInterface_t = false; 
+					s1_release_t = false;
+					doEncryption_t = false;
+					checkIntegrity_t = false;
+					ueServiceRequest_t = false;
+					loop1 = 100;
+					loop2 = 1;
+					break;
+			case 1: setUpTunnel_t = true;
+					doDetach_t = true;			
+					sendData_t = false;			
+					assignIpToInterface_t = false; 
+					s1_release_t = true;
+					doEncryption_t = false;
+					checkIntegrity_t = false;
+					ueServiceRequest_t = true;
+					loop1 = 1;
+					loop2 = 100;
+					break;
+			case 2: setUpTunnel_t = true;			//long data
+					doDetach_t = true;			
+					sendData_t = true;			
+					assignIpToInterface_t = true; 
+					s1_release_t = false;
+					doEncryption_t = false;
+					checkIntegrity_t = false;
+					ueServiceRequest_t = false;
+					dataTime = 300;	//seconds
+					loop1 = 1;
+					loop2 = 1;
+					break;
+			case 3: setUpTunnel_t = true;
+					doDetach_t = true;			
+					sendData_t = true;			
+					assignIpToInterface_t = true; 
+					s1_release_t = false;
+					doEncryption_t = false;
+					checkIntegrity_t = false;
+					ueServiceRequest_t = false;
+					dataTime = 1;				//short data
+					loop1 = 1;
+					loop2 = 1;
+					break;
+			case 4: setUpTunnel_t = true;
+					doDetach_t = true;			
+					sendData_t = true;			
+					assignIpToInterface_t = true; 
+					s1_release_t = true;
+					doEncryption_t = false;
+					checkIntegrity_t = false;
+					ueServiceRequest_t = true;
+					dataTime = 1;
+					loop1 = 1;
+					loop2 = 10;
+					break;
+			/*case 5: setUpTunnel_t = true;
+					doDetach_t = true;			
+					sendData_t = false;			
+					assignIpToInterface_t = false; 
+					s1_release_t = true;
+					doEncryption_t = false;
+					checkIntegrity_t = false;
+					ueServiceRequest_t = true;
+					loop1 = 5;
+					loop2 = 5;
+					break;*/
+		}
+		do {
+			UserEquipment ue(threadId+1);
+
+		
+			//user.input_server_details(g_mme_port, g_mme_address);
+			if(DO_DEBUG){
+				cout<<"Attaching with MME"<<endl;
+			}
+
+
+
+			gettimeofday(&start, NULL);
+			usleep(my_rand()+2000);
+			if(attach_with_mme(ue, user, checkIntegrity_t)){ 	// Authentication
+				//if(setUpTunnel_t || serviceRequestLoopFlag){
+					// Setup tunnel
+				if(setUpTunnel_t) {
+						//att=1;
+						/*if(attNo>6)
+							setUpTunnel_t=false;*/
+					//att_done=true;
+					lat_mtx.lock();
+					attNo++;
+					lat_mtx.unlock();
+					//usleep(my_rand()+200);
+					gettimeofday(&start1, NULL);
+					tmpArray = setup_tunnel(ue, user, doEncryption_t);
+					lat_mtx.lock();
+					attNo++;
+					num_ue_per_thread[threadId] += 1; //Increment completion num for att req
+					lat_mtx.unlock();
+					//////PRINT REG TIME TO ARRAY////
+					gettimeofday(&end1, NULL);
+					seconds  = end1.tv_sec  - start1.tv_sec;
+					useconds = end1.tv_usec - start1.tv_usec;
+					mtime = ((seconds) * 1000000 + useconds);
+					lat_mtx.lock();
+					ue_registration_response_time[threadId] += mtime;
+					lat_mtx.unlock();
+					/*stored_ue_registration_response_time[j] = mtime;
+					j = j + 1;*/
+						////////////////////////////////////
+				}
+					//tmpArray: [0] = SEND_IP_SGW_TEID, [1] = IP Address of UE, [2] = SGW TEID, [3] = ue_teid, [4] = GUTI
+				if(tmpArray.size()>=5){
+					do{
+						if(sendData_t){
+								// Send data
+							if(DO_DEBUG){
+								cout<<"traffic_type = "<<traffic_type<<" DATA TIME = "<<dataTime<<endl;
+							
+							}
+
+							currentPort = send_ue_data(ue, ue_num, rate, currentPort, startingPort, endPort, user, tmpArray, dataTime);
+						}
+						if(s1_release_t){
+							//cout<<"SLEEPING BEFORE s1 release"<<endl;
+							usleep(my_rand()+2000);		//200-700 usec
+							//sreqNo++;
+							//gettimeofday(&start2, NULL);
+							ue_context_release(ue, user, ue_num, tmpArray[1], tmpArray[2], tmpArray[3], currentPort, networkServiceRequest);
+							//gettimeofday(&end2, NULL);
+							//seconds  = end2.tv_sec  - start2.tv_sec;
+							//useconds = end2.tv_usec - start2.tv_usec;
+							//mtime = ((seconds) * 1000000 + useconds);
+							//ue_registration_response_time[threadId] += mtime;
+							/*stored_ue_registration_response_time[j] = mtime;
+							j = j + 1;*/
+							if(DO_DEBUG){
+								cout<<"UE CONTEXT RELEASE DONE with UE NUM="<<ue_num<<endl;
+							}
+
+							if(ueServiceRequest_t){
+																
+									/*do{
+										serviceRequestSleepTime = (size_t) dist_service_request_time(generator);
+									}while(serviceRequestSleepTime == 0);*/
+								//usleep(5000);	
+									//sleep(serviceRequestSleepTime);
+
+									// tmpArray[1] = UE IP   tmpArray[2]= SGW TEID  tmpArray[4]=GUTI
+								if(DO_DEBUG){
+									cout<<"UE SERVICE REQUEST INITIATED with UE NUM="<<ue_num<<" after "<<serviceRequestSleepTime<<" seconds"<<endl;
+								}
+								lat_mtx.lock();
+								num_ue_per_thread[threadId] += 1;//Increment completion num for serv req
+								sreqNo++;
+								lat_mtx.unlock();
+								//cout<<"SLEEPING BEFORE service request"<<endl;
+								//usleep(my_rand());
+								usleep(my_rand()+2000);
+								gettimeofday(&start2, NULL);
+								tmpArray[3] = ue_service_request(ue, user, ue_num, tmpArray[1]); //returns newly generated ue_teid
+									//////PRINT REG TIME TO ARRAY////
+								gettimeofday(&end2, NULL);
+								seconds  = end2.tv_sec  - start2.tv_sec;
+								useconds = end2.tv_usec - start2.tv_usec;
+								mtime = ((seconds) * 1000000 + useconds);
+								lat_mtx.lock();								
+								ue_registration_response_time[threadId] += mtime;
+								lat_mtx.unlock();
+								/*stored_ue_registration_response_time[j] = mtime;
+								j = j + 1;*/
+								////////////////////////////////////
+								if(DO_DEBUG){
+									cout<<"UE SERVICE REQUEST DONE with UE NUM="<<ue_num<<endl;	
+								}
+							} else if(networkServiceRequest){
+								tmpArray[3] = network_service_request(ue, user, ue_num, tmpArray[1]); //returns newly generated ue_teid
+								if(DO_DEBUG){
+									cout<<"NETWORK SERVICE REQUEST DONE with UE NUM="<<ue_num<<endl;
+								}
+							}
+
+						} //endif s1 release
+						if(sendData_t){
+							currentPort++;
+							if(currentPort >= endPort){
+								currentPort = startingPort;
+							}
+						}
+						//cout<<"IN LOOP 2"<<endl;
+						loop2--;
+					}while(loop2>0);
+
+					if(doDetach_t){
+						// Initiate detach
+						//cout<<"SLEEPING BEFORE detach"<<endl;
+						//usleep(my_rand()+200);			//sleep for 200-700 usec 
+						if(!s1_release_t && !sendData_t)
+							usleep(my_rand()+2000);
+						att_done=false;
+						gettimeofday(&start3, NULL);
+						detach_ue(ue, user, ue_num, tmpArray[1], tmpArray[2], tmpArray[3]);
+						gettimeofday(&end3, NULL);
+						lat_mtx.lock();
+						detNo++;
+						num_ue_per_thread[threadId] += 1;//Increment completion num for delreq
+						lat_mtx.unlock();
+				
+						//////PRINT REG TIME TO ARRAY////
+						seconds  = end3.tv_sec  - start3.tv_sec;
+						useconds = end3.tv_usec - start3.tv_usec;
+						mtime = ((seconds) * 1000000 + useconds);
+						lat_mtx.lock();
+						ue_registration_response_time[threadId] += mtime;
+						lat_mtx.unlock();
+						/*stored_ue_registration_response_time[j] = mtime;
+						j = j + 1;*/
+						////////////////////////////////////
+						//cout<<"SLEEPING AFTER detach"<<endl;
+						//usleep(my_rand()+200);
+					}
+
+				}//endif tmpArray.size()>=5
+
+			}//end if attach_with_mme
+			else{
+				cout<<"Authentication Error"<<endl;
+				//exit(1);
+			} //endif else attach_with_mme
+		/*	gettimeofday(&end, NULL);
+			seconds  = end.tv_sec  - start.tv_sec;
+			useconds = end.tv_usec - start.tv_usec;
+			mtime = ((seconds) * 1000000 + useconds);
+			ue_registration_response_time[threadId] += mtime;
+			//if (WANT_DELAY_CDF){
+			stored_ue_registration_response_time[j] = mtime;
+			//delay[threadId][j] = mtime;
+			j = j + 1;*/
+			//}*/
+			time(&curTime);
+			loop1--;
+			
+			if(dynLoad){
+				traffic_mtx.lock();
+				if(curTime >= mix_endTime) {
+					//cout<<"start time="<<curTime<<endl;
+					lat_mtx.lock();
+					//num_ue_per_epoch[curr_mix_index] = attNo + detNo + sreqNo;
+					for(int i=0; i<maxThreads; i++){
+						num_ue_per_epoch[curr_mix_index] = num_ue_per_epoch[curr_mix_index] + num_ue_per_thread[i];
+						ue_response_time_per_epoch[curr_mix_index] = ue_response_time_per_epoch[curr_mix_index] + ue_registration_response_time[i];
+					}
+					lat_mtx.unlock();
+					//cout<<"Total Num previous epoch is "<<num_ue_per_epoch[curr_mix_index]<<endl;
+					if ( curr_mix_index > 0){
+						int i = curr_mix_index;
+						while (i > 0) {
+							num_ue_per_epoch[curr_mix_index] = num_ue_per_epoch[curr_mix_index] - num_ue_per_epoch[i-1];
+							ue_response_time_per_epoch[curr_mix_index] =  ue_response_time_per_epoch[curr_mix_index] - ue_response_time_per_epoch[i-1];
+							i--;
+						}
+					}
+					float tmp_tpt = (num_ue_per_epoch[curr_mix_index]*1.0)/(traffic_shape[curr_mix_index][0] * 60);
+					float tmp_lat = (ue_response_time_per_epoch[curr_mix_index]*0.001)/num_ue_per_epoch[curr_mix_index];
+					cout<<"Throughput= "<<tmp_tpt<<endl;
+					cout<<"Latency(ms)= "<<tmp_lat<<endl;
+					tpt[curr_mix_index] = tmp_tpt;
+					lat[curr_mix_index] = tmp_lat;
+//					cout<<"Num this epoch is "<<(num_ue_per_epoch[curr_mix_index]*1.0)/(traffic_shape[curr_mix_index][0] * 60.0)<<endl;
+//					cout<<"Delay this epoch is "<< (ue_response_time_per_epoch[curr_mix_index]*1.0)/num_ue_per_epoch[curr_mix_index] <<endl;
+					
+					if(curr_mix_index < traffic_shape_size){
+						curr_mix_index++;
+					}
+					mix_num = traffic_shape[curr_mix_index][1];
+					int tmp1 = traffic_shape[curr_mix_index][0] * 60;
+					mix_endTime = curTime + (int) tmp1;
+					//cout<<"mix end time="<<mix_endTime<<endl;
+					cout<<"mix="<<mix_num<<endl;
+					//usleep(500000);
+					//sleep(1);
+				}
+				traffic_mtx.unlock();
+			}
+//////  INSTRUMENTATION CODE STARTS HERE /////////////////////////////////////////////////////////
+			
+			if(instrumentTptLat){
+				inst_mtx.lock();
+				time(&curTime);
+				if(curTime >= inst_endTime) {
+					//cout<<"start time="<<curTime<<endl;
+					lat_mtx.lock();
+					//num_ue_inst[instIndex] = attNo + detNo + sreqNo;
+					for(int i=0; i<maxThreads; i++){
+						num_ue_inst[instIndex] =  num_ue_inst[instIndex] + num_ue_per_thread[i];
+						resp_time_inst[instIndex] = resp_time_inst[instIndex] + ue_registration_response_time[i];
+					}
+					lat_mtx.unlock();
+					//cout<<"Total Num previous epoch is "<<num_ue_per_epoch[curr_mix_index]<<endl;
+					/*if ( instIndex > 0){
+						int i = instIndex;
+						while (i > 0) {
+							num_ue_inst[instIndex] = num_ue_inst[instIndex] - num_ue_inst[i-1];
+							resp_time_inst[instIndex] =  resp_time_inst[instIndex] - resp_time_inst[i-1];
+							i--;
+						}
+					}*/
+					float prev_t = num_ue_inst[instIndex];
+					float prev_l = resp_time_inst[instIndex];
+					num_ue_inst[instIndex] = num_ue_inst[instIndex] - prev_tpt; //Get current period val
+					resp_time_inst[instIndex] = resp_time_inst[instIndex] - prev_lat;\
+					resp_time_inst[instIndex] = (resp_time_inst[instIndex]*0.001)/num_ue_inst[instIndex]; //Keep it bfor num_ue_inst update coz we need total number and not throughtput
+					num_ue_inst[instIndex] = (num_ue_inst[instIndex]*1.0)/INST_PERIOD;
+					prev_tpt = prev_t;
+					prev_lat = prev_l;
+					//cout<<"Throughput= "<<num_ue_inst[instIndex]<<endl;
+					//cout<<"Latency(ms)= "<<resp_time_inst[instIndex]<<endl;
+					
+					instIndex++;
+					
+					inst_endTime = curTime + (int) INST_PERIOD;
+					//cout<<"mix end time="<<mix_endTime<<endl;
+					//sleep(1);
+				}
+				inst_mtx.unlock();
+			}
+
+
+//////  INSTRUMENTATION CODE ENDS HERE /////////////////////////////////////////////////////////
+
+		}while(curTime < endTime && loop1>0);
+	} //end while
+	
+
+	free(args);
+	pthread_exit(NULL);
+}
+
+bool attach_with_mme(UserEquipment &ue, Client &user, bool checkIntegrity){
+	return ue.authenticate(user, checkIntegrity);
+}
+
+string get_starting_IP_Address(UserEquipment &ue, Client &user){
+	return ue.getStartingIPAddress(user);
+}
+
+vector<string> setup_tunnel(UserEquipment &ue, Client &user, bool doEncryption){
+	return ue.setupTunnel(user, doEncryption);
+}
+
+int send_ue_data(UserEquipment &ue, int ue_num, string rate, int serverPort, int startingPort, int endPort, Client &user, vector<string>& tmpArray, int dataTime){
+	return ue.sendUserData(user, ue_num, rate, serverPort, startingPort, endPort, tmpArray, dataTime);
+}
+
+void ue_context_release(UserEquipment &ue, Client &user, int ue_num, string ue_ip, string sgw_teid, string ue_teid, int currentPort, bool networkServiceRequest){
+	ue.initiate_ue_context_release(user, ue_num, ue_ip, sgw_teid, ue_teid, currentPort, networkServiceRequest);
+}
+
+string ue_service_request(UserEquipment &ue, Client &user, int ue_num, string ue_ip){
+	return ue.send_ue_service_request(user, ue_num, ue_ip);
+}
+
+string network_service_request(UserEquipment &ue, Client &user, int ue_num, string ue_ip){
+	return ue.receive_paging_request(user, ue_num, ue_ip);
+}
+
+void detach_ue(UserEquipment &ue, Client &user, int ue_num, string ue_ip, string sgw_teid, string ue_teid){
+	ue.initiate_detach(user, ue_num, ue_ip, sgw_teid, ue_teid);
+}
+
+// Generate UE IP addresses and assign to the network interface
+void* multithreading_add_ip(void *arg){
+	string c = "";
+	struct _ipArgs *args = (struct _ipArgs *)arg;
+	string ip = args->startingIp;
+	long numIp = args->numIps;
+	system(("sudo chmod +x ipgen.sh"+c+"").c_str());
+	string s = "./ipgen.sh "+ip+" "+SINK_SERVER_NETMASK+" "+ to_string(numIp) +" "+DEFAULT_IF;
+	if(DO_DEBUG){
+		cout<<"Generating IPs: "<<s<<endl;
+	}
+	system(s.c_str());
+}
+
+int main(int argc, char *args[]){
+	long maxThreads = 0;
+	int status;
+	stringstream ss;
+	string data = "";
+	std::ofstream outfile;
+	std::ofstream delayfile;
+	std::ofstream instfile;
+	
+	if(argc != 4 && argc != 5){
+		fprintf(stderr,"Usage: %s <max-threads> <program-run-time(in mins)> <rate[e.g. 20M (i.e. 20 Mbits/sec)  or 20K (i.e. 20 Kbits/sec)]> [<SINK_SERVER_STARTING_PORT (default:13001)>]\n", args[0]);
+		exit(0);
+	}
+
+	maxThreads = atoi(args[1]);
+	if(maxThreads <= 0){
+		printf("Number of threads should be greater than 0\n");
+		exit(0);
+	}
+	double tmp;
+	ss << args[2];
+	ss >> tmp;
+	if(tmp <= 0.0){
+		printf("Run time of each threads should be greater than 0.0\n");
+		exit(0);
+	}
+
+	rate = args[3];
+	if(rate.size() <= 1){
+		printf("Rate should be of format XM or XK e.g. 20M (i.e. 20 Mbits/sec)  or 20K (i.e. 20 Kbits/sec)\n");
+		exit(0);
+	}
+
+	if(argc == 5){
+		int tmp_port = atoi(args[4]);
+		if (tmp_port >= 65536 || tmp_port <= 1023){
+			printf("Server port number should lie in [1024, 65535] only \n");
+			exit(0);
+		}
+		SINK_SERVER_STARTING_PORT = tmp_port;
+	}
+
+	string c = "";
+	system(("ifconfig"+c+" "+DEFAULT_IF+" mtu "+to_string(LINK_MTU)).c_str());
+
+	for(int i=1; i<4096; i++){
+		reusable_ue_teid.push(i);
+	}
+
+	if(sendData || networkServiceRequest){
+		// Get the starting UE IP address from controller
+		UserEquipment ue(1);
+		Client user(2001);
+		//user.input_server_details(g_mme_port, g_mme_address);
+		string startingIp = get_starting_IP_Address(ue, user);
+
+		if(assignIpToInterface){
+			// Generate and assign UE IP addresses in advance
+			cout<<"Allocating IPs. Please wait..."<<endl;
+			time_t start;
+			time(&start);
+			pthread_t ipAddThread;
+			struct _ipArgs * argss =   (struct _ipArgs *)malloc(sizeof(struct _ipArgs));
+			argss->startingIp = startingIp;
+			argss->numIps = 2 * maxThreads + 10;
+			status = pthread_create(&ipAddThread,NULL, multithreading_add_ip, argss);
+			report_error(status);
+			pthread_join(ipAddThread, NULL);
+			time_t end;
+			time(&end);
+			cout<<"time="<<(end-start)<<"sec"<<endl;
+			sleep(5);
+			if(DO_DEBUG){
+				cout<<"Starting IP="<<startingIp<<endl;
+			}
+		}
+	}
+
+	num_ue_per_thread.resize(maxThreads, 0);
+	ue_registration_response_time.resize(maxThreads, 0);
+        //int ue_per_thr = 50000;
+	stored_ue_registration_response_time.resize(UE_PER_THREAD, 0);
+
+	cout<<"***************STARTING NOW***************"<<endl;
+	tmp = tmp * 60;
+	time_t curTime;
+	time(&curTime);
+	if(DO_DEBUG){
+		cout<<"start time="<<curTime<<endl;
+	}
+
+	if (dynLoad){	
+		cout<<"start time="<<curTime<<endl;
+		int tmp1 = traffic_shape[curr_mix_index][0] * 60;
+		mix_endTime = curTime + (int) tmp1;
+		mix_num = traffic_shape[curr_mix_index][1];
+		/*if(curr_mix_index < traffic_shape_size){
+			curr_mix_index++;
+		}*/
+		cout<<"mix end time="<<mix_endTime<<endl;
+		cout<<"mix="<<mix_num<<endl;
+	}
+
+	///// INSTRUMENTATION CODE STARTS /////////
+
+	if (instrumentTptLat){	
+		cout<<"start time="<<curTime<<endl;
+		int tmp2 = INST_PERIOD;
+		inst_endTime = curTime + (int) tmp2;
+		//cout<<"instrumentation end time="<<inst_endTime<<endl;
+	}
+	///// INSTRUMENTATION CODE ENDS /////////
+
+	endTime = curTime + (int) tmp;
+	if(DO_DEBUG){
+		cout<<"end time="<<endTime<<endl;
+	}
+	int simulationTime = (int) tmp;
+	
+	
+	//servTime = (int) (tmp/fracServ);
+        //servReqTime = curTime + (int) servTime;
+
+	pthread_t tid[maxThreads];
+	int gap = 1;
+	int port_gap = PER_THREAD_PORT_WINDOW;
+	int total_non_global_ports = maxThreads * port_gap;
+	int global_starting_port = SINK_SERVER_STARTING_PORT + total_non_global_ports;
+	// Filling global ports
+	for(int i = 0; i < NUM_GLOBAL_PORTS; i++){
+		global_ports[i] = global_starting_port + i;
+	}
+
+	// Create UE threads
+	for(int i = 0;i<maxThreads;i++){
+		struct _threadArgs * args = (struct _threadArgs *)malloc(sizeof(struct _threadArgs));
+		args->threadId = i;
+		args->serverPort = SINK_SERVER_STARTING_PORT + i * port_gap;
+		args->port_gap = port_gap;
+		args->starting_ue_id = 1 + i * gap;
+		args->ue_id_gap = gap;
+		args->num_threads = maxThreads;
+
+		status = pthread_create(&tid[i], NULL, multithreading_func, args);
+		report_error(status);
+	}
+
+	string s = "";
+	int total_ue = 0;
+	unsigned long long total_reistration_time = 0;
+	double average_registration_time = 0.0;
+	double registrationThroughput = 0.0;
+
+	// Sleep for the specified simulation time
+	usleep(simulationTime * 1000000); // 1sec
+
+	/* Wake up and cancel/join all the UE threads to end simulation */
+	for(int i=0;i<maxThreads;i++){
+		if(DO_DEBUG){
+			cout<<"******* ENDING THREAD - "<<i<<endl;
+		}
+		pthread_cancel(tid[i]);
+		pthread_join(tid[i],NULL);
+	}
+	if(DO_DEBUG){
+		cout<<"************ENDED!!!************"<<endl;
+	}
+	/* Calculations for last epoch */
+	if (dynLoad == true){
+		//num_ue_per_epoch[curr_mix_index] = attNo + detNo + sreqNo;
+		for(int i=0; i<maxThreads; i++){
+						num_ue_per_epoch[curr_mix_index] = num_ue_per_epoch[curr_mix_index] + num_ue_per_thread[i];
+						ue_response_time_per_epoch[curr_mix_index] = ue_response_time_per_epoch[curr_mix_index] + ue_registration_response_time[i];
+					}
+		//cout<<"Total Num previous epoch is "<<num_ue_per_epoch[curr_mix_index]<<endl;
+		if ( curr_mix_index > 0){
+			int i = curr_mix_index;
+			while (i > 0) {
+				num_ue_per_epoch[curr_mix_index] = num_ue_per_epoch[curr_mix_index] - num_ue_per_epoch[i-1];
+				ue_response_time_per_epoch[curr_mix_index] = ue_response_time_per_epoch[curr_mix_index] - ue_response_time_per_epoch[i-1];
+				i--;
+			}
+		}
+		float tmp_tpt = (num_ue_per_epoch[curr_mix_index]*1.0)/(traffic_shape[curr_mix_index-1][0] * 60);
+		float tmp_lat = (ue_response_time_per_epoch[curr_mix_index]*0.001)/num_ue_per_epoch[curr_mix_index];
+		cout<<"Throughput= "<<tmp_tpt<<endl;
+		cout<<"Latency(ms)= "<<tmp_lat<<endl;
+		tpt[curr_mix_index] = tmp_tpt;
+		lat[curr_mix_index] = tmp_lat;
+	}
+
+	
+	/////////////////////////////////
+
+	/* Calculate and display various metrics */
+	time_t actual_endTime;
+	time(&actual_endTime);
+	for(int i=0;i<maxThreads;i++){
+		total_ue += num_ue_per_thread[i];
+		total_reistration_time += ue_registration_response_time[i];
+		cout<<"num_ue_per_thread["<<i<<"] "<<num_ue_per_thread[i]<<endl;
+		cout<<"ue_registration_response_time["<<i<<"] "<<((ue_registration_response_time[i]*1.0)/num_ue_per_thread[i])<<" us"<<endl;
+	}
+	average_registration_time = (total_reistration_time*1.0)/(total_ue*1.0);
+	registrationThroughput = (total_ue*1.0)/(actual_endTime - curTime);
+
+	cout<<"***************************************STATISTICS***************************************"<<endl;
+	execution_done = true;
+	double averageUEperThread = ((total_ue*1.0)/maxThreads);
+	averageUEperThread = roundf(averageUEperThread * 100) / 100; 
+	ostringstream strs;
+	strs << averageUEperThread;
+	string avUE = strs.str();
+	printf("Total Number of Threads=%d\n", maxThreads);
+	printf("Total Number of UE=%d\n", total_ue);
+	cout<<"Average Number of UE per Thread="<<averageUEperThread<<endl;
+	printf("Total Execution Time=%d sec\n", (actual_endTime - curTime));
+
+	average_registration_time = average_registration_time/1000000.0;
+	cout<<"Latency = "<<average_registration_time<<" secs"<<endl;
+	cout<<"Registration Throughput="<<registrationThroughput<<" registrations/sec"<<endl;
+	cout<<"Attach-Request= "<<attNo<<"  Detach-Request= "<< detNo<<"  Service-Request= "<<sreqNo<<endl;
+	cout << fixed;
+	cout.precision(2);
+	traffic_percent = ((attNo+detNo)*1.0/(attNo+detNo+sreqNo))*100; //Attach Percentage served
+        cout<<"Attach Percentage= "<<traffic_percent<<endl;
+	/*verify traffic distribution */
+	cout<<"\n ******* verify traffic distribution "<<endl;
+	for(int i=0;i<5;i++){
+		cout<<i<<"--->"<<distr_check[i]<<endl;
+	}
+	/* end verification*/
+	
+	/***** EPOCH STATISTICS *******/
+	for (int i=0; i<=curr_mix_index; i++){
+		cout<< "EPOCH "<<i<<"Tpt= "<<tpt[i]<<" LAT(ms)= "<<lat[i]<<endl;
+	}
+
+	/******************************/
+	
+
+
+	/* Write the metrics to the statistics file */
+	if(!fileExists(STATISTIC_FILE)){
+		data.append("#MaxThreads").append(COMMA).append("#UE").append(COMMA).append("AvUE/Thread").append(COMMA);
+		data.append("ExecutionTime").append(COMMA);
+		data.append("RegistrationThroughput(registrations/sec)").append(COMMA);
+		data.append("RegistrationLatency(sec)").append(COMMA);
+		data.append("SetupTunnel(Yes/No)").append(COMMA);
+		data.append("DO Detach (Yes/No)").append(COMMA);
+		data.append("SendingData?(Yes/No)").append(COMMA).append("MeanDataSendingTime").append(COMMA).append("SendingRate").append(COMMA);
+		data.append("#Attach").append(COMMA).append("#Detach").append(COMMA);
+		data.append("#Service_Requests").append(COMMA);
+		data.append("ATTACH_PERCENT").append(COMMA);
+		data.append("EPOCH_TPT").append(COMMA).append("EPOCH_DELAY_ms");
+		data.append("\n");
+	}
+	/*if(!fileExists(INST_FILE)){
+		data = "";
+		data.append("ThroughputPerPeriod").append(COMMA).append("RespTimePerPeriod");
+		data.append("\n");
+	}*/
+
+	outfile.open(STATISTIC_FILE, std::ios_base::app);
+	if (outfile.is_open()){
+		data.append(to_string(maxThreads)).append(COMMA).append(to_string(total_ue)).append(COMMA).append(avUE).append(COMMA);
+		data.append(to_string((actual_endTime - curTime))).append(COMMA);
+		data.append(to_string(registrationThroughput)).append(COMMA);
+		data.append(to_string(average_registration_time)).append(COMMA);
+		data.append(setUpTunnel?"Yes":"No").append(COMMA);
+		data.append(doDetach?"Yes":"No").append(COMMA);
+		data.append(sendData?"Yes":"No").append(COMMA);
+		data.append(to_string(UE_MEAN_DATA_SENDING_TIME)).append(COMMA).append(rate).append(COMMA);
+		data.append(to_string(attNo)).append(COMMA);
+		data.append(to_string(detNo)).append(COMMA).append(to_string(sreqNo)).append(COMMA);
+		data.append(to_string(traffic_percent));
+		if (dynLoad==true){
+			for (int i=0; i<=curr_mix_index; i++){
+				data.append(COMMA).append(to_string(tpt[i])).append(COMMA).append(to_string(lat[i]));
+			}
+		}
+		data.append("\n");
+		outfile << data;
+		outfile.close();
+		//data="";
+	}
+	
+	if (instrumentTptLat) {
+		instfile.open(INST_FILE, std::ios_base::app);
+		data = "";
+		if (instfile.is_open()){
+			for(int i = 0; i < instIndex; i++){
+				float t = num_ue_inst[i];
+				float l = resp_time_inst[i];
+				data.append(to_string(t)).append(COMMA).append(to_string(l)).append("\n");
+
+			}
+			instfile << data;
+			instfile.close();
+		}
+	}
+	
+	if (WANT_DELAY_CDF){
+	/*Captured Delays of each thread for Delay Distribution*/
+		delayfile.open(DELAY_FILE, std::ios_base::app);
+		data = "";
+		if (delayfile.is_open()){
+		/*for(int i = 0; i < maxThreads; i++){
+			float delay = (ue_registration_response_time[i]*1.0)/(num_ue_per_thread[i]*1000);
+			cout<<"Delay for UE thread "<<i<<" = "<<delay<<" ms\n";
+			data.append(to_string(delay)).append("\n");
+			
+		}*/
+			for(int i = 0; i < total_ue; i++){
+				long delay = stored_ue_registration_response_time[i];
+			//cout<<"Delay for UE thread "<<i<<" = "<<delay<<" ms\n";
+				data.append(to_string(maxThreads)).append(COMMA).append(to_string(delay)).append("\n");
+
+			}
+			delayfile << data;
+			delayfile.close();
+
+		}
+	}
+
+	/* Kill all the iperf3 client processes after the simulation ends */
+	//if(sendData){
+		system(("sudo killall iperf3 "+c+"").c_str());
+	//}
+
+	exit(0);
+	return 0;
+}
+
+inline bool fileExists (const std::string& name) {
+	struct stat buffer;   
+	return (stat (name.c_str(), &buffer) == 0); 
+}
+
+string GetStdoutFromCommand(string cmd) {
+        string data;
+        FILE * stream;
+        const int max_buffer = 256;
+        char buffer[max_buffer];
+        cout<<"Entered getstdout"<<endl;
+
+        cmd.append(" 2>&1");
+
+        stream = popen(cmd.c_str(), "r");
+
+        cout<<"After popen"<<endl;
+
+        if (stream) {
+                //cout<<"inside if stream"<<endl;
+                while (!feof(stream)){
+                        cout<<"inside !feof stream "<<cmd<<endl;
+
+                        if (fgets(buffer, max_buffer, stream) != NULL) data.append(buffer);
+                }
+		
+		pclose(stream);
+        }
+//      cout<<"before return"<<endl;
+
+        return data;
+ }
+#include "ue.h"
+
+// Thread function for each UE
+void* multithreading_func(void*);
+
+/* High-level functions for various LTE procedures */
+bool attach_with_mme(UserEquipment&, Client&, bool);
+int send_ue_data(UserEquipment&, int, string, int, int, int, Client&, vector<string>&, int);
+vector<string> setup_tunnel(UserEquipment&, Client&, bool);
+void detach_ue(UserEquipment&, Client&, int, string, string, string);
+void ue_context_release(UserEquipment&, Client&, int, string, string, string, int, bool);
+string ue_service_request(UserEquipment&, Client&, int, string);
+string network_service_request(UserEquipment&, Client&, int, string);
+
+// Retrieves the starting UE IP address from the controller
+string get_starting_IP_Address(UserEquipment&, Client&);
+
+// Generates UE IP addresses and assigns to the network interface
+void* multithreading_add_ip(void *);
+
+// Utility function to check if a file already exists
+inline bool fileExists (const std::string& );
+
+string GetStdoutFromCommand(string);

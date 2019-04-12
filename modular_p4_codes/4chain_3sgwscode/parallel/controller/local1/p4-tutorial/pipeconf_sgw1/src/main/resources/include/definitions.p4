@@ -20,7 +20,7 @@ const bit<32> s1u_dgw_addr = 0xC0A80202;
 
 // IP address of 1st,2nd,3rd,3th chains in SGW
 // s1u - 1st chain
-// s2u - 2nd chain
+// s1u - 2nd chain
 // s3u - 3rd chain
 // s4u - 4th chain
 const bit<32> s11_sgw_ipaddr = 0xc0a80202;  //192.168.2.2
@@ -55,7 +55,7 @@ const bit<48> ran6 = 0x00163e714c4f;
 // MAC addresses of SGWs
 const bit<48> sgw11 = 0x00163e1f04f2;
 const bit<48> sgw12 = 0x00163e3f0d83;
-const bit<48> sgw13 = 0x00163e3f0d83;
+const bit<48> sgw13 = 0x00163ee95b4f; 
 
 const bit<48> sgw21 = 0x00163ee95b4f;
 const bit<48> sgw22 = 0x00163e727ffe;
@@ -111,12 +111,19 @@ const bit<32> BMV2_V1MODEL_INSTANCE_TYPE_RESUBMIT      = 6;
 const bit<32> I2E_CLONE_SESSION_ID = 500;
 
 
+//const bit<32> LB11 = 100;
+//const bit<32> UB11 = 124;
+//const bit<32> LB12 = 125;
+//const bit<32> UB12 = 149;
+//const bit<32> LB13 = 150;
+//const bit<32> UB13 = 174;
+
 const bit<32> LB11 = 100;
-const bit<32> UB11 = 149;
-const bit<32> LB12 = 150;
-const bit<32> UB12 = 199;
-const bit<32> LB13 = 150;
-const bit<32> UB13 = 199;
+const bit<32> UB11 = 114;
+const bit<32> LB12 = 115;
+const bit<32> UB12 = 129;
+const bit<32> LB13 = 130;
+const bit<32> UB13 = 144;
 
 const bit<32> LB21 = 200;
 const bit<32> UB21 = 249;
