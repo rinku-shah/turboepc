@@ -115,6 +115,8 @@ public class SGW  {
 		int pgw_teid, sgw_teid;
 		//code for reusing the used tunnel ids. Because we only have 4000 available
 		int chainId = Constants.getChainIDFromSGW(sgw_dpId);
+		// Handling MISS
+		//if (sgw_dpId
 		/*************************** for now we dont need synchronisation as issue is fixed ****************************/
 			if(reusable_teids[chainId].isEmpty()){
 				if(tunnelId[chainId] > maxTeid[chainId]){

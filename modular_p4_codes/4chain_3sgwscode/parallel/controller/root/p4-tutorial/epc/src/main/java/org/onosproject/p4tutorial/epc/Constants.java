@@ -3,7 +3,6 @@
  ***********************************************************************/
 package org.onosproject.p4tutorial.epc;
 
-
 import java.util.HashMap;
 import org.slf4j.Logger;
 import static org.slf4j.LoggerFactory.getLogger;
@@ -31,17 +30,27 @@ public class Constants {
 	/***************************Configurable parameters**********************************/
 	//global chain
 	final static int UE_LB = 100; //push UE state to switches when UE KEY is between UE_LB & UE_UB
-	final static int UE_UB = 499;
+	final static int UE_UB = 144;
 	
 	//chain1
-	final static int LB11 = 100; //Select SGW11 when UE KEY is between LB11 & UB11
-    final static int UB11 = 149; 
+/*  Below range used for 1 and 2 sgw	
+    final static int LB11 = 100; //Select SGW11 when UE KEY is between LB11 & UB11
+    final static int UB11 = 124; 
 
-    final static int LB12 = 150; //Select SGW12 when UE KEY is between LB12 & UB12
-	final static int UB12 = 199;
+    final static int LB12 = 125; //Select SGW12 when UE KEY is between LB12 & UB12
+	final static int UB12 = 149;
 
-	final static int LB13 = 200; //Select SGW21 when UE KEY is between LB13 & UB13
-    final static int UB13 = 249; 
+	final static int LB13 = 150; //Select SGW21 when UE KEY is between LB13 & UB13
+    final static int UB13 = 174; */
+
+    final static int LB11 = 100; //Select SGW11 when UE KEY is between LB11 & UB11
+    final static int UB11 = 114;
+
+    final static int LB12 = 115; //Select SGW12 when UE KEY is between LB12 & UB12
+        final static int UB12 = 129;
+
+        final static int LB13 = 130; //Select SGW21 when UE KEY is between LB13 & UB13
+    final static int UB13 = 144;
 
 	//chain2	
     final static int LB21 = 250; //Select SGW22 when UE KEY is between LB21 & UB21
@@ -569,9 +578,9 @@ public class Constants {
 				else if ( (swid==(Constants.SGW_ID_41)) ||  (swid==(Constants.SGW_ID_42)) ||  (swid==(Constants.SGW_ID_43)) )
 					return 3;
 				else
-					// if(DEBUG)
+					 //if(DEBUG)
 						log.warn("GOT INVALID SGW DPID!!!");
-					return 0;
+					return 10;
 			}
 
 			public static int getChainIDFromDGW(String dgw){
