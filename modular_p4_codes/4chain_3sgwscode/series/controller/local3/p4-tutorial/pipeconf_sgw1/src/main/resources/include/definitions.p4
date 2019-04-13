@@ -27,7 +27,7 @@ const bit<32> s1u_dgw_ipaddr = 0xc0a80201;  // 192.168.2.1
 
 const bit<32> s11_sgw_ipaddr = 0xc0a80202;  //192.168.2.2
 const bit<32> s12_sgw_ipaddr = 0xc0a80302;  //192.168.3.2
-const bit<32> s21_sgw_ipaddr = 0xc0a80602; //192.168.6.2
+const bit<32> s13_sgw_ipaddr = 0xc0a80402; //192.168.4.2
 const bit<32> s22_sgw_ipaddr = 0xc0a80702; //192.168.7.2
 const bit<32> s31_sgw_ipaddr = 0xc0a80a02;  //192.168.10.2
 const bit<32> s32_sgw_ipaddr = 0xc0a80b02; //192.168.11.2
@@ -41,8 +41,9 @@ const bit<32> sink_ip =0xc0a81502;  // 192.168.21.2
 // MAC addresses of SGWs
 const bit<48> sgw11 = 0x00163e416103;
 const bit<48> sgw12 = 0x00163e8f0eae;
-const bit<48> sgw21 = 0x00163e73b569;
-const bit<48> sgw22 = 0x00163e750e1c;
+//const bit<48> sgw21 = 0x00163e73b569;
+const bit<48> sgw13 = 0x00163e750e1c;
+
 const bit<48> sgw31 = 0x00163e362217;
 const bit<48> sgw32 = 0x00163e65bbf4;
 const bit<48> sgw41 = 0x00163e4646a8;
@@ -97,24 +98,11 @@ const bit<32> BMV2_V1MODEL_INSTANCE_TYPE_RESUBMIT      = 6;
 const bit<32> I2E_CLONE_SESSION_ID = 500;
 
 
-const bit<32> LB1 = 200;
-const bit<32> UB1 = 299;
-const bit<32> LB2 = 100;
-const bit<32> UB2 = 199;
-
-const bit<32> LB3 = 200;
-const bit<32> UB3 = 299;
-const bit<32> LB4 = 100;
-const bit<32> UB4 = 199;
-
-const bit<32> LB5 = 300;
-const bit<32> UB5 = 399;
-const bit<32> LB6 = 400;
-const bit<32> UB6 = 499;
-
-const bit<32> LB7 = 400;
-const bit<32> UB7 = 499;
-const bit<32> LB8 = 500;
-const bit<32> UB8 = 599;
+const bit<32> LB11 = 100;
+const bit<32> UB11 = 124;
+const bit<32> LB12 = 125;
+const bit<32> UB12 = 149;
+const bit<32> LB13 = 150;
+const bit<32> UB13 = 174;
 
 #endif

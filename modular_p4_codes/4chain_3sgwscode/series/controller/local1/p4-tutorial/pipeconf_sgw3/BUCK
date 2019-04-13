@@ -11,7 +11,7 @@ osgi_jar (
 )
 
 BUNDLES = [
-    '//apps/p4-tutorial/pipeconf_sgw2:onos-apps-p4-tutorial-pipeconf_sgw3',
+    '//apps/p4-tutorial/pipeconf_sgw3:onos-apps-p4-tutorial-pipeconf_sgw3',
 
 ]
 

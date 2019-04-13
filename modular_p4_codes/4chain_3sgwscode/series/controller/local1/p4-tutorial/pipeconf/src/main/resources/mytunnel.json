@@ -29,6 +29,7 @@
       "id" : 2,
       "fields" : [
         ["ingress_port", 9, false],
+        ["reason_code", 8, false],
         ["_padding_0", 7, false]
       ]
     },
@@ -1546,6 +1547,25 @@
             "column" : 8,
             "source_fragment" : "hdr.packet_in.ingress_port = standard_metadata.ingress_port"
           }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["packet_in", "reason_code"]
+            },
+            {
+              "type" : "hexstr",
+              "value" : "0x64"
+            }
+          ],
+          "source_info" : {
+            "filename" : "epc_4chainseries_dgw.p4",
+            "line" : 43,
+            "column" : 8,
+            "source_fragment" : "hdr.packet_in.reason_code = 100"
+          }
         }
       ]
     },
@@ -1559,7 +1579,7 @@
           "parameters" : [],
           "source_info" : {
             "filename" : "epc_4chainseries_dgw.p4",
-            "line" : 45,
+            "line" : 47,
             "column" : 8,
             "source_fragment" : "mark_to_drop()"
           }
@@ -1590,7 +1610,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_dgw.p4",
-            "line" : 77,
+            "line" : 79,
             "column" : 8,
             "source_fragment" : "hdr.gtpu_ipv4.setValid()"
           }
@@ -1609,7 +1629,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_dgw.p4",
-            "line" : 78,
+            "line" : 80,
             "column" : 8,
             "source_fragment" : "hdr.gtpu_ipv4.version = 4"
           }
@@ -1628,7 +1648,7 @@
           ],
           "source_info" : {
             "filename" : "include/definitions.p4",
-            "line" : 72,
+            "line" : 71,
             "column" : 28,
             "source_fragment" : "5; ..."
           }
@@ -1647,7 +1667,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_dgw.p4",
-            "line" : 80,
+            "line" : 82,
             "column" : 8,
             "source_fragment" : "hdr.gtpu_ipv4.diffserv = 0"
           }
@@ -1689,7 +1709,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_dgw.p4",
-            "line" : 81,
+            "line" : 83,
             "column" : 8,
             "source_fragment" : "hdr.gtpu_ipv4.totalLen = hdr.ipv4.totalLen ..."
           }
@@ -1708,7 +1728,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_dgw.p4",
-            "line" : 83,
+            "line" : 85,
             "column" : 8,
             "source_fragment" : "hdr.gtpu_ipv4.identification = 0"
           }
@@ -1727,7 +1747,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_dgw.p4",
-            "line" : 84,
+            "line" : 86,
             "column" : 8,
             "source_fragment" : "hdr.gtpu_ipv4.flags = 0"
           }
@@ -1746,7 +1766,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_dgw.p4",
-            "line" : 85,
+            "line" : 87,
             "column" : 8,
             "source_fragment" : "hdr.gtpu_ipv4.fragOffset = 0"
           }
@@ -1788,7 +1808,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_dgw.p4",
-            "line" : 86,
+            "line" : 88,
             "column" : 8,
             "source_fragment" : "hdr.gtpu_ipv4.ttl = hdr.ipv4.ttl-1"
           }
@@ -1807,7 +1827,7 @@
           ],
           "source_info" : {
             "filename" : "include/definitions.p4",
-            "line" : 74,
+            "line" : 73,
             "column" : 25,
             "source_fragment" : "17; ..."
           }
@@ -1845,7 +1865,7 @@
           ],
           "source_info" : {
             "filename" : "include/definitions.p4",
-            "line" : 28,
+            "line" : 27,
             "column" : 31,
             "source_fragment" : "0xc0a80202; //192.168.2.2 ..."
           }
@@ -1864,7 +1884,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_dgw.p4",
-            "line" : 90,
+            "line" : 92,
             "column" : 8,
             "source_fragment" : "hdr.gtpu_ipv4.hdrChecksum = 0"
           }
@@ -1879,7 +1899,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_dgw.p4",
-            "line" : 92,
+            "line" : 94,
             "column" : 8,
             "source_fragment" : "hdr.gtpu_udp.setValid()"
           }
@@ -1898,7 +1918,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_dgw.p4",
-            "line" : 94,
+            "line" : 96,
             "column" : 8,
             "source_fragment" : "hdr.gtpu_udp.srcPort = hdr.tcp.src_port"
           }
@@ -1917,7 +1937,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_dgw.p4",
-            "line" : 95,
+            "line" : 97,
             "column" : 8,
             "source_fragment" : "hdr.gtpu_udp.dstPort = 2152"
           }
@@ -1959,7 +1979,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_dgw.p4",
-            "line" : 96,
+            "line" : 98,
             "column" : 8,
             "source_fragment" : "hdr.gtpu_udp.length_= hdr.ipv4.totalLen ..."
           }
@@ -1978,7 +1998,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_dgw.p4",
-            "line" : 98,
+            "line" : 100,
             "column" : 8,
             "source_fragment" : "hdr.gtpu_udp.checksum = 0"
           }
@@ -1993,7 +2013,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_dgw.p4",
-            "line" : 100,
+            "line" : 102,
             "column" : 8,
             "source_fragment" : "hdr.gtpu.setValid()"
           }
@@ -2012,7 +2032,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_dgw.p4",
-            "line" : 101,
+            "line" : 103,
             "column" : 8,
             "source_fragment" : "hdr.gtpu.version = 0x01"
           }
@@ -2031,7 +2051,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_dgw.p4",
-            "line" : 102,
+            "line" : 104,
             "column" : 8,
             "source_fragment" : "hdr.gtpu.pt = 0x01"
           }
@@ -2050,7 +2070,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_dgw.p4",
-            "line" : 103,
+            "line" : 105,
             "column" : 8,
             "source_fragment" : "hdr.gtpu.x = 0"
           }
@@ -2069,7 +2089,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_dgw.p4",
-            "line" : 104,
+            "line" : 106,
             "column" : 8,
             "source_fragment" : "hdr.gtpu.ex_flag = 0"
           }
@@ -2088,7 +2108,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_dgw.p4",
-            "line" : 105,
+            "line" : 107,
             "column" : 8,
             "source_fragment" : "hdr.gtpu.seq_flag = 0"
           }
@@ -2107,7 +2127,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_dgw.p4",
-            "line" : 106,
+            "line" : 108,
             "column" : 8,
             "source_fragment" : "hdr.gtpu.npdu_flag = 0"
           }
@@ -2126,7 +2146,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_dgw.p4",
-            "line" : 107,
+            "line" : 109,
             "column" : 8,
             "source_fragment" : "hdr.gtpu.msgtype = 0xff"
           }
@@ -2145,7 +2165,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_dgw.p4",
-            "line" : 108,
+            "line" : 110,
             "column" : 8,
             "source_fragment" : "hdr.gtpu.msglen = hdr.ipv4.totalLen"
           }
@@ -2164,7 +2184,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_dgw.p4",
-            "line" : 109,
+            "line" : 111,
             "column" : 8,
             "source_fragment" : "hdr.gtpu.teid = op_tunnel_s1"
           }
@@ -2183,7 +2203,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_dgw.p4",
-            "line" : 111,
+            "line" : 113,
             "column" : 8,
             "source_fragment" : "standard_metadata.egress_spec = egress_port_s1"
           }
@@ -2225,7 +2245,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_dgw.p4",
-            "line" : 112,
+            "line" : 114,
             "column" : 8,
             "source_fragment" : "hdr.ipv4.ttl = hdr.ipv4.ttl - 1"
           }
@@ -2256,7 +2276,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_dgw.p4",
-            "line" : 132,
+            "line" : 134,
             "column" : 8,
             "source_fragment" : "standard_metadata.egress_spec = egress_port_s3"
           }
@@ -2275,7 +2295,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_dgw.p4",
-            "line" : 138,
+            "line" : 140,
             "column" : 8,
             "source_fragment" : "hdr.ipv4 = hdr.inner_ipv4"
           }
@@ -2294,7 +2314,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_dgw.p4",
-            "line" : 139,
+            "line" : 141,
             "column" : 8,
             "source_fragment" : "hdr.tcp = hdr.inner_tcp"
           }
@@ -2309,7 +2329,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_dgw.p4",
-            "line" : 142,
+            "line" : 144,
             "column" : 8,
             "source_fragment" : "hdr.udp.setInvalid()"
           }
@@ -2375,7 +2395,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_dgw.p4",
-            "line" : 148,
+            "line" : 150,
             "column" : 16,
             "source_fragment" : "hdr.ethernet.dstAddr ="
           }
@@ -2468,7 +2488,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_dgw.p4",
-            "line" : 151,
+            "line" : 153,
             "column" : 16,
             "source_fragment" : "hdr.ethernet.dstAddr ="
           }
@@ -2588,7 +2608,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_dgw.p4",
-            "line" : 154,
+            "line" : 156,
             "column" : 16,
             "source_fragment" : "hdr.ethernet.dstAddr ="
           }
@@ -2735,7 +2755,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_dgw.p4",
-            "line" : 157,
+            "line" : 159,
             "column" : 16,
             "source_fragment" : "hdr.ethernet.dstAddr ="
           }
@@ -2909,7 +2929,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_dgw.p4",
-            "line" : 160,
+            "line" : 162,
             "column" : 16,
             "source_fragment" : "hdr.ethernet.dstAddr ="
           }
@@ -3110,7 +3130,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_dgw.p4",
-            "line" : 163,
+            "line" : 165,
             "column" : 16,
             "source_fragment" : "hdr.ethernet.dstAddr ="
           }
@@ -3403,7 +3423,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_dgw.p4",
-            "line" : 171,
+            "line" : 173,
             "column" : 16,
             "source_fragment" : "hdr.ethernet.dstAddr ="
           }
@@ -3418,7 +3438,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_dgw.p4",
-            "line" : 175,
+            "line" : 177,
             "column" : 8,
             "source_fragment" : "hdr.gtpu.setInvalid()"
           }
@@ -3433,7 +3453,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_dgw.p4",
-            "line" : 176,
+            "line" : 178,
             "column" : 8,
             "source_fragment" : "hdr.gtpu_ipv4.setInvalid()"
           }
@@ -3448,7 +3468,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_dgw.p4",
-            "line" : 177,
+            "line" : 179,
             "column" : 8,
             "source_fragment" : "hdr.gtpu_udp.setInvalid()"
           }
@@ -3490,7 +3510,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_dgw.p4",
-            "line" : 179,
+            "line" : 181,
             "column" : 8,
             "source_fragment" : "hdr.ipv4.ttl = hdr.ipv4.ttl - 1"
           }
@@ -3516,7 +3536,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_dgw.p4",
-            "line" : 208,
+            "line" : 210,
             "column" : 12,
             "source_fragment" : "standard_metadata.egress_spec = hdr.packet_out.egress_port"
           }
@@ -3531,7 +3551,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_dgw.p4",
-            "line" : 210,
+            "line" : 212,
             "column" : 12,
             "source_fragment" : "hdr.packet_out.setInvalid()"
           }
@@ -3560,7 +3580,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_dgw.p4",
-            "line" : 211,
+            "line" : 213,
             "column" : 12,
             "source_fragment" : "return"
           }
@@ -3656,7 +3676,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_dgw.p4",
-            "line" : 220,
+            "line" : 222,
             "column" : 16,
             "source_fragment" : "return"
           }
@@ -3692,7 +3712,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_dgw.p4",
-            "line" : 238,
+            "line" : 240,
             "column" : 32,
             "source_fragment" : "return"
           }
@@ -3718,7 +3738,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_dgw.p4",
-            "line" : 243,
+            "line" : 245,
             "column" : 36,
             "source_fragment" : "standard_metadata.egress_spec = 2"
           }
@@ -3760,7 +3780,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_dgw.p4",
-            "line" : 244,
+            "line" : 246,
             "column" : 36,
             "source_fragment" : "hdr.ipv4.ttl = hdr.ipv4.ttl - 1"
           }
@@ -3786,7 +3806,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_dgw.p4",
-            "line" : 251,
+            "line" : 253,
             "column" : 32,
             "source_fragment" : "standard_metadata.egress_spec = 1"
           }
@@ -3828,7 +3848,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_dgw.p4",
-            "line" : 252,
+            "line" : 254,
             "column" : 32,
             "source_fragment" : "hdr.ipv4.ttl = hdr.ipv4.ttl - 1"
           }
@@ -3864,7 +3884,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_dgw.p4",
-            "line" : 263,
+            "line" : 265,
             "column" : 20,
             "source_fragment" : "return"
           }
@@ -3946,7 +3966,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_dgw.p4",
-            "line" : 271,
+            "line" : 273,
             "column" : 17,
             "source_fragment" : "tx_port_counter.count((bit<32>) standard_metadata.egress_spec)"
           }
@@ -3998,7 +4018,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_dgw.p4",
-            "line" : 274,
+            "line" : 276,
             "column" : 17,
             "source_fragment" : "rx_port_counter.count((bit<32>) standard_metadata.ingress_port)"
           }
@@ -4069,7 +4089,7 @@
           "id" : 2,
           "source_info" : {
             "filename" : "epc_4chainseries_dgw.p4",
-            "line" : 52,
+            "line" : 54,
             "column" : 10,
             "source_fragment" : "t_l3_fwd"
           },
@@ -4199,7 +4219,7 @@
           "id" : 6,
           "source_info" : {
             "filename" : "epc_4chainseries_dgw.p4",
-            "line" : 116,
+            "line" : 118,
             "column" : 9,
             "source_fragment" : "ip_op_tun_s1_uplink"
           },
@@ -4311,7 +4331,7 @@
           "id" : 10,
           "source_info" : {
             "filename" : "epc_4chainseries_dgw.p4",
-            "line" : 183,
+            "line" : 185,
             "column" : 10,
             "source_fragment" : "tun_egress_s3_uplink"
           },
@@ -4420,7 +4440,7 @@
           "id" : 0,
           "source_info" : {
             "filename" : "epc_4chainseries_dgw.p4",
-            "line" : 203,
+            "line" : 205,
             "column" : 12,
             "source_fragment" : "standard_metadata.ingress_port == CPU_PORT"
           },
@@ -4487,7 +4507,7 @@
           "id" : 3,
           "source_info" : {
             "filename" : "epc_4chainseries_dgw.p4",
-            "line" : 224,
+            "line" : 226,
             "column" : 16,
             "source_fragment" : "hdr.ipv4.isValid() && !hdr.gtpu.isValid()"
           },
@@ -4534,7 +4554,7 @@
           "id" : 4,
           "source_info" : {
             "filename" : "epc_4chainseries_dgw.p4",
-            "line" : 228,
+            "line" : 230,
             "column" : 22,
             "source_fragment" : "standard_metadata.ingress_port==1"
           },
@@ -4560,7 +4580,7 @@
           "id" : 5,
           "source_info" : {
             "filename" : "epc_4chainseries_dgw.p4",
-            "line" : 236,
+            "line" : 238,
             "column" : 31,
             "source_fragment" : "hdr.ipv4.protocol == PROTO_TCP"
           },
@@ -4586,7 +4606,7 @@
           "id" : 6,
           "source_info" : {
             "filename" : "epc_4chainseries_dgw.p4",
-            "line" : 241,
+            "line" : 243,
             "column" : 36,
             "source_fragment" : "hdr.ipv4.protocol == PROTO_UDP"
           },
@@ -4612,7 +4632,7 @@
           "id" : 7,
           "source_info" : {
             "filename" : "epc_4chainseries_dgw.p4",
-            "line" : 250,
+            "line" : 252,
             "column" : 28,
             "source_fragment" : "standard_metadata.ingress_port==2"
           },
@@ -4662,7 +4682,7 @@
           "id" : 9,
           "source_info" : {
             "filename" : "epc_4chainseries_dgw.p4",
-            "line" : 258,
+            "line" : 260,
             "column" : 16,
             "source_fragment" : "hdr.gtpu.isValid()"
           },
@@ -4709,7 +4729,7 @@
           "id" : 11,
           "source_info" : {
             "filename" : "epc_4chainseries_dgw.p4",
-            "line" : 270,
+            "line" : 272,
             "column" : 17,
             "source_fragment" : "standard_metadata.egress_spec < 255"
           },
@@ -4735,7 +4755,7 @@
           "id" : 12,
           "source_info" : {
             "filename" : "epc_4chainseries_dgw.p4",
-            "line" : 273,
+            "line" : 275,
             "column" : 17,
             "source_fragment" : "standard_metadata.ingress_port < 255"
           },
@@ -4763,7 +4783,7 @@
       "id" : 1,
       "source_info" : {
         "filename" : "epc_4chainseries_dgw.p4",
-        "line" : 282,
+        "line" : 284,
         "column" : 8,
         "source_fragment" : "c_egress"
       },

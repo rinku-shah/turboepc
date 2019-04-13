@@ -377,6 +377,11 @@ controller_packet_metadata {
     name: "ingress_port"
     bitwidth: 9
   }
+  metadata {
+    id: 2
+    name: "reason_code"
+    bitwidth: 8
+  }
 }
 controller_packet_metadata {
   preamble {

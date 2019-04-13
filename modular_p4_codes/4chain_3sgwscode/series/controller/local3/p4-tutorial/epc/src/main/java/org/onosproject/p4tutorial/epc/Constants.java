@@ -131,7 +131,7 @@ public class Constants {
 			// DPID of SGW
 			final static int SGW_ID_11 = 2;
 			final static int SGW_ID_12 = 3;
-			final static int SGW_ID_13 = 5;
+			final static int SGW_ID_13 = 6;
 
 			final static int SGW_ID_21 = 5;
 			final static int SGW_ID_22 = 6;
@@ -151,7 +151,7 @@ public class Constants {
 			// @vikas : in 4chain setup we have 2 SGWs in 1 chain 
 			final static DeviceId SGW_NAME_11 = DeviceId.deviceId("device:bmv2:s2");
 			final static DeviceId SGW_NAME_12 = DeviceId.deviceId("device:bmv2:s3");
-			final static DeviceId SGW_NAME_13 = DeviceId.deviceId("device:bmv2:s5");
+			final static DeviceId SGW_NAME_13 = DeviceId.deviceId("device:bmv2:s6");
 
 			final static DeviceId SGW_NAME_21 = DeviceId.deviceId("device:bmv2:s5");
 			final static DeviceId SGW_NAME_22 = DeviceId.deviceId("device:bmv2:s6");
@@ -257,6 +257,7 @@ public class Constants {
 
 			public static String getSgwDpidFromIp(String ip){
 					String sgw = "";
+					//@rinku: In series setup all packets come from RAN_IP_1. how to sort this??
 					if (ip.equals(Constants.RAN_IP_1))
 						sgw = Integer.toString(Constants.SGW_ID_13);
 					else if (ip.equals(Constants.RAN_IP_2))

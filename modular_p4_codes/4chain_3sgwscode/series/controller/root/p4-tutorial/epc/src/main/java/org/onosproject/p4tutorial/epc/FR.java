@@ -195,6 +195,30 @@ public class FR{
                 insertPiFlowRule(appId,flowRuleService,switchId, tunnelIngressTableId, match, action);
             }
         }
+ 
+        else if(lookup_flag==3){
+
+            PiTableId tunnelIngressTableId = PiTableId.of("c_ingress.uekey_lookup_lb3_ub3");
+            PiMatchFieldId ueKeyFieldId = PiMatchFieldId.of("meta.metakey");
+            PiCriterion match = PiCriterion.builder()
+                    .matchExact(ueKeyFieldId, ue_key)
+                    .build();
+
+            //invoking default action which is NoAction()
+            PiActionId ingressActionId = PiActionId.of("NoAction");
+
+            PiAction action = PiAction.builder()
+                    .withId(ingressActionId)
+                    .build();
+
+            if (removeRule) {
+                removePiFlowRule(appId,flowRuleService,switchId, tunnelIngressTableId, match, action);
+            }
+            else{
+                insertPiFlowRule(appId,flowRuleService,switchId, tunnelIngressTableId, match, action);
+            }
+        }
+
                   
      }
 

@@ -171,9 +171,9 @@ tables {
 }
 tables {
   preamble {
-    id: 33574977
-    name: "c_ingress.uekey_lookup_lb2_ub2"
-    alias: "uekey_lookup_lb2_ub2"
+    id: 33584891
+    name: "c_ingress.uekey_lookup_lb3_ub3"
+    alias: "uekey_lookup_lb3_ub3"
   }
   match_fields {
     id: 1
@@ -376,6 +376,11 @@ controller_packet_metadata {
     id: 1
     name: "ingress_port"
     bitwidth: 9
+  }
+  metadata {
+    id: 2
+    name: "reason_code"
+    bitwidth: 8
   }
 }
 controller_packet_metadata {

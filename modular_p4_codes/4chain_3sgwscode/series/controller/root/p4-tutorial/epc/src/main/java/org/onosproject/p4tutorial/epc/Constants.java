@@ -31,18 +31,18 @@ public class Constants {
 	/***************************Configurable parameters**********************************/
 	
 	//global chain
-	final static int UE_LB = 300; //push UE state to switches when UE KEY is between UE_LB & UE_UB
-	final static int UE_UB = 399;
+	final static int UE_LB = 100; //push UE state to switches when UE KEY is between UE_LB & UE_UB
+	final static int UE_UB = 174;
 	
 	//chain1
 	final static int LB11 = 100; //Select SGW11 when UE KEY is between LB11 & UB11
-    final static int UB11 = 149; 
+    final static int UB11 = 124; 
 
-    final static int LB12 = 150; //Select SGW12 when UE KEY is between LB12 & UB12
-	final static int UB12 = 199;
+    final static int LB12 = 125; //Select SGW12 when UE KEY is between LB12 & UB12
+	final static int UB12 = 149;
 
-	final static int LB13 = 200; //Select SGW21 when UE KEY is between LB13 & UB13
-    final static int UB13 = 249; 
+	final static int LB13 = 150; //Select SGW21 when UE KEY is between LB13 & UB13
+    final static int UB13 = 174; 
 
 	//chain2	
     final static int LB21 = 250; //Select SGW22 when UE KEY is between LB21 & UB21
@@ -256,7 +256,8 @@ public class Constants {
 			// DPID of SGW
 			final static int SGW_ID_11 = 2;
 			final static int SGW_ID_12 = 3;
-			final static int SGW_ID_13 = 5;
+			final static int SGW_ID_13 = 6;
+			//final static int SGW_ID_13 = 5;
 
 			final static int SGW_ID_21 = 5;
 			final static int SGW_ID_22 = 6;
@@ -275,7 +276,7 @@ public class Constants {
 			// @vikas : in 4chain series setup we have 3 SGWs in 1 chain 
 			final static DeviceId SGW_NAME_11 = DeviceId.deviceId("device:bmv2:s2");
 			final static DeviceId SGW_NAME_12 = DeviceId.deviceId("device:bmv2:s3");
-			final static DeviceId SGW_NAME_13 = DeviceId.deviceId("device:bmv2:s5");
+			final static DeviceId SGW_NAME_13 = DeviceId.deviceId("device:bmv2:s6");
 
 			final static DeviceId SGW_NAME_21 = DeviceId.deviceId("device:bmv2:s5");
 			final static DeviceId SGW_NAME_22 = DeviceId.deviceId("device:bmv2:s6");
@@ -602,7 +603,7 @@ public class Constants {
 				else
 					// if(DEBUG)
 						log.warn("GOT INVALID SGW DPID!!!");
-					return 0;
+					return 10;
 			}
 
 			public static int getChainIDFromDGW(String dgw){
@@ -620,7 +621,7 @@ public class Constants {
 				else
 					// if(DEBUG)
 						log.info("GOT INVALID DGW DPID!!!");
-					return 0;
+					return 10;
 			}
 
 

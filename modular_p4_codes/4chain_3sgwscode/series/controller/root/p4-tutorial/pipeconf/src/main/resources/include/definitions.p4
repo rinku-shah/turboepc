@@ -26,7 +26,7 @@ const bit<32> s1u_dgw_ipaddr = 0xc0a80201;  // 192.168.2.1
 
 const bit<32> s11_sgw_ipaddr = 0xc0a80202;  //192.168.2.2
 const bit<32> s12_sgw_ipaddr = 0xc0a80302;  //192.168.3.2
-const bit<32> s21_sgw_ipaddr = 0xc0a80602; //192.168.6.2
+const bit<32> s21_sgw_ipaddr = 0xc0a80402; //192.168.4.2
 const bit<32> s22_sgw_ipaddr = 0xc0a80702; //192.168.7.2
 const bit<32> s31_sgw_ipaddr = 0xc0a80a02;  //192.168.10.2
 const bit<32> s32_sgw_ipaddr = 0xc0a80b02; //192.168.11.2

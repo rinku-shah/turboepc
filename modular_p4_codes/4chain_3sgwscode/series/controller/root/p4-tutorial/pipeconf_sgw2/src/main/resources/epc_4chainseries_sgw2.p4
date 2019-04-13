@@ -295,7 +295,7 @@ control c_ingress(inout headers hdr,
                          if(hdr.data.epc_traffic_code == 14){
                             meta.metakey = hdr.ue_context_rel_req.ue_num;
                         }
-                        else if(hdr.data.epc_traffic_code == 17){
+                        else if(hdr.data.epc_traffic_code == 19){
                             meta.metakey = hdr.initial_ctxt_setup_resp.ue_key;
                         }
                         else{
@@ -442,43 +442,18 @@ control c_egress(inout headers hdr,
                 hdr.ipv4.dstAddr = hdr.ipv4.srcAddr;
 
                    // we need to send reply from sgw1,sgw2,sge3,sgw4 as per the chain
-                if(hdr.ethernet.srcAddr == ran1  && (tmp_ue_num >= LB1 && tmp_ue_num <= UB1)){
+                 if(hdr.ethernet.srcAddr == ran1  && (tmp_ue_num >= LB11 && tmp_ue_num <= UB11)){
                     hdr.ethernet.srcAddr = sgw11;
                     hdr.ipv4.srcAddr = s11_sgw_ipaddr;
                 }
-		        else if(hdr.ethernet.srcAddr == ran1  && (tmp_ue_num >= LB2 && tmp_ue_num <= UB2)){
+                else if(hdr.ethernet.srcAddr == ran1  && (tmp_ue_num >= LB12 && tmp_ue_num <= UB12)){
                     hdr.ethernet.srcAddr = sgw12;
                     hdr.ipv4.srcAddr = s12_sgw_ipaddr;
                 }
-                
-		        else if(hdr.ethernet.srcAddr == ran2  && (tmp_ue_num >= LB3 && tmp_ue_num <= UB3)){
-                    hdr.ethernet.srcAddr = sgw21;
-                    hdr.ipv4.srcAddr = s22_sgw_ipaddr;
+                else if(hdr.ethernet.srcAddr == ran1  && (tmp_ue_num >= LB13 && tmp_ue_num <= UB13)){
+                    hdr.ethernet.srcAddr = sgw13;
+		   hdr.ipv4.srcAddr = s13_sgw_ipaddr;
                 }
-		        else if(hdr.ethernet.srcAddr == ran2  && (tmp_ue_num >= LB4 && tmp_ue_num <= UB4)){
-                    hdr.ethernet.srcAddr = sgw22;
-                    hdr.ipv4.srcAddr = s22_sgw_ipaddr;
-                }
-
-		        else if(hdr.ethernet.srcAddr == ran3 && (tmp_ue_num >= LB5 && tmp_ue_num <= UB5)){
-                    hdr.ethernet.srcAddr = sgw31;
-                    hdr.ipv4.srcAddr = s31_sgw_ipaddr;
-                }
-		        else if(hdr.ethernet.srcAddr == ran3  && (tmp_ue_num >= LB6 && tmp_ue_num <= UB6)){
-                    hdr.ethernet.srcAddr = sgw32;
-                    hdr.ipv4.srcAddr = s32_sgw_ipaddr;
-                }
-
-		        else if(hdr.ethernet.srcAddr == ran4  && (tmp_ue_num >= LB7 && tmp_ue_num <= UB7)){
-                    hdr.ethernet.srcAddr = sgw41;
-                    hdr.ipv4.srcAddr = s41_sgw_ipaddr;
-                }
-		        else if(hdr.ethernet.srcAddr == ran4  && (tmp_ue_num >= LB8 && tmp_ue_num <= UB8)){
-                    hdr.ethernet.srcAddr = sgw42;
-                    hdr.ipv4.srcAddr = s42_sgw_ipaddr;
-                }
-
-
 
                 hdr.tmpvar.tmpUdpPort = hdr.udp.srcPort;
                 hdr.udp.srcPort = hdr.udp.dstPort;
@@ -532,44 +507,19 @@ control c_egress(inout headers hdr,
                                     hdr.ipv4.dstAddr = hdr.ipv4.srcAddr;
 
                                    // we need to send reply from sgw1,sgw2,sge3,sgw4 as per the chain
-                                    if(hdr.ethernet.srcAddr == ran1 && (tmp_ue_num1 >= LB1 && tmp_ue_num1 <= UB1)){
-                                         hdr.ethernet.srcAddr = sgw11;
+				     // we need to send reply from sgw1,sgw2,sge3,sgw4 as per the chain
+                                   if(hdr.ethernet.srcAddr == ran1  && (tmp_ue_num1 >= LB11 && tmp_ue_num1 <= UB11)){
+                                        hdr.ethernet.srcAddr = sgw11;
                                         hdr.ipv4.srcAddr = s11_sgw_ipaddr;
                                     }
-			                        else if(hdr.ethernet.srcAddr == ran1 && (tmp_ue_num1 >= LB2 && tmp_ue_num1 <= UB2)){
-                                         hdr.ethernet.srcAddr = sgw12;
+                                    else if(hdr.ethernet.srcAddr == ran1  && (tmp_ue_num1 >= LB12 && tmp_ue_num1 <= UB12)){
+                                        hdr.ethernet.srcAddr = sgw12;
                                         hdr.ipv4.srcAddr = s12_sgw_ipaddr;
                                     }
-                                    
-			                        else if(hdr.ethernet.srcAddr == ran2 && (tmp_ue_num1 >= LB3 && tmp_ue_num1 <= UB3)){
-                                         hdr.ethernet.srcAddr = sgw21;
-                                        hdr.ipv4.srcAddr = s21_sgw_ipaddr;
-                                    }
-			                        else if(hdr.ethernet.srcAddr == ran2 && (tmp_ue_num1 >= LB4 && tmp_ue_num1 <= UB4)){
-                                         hdr.ethernet.srcAddr = sgw22;
-                                        hdr.ipv4.srcAddr = s22_sgw_ipaddr;
-                                    }
-
-
-			                        else if(hdr.ethernet.srcAddr == ran3 && (tmp_ue_num1 >= LB5 && tmp_ue_num1 <= UB5)){
-                                         hdr.ethernet.srcAddr = sgw31;
-                                        hdr.ipv4.srcAddr = s31_sgw_ipaddr;
-                                    }
-			                        else if(hdr.ethernet.srcAddr == ran3 && (tmp_ue_num1 >= LB6 && tmp_ue_num1 <= UB6)){
-                                         hdr.ethernet.srcAddr = sgw32;
-                                        hdr.ipv4.srcAddr = s32_sgw_ipaddr;
-                                    }
-
-			                        else if(hdr.ethernet.srcAddr == ran4 && (tmp_ue_num1 >= LB7 && tmp_ue_num1 <= UB7)){
-                                         hdr.ethernet.srcAddr = sgw41;
-                                        hdr.ipv4.srcAddr = s41_sgw_ipaddr;
-                                    }
-			                        else if(hdr.ethernet.srcAddr == ran4 && (tmp_ue_num1 >= LB8 && tmp_ue_num1 <= UB8)){
-                                         hdr.ethernet.srcAddr = sgw42;
-                                        hdr.ipv4.srcAddr = s42_sgw_ipaddr;
-                                    }
-
-
+                                    else if(hdr.ethernet.srcAddr == ran1  && (tmp_ue_num1 >= LB13 && tmp_ue_num1 <= UB13)){
+                                        hdr.ethernet.srcAddr = sgw13;
+                                        hdr.ipv4.srcAddr = s13_sgw_ipaddr;
+                                    }  
 
                                     hdr.tmpvar.tmpUdpPort = hdr.udp.srcPort;
                                     hdr.udp.srcPort = hdr.udp.dstPort;
@@ -592,6 +542,9 @@ control c_egress(inout headers hdr,
                                     hdr.attach_accept.epc_traffic_code = 8;
                                     hdr.attach_accept.sep1 = hdr.initial_ctxt_setup_resp.sep1;
                                     hdr.attach_accept.ue_key = hdr.initial_ctxt_setup_resp.ue_key;
+				      // tmp_ue_num2 carries the ue_key value
+                                    bit<32> tmp_ue_num2;
+				   tmp_ue_num2 = hdr.attach_accept.ue_key;
                                     // set invalid the incoming headers as we are appending new one
                                     hdr.data.setInvalid();
                                     hdr.initial_ctxt_setup_resp.setInvalid();
@@ -602,39 +555,19 @@ control c_egress(inout headers hdr,
                                     hdr.ethernet.dstAddr =  hdr.ethernet.srcAddr;
                                     hdr.ipv4.dstAddr = hdr.ipv4.srcAddr;
 
-                                      if(hdr.ethernet.srcAddr == ran1 && (hdr.attach_accept.ue_key >= LB1 && hdr.attach_accept.ue_key <= UB1)){
-                                         hdr.ethernet.srcAddr = sgw11;
+                                    if(hdr.ethernet.srcAddr == ran1  && (tmp_ue_num2 >= LB11 && tmp_ue_num2 <= UB11)){
+                                        hdr.ethernet.srcAddr = sgw11;
                                         hdr.ipv4.srcAddr = s11_sgw_ipaddr;
                                     }
-				                    else if(hdr.ethernet.srcAddr == ran1 && (hdr.attach_accept.ue_key >= LB2 && hdr.attach_accept.ue_key <= UB2)){
-                                         hdr.ethernet.srcAddr = sgw12;
+                                    else if(hdr.ethernet.srcAddr == ran1  && (tmp_ue_num2 >= LB12 && tmp_ue_num2 <= UB12)){
+                                        hdr.ethernet.srcAddr = sgw12;
                                         hdr.ipv4.srcAddr = s12_sgw_ipaddr;
                                     }
-                                   else if(hdr.ethernet.srcAddr == ran2 && (hdr.attach_accept.ue_key >= LB3 && hdr.attach_accept.ue_key <= UB3)){
-                                         hdr.ethernet.srcAddr = sgw21;
-                                        hdr.ipv4.srcAddr = s21_sgw_ipaddr;
-                                   }
-                                    else if(hdr.ethernet.srcAddr == ran2 && (hdr.attach_accept.ue_key >= LB4 && hdr.attach_accept.ue_key <= UB4)){
-                                         hdr.ethernet.srcAddr = sgw22;
-                                        hdr.ipv4.srcAddr = s22_sgw_ipaddr;
-                                   }
-                                    else if(hdr.ethernet.srcAddr == ran3 && (hdr.attach_accept.ue_key >= LB5 && hdr.attach_accept.ue_key <= UB5)){
-                                         hdr.ethernet.srcAddr = sgw31;
-                                        hdr.ipv4.srcAddr = s31_sgw_ipaddr;
-                                   }
-                                    else if(hdr.ethernet.srcAddr == ran3 && (hdr.attach_accept.ue_key >= LB6 && hdr.attach_accept.ue_key <= UB6)){
-                                         hdr.ethernet.srcAddr = sgw32;
-                                        hdr.ipv4.srcAddr = s32_sgw_ipaddr;
-                                   }
-                                    else if(hdr.ethernet.srcAddr == ran4 && (hdr.attach_accept.ue_key >= LB7 && hdr.attach_accept.ue_key <= UB7)){
-                                         hdr.ethernet.srcAddr = sgw41;
-                                        hdr.ipv4.srcAddr = s41_sgw_ipaddr;
-                                   }
-                                    else if(hdr.ethernet.srcAddr == ran4 && (hdr.attach_accept.ue_key >= LB8 && hdr.attach_accept.ue_key <= UB8)){
-                                         hdr.ethernet.srcAddr = sgw42;
-                                        hdr.ipv4.srcAddr = s42_sgw_ipaddr;
-                                   }
-                                    hdr.tmpvar.tmpUdpPort = hdr.udp.srcPort;
+                                    else if(hdr.ethernet.srcAddr == ran1  && (tmp_ue_num2 >= LB13 && tmp_ue_num2 <= UB13)){
+                                        hdr.ethernet.srcAddr = sgw13;
+                                        hdr.ipv4.srcAddr = s13_sgw_ipaddr;
+                                    }  
+				    hdr.tmpvar.tmpUdpPort = hdr.udp.srcPort;
                                     hdr.udp.srcPort = hdr.udp.dstPort;
                                     hdr.udp.dstPort = hdr.tmpvar.tmpUdpPort;
                                     hdr.tmpvar.setInvalid();
