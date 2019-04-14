@@ -1,6 +1,0 @@
-# Traffic-mix-MISS 1-99-tpt 1-99-lat 1-99-sr-lat 5-95-tpt 5-95-lat 5-95-sr-lat 10-90-tpt 10-90-lat 10-90-sr-lat
-# Traffic-mix	1-sgw-tpt 1-sgw-lat 1-sgw-sr-lat 2-sgw-tpt 2-sgw-lat 2-sgw-sr-lat 3-sgw-tpt 3-sgw-lat 3-sgw-sr-lat
-Service-request 547.702 2.239 2.09524 699.52 3.162 2.93989
-Medium-attach 500.174 2.869 2.1485 664.992 5 3.74757 
-Attach 334.945 2.898 2.06909 503.935 5.969 3.61671
-Miss   0
