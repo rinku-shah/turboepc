@@ -1919,7 +1919,8 @@ void UserEquipment::initiate_ue_context_release(Client &user, int ue_num, string
         }
 
 	tmpArray = split(user.client_buffer, SEPARATOR);
-	if(tmpArray[0] == UE_CONTEXT_RELEASE_COMMAND){
+	//if(tmpArray[0] == UE_CONTEXT_RELEASE_COMMAND){
+	if(true){  // @Handover : assuiming we will get correct response from SGW switch in offload
 
 		if(DO_DEBUG){
 			cout<<"UE CONTEXT RELEASE COMMAND:  IP Address of UE="<<ue_ip<<" and UE TEID="<<ue_teid<<" SGW TEID"<<sgw_teid<<endl;

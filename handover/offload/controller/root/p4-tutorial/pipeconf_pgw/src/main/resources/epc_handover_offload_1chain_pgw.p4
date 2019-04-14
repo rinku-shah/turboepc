@@ -37,6 +37,7 @@ control c_ingress(inout headers hdr,
         // deparsed on the wire (see c_deparser).
         hdr.packet_in.setValid();
         hdr.packet_in.ingress_port = standard_metadata.ingress_port;
+        hdr.packet_in.reason_code = 100; // reason_code 100 means packet_in has to be sent to root contoller 
     }
 
     action _drop() {

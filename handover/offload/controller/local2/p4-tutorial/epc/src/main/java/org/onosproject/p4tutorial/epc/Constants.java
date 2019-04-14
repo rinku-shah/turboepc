@@ -219,14 +219,14 @@ public class Constants {
 			
 			// DPID of SGW
 			final static int SGW_ID_1 = 2;
-			final static int SGW_ID_2 = 5;
+			final static int SGW_ID_2 = 3;
 			final static int SGW_ID_3 = 7;
 			final static int SGW_ID_4 = 9;
 			final static int SGW_ID_5 = 11;
 			final static int SGW_ID_6 = 13;
 
 			final static DeviceId SGW_NAME_1 = DeviceId.deviceId("device:bmv2:s2");
-			final static DeviceId SGW_NAME_2 = DeviceId.deviceId("device:bmv2:s5");
+			final static DeviceId SGW_NAME_2 = DeviceId.deviceId("device:bmv2:s3");
 			final static DeviceId SGW_NAME_3 = DeviceId.deviceId("device:bmv2:s7");
 			final static DeviceId SGW_NAME_4 = DeviceId.deviceId("device:bmv2:s9");
 			final static DeviceId SGW_NAME_5 = DeviceId.deviceId("device:bmv2:s11");
@@ -395,7 +395,6 @@ public class Constants {
 
 			public static String getDgwDpid(String sgw){
 //				log.info("received sgw = {}",sgw);
-//				String swid1 = Character.toString(sgw.charAt(1));  // assuming that switches will be from s1---s9 so char at position1 will give switchid which is an int
 				String swid1 = sgw;  // assuming that switches will be from s1---s9 so char at position1 will give switchid which is an int
 				int swid = Integer.parseInt(swid1);
 				String dgw="";
@@ -435,26 +434,19 @@ public class Constants {
 
 
 			public static String getSgwDpidFromIp(String ip){
-				//				DatapathId dgw = DatapathId.of(0);
 								String dgw = "";
 								if (ip.equals(Constants.RAN_IP_1))
-				//					dgw = DatapathId.of(Constants.DEFAULT_SWITCH_ID_1);
 									dgw = Integer.toString(Constants.SGW_ID_1);
 								else if (ip.equals(Constants.RAN_IP_2))
 									dgw = Integer.toString(Constants.SGW_ID_2);
-				//				dgw = DatapathId.of(Constants.DEFAULT_SWITCH_ID_2);
 								else if (ip.equals(Constants.RAN_IP_3))
 									dgw = Integer.toString(Constants.SGW_ID_3);
-				//				dgw = DatapathId.of(Constants.DEFAULT_SWITCH_ID_3);
 								else if (ip.equals(Constants.RAN_IP_4))
 									dgw = Integer.toString(Constants.SGW_ID_4);
-				//					dgw = DatapathId.of(Constants.DEFAULT_SWITCH_ID_4);
 								else if (ip.equals(Constants.RAN_IP_5))
 									dgw = Integer.toString(Constants.SGW_ID_5);
-				//					dgw = DatapathId.of(Constants.DEFAULT_SWITCH_ID_5);
 								else if (ip.equals(Constants.RAN_IP_6))
 									dgw = Integer.toString(Constants.SGW_ID_6);
-				//					dgw = DatapathId.of(Constants.DEFAULT_SWITCH_ID_6);
 								return dgw;
 				}
 
@@ -534,7 +526,6 @@ public class Constants {
 			}
 
 			public static String getPgwIpUplink(String sgw){
-                // int length = sgw.length();
 				String swid1 = "";
 				if(sgw.charAt(0)=='s'){
 					// means we get "s1", "s11" like switch numbers

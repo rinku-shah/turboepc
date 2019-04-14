@@ -389,7 +389,7 @@ public class EpcApp {
 
                     /************************************************* CONTEXT RELEASE ****************************************************/
 
-                    case Constants.UE_CONTEXT_RELEASE_REQUEST:
+                    case Constants.UE_CONTEXT_RELEASE_REQUEST_HANDOVER:
 
                                 byte [] b143 =Arrays.copyOfRange(p, 7, 11); //ue ip
                                 byte [] b144 =Arrays.copyOfRange(p, 11, 17); //sep
@@ -492,7 +492,7 @@ public class EpcApp {
 
                     /**********************************  UE_INITIATED SERVICE REQUEST ***************************************/
 
-                    case Constants.UE_SERVICE_REQUEST:
+                    case Constants.UE_SERVICE_REQUEST_HANDOVER:
 
                                         byte [] b173 =Arrays.copyOfRange(p, 7, 11); //ue num
                                         byte [] b174 =Arrays.copyOfRange(p, 11, 17); //sep
@@ -593,7 +593,7 @@ public class EpcApp {
                             d2 = new Date();
                         break;
 
-                    case Constants.INITIAL_CONTEXT_SETUP_RESPONSE:
+                    case Constants.INITIAL_CONTEXT_SETUP_RESPONSE_HANDOVER:
                     
                                     byte [] b193 =Arrays.copyOfRange(p, 7, 11); //ue teid
                                     byte [] b194 =Arrays.copyOfRange(p, 11, 17); //sep

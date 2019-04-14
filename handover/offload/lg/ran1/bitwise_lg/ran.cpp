@@ -415,15 +415,15 @@ void* multithreading_func(void *arg){
 					doDetach_t = true;
 					sendData_t = true;
 					assignIpToInterface_t = true;
-					s1_release_t = false;
+					s1_release_t = true;
 					doEncryption_t = false;
 					checkIntegrity_t = false;
-					ueServiceRequest_t = false;
+					ueServiceRequest_t = true;
 					handover_t = true;
 					dataTime = 1;
 					loop1 = 1;    //outer loop---attach
 					loop2 = 1;   //inner loop---service-req
-					loop3 = 1;   // HO loop
+					loop3 = 2;   // HO loop
 					break;
 		}
 		do {
@@ -1135,7 +1135,11 @@ int main(int argc, char *args[]){
 	cout << fixed;
 	cout.precision(2);
 	traffic_percent = ((attNo+detNo)*1.0/(attNo+detNo+sreqNo+hoNo))*100; //Attach Percentage served
+	float ho_percent = (hoNo*1.0/(attNo+detNo+sreqNo+hoNo)*100);
+	float serq_percent = (sreqNo*1.0/(attNo+detNo+sreqNo+hoNo)*100);
         cout<<"Attach Percentage= "<<traffic_percent<<endl;
+        cout<<"HO Percentage= "<<ho_percent<<endl;
+        cout<<"Service Request Percentage= "<<serq_percent<<endl;
 	/*verify traffic distribution */
 	cout<<"\n ******* verify traffic distribution "<<endl;
 	for(int i=0;i<6;i++){

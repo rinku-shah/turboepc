@@ -179,6 +179,9 @@ public class Constants {
 			final static String INITIATE_NETWORK_SERVICE_REQUEST = "22";
 			final static String SINK_SERVICE_REQUEST = "23";
 
+			final static String UE_CONTEXT_RELEASE_REQUEST_HANDOVER = "54";
+			final static String UE_SERVICE_REQUEST_HANDOVER = "57";
+			final static String INITIAL_CONTEXT_SETUP_RESPONSE_HANDOVER = "59";
 			final static String MAPKEYSEPARATOR = "@#";
 			final static String STOREKEYSEPARATOR = "@@";
 			// Serving Network ID of the MME
@@ -226,14 +229,14 @@ public class Constants {
 			
 			// DPID of SGW
 			final static int SGW_ID_1 = 2;
-			final static int SGW_ID_2 = 5;
+			final static int SGW_ID_2 = 3;
 			final static int SGW_ID_3 = 7;
 			final static int SGW_ID_4 = 9;
 			final static int SGW_ID_5 = 11;
 			final static int SGW_ID_6 = 13;
 
 			final static DeviceId SGW_NAME_1 = DeviceId.deviceId("device:bmv2:s2");
-			final static DeviceId SGW_NAME_2 = DeviceId.deviceId("device:bmv2:s5");
+			final static DeviceId SGW_NAME_2 = DeviceId.deviceId("device:bmv2:s3");
 			final static DeviceId SGW_NAME_3 = DeviceId.deviceId("device:bmv2:s7");
 			final static DeviceId SGW_NAME_4 = DeviceId.deviceId("device:bmv2:s9");
 			final static DeviceId SGW_NAME_5 = DeviceId.deviceId("device:bmv2:s11");

@@ -76,11 +76,19 @@ parser c_parser(packet_in packet,
             3  : parse_auth_step_three;
             20 : parse_nas_step_two;
             5  : parse_send_apn;
+            24  : parse_send_apn;
             7  : parse_send_ue_teid;
+            26  : parse_send_ue_teid;
             9  : parse_detach_req;
-            14 : parse_ue_context_release;
-            17 : parse_ue_service_req;
-            19 : parse_initial_ctxt_setup_resp;
+            // 14 : parse_ue_context_release;
+            // @HO : sgw1 will only get service request AFTER handover with changed epc traffic code
+            54 : parse_ue_context_release;
+            // 17 : parse_ue_service_req;
+            // @HO : sgw1 will only get service request AFTER handover with changed epc traffic code
+            57 : parse_ue_service_req;
+            // 19 : parse_initial_ctxt_setup_resp;
+            // @HO : sgw1 will only get service request AFTER handover with changed epc traffic code
+            59 : parse_initial_ctxt_setup_resp;
             // deafult is 12(request_starting_ip) so accept it 
             default : accept;
         }

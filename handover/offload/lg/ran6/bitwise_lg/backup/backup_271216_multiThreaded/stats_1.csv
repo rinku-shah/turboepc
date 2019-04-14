@@ -1,9 +1,0 @@
-#MaxThreads,#UE,AvUE/Thread,Execution Time,Registration Throughput(registrations/sec),Registration Latency (in sec),Setup Tunnel (Yes/No),DO Detach (Yes/No),Sending Data? (Yes/ No),Mean Data Sending Time,Sending Rate
-1,1,1,300,0.003333,213.242416,Yes,Yes,Yes,280,100M
-2,1,0.5,300,0.003333,13.257907,Yes,Yes,Yes,280,100M
-10,8,0.8,300,0.026667,129.514004,Yes,Yes,Yes,280,100M
-20,19,0.95,300,0.063333,122.864044,Yes,Yes,Yes,280,100M
-50,54,1.08,300,0.180000,111.078252,Yes,Yes,Yes,280,100M
-1,21,21,300,0.070000,13.183174,Yes,Yes,Yes,10,100M
-
-

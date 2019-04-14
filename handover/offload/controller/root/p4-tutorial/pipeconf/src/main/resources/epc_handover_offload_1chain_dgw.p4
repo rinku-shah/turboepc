@@ -36,7 +36,8 @@ control c_ingress(inout headers hdr,
         // deparsed on the wire (see c_deparser).
         hdr.packet_in.setValid();
         hdr.packet_in.ingress_port = standard_metadata.ingress_port;
-    }
+        hdr.packet_in.reason_code = 100; // reason_code 100 means packet_in has to be sent to root contoller 
+   }
 
     action _drop() {
         mark_to_drop();
@@ -222,11 +223,11 @@ control c_ingress(inout headers hdr,
                             // UDP means control traffic
                             else if(hdr.ipv4.protocol == PROTO_UDP){
                                     // before handover the normal service request and context release packets are sent to SGW2(chain2) for processing
-                                    if(hdr.data.epc_traffic_code==14 || hdr.data.epc_traffic_code==17 hdr.data.epc_traffic_code==19){
+                                    if(hdr.data.epc_traffic_code==14 || hdr.data.epc_traffic_code==17 || hdr.data.epc_traffic_code==19){
                                         standard_metadata.egress_spec = 3;
                                     }
                                     // AFTER handover the normal service request and context release packets are sent to SGW1(chain1) for processing
-                                    else if(hdr.data.epc_traffic_code==54 || hdr.data.epc_traffic_code==57 hdr.data.epc_traffic_code==59){
+                                    else if(hdr.data.epc_traffic_code==54 || hdr.data.epc_traffic_code==57 || hdr.data.epc_traffic_code==59){
                                         standard_metadata.egress_spec = 2;
                                     }
                                     hdr.ipv4.ttl = hdr.ipv4.ttl - 1;
@@ -234,7 +235,7 @@ control c_ingress(inout headers hdr,
                             }
                    }
                     // process reply from local onos at DGW 
-                    else if(standard_metadata.ingress_port==2){
+                    else if(standard_metadata.ingress_port==2 || standard_metadata.ingress_port==3){
                                 standard_metadata.egress_spec = 1;
                                 hdr.ipv4.ttl = hdr.ipv4.ttl - 1;
                                 // return;
