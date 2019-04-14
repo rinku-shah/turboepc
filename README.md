@@ -1,5 +1,5 @@
 # turboepc
-Accelerate mobile core network functions using hardware accelerators like programmable switches, and GPUs
+Accelerate mobile core network control plane functions using programmable switches
 
 # Designs:
 
