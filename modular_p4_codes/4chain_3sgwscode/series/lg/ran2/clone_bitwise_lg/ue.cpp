@@ -768,7 +768,7 @@ bool UserEquipment::authenticate(Client &user, bool checkIntegrity){
 	// printf("sizeof one = %ld\n",sizeof(one));
 	// printf("sizeof struct = %ld\n",sizeof(struct auth_step_one_t ));  
 	// printf("data = %s\n",user.client_buffer);     
-
+  do{
 	user.write_data2(len);
 
 	// ORIGINAL code: uncomment if required 
@@ -783,6 +783,8 @@ bool UserEquipment::authenticate(Client &user, bool checkIntegrity){
 	time(&curTime);
 	// Receive reply from MME: Authentication Step 2
 	user.read_data();
+  } while(user.timeoutFlag);
+
 //	cout<<"After read"<<endl;
 	time(&curTime);
 	receive = (string) (user.client_buffer);
@@ -974,7 +976,8 @@ bool UserEquipment::authenticate(Client &user, bool checkIntegrity){
 
 			memcpy(user.client_buffer+len, &(three.res), sizeof(three.res));
 			len+=sizeof(three.res);
-
+      
+      do{
 			user.write_data2(len);
 
 			// ORIGINAL code: uncomment if required 
@@ -995,6 +998,7 @@ bool UserEquipment::authenticate(Client &user, bool checkIntegrity){
 			
 			// Receive reply from MME: Authentication Step 4
 			user.read_data();
+      } while(user.timeoutFlag);
 			time(&curTime);
 			receive = (string) (user.client_buffer);
 			if(MY_DEBUG){
@@ -1262,7 +1266,7 @@ vector<string> UserEquipment::setupTunnel(Client &user, bool doEncryption){
 
 	memcpy(user.client_buffer+len, &(apnt.key), sizeof(apnt.key));
 	len+=sizeof(apnt.key);
-	
+	do{
 	user.write_data2(len);
 
 	// ORIGINAL code: uncomment if required 
@@ -1279,6 +1283,8 @@ vector<string> UserEquipment::setupTunnel(Client &user, bool doEncryption){
 
 	// Receive UE IP address and SGW TEID from MME
 	user.read_data();
+  } while(user.timeoutFlag);
+
 	receive = (string) (user.client_buffer);
 
 	tmpArray = split(user.client_buffer, SEPARATOR);
@@ -1343,7 +1349,7 @@ vector<string> UserEquipment::setupTunnel(Client &user, bool doEncryption){
 
 		memcpy(user.client_buffer+len, &(st.key), sizeof(st.key));   
 		len+=sizeof(st.key);
-		
+		do{
 		user.write_data2(len);
 
 		// ORIGINAL code: uncomment if required 
@@ -1359,6 +1365,7 @@ vector<string> UserEquipment::setupTunnel(Client &user, bool doEncryption){
 		}
 
 		user.read_data();
+    } while(user.timeoutFlag);
 		receive = (string) (user.client_buffer);
 		clearToSend = split(user.client_buffer, SEPARATOR);
 		if(doEncryption) {
@@ -1493,7 +1500,7 @@ void UserEquipment::initiate_detach(Client &user, int ue_num, string ue_ip, stri
 
 	memcpy(user.client_buffer+len, &(detach.ue_num), sizeof(detach.ue_num));
 	len+=sizeof(detach.ue_num);
-	
+	do{
 	user.write_data2(len);
 
 	// ORIGINAL code: uncomment if required 
@@ -1512,6 +1519,7 @@ void UserEquipment::initiate_detach(Client &user, int ue_num, string ue_ip, stri
 
 	// Receive UE IP address and SGW TEID
 	user.read_data();
+  } while(user.timeoutFlag);
 	receive = (string) (user.client_buffer);
 	tmpArray = split(user.client_buffer, SEPARATOR);
 	if(DO_DEBUG){
@@ -1614,7 +1622,7 @@ void UserEquipment::initiate_ue_context_release(Client &user, int ue_num, string
 
 	memcpy(user.client_buffer+len, &(ctxtrel.ue_num), sizeof(ctxtrel.ue_num));
 	len+=sizeof(ctxtrel.ue_num);
-	
+	do{
 	user.write_data2(len);
 
 	// ORIGINAL code: uncomment if required 
@@ -1627,6 +1635,7 @@ void UserEquipment::initiate_ue_context_release(Client &user, int ue_num, string
 	// Receive UE_CONTEXT_RELEASE_COMMAND from MME
 	// user.read_data();
 	user.read_data2();
+  } while(user.timeoutFlag);
 	//int code_name = (int)(user.my_client_byte_buffer[0]);
 	 int code_name = user.my_client_byte_buffer[0];
 	char sep = (char)user.my_client_byte_buffer[1];
@@ -1753,7 +1762,7 @@ string UserEquipment::send_ue_service_request(Client& user, int ue_num, string u
 
 	memcpy(user.client_buffer+len, &(serreq.ue_ip ), sizeof(serreq.ue_ip ));
 	len+=sizeof(serreq.ue_ip );
-	
+	do{
 	user.write_data2(len);
 
 	// ORIGINAL code: uncomment if required 
@@ -1766,6 +1775,7 @@ string UserEquipment::send_ue_service_request(Client& user, int ue_num, string u
 	// Receive reply from MME
 	// user.read_data();
 	user.read_data2();
+  } while(user.timeoutFlag);
 	int code_name1 = (int)(user.my_client_byte_buffer[0]);
 	// not parsing sep as not needed
 
@@ -1918,7 +1928,7 @@ string UserEquipment::send_ue_service_request(Client& user, int ue_num, string u
 
 			memcpy(user.client_buffer+len, &(ctxtresp.ue_ip ), sizeof(ctxtresp.ue_ip ));
 			len+=sizeof(ctxtresp.ue_ip );
-			
+			do{
 			user.write_data2(len);
 
 			// ORIGINAL code: uncomment if required 
@@ -1929,6 +1939,7 @@ string UserEquipment::send_ue_service_request(Client& user, int ue_num, string u
 				// user.write_data(INITIAL_CONTEXT_SETUP_RESPONSE);
 
 			user.read_data2();
+      } while(user.timeoutFlag);
 			int code_name2 = (int)(user.my_client_byte_buffer[0]);
 
 			if(DO_DEBUG){
@@ -2028,7 +2039,7 @@ string UserEquipment::getStartingIPAddress(Client& user){
 	len+=sizeof(rip.msg_id);
 	memcpy(user.client_buffer+len,&rip.sep1,sizeof(rip.sep1));
 	len+=sizeof(rip.sep1);
-
+  do{
 	user.write_data2(len);
 
 
@@ -2041,6 +2052,7 @@ string UserEquipment::getStartingIPAddress(Client& user){
 
 	//cout<<"sent data in getStartingIPAddress = "<<send<<endl;
 	user.read_data();
+  } while(user.timeoutFlag);
 	receive = (string) (user.client_buffer);
 
 	if(MY_DEBUG){

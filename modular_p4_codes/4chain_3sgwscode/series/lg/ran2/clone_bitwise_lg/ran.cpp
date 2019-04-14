@@ -43,8 +43,9 @@ bool networkServiceRequest = false;	// Network initiated service request (downli
 //mix of traffic types
 /* attach-detach, context-rel/service-req, att-data_all_the_time-det, att-data(default=1s)-det-loop, att-serv_req-data-loop2-det-loop1, att-serv-req-data-loop2-det*/
 // vector<vector<int>> traffic_mix={{0,100,0,0,0},{499,99501,0,0,0},{1499,98501,0,0,0},{2999,97001,0,0,0},{6999,93001,0,0,0},{8999,91001,0,0,0},{10999,89001,0,0,0},{30999,69001,0,0,0},{40999,59001,0,0,0},{50999,49001,0,0,0},{60999,39001,0,0,0},{100,0,0,0,0}};
-vector<vector<int>> traffic_mix={{0,0,0,74999,0,25001},{499,99501,0,0,0,0},{1499,98501,0,0,0,0},{2999,97001,0,0,0,0},{6999,93001,0,0,0,0},{8999,91001,0,0,0,0},{10999,89001,0,0,0,0},{30999,69001,0,0,0,0},{40999,59001,0,0,0,0},{0,0,0,0,100,0},{0,0,0,0,0,100},{0,0,0,100,0,0}};
-
+vector<vector<int>> traffic_mix={{0,0,0,9909,90991,0},{499,0,0,0,99501,0},{1499,98501,0,0,0,0},{2999,97001,0,0,0,0},{6999,93001,0,0,0,0},{8999,91001,0,0,0,0},{13999,86001,0,0,0,0},{30999,69001,0,0,0,0},{40999,59001,0,0,0,0},{0,0,0,0,100,0},{0,0,0,0,0,100},{0,0,0,100,0,0}};
+int start_ue = 200;
+int wait_latency = 35000;
 //2_98,0
 //5_95,1
 //6_94,2
@@ -89,8 +90,8 @@ bool dynLoad = false;
 bool instrumentTptLat = false; //Instrument num_ue and response_time every 10 sec
 //vector<vector<int>> traffic_shape={{2,1},{3,3}}; //States for the first two minutes mix_num=1 & for next 3 minutes mix_num=3
 /// DYNAMIC LOAD GENERATOR ///
-//  11 for ATTACH Detach and 10  for service request, 9 for other mixes
-int mix_num=10;	//choose the traffix mix from above traffic_options -> {0,1,2}  // 11 means only attach request will be sent
+// 1=> 1:99
+int mix_num = 9; //9;	//choose the traffix mix from above traffic_options -> {0,1,2}  // 11 means only attach request will be sent
 float a_prob = 0;
 float s_prob = 0;
 //0%  att/serv == att=0.01,serv=0.99 ==>0.7%
@@ -194,7 +195,7 @@ int send_socket_data(const char *ip)
     int portno,nbytes;
     struct sockaddr_in server_addr;
     struct hostent *server;
-    portno = atoi("23001");
+    portno = atoi("13001");
     int sockfd = socket(AF_INET,SOCK_STREAM,0);
     if(sockfd<0){
       perror("Error opening socket");
@@ -293,7 +294,7 @@ void* multithreading_func(void *arg){
 	size_t idleSleepTime, serviceRequestSleepTime;
 
 	// Client user(threadId+1), sink_user(threadId+1);
-	Client user(threadId+200), sink_user(threadId+200);
+	Client user(threadId+start_ue), sink_user(threadId+start_ue);
 	vector<string> tmpArray;
 	vector<string> service_response;
 	bool att_done=false;
@@ -319,7 +320,7 @@ void* multithreading_func(void *arg){
 					checkIntegrity_t = false;
 					ueServiceRequest_t = false;
 					loop1 = 100;
-					loop2 = 1;
+					loop2 = 0;
 					break;
 
 			/* context-rel/service-req, only*/ 
@@ -393,12 +394,12 @@ void* multithreading_func(void *arg){
 					//loop1 = 1;  //outer loop---attach
 					//loop2 = 100;   //inner loop---service-req
 					loop1 = 1; //1;  //outer loop---attach
-					loop2 = 100; //100;   //inner loop---service-req
+					loop2 = 99; //100;   //inner loop---service-req
 					break;
 		}
 		do {
 			// UserEquipment ue(threadId+1);
-			UserEquipment ue(threadId+200);
+			UserEquipment ue(threadId+start_ue);
 			//user.input_server_details(g_mme_port, g_mme_address);
 			if(DO_DEBUG){
 				cout<<"Attaching with MME"<<endl;
@@ -406,7 +407,7 @@ void* multithreading_func(void *arg){
 			gettimeofday(&start, NULL);
 			//usleep(my_rand()+2000);
 			// usleep(200000);
-			usleep(25000);
+			usleep(my_rand()+wait_latency);
 			if(attach_with_mme(ue, user, checkIntegrity_t)){ 	// Authentication
 				//if(setUpTunnel_t || serviceRequestLoopFlag){
 					// Setup tunnel
@@ -421,7 +422,7 @@ void* multithreading_func(void *arg){
 					//usleep(my_rand()+200);
 					gettimeofday(&start1, NULL);
 					tmpArray = setup_tunnel(ue, user, doEncryption_t);
-					//  IP Address of UE="<<tmpArray[1]<<" and SGW TEID="<<tmpArray[2]
+					//cout<<"IP Address of UE="<<tmpArray[1]<<" and SGW TEID="<<tmpArray[2]<<endl;
 					// string UE_IP = tmpArray[1];
 					//lat_mtx.lock();
 					//attNo++;
@@ -459,17 +460,17 @@ void* multithreading_func(void *arg){
 							/*if(ue_num == 100){
 								sleep(1000);
 							}*/
-							//usleep(25000);
+							//usleep(20000);
 							//sleep(500);
+							//cout<<"IP address of UE = "<<tmpArray[1].c_str()<<endl;
 							//send_socket_data(tmpArray[1].c_str());
-
 							//currentPort = send_ue_data(ue, ue_num, rate, currentPort, startingPort, endPort, user, tmpArray, dataTime);
 							// usleep(100000);
 						}
 						if(s1_release_t){
 							//cout<<"SLEEPING BEFORE s1 release"<<endl;
 							//usleep(my_rand()+2000);		//200-700 usec
-							usleep(25000);
+							usleep(my_rand()+wait_latency);
 							//sreqNo++;
 							gettimeofday(&start2, NULL);
 							ue_context_release(ue, user, ue_num, tmpArray[1], tmpArray[2], tmpArray[3], currentPort, networkServiceRequest);
@@ -514,7 +515,7 @@ void* multithreading_func(void *arg){
 								//cout<<"SLEEPING BEFORE service request"<<endl;
 								//usleep(my_rand());
 								//usleep(my_rand()+2000);
-								usleep(25000);
+								usleep(my_rand()+wait_latency);
 								//usleep(my_rand()+2000);
 								gettimeofday(&start2, NULL);
 								tmpArray[3] = ue_service_request(ue, user, ue_num, tmpArray[1]); //returns newly generated ue_teid
@@ -567,10 +568,10 @@ void* multithreading_func(void *arg){
 						//cout<<"SLEEPING BEFORE detach"<<endl;
 						//usleep(my_rand()+200);			//sleep for 200-700 usec
 						if(!s1_release_t && !sendData_t)
-							usleep(my_rand()+2000);
+							usleep(my_rand()+wait_latency);
 						att_done=false;
+						usleep(my_rand()+wait_latency);
 						gettimeofday(&start3, NULL);
-						usleep(25000);
 						detach_ue(ue, user, ue_num, tmpArray[1], tmpArray[2], tmpArray[3]);
 						// sleep(300);
 
@@ -813,7 +814,7 @@ int main(int argc, char *args[]){
 	if(sendData || networkServiceRequest){
 		// Get the starting UE IP address from controller
 		// UserEquipment ue(1);
-		UserEquipment ue(200);
+		UserEquipment ue(start_ue);
 		Client user(2001);
 		// Client user(1);
 		//user.input_server_details(g_mme_port, g_mme_address);
@@ -906,7 +907,7 @@ int main(int argc, char *args[]){
 		args->threadId = i;
 		args->serverPort = SINK_SERVER_STARTING_PORT + i * port_gap;
 		args->port_gap = port_gap;
-		args->starting_ue_id = 200 + i * gap;
+		args->starting_ue_id = start_ue + i * gap;
 		args->ue_id_gap = gap;
 		args->num_threads = maxThreads;
 

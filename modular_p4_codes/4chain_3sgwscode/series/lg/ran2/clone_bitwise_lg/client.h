@@ -125,7 +125,10 @@ public:
 	struct sockaddr_in source,dest;
 	//bool flag=false; //flag to test the right dest IP for rcv data 
 	bool tflag=false; //flag to test dest UDP port for demux of packets
-	
+    time_t curT;
+    time_t endT;
+	double timeout = 5;
+    bool timeoutFlag=false; // Flag =true if read timedout
 
 	// Constructor
 	Client(int);
