@@ -1,15 +1,15 @@
 #ROOT RAN DGW SGW PGW
-paste ../ran1_util.txt ../ran2_util.txt ../ran3_util.txt ../ran4_util.txt |tr -s "," " "|tr -s [:blank:] " " > tmp
+paste ../ran1_util.txt |tr -s "," " "|tr -s [:blank:] " " > tmp
 cat tmp| tail -n +2 > tmp_cpu
 awk -f compile_CPU.awk tmp_cpu > ran_cpu.dat
 
-paste ../dgw1_util.txt ../dgw2_util.txt ../dgw3_util.txt ../dgw4_util.txt |tr -s "," " "|tr -s [:blank:] " " > tmp
+paste ../dgw1_util.txt |tr -s "," " "|tr -s [:blank:] " " > tmp
 cat tmp| tail -n +2 > tmp_cpu
 awk -f compile_CPU.awk tmp_cpu > dgw_cpu.dat
 
-paste ../sgw1_util.txt ../sgw2_util.txt ../sgw3_util.txt ../sgw4_util.txt |tr -s "," " "|tr -s [:blank:] " " > tmp
+paste ../sgw11_util.txt ../sgw12_util.txt |tr -s "," " "|tr -s [:blank:] " " > tmp
 cat tmp| tail -n +2 > tmp_cpu
-awk -f compile_CPU.awk tmp_cpu > sgw_cpu.dat
+awk -f compile_CPU_scale.awk tmp_cpu > sgw_cpu.dat
 
 cat ../pgw_util.txt| tail -n +2 > tmp_cpu
 awk -f compile_CPU.awk tmp_cpu > pgw_cpu.dat

@@ -1,6 +1,6 @@
 paste ../stats_1.csv |tr -s "," " "|tr -s [:blank:] " " > tmp
 cat tmp | tail -n +2 > tmp_stats
-echo "#UE Throughput Delay(ms)" > ../results/tpt_delay.dat
+echo "#UE Throughput Delay(ms) SR-Delay(ms)" > ../results/tpt_delay.dat
 awk -f compile_tpt_delay.awk tmp_stats >> ../results/tpt_delay.dat
 
 #echo "#UE RootTraffic(NoOfPackets)" > ../results/traffic_in_pkts.dat
