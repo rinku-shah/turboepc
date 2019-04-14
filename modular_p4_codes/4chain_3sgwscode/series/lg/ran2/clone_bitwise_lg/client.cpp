@@ -145,12 +145,19 @@ unsigned short csum(unsigned short *ptr,int nbytes)
 void Client::read_data2(){
         int status=0;
         unsigned char* my_buffer;
-    while(status!=17 || !tflag ){
+        timeoutFlag = false;
+        time(&curT);
+        endT = curT + (int) timeout;
+    while(status!=17 || !tflag || !timeoutFlag){
 	    bzero(my_client_byte_buffer, BUFFER_SIZE);
          data_size = recvfrom(sock_raw, my_client_byte_buffer , BUFFER_SIZE-1 , 0 , &saddr , (socklen_t*)&saddr_size);
         status=ProcessPacket2((unsigned char*)my_client_byte_buffer , data_size); 
+        time(&curT);
+       if (curT > endT) {
+          cout<<"Read Timed out"<<endl;
+          timeoutFlag = true;
+       }
 	}
-
 }
 
 int Client::ProcessPacket2(unsigned char* buffer, int size)
@@ -258,21 +265,22 @@ void Client::print_udp_packet2(unsigned char *Buffer , int Size)
         //Receive a packet
         int c=0;
 	//while(status!=17 || !flag || !tflag){
-	
-	/*time(&curT);
-	endT = curT + (int) timeout;*/
-	while(status!=17 || !tflag ){	
-	 bzero(client_buffer, BUFFER_SIZE);
-         data_size = recvfrom(sock_raw, client_buffer , BUFFER_SIZE-1 , 0 , &saddr , (socklen_t*)&saddr_size);
+	timeoutFlag = false;
+	time(&curT);
+	endT = curT + (int) timeout;
+	while(status!=17 || !tflag || !timeoutFlag){	
+	    bzero(client_buffer, BUFFER_SIZE);
+        data_size = recvfrom(sock_raw, client_buffer , BUFFER_SIZE-1 , 0 , &saddr , (socklen_t*)&saddr_size);
        //cout<<(string)client_buffer<<endl;
        //cout<<status;
         //Now process the packet
          
         status=ProcessPacket((unsigned char*)client_buffer , data_size); 
-	/*time(&curT);
-	if (curT > endT) {
-		cout<<"Read Timed out"<<endl;
-	}*/
+	   time(&curT);
+	   if (curT > endT) {
+		  cout<<"Read Timed out"<<endl;
+          timeoutFlag = true;
+	   }
 	//cout<<"Status "<<status<<endl;
 	//cout<<"c= "<<c++<<"flag = "<<flag<<endl;
 	}
