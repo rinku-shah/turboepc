@@ -3210,6 +3210,74 @@
           "parameters" : [
             {
               "type" : "field",
+              "value" : ["standard_metadata", "egress_spec"]
+            },
+            {
+              "type" : "hexstr",
+              "value" : "0x0001"
+            }
+          ],
+          "source_info" : {
+            "filename" : "epc_4chainseries_sgw2.p4",
+            "line" : 349,
+            "column" : 32,
+            "source_fragment" : "standard_metadata.egress_spec = 1"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["ipv4", "ttl"]
+            },
+            {
+              "type" : "expression",
+              "value" : {
+                "type" : "expression",
+                "value" : {
+                  "op" : "&",
+                  "left" : {
+                    "type" : "expression",
+                    "value" : {
+                      "op" : "+",
+                      "left" : {
+                        "type" : "field",
+                        "value" : ["ipv4", "ttl"]
+                      },
+                      "right" : {
+                        "type" : "hexstr",
+                        "value" : "0xff"
+                      }
+                    }
+                  },
+                  "right" : {
+                    "type" : "hexstr",
+                    "value" : "0xff"
+                  }
+                }
+              }
+            }
+          ],
+          "source_info" : {
+            "filename" : "epc_4chainseries_sgw2.p4",
+            "line" : 350,
+            "column" : 32,
+            "source_fragment" : "hdr.ipv4.ttl = hdr.ipv4.ttl - 1"
+          }
+        }
+      ]
+    },
+    {
+      "name" : "act_12",
+      "id" : 30,
+      "runtime_data" : [],
+      "primitives" : [
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
               "value" : ["scalars", "tmp_5"]
             },
             {
@@ -3231,8 +3299,8 @@
       ]
     },
     {
-      "name" : "act_12",
-      "id" : 30,
+      "name" : "act_13",
+      "id" : 31,
       "runtime_data" : [],
       "primitives" : [
         {
@@ -3261,8 +3329,8 @@
       ]
     },
     {
-      "name" : "act_13",
-      "id" : 31,
+      "name" : "act_14",
+      "id" : 32,
       "runtime_data" : [],
       "primitives" : [
         {
@@ -3289,7 +3357,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_sgw2.p4",
-            "line" : 358,
+            "line" : 363,
             "column" : 32,
             "source_fragment" : "return"
           }
@@ -3297,8 +3365,8 @@
       ]
     },
     {
-      "name" : "act_14",
-      "id" : 32,
+      "name" : "act_15",
+      "id" : 33,
       "runtime_data" : [],
       "primitives" : [
         {
@@ -3315,7 +3383,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_sgw2.p4",
-            "line" : 363,
+            "line" : 368,
             "column" : 36,
             "source_fragment" : "hdr.gtpu_ipv4 = hdr.ipv4"
           }
@@ -3323,8 +3391,8 @@
       ]
     },
     {
-      "name" : "act_15",
-      "id" : 33,
+      "name" : "act_16",
+      "id" : 34,
       "runtime_data" : [],
       "primitives" : [
         {
@@ -3341,7 +3409,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_sgw2.p4",
-            "line" : 364,
+            "line" : 369,
             "column" : 36,
             "source_fragment" : "hdr.gtpu_udp = hdr.udp"
           }
@@ -3360,7 +3428,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_sgw2.p4",
-            "line" : 365,
+            "line" : 370,
             "column" : 36,
             "source_fragment" : "hdr.ipv4 = hdr.inner_ipv4"
           }
@@ -3379,7 +3447,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_sgw2.p4",
-            "line" : 366,
+            "line" : 371,
             "column" : 36,
             "source_fragment" : "hdr.tcp = hdr.inner_tcp"
           }
@@ -3394,7 +3462,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_sgw2.p4",
-            "line" : 367,
+            "line" : 372,
             "column" : 36,
             "source_fragment" : "hdr.udp.setInvalid()"
           }
@@ -3436,7 +3504,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_sgw2.p4",
-            "line" : 369,
+            "line" : 374,
             "column" : 36,
             "source_fragment" : "hdr.ipv4.ttl = hdr.ipv4.ttl - 1"
           }
@@ -3478,7 +3546,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_sgw2.p4",
-            "line" : 370,
+            "line" : 375,
             "column" : 36,
             "source_fragment" : "hdr.gtpu_ipv4.ttl = hdr.gtpu_ipv4.ttl - 1"
           }
@@ -3497,7 +3565,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_sgw2.p4",
-            "line" : 371,
+            "line" : 376,
             "column" : 36,
             "source_fragment" : "standard_metadata.egress_spec = 2"
           }
@@ -3526,7 +3594,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_sgw2.p4",
-            "line" : 372,
+            "line" : 377,
             "column" : 36,
             "source_fragment" : "return"
           }
@@ -3534,8 +3602,8 @@
       ]
     },
     {
-      "name" : "act_16",
-      "id" : 34,
+      "name" : "act_17",
+      "id" : 35,
       "runtime_data" : [],
       "primitives" : [
         {
@@ -3564,8 +3632,8 @@
       ]
     },
     {
-      "name" : "act_17",
-      "id" : 35,
+      "name" : "act_18",
+      "id" : 36,
       "runtime_data" : [],
       "primitives" : [
         {
@@ -3594,8 +3662,8 @@
       ]
     },
     {
-      "name" : "act_18",
-      "id" : 36,
+      "name" : "act_19",
+      "id" : 37,
       "runtime_data" : [],
       "primitives" : [
         {
@@ -3622,7 +3690,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_sgw2.p4",
-            "line" : 381,
+            "line" : 386,
             "column" : 32,
             "source_fragment" : "return"
           }
@@ -3630,8 +3698,8 @@
       ]
     },
     {
-      "name" : "act_19",
-      "id" : 37,
+      "name" : "act_20",
+      "id" : 38,
       "runtime_data" : [],
       "primitives" : [
         {
@@ -3648,7 +3716,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_sgw2.p4",
-            "line" : 386,
+            "line" : 391,
             "column" : 36,
             "source_fragment" : "hdr.gtpu_ipv4 = hdr.ipv4"
           }
@@ -3667,7 +3735,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_sgw2.p4",
-            "line" : 387,
+            "line" : 392,
             "column" : 36,
             "source_fragment" : "hdr.gtpu_udp = hdr.udp"
           }
@@ -3686,7 +3754,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_sgw2.p4",
-            "line" : 388,
+            "line" : 393,
             "column" : 36,
             "source_fragment" : "hdr.ipv4 = hdr.inner_ipv4"
           }
@@ -3705,7 +3773,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_sgw2.p4",
-            "line" : 389,
+            "line" : 394,
             "column" : 36,
             "source_fragment" : "hdr.tcp = hdr.inner_tcp"
           }
@@ -3720,7 +3788,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_sgw2.p4",
-            "line" : 390,
+            "line" : 395,
             "column" : 36,
             "source_fragment" : "hdr.udp.setInvalid()"
           }
@@ -3762,7 +3830,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_sgw2.p4",
-            "line" : 392,
+            "line" : 397,
             "column" : 36,
             "source_fragment" : "hdr.ipv4.ttl = hdr.ipv4.ttl - 1"
           }
@@ -3804,7 +3872,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_sgw2.p4",
-            "line" : 393,
+            "line" : 398,
             "column" : 36,
             "source_fragment" : "hdr.gtpu_ipv4.ttl = hdr.gtpu_ipv4.ttl - 1"
           }
@@ -3823,7 +3891,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_sgw2.p4",
-            "line" : 394,
+            "line" : 399,
             "column" : 36,
             "source_fragment" : "standard_metadata.egress_spec = 1"
           }
@@ -3852,7 +3920,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_sgw2.p4",
-            "line" : 395,
+            "line" : 400,
             "column" : 36,
             "source_fragment" : "return"
           }
@@ -3860,8 +3928,8 @@
       ]
     },
     {
-      "name" : "act_20",
-      "id" : 38,
+      "name" : "act_21",
+      "id" : 39,
       "runtime_data" : [],
       "primitives" : [
         {
@@ -3890,8 +3958,8 @@
       ]
     },
     {
-      "name" : "act_21",
-      "id" : 39,
+      "name" : "act_22",
+      "id" : 40,
       "runtime_data" : [],
       "primitives" : [
         {
@@ -3934,7 +4002,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_sgw2.p4",
-            "line" : 411,
+            "line" : 416,
             "column" : 17,
             "source_fragment" : "tx_port_counter.count((bit<32>) standard_metadata.egress_spec)"
           }
@@ -3942,8 +4010,8 @@
       ]
     },
     {
-      "name" : "act_22",
-      "id" : 40,
+      "name" : "act_23",
+      "id" : 41,
       "runtime_data" : [],
       "primitives" : [
         {
@@ -3986,7 +4054,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_sgw2.p4",
-            "line" : 414,
+            "line" : 419,
             "column" : 17,
             "source_fragment" : "rx_port_counter.count((bit<32>) standard_metadata.ingress_port)"
           }
@@ -3995,13 +4063,13 @@
     },
     {
       "name" : "NoAction",
-      "id" : 41,
+      "id" : 42,
       "runtime_data" : [],
       "primitives" : []
     },
     {
       "name" : "c_egress.populate_ctxt_release_uekey_sgwteid_map",
-      "id" : 42,
+      "id" : 43,
       "runtime_data" : [
         {
           "name" : "sgwteid",
@@ -4023,7 +4091,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_sgw2.p4",
-            "line" : 430,
+            "line" : 435,
             "column" : 10,
             "source_fragment" : "tmp_ue_num = hdr.ue_service_req.ue_key"
           }
@@ -4038,7 +4106,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_sgw2.p4",
-            "line" : 431,
+            "line" : 436,
             "column" : 16,
             "source_fragment" : "hdr.initial_ctxt_setup_req.setValid()"
           }
@@ -4057,7 +4125,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_sgw2.p4",
-            "line" : 432,
+            "line" : 437,
             "column" : 16,
             "source_fragment" : "hdr.initial_ctxt_setup_req.epc_traffic_code = 18"
           }
@@ -4076,7 +4144,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_sgw2.p4",
-            "line" : 433,
+            "line" : 438,
             "column" : 16,
             "source_fragment" : "hdr.initial_ctxt_setup_req.sep1 = hdr.ue_service_req.sep1"
           }
@@ -4095,7 +4163,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_sgw2.p4",
-            "line" : 434,
+            "line" : 439,
             "column" : 16,
             "source_fragment" : "hdr.initial_ctxt_setup_req.sgw_teid = sgwteid"
           }
@@ -4110,7 +4178,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_sgw2.p4",
-            "line" : 436,
+            "line" : 441,
             "column" : 16,
             "source_fragment" : "hdr.data.setInvalid()"
           }
@@ -4125,7 +4193,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_sgw2.p4",
-            "line" : 437,
+            "line" : 442,
             "column" : 16,
             "source_fragment" : "hdr.ue_service_req.setInvalid()"
           }
@@ -4144,7 +4212,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_sgw2.p4",
-            "line" : 438,
+            "line" : 443,
             "column" : 16,
             "source_fragment" : "standard_metadata.egress_spec = 1"
           }
@@ -4163,7 +4231,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_sgw2.p4",
-            "line" : 440,
+            "line" : 445,
             "column" : 16,
             "source_fragment" : "hdr.ipv4.ttl = 64"
           }
@@ -4182,7 +4250,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_sgw2.p4",
-            "line" : 441,
+            "line" : 446,
             "column" : 16,
             "source_fragment" : "hdr.ethernet.dstAddr = hdr.ethernet.srcAddr"
           }
@@ -4201,7 +4269,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_sgw2.p4",
-            "line" : 442,
+            "line" : 447,
             "column" : 16,
             "source_fragment" : "hdr.ipv4.dstAddr = hdr.ipv4.srcAddr"
           }
@@ -4433,7 +4501,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_sgw2.p4",
-            "line" : 446,
+            "line" : 451,
             "column" : 20,
             "source_fragment" : "hdr.ethernet.srcAddr ="
           }
@@ -4476,7 +4544,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_sgw2.p4",
-            "line" : 447,
+            "line" : 452,
             "column" : 20,
             "source_fragment" : "hdr.ipv4.srcAddr ="
           }
@@ -4809,7 +4877,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_sgw2.p4",
-            "line" : 450,
+            "line" : 455,
             "column" : 20,
             "source_fragment" : "hdr.ethernet.srcAddr ="
           }
@@ -4852,7 +4920,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_sgw2.p4",
-            "line" : 451,
+            "line" : 456,
             "column" : 20,
             "source_fragment" : "hdr.ipv4.srcAddr ="
           }
@@ -5163,7 +5231,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_sgw2.p4",
-            "line" : 454,
+            "line" : 459,
             "column" : 20,
             "source_fragment" : "hdr.ethernet.srcAddr ="
           }
@@ -5206,7 +5274,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_sgw2.p4",
-            "line" : 455,
+            "line" : 460,
             "column" : 5,
             "source_fragment" : "hdr.ipv4.srcAddr ="
           }
@@ -5225,7 +5293,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_sgw2.p4",
-            "line" : 458,
+            "line" : 463,
             "column" : 16,
             "source_fragment" : "hdr.tmpvar.tmpUdpPort = hdr.udp.srcPort"
           }
@@ -5244,7 +5312,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_sgw2.p4",
-            "line" : 459,
+            "line" : 464,
             "column" : 16,
             "source_fragment" : "hdr.udp.srcPort = hdr.udp.dstPort"
           }
@@ -5263,7 +5331,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_sgw2.p4",
-            "line" : 460,
+            "line" : 465,
             "column" : 16,
             "source_fragment" : "hdr.udp.dstPort = hdr.tmpvar.tmpUdpPort"
           }
@@ -5278,7 +5346,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_sgw2.p4",
-            "line" : 461,
+            "line" : 466,
             "column" : 16,
             "source_fragment" : "hdr.tmpvar.setInvalid()"
           }
@@ -5297,7 +5365,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_sgw2.p4",
-            "line" : 463,
+            "line" : 468,
             "column" : 16,
             "source_fragment" : "hdr.udp.length_ = 11 + 8"
           }
@@ -5316,54 +5384,9 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_sgw2.p4",
-            "line" : 464,
+            "line" : 469,
             "column" : 16,
             "source_fragment" : "hdr.ipv4.totalLen = hdr.udp.length_ + 20"
-          }
-        }
-      ]
-    },
-    {
-      "name" : "act_23",
-      "id" : 43,
-      "runtime_data" : [],
-      "primitives" : [
-        {
-          "op" : "assign",
-          "parameters" : [
-            {
-              "type" : "field",
-              "value" : ["ethernet", "srcAddr"]
-            },
-            {
-              "type" : "hexstr",
-              "value" : "0x00163e416103"
-            }
-          ],
-          "source_info" : {
-            "filename" : "include/definitions.p4",
-            "line" : 43,
-            "column" : 22,
-            "source_fragment" : "0x00163e416103; ..."
-          }
-        },
-        {
-          "op" : "assign",
-          "parameters" : [
-            {
-              "type" : "field",
-              "value" : ["ipv4", "srcAddr"]
-            },
-            {
-              "type" : "hexstr",
-              "value" : "0xc0a80202"
-            }
-          ],
-          "source_info" : {
-            "filename" : "include/definitions.p4",
-            "line" : 29,
-            "column" : 31,
-            "source_fragment" : "0xc0a80202; //192.168.2.2 ..."
           }
         }
       ]
@@ -5382,6 +5405,51 @@
             },
             {
               "type" : "hexstr",
+              "value" : "0x00163e416103"
+            }
+          ],
+          "source_info" : {
+            "filename" : "include/definitions.p4",
+            "line" : 43,
+            "column" : 22,
+            "source_fragment" : "0x00163e416103; ..."
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["ipv4", "srcAddr"]
+            },
+            {
+              "type" : "hexstr",
+              "value" : "0xc0a80202"
+            }
+          ],
+          "source_info" : {
+            "filename" : "include/definitions.p4",
+            "line" : 29,
+            "column" : 31,
+            "source_fragment" : "0xc0a80202; //192.168.2.2 ..."
+          }
+        }
+      ]
+    },
+    {
+      "name" : "act_25",
+      "id" : 45,
+      "runtime_data" : [],
+      "primitives" : [
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["ethernet", "srcAddr"]
+            },
+            {
+              "type" : "hexstr",
               "value" : "0x00163e8f0eae"
             }
           ],
@@ -5414,8 +5482,8 @@
       ]
     },
     {
-      "name" : "act_25",
-      "id" : 45,
+      "name" : "act_26",
+      "id" : 46,
       "runtime_data" : [],
       "primitives" : [
         {
@@ -5459,8 +5527,8 @@
       ]
     },
     {
-      "name" : "act_26",
-      "id" : 46,
+      "name" : "act_27",
+      "id" : 47,
       "runtime_data" : [],
       "primitives" : [
         {
@@ -5477,7 +5545,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_sgw2.p4",
-            "line" : 495,
+            "line" : 500,
             "column" : 24,
             "source_fragment" : "tmp_ue_num1 = hdr.ue_context_rel_req.ue_num"
           }
@@ -5492,7 +5560,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_sgw2.p4",
-            "line" : 496,
+            "line" : 501,
             "column" : 36,
             "source_fragment" : "hdr.ue_context_rel_command.setValid()"
           }
@@ -5511,7 +5579,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_sgw2.p4",
-            "line" : 497,
+            "line" : 502,
             "column" : 36,
             "source_fragment" : "hdr.ue_context_rel_command.epc_traffic_code = 15"
           }
@@ -5530,7 +5598,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_sgw2.p4",
-            "line" : 498,
+            "line" : 503,
             "column" : 36,
             "source_fragment" : "hdr.ue_context_rel_command.sep1 = hdr.ue_context_rel_req.sep1"
           }
@@ -5545,7 +5613,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_sgw2.p4",
-            "line" : 500,
+            "line" : 505,
             "column" : 36,
             "source_fragment" : "hdr.data.setInvalid()"
           }
@@ -5560,7 +5628,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_sgw2.p4",
-            "line" : 501,
+            "line" : 506,
             "column" : 36,
             "source_fragment" : "hdr.ue_context_rel_req.setInvalid()"
           }
@@ -5579,7 +5647,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_sgw2.p4",
-            "line" : 502,
+            "line" : 507,
             "column" : 36,
             "source_fragment" : "standard_metadata.egress_spec = 1"
           }
@@ -5598,7 +5666,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_sgw2.p4",
-            "line" : 505,
+            "line" : 510,
             "column" : 36,
             "source_fragment" : "hdr.ipv4.ttl = 64"
           }
@@ -5617,7 +5685,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_sgw2.p4",
-            "line" : 506,
+            "line" : 511,
             "column" : 36,
             "source_fragment" : "hdr.ethernet.dstAddr = hdr.ethernet.srcAddr"
           }
@@ -5636,7 +5704,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_sgw2.p4",
-            "line" : 507,
+            "line" : 512,
             "column" : 36,
             "source_fragment" : "hdr.ipv4.dstAddr = hdr.ipv4.srcAddr"
           }
@@ -5644,8 +5712,8 @@
       ]
     },
     {
-      "name" : "act_27",
-      "id" : 47,
+      "name" : "act_28",
+      "id" : 48,
       "runtime_data" : [],
       "primitives" : [
         {
@@ -5662,7 +5730,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_sgw2.p4",
-            "line" : 524,
+            "line" : 529,
             "column" : 36,
             "source_fragment" : "hdr.tmpvar.tmpUdpPort = hdr.udp.srcPort"
           }
@@ -5681,7 +5749,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_sgw2.p4",
-            "line" : 525,
+            "line" : 530,
             "column" : 36,
             "source_fragment" : "hdr.udp.srcPort = hdr.udp.dstPort"
           }
@@ -5700,7 +5768,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_sgw2.p4",
-            "line" : 526,
+            "line" : 531,
             "column" : 36,
             "source_fragment" : "hdr.udp.dstPort = hdr.tmpvar.tmpUdpPort"
           }
@@ -5715,7 +5783,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_sgw2.p4",
-            "line" : 527,
+            "line" : 532,
             "column" : 36,
             "source_fragment" : "hdr.tmpvar.setInvalid()"
           }
@@ -5734,7 +5802,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_sgw2.p4",
-            "line" : 529,
+            "line" : 534,
             "column" : 36,
             "source_fragment" : "hdr.udp.length_ = 7 + 8"
           }
@@ -5753,7 +5821,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_sgw2.p4",
-            "line" : 530,
+            "line" : 535,
             "column" : 36,
             "source_fragment" : "hdr.ipv4.totalLen = hdr.udp.length_ + 20"
           }
@@ -5761,8 +5829,8 @@
       ]
     },
     {
-      "name" : "act_28",
-      "id" : 48,
+      "name" : "act_29",
+      "id" : 49,
       "runtime_data" : [],
       "primitives" : [
         {
@@ -5806,8 +5874,8 @@
       ]
     },
     {
-      "name" : "act_29",
-      "id" : 49,
+      "name" : "act_30",
+      "id" : 50,
       "runtime_data" : [],
       "primitives" : [
         {
@@ -5851,8 +5919,8 @@
       ]
     },
     {
-      "name" : "act_30",
-      "id" : 50,
+      "name" : "act_31",
+      "id" : 51,
       "runtime_data" : [],
       "primitives" : [
         {
@@ -5896,8 +5964,8 @@
       ]
     },
     {
-      "name" : "act_31",
-      "id" : 51,
+      "name" : "act_32",
+      "id" : 52,
       "runtime_data" : [],
       "primitives" : [
         {
@@ -5910,7 +5978,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_sgw2.p4",
-            "line" : 541,
+            "line" : 546,
             "column" : 36,
             "source_fragment" : "hdr.attach_accept.setValid()"
           }
@@ -5929,7 +5997,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_sgw2.p4",
-            "line" : 542,
+            "line" : 547,
             "column" : 36,
             "source_fragment" : "hdr.attach_accept.epc_traffic_code = 8"
           }
@@ -5948,7 +6016,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_sgw2.p4",
-            "line" : 543,
+            "line" : 548,
             "column" : 36,
             "source_fragment" : "hdr.attach_accept.sep1 = hdr.initial_ctxt_setup_resp.sep1"
           }
@@ -5967,7 +6035,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_sgw2.p4",
-            "line" : 544,
+            "line" : 549,
             "column" : 36,
             "source_fragment" : "hdr.attach_accept.ue_key = hdr.initial_ctxt_setup_resp.ue_key"
           }
@@ -5986,7 +6054,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_sgw2.p4",
-            "line" : 544,
+            "line" : 549,
             "column" : 63,
             "source_fragment" : "hdr.initial_ctxt_setup_resp.ue_key; ..."
           }
@@ -6001,7 +6069,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_sgw2.p4",
-            "line" : 549,
+            "line" : 554,
             "column" : 36,
             "source_fragment" : "hdr.data.setInvalid()"
           }
@@ -6016,7 +6084,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_sgw2.p4",
-            "line" : 550,
+            "line" : 555,
             "column" : 36,
             "source_fragment" : "hdr.initial_ctxt_setup_resp.setInvalid()"
           }
@@ -6035,7 +6103,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_sgw2.p4",
-            "line" : 552,
+            "line" : 557,
             "column" : 36,
             "source_fragment" : "standard_metadata.egress_spec = 1"
           }
@@ -6054,7 +6122,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_sgw2.p4",
-            "line" : 553,
+            "line" : 558,
             "column" : 36,
             "source_fragment" : "hdr.ipv4.ttl = 64"
           }
@@ -6073,7 +6141,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_sgw2.p4",
-            "line" : 555,
+            "line" : 560,
             "column" : 36,
             "source_fragment" : "hdr.ethernet.dstAddr = hdr.ethernet.srcAddr"
           }
@@ -6092,7 +6160,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_sgw2.p4",
-            "line" : 556,
+            "line" : 561,
             "column" : 36,
             "source_fragment" : "hdr.ipv4.dstAddr = hdr.ipv4.srcAddr"
           }
@@ -6100,8 +6168,8 @@
       ]
     },
     {
-      "name" : "act_32",
-      "id" : 52,
+      "name" : "act_33",
+      "id" : 53,
       "runtime_data" : [],
       "primitives" : [
         {
@@ -6118,7 +6186,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_sgw2.p4",
-            "line" : 570,
+            "line" : 575,
             "column" : 8,
             "source_fragment" : "hdr.tmpvar.tmpUdpPort = hdr.udp.srcPort"
           }
@@ -6137,7 +6205,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_sgw2.p4",
-            "line" : 571,
+            "line" : 576,
             "column" : 36,
             "source_fragment" : "hdr.udp.srcPort = hdr.udp.dstPort"
           }
@@ -6156,7 +6224,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_sgw2.p4",
-            "line" : 572,
+            "line" : 577,
             "column" : 36,
             "source_fragment" : "hdr.udp.dstPort = hdr.tmpvar.tmpUdpPort"
           }
@@ -6171,7 +6239,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_sgw2.p4",
-            "line" : 573,
+            "line" : 578,
             "column" : 36,
             "source_fragment" : "hdr.tmpvar.setInvalid()"
           }
@@ -6190,7 +6258,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_sgw2.p4",
-            "line" : 575,
+            "line" : 580,
             "column" : 36,
             "source_fragment" : "hdr.udp.length_ = 11 + 8"
           }
@@ -6209,7 +6277,7 @@
           ],
           "source_info" : {
             "filename" : "epc_4chainseries_sgw2.p4",
-            "line" : 576,
+            "line" : 581,
             "column" : 36,
             "source_fragment" : "hdr.ipv4.totalLen = hdr.udp.length_ + 20"
           }
@@ -6239,14 +6307,14 @@
           "with_counters" : false,
           "support_timeout" : false,
           "direct_meters" : null,
-          "action_ids" : [38],
-          "actions" : ["act_20"],
+          "action_ids" : [39],
+          "actions" : ["act_21"],
           "base_default_next" : "node_3",
           "next_tables" : {
-            "act_20" : "node_3"
+            "act_21" : "node_3"
           },
           "default_entry" : {
-            "action_id" : 38,
+            "action_id" : 39,
             "action_const" : true,
             "action_data" : [],
             "action_entry_const" : true
@@ -6264,9 +6332,9 @@
           "direct_meters" : null,
           "action_ids" : [17],
           "actions" : ["act"],
-          "base_default_next" : "node_51",
+          "base_default_next" : "node_53",
           "next_tables" : {
-            "act" : "node_51"
+            "act" : "node_53"
           },
           "default_entry" : {
             "action_id" : 17,
@@ -6592,9 +6660,9 @@
           "direct_meters" : null,
           "action_ids" : [26],
           "actions" : ["act_8"],
-          "base_default_next" : "node_30",
+          "base_default_next" : "node_32",
           "next_tables" : {
-            "act_8" : "node_30"
+            "act_8" : "node_32"
           },
           "default_entry" : {
             "action_id" : 26,
@@ -6628,10 +6696,10 @@
           "direct_meters" : null,
           "action_ids" : [15, 5],
           "actions" : ["c_ingress.populate_service_req_uekey_sgwteid_map", "NoAction"],
-          "base_default_next" : "node_30",
+          "base_default_next" : "node_32",
           "next_tables" : {
-            "c_ingress.populate_service_req_uekey_sgwteid_map" : "node_30",
-            "NoAction" : "node_30"
+            "c_ingress.populate_service_req_uekey_sgwteid_map" : "node_32",
+            "NoAction" : "node_32"
           },
           "default_entry" : {
             "action_id" : 5,
@@ -6665,10 +6733,10 @@
           "direct_meters" : null,
           "action_ids" : [16, 6],
           "actions" : ["c_ingress.populate_ctxt_setup_uekey_sgwteid_map", "NoAction"],
-          "base_default_next" : "node_30",
+          "base_default_next" : "node_32",
           "next_tables" : {
-            "c_ingress.populate_ctxt_setup_uekey_sgwteid_map" : "node_30",
-            "NoAction" : "node_30"
+            "c_ingress.populate_ctxt_setup_uekey_sgwteid_map" : "node_32",
+            "NoAction" : "node_32"
           },
           "default_entry" : {
             "action_id" : 6,
@@ -6689,9 +6757,9 @@
           "direct_meters" : null,
           "action_ids" : [28],
           "actions" : ["act_10"],
-          "base_default_next" : "node_30",
+          "base_default_next" : "node_32",
           "next_tables" : {
-            "act_10" : "node_30"
+            "act_10" : "node_32"
           },
           "default_entry" : {
             "action_id" : 28,
@@ -6701,8 +6769,31 @@
           }
         },
         {
-          "name" : "c_ingress.ip_op_tun_s2_uplink",
+          "name" : "tbl_act_12",
           "id" : 17,
+          "key" : [],
+          "match_type" : "exact",
+          "type" : "simple",
+          "max_size" : 1024,
+          "with_counters" : false,
+          "support_timeout" : false,
+          "direct_meters" : null,
+          "action_ids" : [29],
+          "actions" : ["act_11"],
+          "base_default_next" : "node_32",
+          "next_tables" : {
+            "act_11" : "node_32"
+          },
+          "default_entry" : {
+            "action_id" : 29,
+            "action_const" : true,
+            "action_data" : [],
+            "action_entry_const" : true
+          }
+        },
+        {
+          "name" : "c_ingress.ip_op_tun_s2_uplink",
+          "id" : 18,
           "source_info" : {
             "filename" : "epc_4chainseries_sgw2.p4",
             "line" : 87,
@@ -6727,37 +6818,14 @@
           "actions" : ["c_ingress.populate_ip_op_tun_s2_uplink", "NoAction"],
           "base_default_next" : null,
           "next_tables" : {
-            "__HIT__" : "tbl_act_12",
-            "__MISS__" : "tbl_act_13"
+            "__HIT__" : "tbl_act_13",
+            "__MISS__" : "tbl_act_14"
           },
           "default_entry" : {
             "action_id" : 1,
             "action_const" : false,
             "action_data" : [],
             "action_entry_const" : false
-          }
-        },
-        {
-          "name" : "tbl_act_12",
-          "id" : 18,
-          "key" : [],
-          "match_type" : "exact",
-          "type" : "simple",
-          "max_size" : 1024,
-          "with_counters" : false,
-          "support_timeout" : false,
-          "direct_meters" : null,
-          "action_ids" : [29],
-          "actions" : ["act_11"],
-          "base_default_next" : "node_35",
-          "next_tables" : {
-            "act_11" : "node_35"
-          },
-          "default_entry" : {
-            "action_id" : 29,
-            "action_const" : true,
-            "action_data" : [],
-            "action_entry_const" : true
           }
         },
         {
@@ -6772,9 +6840,9 @@
           "direct_meters" : null,
           "action_ids" : [30],
           "actions" : ["act_12"],
-          "base_default_next" : "node_35",
+          "base_default_next" : "node_37",
           "next_tables" : {
-            "act_12" : "node_35"
+            "act_12" : "node_37"
           },
           "default_entry" : {
             "action_id" : 30,
@@ -6795,9 +6863,9 @@
           "direct_meters" : null,
           "action_ids" : [31],
           "actions" : ["act_13"],
-          "base_default_next" : "node_38",
+          "base_default_next" : "node_37",
           "next_tables" : {
-            "act_13" : "node_38"
+            "act_13" : "node_37"
           },
           "default_entry" : {
             "action_id" : 31,
@@ -6818,9 +6886,9 @@
           "direct_meters" : null,
           "action_ids" : [32],
           "actions" : ["act_14"],
-          "base_default_next" : "node_38",
+          "base_default_next" : "node_40",
           "next_tables" : {
-            "act_14" : "node_38"
+            "act_14" : "node_40"
           },
           "default_entry" : {
             "action_id" : 32,
@@ -6841,9 +6909,9 @@
           "direct_meters" : null,
           "action_ids" : [33],
           "actions" : ["act_15"],
-          "base_default_next" : "node_47",
+          "base_default_next" : "node_40",
           "next_tables" : {
-            "act_15" : "node_47"
+            "act_15" : "node_40"
           },
           "default_entry" : {
             "action_id" : 33,
@@ -6853,8 +6921,31 @@
           }
         },
         {
-          "name" : "c_ingress.ip_op_tun_s2_downlink",
+          "name" : "tbl_act_17",
           "id" : 23,
+          "key" : [],
+          "match_type" : "exact",
+          "type" : "simple",
+          "max_size" : 1024,
+          "with_counters" : false,
+          "support_timeout" : false,
+          "direct_meters" : null,
+          "action_ids" : [34],
+          "actions" : ["act_16"],
+          "base_default_next" : "node_49",
+          "next_tables" : {
+            "act_16" : "node_49"
+          },
+          "default_entry" : {
+            "action_id" : 34,
+            "action_const" : true,
+            "action_data" : [],
+            "action_entry_const" : true
+          }
+        },
+        {
+          "name" : "c_ingress.ip_op_tun_s2_downlink",
+          "id" : 24,
           "source_info" : {
             "filename" : "epc_4chainseries_sgw2.p4",
             "line" : 119,
@@ -6879,37 +6970,14 @@
           "actions" : ["c_ingress.populate_ip_op_tun_s2_downlink", "NoAction"],
           "base_default_next" : null,
           "next_tables" : {
-            "__HIT__" : "tbl_act_17",
-            "__MISS__" : "tbl_act_18"
+            "__HIT__" : "tbl_act_18",
+            "__MISS__" : "tbl_act_19"
           },
           "default_entry" : {
             "action_id" : 2,
             "action_const" : false,
             "action_data" : [],
             "action_entry_const" : false
-          }
-        },
-        {
-          "name" : "tbl_act_17",
-          "id" : 24,
-          "key" : [],
-          "match_type" : "exact",
-          "type" : "simple",
-          "max_size" : 1024,
-          "with_counters" : false,
-          "support_timeout" : false,
-          "direct_meters" : null,
-          "action_ids" : [34],
-          "actions" : ["act_16"],
-          "base_default_next" : "node_44",
-          "next_tables" : {
-            "act_16" : "node_44"
-          },
-          "default_entry" : {
-            "action_id" : 34,
-            "action_const" : true,
-            "action_data" : [],
-            "action_entry_const" : true
           }
         },
         {
@@ -6924,9 +6992,9 @@
           "direct_meters" : null,
           "action_ids" : [35],
           "actions" : ["act_17"],
-          "base_default_next" : "node_44",
+          "base_default_next" : "node_46",
           "next_tables" : {
-            "act_17" : "node_44"
+            "act_17" : "node_46"
           },
           "default_entry" : {
             "action_id" : 35,
@@ -6947,9 +7015,9 @@
           "direct_meters" : null,
           "action_ids" : [36],
           "actions" : ["act_18"],
-          "base_default_next" : "node_47",
+          "base_default_next" : "node_46",
           "next_tables" : {
-            "act_18" : "node_47"
+            "act_18" : "node_46"
           },
           "default_entry" : {
             "action_id" : 36,
@@ -6970,9 +7038,9 @@
           "direct_meters" : null,
           "action_ids" : [37],
           "actions" : ["act_19"],
-          "base_default_next" : "node_47",
+          "base_default_next" : "node_49",
           "next_tables" : {
-            "act_19" : "node_47"
+            "act_19" : "node_49"
           },
           "default_entry" : {
             "action_id" : 37,
@@ -6982,8 +7050,31 @@
           }
         },
         {
-          "name" : "c_ingress.uekey_uestate_map",
+          "name" : "tbl_act_21",
           "id" : 28,
+          "key" : [],
+          "match_type" : "exact",
+          "type" : "simple",
+          "max_size" : 1024,
+          "with_counters" : false,
+          "support_timeout" : false,
+          "direct_meters" : null,
+          "action_ids" : [38],
+          "actions" : ["act_20"],
+          "base_default_next" : "node_49",
+          "next_tables" : {
+            "act_20" : "node_49"
+          },
+          "default_entry" : {
+            "action_id" : 38,
+            "action_const" : true,
+            "action_data" : [],
+            "action_entry_const" : true
+          }
+        },
+        {
+          "name" : "c_ingress.uekey_uestate_map",
+          "id" : 29,
           "source_info" : {
             "filename" : "epc_4chainseries_sgw2.p4",
             "line" : 139,
@@ -7020,7 +7111,7 @@
         },
         {
           "name" : "c_ingress.uekey_guti_map",
-          "id" : 29,
+          "id" : 30,
           "source_info" : {
             "filename" : "epc_4chainseries_sgw2.p4",
             "line" : 155,
@@ -7043,39 +7134,16 @@
           "direct_meters" : null,
           "action_ids" : [14, 4],
           "actions" : ["c_ingress.populate_uekey_guti_map", "NoAction"],
-          "base_default_next" : "node_51",
+          "base_default_next" : "node_53",
           "next_tables" : {
-            "c_ingress.populate_uekey_guti_map" : "node_51",
-            "NoAction" : "node_51"
+            "c_ingress.populate_uekey_guti_map" : "node_53",
+            "NoAction" : "node_53"
           },
           "default_entry" : {
             "action_id" : 4,
             "action_const" : false,
             "action_data" : [],
             "action_entry_const" : false
-          }
-        },
-        {
-          "name" : "tbl_act_21",
-          "id" : 30,
-          "key" : [],
-          "match_type" : "exact",
-          "type" : "simple",
-          "max_size" : 1024,
-          "with_counters" : false,
-          "support_timeout" : false,
-          "direct_meters" : null,
-          "action_ids" : [39],
-          "actions" : ["act_21"],
-          "base_default_next" : "node_54",
-          "next_tables" : {
-            "act_21" : "node_54"
-          },
-          "default_entry" : {
-            "action_id" : 39,
-            "action_const" : true,
-            "action_data" : [],
-            "action_entry_const" : true
           }
         },
         {
@@ -7090,12 +7158,35 @@
           "direct_meters" : null,
           "action_ids" : [40],
           "actions" : ["act_22"],
-          "base_default_next" : null,
+          "base_default_next" : "node_56",
           "next_tables" : {
-            "act_22" : null
+            "act_22" : "node_56"
           },
           "default_entry" : {
             "action_id" : 40,
+            "action_const" : true,
+            "action_data" : [],
+            "action_entry_const" : true
+          }
+        },
+        {
+          "name" : "tbl_act_23",
+          "id" : 32,
+          "key" : [],
+          "match_type" : "exact",
+          "type" : "simple",
+          "max_size" : 1024,
+          "with_counters" : false,
+          "support_timeout" : false,
+          "direct_meters" : null,
+          "action_ids" : [41],
+          "actions" : ["act_23"],
+          "base_default_next" : null,
+          "next_tables" : {
+            "act_23" : null
+          },
+          "default_entry" : {
+            "action_id" : 41,
             "action_const" : true,
             "action_data" : [],
             "action_entry_const" : true
@@ -7169,7 +7260,7 @@
             }
           },
           "true_next" : "node_11",
-          "false_next" : "node_47"
+          "false_next" : "node_49"
         },
         {
           "name" : "node_11",
@@ -7216,7 +7307,7 @@
             }
           },
           "true_next" : "node_12",
-          "false_next" : "node_30"
+          "false_next" : "node_32"
         },
         {
           "name" : "node_12",
@@ -7389,14 +7480,40 @@
             }
           },
           "true_next" : "c_ingress.ctxt_setup_uekey_sgwteid_map",
-          "false_next" : "node_30"
+          "false_next" : "node_32"
         },
         {
           "name" : "node_30",
           "id" : 11,
           "source_info" : {
             "filename" : "epc_4chainseries_sgw2.p4",
-            "line" : 349,
+            "line" : 348,
+            "column" : 13,
+            "source_fragment" : "standard_metadata.ingress_port==2"
+          },
+          "expression" : {
+            "type" : "expression",
+            "value" : {
+              "op" : "==",
+              "left" : {
+                "type" : "field",
+                "value" : ["standard_metadata", "ingress_port"]
+              },
+              "right" : {
+                "type" : "hexstr",
+                "value" : "0x0002"
+              }
+            }
+          },
+          "true_next" : "tbl_act_12",
+          "false_next" : "node_32"
+        },
+        {
+          "name" : "node_32",
+          "id" : 12,
+          "source_info" : {
+            "filename" : "epc_4chainseries_sgw2.p4",
+            "line" : 354,
             "column" : 7,
             "source_fragment" : "hdr.gtpu.isValid()"
           },
@@ -7411,15 +7528,15 @@
               }
             }
           },
-          "true_next" : "node_31",
-          "false_next" : "node_47"
+          "true_next" : "node_33",
+          "false_next" : "node_49"
         },
         {
-          "name" : "node_31",
-          "id" : 12,
+          "name" : "node_33",
+          "id" : 13,
           "source_info" : {
             "filename" : "epc_4chainseries_sgw2.p4",
-            "line" : 355,
+            "line" : 360,
             "column" : 23,
             "source_fragment" : "standard_metadata.ingress_port==1"
           },
@@ -7438,11 +7555,11 @@
             }
           },
           "true_next" : "c_ingress.ip_op_tun_s2_uplink",
-          "false_next" : "node_40"
+          "false_next" : "node_42"
         },
         {
-          "name" : "node_35",
-          "id" : 13,
+          "name" : "node_37",
+          "id" : 14,
           "expression" : {
             "type" : "expression",
             "value" : {
@@ -7454,12 +7571,12 @@
               }
             }
           },
-          "true_next" : "tbl_act_14",
-          "false_next" : "tbl_act_15"
+          "true_next" : "tbl_act_15",
+          "false_next" : "tbl_act_16"
         },
         {
-          "name" : "node_38",
-          "id" : 14,
+          "name" : "node_40",
+          "id" : 15,
           "expression" : {
             "type" : "expression",
             "value" : {
@@ -7478,15 +7595,15 @@
               }
             }
           },
-          "true_next" : "tbl_act_16",
-          "false_next" : "node_47"
+          "true_next" : "tbl_act_17",
+          "false_next" : "node_49"
         },
         {
-          "name" : "node_40",
-          "id" : 15,
+          "name" : "node_42",
+          "id" : 16,
           "source_info" : {
             "filename" : "epc_4chainseries_sgw2.p4",
-            "line" : 379,
+            "line" : 384,
             "column" : 28,
             "source_fragment" : "standard_metadata.ingress_port==2"
           },
@@ -7505,11 +7622,11 @@
             }
           },
           "true_next" : "c_ingress.ip_op_tun_s2_downlink",
-          "false_next" : "node_47"
+          "false_next" : "node_49"
         },
         {
-          "name" : "node_44",
-          "id" : 16,
+          "name" : "node_46",
+          "id" : 17,
           "expression" : {
             "type" : "expression",
             "value" : {
@@ -7521,12 +7638,12 @@
               }
             }
           },
-          "true_next" : "tbl_act_19",
-          "false_next" : "tbl_act_20"
+          "true_next" : "tbl_act_20",
+          "false_next" : "tbl_act_21"
         },
         {
-          "name" : "node_47",
-          "id" : 17,
+          "name" : "node_49",
+          "id" : 18,
           "expression" : {
             "type" : "expression",
             "value" : {
@@ -7545,15 +7662,15 @@
               }
             }
           },
-          "true_next" : "node_48",
-          "false_next" : "node_51"
+          "true_next" : "node_50",
+          "false_next" : "node_53"
         },
         {
-          "name" : "node_48",
-          "id" : 18,
+          "name" : "node_50",
+          "id" : 19,
           "source_info" : {
             "filename" : "epc_4chainseries_sgw2.p4",
-            "line" : 403,
+            "line" : 408,
             "column" : 15,
             "source_fragment" : "hdr.ipv4.ttl == 250"
           },
@@ -7572,11 +7689,11 @@
             }
           },
           "true_next" : "c_ingress.uekey_uestate_map",
-          "false_next" : "node_51"
+          "false_next" : "node_53"
         },
         {
-          "name" : "node_51",
-          "id" : 19,
+          "name" : "node_53",
+          "id" : 20,
           "expression" : {
             "type" : "expression",
             "value" : {
@@ -7596,14 +7713,14 @@
             }
           },
           "false_next" : null,
-          "true_next" : "node_52"
+          "true_next" : "node_54"
         },
         {
-          "name" : "node_52",
-          "id" : 20,
+          "name" : "node_54",
+          "id" : 21,
           "source_info" : {
             "filename" : "epc_4chainseries_sgw2.p4",
-            "line" : 410,
+            "line" : 415,
             "column" : 17,
             "source_fragment" : "standard_metadata.egress_spec < 255"
           },
@@ -7621,15 +7738,15 @@
               }
             }
           },
-          "true_next" : "tbl_act_21",
-          "false_next" : "node_54"
+          "true_next" : "tbl_act_22",
+          "false_next" : "node_56"
         },
         {
-          "name" : "node_54",
-          "id" : 21,
+          "name" : "node_56",
+          "id" : 22,
           "source_info" : {
             "filename" : "epc_4chainseries_sgw2.p4",
-            "line" : 413,
+            "line" : 418,
             "column" : 17,
             "source_fragment" : "standard_metadata.ingress_port < 255"
           },
@@ -7648,7 +7765,7 @@
             }
           },
           "false_next" : null,
-          "true_next" : "tbl_act_22"
+          "true_next" : "tbl_act_23"
         }
       ]
     },
@@ -7657,35 +7774,12 @@
       "id" : 1,
       "source_info" : {
         "filename" : "epc_4chainseries_sgw2.p4",
-        "line" : 422,
+        "line" : 427,
         "column" : 8,
         "source_fragment" : "c_egress"
       },
-      "init_table" : "node_58",
+      "init_table" : "node_60",
       "tables" : [
-        {
-          "name" : "tbl_act_23",
-          "id" : 32,
-          "key" : [],
-          "match_type" : "exact",
-          "type" : "simple",
-          "max_size" : 1024,
-          "with_counters" : false,
-          "support_timeout" : false,
-          "direct_meters" : null,
-          "action_ids" : [46],
-          "actions" : ["act_26"],
-          "base_default_next" : "node_61",
-          "next_tables" : {
-            "act_26" : "node_61"
-          },
-          "default_entry" : {
-            "action_id" : 46,
-            "action_const" : true,
-            "action_data" : [],
-            "action_entry_const" : true
-          }
-        },
         {
           "name" : "tbl_act_24",
           "id" : 33,
@@ -7696,14 +7790,14 @@
           "with_counters" : false,
           "support_timeout" : false,
           "direct_meters" : null,
-          "action_ids" : [43],
-          "actions" : ["act_23"],
-          "base_default_next" : "tbl_act_27",
+          "action_ids" : [47],
+          "actions" : ["act_27"],
+          "base_default_next" : "node_63",
           "next_tables" : {
-            "act_23" : "tbl_act_27"
+            "act_27" : "node_63"
           },
           "default_entry" : {
-            "action_id" : 43,
+            "action_id" : 47,
             "action_const" : true,
             "action_data" : [],
             "action_entry_const" : true
@@ -7721,9 +7815,9 @@
           "direct_meters" : null,
           "action_ids" : [44],
           "actions" : ["act_24"],
-          "base_default_next" : "tbl_act_27",
+          "base_default_next" : "tbl_act_28",
           "next_tables" : {
-            "act_24" : "tbl_act_27"
+            "act_24" : "tbl_act_28"
           },
           "default_entry" : {
             "action_id" : 44,
@@ -7744,9 +7838,9 @@
           "direct_meters" : null,
           "action_ids" : [45],
           "actions" : ["act_25"],
-          "base_default_next" : "tbl_act_27",
+          "base_default_next" : "tbl_act_28",
           "next_tables" : {
-            "act_25" : "tbl_act_27"
+            "act_25" : "tbl_act_28"
           },
           "default_entry" : {
             "action_id" : 45,
@@ -7765,14 +7859,37 @@
           "with_counters" : false,
           "support_timeout" : false,
           "direct_meters" : null,
-          "action_ids" : [47],
-          "actions" : ["act_27"],
-          "base_default_next" : null,
+          "action_ids" : [46],
+          "actions" : ["act_26"],
+          "base_default_next" : "tbl_act_28",
           "next_tables" : {
-            "act_27" : null
+            "act_26" : "tbl_act_28"
           },
           "default_entry" : {
-            "action_id" : 47,
+            "action_id" : 46,
+            "action_const" : true,
+            "action_data" : [],
+            "action_entry_const" : true
+          }
+        },
+        {
+          "name" : "tbl_act_28",
+          "id" : 37,
+          "key" : [],
+          "match_type" : "exact",
+          "type" : "simple",
+          "max_size" : 1024,
+          "with_counters" : false,
+          "support_timeout" : false,
+          "direct_meters" : null,
+          "action_ids" : [48],
+          "actions" : ["act_28"],
+          "base_default_next" : null,
+          "next_tables" : {
+            "act_28" : null
+          },
+          "default_entry" : {
+            "action_id" : 48,
             "action_const" : true,
             "action_data" : [],
             "action_entry_const" : true
@@ -7780,10 +7897,10 @@
         },
         {
           "name" : "c_egress.ctxt_release_uekey_sgwteid_map",
-          "id" : 37,
+          "id" : 38,
           "source_info" : {
             "filename" : "epc_4chainseries_sgw2.p4",
-            "line" : 467,
+            "line" : 472,
             "column" : 14,
             "source_fragment" : "ctxt_release_uekey_sgwteid_map"
           },
@@ -7801,7 +7918,7 @@
           "with_counters" : false,
           "support_timeout" : false,
           "direct_meters" : null,
-          "action_ids" : [42, 41],
+          "action_ids" : [43, 42],
           "actions" : ["c_egress.populate_ctxt_release_uekey_sgwteid_map", "NoAction"],
           "base_default_next" : null,
           "next_tables" : {
@@ -7809,33 +7926,10 @@
             "NoAction" : null
           },
           "default_entry" : {
-            "action_id" : 41,
+            "action_id" : 42,
             "action_const" : false,
             "action_data" : [],
             "action_entry_const" : false
-          }
-        },
-        {
-          "name" : "tbl_act_28",
-          "id" : 38,
-          "key" : [],
-          "match_type" : "exact",
-          "type" : "simple",
-          "max_size" : 1024,
-          "with_counters" : false,
-          "support_timeout" : false,
-          "direct_meters" : null,
-          "action_ids" : [51],
-          "actions" : ["act_31"],
-          "base_default_next" : "node_72",
-          "next_tables" : {
-            "act_31" : "node_72"
-          },
-          "default_entry" : {
-            "action_id" : 51,
-            "action_const" : true,
-            "action_data" : [],
-            "action_entry_const" : true
           }
         },
         {
@@ -7848,14 +7942,14 @@
           "with_counters" : false,
           "support_timeout" : false,
           "direct_meters" : null,
-          "action_ids" : [48],
-          "actions" : ["act_28"],
-          "base_default_next" : "tbl_act_32",
+          "action_ids" : [52],
+          "actions" : ["act_32"],
+          "base_default_next" : "node_74",
           "next_tables" : {
-            "act_28" : "tbl_act_32"
+            "act_32" : "node_74"
           },
           "default_entry" : {
-            "action_id" : 48,
+            "action_id" : 52,
             "action_const" : true,
             "action_data" : [],
             "action_entry_const" : true
@@ -7873,9 +7967,9 @@
           "direct_meters" : null,
           "action_ids" : [49],
           "actions" : ["act_29"],
-          "base_default_next" : "tbl_act_32",
+          "base_default_next" : "tbl_act_33",
           "next_tables" : {
-            "act_29" : "tbl_act_32"
+            "act_29" : "tbl_act_33"
           },
           "default_entry" : {
             "action_id" : 49,
@@ -7896,9 +7990,9 @@
           "direct_meters" : null,
           "action_ids" : [50],
           "actions" : ["act_30"],
-          "base_default_next" : "tbl_act_32",
+          "base_default_next" : "tbl_act_33",
           "next_tables" : {
-            "act_30" : "tbl_act_32"
+            "act_30" : "tbl_act_33"
           },
           "default_entry" : {
             "action_id" : 50,
@@ -7917,14 +8011,37 @@
           "with_counters" : false,
           "support_timeout" : false,
           "direct_meters" : null,
-          "action_ids" : [52],
-          "actions" : ["act_32"],
-          "base_default_next" : null,
+          "action_ids" : [51],
+          "actions" : ["act_31"],
+          "base_default_next" : "tbl_act_33",
           "next_tables" : {
-            "act_32" : null
+            "act_31" : "tbl_act_33"
           },
           "default_entry" : {
-            "action_id" : 52,
+            "action_id" : 51,
+            "action_const" : true,
+            "action_data" : [],
+            "action_entry_const" : true
+          }
+        },
+        {
+          "name" : "tbl_act_33",
+          "id" : 43,
+          "key" : [],
+          "match_type" : "exact",
+          "type" : "simple",
+          "max_size" : 1024,
+          "with_counters" : false,
+          "support_timeout" : false,
+          "direct_meters" : null,
+          "action_ids" : [53],
+          "actions" : ["act_33"],
+          "base_default_next" : null,
+          "next_tables" : {
+            "act_33" : null
+          },
+          "default_entry" : {
+            "action_id" : 53,
             "action_const" : true,
             "action_data" : [],
             "action_entry_const" : true
@@ -7934,11 +8051,11 @@
       "action_profiles" : [],
       "conditionals" : [
         {
-          "name" : "node_58",
-          "id" : 22,
+          "name" : "node_60",
+          "id" : 23,
           "source_info" : {
             "filename" : "epc_4chainseries_sgw2.p4",
-            "line" : 482,
+            "line" : 487,
             "column" : 21,
             "source_fragment" : "standard_metadata.instance_type == BMV2_V1MODEL_INSTANCE_TYPE_INGRESS_CLONE"
           },
@@ -7957,14 +8074,14 @@
             }
           },
           "false_next" : null,
-          "true_next" : "node_59"
+          "true_next" : "node_61"
         },
         {
-          "name" : "node_59",
-          "id" : 23,
+          "name" : "node_61",
+          "id" : 24,
           "source_info" : {
             "filename" : "epc_4chainseries_sgw2.p4",
-            "line" : 493,
+            "line" : 498,
             "column" : 31,
             "source_fragment" : "hdr.data.epc_traffic_code == 14"
           },
@@ -7982,15 +8099,15 @@
               }
             }
           },
-          "true_next" : "tbl_act_23",
-          "false_next" : "node_68"
+          "true_next" : "tbl_act_24",
+          "false_next" : "node_70"
         },
         {
-          "name" : "node_61",
-          "id" : 24,
+          "name" : "node_63",
+          "id" : 25,
           "source_info" : {
             "filename" : "epc_4chainseries_sgw2.p4",
-            "line" : 511,
+            "line" : 516,
             "column" : 38,
             "source_fragment" : "hdr.ethernet.srcAddr == ran1 && (tmp_ue_num1 >= LB11 && tmp_ue_num1 <= UB11)"
           },
@@ -8048,15 +8165,15 @@
               }
             }
           },
-          "true_next" : "tbl_act_24",
-          "false_next" : "node_63"
+          "true_next" : "tbl_act_25",
+          "false_next" : "node_65"
         },
         {
-          "name" : "node_63",
-          "id" : 25,
+          "name" : "node_65",
+          "id" : 26,
           "source_info" : {
             "filename" : "epc_4chainseries_sgw2.p4",
-            "line" : 515,
+            "line" : 520,
             "column" : 44,
             "source_fragment" : "hdr.ethernet.srcAddr == ran1 && (tmp_ue_num1 >= LB12 && tmp_ue_num1 <= UB12)"
           },
@@ -8114,15 +8231,15 @@
               }
             }
           },
-          "true_next" : "tbl_act_25",
-          "false_next" : "node_65"
+          "true_next" : "tbl_act_26",
+          "false_next" : "node_67"
         },
         {
-          "name" : "node_65",
-          "id" : 26,
+          "name" : "node_67",
+          "id" : 27,
           "source_info" : {
             "filename" : "epc_4chainseries_sgw2.p4",
-            "line" : 519,
+            "line" : 524,
             "column" : 44,
             "source_fragment" : "hdr.ethernet.srcAddr == ran1 && (tmp_ue_num1 >= LB13 && tmp_ue_num1 <= UB13)"
           },
@@ -8180,15 +8297,15 @@
               }
             }
           },
-          "true_next" : "tbl_act_26",
-          "false_next" : "tbl_act_27"
+          "true_next" : "tbl_act_27",
+          "false_next" : "tbl_act_28"
         },
         {
-          "name" : "node_68",
-          "id" : 27,
+          "name" : "node_70",
+          "id" : 28,
           "source_info" : {
             "filename" : "epc_4chainseries_sgw2.p4",
-            "line" : 534,
+            "line" : 539,
             "column" : 36,
             "source_fragment" : "hdr.data.epc_traffic_code == 17"
           },
@@ -8207,14 +8324,14 @@
             }
           },
           "true_next" : "c_egress.ctxt_release_uekey_sgwteid_map",
-          "false_next" : "node_70"
+          "false_next" : "node_72"
         },
         {
-          "name" : "node_70",
-          "id" : 28,
+          "name" : "node_72",
+          "id" : 29,
           "source_info" : {
             "filename" : "epc_4chainseries_sgw2.p4",
-            "line" : 539,
+            "line" : 544,
             "column" : 36,
             "source_fragment" : "hdr.data.epc_traffic_code == 19"
           },
@@ -8233,14 +8350,14 @@
             }
           },
           "false_next" : null,
-          "true_next" : "tbl_act_28"
+          "true_next" : "tbl_act_29"
         },
         {
-          "name" : "node_72",
-          "id" : 29,
+          "name" : "node_74",
+          "id" : 30,
           "source_info" : {
             "filename" : "epc_4chainseries_sgw2.p4",
-            "line" : 558,
+            "line" : 563,
             "column" : 39,
             "source_fragment" : "hdr.ethernet.srcAddr == ran1 && (tmp_ue_num2 >= LB11 && tmp_ue_num2 <= UB11)"
           },
@@ -8298,15 +8415,15 @@
               }
             }
           },
-          "true_next" : "tbl_act_29",
-          "false_next" : "node_74"
+          "true_next" : "tbl_act_30",
+          "false_next" : "node_76"
         },
         {
-          "name" : "node_74",
-          "id" : 30,
+          "name" : "node_76",
+          "id" : 31,
           "source_info" : {
             "filename" : "epc_4chainseries_sgw2.p4",
-            "line" : 562,
+            "line" : 567,
             "column" : 44,
             "source_fragment" : "hdr.ethernet.srcAddr == ran1 && (tmp_ue_num2 >= LB12 && tmp_ue_num2 <= UB12)"
           },
@@ -8364,15 +8481,15 @@
               }
             }
           },
-          "true_next" : "tbl_act_30",
-          "false_next" : "node_76"
+          "true_next" : "tbl_act_31",
+          "false_next" : "node_78"
         },
         {
-          "name" : "node_76",
-          "id" : 31,
+          "name" : "node_78",
+          "id" : 32,
           "source_info" : {
             "filename" : "epc_4chainseries_sgw2.p4",
-            "line" : 566,
+            "line" : 571,
             "column" : 44,
             "source_fragment" : "hdr.ethernet.srcAddr == ran1 && (tmp_ue_num2 >= LB13 && tmp_ue_num2 <= UB13)"
           },
@@ -8430,8 +8547,8 @@
               }
             }
           },
-          "true_next" : "tbl_act_31",
-          "false_next" : "tbl_act_32"
+          "true_next" : "tbl_act_32",
+          "false_next" : "tbl_act_33"
         }
       ]
     }

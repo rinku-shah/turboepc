@@ -588,6 +588,7 @@ public class Constants {
 			}
 
 			public static int getChainIDFromSGW(String sgw){
+				//log.warn("in Constants.getChainIDFromSGW sgw recieved = {}",sgw);
 //				String swid1 = Character.toString(sgw.charAt(1));  // assuming that switches will be from s1---s9 so char at position1 will give switchid which is an int
 				String swid1 = sgw;  // assuming that switches will be from s1---s9 so char at position1 will give switchid which is an int
 				int swid = Integer.parseInt(swid1);

@@ -344,6 +344,11 @@ control c_ingress(inout headers hdr,
                     }  // standard metadata if over
 
                     
+	  	// @series : process reply packet from SGW3 and send it to SGW1
+	   	else if(standard_metadata.ingress_port==2){
+                                standard_metadata.egress_spec = 1;
+                                hdr.ipv4.ttl = hdr.ipv4.ttl - 1;
+		}
           }  // control packet if over
          //------------------------------------ Data packet tunneling logic  ---------------------------------------------
  	 if (hdr.gtpu.isValid()) {

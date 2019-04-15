@@ -314,7 +314,6 @@ control c_ingress(inout headers hdr,
 
                         // do some lookup on hit clone and populate rules using local ONOS of SGW1 else on MISS forward to SGW2 on port 2
                              // HIT on the switch for 100 <= ue_num <=103 
-                        // if((ue_context_rel_req_lookup_lb1_ub1.apply().hit)|| (initial_ctxt_setup_resp_lookup_lb1_ub1.apply().hit) || (ue_service_req_lookup_lb1_ub1.apply().hit)) {
                         if(uekey_lookup_lb1_ub1.apply().hit){
                                 // clone packet and reply back to RAN in egress processing
                                 clone3(CloneType.I2E, I2E_CLONE_SESSION_ID, standard_metadata);
@@ -347,7 +346,6 @@ control c_ingress(inout headers hdr,
                         }
 
                         //since its a miss, send to SGW2
-                        // else if((ue_context_rel_req_lookup_lb2_ub2.apply().hit)|| (initial_ctxt_setup_resp_lookup_lb2_ub2.apply().hit) || (ue_service_req_lookup_lb2_ub2.apply().hit)) {
                         else{    
                                 standard_metadata.egress_spec = 2;
                                 hdr.ipv4.ttl = hdr.ipv4.ttl - 1;
