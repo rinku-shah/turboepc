@@ -110,7 +110,7 @@ public:
 	int tID;
 	int client_socket;
 	char client_buffer[BUFFER_SIZE];
-    unsigned char my_client_byte_buffer[BUFFER_SIZE];
+        //char trim_buffer[BUFFER_SIZE];
 	char write_client_buffer[BUFFER_SIZE];
 	char write_client_byte_buffer[BUFFER_SIZE];
 	int sock_raw; //To receive raw packets
@@ -125,10 +125,10 @@ public:
 	struct sockaddr_in source,dest;
 	//bool flag=false; //flag to test the right dest IP for rcv data 
 	bool tflag=false; //flag to test dest UDP port for demux of packets
-    	time_t curT;
-    	time_t endT;
-	double timeout = 1;
-    	bool timeoutFlag=false; // Flag =true if read timedout
+	time_t curT;
+    time_t endT;
+    double timeout = 1;
+    bool timeoutFlag=false; // Flag =true if read timedout
 
 	// Constructor
 	Client(int);
@@ -136,8 +136,6 @@ public:
 	// Socket methods
 	void input_server_details(int,const char*);
 	void read_data();
-	void read_data2();
-
 	void write_data(string);
 	// void write_data2(char *);
 	void write_data2(int);
@@ -154,15 +152,9 @@ public:
 	//Raw packet functions
 
 	int ProcessPacket(unsigned char* , int);
-	int ProcessPacket2(unsigned char* , int);
-
 	void print_ip_header(unsigned char* , int);
-	void print_ip_header2(unsigned char* , int);
-
 	//void print_tcp_packet(unsigned char * , int );
 	void print_udp_packet(unsigned char * , int );
-	void print_udp_packet2(unsigned char * , int );
-
 	//void print_icmp_packet(unsigned char* , int );
 	//void PrintData (unsigned char* , int);
 	//void PrintDataPayload (unsigned char* , int);
