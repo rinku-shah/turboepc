@@ -912,7 +912,8 @@ public class EpcApp {
                         /********************************  DETACH tunnel code for chain 2 starts here ***********************************/
 
                         String pgw_dpid = Integer.toString(Constants.PGW_ID);
-                        
+                         tmp = FT.get(Integer.toString(Constants.DEFAULT_SWITCH_ID_2), "uekey_sgw_teid_map", tmpArray[2]); // tmpArray[2] => ue key
+			tmpArray2 = tmp.split(Constants.SEPARATOR); 
                         // @HO: find UE IP, and sgw_teid from uekey_sgw_teid_map, and uekey_ueip_map : already found above so reusing
                         // @HO: ue_teid (need to remember prev ue_teid, if not forget the last flow remove)   : UE is sedning ue_teid in Send_ue_teid message itself reusing it here
 

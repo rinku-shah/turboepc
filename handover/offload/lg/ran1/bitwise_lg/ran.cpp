@@ -45,7 +45,7 @@ bool networkServiceRequest = false;	// Network initiated service request (downli
 // vector<vector<int>> traffic_mix={{0,100,0,0,0},{499,99501,0,0,0},{1499,98501,0,0,0},{2999,97001,0,0,0},{6999,93001,0,0,0},{8999,91001,0,0,0},{10999,89001,0,0,0},{30999,69001,0,0,0},{40999,59001,0,0,0},{50999,49001,0,0,0},{60999,39001,0,0,0},{100,0,0,0,0}};
 //vector<vector<int>> traffic_mix={{0,0,0,74999,0,25001},{499,99501,0,0,0,0},{1499,98501,0,0,0,0},{2999,97001,0,0,0,0},{6999,93001,0,0,0,0},{8999,91001,0,0,0,0},{10999,89001,0,0,0,0},{30999,69001,0,0,0,0},{40999,59001,0,0,0,0},{0,0,0,0,100,0},{0,0,0,0,0,100},{0,0,0,100,0,0}};
 vector<vector<int>> traffic_mix={{0,0,0,0,0,0,100000}};
-//2_98,0
+int wait_latency = 40000;//2_98,0
 //5_95,1
 //6_94,2
 //10_90,3
@@ -422,8 +422,8 @@ void* multithreading_func(void *arg){
 					handover_t = true;
 					dataTime = 1;
 					loop1 = 1;    //outer loop---attach
-					loop2 = 1;   //inner loop---service-req
-					loop3 = 2;   // HO loop
+					loop2 = 4;   //inner loop---service-req
+					loop3 = 4;   // HO loop
 					break;
 		}
 		do {
@@ -436,7 +436,8 @@ void* multithreading_func(void *arg){
 			gettimeofday(&start, NULL);
 			//usleep(my_rand()+2000);
 			// usleep(200000);
-			usleep(10000);
+			//usleep(28000);
+			usleep(my_rand()+ wait_latency);		//200-700 usec
 			if(attach_with_mme(ue, user, checkIntegrity_t)){ 	// Authentication //DO ATTACH WITH CHAIN 2 FOR HO
 				//if(setUpTunnel_t || serviceRequestLoopFlag){
 					// Setup tunnel
@@ -475,26 +476,15 @@ void* multithreading_func(void *arg){
 				// usleep(200000);
 				if(tmpArray.size()>=5){
 
-					do{ //for while(loop2>0)
-						if(sendData_t){
-								// Send data
-							if(DO_DEBUG){
-								cout<<"Sending DATA - traffic_type = "<<traffic_type<<" DATA TIME = "<<dataTime<<endl;
-							}
-							usleep(10000);
-							//send_socket_data(tmpArray[1].c_str());
-
-							//currentPort = send_ue_data(ue, ue_num, rate, currentPort, startingPort, endPort, user, tmpArray, dataTime);
-							// usleep(100000);
-						}
+				
 						do{
 							if(handover_t){
 
 										/************************************************ @HO: START: Do Context Release - Service Request loop with chain 2 ***********************************************/
 								if(s1_release_t){
 								//cout<<"SLEEPING BEFORE s1 release"<<endl;
-								usleep(my_rand()+2000);		//200-700 usec
-								usleep(40000);
+								usleep(my_rand()+ wait_latency);		//200-700 usec
+								//usleep(28000);
 								//sreqNo++;
 								gettimeofday(&start2, NULL);
 								ue_context_release(ue, user, ue_num, tmpArray[1], tmpArray[2], tmpArray[3], currentPort, networkServiceRequest,false);
@@ -526,8 +516,8 @@ void* multithreading_func(void *arg){
 									lat_mtx.unlock();
 									//cout<<"SLEEPING BEFORE service request"<<endl;
 									//usleep(my_rand());
-									usleep(my_rand()+2000);
-									usleep(40000);
+								        usleep(my_rand()+ wait_latency);		//200-700 usec
+									//usleep(40000);
 									//usleep(my_rand()+2000);
 									gettimeofday(&start2, NULL);
 									tmpArray[3] = ue_service_request(ue, user, ue_num, tmpArray[1],false); //returns newly generated ue_teid
@@ -555,9 +545,17 @@ void* multithreading_func(void *arg){
 							/************************************************ @HO: END : Context Release-  Service Request loop with chain 2 ***********************************************/
 
 
+							///  After this the detach should be performed for second chain, attach is still done with first chain
+						}
+						loop3--;
+						}
+
+						}while(loop3>0);
+
 							/***************************************************  in HANDOVER, Attach to 1st chain of DGW-SGW  **********************************************/
 							//change the functions for tunnel setup to indicate that it is for second chain 
 							//gettimeofday(&start1, NULL);
+					                usleep(my_rand()+ wait_latency);		//200-700 usec
 							gettimeofday(&start4, NULL);
 							//@HO
 							tmpArray = setup_tunnel(ue, user, doEncryption_t); //attach to the chain where HO is to be done i.e. chain 1
@@ -573,32 +571,24 @@ void* multithreading_func(void *arg){
 							hoNo++;
 							num_ue_per_thread[threadId] += 1; //Increment completion num for att req
 							lat_mtx.unlock();
-							//////// Detach and release the tunnel from first chain, do not delete the data
-							//cout<<"SLEEPING BEFORE detach"<<endl;
-							//usleep(my_rand()+200);			//sleep for 200-700 usec
-							
-							//@HO
-							//detach_ue_ho(ue, user, ue_num, tmpArray[1], tmpArray[2], tmpArray[3]); //detach the tunnel with chain 2 without deleting state
-																								// maybe not needed, controller can initiate the whole process of setup_tunnel & detach_ue_ho
-							/*gettimeofday(&end3, NULL);
-							seconds  = end3.tv_sec  - start3.tv_sec;
-							useconds = end3.tv_usec - start3.tv_usec;
-							mtime = ((seconds) * 1000000 + useconds);
-							lat_mtx.lock();
-							ue_registration_response_time[threadId] += mtime;
-							lat_mtx.unlock();*/
 
-							///  After this the detach should be performed for second chain, attach is still done with first chain
-						}
-						loop3--;
-						}
+				do{ //for while(loop2>0)
+						if(sendData_t){
+								// Send data
+							if(DO_DEBUG){
+								cout<<"Sending DATA - traffic_type = "<<traffic_type<<" DATA TIME = "<<dataTime<<endl;
+							}
+							//usleep(10000);
+							//usleep(my_rand()+28000);		//200-700 usec
+							//send_socket_data(tmpArray[1].c_str());
 
-						}while(loop3>0);
-					
+							//currentPort = send_ue_data(ue, ue_num, rate, currentPort, startingPort, endPort, user, tmpArray, dataTime);
+							// usleep(100000);
+						}
 						if(s1_release_t){
 							//cout<<"SLEEPING BEFORE s1 release"<<endl;
-							usleep(my_rand()+2000);		//200-700 usec
-							usleep(40000);
+					                usleep(my_rand()+ wait_latency);		//200-700 usec
+							//usleep(40000);
 							//sreqNo++;
 							gettimeofday(&start2, NULL);
 							ue_context_release(ue, user, ue_num, tmpArray[1], tmpArray[2], tmpArray[3], currentPort, networkServiceRequest,true);
@@ -637,8 +627,8 @@ void* multithreading_func(void *arg){
 								lat_mtx.unlock();
 								//cout<<"SLEEPING BEFORE service request"<<endl;
 								//usleep(my_rand());
-								usleep(my_rand()+2000);
-								usleep(40000);
+					                         usleep(my_rand()+ wait_latency);		//200-700 usec
+								//usleep(40000);
 								//usleep(my_rand()+2000);
 								gettimeofday(&start2, NULL);
 								tmpArray[3] = ue_service_request(ue, user, ue_num, tmpArray[1],true); //returns newly generated ue_teid
@@ -651,9 +641,6 @@ void* multithreading_func(void *arg){
 								ue_registration_response_time[threadId] += mtime;
 								sr_registration_response_time[threadId] += mtime;
 								lat_mtx.unlock();
-								/*stored_ue_registration_response_time[j] = mtime;
-								j = j + 1;*/
-								////////////////////////////////////
 								if(DO_DEBUG){
 									cout<<"UE SERVICE REQUEST DONE with UE NUM="<<ue_num<<endl;
 								}
@@ -663,16 +650,7 @@ void* multithreading_func(void *arg){
 									cout<<"NETWORK SERVICE REQUEST DONE with UE NUM="<<ue_num<<endl;
 								}
 							}
-							// if(sendData_t){
-							// 	// Send data
-							// if(DO_DEBUG){
-							// 	cout<<"traffic_type = "<<traffic_type<<" DATA TIME = "<<dataTime<<endl;
-
-							// }
-							// currentPort = send_ue_data(ue, ue_num, rate, currentPort, startingPort, endPort, user, tmpArray, dataTime);
-							// // usleep(100000);
-							// }
-
+					
 						} //endif s1 release
 						if(sendData_t){
 							currentPort++;
@@ -685,7 +663,7 @@ void* multithreading_func(void *arg){
 					}while(loop2>0); //end of do
 					// sleep(300); // sleep after sending data
 					if(doDetach_t){
-						usleep(my_rand()+20000); 
+					        usleep(my_rand()+ wait_latency);		//200-700 usec
 						// Initiate detach
 						//cout<<"SLEEPING BEFORE detach"<<endl;
 						//usleep(my_rand()+200);			//sleep for 200-700 usec
@@ -694,7 +672,7 @@ void* multithreading_func(void *arg){
 						att_done=false;
 						gettimeofday(&start3, NULL);
 						detach_ue(ue, user, ue_num, tmpArray[1], tmpArray[2], tmpArray[3]);
-						// sleep(300);
+					 //sleep(300);
 
 						gettimeofday(&end3, NULL);
 						lat_mtx.lock();
@@ -709,11 +687,7 @@ void* multithreading_func(void *arg){
 						lat_mtx.lock();
 						ue_registration_response_time[threadId] += mtime;
 						lat_mtx.unlock();
-						/*stored_ue_registration_response_time[j] = mtime;
-						j = j + 1;*/
-						////////////////////////////////////
-						//cout<<"SLEEPING AFTER detach"<<endl;
-						//usleep(my_rand()+200);
+					
 					}
 
 				}//endif tmpArray.size()>=5
@@ -723,16 +697,7 @@ void* multithreading_func(void *arg){
 				cout<<"Authentication Error"<<endl;
 				//exit(1);
 			} //endif else attach_with_mme
-		/*	gettimeofday(&end, NULL);
-			seconds  = end.tv_sec  - start.tv_sec;
-			useconds = end.tv_usec - start.tv_usec;
-			mtime = ((seconds) * 1000000 + useconds);
-			ue_registration_response_time[threadId] += mtime;
-			//if (WANT_DELAY_CDF){
-			stored_ue_registration_response_time[j] = mtime;
-			//delay[threadId][j] = mtime;
-			j = j + 1;*/
-			//}*/
+	
 			time(&curTime);
 			loop1--;
 
