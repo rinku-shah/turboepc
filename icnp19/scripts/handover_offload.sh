@@ -15,21 +15,21 @@ fi
 #rt=`sudo lxc-info -p -n onos-controller|tr -d ' '|cut -d ':' -f2`
 #rt=`sudo lxc-info -p -n onos-offload-controller|tr -d ' '|cut -d ':' -f2`
 
-dg1=`sudo lxc-info -p -n scale_dgw1|tr -d ' '|cut -d ':' -f2`
-#dg2=`sudo lxc-info -p -n scale_dgw2|tr -d ' '|cut -d ':' -f2`
+dg1=`sudo lxc-info -p -n handover_dgw1|tr -d ' '|cut -d ':' -f2`
+dg2=`sudo lxc-info -p -n scale_dgw2|tr -d ' '|cut -d ':' -f2`
 #dg3=`sudo lxc-info -p -n scale_dgw3|tr -d ' '|cut -d ':' -f2`
 #dg4=`sudo lxc-info -p -n scale_dgw4|tr -d ' '|cut -d ':' -f2`
 
-sg11=`sudo lxc-info -p -n series_sgw1_1|tr -d ' '|cut -d ':' -f2`
-sg12=`sudo lxc-info -p -n series_sgw1_2|tr -d ' '|cut -d ':' -f2`
-sg21=`sudo lxc-info -p -n series_sgw2_2|tr -d ' '|cut -d ':' -f2`
+sg11=`sudo lxc-info -p -n scale_sgw1_1|tr -d ' '|cut -d ':' -f2`
+sg12=`sudo lxc-info -p -n scale_sgw1_2|tr -d ' '|cut -d ':' -f2`
+#sg21=`sudo lxc-info -p -n scale_sgw2_1|tr -d ' '|cut -d ':' -f2`
 #sg22=`sudo lxc-info -p -n scale_sgw2_2|tr -d ' '|cut -d ':' -f2`
 #sg31=`sudo lxc-info -p -n scale_sgw3_1|tr -d ' '|cut -d ':' -f2`
 #sg32=`sudo lxc-info -p -n scale_sgw3_2|tr -d ' '|cut -d ':' -f2`
 #sg41=`sudo lxc-info -p -n scale_sgw4_1|tr -d ' '|cut -d ':' -f2`
 #sg42=`sudo lxc-info -p -n scale_sgw4_2|tr -d ' '|cut -d ':' -f2`
 
-pg=`sudo lxc-info -p -n scale_pgw_series|tr -d ' '|cut -d ':' -f2`
+pg=`sudo lxc-info -p -n scale_pgw|tr -d ' '|cut -d ':' -f2`
 
 ran1=`sudo lxc-info -p -n ran1|tr -d ' '|cut -d ':' -f2`
 #ran2=`sudo lxc-info -p -n ran2|tr -d ' '|cut -d ':' -f2`
@@ -46,9 +46,9 @@ sink=`sudo lxc-info -p -n sink|tr -d ' '|cut -d ':' -f2`
 
 #DGW utilization
 
-sh cpu_util.sh $1 $2 $dg1 dgw1_util.txt tmp_d1 $3 "^%Cpu16 \|^%Cpu17 \|^%Cpu18 " &
+sh cpu_util.sh $1 $2 $dg1 dgw1_util.txt tmp_d1 $3 "^%Cpu16 \|^%Cpu17 " &
 
-#sh cpu_util.sh $1 $2 $dg2 dgw2_util.txt tmp_d2 $3 "^%Cpu18 \|^%Cpu19 " & 
+sh cpu_util.sh $1 $2 $dg2 dgw2_util.txt tmp_d2 $3 "^%Cpu18 \|^%Cpu19 " & 
 
 #sh cpu_util.sh $1 $2 $dg3 dgw3_util.txt tmp_d3 $3 "^%Cpu20 \|^%Cpu21 " & 
 
@@ -60,7 +60,7 @@ sh cpu_util.sh $1 $2 $dg1 dgw1_util.txt tmp_d1 $3 "^%Cpu16 \|^%Cpu17 \|^%Cpu18 "
 sh cpu_util.sh $1 $2 $sg11 sgw11_util.txt tmp_s11 $3 "^%Cpu24 \|^%Cpu25 " & 
 sh cpu_util.sh $1 $2 $sg12 sgw12_util.txt tmp_s12 $3 "^%Cpu26 \|^%Cpu27 " &
 
-sh cpu_util.sh $1 $2 $sg21 sgw21_util.txt tmp_s21 $3 "^%Cpu28 \|^%Cpu29 " & 
+#sh cpu_util.sh $1 $2 $sg21 sgw21_util.txt tmp_s21 $3 "^%Cpu28 \|^%Cpu29 " & 
 #sh cpu_util.sh $1 $2 $sg22 sgw22_util.txt tmp_s22 $3 "^%Cpu30 \|^%Cpu31 " &
 
 #sh cpu_util.sh $1 $2 $sg31 sgw31_util.txt tmp_s31 $3 "^%Cpu32 \|^%Cpu33 " & 
