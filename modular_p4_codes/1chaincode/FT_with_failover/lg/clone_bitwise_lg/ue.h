@@ -14,6 +14,7 @@ typedef struct {
 
 class UserEquipment{
 	public:
+		bool failFlag = true;
 		uint8_t key[16];		// UE key
 		/*-------------------- Rijndael round subkeys ---------------------*/
 		uint8_t roundKeys[11][4][4];

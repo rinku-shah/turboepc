@@ -44,7 +44,7 @@ bool networkServiceRequest = false;	// Network initiated service request (downli
 /* attach-detach, context-rel/service-req, att-data_all_the_time-det, att-data(default=1s)-det-loop, att-serv_req-data-loop2-det-loop1, att-serv-req-data-loop2-det*/
 // vector<vector<int>> traffic_mix={{0,100,0,0,0},{499,99501,0,0,0},{1499,98501,0,0,0},{2999,97001,0,0,0},{6999,93001,0,0,0},{8999,91001,0,0,0},{10999,89001,0,0,0},{30999,69001,0,0,0},{40999,59001,0,0,0},{50999,49001,0,0,0},{60999,39001,0,0,0},{100,0,0,0,0}};
 vector<vector<int>> traffic_mix={{0,0,0,74999,0,25001},{499,99501,0,0,0,0},{1499,98501,0,0,0,0},{2999,97001,0,0,0,0},{6999,93001,0,0,0,0},{8999,91001,0,0,0,0},{10999,89001,0,0,0,0},{30999,69001,0,0,0,0},{40999,59001,0,0,0,0},{0,0,0,0,100,0},{0,0,0,0,0,100},{0,0,0,100,0,0}};
-
+int waitlatency = 40000;
 //2_98,0
 //5_95,1
 //6_94,2
@@ -86,7 +86,7 @@ int traffic_shape[10][2] = {{5,1},{5,0},{5,9},{5,3},{5,1},{5,11},{5,10},{6,7}};
 //int traffic_shape[10][2] = {{5,1},{5,9},{6,0}};
 int curr_mix_index=0;
 bool dynLoad = false;
-bool instrumentTptLat = false; //Instrument num_ue and response_time every 10 sec
+bool instrumentTptLat = true; //Instrument num_ue and response_time every 10 sec
 //vector<vector<int>> traffic_shape={{2,1},{3,3}}; //States for the first two minutes mix_num=1 & for next 3 minutes mix_num=3
 /// DYNAMIC LOAD GENERATOR ///
 //  11 for ATTACH Detach and 10  for service request, 9 for other mixes
@@ -117,6 +117,7 @@ struct _threadArgs {
 	int starting_ue_id;
 	int ue_id_gap;		// Number of ids of UE initially allocated to each thread
 	int num_threads;
+	bool failFlag;
         //long delay[1000][10000]; //For storing index ofserviceRequestLoopFlag UE delays
         //int j; //secondary index for delay matrix
 };
@@ -147,6 +148,9 @@ string rate;		// Rate at which each UE sends data
 time_t endTime;		// Simulation end time
 time_t mix_endTime; //End time of current traffic mix
 time_t inst_endTime; //End time of instrumenting current period (10sec)
+time_t failTime; //Time after which primary switch should fail
+int FAIL = 60; //Time in secs after which thread sleep 
+int WAKEUP = 60; //Time for which all threads sleep after primary switch failure
 //time_t servReqTime; //Service Request time for traffic mix containing multiple service requests
 int cnt = 0;
 int attNo, detNo, sreqNo = 0;//Counts number of requests served
@@ -279,6 +283,7 @@ void* multithreading_func(void *arg){
 	int port_gap =  args->port_gap;
 	int gap = args->ue_id_gap;
 	int maxThreads = args->num_threads;
+	bool failFlag = args->failFlag;
 	//int j = args->j;
 	//long delay[1000][10000] = args->delay;
 	time_t curTime;
@@ -396,6 +401,7 @@ void* multithreading_func(void *arg){
 					loop2 = 100; //100;   //inner loop---service-req
 					break;
 		}
+		
 		do {
 			// UserEquipment ue(threadId+1);
 			UserEquipment ue(threadId+100);
@@ -404,9 +410,9 @@ void* multithreading_func(void *arg){
 				cout<<"Attaching with MME"<<endl;
 			}
 			gettimeofday(&start, NULL);
-			//usleep(my_rand()+2000);
+			usleep(my_rand()+waitlatency);
 			// usleep(200000);
-			usleep(10000);
+			//usleep(10000);
 			if(attach_with_mme(ue, user, checkIntegrity_t)){ 	// Authentication
 				//if(setUpTunnel_t || serviceRequestLoopFlag){
 					// Setup tunnel
@@ -459,7 +465,7 @@ void* multithreading_func(void *arg){
 							/*if(ue_num == 100){
 								sleep(1000);
 							}*/
-							usleep(20000);
+							//usleep(20000);
 							//sleep(500);
 							//send_socket_data(tmpArray[1].c_str());
 
@@ -468,8 +474,9 @@ void* multithreading_func(void *arg){
 						}
 						if(s1_release_t){
 							//cout<<"SLEEPING BEFORE s1 release"<<endl;
-							usleep(my_rand()+2000);		//200-700 usec
-							usleep(20000);
+						//	usleep(my_rand()+2000);		//200-700 usec
+							usleep(my_rand()+waitlatency);
+						//	usleep(20000);
 							//sreqNo++;
 							gettimeofday(&start2, NULL);
 							ue_context_release(ue, user, ue_num, tmpArray[1], tmpArray[2], tmpArray[3], currentPort, networkServiceRequest);
@@ -514,8 +521,9 @@ void* multithreading_func(void *arg){
 								//cout<<"SLEEPING BEFORE service request"<<endl;
 								//usleep(my_rand());
 								//usleep(my_rand()+2000);
-								usleep(20000);
-								usleep(my_rand()+2000);
+								//usleep(20000);
+								//usleep(my_rand()+2000);
+							        usleep(my_rand()+waitlatency);
 								gettimeofday(&start2, NULL);
 								tmpArray[3] = ue_service_request(ue, user, ue_num, tmpArray[1]); //returns newly generated ue_teid
 									//////PRINT REG TIME TO ARRAY////
@@ -566,6 +574,7 @@ void* multithreading_func(void *arg){
 						// Initiate detach
 						//cout<<"SLEEPING BEFORE detach"<<endl;
 						//usleep(my_rand()+200);			//sleep for 200-700 usec
+					        usleep(my_rand()+waitlatency);
 						if(!s1_release_t && !sendData_t)
 							usleep(my_rand()+2000);
 						att_done=false;
@@ -700,7 +709,12 @@ void* multithreading_func(void *arg){
 
 
 //////  INSTRUMENTATION CODE ENDS HERE /////////////////////////////////////////////////////////
-
+                       if (curTime > failTime && failFlag){
+				failFlag = false;
+                                cout<<"TIME TO SLEEP ........................"<<endl;
+				sleep(WAKEUP); 
+				cout<<"I AM STARTING NOW ........................"<<endl;
+			}
 		}while(curTime < endTime && loop1>0);
 	} //end while
 
@@ -880,6 +894,7 @@ int main(int argc, char *args[]){
 	///// INSTRUMENTATION CODE ENDS /////////
 
 	endTime = curTime + (int) tmp;
+        failTime = curTime + FAIL;
 	if(DO_DEBUG){
 		cout<<"end time="<<endTime<<endl;
 	}
@@ -908,6 +923,7 @@ int main(int argc, char *args[]){
 		args->starting_ue_id = 100 + i * gap;
 		args->ue_id_gap = gap;
 		args->num_threads = maxThreads;
+		args->failFlag=true;
 
 		status = pthread_create(&tid[i], NULL, multithreading_func, args);
 		report_error(status);
@@ -974,7 +990,8 @@ int main(int argc, char *args[]){
 	}
 	average_sr_registration_time = (total_sr_reistration_time*1.0)/(sreqNo*1.0);
 	average_registration_time = (total_reistration_time*1.0)/(total_ue*1.0);
-	registrationThroughput = (total_ue*1.0)/(actual_endTime - curTime);
+	registrationThroughput = (total_ue*1.0)/(actual_endTime - curTime - WAKEUP);
+	cout<<"Total time for which experiment ran ="<< (actual_endTime - curTime - WAKEUP)<<endl;
 
 	cout<<"***************************************STATISTICS***************************************"<<endl;
 	execution_done = true;
