@@ -110,7 +110,7 @@ public:
 	int tID;
 	int client_socket;
 	char client_buffer[BUFFER_SIZE];
-    unsigned char my_client_byte_buffer[BUFFER_SIZE];
+        unsigned char my_client_byte_buffer[BUFFER_SIZE];
 	char write_client_buffer[BUFFER_SIZE];
 	char write_client_byte_buffer[BUFFER_SIZE];
 	int sock_raw; //To receive raw packets
@@ -125,7 +125,10 @@ public:
 	struct sockaddr_in source,dest;
 	//bool flag=false; //flag to test the right dest IP for rcv data 
 	bool tflag=false; //flag to test dest UDP port for demux of packets
-	
+	time_t cT;
+	time_t eT;
+        double timeout = 2;
+        bool timeoutFlag=false; // Flag =true if read timedout
 
 	// Constructor
 	Client(int);

@@ -1,6 +1,6 @@
-/*******//*************************************************************
+/********************************************************************
  * This file contains all the functionalities associated with a UE. *
- *******//*************************************************************/
+ ********************************************************************/
 
 #include "ue.h"
 #include <time.h>
@@ -10,7 +10,7 @@
 
 typedef uint8_t  u8;
 typedef uint32_t u32;
-//
+
 /* UE Authentication and tunnel setup codes */
 string AUTHENTICATION_FAILURE = "-1";
 string AUTHENTICATION_STEP_ONE = "1"; 	// Attach request
@@ -725,7 +725,7 @@ bool UserEquipment::authenticate(Client &user, bool checkIntegrity){
 	one.tai[5] =  (tai >> 16) & 0xFF;
 	one.tai[6] =  (tai >> 8) & 0xFF;
 	one.tai[7] =  (tai) & 0xFF;
-
+    do{
     bzero(user.client_buffer, BUFFER_SIZE);
 
 	int len=0;
@@ -783,6 +783,8 @@ bool UserEquipment::authenticate(Client &user, bool checkIntegrity){
 	time(&curTime);
 	// Receive reply from MME: Authentication Step 2
 	user.read_data();
+        } while(user.timeoutFlag);
+
 //	cout<<"After read"<<endl;
 	time(&curTime);
 	receive = (string) (user.client_buffer);
@@ -955,10 +957,11 @@ bool UserEquipment::authenticate(Client &user, bool checkIntegrity){
 			// three.res[7] =  (authenticationVector[1]) & 0xFF;
 			// cout<<"size of av.xres = "<<sizeof(av.xres)<<endl;
 			memcpy(three.res,av.xres,sizeof(av.xres));
-
+                        
+			do{
 			// now write struct elemets to buffer one by one
 			bzero(user.client_buffer, BUFFER_SIZE);
-			len=0;  // reset length which holds no of bytes written in buffer
+			int len=0;  // reset length which holds no of bytes written in buffer
 
 			memcpy(user.client_buffer, &(three.msg_id), sizeof(three.msg_id));
 			len+=sizeof(three.msg_id);
@@ -995,6 +998,8 @@ bool UserEquipment::authenticate(Client &user, bool checkIntegrity){
 			
 			// Receive reply from MME: Authentication Step 4
 			user.read_data();
+		        } while(user.timeoutFlag);
+
 			time(&curTime);
 			receive = (string) (user.client_buffer);
 			if(MY_DEBUG){
@@ -1104,7 +1109,7 @@ bool UserEquipment::authenticate(Client &user, bool checkIntegrity){
 
 						// now write struct elemets to buffer one by one
 						bzero(user.client_buffer, BUFFER_SIZE);
-						len=0;  // reset length which holds no of bytes written in buffer
+						int len=0;  // reset length which holds no of bytes written in buffer
 
 						memcpy(user.client_buffer, &(n2.msg_id), sizeof(n2.msg_id));
 						len+=sizeof(n2.msg_id);
@@ -1243,7 +1248,8 @@ vector<string> UserEquipment::setupTunnel(Client &user, bool doEncryption){
 	// apnt.key[7] =  (ue_key) & 0xFF;
 
 	apnt.key = htonl(ue_key);
-
+        
+        do{
 	// now write struct elemets to buffer one by one
 	bzero(user.client_buffer, BUFFER_SIZE);
 	int len=0;  // reset length which holds no of bytes written in buffer
@@ -1279,6 +1285,8 @@ vector<string> UserEquipment::setupTunnel(Client &user, bool doEncryption){
 
 	// Receive UE IP address and SGW TEID from MME
 	user.read_data();
+        } while(user.timeoutFlag);
+
 	receive = (string) (user.client_buffer);
 
 	tmpArray = split(user.client_buffer, SEPARATOR);
@@ -1289,7 +1297,8 @@ vector<string> UserEquipment::setupTunnel(Client &user, bool doEncryption){
 		if(DO_DEBUG){
 			cout<<" IP Address of UE="<<tmpArray[1]<<" and SGW TEID="<<tmpArray[2]<<" ue TEID="<<ue_teid<<endl;
 		}
-		tmpArray.push_back(to_string(ue_teid));
+		//tmpArray.push_back(to_string(ue_teid));
+		tmpArray[3] = to_string(ue_teid);
 
 		// rewriting Send UE TEID and key for identifying UE at MME (for SGW)
 		// struct send_ue_teid_t{
@@ -1323,10 +1332,10 @@ vector<string> UserEquipment::setupTunnel(Client &user, bool doEncryption){
 		// st.key[7] =  (ue_key) & 0xFF;
 
 		st.key = htonl(ue_key);
-
+                do{
 		// now write struct elemets to buffer one by one
 		bzero(user.client_buffer, BUFFER_SIZE);
-		len=0;  // reset length which holds no of bytes written in buffer
+		int len=0;  // reset length which holds no of bytes written in buffer
 
 		memcpy(user.client_buffer, &(st.msg_id), sizeof(st.msg_id));
 		len+=sizeof(st.msg_id);
@@ -1358,6 +1367,8 @@ vector<string> UserEquipment::setupTunnel(Client &user, bool doEncryption){
 		}
 
 		user.read_data();
+                } while(user.timeoutFlag);
+
 		receive = (string) (user.client_buffer);
 		clearToSend = split(user.client_buffer, SEPARATOR);
 		if(doEncryption) {
@@ -1461,7 +1472,7 @@ void UserEquipment::initiate_detach(Client &user, int ue_num, string ue_ip, stri
 
 	detach.ue_num = htonl(ue_num);
 
-
+        do{
 	// now write struct elemets to buffer one by one
 	bzero(user.client_buffer, BUFFER_SIZE);
 	int len=0;  // reset length which holds no of bytes written in buffer
@@ -1511,6 +1522,8 @@ void UserEquipment::initiate_detach(Client &user, int ue_num, string ue_ip, stri
 
 	// Receive UE IP address and SGW TEID
 	user.read_data();
+        } while(user.timeoutFlag);
+
 	receive = (string) (user.client_buffer);
 	tmpArray = split(user.client_buffer, SEPARATOR);
 	if(DO_DEBUG){
@@ -1583,7 +1596,8 @@ void UserEquipment::initiate_ue_context_release(Client &user, int ue_num, string
 
 	ctxtrel.ue_num = htonl(ue_num);
 	
-	// now write struct elemets to buffer one by one
+	do{
+        // now write struct elemets to buffer one by one
 	bzero(user.client_buffer, BUFFER_SIZE);
 	int len=0;  // reset length which holds no of bytes written in buffer
 
@@ -1626,23 +1640,37 @@ void UserEquipment::initiate_ue_context_release(Client &user, int ue_num, string
 	// Receive UE_CONTEXT_RELEASE_COMMAND from MME
 	// user.read_data();
 	user.read_data2();
-	int code_name = (int)(user.my_client_byte_buffer[0]);
+        } while(user.timeoutFlag);
+
+	//int code_name = (int)(user.my_client_byte_buffer[0]);
+	 int code_name = user.my_client_byte_buffer[0];
 	char sep = (char)user.my_client_byte_buffer[1];
 
 	if(DO_DEBUG){
 		cout<<"UE INITIATED CONTEXT RELEASE REQUEST:  IP Address of UE="<<ue_ip<<" and UE TEID="<<ue_teid<<" SGW TEID"<<sgw_teid<<endl;
 		cout<<" received data UE CONTEXT RELEASE COMMAND my_client_byte_buffer = "<<user.my_client_byte_buffer<<endl;
-		// cout<<"user.my_client_byte_buffer[0] = "<<(int)user.my_client_byte_buffer[0]<<endl;
+		//cout<<"user.my_client_byte_buffer[0] = "<<(int)user.my_client_byte_buffer[0]<<endl;
+		cout<<"user.my_client_byte_buffer[0] = "<<user.my_client_byte_buffer[0]<<endl;
 		cout<<"code_name = "<<code_name<<endl;
 		cout<<"sep = "<<sep<<endl;
 	}
-	
+	string tmpStr;
+	tmpStr += user.my_client_byte_buffer[0];
+	tmpStr += user.my_client_byte_buffer[1];
+        //receive = (user.my_client_byte_buffer);
+        //tmpArray = split((char*)user.my_client_byte_buffer, SEPARATOR);
 
+	//cout<<"tmpArray[0]= "<<tmpArray[0]<<endl;	
 	// receive = (string) (user.client_buffer);
-	// tmpArray = split(user.client_buffer, SEPARATOR);
+	//tmpArray = split(user.client_buffer, SEPARATOR);
 	// if(tmpArray[0] == UE_CONTEXT_RELEASE_COMMAND){
-	if(code_name == stoi(UE_CONTEXT_RELEASE_COMMAND)){
+	
+	if((code_name == stoi(UE_CONTEXT_RELEASE_COMMAND)) || (stoi(tmpStr) == stoi(UE_CONTEXT_RELEASE_COMMAND))){
 
+	//if (stoi(tmpArray[0])== stoi(UE_CONTEXT_RELEASE_COMMAND)) {
+	//if (tmpArray[0].compare(UE_CONTEXT_RELEASE_COMMAND) == 0) {
+	
+	//if((code_name == stoi(UE_CONTEXT_RELEASE_COMMAND)) || (tmpArray[0].compare(UE_CONTEXT_RELEASE_COMMAND) == 0)){
 		if(DO_DEBUG){
 			cout<<"UE CONTEXT RELEASE COMMAND:  IP Address of UE="<<ue_ip<<" and UE TEID="<<ue_teid<<" SGW TEID"<<sgw_teid<<endl;
 		}
@@ -1715,7 +1743,7 @@ string UserEquipment::send_ue_service_request(Client& user, int ue_num, string u
 
 	serreq.ue_ip = inet_addr(ue_ip.c_str());
 
-
+        do{
 	// now write struct elemets to buffer one by one
 	bzero(user.client_buffer, BUFFER_SIZE);
 	int len=0;  // reset length which holds no of bytes written in buffer
@@ -1753,6 +1781,8 @@ string UserEquipment::send_ue_service_request(Client& user, int ue_num, string u
 	// Receive reply from MME
 	// user.read_data();
 	user.read_data2();
+        } while(user.timeoutFlag);
+
 	int code_name1 = (int)(user.my_client_byte_buffer[0]);
 	// not parsing sep as not needed
 
@@ -1881,6 +1911,7 @@ string UserEquipment::send_ue_service_request(Client& user, int ue_num, string u
 
 			ctxtresp.ue_ip = inet_addr(ue_ip.c_str());
 
+                        do{
 			// now write struct elemets to buffer one by one
 			bzero(user.client_buffer, BUFFER_SIZE);
 			int len=0;  // reset length which holds no of bytes written in buffer
@@ -1916,6 +1947,8 @@ string UserEquipment::send_ue_service_request(Client& user, int ue_num, string u
 				// user.write_data(INITIAL_CONTEXT_SETUP_RESPONSE);
 
 			user.read_data2();
+                        } while(user.timeoutFlag);
+
 			int code_name2 = (int)(user.my_client_byte_buffer[0]);
 
 			if(DO_DEBUG){
@@ -2003,6 +2036,7 @@ string UserEquipment::getStartingIPAddress(Client& user){
 	
     struct req_starting_ip rip;
 	int len=0;
+        do{
 	bzero(user.client_buffer, BUFFER_SIZE);
 
 	rip.msg_id = 12;
@@ -2028,6 +2062,8 @@ string UserEquipment::getStartingIPAddress(Client& user){
 
 	//cout<<"sent data in getStartingIPAddress = "<<send<<endl;
 	user.read_data();
+        } while(user.timeoutFlag);
+
 	receive = (string) (user.client_buffer);
 
 	if(MY_DEBUG){

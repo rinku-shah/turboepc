@@ -145,12 +145,22 @@ unsigned short csum(unsigned short *ptr,int nbytes)
 void Client::read_data2(){
         int status=0;
         unsigned char* my_buffer;
-    while(status!=17 || !tflag ){
-	    bzero(my_client_byte_buffer, BUFFER_SIZE);
-         data_size = recvfrom(sock_raw, my_client_byte_buffer , BUFFER_SIZE-1 , 0 , &saddr , (socklen_t*)&saddr_size);
-        status=ProcessPacket2((unsigned char*)my_client_byte_buffer , data_size); 
-	}
-
+        
+        timeoutFlag = false;
+        time(&cT);
+        eT = cT + (int) timeout;
+        while(status!=17 || !tflag){    
+         	bzero(my_client_byte_buffer, BUFFER_SIZE);
+         	data_size = recvfrom(sock_raw, my_client_byte_buffer , BUFFER_SIZE-1 , 0 , &saddr , (socklen_t*)&saddr_size);
+        	//Now process the packet        
+        	status=ProcessPacket2((unsigned char*)my_client_byte_buffer , data_size);
+        	time(&cT);
+        	if (cT > eT) {
+          		cout<<"Read Timed out"<<endl;
+          		timeoutFlag = true;
+          		break;
+          	}
+        }
 }
 
 int Client::ProcessPacket2(unsigned char* buffer, int size)
@@ -217,74 +227,22 @@ void Client::print_udp_packet2(unsigned char *Buffer , int Size)
  void Client::read_data(){
         int status=0;
         unsigned char* my_buffer;
-	//bzero(client_buffer, BUFFER_SIZE);
-
-	//int saddr_size , data_size;
-        //struct sockaddr saddr;
-	
-    /*logfile=fopen("log.txt","w");
-    if(logfile==NULL) 
-    {
-        printf("Unable to create log.txt file.");
-    }*/
-        //struct ethhdr *eth = (struct ethhdr *)client_buffer;
-        //struct iphdr *iph = (struct iphdr *)(client_buffer  + sizeof(struct ethhdr) );
-        //struct udphdr *udph = (struct udphdr*)(client_buffer + sizeof(struct iphdr) + sizeof(struct ethhdr));
-	
-	/*sock_raw = socket( AF_PACKET , SOCK_RAW , htons(ETH_P_ALL)) ;
-        //int sock_raw = socket( AF_PACKET , SOCK_RAW , htons(ETH_P_ALL)) ;
-        //setsockopt(sock_raw , SOL_SOCKET , SO_BINDTODEVICE , "eth0" , strlen("eth0")+ 1 );
-     
-       if(sock_raw < 0)
-       {
-        //Print the error with proper message
-        perror("Socket Error");
-        //return 1;
-       }*/
-	
-	/*saddr_size = sizeof saddr;
-	struct sockaddr_in client_sock_addr;
-     
-    //some address resolution
-    //strcpy(source_ip , RAN_IP); //Source IP
-   
-    client_sock_addr.sin_family = AF_INET;
-    client_sock_addr.sin_port = htons(RAN_UDP_PORT);
-    client_sock_addr.sin_addr.s_addr = inet_addr(RAN_IP); //Dest IP
-    //setsockopt(sock_raw , SOL_SOCKET , SO_BINDTODEVICE , "eth1" , strlen("eth0")+ 1 );
-    //Bind the client socket to UDP port 
-    //bind(sock_raw, (struct sockaddr *)& client_sock_addr, sizeof(client_sock_addr)); */
-
-        //Receive a packet
-        int c=0;
-	//while(status!=17 || !flag || !tflag){
-	
-	/*time(&curT);
-	endT = curT + (int) timeout;*/
-	while(status!=17 || !tflag ){	
+	timeoutFlag = false;
+    	time(&cT);
+    	eT = cT + (int) timeout;
+	while(status!=17 || !tflag){	
 	 bzero(client_buffer, BUFFER_SIZE);
          data_size = recvfrom(sock_raw, client_buffer , BUFFER_SIZE-1 , 0 , &saddr , (socklen_t*)&saddr_size);
-       //cout<<(string)client_buffer<<endl;
-       //cout<<status;
-        //Now process the packet
-         
+        //Now process the packet        
         status=ProcessPacket((unsigned char*)client_buffer , data_size); 
-	/*time(&curT);
-	if (curT > endT) {
-		cout<<"Read Timed out"<<endl;
-	}*/
-	//cout<<"Status "<<status<<endl;
-	//cout<<"c= "<<c++<<"flag = "<<flag<<endl;
+        time(&cT);
+        if (cT > eT) {
+          cout<<"Read Timed out"<<endl;
+          timeoutFlag = true;
+          break;
+          }
 	}
-	
-	//cout<<"Outside c= "<<c++<<"flag = "<<flag<<endl;
-	//flag=false;
-			
-        //status = recvfrom(client_socket, client_buffer, BUFFER_SIZE-1, 0, NULL, NULL);
-        //cout<<data_size<<endl;
-        //fclose(logfile);
-        //report_error(data_size);
-	//close(sock_raw);
+
  }
 
 
