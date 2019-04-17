@@ -7,7 +7,7 @@ paste ../dgw1_util.txt |tr -s "," " "|tr -s [:blank:] " " > tmp
 cat tmp| tail -n +2 > tmp_cpu
 awk -f compile_CPU.awk tmp_cpu > dgw_cpu.dat
 
-paste ../sgw11_util.txt ../sgw12_util.txt |tr -s "," " "|tr -s [:blank:] " " > tmp
+paste ../sgw11_util.txt |tr -s "," " "|tr -s [:blank:] " " > tmp
 cat tmp| tail -n +2 > tmp_cpu
 awk -f compile_CPU_scale.awk tmp_cpu > sgw_cpu.dat
 

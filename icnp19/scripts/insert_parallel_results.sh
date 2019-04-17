@@ -3,7 +3,8 @@ cp /home/vikas/icnp19/scripts/*.txt .
 scp mv@192.168.100.1:/home/mv/scripts/*.txt . 
 
 #Copy stats for offload clone
-cp /var/lib/lxc/ran1/rootfs/home/ubuntu/clone_bitwise_lg/stats.csv stats_1.csv
+#cp /var/lib/lxc/ran1/rootfs/home/ubuntu/clone_bitwise_lg/stats.csv stats_1.csv
+cp /var/lib/lxc/ran1/rootfs/home/ubuntu/turboepc/modular_p4_codes/4chain_3sgwscode/parallel/lg/read-timeout_lg/stats.csv stats_1.csv
 #cp /var/lib/lxc/offload_ran2/rootfs/home/ubuntu/ran2/clone_bitwise_lg/stats.csv stats_2.csv
 #cp /var/lib/lxc/offload_ran3/rootfs/home/ubuntu/ran3/clone_bitwise_lg/stats.csv stats_3.csv
 #cp /var/lib/lxc/offload_ran4/rootfs/home/ubuntu/ran4/clone_bitwise_lg/stats.csv stats_4.csv
