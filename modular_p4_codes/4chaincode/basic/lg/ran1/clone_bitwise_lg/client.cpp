@@ -58,24 +58,24 @@ time_t curT;
 time_t endT;*/
 
  Client::Client(int ID){
-	
-	tID=2000+ID; //use global tID to distinguish between threads
+    
+    tID=2000+ID; //use global tID to distinguish between threads
 
         //Create a raw socket of type IPPROTO
         client_socket = socket (AF_INET, SOCK_RAW, IPPROTO_RAW);
-	if(MY_DEBUG){
+    if(MY_DEBUG){
         cout << "Raw Send Socket created"<<endl;
-	}
+    }
         //client_socket = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
- 	 if(client_socket < 0){
-    	cout << "ERROR opening UDP socket" << endl;
+     if(client_socket < 0){
+        cout << "ERROR opening UDP socket" << endl;
     exit(1);
   }
 
-	sock_raw = socket( AF_PACKET , SOCK_RAW , htons(ETH_P_ALL)) ;
-	if(MY_DEBUG){
-	cout << "Raw Receive Socket created"<<endl;
-	}
+    sock_raw = socket( AF_PACKET , SOCK_RAW , htons(ETH_P_ALL)) ;
+    if(MY_DEBUG){
+    cout << "Raw Receive Socket created"<<endl;
+    }
         //int sock_raw = socket( AF_PACKET , SOCK_RAW , htons(ETH_P_ALL)) ;
         //setsockopt(sock_raw , SOL_SOCKET , SO_BINDTODEVICE , "eth1" , strlen("eth1")+ 1 );
      
@@ -145,12 +145,22 @@ unsigned short csum(unsigned short *ptr,int nbytes)
 void Client::read_data2(){
         int status=0;
         unsigned char* my_buffer;
-    while(status!=17 || !tflag ){
-	    bzero(my_client_byte_buffer, BUFFER_SIZE);
-         data_size = recvfrom(sock_raw, my_client_byte_buffer , BUFFER_SIZE-1 , 0 , &saddr , (socklen_t*)&saddr_size);
-        status=ProcessPacket2((unsigned char*)my_client_byte_buffer , data_size); 
-	}
-
+        
+        timeoutFlag = false;
+        time(&cT);
+        eT = cT + (int) timeout;
+        while(status!=17 || !tflag){    
+            bzero(my_client_byte_buffer, BUFFER_SIZE);
+            data_size = recvfrom(sock_raw, my_client_byte_buffer , BUFFER_SIZE-1 , 0 , &saddr , (socklen_t*)&saddr_size);
+            //Now process the packet        
+            status=ProcessPacket2((unsigned char*)my_client_byte_buffer , data_size);
+            time(&cT);
+            if (cT > eT) {
+                cout<<"Read Timed out"<<endl;
+                timeoutFlag = true;
+                break;
+            }
+        }
 }
 
 int Client::ProcessPacket2(unsigned char* buffer, int size)
@@ -163,13 +173,13 @@ int Client::ProcessPacket2(unsigned char* buffer, int size)
          
         case 17: //UDP Protocol
             print_udp_packet2(buffer , size);
-	        return(17);
+            return(17);
             break;
          
         default: //Some Other Protocol like ARP etc.
             //cout<<"Inside process packet:others";
             //++others;
-	    return(0);
+        return(0);
             break;
     }
 }
@@ -198,10 +208,10 @@ void Client::print_udp_packet2(unsigned char *Buffer , int Size)
     print_ip_header2(Buffer,Size);           
      
     if ((int)ntohs(udph->dest) == tID) {
-		tflag=true;
+        tflag=true;
     }
     else 
-	tflag=false;
+    tflag=false;
 // TODO : only 8 bytes are copied in my_client_byte_buffer in print_udp_packet_2 why?? 
     // memcpy(my_client_byte_buffer,(const char*) Buffer + header_size,sizeof(Buffer + header_size));
     // cout<<"sizeof(Buffer + header_size) = "<<sizeof(Buffer + header_size)<<endl;
@@ -217,74 +227,22 @@ void Client::print_udp_packet2(unsigned char *Buffer , int Size)
  void Client::read_data(){
         int status=0;
         unsigned char* my_buffer;
-	//bzero(client_buffer, BUFFER_SIZE);
-
-	//int saddr_size , data_size;
-        //struct sockaddr saddr;
-	
-    /*logfile=fopen("log.txt","w");
-    if(logfile==NULL) 
-    {
-        printf("Unable to create log.txt file.");
-    }*/
-        //struct ethhdr *eth = (struct ethhdr *)client_buffer;
-        //struct iphdr *iph = (struct iphdr *)(client_buffer  + sizeof(struct ethhdr) );
-        //struct udphdr *udph = (struct udphdr*)(client_buffer + sizeof(struct iphdr) + sizeof(struct ethhdr));
-	
-	/*sock_raw = socket( AF_PACKET , SOCK_RAW , htons(ETH_P_ALL)) ;
-        //int sock_raw = socket( AF_PACKET , SOCK_RAW , htons(ETH_P_ALL)) ;
-        //setsockopt(sock_raw , SOL_SOCKET , SO_BINDTODEVICE , "eth0" , strlen("eth0")+ 1 );
-     
-       if(sock_raw < 0)
-       {
-        //Print the error with proper message
-        perror("Socket Error");
-        //return 1;
-       }*/
-	
-	/*saddr_size = sizeof saddr;
-	struct sockaddr_in client_sock_addr;
-     
-    //some address resolution
-    //strcpy(source_ip , RAN_IP); //Source IP
-   
-    client_sock_addr.sin_family = AF_INET;
-    client_sock_addr.sin_port = htons(RAN_UDP_PORT);
-    client_sock_addr.sin_addr.s_addr = inet_addr(RAN_IP); //Dest IP
-    //setsockopt(sock_raw , SOL_SOCKET , SO_BINDTODEVICE , "eth1" , strlen("eth0")+ 1 );
-    //Bind the client socket to UDP port 
-    //bind(sock_raw, (struct sockaddr *)& client_sock_addr, sizeof(client_sock_addr)); */
-
-        //Receive a packet
-        int c=0;
-	//while(status!=17 || !flag || !tflag){
-	
-	/*time(&curT);
-	endT = curT + (int) timeout;*/
-	while(status!=17 || !tflag ){	
-	 bzero(client_buffer, BUFFER_SIZE);
+    timeoutFlag = false;
+        time(&cT);
+        eT = cT + (int) timeout;
+    while(status!=17 || !tflag){    
+     bzero(client_buffer, BUFFER_SIZE);
          data_size = recvfrom(sock_raw, client_buffer , BUFFER_SIZE-1 , 0 , &saddr , (socklen_t*)&saddr_size);
-       //cout<<(string)client_buffer<<endl;
-       //cout<<status;
-        //Now process the packet
-         
+        //Now process the packet        
         status=ProcessPacket((unsigned char*)client_buffer , data_size); 
-	/*time(&curT);
-	if (curT > endT) {
-		cout<<"Read Timed out"<<endl;
-	}*/
-	//cout<<"Status "<<status<<endl;
-	//cout<<"c= "<<c++<<"flag = "<<flag<<endl;
-	}
-	
-	//cout<<"Outside c= "<<c++<<"flag = "<<flag<<endl;
-	//flag=false;
-			
-        //status = recvfrom(client_socket, client_buffer, BUFFER_SIZE-1, 0, NULL, NULL);
-        //cout<<data_size<<endl;
-        //fclose(logfile);
-        //report_error(data_size);
-	//close(sock_raw);
+        time(&cT);
+        if (cT > eT) {
+          cout<<"Read Timed out"<<endl;
+          timeoutFlag = true;
+          break;
+          }
+    }
+
  }
 
 
@@ -303,7 +261,7 @@ int Client::ProcessPacket(unsigned char* buffer, int size)
     switch (iph->protocol) //Check the Protocol and do accordingly...
     {   //cout<<"Inside process packet:inside switch"<<endl;
        /* case 1:  //ICMP Protocol
-	    //cout<<"Inside process packet:ICMP";
+        //cout<<"Inside process packet:ICMP";
             ++icmp;
             //print_icmp_packet( buffer , size);
             break;
@@ -320,16 +278,16 @@ int Client::ProcessPacket(unsigned char* buffer, int size)
             break; */
          
         case 17: //UDP Protocol
-	    //cout<<"Inside process packet:UDP"<<endl;
+        //cout<<"Inside process packet:UDP"<<endl;
             //++udp;
             print_udp_packet(buffer , size);
-	    return(17);
+        return(17);
             break;
          
         default: //Some Other Protocol like ARP etc.
             //cout<<"Inside process packet:others";
             //++others;
-	    return(0);
+        return(0);
             break;
     }
     //printf("TCP : %d   UDP : %d   ICMP : %d   IGMP : %d   Others : %d   Total : %d\r", tcp , udp , icmp , igmp , others , total);
@@ -377,11 +335,11 @@ void Client::print_ip_header(unsigned char* Buffer, int Size)
     fprintf(logfile , "   |-Source IP        : %s\n",inet_ntoa(source.sin_addr));
     fprintf(logfile , "   |-Destination IP   : %s\n",inet_ntoa(dest.sin_addr));*/
    /* if ((string)inet_ntoa(dest.sin_addr) == "10.127.41.2") {
-	//cout<<"Dest IP= "<<inet_ntoa(dest.sin_addr)<<endl;
-	flag=true;
+    //cout<<"Dest IP= "<<inet_ntoa(dest.sin_addr)<<endl;
+    flag=true;
     }
     else 
-	flag=false;	*/
+    flag=false; */
 }
  
 /*void Client::print_tcp_packet(unsigned char* Buffer, int Size)
@@ -472,17 +430,17 @@ void Client::print_udp_packet(unsigned char *Buffer , int Size)
     temp_buffer = Buffer + header_size;*/
 
         if ((int)ntohs(udph->dest) == tID) {
-		tflag=true;
+        tflag=true;
     }
     else 
-	tflag=false;
+    tflag=false;
 
     strcpy(client_buffer, (const char*) Buffer + header_size);
     /*int c = 0;
- 	while (temp_buffer[c] != '\0') {
- 	     client_buffer[c] = temp_buffer[c];
-	      c++;
-   	}
+    while (temp_buffer[c] != '\0') {
+         client_buffer[c] = temp_buffer[c];
+          c++;
+    }
    client_buffer[c] = '\0';*/
     
 //    fprintf(logfile , "\n###########################################################");
@@ -656,14 +614,14 @@ void Client::print_udp_packet(unsigned char *Buffer , int Size)
     //Data part
     
     data = datagram + sizeof(struct iphdr) + sizeof(struct udphdr);
-    if(MY_DEBUG){	
+    if(MY_DEBUG){   
         cout<<"data len = "<<data_len<<endl;
     }
 
     memcpy (data, client_buffer, data_len);
     
     bzero(client_buffer, BUFFER_SIZE);
-    if(MY_DEBUG){	
+    if(MY_DEBUG){   
     cout<<"SENDING - "<<data<<endl;
     }
     //cout<<"Thread ID- "<<tID<<endl;
@@ -688,8 +646,8 @@ void Client::print_udp_packet(unsigned char *Buffer , int Size)
    /*int one = 1;
    const int *val = &one;
     if(setsockopt(client_socket, IPPROTO_IP, IP_HDRINCL, val, sizeof(one)) < 0){
-		perror("setsockopt() error");
-		exit(-1);
+        perror("setsockopt() error");
+        exit(-1);
     }*/
 
     //Fill in the IP Header
@@ -734,9 +692,9 @@ void Client::print_udp_packet(unsigned char *Buffer , int Size)
      
     udph->check = csum( (unsigned short*) pseudogram , psize);
 
-	int status;
+    int status;
     status = sendto(client_socket, datagram, iph->tot_len, 0 , (struct sockaddr*) &server_sock_addr, sizeof(server_sock_addr));
-	
+    
     report_error(status);
 
 
@@ -768,7 +726,7 @@ void Client::print_udp_packet(unsigned char *Buffer , int Size)
 
     strcpy(data , client_buffer);
     bzero(client_buffer, BUFFER_SIZE);
-    if(MY_DEBUG){	
+    if(MY_DEBUG){   
     cout<<"SENDING - "<<data<<endl;
     }
     //cout<<"Thread ID- "<<tID<<endl;
@@ -793,8 +751,8 @@ void Client::print_udp_packet(unsigned char *Buffer , int Size)
    /*int one = 1;
    const int *val = &one;
     if(setsockopt(client_socket, IPPROTO_IP, IP_HDRINCL, val, sizeof(one)) < 0){
-		perror("setsockopt() error");
-		exit(-1);
+        perror("setsockopt() error");
+        exit(-1);
     }*/
 
     //Fill in the IP Header
@@ -838,9 +796,9 @@ void Client::print_udp_packet(unsigned char *Buffer , int Size)
      
     udph->check = csum( (unsigned short*) pseudogram , psize);
 
-	int status;
+    int status;
     status = sendto(client_socket, datagram, iph->tot_len, 0 , (struct sockaddr*) &server_sock_addr, sizeof(server_sock_addr));
-	
+    
     report_error(status);
 
  }
@@ -885,7 +843,7 @@ void Client::print_udp_packet(unsigned char *Buffer , int Size)
         if(DO_DEBUG){
                 cout<<"SOURCE IP="<<srcIp<<endl;
                 cout<<"DESTINATION IP="<<dstIp<<endl;
-		        cout<<"*** client.cpp DATA TIME _--- "<<meanTime<<endl;
+                cout<<"*** client.cpp DATA TIME _--- "<<meanTime<<endl;
                 cout<<f<<endl;
         }
 
@@ -896,16 +854,16 @@ void Client::print_udp_packet(unsigned char *Buffer , int Size)
 
         do{
         
-	// string g = runIperfCommand("iperf3 -c "+dstIp+" -p "+to_string(portnum)+" -b "+rate+" -M "+to_string(LINK_MTU)+" -f "+format+" -t "+to_string(meanTime)+" -B "+srcIp, srcIp);
+    // string g = runIperfCommand("iperf3 -c "+dstIp+" -p "+to_string(portnum)+" -b "+rate+" -M "+to_string(LINK_MTU)+" -f "+format+" -t "+to_string(meanTime)+" -B "+srcIp, srcIp);
     string No_of_bytes="1K";
-	string g = runIperfCommand("iperf3 -c "+dstIp+" -p "+to_string(portnum)+" -b "+rate+" -M "+to_string(LINK_MTU)+" -f "+format+" -n "+No_of_bytes+" -B "+srcIp+" -l "+to_string(1424), srcIp );
+    string g = runIperfCommand("iperf3 -c "+dstIp+" -p "+to_string(portnum)+" -b "+rate+" -M "+to_string(LINK_MTU)+" -f "+format+" -n "+No_of_bytes+" -B "+srcIp+" -l "+to_string(1424), srcIp );
 
 
 //      string g = GetStdoutFromCommand("iperf3 -c "+dstIp+" -p "+to_string(portnum)+" -b "+rate+" -M "+to_string(LINK_MTU)+" -f "+format+" -t 60"+" -B "+srcIp);
         string cmd1 = "iperf3 -c "+dstIp+" -p "+to_string(portnum)+" -b "+rate+" -M "+to_string(LINK_MTU)+" -f "+format+" -n "+No_of_bytes+" -B "+srcIp+" -l "+to_string(1424);
         // string cmd1 = "iperf3 -c "+dstIp+" -p "+to_string(portnum)+" -b "+rate+" -M "+to_string(LINK_MTU)+" -f "+format+" -t "+to_string(meanTime)+" -B "+srcIp;
 
-		size_t f = g.find("Connecting to host");
+        size_t f = g.find("Connecting to host");
                 size_t found = g.find("iperf3: error - the server is busy running a test");
                 size_t timeout = g.find("iperf3: error - unable to connect to server:");
 
@@ -913,7 +871,7 @@ void Client::print_udp_packet(unsigned char *Buffer , int Size)
                         cout<<"FAILURE FOR "<<cmd1<<endl;
                         cout<<"iperf3 output: "<<g<<"\n for cmd "<<cmd1<<endl;
                         //return portnum;
-			exit(1);
+            exit(1);
                 }
                 if(found != std::string::npos){
                         cout<<"iperf3 output: "<<g<<endl;
@@ -956,7 +914,7 @@ void Client::print_udp_packet(unsigned char *Buffer , int Size)
                                 count = 0;
                                 portnum = tmp_port;
                         }
- 			count++;
+            count++;
                         realCounter++;
                 }else{
                         if(realCounter != 0){
@@ -965,22 +923,22 @@ void Client::print_udp_packet(unsigned char *Buffer , int Size)
                         done = true;
                 }
         }while(!done);
-	if(DO_DEBUG)
-		cout<<"SENT DATA with SRC IP "<<srcIp<<endl;
+    if(DO_DEBUG)
+        cout<<"SENT DATA with SRC IP "<<srcIp<<endl;
         if(loopedOnce){
                 portnum = tmp_port;
         }
-	/*string get_pid = "ps -aux | grep -E 'iperf3.*"+srcIp+"'|grep -v 'grep'| tr -s \" \"| cut -d \" \" -f 2";
-	cout<<"GET PID COMMAND --- "<<get_pid<<endl;
-	string pid = GetStdoutFromCommand(get_pid);
-	cout<<"\nPROCESS TO KILL - "<<pid<<endl; 	
-	if(!pid.empty()){
-		cout<<"\ninside PROCESS TO KILL - "<<pid<<endl; 		
-		string kill_out = GetStdoutFromCommand("sudo kill -9 "+pid);
-		cout<<"KILL OUTPUT ---- "<<kill_out<<endl;
-	}*/
-//	const char* kill_cmd = ("sudo kill $(ps -aux | grep -E 'iperf3.*"+srcIp+"'|grep -v 'grep'| tr -s \" \"| cut -d \" \" -f 2)").c_str();
-//	system(kill_cmd);
+    /*string get_pid = "ps -aux | grep -E 'iperf3.*"+srcIp+"'|grep -v 'grep'| tr -s \" \"| cut -d \" \" -f 2";
+    cout<<"GET PID COMMAND --- "<<get_pid<<endl;
+    string pid = GetStdoutFromCommand(get_pid);
+    cout<<"\nPROCESS TO KILL - "<<pid<<endl;    
+    if(!pid.empty()){
+        cout<<"\ninside PROCESS TO KILL - "<<pid<<endl;         
+        string kill_out = GetStdoutFromCommand("sudo kill -9 "+pid);
+        cout<<"KILL OUTPUT ---- "<<kill_out<<endl;
+    }*/
+//  const char* kill_cmd = ("sudo kill $(ps -aux | grep -E 'iperf3.*"+srcIp+"'|grep -v 'grep'| tr -s \" \"| cut -d \" \" -f 2)").c_str();
+//  system(kill_cmd);
 
         return portnum;
  }
@@ -999,11 +957,11 @@ void Client::print_udp_packet(unsigned char *Buffer , int Size)
         // cmd.append(" 2>&1");
 
         stream = popen(cmd.c_str(), "r");
-	/*int fd = fileno(stream);
-	int flags;
-	flags = fcntl(fd, F_GETFL, 0);
-	flags |= O_NONBLOCK;
-	fcntl(fd, F_SETFL, flags);*/
+    /*int fd = fileno(stream);
+    int flags;
+    flags = fcntl(fd, F_GETFL, 0);
+    flags |= O_NONBLOCK;
+    fcntl(fd, F_SETFL, flags);*/
 
 
 
@@ -1020,17 +978,17 @@ void Client::print_udp_packet(unsigned char *Buffer , int Size)
                 string get_pid = "ps -aux | grep -E 'iperf3.*"+srcIp+"'|grep -v 'grep'| tr -s \" \"| cut -d \" \" -f 2";
                 //cout<<"client --- GET PID COMMAND --- "<<get_pid<<endl;
                 string pid = GetStdoutFromCommand(get_pid);
-                //cout<<"\nclient --- PROCESS TO KILL - "<<pid<<endl; 	
+                //cout<<"\nclient --- PROCESS TO KILL - "<<pid<<endl;   
                 if(!pid.empty()){
-                    //cout<<"\ninside PROCESS TO KILL - "<<pid<<endl; 		
+                    //cout<<"\ninside PROCESS TO KILL - "<<pid<<endl;       
                     string kill_out = GetStdoutFromCommand("sudo kill -9 "+pid);
                     
                     //cout<<"KILL OUTPUT ---- "<<kill_out<<endl;
-		        }
-       	
+                }
+        
 
 
-		    int status = pclose(stream);
+            int status = pclose(stream);
             if(status!=-1){
 
             }
@@ -1068,8 +1026,8 @@ string Client::GetStdoutFromCommand(string cmd) {
 
                         if (fgets(buffer, max_buffer, stream) != NULL) data.append(buffer);
                 }
-		
-		// pclose(stream);
+        
+        // pclose(stream);
         int status = pclose(stream);
             if(status!=-1){
 
@@ -1090,7 +1048,6 @@ string Client::GetStdoutFromCommand(string cmd) {
 // Destructor: Close the UDP client socket
 Client::~Client(){
         close(client_socket);
-	close(sock_raw);
+    close(sock_raw);
 }
                                                                                                                                                                                                                          
-
