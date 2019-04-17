@@ -692,9 +692,9 @@ public class EpcApp {
                             }
                         }else{
                             log.info("AUTHENTICATION_STEP_THREE failure");
-                            build_response_pkt(connectPoint,srcMac,dstMac,ipv4Protocol,ipv4SourceAddress,udp_dstport,udp_srcport,Constants.AUTHENTICATION_FAILURE);
+                            //build_response_pkt(connectPoint,srcMac,dstMac,ipv4Protocol,ipv4SourceAddress,udp_dstport,udp_srcport,Constants.AUTHENTICATION_FAILURE);
 
-                            System.exit(1);
+                            //System.exit(1);
                         }
                         if(Constants.DEBUG)
                             d2 = new Date();
