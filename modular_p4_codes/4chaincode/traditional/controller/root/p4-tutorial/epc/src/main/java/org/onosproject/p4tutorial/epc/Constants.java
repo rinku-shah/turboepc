@@ -10,9 +10,6 @@ import static org.slf4j.LoggerFactory.getLogger;
 import org.onosproject.net.DeviceId;
 import org.onlab.packet.IPv4;
 
-
-//import org.projectfloodlight.openflow.types.DatapathId;
-
 public class Constants {
 	private static final Logger log = getLogger(EpcApp.class);
 	// Boolean flag to do the logging of events
@@ -30,9 +27,6 @@ public class Constants {
 	static byte[] dstSinkIpAddr =  IPv4.toIPv4AddressBytes("192.168.4.5");
 
 	/***************************Configurable parameters**********************************/
-	//40:8d:5c:76:d2:67 UE MAC 00:16:3e:1f:c0:12 
-	//final static String UE_MAC = "00:16:3e:c6:a2:aa"; // MAC Address of UE/eNodeB Node  *
-	//final static String DEFAULT_GW_MAC = "00:16:3e:f7:4d:43"; //"12:b4:6f:db:03:28";//"00:16:3e:03:9d:5a"; // MAC Address of DGW int2 //1e:12:62:1d:67:a5     *
 	final static boolean OFFLOAD_ATTACH = true; //false; //True=> We wish to offload attach components to local controller
 	final static String SINK_MAC = "00:16:3e:de:0a:60"; //"00:16:3e:42:b9:ea"; // MAC Address of SINK Node //40:8d:5c:76:d2:fa    *
 	final static int NUM_CHAINS = 6;
@@ -73,7 +67,6 @@ public class Constants {
 	final static String UE_MAC_4 = "00:16:3e:e4:62:8a"; // MAC Address of UE/eNodeB Node  *
 	final static String UE_MAC_5 = "00:16:3f:7e:8e:b3"; // MAC Address of UE/eNodeB Node  *
 	final static String UE_MAC_6 = "00:16:3e:c8:9a:44"; // MAC Address of UE/eNodeB Node  *
-	//final static String UE_MAC_7 = "00:16:3f:7e:8e:b3"; // MAC Address of UE/eNodeB Node  *
 	// IP address of various component interfaces										*
 			final static String RAN_IP_1 = "192.168.1.1";			// RAN							*
 			final static String RAN_IP_2 = "192.168.5.1";
@@ -95,8 +88,6 @@ public class Constants {
 			final static String DGW_IP_6_UPLINK = "192.168.16.2";	// DGW
 			final static String DGW_IP_6_DOWNLINK = "192.168.17.2";
 			
-			//final static String DSWITCH_IP_UPLINK = "10.127.41.4";	// DGW						*
-			//final static String DSWITCH_IP_DOWNLINK =final static String SGW_IP_2_DOWNLINK = "10.129.2.219"; "10.127.41.4";	// DGW
 			final static String SGW_IP_1_UPLINK = "192.168.2.3";	// SGW	*
 			final static String SGW_IP_1_DOWNLINK = "192.168.3.3";	
 			final static String SGW_IP_2_UPLINK = "192.168.6.3";	// SGW	*
@@ -142,7 +133,6 @@ public class Constants {
 			// The starting IP address which is allocated to the first UE connecting to our		*
 			// network. After this addresses are assigned in monotonically increasing order.	*
 			final static String STARTING_UE_IP_1 = "10.127.1.1"; //"10.129.41.103";
-//			final static String STARTING_UE_IP_1 = "10.0.0.1"; //"10.129.41.103";
 			final static String STARTING_UE_IP_2 = "10.127.2.1"; //"10.129.41.103";
 			final static String STARTING_UE_IP_3 = "10.127.3.1"; //"10.129.41.103";  
 			final static String STARTING_UE_IP_4 = "10.127.4.1"; //"10.129.41.103";  
@@ -198,20 +188,12 @@ public class Constants {
 			final static int MIN_TEID = 1;
 			final static int MAX_TEID = 4095;
 			
-			// DPID or unique ID of SGW switch (assuming only one sgw in the network)
-			//final static int SGW_DPID = 2;
-			/*final static int SGW_DPID_1 = 2;
-			final static int SGW_DPID_2 = 6;
-			final static int SGW_DPID_3 = 8;
-			final static int SGW_DPID_4 = 3;*/
-			
 			// boolean flags which control whether encryption and integrity checks needs to be performed or not.
 			static boolean DO_ENCRYPTION = false;
 			static boolean CHECK_INTEGRITY = false;
 		//=====================================
 			// DPID or unique ID of default switch 
 			final static int DEFAULT_SWITCH_ID_1 = 1;
-//			final static String DEFAULT_SWITCH_ID_1 = "s1";
 			final static int DEFAULT_SWITCH_ID_2 = 4;
 			final static int DEFAULT_SWITCH_ID_3 = 6;
 			final static int DEFAULT_SWITCH_ID_4 = 8;
@@ -236,10 +218,6 @@ public class Constants {
 
 			final static DeviceId PGW_Switch_Name =  DeviceId.deviceId("device:bmv2:s13");
 
-
-	//final static int DEFAULT_SWITCH_ID = 0;
-			//final static int SGW_ID = 0;
-			
 			// DPID of PGW
 			final static int PGW_ID = 13;
 			
@@ -274,12 +252,9 @@ public class Constants {
 				put(PGW_ID + SEPARATOR + SGW_ID_5, 5); // for switch S3(SGW-4) connected to S4(PGW) via port 1 of PGW
 				put(PGW_ID + SEPARATOR + SGW_ID_6, 6); // for switch S3(SGW-4) connected to S4(PGW) via port 1 of PGW
 			}};
-//
 			@SuppressWarnings("serial")
-//			final static HashMap<DatapathId, int[]> SGW_PORT_MAP = new HashMap<DatapathId, int[]>()
 			final static HashMap<String, int[]> SGW_PORT_MAP = new HashMap<String, int[]>()
 			{{
-//				put(DatapathId.of(SGW_ID_1), new int[]{3,4}); // new int[]{SGW-INPORT, SGW-OUTPORT}
 				put(Integer.toString(SGW_ID_1), new int[]{1,2}); // new int[]{SGW-INPORT, SGW-OUTPORT}
 				put(Integer.toString(SGW_ID_2), new int[]{1,2}); // new int[]{SGW-INPORT, SGW-OUTPORT}
 				put(Integer.toString(SGW_ID_3), new int[]{1,2}); // new int[]{SGW-INPORT, SGW-OUTPORT}
@@ -288,7 +263,6 @@ public class Constants {
 				put(Integer.toString(SGW_ID_6), new int[]{1,2}); // new int[]{SGW-INPORT, SGW-OUTPORT}
 			}};
 
-			//final static int UE_PORT = 3; //port with which default switch is connected to UE
 			@SuppressWarnings("serial")
 			final static HashMap<String, Integer> ENODEB_SGW_PORT_MAP = new HashMap<String, Integer>()
 			{{
@@ -301,42 +275,6 @@ public class Constants {
 				//put(DEFAULT_SWITCH_ID_1 + SEPARATOR + "6", 1);// , 3// for switch S2(SGW-1) connected to S1(ENODEB) via port 3 of Default Switch
 				//put(DEFAULT_SWITCH_ID_2 + SEPARATOR + "2", 1);// , 4// for switch S3(SGW-2) connected to S1(ENODEB) via port 4 of Default Switch
 			}};
-//
-//			public static String getUeMac(DatapathId dgw){
-//				String ip = "";
-//				if (dgw.equals(DatapathId.of(DEFAULT_SWITCH_ID_1)))
-//					ip = Constants.UE_MAC_1;
-//				else if (dgw.equals(DatapathId.of(DEFAULT_SWITCH_ID_2)))
-//					ip = Constants.UE_MAC_2;
-//				else if (dgw.equals(DatapathId.of(DEFAULT_SWITCH_ID_3)))
-//					ip = Constants.UE_MAC_3;
-//				else if (dgw.equals(DatapathId.of(DEFAULT_SWITCH_ID_4)))
-//					ip = Constants.UE_MAC_4;
-//				else if (dgw.equals(DatapathId.of(DEFAULT_SWITCH_ID_5)))
-//					ip = Constants.UE_MAC_5;
-//				else if (dgw.equals(DatapathId.of(DEFAULT_SWITCH_ID_6)))
-//					ip = Constants.UE_MAC_6;
-//				return ip;
-//			}
-//
-//			public static String getStartingIP(DatapathId dgw){
-//				String ip = "";
-//				if (dgw.equals(DatapathId.of(DEFAULT_SWITCH_ID_1)))
-//					ip = Constants.STARTING_UE_IP_1;
-//				else if (dgw.equals(DatapathId.of(DEFAULT_SWITCH_ID_2)))
-//					ip = Constants.STARTING_UE_IP_2;
-//				else if (dgw.equals(DatapathId.of(DEFAULT_SWITCH_ID_3)))
-//					ip = Constants.STARTING_UE_IP_3;
-//				else if (dgw.equals(DatapathId.of(DEFAULT_SWITCH_ID_4)))
-//					ip = Constants.STARTING_UE_IP_4;
-//				else if (dgw.equals(DatapathId.of(DEFAULT_SWITCH_ID_5)))
-//					ip = Constants.STARTING_UE_IP_5;
-//				else if (dgw.equals(DatapathId.of(DEFAULT_SWITCH_ID_6)))
-//					ip = Constants.STARTING_UE_IP_6;
-//				return ip;
-//
-//			}
-//
 
 //            getSgwDpid() fn can get "1", "s1", "s2", "s10", "12"
 			public static String getSgwDpid(String dgw){
@@ -428,9 +366,7 @@ public class Constants {
 				return dgw;
 			}
 
-//			public static DatapathId getDgwDpidFromIp(String ip){
 			public static String getDgwDpidFromIp(String ip){
-//				DatapathId dgw = DatapathId.of(0);
 				String dgw = "";
 				if (ip.equals(Constants.RAN_IP_1))
 					dgw = Integer.toString(Constants.DEFAULT_SWITCH_ID_1);
@@ -447,43 +383,8 @@ public class Constants {
 					// log.warn("getDgwDpidFromIp dgw returning  = {}",dgw);
 				return dgw;
 			}
-//
-//			public static String getRanIp(DatapathId dgw){
-//				String ip = "";
-//				if (dgw.equals(DatapathId.of(DEFAULT_SWITCH_ID_1)))
-//					ip = Constants.RAN_IP_1;
-//				else if (dgw.equals(DatapathId.of(DEFAULT_SWITCH_ID_2)))
-//					ip = Constants.RAN_IP_2;
-//				else if (dgw.equals(DatapathId.of(DEFAULT_SWITCH_ID_3)))
-//					ip = Constants.RAN_IP_3;
-//				else if (dgw.equals(DatapathId.of(DEFAULT_SWITCH_ID_4)))
-//					ip = Constants.RAN_IP_4;
-//				else if (dgw.equals(DatapathId.of(DEFAULT_SWITCH_ID_5)))
-//					ip = Constants.RAN_IP_5;
-//				else if (dgw.equals(DatapathId.of(DEFAULT_SWITCH_ID_6)))
-//					ip = Constants.RAN_IP_6;
-//				return ip;
-//			}
-//
-//			public static String getDgwIpUplink(DatapathId sgw){
-//				String ip = "";
-//				if (sgw.equals(DatapathId.of(SGW_ID_1)))
-//					ip = Constants.DGW_IP_1_UPLINK;
-//				else if (sgw.equals(DatapathId.of(SGW_ID_2)))
-//					ip = Constants.DGW_IP_2_UPLINK;
-//				else if (sgw.equals(DatapathId.of(SGW_ID_3)))
-//					ip = Constants.DGW_IP_3_UPLINK;
-//				else if (sgw.equals(DatapathId.of(SGW_ID_4)))
-//					ip = Constants.DGW_IP_4_UPLINK;
-//				else if (sgw.equals(DatapathId.of(SGW_ID_5)))
-//					ip = Constants.DGW_IP_5_UPLINK;
-//				else if (sgw.equals(DatapathId.of(SGW_ID_6)))
-//					ip = Constants.DGW_IP_6_UPLINK;
-//				return ip;
-//			}
-//
+			
 			public static int getChainIDFromSGW(String sgw){
-//				String swid1 = Character.toString(sgw.charAt(1));  // assuming that switches will be from s1---s9 so char at position1 will give switchid which is an int
 				String swid1 = sgw;  // assuming that switches will be from s1---s9 so char at position1 will give switchid which is an int
 				int swid = Integer.parseInt(swid1);
 				if (swid==(Constants.SGW_ID_1))
@@ -526,41 +427,7 @@ public class Constants {
 						log.info("GOT INVALID DGW DPID!!!");
 					return 0;
 			}
-//
-//			public static String getDgwIpDownlink(DatapathId sgw){
-//				String ip = "";
-//				if (sgw.equals(DatapathId.of(SGW_ID_1)))
-//					ip = Constants.DGW_IP_1_DOWNLINK;
-//				else if (sgw.equals(DatapathId.of(SGW_ID_2)))
-//					ip = Constants.DGW_IP_2_DOWNLINK;
-//				else if (sgw.equals(DatapathId.of(SGW_ID_3)))
-//					ip = Constants.DGW_IP_3_DOWNLINK;
-//				else if (sgw.equals(DatapathId.of(SGW_ID_4)))
-//					ip = Constants.DGW_IP_4_DOWNLINK;
-//				else if (sgw.equals(DatapathId.of(SGW_ID_5)))
-//					ip = Constants.DGW_IP_5_DOWNLINK;
-//				else if (sgw.equals(DatapathId.of(SGW_ID_6)))
-//					ip = Constants.DGW_IP_6_DOWNLINK;
-//				return ip;
-//			}
-//			public static String getSgwIpUplink(DatapathId dgw){
-//				String ip = "";
-//				if (dgw.equals(DatapathId.of(DEFAULT_SWITCH_ID_1)))
-//					ip = Constants.SGW_IP_1_UPLINK;
-//				else if (dgw.equals(DatapathId.of(DEFAULT_SWITCH_ID_2)))
-//					ip = Constants.SGW_IP_2_UPLINK;
-//				else if (dgw.equals(DatapathId.of(DEFAULT_SWITCH_ID_3)))
-//					ip = Constants.SGW_IP_3_UPLINK;
-//				else if (dgw.equals(DatapathId.of(DEFAULT_SWITCH_ID_4)))
-//					ip = Constants.SGW_IP_4_UPLINK;
-//				else if (dgw.equals(DatapathId.of(DEFAULT_SWITCH_ID_5)))
-//					ip = Constants.SGW_IP_5_UPLINK;
-//				else if (dgw.equals(DatapathId.of(DEFAULT_SWITCH_ID_6)))
-//					ip = Constants.SGW_IP_6_UPLINK;
-//				return ip;
-//			}
 
-//			public static String getSgwIpDownlink(DatapathId dgw){
 			public static String getSgwIpDownlink(String dgw){
 				String ip = "";
 				String swid1 = ""; 
@@ -592,7 +459,6 @@ public class Constants {
 			}
 
 			public static String getPgwIpUplink(String sgw){
-                // int length = sgw.length();
 				String swid1 = "";
 				if(sgw.charAt(0)=='s'){
 					// means we get "s1", "s11" like switch numbers
@@ -622,65 +488,6 @@ public class Constants {
                     ip = Constants.PGW_IP_6_UPLINK;
 				return ip;
 			}
-//
-//			public static boolean getCentralizedDesign(){
-//				return CENTRALIZED;
-//
-//			}
-//
-//			public static boolean getMigrating(){
-//				return MIGRATING;
-//
-//			}
-		/*	// DPID or unique ID of SGW switch (assuming only one sgw in the network)
-			final static int SGW_DPID = 2;
-
-			// boolean flags which control whether encryption and integrity checks needs to be performed or not.
-			static boolean DO_ENCRYPTION = false;
-			static boolean CHECK_INTEGRITY = false;
-
-			// DPID or unique ID of default switch 
-			final static int DEFAULT_SWITCH_ID = 1;
-			
-			// DPID of SGW
-			final static int SGW_ID = 2;
-			
-			// DPID of PGW
-			final static int PGW_ID = 4;
-			
-			// its the source port to be used by MME while sending UDP packets to UE
-			final static int DEFAULT_CONTROL_TRAFFIC_UDP_PORT = 9876;
-
-			// Port of Default switch with which UE is connected
-			final static int DEFAULT_SWITCH_UE_PORT = 3;
-			
-			// Port of pgw with which sink is connected
-			final static int PGW_SINK_PORT = 4;
-
-			// We have assumed there are two SGWs viz. SGW-1 and SGW-2 between our default switch and PGW.
-			// Note: One one SGW would also work, just the port number with with it is connected to default
-			// switch and PGW should be correct.
-			@SuppressWarnings("serial")
-			final static HashMap<String, Integer> PGW_SGW_PORT_MAP = new HashMap<String, Integer>()
-			{{
-				put("4" + SEPARATOR + "2", 3); // for switch S2(SGW-1) connected to S4(PGW) via port 4 of PGW
-				put("4" + SEPARATOR + "3", 1); // for switch S3(SGW-2) connected to S4(PGW) via port 1 of PGW
-			}};
-
-			@SuppressWarnings("serial")
-			final static HashMap<DatapathId, int[]> SGW_PORT_MAP = new HashMap<DatapathId, int[]>()
-			{{
-				put(DatapathId.of(2), new int[]{3,4}); // new int[]{SGW-INPORT, SGW-OUTPORT}
-				put(DatapathId.of(3), new int[]{3,4}); // new int[]{SGW-INPORT, SGW-OUTPORT}
-			}};
-
-			final static int UE_PORT = 3; //port with which default switch is connected to UE
-			@SuppressWarnings("serial")
-			final static HashMap<String, Integer> ENODEB_SGW_PORT_MAP = new HashMap<String, Integer>()
-			{{
-				put(DEFAULT_SWITCH_ID + SEPARATOR + "2", 4);// , 3// for switch S2(SGW-1) connected to S1(ENODEB) via port 3 of Default Switch
-				put(DEFAULT_SWITCH_ID + SEPARATOR + "3", 1);// , 4// for switch S3(SGW-2) connected to S1(ENODEB) via port 4 of Default Switch
-			}};*/
 
 			// Stores Algorithm Id for encryption/integrity algorithms
 			@SuppressWarnings("serial")
