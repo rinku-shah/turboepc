@@ -353,8 +353,8 @@ control c_ingress(inout headers hdr,
                             // deparsed on the wire (see c_deparser).
                             hdr.packet_in.setValid();
                             hdr.packet_in.ingress_port = standard_metadata.ingress_port;
-                             // reason_code 50 means packet_in has to be sent to local SGW1 contoller 
-                            hdr.packet_in.reason_code = 50;
+                             // reason_code 100 means packet_in has to be sent to root contoller 
+                            hdr.packet_in.reason_code = 100;
                             return;
                         }
 
