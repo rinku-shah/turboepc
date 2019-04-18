@@ -1020,7 +1020,7 @@ public class EpcApp {
                         ip_sgw = sgw.contactPGW(appId,flowRuleService,sgwswitchName,sgw_dpId, pgw_dpId, tmpArray[1]); //tmpArray[1] => apn of UE
                         
                         response = new StringBuilder();
-                        response.append(Constants.SEND_IP_SGW_TEID).append(Constants.SEPARATOR).append(ip_sgw).append(Constants.SEPARATOR).append("1").append(Constants.SEPARATOR);
+                        response.append(Constants.SEND_IP_SGW_TEID_HO).append(Constants.SEPARATOR).append(ip_sgw).append(Constants.SEPARATOR).append("1").append(Constants.SEPARATOR);
 
                         if(Constants.DO_ENCRYPTION){
                             Utils.aesEncrypt(response.toString(), Constants.SAMPLE_ENC_KEY);
@@ -1147,7 +1147,7 @@ public class EpcApp {
                         fr.populate_uekey_guti_map(false,appId,flowRuleService,offload_SGWswitchName2,Integer.parseInt(tmpArray[2]),(Integer.parseInt(tmpArray[2])+1000));
 
 
-                        response.append(Constants.ATTACH_ACCEPT).append(Constants.SEPARATOR).append(Integer.parseInt(tmpArray[2])+1000);	// Sending GUTI
+                        response.append(Constants.ATTACH_ACCEPT_HO).append(Constants.SEPARATOR).append(Integer.parseInt(tmpArray[2])+1000);	// Sending GUTI
 
                         if(Constants.DO_ENCRYPTION){
                             decArray = receiveDecryptedArray(tmpArray);
