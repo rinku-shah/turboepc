@@ -98,6 +98,13 @@ const bit<32> BMV2_V1MODEL_INSTANCE_TYPE_RESUBMIT      = 6;
 
 const bit<32> I2E_CLONE_SESSION_ID = 500;
 
+//const bit<32> LB11 = 100;
+//const bit<32> UB11 = 114;
+//const bit<32> LB12 = 115;
+//const bit<32> UB12 = 129;
+//const bit<32> LB13 = 130;
+//const bit<32> UB13 = 144;
+
 const bit<32> LB11 = 100;
 const bit<32> UB11 = 124;
 const bit<32> LB12 = 125;
