@@ -196,8 +196,8 @@ public class Constants {
 			
 			
 			// boolean flags which control whether encryption and integrity checks needs to be performed or not.
-			static boolean DO_ENCRYPTION = false;
-			static boolean CHECK_INTEGRITY = false;
+			static boolean DO_ENCRYPTION = true;
+			static boolean CHECK_INTEGRITY = true;
 			//=====================================
 			// DPID or unique ID of default switch 
 			final static int DEFAULT_SWITCH_ID_1 = 1;
