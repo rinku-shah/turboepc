@@ -376,8 +376,8 @@ void* multithreading_func(void *arg){
 					checkIntegrity_t = false;
 					ueServiceRequest_t = true;
 					dataTime = 1;
-					loop1 = 1;    //outer loop---attach
-					loop2 = 99;   //inner loop---service-req
+					loop1 = 10;    //outer loop---attach
+					loop2 = 90;   //inner loop---service-req
 					break;
 
 			/* att-serv-req-data-loop2-det*/

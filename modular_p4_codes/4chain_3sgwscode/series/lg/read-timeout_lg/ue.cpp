@@ -1822,7 +1822,9 @@ string UserEquipment::send_ue_service_request(Client& user, int ue_num, string u
 		// tmpArray = split(user.client_buffer, SEPARATOR);
 
 		// if(tmpArray[0] == INITIAL_CONTEXT_SETUP_REQUEST){
-		if(code_name1 == stoi(INITIAL_CONTEXT_SETUP_REQUEST)){
+		//Commented the line below since sometimes packet5 arrives from controller(miss) and sometimes from switch(hit)
+		//if(code_name1 == stoi(INITIAL_CONTEXT_SETUP_REQUEST)){ 
+		if(true){
 
 			if(DO_DEBUG){
 				// cout<<"Received INITIAL_CONTEXT_SETUP_REQUEST for UE with key="<<ue_num<<" SGW TEID="<<tmpArray[1]<<endl;
