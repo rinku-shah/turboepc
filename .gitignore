@@ -1,5 +1,9 @@
 .*
 *.pcap
-
+#ignore out folder of smartnic SDK
+out/
+*.psproj
+*.nffw
+*.psdbg
 #dont ignore gitignore
 !.gitignore
