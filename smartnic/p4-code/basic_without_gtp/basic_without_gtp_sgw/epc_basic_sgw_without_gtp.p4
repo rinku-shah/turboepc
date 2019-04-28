@@ -210,6 +210,26 @@ control c_ingress(inout headers hdr,
       default_action = NoAction();
     }
 
+    // ARP packets forwarding tables 
+    action fwd_act( bit<16> prt) {
+        standard_metadata.egress_spec = prt;
+    }
+
+    action drop_act() {
+        mark_to_drop();
+    }
+
+    table arp_tbl {
+        key={
+            standard_metadata.ingress_port : exact;
+        }
+        actions={
+            fwd_act;
+            drop_act;
+        }
+        size = 4096;
+    }
+
     apply {
         // in hardware our CPU port is v0.0 (768) as our NF is running on that port
         if (standard_metadata.ingress_port == CPU_PORT) {
@@ -222,6 +242,12 @@ control c_ingress(inout headers hdr,
             hdr.packet_out.setInvalid();
             return;
         }
+
+         // @vikas : forwarding ARP packets via SmartNICs
+         if(hdr.ethernet.etherType==TYPE_ARP){
+                arp_tbl.apply();
+                return;
+          }
             // if the packet misses in the t_l3_fwd table then it means it either a Data packet or it is a cntxt release/ Service request packet 
             
           if (hdr.ipv4.isValid()) {

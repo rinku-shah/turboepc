@@ -136,167 +136,164 @@ class PacketProcessor(object):
         s.send(new_p_str)
 
     def processPacket(self, p):
-        # hexdump(p)
-        # print '.',
-	    src_ip = p[IP].src
-	    dst_ip = p[IP].dst
+		src_ip = p[IP].src
+		dst_ip = p[IP].dst
 		p_str = str(p)
-        try:
-		switch_port = p_str[0:1]
-		p2  = Ether(p_str[2:])	
-		data = p2['Data']		
-        except:
-		print "welcome"
-		return
+		try:
+			switch_port = p_str[0:1]
+			p2  = Ether(p_str[2:])	
+			data = p2['Data']		
+		except:
+			print "welcome"
+			return
 
-	
-	print p2.show()
-	print "Switch Port : " + switch_port
-	if data.epc_traffic_code == 14: #UE_Context_Release_Req
-        try:
-            tbl_id = 'ip_op_tun_s1_uplink' #del on DGW
-            rule_name = 'del-s1-uplink_' + str(data.param4)
-            default_rule = False
-            actions = '{  "type" : "populate_ip_op_tun_s1_uplink",  "data" : { "egress_port_s1" : { "value" : "p0" } } }' % \
-            match = '{ "ipv4.srcAddr" : {  "value" : "src_ip"} , "ipv4.dstAddr" : { "value" : "dst_ip"} } }' 
+		print p2.show()
+		print "Switch Port : " + switch_port
+		sink_ip=str("192.168.3.4")
+		if data.epc_traffic_code == 14: #UE_Context_Release_Req
+			# try:
+			#     tbl_id = 'ip_op_tun_s1_uplink' #del on DGW
+			#     rule_name = 'del-s1-uplink_' + str(data.param4)
+			#     default_rule = False
+			#     actions = '{  "type" : "populate_ip_op_tun_s1_uplink",  "data" : { "egress_port_s1" : { "value" : "p0" } } }' 
+			#     match = '{ "ipv4.srcAddr" : {  "value" : "%s"} , "ipv4.dstAddr" : { "value" : "192.168.3.4"} } }' % \ (data.param1)  
 
-            with THRIFT_API_LOCK:
-                if src_ip != 0:
-                	RTEInterface.Tables.RemoveRule(tbl_id, rule_name, default_rule, match, actions, 1)
-                	#RTEInterface.Tables.AddRule(tbl_id, rule_name, default_rule, match, actions, 1)
-                	# RTEInterface.Tables.AddRule(tbl_id, rule_name, default_rule, match, actions, 1, 3)
-        except Exception, err:
-        print("Exception")
-        print(err)
+			#     with THRIFT_API_LOCK:
+			#         if src_ip != 0:
+			#         	RTEInterface.Tables.RemoveRule(tbl_id, rule_name, default_rule, match, actions, 1)
+			#         	#RTEInterface.Tables.AddRule(tbl_id, rule_name, default_rule, match, actions, 1)
+			#         	# RTEInterface.Tables.AddRule(tbl_id, rule_name, default_rule, match, actions, 1, 3)
+			# except Exception, err:
+			# 	print("Exception")
+			# 	print(err)
 
-        try:
-            tbl_id = 'tun_egress_s3_uplink' #del on DGW
-            rule_name = 'del-s3-uplink_' + str(data.param4)
-            default_rule = False
-            actions = '{  "type" : "populate_tun_egress_s3_uplink",  "data" : { "egress_port_s3" : { "value" : "v0.0" } } }' % \
-            match = '{ "ue_service_req.ue_key" : {  "value" : data.param4} }' 
+			# try:
+			#     tbl_id = 'tun_egress_s3_uplink' #del on DGW
+			#     rule_name = 'del-s3-uplink_' + str(data.param4)
+			#     default_rule = False
+			#     actions = '{  "type" : "populate_tun_egress_s3_uplink",  "data" : { "egress_port_s3" : { "value" : "v0.0" } } }' 
+			#     match = '{ "ue_service_req.ue_key" : {  "value" : "%s"} }' % \ (data.param4) 
 
-            with THRIFT_API_LOCK:
-                if ue_service_req.ue_key != 0:
-                	RTEInterface.Tables.RemoveRule(tbl_id, rule_name, default_rule, match, actions, 1)
-                	#RTEInterface.Tables.AddRule(tbl_id, rule_name, default_rule, match, actions, 1)
-                	# RTEInterface.Tables.AddRule(tbl_id, rule_name, default_rule, match, actions, 1, 3)
-        except Exception, err:
-        print("Exception")
-        print(err)
+			#     with THRIFT_API_LOCK:
+			#         if ue_service_req.ue_key != 0:
+			#         	RTEInterface.Tables.RemoveRule(tbl_id, rule_name, default_rule, match, actions, 1)
+			#         	#RTEInterface.Tables.AddRule(tbl_id, rule_name, default_rule, match, actions, 1)
+			#         	# RTEInterface.Tables.AddRule(tbl_id, rule_name, default_rule, match, actions, 1, 3)
+			# except Exception, err:
+			# 	print("Exception")
+			# 	print(err)
 
-        try:
-            tbl_id = 'ip_op_tun_s2_downlink' #del on SGW
-            rule_name = 'del-s2-downlink_' + str(data.param4)
-            default_rule = False
-            actions = '{  "type" : "populate_ip_op_tun_s2_downlink",  "data" : { "egress_port_s2" : { "value" : "p1" } } }' % \
-            match = '{ "ue_service_req.ue_key" : {  "value" : data.param4} }' 
+			try:
+				tbl_id = 'ip_op_tun_s2_downlink' #del on SGW
+				rule_name = 'del-s2-downlink_' + str(data.param4)
+				default_rule = False
+				actions = '{  "type" : "populate_ip_op_tun_s2_downlink",  "data" : { "egress_port_s2" : { "value" : "p0" } } }' 
+				match = '{ "ue_service_req.ue_key" : {  "value" : "%s"} }' % \ (data.param4) 
 
-            with THRIFT_API_LOCK:
-                if ue_service_req.ue_key != 0:
-                	RTEInterface.Tables.RemoveRule(tbl_id, rule_name, default_rule, match, actions, 1)
-                	#RTEInterface.Tables.AddRule(tbl_id, rule_name, default_rule, match, actions, 1)
-                	# RTEInterface.Tables.AddRule(tbl_id, rule_name, default_rule, match, actions, 1, 3)
-        except Exception, err:
-        print("Exception")
-        print(err)
+				with THRIFT_API_LOCK:
+					if ue_service_req.ue_key != 0:
+						RTEInterface.Tables.RemoveRule(tbl_id, rule_name, default_rule, match, actions, 1)
+						#RTEInterface.Tables.AddRule(tbl_id, rule_name, default_rule, match, actions, 1)
+						# RTEInterface.Tables.AddRule(tbl_id, rule_name, default_rule, match, actions, 1, 3)
+			except Exception, err:
+				print("Exception")
+				print(err)
 
-        try:
-            tbl_id = 'uekey_uestate_map' #update on SGW
-            rule_name = 'update_ue_state_0_' + str(data.param4)
-            default_rule = False
-            actions = '{  "type" : "populate_uekey_uestate_map",  "data" : { "uestate" : { "value" : "0" } } }' % \
-            match = '{ "uekey_uestate.ue_key" : {  "value" : data.param4} }' 
+			try:
+				tbl_id = 'uekey_uestate_map' #update on SGW
+				rule_name = 'update_ue_state_0_' + str(data.param4)
+				default_rule = False
+				actions = '{  "type" : "populate_uekey_uestate_map",  "data" : { "uestate" : { "value" : "0" } } }' 
+				match = '{ "uekey_uestate.ue_key" : {  "value" : "%s"} }' % \ (data.param4) 
 
-            with THRIFT_API_LOCK:
-                if uekey_uestate.ue_key != 0:
-                	RTEInterface.Tables.AddRule(tbl_id, rule_name, default_rule, match, actions, 1)
-                	#RTEInterface.Tables.AddRule(tbl_id, rule_name, default_rule, match, actions, 1)
-                	# RTEInterface.Tables.AddRule(tbl_id, rule_name, default_rule, match, actions, 1, 3)
-        except Exception, err:
-        print("Exception")
-        print(err)
-        self.ruleNum += 4
+				with THRIFT_API_LOCK:
+					if uekey_uestate.ue_key != 0:
+						RTEInterface.Tables.AddRule(tbl_id, rule_name, default_rule, match, actions, 1)
+						#RTEInterface.Tables.AddRule(tbl_id, rule_name, default_rule, match, actions, 1)
+						# RTEInterface.Tables.AddRule(tbl_id, rule_name, default_rule, match, actions, 1, 3)
+			except Exception, err:
+				print("Exception")
+				print(err)
+			self.ruleNum += 4
 
-    else:
-    	if data.epc_traffic_code == 17:  #17:UE_Service_Req,
-        	try:
-	            tbl_id = 'ip_op_tun_s1_uplink' #del on DGW
-	            rule_name = 'add-s1-uplink_' + str(data.param1)
-	            default_rule = False
-	            actions = '{  "type" : "populate_ip_op_tun_s1_uplink",  "data" : { "egress_port_s1" : { "value" : "p0" } } }' % \
-	            match = '{ "ipv4.srcAddr" : {  "value" : "src_ip"} , "ipv4.dstAddr" : { "value" : "dst_ip"} } }' 
+		else:
+			if data.epc_traffic_code == 17:  #17:UE_Service_Req,
+				# try:
+				#     tbl_id = 'ip_op_tun_s1_uplink' #del on DGW
+				#     rule_name = 'add-s1-uplink_' + str(data.param1)
+				#     default_rule = False
+				#     actions = '{  "type" : "populate_ip_op_tun_s1_uplink",  "data" : { "egress_port_s1" : { "value" : "p1" } } }'
+				#     match = '{ "ipv4.srcAddr" : {  "value" : "%s"} , "ipv4.dstAddr" : { "value" : "192.168.3.4"} } }' % \ (data.param3)  
 
-	            with THRIFT_API_LOCK:
-	                if src_ip != 0:
-	                	RTEInterface.Tables.AddRule(tbl_id, rule_name, default_rule, match, actions, 1)
-	                	#RTEInterface.Tables.AddRule(tbl_id, rule_name, default_rule, match, actions, 1)
-	                	# RTEInterface.Tables.AddRule(tbl_id, rule_name, default_rule, match, actions, 1, 3)
-	        except Exception, err:
-	        print("Exception")
-	        print(err) 
-	        self.ruleNum += 1   
-     
-     else:
-    	if data.epc_traffic_code == 19:  #19:Initial_Ctxt_Setup_Resp
-    		try:
-	            tbl_id = 'ip_op_tun_s2_downlink' #add on SGW
-	            rule_name = 'add-s2-downlink_' + str(data.param2)
-	            default_rule = False
-	            actions = '{  "type" : "populate_ip_op_tun_s2_downlink",  "data" : { "egress_port_s2" : { "value" : "p1" } } }' % \
-	            match = '{ "ue_service_req.ue_key" : {  "value" : data.param2} }' 
+				#     with THRIFT_API_LOCK:
+				#         if src_ip != 0:
+				#         	RTEInterface.Tables.AddRule(tbl_id, rule_name, default_rule, match, actions, 1)
+				#         	#RTEInterface.Tables.AddRule(tbl_id, rule_name, default_rule, match, actions, 1)
+				#         	# RTEInterface.Tables.AddRule(tbl_id, rule_name, default_rule, match, actions, 1, 3)
+				# except Exception, err:
+				# 	print("Exception")
+				# 	print(err) 
+				# self.ruleNum += 1
+				done   
+		
+			else:
+				if data.epc_traffic_code == 19:  #19:Initial_Ctxt_Setup_Resp
+					try:
+						tbl_id = 'ip_op_tun_s2_downlink' #add on SGW
+						rule_name = 'add-s2-downlink_' + str(data.param2)
+						default_rule = False
+						actions = '{  "type" : "populate_ip_op_tun_s2_downlink",  "data" : { "egress_port_s2" : { "value" : "p0" } } }' 
+						match = '{ "ue_service_req.ue_key" :{  "value" : "%s"} }' % \ (data.param2)  
 
-	            with THRIFT_API_LOCK:
-	                if ue_service_req.ue_key != 0:
-	                	RTEInterface.Tables.AddRule(tbl_id, rule_name, default_rule, match, actions, 1)
-	                	#RTEInterface.Tables.AddRule(tbl_id, rule_name, default_rule, match, actions, 1)
-	                	# RTEInterface.Tables.AddRule(tbl_id, rule_name, default_rule, match, actions, 1, 3)
-	        except Exception, err:
-	        print("Exception")
-	        print(err)
+						with THRIFT_API_LOCK:
+							if ue_service_req.ue_key != 0:
+								RTEInterface.Tables.AddRule(tbl_id, rule_name, default_rule, match, actions, 1)
+								#RTEInterface.Tables.AddRule(tbl_id, rule_name, default_rule, match, actions, 1)
+								# RTEInterface.Tables.AddRule(tbl_id, rule_name, default_rule, match, actions, 1, 3)
+					except Exception, err:
+						print("Exception")
+						print(err)
 
-	        try:
-	            tbl_id = 'tun_egress_s3_uplink' #add on DGW
-	            rule_name = 'add-s3-uplink_' + str(data.param2)
-	            default_rule = False
-	            actions = '{  "type" : "populate_tun_egress_s3_uplink",  "data" : { "egress_port_s3" : { "value" : "v0.0" } } }' % \
-	            match = '{ "ue_service_req.ue_key" : {  "value" : data.param2} }' 
+					# try:
+					#     tbl_id = 'tun_egress_s3_uplink' #add on DGW
+					#     rule_name = 'add-s3-uplink_' + str(data.param2)
+					#     default_rule = False
+					#     actions = '{  "type" : "populate_tun_egress_s3_uplink",  "data" : { "egress_port_s3" : { "value" : "v0.0" } } }' 
+					#     match = '{ "ue_service_req.ue_key" :{  "value" : "%s"} }' % \ (data.param2)  
 
-	            with THRIFT_API_LOCK:
-	                if ue_service_req.ue_key != 0:
-	                	RTEInterface.Tables.AddRule(tbl_id, rule_name, default_rule, match, actions, 1)
-	                	#RTEInterface.Tables.AddRule(tbl_id, rule_name, default_rule, match, actions, 1)
-	                	# RTEInterface.Tables.AddRule(tbl_id, rule_name, default_rule, match, actions, 1, 3)
-	        except Exception, err:
-	        print("Exception")
-	        print(err)
+					#     with THRIFT_API_LOCK:
+					#         if ue_service_req.ue_key != 0:
+					#         	RTEInterface.Tables.AddRule(tbl_id, rule_name, default_rule, match, actions, 1)
+					#         	#RTEInterface.Tables.AddRule(tbl_id, rule_name, default_rule, match, actions, 1)
+					#         	# RTEInterface.Tables.AddRule(tbl_id, rule_name, default_rule, match, actions, 1, 3)
+					# except Exception, err:
+					# 	print("Exception")
+					# 	print(err)
 
-	        try:
-	            tbl_id = 'uekey_uestate_map' #update on SGW
-	            rule_name = 'update_ue_state_1_' + str(data.param2)
-	            default_rule = False
-	            actions = '{  "type" : "populate_uekey_uestate_map",  "data" : { "uestate" : { "value" : "1" } } }' % \
-	            match = '{ "uekey_uestate.ue_key" : {  "value" : data.param2} }' 
+					try:
+						tbl_id = 'uekey_uestate_map' #update on SGW
+						rule_name = 'update_ue_state_1_' + str(data.param2)
+						default_rule = False
+						actions = '{  "type" : "populate_uekey_uestate_map",  "data" : { "uestate" : { "value" : "1" } } }' 
+						match = '{ "uekey_uestate.ue_key"  :{  "value" : "%s"} }' % \ (data.param2)   
 
-	            with THRIFT_API_LOCK:
-	                if uekey_uestate.ue_key != 0:
-	                	RTEInterface.Tables.AddRule(tbl_id, rule_name, default_rule, match, actions, 1)
-	                	#RTEInterface.Tables.AddRule(tbl_id, rule_name, default_rule, match, actions, 1)
-	                	# RTEInterface.Tables.AddRule(tbl_id, rule_name, default_rule, match, actions, 1, 3)
-	        except Exception, err:
-	        print("Exception")
-	        print(err)
-            self.ruleNum += 3
-	# print data.key1
-	# print data.value
-	# p2['Data'].type_sync = 3
-	# #p2['IP'].src = ip_hdr.dst
-	# #p2['IP'].dst = ip_hdr.src
-	# #p2['Ether'].src = eth_hdr.dst
-	# #p2['Ether'].dst = eth_hdr.src         
-	# PacketProcessor.SendToSwitch(self, p2, switch_port)
-        #self.ruleNum += 1
-        print "Done Adding " + str(self.ruleNum) + "rules"
+						with THRIFT_API_LOCK:
+							if uekey_uestate.ue_key != 0:
+								RTEInterface.Tables.AddRule(tbl_id, rule_name, default_rule, match, actions, 1)
+					except Exception, err:
+						print("Exception")
+						print(err)
+					self.ruleNum += 3
+			# print data.key1
+			# print data.value
+			# p2['Data'].type_sync = 3
+			# #p2['IP'].src = ip_hdr.dst
+			# #p2['IP'].dst = ip_hdr.src
+			# #p2['Ether'].src = eth_hdr.dst
+			# #p2['Ether'].dst = eth_hdr.src         
+			# PacketProcessor.SendToSwitch(self, p2, switch_port)
+				#self.ruleNum += 1
+			print "Done Adding " + str(self.ruleNum) + "rules"
   
 def main():
     parser = argparse.ArgumentParser(description='P4 TurboEPC config')
@@ -322,7 +319,7 @@ def main():
     thread.start()
     
     #@rinku: check for switch CLI IP,port
-    RTEInterface.Connect(args.rpc_server,"192.168.100.1", args.rpc_port)
+    RTEInterface.Connect(args.rpc_server,"127.0.0.1", args.rpc_port)
     ruleNum = 0
     pp = PacketProcessor(args.ip, 1025, args.ext_port, args.controller_port, 
         args.controller_port_rules, args.port_prefix,ruleNum)
