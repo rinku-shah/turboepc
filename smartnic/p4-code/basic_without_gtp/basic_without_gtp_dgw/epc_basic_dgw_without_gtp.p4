@@ -135,7 +135,8 @@ control c_ingress(inout headers hdr,
                             //TC means data packet
                             // going with this to be on safe side 
                             if(hdr.ipv4.protocol == PROTO_TCP){
-                                ip_op_tun_s1_uplink.apply();
+                                standard_metadata.egress_spec = 0;
+                                //ip_op_tun_s1_uplink.apply();
                                 return;
                             }
                             // UDP means control traffic so forward it to SGW which is connected at physical port "p0"(0)
@@ -159,6 +160,7 @@ control c_ingress(inout headers hdr,
             if (hdr.ipv4.ttl == 100) {
                 // Process all tunneled packets at DGW
                     tun_egress_s3_uplink.apply();
+                    ip_op_tun_s1_uplink.apply();
                     return;
             }
           

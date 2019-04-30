@@ -34,7 +34,7 @@ const bit<32> s5u_sgw_addr = 0xC0A80F03;
 const bit<32> s6u_sgw_addr = 0xC0A81103;
 
 
-const bit<32> s1u_pgw_addr =0xC0A80204;
+const bit<32> s1u_pgw_addr =0xC0A80304;
 
 const bit<32> sink_ip =0xC0A80405;
 

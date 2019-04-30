@@ -188,8 +188,7 @@ class PacketProcessor(object):
 				rule_name = 'del-s2-downlink_' + str(data.param4)
 				default_rule = False
 				actions = '{  "type" : "populate_ip_op_tun_s2_downlink",  "data" : { "egress_port_s2" : { "value" : "p0" } } }' 
-				match = '{ "ue_service_req.ue_key" : {  "value" : "%s"} }' % \ (data.param4) 
-
+				match = '{ "ue_service_req.ue_key" : {  "value" : "%s"} }' % (data.param4) 
 				with THRIFT_API_LOCK:
 					if ue_service_req.ue_key != 0:
 						RTEInterface.Tables.RemoveRule(tbl_id, rule_name, default_rule, match, actions, 1)
@@ -204,7 +203,7 @@ class PacketProcessor(object):
 				rule_name = 'update_ue_state_0_' + str(data.param4)
 				default_rule = False
 				actions = '{  "type" : "populate_uekey_uestate_map",  "data" : { "uestate" : { "value" : "0" } } }' 
-				match = '{ "uekey_uestate.ue_key" : {  "value" : "%s"} }' % \ (data.param4) 
+				match = '{ "uekey_uestate.ue_key" : {  "value" : "%s"} }' % (data.param4) 
 
 				with THRIFT_API_LOCK:
 					if uekey_uestate.ue_key != 0:
@@ -243,7 +242,7 @@ class PacketProcessor(object):
 						rule_name = 'add-s2-downlink_' + str(data.param2)
 						default_rule = False
 						actions = '{  "type" : "populate_ip_op_tun_s2_downlink",  "data" : { "egress_port_s2" : { "value" : "p0" } } }' 
-						match = '{ "ue_service_req.ue_key" :{  "value" : "%s"} }' % \ (data.param2)  
+						match = '{ "ue_service_req.ue_key" :{  "value" : "%s"} }' % (data.param2)  
 
 						with THRIFT_API_LOCK:
 							if ue_service_req.ue_key != 0:
@@ -275,7 +274,7 @@ class PacketProcessor(object):
 						rule_name = 'update_ue_state_1_' + str(data.param2)
 						default_rule = False
 						actions = '{  "type" : "populate_uekey_uestate_map",  "data" : { "uestate" : { "value" : "1" } } }' 
-						match = '{ "uekey_uestate.ue_key"  :{  "value" : "%s"} }' % \ (data.param2)   
+						match = '{ "uekey_uestate.ue_key"  :{  "value" : "%s"} }' % (data.param2)   
 
 						with THRIFT_API_LOCK:
 							if uekey_uestate.ue_key != 0:
@@ -305,7 +304,7 @@ def main():
     parser.add_argument('-r','--controller-port-rules', help='Controller port for rules - "v0.1"', required=False,default="v0.1")
     #parser.add_argument('-d','--device-number', help='Device number in case of using VFs - "v0."', required=False,default="vf0.0") #How would this work for physical ports? - Default " "?
     parser.add_argument('-d','--port-prefix', help='Port prefix for internal port - "v0." for VF or "p" for physical (DEFAULT: p)"', required=False,default="p")
-    parser.add_argument('-o', '--rpc-port',dest='rpc_port', default='20206',type=int,help="Thrift RPC port (DEFAULT: 20206)")
+    parser.add_argument('-o', '--rpc-port',dest='rpc_port', default='20207',type=int,help="Thrift RPC port (DEFAULT: 20207)")
     parser.add_argument('-s', '--rpc-server', dest='rpc_server', default='thrift', type=str, help="Thrift RPC host (DEFAULT: localhost)")
     parser.add_argument('-t', '--rule-timeout', dest='rule_timeout', default=1000, type=float, help="Rule Timeout - Rules will delete if not hit within t seconds (DEFAULT: 10 seconds)")
     parser.add_argument('-n', '--internal-ports', dest='internal_ports', default=1, type=float, help="Number of internal ports (DEFAULT: 1)")

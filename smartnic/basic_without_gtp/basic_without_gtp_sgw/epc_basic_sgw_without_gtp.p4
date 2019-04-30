@@ -249,28 +249,16 @@ control c_ingress(inout headers hdr,
                     standard_metadata.egress_spec =1;
                     return;
             }
-
-            else if( hdr.ipv4.protocol == PROTO_TCP && hdr.ipv4.dstAddr == s1u_dgw_addr){
-                            //ip_op_tun_s2_uplink.apply();
-                            standard_metadata.egress_spec = 0;
-                            return;
-                    }
-                    else if(hdr.ipv4.protocol == PROTO_TCP && hdr.ipv4.dstAddr == s1u_pgw_addr){
-                            //ip_op_tun_s2_uplink.apply();
-                            standard_metadata.egress_spec = 1;
-                            return;
-                    }
-                  
             // @smartnic : forward all control packets from controller to DGW
             standard_metadata.egress_spec = 0;
             return;
         }
 
          // @vikas : forwarding ARP packets via SmartNICs
-        if(hdr.ethernet.etherType==TYPE_ARP){
-                 arp_tbl.apply();
-                 return;
-        }
+        //  if(hdr.ethernet.etherType==TYPE_ARP){
+        //         arp_tbl.apply();
+        //         return;
+        //   }
             // if the packet misses in the t_l3_fwd table then it means it either a Data packet or it is a cntxt release/ Service request packet 
             
           if (hdr.ipv4.isValid()) {
@@ -320,25 +308,13 @@ control c_ingress(inout headers hdr,
 
                 // Process all tunneled packets at SGW
                     // if ingress port is "p0"(0) on SGW it means it is a UPLINK tunnel packet (RAN -> Sink)
-                    if(standard_metadata.ingress_port==0 && hdr.ipv4.dstAddr == s1u_sgw_addr){
-                            //ip_op_tun_s2_uplink.apply();
-                            standard_metadata.egress_spec = CPU_PORT;
-                            return;
-                    }
-                    else if(standard_metadata.ingress_port==0 && hdr.ipv4.dstAddr == s1u_pgw_addr){
-                            //ip_op_tun_s2_uplink.apply();
-                            standard_metadata.egress_spec = 1;
+                    if(standard_metadata.ingress_port==0){
+                            ip_op_tun_s2_uplink.apply();
                             return;
                     }
                     // if the ingress port is "p1"(1) then it a DOWNLINK tunnel packet (Sink -> RAN)
-                    else if(standard_metadata.ingress_port==1 && hdr.ipv4.dstAddr == s1u_sgw_addr){
-                            //ip_op_tun_s2_downlink.apply();
-                            standard_metadata.egress_spec = CPU_PORT;
-                            return;
-                    }
-                    else if(standard_metadata.ingress_port==1 && hdr.ipv4.dstAddr == s1u_dgw_addr){
-                            //ip_op_tun_s2_uplink.apply();
-                            standard_metadata.egress_spec = 0;
+                    else if(standard_metadata.ingress_port==1){
+                            ip_op_tun_s2_downlink.apply();
                             return;
                     }
             }
@@ -347,8 +323,6 @@ control c_ingress(inout headers hdr,
             if(hdr.ipv4.ttl == 250){
                 uekey_uestate_map.apply();
                 uekey_guti_map.apply();
-                ip_op_tun_s2_uplink.apply();
-                ip_op_tun_s2_downlink.apply();
             }
            
     }

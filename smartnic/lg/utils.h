@@ -69,9 +69,9 @@ using namespace std;
 #define UE_PER_THREAD 1000000
 /**************************************** Configurable parameters **********************************************/
 
-#define DEFAULT_IF "enp1s0f0"  // Default network interface name                                                *
-#define DGW_IP "192.168.1.2"    // IP address of DGW machine
-#define RAN_IP "192.168.1.1"   // IP address of RAN machine
+#define DEFAULT_IF "vf0_0"  // Default network interface name                                                *
+#define DGW_IP "192.168.2.3"    // IP address of DGW machine
+#define RAN_IP "192.168.2.2"   // IP address of RAN machine
 
 #define SINK_IP "192.168.4.5"   // IP address of Sink machine; TCP server at sink listens on this IP
 

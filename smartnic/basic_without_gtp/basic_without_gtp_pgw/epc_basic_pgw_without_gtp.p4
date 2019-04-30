@@ -116,8 +116,7 @@ control c_ingress(inout headers hdr,
                             //TC means data packet
                             // going with this to be on safe side 
                             if(hdr.ipv4.protocol == PROTO_TCP){
-                                standard_metadata.egress_spec = 0;
-                                //ip_op_tun_s1_uplink.apply();
+                                ip_op_tun_s1_uplink.apply();
                                 return;
                             }
 
@@ -137,16 +136,11 @@ control c_ingress(inout headers hdr,
             // process Uplink packets from RAN to Sink since SGW and PGW are connected via "p0"(0) 
             if(standard_metadata.ingress_port==0){
                 // Process all tunneled packets at PGW
-                    standard_metadata.egress_spec = 768;
-                    //tun_egress_s3_uplink.apply();
+                    tun_egress_s3_uplink.apply();
                     return;
             }
-            if(hdr.ipv4.ttl == 250){
-                ip_op_tun_s1_uplink.apply();
-                tun_egress_s3_uplink.apply();
-            }
-    }
 
+    }
 }
 /*************************************************************************
 ****************  E G R E S S   P R O C E S S I N G   *******************

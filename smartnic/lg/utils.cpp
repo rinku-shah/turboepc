@@ -6,7 +6,7 @@
 #include <random>
 
 
-int g_mme_port = 11276;
+int g_mme_port = 5001;
 atomic<int> ue_teid_curr(1);
 queue<int> reusable_ue_teid;
 mutex mtx;

@@ -3,6 +3,7 @@
 const bit<16> TYPE_IPV4 = 0x0800;
 const bit<16> TYPE_VLAN = 0x8100;
 const bit<16> TYPE_ARP = 0x0806;
+
 const bit<9> CONTROLLER_PORT = 3;
 const bit<24> CONTROLLER_PKT_TYPE = 2;
 const bit<32> CLONE_SESSION_ID = 500;
@@ -34,7 +35,7 @@ const bit<32> s5u_sgw_addr = 0xC0A80F03;
 const bit<32> s6u_sgw_addr = 0xC0A81103;
 
 
-const bit<32> s1u_pgw_addr =0xC0A80204;
+const bit<32> s1u_pgw_addr =0xC0A80304;
 
 const bit<32> sink_ip =0xC0A80405;
 
@@ -47,7 +48,7 @@ const bit<48> ran5 = 0x00163e8dccbe;
 const bit<48> ran6 = 0x00163e714c4f;
 
 // MAC addresses of SGWs
-const bit<48> sgw1 = 0x002222222222;
+const bit<48> sgw1 = 0x00163e1f04f2;
 const bit<48> sgw2 = 0x00163e3f0d83;
 const bit<48> sgw3 = 0x00163ee0eb61;
 const bit<48> sgw4 = 0x00163e4c02a8;
