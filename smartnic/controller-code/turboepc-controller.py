@@ -140,8 +140,8 @@ class PacketProcessor(object):
 		dst_ip = p[IP].dst
 		p_str = str(p)
 		try:
-			switch_port = p_str[0:1]
-			p2  = Ether(p_str[2:])	
+			switch_port = p_str[0:2]
+			p2  = Ether(p_str[3:])	
 			data = p2['Data']		
 		except:
 			print "welcome"
