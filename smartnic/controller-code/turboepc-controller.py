@@ -136,12 +136,12 @@ class PacketProcessor(object):
         s.send(new_p_str)
 
     def processPacket(self, p):
-		src_ip = p[IP].src
-		dst_ip = p[IP].dst
+                #src_ip = p[IP].src
+		#dst_ip = p[IP].dst
 		p_str = str(p)
 		try:
 			switch_port = p_str[0:2]
-			p2  = Ether(p_str[3:])	
+			p2  = Ether(p_str[2:])	
 			data = p2['Data']		
 		except:
 			print "welcome"
@@ -184,35 +184,40 @@ class PacketProcessor(object):
 			# 	print(err)
 
 			try:
-				tbl_id = 'ip_op_tun_s2_downlink' #del on SGW
-				rule_name = 'del-s2-downlink_' + str(data.param4)
+				tbl_id = 'ingress::ip_op_tun_s2_downlink' #del on SGW
+				#rule_name = 'del-s2-downlink_' + str(data.param4)
+				rule_name = str(data.param4-99)
 				default_rule = False
-				actions = '{  "type" : "populate_ip_op_tun_s2_downlink",  "data" : { "egress_port_s2" : { "value" : "p0" } } }' 
+				actions = '{  "type" : "ingress::populate_ip_op_tun_s2_downlink",  "data" : { "egress_port_s2" : { "value" : "0" } } }' 
 				match = '{ "ue_service_req.ue_key" : {  "value" : "%s"} }' % (data.param4) 
 				with THRIFT_API_LOCK:
-					if ue_service_req.ue_key != 0:
-						RTEInterface.Tables.RemoveRule(tbl_id, rule_name, default_rule, match, actions, 1)
+					if data.param4 != 0:
+						RTEInterface.Tables.DeleteRule(tbl_id, rule_name, default_rule, match, actions) #, 1)
 						#RTEInterface.Tables.AddRule(tbl_id, rule_name, default_rule, match, actions, 1)
 						# RTEInterface.Tables.AddRule(tbl_id, rule_name, default_rule, match, actions, 1, 3)
 			except Exception, err:
-				print("Exception")
+				print("Exception: ip_op_tun_s2_downlink:delete")
+			        print "param4 = ", data.param4
 				print(err)
+				#pass
 
 			try:
-				tbl_id = 'uekey_uestate_map' #update on SGW
-				rule_name = 'update_ue_state_0_' + str(data.param4)
+				tbl_id = 'ingress::uekey_uestate_map' #update on SGW
+				#rule_name = 'update_ue_state_0_' + str(data.param4)
+				rule_name =  str(data.param4-99)
 				default_rule = False
-				actions = '{  "type" : "populate_uekey_uestate_map",  "data" : { "uestate" : { "value" : "0" } } }' 
-				match = '{ "uekey_uestate.ue_key" : {  "value" : "%s"} }' % (data.param4) 
+				actions = '{  "type" : "ingress::populate_uekey_uestate_map",  "data" : { "uestate" : { "value" : "0" } } }' 
+				match = '{ "ingress::uekey_uestate.ue_key" : {  "value" : "%s"} }' % (data.param4) 
 
 				with THRIFT_API_LOCK:
-					if uekey_uestate.ue_key != 0:
-						RTEInterface.Tables.AddRule(tbl_id, rule_name, default_rule, match, actions, 1)
+					if data.param4 != 0:
+						RTEInterface.Tables.EditRule(tbl_id, rule_name, default_rule, match, actions, 1)
 						#RTEInterface.Tables.AddRule(tbl_id, rule_name, default_rule, match, actions, 1)
 						# RTEInterface.Tables.AddRule(tbl_id, rule_name, default_rule, match, actions, 1, 3)
 			except Exception, err:
-				print("Exception")
+				print("Exception:uekey_uestate_map:add")
 				print(err)
+				#pass
 			self.ruleNum += 4
 
 		else:
@@ -233,25 +238,27 @@ class PacketProcessor(object):
 				# 	print("Exception")
 				# 	print(err) 
 				# self.ruleNum += 1
-				done   
+				pass   
 		
 			else:
 				if data.epc_traffic_code == 19:  #19:Initial_Ctxt_Setup_Resp
 					try:
-						tbl_id = 'ip_op_tun_s2_downlink' #add on SGW
-						rule_name = 'add-s2-downlink_' + str(data.param2)
+						tbl_id = 'ingress::ip_op_tun_s2_downlink' #add on SGW
+						#rule_name = 'add-s2-downlink_' + str(data.param2)
+						rule_name = str(data.param2-99)
 						default_rule = False
-						actions = '{  "type" : "populate_ip_op_tun_s2_downlink",  "data" : { "egress_port_s2" : { "value" : "p0" } } }' 
+						actions = '{  "type" : "ingress::populate_ip_op_tun_s2_downlink",  "data" : { "egress_port_s2" : { "value" : "p0" } } }' 
 						match = '{ "ue_service_req.ue_key" :{  "value" : "%s"} }' % (data.param2)  
 
 						with THRIFT_API_LOCK:
-							if ue_service_req.ue_key != 0:
+							if data.param2 != 0:
 								RTEInterface.Tables.AddRule(tbl_id, rule_name, default_rule, match, actions, 1)
 								#RTEInterface.Tables.AddRule(tbl_id, rule_name, default_rule, match, actions, 1)
 								# RTEInterface.Tables.AddRule(tbl_id, rule_name, default_rule, match, actions, 1, 3)
 					except Exception, err:
-						print("Exception")
+						print("Exception:ip_op_tun_s2_downlink:add")
 						print(err)
+						#pass
 
 					# try:
 					#     tbl_id = 'tun_egress_s3_uplink' #add on DGW
@@ -270,18 +277,20 @@ class PacketProcessor(object):
 					# 	print(err)
 
 					try:
-						tbl_id = 'uekey_uestate_map' #update on SGW
-						rule_name = 'update_ue_state_1_' + str(data.param2)
+						tbl_id = 'ingress::uekey_uestate_map' #update on SGW
+						#rule_name = 'update_ue_state_1_' + str(data.param2)
+						rule_name = str(data.param2-99)
 						default_rule = False
-						actions = '{  "type" : "populate_uekey_uestate_map",  "data" : { "uestate" : { "value" : "1" } } }' 
-						match = '{ "uekey_uestate.ue_key"  :{  "value" : "%s"} }' % (data.param2)   
+						actions = '{  "type" : "ingress::populate_uekey_uestate_map",  "data" : { "uestate" : { "value" : "1" } } }' 
+						match = '{ "ingress::uekey_uestate.ue_key"  :{  "value" : "%s"} }' % (data.param2)   
 
 						with THRIFT_API_LOCK:
-							if uekey_uestate.ue_key != 0:
-								RTEInterface.Tables.AddRule(tbl_id, rule_name, default_rule, match, actions, 1)
+							if data.param2 != 0:
+								RTEInterface.Tables.EditRule(tbl_id, rule_name, default_rule, match, actions, 1)
 					except Exception, err:
-						print("Exception")
+						print("Exceptioni:uekey_uestate_map:add")
 						print(err)
+						#pass
 					self.ruleNum += 3
 			# print data.key1
 			# print data.value
@@ -292,7 +301,7 @@ class PacketProcessor(object):
 			# #p2['Ether'].dst = eth_hdr.src         
 			# PacketProcessor.SendToSwitch(self, p2, switch_port)
 				#self.ruleNum += 1
-			print "Done Adding " + str(self.ruleNum) + "rules"
+			#print "Done Adding " + str(self.ruleNum) + "rules"
   
 def main():
     parser = argparse.ArgumentParser(description='P4 TurboEPC config')
@@ -300,7 +309,7 @@ def main():
     # parser.add_argument('-p','--ext-port', help='External port for rules - "v0.2"', required=False,default="v0.2")
     parser.add_argument('-p','--ext-port', help='External port for rules - "p1"', required=False,default="p1")
     # parser.add_argument('-c','--controller-port', help='Controller port - "vf0_1"', required=False,default="vf0_1")
-    parser.add_argument('-c','--controller-port', help='Controller port - "vf0_1"', required=False,default="vf0_1")
+    parser.add_argument('-c','--controller-port', help='Controller port - "vf0_0"', required=False,default="vf0_0")
     parser.add_argument('-r','--controller-port-rules', help='Controller port for rules - "v0.1"', required=False,default="v0.1")
     #parser.add_argument('-d','--device-number', help='Device number in case of using VFs - "v0."', required=False,default="vf0.0") #How would this work for physical ports? - Default " "?
     parser.add_argument('-d','--port-prefix', help='Port prefix for internal port - "v0." for VF or "p" for physical (DEFAULT: p)"', required=False,default="p")
@@ -311,7 +320,7 @@ def main():
     
     args = parser.parse_args()
 
-    bind_layers(UDP, Data, dport=11276)
+    bind_layers(UDP, Data, dport=5001)
     stopFlag = Event()
     thread = TimerThread(stopFlag, args.rule_timeout, args.internal_ports)
     thread.daemon = True
@@ -325,7 +334,7 @@ def main():
 
     while(1):
         s = conf.L2socket(iface=args.controller_port)
-        s.sniff(prn=pp)
+        s.sniff(prn=pp ,filter='udp')
     # sniff(iface=args.controller_port, prn=pp)
 
 if __name__ == '__main__':
