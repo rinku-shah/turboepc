@@ -1953,7 +1953,7 @@ string UserEquipment::send_ue_service_request(Client& user, int ue_num, string u
       int code_name2 = (int)(user.my_client_byte_buffer[0]);
 
       if(DO_DEBUG){
-        cout<<" received data INITIAL_CONTEXT_SETUP_REQUEST = "<<user.client_buffer<<endl;
+        cout<<" received data INITIAL_CONTEXT_SETUP_REQUEST = "<<user.my_client_byte_buffer<<endl;
         cout<<"code_name2 = "<<code_name2<<endl;
       // cout<<"user.my_client_byte_buffer[0] = "<<user.my_client_byte_buffer[0]<<endl;
 
@@ -1994,7 +1994,7 @@ string UserEquipment::send_ue_service_request(Client& user, int ue_num, string u
 
         // tmpArray[1] => ue key
         if(DO_DEBUG){
-          // cout<<"CLEAR TO SEND DATA for ue with key ="<<tmpArray[1]<<endl;
+          cout<<"ATTACH ACCEPT for ue with key = "<<ue_key<<" ue_teid = "<< ue_teid<<endl;
         }
       }
     }

@@ -44,8 +44,9 @@ bool networkServiceRequest = false;	// Network initiated service request (downli
 /* attach-detach, context-rel/service-req, att-data_all_the_time-det, att-data(default=1s)-det-loop, att-serv_req-data-loop2-det-loop1, att-serv-req-data-loop2-det*/
 // vector<vector<int>> traffic_mix={{0,100,0,0,0},{499,99501,0,0,0},{1499,98501,0,0,0},{2999,97001,0,0,0},{6999,93001,0,0,0},{8999,91001,0,0,0},{10999,89001,0,0,0},{30999,69001,0,0,0},{40999,59001,0,0,0},{50999,49001,0,0,0},{60999,39001,0,0,0},{100,0,0,0,0}};
 vector<vector<int>> traffic_mix={{0,0,0,9909,90991,0},{499,0,0,0,99501,0},{1499,98501,0,0,0,0},{2999,97001,0,0,0,0},{6999,93001,0,0,0,0},{8999,91001,0,0,0,0},{10999,89001,0,0,0,0},{30999,69001,0,0,0,0},{40999,59001,0,0,0,0},{0,0,0,0,100,0},{0,0,0,0,0,100},{0,0,0,100,0,0}};
-int start_ue = 100;
-int wait_latency = 28000;
+int start_ue = 101;
+int wait_latency = 8000;
+//int wait_latency = 800000;
 //2_98,0
 //5_95,1
 //6_94,2
@@ -393,7 +394,7 @@ void* multithreading_func(void *arg){
 					loop2 = 99; //100;   //inner loop---service-req
 					break;
 			}
-			do {
+			do{
 				// UserEquipment ue(threadId+1);
 				UserEquipment ue(threadId+start_ue);
 				//user.input_server_details(g_mme_port, g_mme_address);
@@ -403,6 +404,7 @@ void* multithreading_func(void *arg){
 				gettimeofday(&start, NULL);
 				//usleep(my_rand()+2000);
 				// usleep(200000);
+                      
 				usleep(my_rand()+wait_latency);
 				do{
 					if(s1_release_t){
@@ -455,7 +457,8 @@ void* multithreading_func(void *arg){
 							usleep(my_rand()+wait_latency);
 							gettimeofday(&start2, NULL);
 							//send_ue_service_request(Client& user, int ue_num, string ue_ip)
-							tmpArray[3] = ue_service_request(ue, user, ue_num, ue_ip); //returns newly generated ue_teid
+							//tmpArray[3] = ue_service_request(ue, user, ue_num, ue_ip); //returns newly generated ue_teid
+                                                        string ueteid = ue_service_request(ue, user, ue_num, ue_ip); //returns newly generated ue_teid
 							//tmpArray[3] = ue_service_request(ue, user, ue_num, tmpArray[1]); //returns newly generated ue_teid
 								//////PRINT REG TIME TO ARRAY////
 							gettimeofday(&end2, NULL);
@@ -794,7 +797,7 @@ int main(int argc, char *args[]){
 
 	average_registration_time = average_registration_time/1000000.0;
 	cout<<"Latency = "<<average_registration_time<<" secs"<<endl;
-	cout<<"Service Request Latency = "<<average_sr_registration_time<<" secs"<<endl;
+	cout<<"Service Request Latency = "<<average_sr_registration_time<<" usecs"<<endl;
 	cout<<"Registration Throughput="<<registrationThroughput<<" registrations/sec"<<endl;
 	cout<<"Attach-Request= "<<attNo<<"  Detach-Request= "<< detNo<<"  Service-Request= "<<sreqNo<<endl;
 	cout << fixed;
@@ -829,7 +832,7 @@ int main(int argc, char *args[]){
 		data.append("#Attach").append(COMMA).append("#Detach").append(COMMA);
 		data.append("#Service_Requests").append(COMMA);
 		data.append("ATTACH_PERCENT").append(COMMA);
-		data.append("EPOCH_TPT").append(COMMA).append("EPOCH_DELAY_ms").append(COMMA).append("ServiceRequestLatency");
+		data.append("EPOCH_TPT").append(COMMA).append("EPOCH_DELAY_ms").append(COMMA).append("ServiceRequestLatency(us)");
 		data.append("\n");
 	}
 	/*if(!fileExists(INST_FILE)){
