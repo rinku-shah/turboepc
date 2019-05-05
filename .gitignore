@@ -7,3 +7,4 @@ out/
 *.psdbg
 #dont ignore gitignore
 !.gitignore
+smartnic/controller-code/turboepc-dgw-controller.py~
