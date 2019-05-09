@@ -48,6 +48,7 @@ char * INTSEPARATOR = "^";
 int SN_ID = 1; // Serving Network Id of MME
 int teid = 1;
 static int count=0;
+long seconds, useconds;
 
 /*-------------------- Rijndael round subkeys ---------------------*/
 //u8 roundKeys[11][4][4];
@@ -730,6 +731,7 @@ bool UserEquipment::authenticate(Client &user, bool checkIntegrity){
 	one.tai[7] =  (tai) & 0xFF;
   
   do{
+  gettimeofday(&start, NULL);
   bzero(user.client_buffer, BUFFER_SIZE);
 
 	int len=0;
@@ -787,6 +789,7 @@ bool UserEquipment::authenticate(Client &user, bool checkIntegrity){
 	// Receive reply from MME: Authentication Step 2
 	user.read_data();
   } while(user.timeoutFlag);
+
 //	cout<<"After read"<<endl;
 	time(&curTime);
 	receive = (string) (user.client_buffer);
@@ -967,11 +970,16 @@ bool UserEquipment::authenticate(Client &user, bool checkIntegrity){
 			// three.res[7] =  (authenticationVector[1]) & 0xFF;
 			// cout<<"size of av.xres = "<<sizeof(av.xres)<<endl;
 			memcpy(three.res,av.xres,sizeof(av.xres));
+      gettimeofday(&end, NULL);
+      seconds  = end.tv_sec  - start.tv_sec;
+      useconds = end.tv_usec - start.tv_usec;
+      delay = delay + ((seconds) * 1000000 + useconds);
 
       do{
+      gettimeofday(&start, NULL);
 			// now write struct elemets to buffer one by one
 			bzero(user.client_buffer, BUFFER_SIZE);
-			len=0;  // reset length which holds no of bytes written in buffer
+			int len=0;  // reset length which holds no of bytes written in buffer
 
 			memcpy(user.client_buffer, &(three.msg_id), sizeof(three.msg_id));
 			len+=sizeof(three.msg_id);
@@ -1121,7 +1129,7 @@ bool UserEquipment::authenticate(Client &user, bool checkIntegrity){
 
 						// now write struct elemets to buffer one by one
 						bzero(user.client_buffer, BUFFER_SIZE);
-						len=0;  // reset length which holds no of bytes written in buffer
+						int len=0;  // reset length which holds no of bytes written in buffer
 
 						memcpy(user.client_buffer, &(n2.msg_id), sizeof(n2.msg_id));
 						len+=sizeof(n2.msg_id);
@@ -1170,6 +1178,10 @@ bool UserEquipment::authenticate(Client &user, bool checkIntegrity){
 		//exit(1);
 		return false;
 	}
+   gettimeofday(&end, NULL);
+      seconds  = end.tv_sec  - start.tv_sec;
+      useconds = end.tv_usec - start.tv_usec;
+      delay = delay + ((seconds) * 1000000 + useconds);
 }
 
 /*
@@ -1262,6 +1274,7 @@ vector<string> UserEquipment::setupTunnel(Client &user, bool doEncryption){
 
 	apnt.key = htonl(ue_key);
   do{
+    gettimeofday(&start, NULL);
 	// now write struct elemets to buffer one by one
 	bzero(user.client_buffer, BUFFER_SIZE);
 	int len=0;  // reset length which holds no of bytes written in buffer
@@ -1357,10 +1370,16 @@ vector<string> UserEquipment::setupTunnel(Client &user, bool doEncryption){
 		// st.key[7] =  (ue_key) & 0xFF;
 
 		st.key = htonl(ue_key);
+    gettimeofday(&end, NULL);
+      seconds  = end.tv_sec  - start.tv_sec;
+      useconds = end.tv_usec - start.tv_usec;
+      delay = delay + ((seconds) * 1000000 + useconds);
+
     do{
+      gettimeofday(&start, NULL);
 		// now write struct elemets to buffer one by one
 		bzero(user.client_buffer, BUFFER_SIZE);
-		len=0;  // reset length which holds no of bytes written in buffer
+		int len=0;  // reset length which holds no of bytes written in buffer
 
 		memcpy(user.client_buffer, &(st.msg_id), sizeof(st.msg_id));
 		len+=sizeof(st.msg_id);
@@ -1424,6 +1443,10 @@ vector<string> UserEquipment::setupTunnel(Client &user, bool doEncryption){
 		//	printf ("%ld seconds since January 1, 1970 kk=%d\n", seconds, stoi(tmpArray[2]));
 		}
 	}
+  gettimeofday(&end, NULL);
+      seconds  = end.tv_sec  - start.tv_sec;
+      useconds = end.tv_usec - start.tv_usec;
+      delay = delay + ((seconds) * 1000000 + useconds);
 	return tmpArray;
 }
 
@@ -1517,6 +1540,7 @@ vector<string> UserEquipment::setupTunnel_ho(Client &user, bool doEncryption){
 
   apnt.key = htonl(ue_key);
   do{
+    gettimeofday(&start, NULL);
   // now write struct elemets to buffer one by one
   bzero(user.client_buffer, BUFFER_SIZE);
   int len=0;  // reset length which holds no of bytes written in buffer
@@ -1612,10 +1636,15 @@ vector<string> UserEquipment::setupTunnel_ho(Client &user, bool doEncryption){
     // st.key[7] =  (ue_key) & 0xFF;
 
     st.key = htonl(ue_key);
+     gettimeofday(&end, NULL);
+      seconds  = end.tv_sec  - start.tv_sec;
+      useconds = end.tv_usec - start.tv_usec;
+      delay = delay + ((seconds) * 1000000 + useconds);
     do{
+      gettimeofday(&start, NULL);
     // now write struct elemets to buffer one by one
     bzero(user.client_buffer, BUFFER_SIZE);
-    len=0;  // reset length which holds no of bytes written in buffer
+    int len=0;  // reset length which holds no of bytes written in buffer
 
     memcpy(user.client_buffer, &(st.msg_id), sizeof(st.msg_id));
     len+=sizeof(st.msg_id);
@@ -1679,6 +1708,10 @@ vector<string> UserEquipment::setupTunnel_ho(Client &user, bool doEncryption){
     //  printf ("%ld seconds since January 1, 1970 kk=%d\n", seconds, stoi(tmpArray[2]));
     }
   }
+   gettimeofday(&end, NULL);
+      seconds  = end.tv_sec  - start.tv_sec;
+      useconds = end.tv_usec - start.tv_usec;
+      delay = delay + ((seconds) * 1000000 + useconds);
   return tmpArray;
 }
 
@@ -1763,6 +1796,7 @@ void UserEquipment::initiate_detach(Client &user, int ue_num, string ue_ip, stri
 	detach.ue_num = htonl(ue_num);
 
   do{
+    gettimeofday(&start, NULL);
 	// now write struct elemets to buffer one by one
 	bzero(user.client_buffer, BUFFER_SIZE);
 	int len=0;  // reset length which holds no of bytes written in buffer
@@ -1841,6 +1875,10 @@ void UserEquipment::initiate_detach(Client &user, int ue_num, string ue_ip, stri
 		cout<<"ERROR: UE DETACH ACCEPT ERROR:  IP Address of UE="<<ue_ip<<" and UE TEID="<<ue_teid<<" SGW TEID"<<sgw_teid<<endl;
 		exit(1);
 	}
+  gettimeofday(&end, NULL);
+      seconds  = end.tv_sec  - start.tv_sec;
+      useconds = end.tv_usec - start.tv_usec;
+      delay = delay + ((seconds) * 1000000 + useconds);
 }
 
 /*
@@ -1884,6 +1922,7 @@ void UserEquipment::initiate_ue_context_release(Client &user, int ue_num, string
 
 	ctxtrel.ue_num = htonl(ue_num);
 	do{
+    gettimeofday(&start, NULL);
 	// now write struct elemets to buffer one by one
 	bzero(user.client_buffer, BUFFER_SIZE);
 	int len=0;  // reset length which holds no of bytes written in buffer
@@ -1953,6 +1992,10 @@ void UserEquipment::initiate_ue_context_release(Client &user, int ue_num, string
 	if(DO_DEBUG){
 		cout<<"UE INITIATED CONTEXT RELEASE COMPLETE: UE Key="<<ue_num<<endl;
 	}
+  gettimeofday(&end, NULL);
+      seconds  = end.tv_sec  - start.tv_sec;
+      useconds = end.tv_usec - start.tv_usec;
+      delay = delay + ((seconds) * 1000000 + useconds);
 }
 
 /*
@@ -1994,6 +2037,7 @@ string UserEquipment::send_ue_service_request(Client& user, int ue_num, string u
 	serreq.ue_ip = inet_addr(ue_ip.c_str());
 
   do{
+    gettimeofday(&start, NULL);
 	// now write struct elemets to buffer one by one
 	bzero(user.client_buffer, BUFFER_SIZE);
 	int len=0;  // reset length which holds no of bytes written in buffer
@@ -2128,7 +2172,13 @@ string UserEquipment::send_ue_service_request(Client& user, int ue_num, string u
 			ctxtresp.sep3[2] = htons(0x3A40);
 
 			ctxtresp.ue_ip = inet_addr(ue_ip.c_str());
+      gettimeofday(&end, NULL);
+      seconds  = end.tv_sec  - start.tv_sec;
+      useconds = end.tv_usec - start.tv_usec;
+      delay = delay + ((seconds) * 1000000 + useconds);
+
       do{
+        gettimeofday(&start, NULL);
 			// now write struct elemets to buffer one by one
 			bzero(user.client_buffer, BUFFER_SIZE);
 			int len=0;  // reset length which holds no of bytes written in buffer
@@ -2182,7 +2232,10 @@ string UserEquipment::send_ue_service_request(Client& user, int ue_num, string u
 			}
 		}
 	}
-
+ gettimeofday(&end, NULL);
+      seconds  = end.tv_sec  - start.tv_sec;
+      useconds = end.tv_usec - start.tv_usec;
+      delay = delay + ((seconds) * 1000000 + useconds);
 	return to_string(ue_teid);
 }
 
