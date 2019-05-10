@@ -1,0 +1,26 @@
+{ 
+    "tables":{
+        "service_req_uekey_sgwteid_map":{
+            "rules":[
+            {
+                "name" : "1",
+                "match": {
+                    "ue_service_req.ue_key": {
+                        "value": "100"
+                    }
+                },
+                "action":
+                {
+                    "type" : "ingress::populate_service_req_uekey_sgwteid_map",
+                    "data" : {
+                        "sgwteid":{
+                            "value" : "1000"
+                        }
+                    }
+                }
+                
+            }
+            ]
+        }
+    }
+}

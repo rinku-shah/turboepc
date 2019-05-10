@@ -26,7 +26,7 @@ class TimerThread(threading.Thread):
                 counterValueList = []
 
                 for i in range(self.internal_ports + 2,len(ruleList)):
-                    # #print(ruleList[i].rule_name)
+                     #print(ruleList[i].rule_name)
                     try:
                         counterValueList.append(RTEInterface.Counters.GetP4Counter(counterList[0])[i])
                         if RTEInterface.Counters.GetP4Counter(counterList[0])[i] == 0:
@@ -121,6 +121,7 @@ class PacketProcessor(object):
         t1 = FuncThread(self.processPacket, x)
         t1.daemon = True
         t1.start()
+        t1.join()
 
     def SendToSwitch(self, packet, switch_port):
         del packet[IP].chksum
@@ -147,16 +148,16 @@ class PacketProcessor(object):
 			print "welcome"
 			return
 
-		print p2.show()
-		print "Switch Port : " + switch_port
+		#print p2.show()
+		#print "Switch Port : " + switch_port
 		sink_ip=str("192.168.3.4")
 		if data.epc_traffic_code == 14: #UE_Context_Release_Req
 			try:
 			    tbl_id = 'ingress::ip_op_tun_s1_uplink' #del on DGW
-			    rule_name = data.param4 #'del-s1-uplink_' + str(data.param4)
+			    rule_name = str(data.param4) #'del-s1-uplink_' + str(data.param4)
 			    default_rule = False
 			    actions = '{  "type" : "ingress::populate_ip_op_tun_s1_uplink",  "data" : { "egress_port_s1" : { "value" : "p0" } } }' 
-			    match = '{ "ipv4.srcAddr" : {  "value" : "%s"} , "ipv4.dstAddr" : { "value" : "192.168.3.4"} } }' % (data.param4)  
+			    match = '{ "ipv4.srcAddr" : {  "value" : "10.127.1.1"} , "ipv4.dstAddr" : { "value" : "192.168.3.4"} } ' #% (data.param4)  
 
 			    with THRIFT_API_LOCK:
 			        if data.param4 != 0:
@@ -164,12 +165,13 @@ class PacketProcessor(object):
 			        	#RTEInterface.Tables.AddRule(tbl_id, rule_name, default_rule, match, actions, 1)
 			        	# RTEInterface.Tables.AddRule(tbl_id, rule_name, default_rule, match, actions, 1, 3)
 			except Exception, err:
-				print("Exception: del ingress::ip_op_tun_s1_uplink")
-				print(err)
+				#print("Exception: del ingress::ip_op_tun_s1_uplink")
+				#print(err)
+				pass
 
 			try:
 			    tbl_id = 'ingress::tun_egress_s3_uplink' #del on DGW
-			    rule_name = data.param4 #'del-s3-uplink_' + str(data.param4)
+			    rule_name = str(data.param4) #'del-s3-uplink_' + str(data.param4)
 			    default_rule = False
 			    actions = '{  "type" : "ingress::populate_tun_egress_s3_uplink",  "data" : { "egress_port_s3" : { "value" : "v0.0" } } }' 
 			    match = '{ "ue_service_req.ue_key" : {  "value" : "%s"} }' % (data.param4) 
@@ -180,8 +182,9 @@ class PacketProcessor(object):
 			        	#RTEInterface.Tables.AddRule(tbl_id, rule_name, default_rule, match, actions, 1)
 			        	# RTEInterface.Tables.AddRule(tbl_id, rule_name, default_rule, match, actions, 1, 3)
 			except Exception, err:
-				print("Exception: del ingress::tun_egress_s3_uplink")
-				print(err)
+				#print("Exception: del ingress::tun_egress_s3_uplink")
+				#print(err)
+				pass
 
 			# try:
 			# 	tbl_id = 'ingress::ip_op_tun_s2_downlink' #del on SGW
@@ -218,25 +221,26 @@ class PacketProcessor(object):
 			# 	print("Exception:uekey_uestate_map:add")
 			# 	print(err)
 			# 	#pass
-			self.ruleNum += 4
+			self.ruleNum += 2
 
 		else:
 			if data.epc_traffic_code == 17:  #17:UE_Service_Req,
 				try:
 				    tbl_id = 'ingress::ip_op_tun_s1_uplink' #del on DGW
-				    rule_name = data.param3 #'add-s1-uplink_' + str(data.param1)
+				    rule_name = str(data.param1) #'add-s1-uplink_' + str(data.param1)
 				    default_rule = False
 				    actions = '{  "type" : "ingress::populate_ip_op_tun_s1_uplink",  "data" : { "egress_port_s1" : { "value" : "p1" } } }'
-				    match = '{ "ipv4.srcAddr" : {  "value" : "%s"} , "ipv4.dstAddr" : { "value" : "192.168.3.4"} } }' % (data.param3)  
+				    match = '{ "ipv4.srcAddr" : {  "value" : "10.127.1.1"} , "ipv4.dstAddr" : { "value" : "192.168.3.4"} } ' #% (data.param3)  
 
 				    with THRIFT_API_LOCK:
-				        if data.param3 != 0:
+				        if data.param1 != 0:
 				        	RTEInterface.Tables.AddRule(tbl_id, rule_name, default_rule, match, actions, 1)
 				        	#RTEInterface.Tables.AddRule(tbl_id, rule_name, default_rule, match, actions, 1)
 				        	# RTEInterface.Tables.AddRule(tbl_id, rule_name, default_rule, match, actions, 1, 3)
 				except Exception, err:
-					print("Exception: add ingress::ip_op_tun_s1_uplink")
-					print(err) 
+					#print("Exception: add ingress::ip_op_tun_s1_uplink")
+					#print(err) 
+					pass
 				self.ruleNum += 1
 				#pass   
 		
@@ -262,7 +266,7 @@ class PacketProcessor(object):
 
 					try:
 					    tbl_id = 'ingress::tun_egress_s3_uplink' #add on DGW
-					    rule_name = data.param4 #'add-s3-uplink_' + str(data.param2)
+					    rule_name = str(data.param2) #'add-s3-uplink_' + str(data.param2)
 					    default_rule = False
 					    actions = '{  "type" : "ingress::populate_tun_egress_s3_uplink",  "data" : { "egress_port_s3" : { "value" : "v0.0" } } }' 
 					    match = '{ "ue_service_req.ue_key" :{  "value" : "%s"} }' %  (data.param2)  
@@ -273,8 +277,9 @@ class PacketProcessor(object):
 					        	#RTEInterface.Tables.AddRule(tbl_id, rule_name, default_rule, match, actions, 1)
 					        	# RTEInterface.Tables.AddRule(tbl_id, rule_name, default_rule, match, actions, 1, 3)
 					except Exception, err:
-						print("Exception: add ingress::tun_egress_s3_uplink")
-						print(err)
+						#print("Exception: add ingress::tun_egress_s3_uplink")
+						#print(err)
+						pass
 
 					# try:
 					# 	tbl_id = 'ingress::uekey_uestate_map' #update on SGW
@@ -291,7 +296,7 @@ class PacketProcessor(object):
 					# 	print("Exceptioni:uekey_uestate_map:add")
 					# 	print(err)
 						#pass
-					self.ruleNum += 3
+					self.ruleNum += 1
 			# print data.key1
 			# print data.value
 			# p2['Data'].type_sync = 3
@@ -305,7 +310,7 @@ class PacketProcessor(object):
   
 def main():
     parser = argparse.ArgumentParser(description='P4 TurboEPC DGW config')
-    parser.add_argument('-i','--ip', help='External IP address - "192.168.2.2"', required=False,default="192.168.0.1")
+    parser.add_argument('-i','--ip', help='External IP address - "192.168.2.3"', required=False,default="192.168.0.1")
     # parser.add_argument('-p','--ext-port', help='External port for rules - "v0.2"', required=False,default="v0.2")
     parser.add_argument('-p','--ext-port', help='External port for rules - "p0"', required=False,default="p0")
     # parser.add_argument('-c','--controller-port', help='Controller port - "vf0_1"', required=False,default="vf0_1")
@@ -313,10 +318,11 @@ def main():
     parser.add_argument('-r','--controller-port-rules', help='Controller port for rules - "v0.0"', required=False,default="v0.0")
     #parser.add_argument('-d','--device-number', help='Device number in case of using VFs - "v0."', required=False,default="vf0.0") #How would this work for physical ports? - Default " "?
     parser.add_argument('-d','--port-prefix', help='Port prefix for internal port - "v0." for VF or "p" for physical (DEFAULT: p)"', required=False,default="p")
-    parser.add_argument('-o', '--rpc-port',dest='rpc_port', default='20207',type=int,heapplications where caching is location basedlp="Thrift RPC port (DEFAULT: 20207)")
+    parser.add_argument('-o', '--rpc-port',dest='rpc_port', default='20207',type=int,help="Thrift RPC port (DEFAULT: 20207)")
     parser.add_argument('-s', '--rpc-server', dest='rpc_server', default='thrift', type=str, help="Thrift RPC host (DEFAULT: localhost)")
     parser.add_argument('-t', '--rule-timeout', dest='rule_timeout', default=1000, type=float, help="Rule Timeout - Rules will delete if not hit within t seconds (DEFAULT: 10 seconds)")
     parser.add_argument('-n', '--internal-ports', dest='internal_ports', default=1, type=float, help="Number of internal ports (DEFAULT: 1)")
+
     
     args = parser.parse_args()
 
@@ -327,7 +333,7 @@ def main():
     thread.start()
     
     #@rinku: check for switch CLI IP,port
-    RTEInterface.Connect(args.rpc_server,"192.168.2.2", args.rpc_port)
+    RTEInterface.Connect(args.rpc_server,"10.129.2.171", args.rpc_port)
     ruleNum = 0
     pp = PacketProcessor(args.ip, 1025, args.ext_port, args.controller_port, 
         args.controller_port_rules, args.port_prefix,ruleNum)
