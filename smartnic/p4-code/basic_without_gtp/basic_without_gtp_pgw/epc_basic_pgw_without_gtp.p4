@@ -37,7 +37,7 @@ control c_ingress(inout headers hdr,
            populate_ip_op_tun_s1_uplink;
            NoAction;
        }
-       size = 4096;
+       size = 65000;
        default_action = NoAction();
    }
 
@@ -73,7 +73,7 @@ control c_ingress(inout headers hdr,
             populate_tun_egress_s3_uplink;
             NoAction;
         }
-        size = 4096;
+        size = 65000;
         default_action = NoAction();
     }
 
@@ -94,7 +94,7 @@ control c_ingress(inout headers hdr,
             fwd_act;
             drop_act;
         }
-        size = 4096;
+        size = 65000;
     }
 
     apply {

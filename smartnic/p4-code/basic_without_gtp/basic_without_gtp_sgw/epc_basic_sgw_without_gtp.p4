@@ -68,7 +68,7 @@ control c_ingress(inout headers hdr,
            populate_ip_op_tun_s2_uplink;
            NoAction;
        }
-       size = 4096;
+       size = 65000;
        default_action = NoAction();
    }
 
@@ -94,7 +94,7 @@ control c_ingress(inout headers hdr,
           populate_ip_op_tun_s2_downlink;
           NoAction;
       }
-      size = 4096;
+      size = 65000;
       default_action = NoAction();
   }
 
@@ -112,7 +112,7 @@ control c_ingress(inout headers hdr,
           populate_uekey_uestate_map;
           NoAction;
       }
-      size = 4096;
+      size = 65000;
       default_action = NoAction();
     }
 
@@ -128,7 +128,7 @@ control c_ingress(inout headers hdr,
           populate_uekey_guti_map;
           NoAction;
       }
-      size = 4096;
+      size = 65000;
       default_action = NoAction();
     }
 
@@ -167,7 +167,7 @@ control c_ingress(inout headers hdr,
           populate_service_req_uekey_sgwteid_map;
           NoAction;
       }
-      size = 4096;
+      size = 65000;
       default_action = NoAction();
     }
 
@@ -206,7 +206,7 @@ control c_ingress(inout headers hdr,
           populate_ctxt_setup_uekey_sgwteid_map;
           NoAction;
       }
-      size = 4096;
+      size = 65000;
       default_action = NoAction();
     }
 
@@ -227,7 +227,7 @@ control c_ingress(inout headers hdr,
             fwd_act;
             drop_act;
         }
-        size = 4096;
+        size = 65000;
     }
 
     apply {
@@ -251,15 +251,15 @@ control c_ingress(inout headers hdr,
             }
 
             else if( hdr.ipv4.protocol == PROTO_TCP && hdr.ipv4.dstAddr == s1u_dgw_addr){
-                            //ip_op_tun_s2_uplink.apply();
-                            standard_metadata.egress_spec = 0;
-                            return;
-                    }
-                    else if(hdr.ipv4.protocol == PROTO_TCP && hdr.ipv4.dstAddr == s1u_pgw_addr){
-                            //ip_op_tun_s2_uplink.apply();
-                            standard_metadata.egress_spec = 1;
-                            return;
-                    }
+                    //ip_op_tun_s2_uplink.apply();
+                    standard_metadata.egress_spec = 0;
+                    return;
+            }
+            else if(hdr.ipv4.protocol == PROTO_TCP && hdr.ipv4.dstAddr == s1u_pgw_addr){
+                    //ip_op_tun_s2_uplink.apply();
+                    standard_metadata.egress_spec = 1;
+                    return;
+            }
                   
             // @smartnic : forward all control packets from controller to DGW
             standard_metadata.egress_spec = 0;
@@ -294,19 +294,19 @@ control c_ingress(inout headers hdr,
                         // deparsed on the wire (see c_deparser).
                         hdr.packet_in.setValid();
                         hdr.packet_in.ingress_port = standard_metadata.ingress_port;
-                        // return;
+                        return;
                     }
 
                     else if(hdr.data.epc_traffic_code == 17){
                         // send the original packet to local onos by appending the sgw_teid field
                         service_req_uekey_sgwteid_map.apply();
-                        // return;
+                        return;
                     }
 
                     else if(hdr.data.epc_traffic_code == 19){
                         // send the original packet to local onos by appending the sgw_teid field
                         ctxt_setup_uekey_sgwteid_map.apply();
-                        // return;
+                        return;
                     }
                 }
                     
@@ -371,7 +371,6 @@ control c_egress(inout headers hdr,
                 // set invalid the incoming headers as we are appending new one
                 hdr.data.setInvalid();
                 hdr.ue_service_req.setInvalid();
-                standard_metadata.egress_spec = 1;
 
                 hdr.ipv4.ttl = 64;
                 hdr.ethernet.dstAddr =  hdr.ethernet.srcAddr;
@@ -392,7 +391,7 @@ control c_egress(inout headers hdr,
                 hdr.ipv4.totalLen =  hdr.udp.length_ + IPV4_HDR_SIZE;
 
                  // forwarding the cloned packet back to RAN on "p0"(0)
-                standard_metadata.egress_spec = 0;
+                standard_metadata.egress_port = 0;
         }
 
         table ctxt_release_uekey_sgwteid_map{
@@ -410,7 +409,11 @@ control c_egress(inout headers hdr,
         }
 
         apply {
-                if (IS_I2E_CLONE(standard_metadata)) {
+                // if (IS_I2E_CLONE(standard_metadata)) {
+                    
+            // this identifies cloned packet in smartNIC
+            if (standard_metadata.instance_type == (bit<4>) 0x8){
+
                                     // @clone design: we are at SGW : beacuse ttl = 63 and we received a cloned packet in 
                                     // we have got cloned packet
                                     // output port is already set by mirrioring add using the CLI
@@ -428,7 +431,6 @@ control c_egress(inout headers hdr,
                                     // set invalid the incoming headers as we are appending new one
                                     hdr.data.setInvalid();
                                     hdr.ue_context_rel_req.setInvalid();
-                                    standard_metadata.egress_spec = 1;
 
                                     // setting ipv4 ttl back as 64 so that DGW can handle the packet                    
                                     hdr.ipv4.ttl = 64;
@@ -449,7 +451,7 @@ control c_egress(inout headers hdr,
                                     hdr.udp.length_ = 7 + UDP_HDR_SIZE;
                                     hdr.ipv4.totalLen =  hdr.udp.length_ + IPV4_HDR_SIZE;
                                     // forwarding the cloned packet back to RAN on "p0"(0)
-                                    standard_metadata.egress_spec = 0;
+                                    standard_metadata.egress_port = 0;
 
                             }
 
@@ -468,7 +470,6 @@ control c_egress(inout headers hdr,
                                     hdr.data.setInvalid();
                                     hdr.initial_ctxt_setup_resp.setInvalid();
                                     // send the packet back to RAN
-                                    standard_metadata.egress_spec = 1;
                                     hdr.ipv4.ttl = 64;
 
                                     hdr.ethernet.dstAddr =  hdr.ethernet.srcAddr;
@@ -489,7 +490,7 @@ control c_egress(inout headers hdr,
                                     hdr.ipv4.totalLen =  hdr.udp.length_ + IPV4_HDR_SIZE;
 
                                      // forwarding the cloned packet back to RAN on "p0"(0)
-                                    standard_metadata.egress_spec = 0;
+                                    standard_metadata.egress_port = 0;
                                      // return;
                             }
 
