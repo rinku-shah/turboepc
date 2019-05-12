@@ -134,13 +134,13 @@ control c_ingress(inout headers hdr,
                             //  if we use above code then sometimes it gets stuck because tcp data can also contain hdr.data.epc_traffic_code 
                             //TC means data packet
                             // going with this to be on safe side 
-                            if(hdr.ipv4.protocol == PROTO_UDP && hdr.udp.dstPort == 8001){
+                            /*if(hdr.ipv4.protocol == PROTO_TCP){
                                 standard_metadata.egress_spec = 0;
                                 //ip_op_tun_s1_uplink.apply();
                                 return;
-                            }
+                            }*/
                             // UDP means control traffic so forward it to SGW which is connected at physical port "p0"(0)
-                            else if(hdr.ipv4.protocol == PROTO_UDP){
+                             if(hdr.ipv4.protocol == PROTO_UDP){
                                     standard_metadata.egress_spec = 0;
                                     hdr.ipv4.ttl = hdr.ipv4.ttl - 1;
                                     return;
