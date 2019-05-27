@@ -1,5 +1,6 @@
 .*
 *.pcap
+a.out
 #ignore out folder of smartnic SDK
 out/
 *.psproj
