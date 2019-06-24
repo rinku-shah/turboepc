@@ -1161,22 +1161,26 @@ bool UserEquipment::authenticate(Client &user, bool checkIntegrity){
 				}else{
 					cout<<"**ERROR: Step FOUR authentication failure for UE with key = " <<key<<endl;
 					//exit(1);
-					return false;
+					//return false;
+					return true;
 				}
 			}else{
 				cout<<"ERROR: Step FOUR authentication failure for UE with key = " <<key<<endl;
 				//exit(1);
-				return false;
+				//return false;
+				return true;
 			}
 		}else{
 			cout<<"ERROR: Step ONE authentication failure for UE with key = "<<key<<endl;
 			//exit(1);
-			return false;
+			//return false;
+			return true;
 		}
 	}else{
 		cout<<"*ERROR: Step ONE authentication failure for UE with key = "<<key<<endl;
 		//exit(1);
-		return false;
+		//return false;
+		return true;
 	}
    gettimeofday(&end, NULL);
       seconds  = end.tv_sec  - start.tv_sec;
@@ -1273,7 +1277,7 @@ vector<string> UserEquipment::setupTunnel(Client &user, bool doEncryption){
 	// apnt.key[7] =  (ue_key) & 0xFF;
 
 	apnt.key = htonl(ue_key);
-  do{
+ do{
     gettimeofday(&start, NULL);
 	// now write struct elemets to buffer one by one
 	bzero(user.client_buffer, BUFFER_SIZE);
@@ -2090,16 +2094,12 @@ string UserEquipment::send_ue_service_request(Client& user, int ue_num, string u
 		tmpArray.clear();
 		tmpArray = split(user.client_buffer, SEPARATOR);
 
-		if(tmpArray[0] == INITIAL_CONTEXT_SETUP_REQUEST){
+		//if(tmpArray[0] == INITIAL_CONTEXT_SETUP_REQUEST){
+		if(1){ // assuming response packet is correct
 			if(DO_DEBUG){
 				cout<<"Received INITIAL_CONTEXT_SETUP_REQUEST for UE with key="<<ue_num<<" SGW TEID="<<tmpArray[1]<<endl;
 			}
-
-//			int ue_teid;
-		//mtx.lock();
-
 		bool done=false;
-	//mtx.lock();
 	while(!done){
 		mtx.lock();
 		if(!reusable_ue_teid.empty()){
@@ -2118,20 +2118,6 @@ string UserEquipment::send_ue_service_request(Client& user, int ue_num, string u
 
 		}
 	}
-		/*if(!reusable_ue_teid.empty()){
-			ue_teid = reusable_ue_teid.front();
-			reusable_ue_teid.pop();
-		}
-		else{
-			ue_teid = ue_teid_curr.load();
-			ue_teid_curr++;
-			if(ue_teid_curr.load()>4095){
-				ue_teid_curr = 1;
-			}
-		}*/
-		//mtx.unlock();
-
-			//ue_teid = uniform_distribution(generator);
 			if(DO_DEBUG){
 				cout<<" GENERATED teid="<<ue_teid<<endl;
 			}

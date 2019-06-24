@@ -223,7 +223,9 @@ control c_ingress(inout headers hdr,
                             // UDP means control traffic
                             else if(hdr.ipv4.protocol == PROTO_UDP){
                                     // before handover the normal service request and context release packets are sent to SGW2(chain2) for processing
-                                    if(hdr.data.epc_traffic_code==14 || hdr.data.epc_traffic_code==17 || hdr.data.epc_traffic_code==19){
+                                   if(hdr.data.epc_traffic_code==14 || hdr.data.epc_traffic_code==17 || hdr.data.epc_traffic_code==19 || hdr.data.epc_traffic_code == 5 || hdr.data.epc_traffic_code== 7){
+
+                                    //if(hdr.data.epc_traffic_code==14 || hdr.data.epc_traffic_code==17 || hdr.data.epc_traffic_code==19){
                                         standard_metadata.egress_spec = 3;
                                     }
                                     // AFTER handover the normal service request and context release packets are sent to SGW1(chain1) for processing

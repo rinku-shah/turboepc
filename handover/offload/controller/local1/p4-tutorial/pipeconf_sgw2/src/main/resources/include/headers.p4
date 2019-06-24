@@ -192,6 +192,11 @@ header offload_initial_ctxt_setup_resp_t{
     bit<32> sgw_teid; 
 }
 
+// @vikas: handover offload header to be appended to the handover packet beng forwarded to the root controller
+header handover_offload_state_t{
+    bit<48> sep;
+    bit<8> ue_state; 
+}
 // Offload tables 
 header uekey_uestate_t{
     bit<32> ue_key;
@@ -267,6 +272,8 @@ struct headers {
     ue_context_rel_req_t ue_context_rel_req;
     ue_service_req_t ue_service_req;
     initial_ctxt_setup_resp_t initial_ctxt_setup_resp;
+
+    handover_offload_state_t handover_offload_state;
 
     // @offload design this request will go to local-onos
     offload_ue_service_req_t offload_ue_service_req;

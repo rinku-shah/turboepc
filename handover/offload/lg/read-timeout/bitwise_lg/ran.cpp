@@ -45,7 +45,7 @@ bool networkServiceRequest = false;	// Network initiated service request (downli
 // vector<vector<int>> traffic_mix={{0,100,0,0,0},{499,99501,0,0,0},{1499,98501,0,0,0},{2999,97001,0,0,0},{6999,93001,0,0,0},{8999,91001,0,0,0},{10999,89001,0,0,0},{30999,69001,0,0,0},{40999,59001,0,0,0},{50999,49001,0,0,0},{60999,39001,0,0,0},{100,0,0,0,0}};
 //vector<vector<int>> traffic_mix={{0,0,0,74999,0,25001},{499,99501,0,0,0,0},{1499,98501,0,0,0,0},{2999,97001,0,0,0,0},{6999,93001,0,0,0,0},{8999,91001,0,0,0,0},{10999,89001,0,0,0,0},{30999,69001,0,0,0,0},{40999,59001,0,0,0,0},{0,0,0,0,100,0},{0,0,0,0,0,100},{0,0,0,100,0,0}};
 vector<vector<int>> traffic_mix={{0,0,0,0,0,0,100000}};
-int wait_latency = 40000;//2_98,0
+int wait_latency = 28000;//2_98,0
 //5_95,1
 //6_94,2
 //10_90,3
@@ -421,6 +421,12 @@ void* multithreading_func(void *arg){
 					ueServiceRequest_t = true;
 					handover_t = true;
 					dataTime = 1;
+					//loop1 = 2;    //outer loop---attach  typical stats 3/0/40 ... 5% HO 1/4/4
+					//loop2 = 1;   //inner loop---service-req
+					//loop3 = 40;   // HO loop
+					//loop1 = 1;    //outer loop---attach  typical stats 3/0/40 ... 5% HO 1/4/4
+					//loop2 = 4;   //inner loop---service-req
+					//loop3 = 4;   // HO loop
 					loop1 = 3;    //outer loop---attach  typical stats 3/0/40 ... 5% HO 1/4/4
 					loop2 = 0;   //inner loop---service-req
 					loop3 = 40;   // HO loop

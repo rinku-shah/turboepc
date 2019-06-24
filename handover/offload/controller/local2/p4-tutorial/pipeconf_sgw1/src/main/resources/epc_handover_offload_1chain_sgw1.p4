@@ -142,7 +142,8 @@ control c_ingress(inout headers hdr,
 
     table uekey_uestate_map{
       key={
-            hdr.uekey_uestate.ue_key : exact;
+            //hdr.uekey_uestate.ue_key : exact;
+            hdr.send_apn.key : exact;
       }
       actions={
           populate_uekey_uestate_map;

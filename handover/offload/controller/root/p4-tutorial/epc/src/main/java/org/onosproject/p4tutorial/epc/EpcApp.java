@@ -200,18 +200,20 @@ public class EpcApp {
                 .matchTernary(epcCode, epc_code,PORTMASK)
                 .build();
         packetService.requestPackets(selector.matchPi(match).build(), PacketPriority.REACTIVE, appId);
+        //@Handover offload :the unchanged traffic code messages are sent during handover to chain1
+        //  we will not intercept them as they will be forwarded via SGW1 after appending the ue_state to the packet during handover
 
-        epc_code = 5;
-        match = PiCriterion.builder()
-                .matchTernary(epcCode, epc_code,PORTMASK)
-                .build();
-        packetService.requestPackets(selector.matchPi(match).build(), PacketPriority.REACTIVE, appId);
+        // epc_code = 5;
+        // match = PiCriterion.builder()
+        //         .matchTernary(epcCode, epc_code,PORTMASK)
+        //         .build();
+        // packetService.requestPackets(selector.matchPi(match).build(), PacketPriority.REACTIVE, appId);
 
-        epc_code = 7;
-        match = PiCriterion.builder()
-                .matchTernary(epcCode, epc_code,PORTMASK)
-                .build();
-        packetService.requestPackets(selector.matchPi(match).build(), PacketPriority.REACTIVE, appId);
+        // epc_code = 7;
+        // match = PiCriterion.builder()
+        //         .matchTernary(epcCode, epc_code,PORTMASK)
+        //         .build();
+        // packetService.requestPackets(selector.matchPi(match).build(), PacketPriority.REACTIVE, appId);
 
         epc_code = 9;
         match = PiCriterion.builder()
@@ -219,7 +221,7 @@ public class EpcApp {
                 .build();
         packetService.requestPackets(selector.matchPi(match).build(), PacketPriority.REACTIVE, appId);
 
-        //@Handover : we have changed traffic code of SEND APN and Send UETEID so we need those messages as well installing rules for them here 
+        //@Handover offload : we have changed traffic code of SEND APN and Send UETEID so we need those messages as well installing rules for them here before handover for chain2 attach
         epc_code = 24;  //SEND_APN_HO
         match = PiCriterion.builder()
                 .matchTernary(epcCode, epc_code,PORTMASK)
@@ -275,7 +277,7 @@ public class EpcApp {
 
         int uePort = Constants.DEFAULT_SWITCH_UE_PORT;
 
-
+        ConnectPoint DGWConnectPoint;
         @Override
         public void process(PacketContext context) {
             // Stop processing if the packet has been handled, since we
@@ -471,7 +473,7 @@ public class EpcApp {
                         }
 
                         build_response_pkt(connectPoint,srcMac,dstMac,ipv4Protocol,ipv4SourceAddress,udp_dstport,udp_srcport,response.toString());
-
+                        DGWConnectPoint = connectPoint;
                         response = null;
                         if(Constants.DEBUG)
                             d2 = new Date();
@@ -726,15 +728,21 @@ public class EpcApp {
                         break;
 
                     //  attach with chain1 during handover
+                    // the handover packet comes with ue_state piggybacked on it and seperated bya seperator from SGW1
                     case Constants.SEND_APN:
 
                                     byte [] b53 =Arrays.copyOfRange(p, 7, 15); //apn
                                     byte [] b54 = Arrays.copyOfRange(p, 15, 21); //sep2
                                     byte [] b55 =Arrays.copyOfRange(p, 21, 25); //ue_key
+                                    byte [] b56 =Arrays.copyOfRange(p, 25, 31); //sep3
+                                    byte [] b57 = Arrays.copyOfRange(p,31,32);  //uestate
 
                                     Long apn = ByteBuffer.wrap(b53).getLong();
                                     
                                     String sep52 = new String(b54, StandardCharsets.UTF_8); //6 byte
+                                    String sep53 = new String(b56, StandardCharsets.UTF_8); //6 byte
+
+                                    String uestate = new String(b57,StandardCharsets.UTF_8); //1 byte
                                     
                                     int ue_key = ByteBuffer.wrap(b55).getInt();
                                     if(Constants.BITWISE_DEBUG){
@@ -742,14 +750,17 @@ public class EpcApp {
                                         log.warn("imsi = {}" , apn);
                                         log.warn("sep2 = {}" , sep52);
                                         log.warn("ue_key = {}" , ue_key);
+                                        log.warn("sep2 = {}" , sep52);
+                                        log.warn("uestate = {}",uestate);
                                     }
                                     tmpArray[1] = Long.toString(apn);
                                     tmpArray[2] = Integer.toString(ue_key);
 					
-                        String dgw_dpId = (String)connectPoint.deviceId().toString();  //hardcoding  Device ID format = device:bmv2:s1
+                        //String dgw_dpId = (String)connectPoint.deviceId().toString();  //hardcoding  Device ID format = device:bmv2:s1
+                        //@handover offload : since send_apn and send_ueteid packet comes via chain2 (SGW2) we need to hardcode the DGW which is always DGW1
+                        String dgw_dpId = (String)Constants.DGW1_connectpoint.toString();
                         String array1[]= dgw_dpId.split(":");  //parsing the connectpoint to get switch ID
                         dgw_dpId = array1[2];  // contains switch names like "s10","s1" 
-
                         if(Constants.DEBUG){
                             log.info("Inside case SEND_APN");
                             log.warn("SEND_APN : array1[0] = {}",array1[0]);
@@ -764,7 +775,9 @@ public class EpcApp {
                         if(Constants.DO_ENCRYPTION){
                             decArray = receiveDecryptedArray(tmpArray);
                         }
-
+                        // @handover offload : updating the uestate which is received from SGW1
+	                    // public static void put(int msgId,String dgwDpId, String mapName, String key, String val){
+                        FT.put(Integer.parseInt(Constants.SEND_APN),dgw_dpId, "ue_state",Integer.toString(ue_key) ,uestate );
                         //tmpArray[1] => ue apn and tmpArray[2] => ue key
                         if(Constants.DEBUG){
                             log.warn("received apn={}",tmpArray[1]);
@@ -803,6 +816,7 @@ public class EpcApp {
                             log.info("UE_IPAddr = {}",UE_IPAddr);
                         }
                         // deviceId is DGW switch name
+                        deviceId = Constants.DGW1_connectpoint;
                         // install flow rules by matching on UE_IP
                         
                         /* UPLINK   => ipv4srcAddr = UE IP and ipv4dstAddr = Sink IP   */
@@ -823,10 +837,13 @@ public class EpcApp {
                         DeviceId offload_SGWswitchName1 = Constants.getSgwswitchName(dgw_dpId);
                         fr.populate_uekey_sgwteid_map(false,appId,flowRuleService,offload_SGWswitchName1,Integer.parseInt(tmpArray[2]),sgw_teid);
 
-                        build_response_pkt(connectPoint,srcMac,dstMac,ipv4Protocol,ipv4SourceAddress,udp_dstport,udp_srcport,response.toString());
+                        //build_response_pkt(connectPoint,srcMac,dstMac,ipv4Protocol,ipv4SourceAddress,udp_dstport,udp_srcport,response.toString());
+                        build_response_pkt(DGWConnectPoint,srcMac,dstMac,ipv4Protocol,ipv4SourceAddress,udp_dstport,udp_srcport,response.toString());
                         response = null;
                         if(Constants.DEBUG){
                             log.info("Send APN done");
+                             
+                            log.warn("Packet sent at {}", DGWConnectPoint);
                             d2 = new Date();
                         }
                         break;
@@ -853,10 +870,15 @@ public class EpcApp {
                                     tmpArray[1] = Integer.toString(ue_teid);
                                     tmpArray[2] = Integer.toString(ue_key7);
 					
-                        String dgw_dpId1 = (String)connectPoint.deviceId().toString();  //hardcoding  Device ID format = device:bmv2:s1
+                        //String dgw_dpId1 = (String)connectPoint.deviceId().toString();  //hardcoding  Device ID format = device:bmv2:s1
+                        //String array5[]= dgw_dpId1.split(":");  //parsing the connectpoint to get switch ID
+                        //dgw_dpId1 = array5[2];
+
+                        //@handover offload : since send_apn and send_ueteid packet comes via chain2 (SGW2) we need to hardcode the DGW which is always DGW1
+                        String dgw_dpId1 = (String)Constants.DGW1_connectpoint.toString();
                         String array5[]= dgw_dpId1.split(":");  //parsing the connectpoint to get switch ID
                         dgw_dpId1 = array5[2];
-
+                        
                         String send_ue_teid_dgw = Constants.getDgwDpidFromIp(DGW_IPAddr);  // send_ue_teid_dgw contains switches ID like "1", "2" etc
                         //log.warn("send_ue_teid_dgw = {}",send_ue_teid_dgw);
 
@@ -889,7 +911,8 @@ public class EpcApp {
 
                         //String ue_ip = uekey_ueip_map.get(tmpArray[2]); // tmpArray[2] => ue key
                         String ue_ip = FT.get(send_ue_teid_dgw, "uekey_ueip_map", tmpArray[2]); // tmpArray[2] => ue key
-
+                        //deviceId is the DGW1 switch Name
+                        deviceId = Constants.DGW1_connectpoint;
                         /**************************** Downlinkl flow rules on DGW (DGW -> RAN) ***************************/
                         fr.insertUplinkTunnelForwardRule(false,appId, flowRuleService, deviceId,Integer.parseInt(tmpArray[1]), uePort,0,true);
 
@@ -913,7 +936,7 @@ public class EpcApp {
 
                         String pgw_dpid = Integer.toString(Constants.PGW_ID);
                          tmp = FT.get(Integer.toString(Constants.DEFAULT_SWITCH_ID_2), "uekey_sgw_teid_map", tmpArray[2]); // tmpArray[2] => ue key
-			tmpArray2 = tmp.split(Constants.SEPARATOR); 
+			             tmpArray2 = tmp.split(Constants.SEPARATOR); 
                         // @HO: find UE IP, and sgw_teid from uekey_sgw_teid_map, and uekey_ueip_map : already found above so reusing
                         // @HO: ue_teid (need to remember prev ue_teid, if not forget the last flow remove)   : UE is sedning ue_teid in Send_ue_teid message itself reusing it here
 
@@ -961,7 +984,8 @@ public class EpcApp {
                         if(Constants.DO_ENCRYPTION){
                             decArray = receiveDecryptedArray(tmpArray);
                         }
-                        build_response_pkt(connectPoint,srcMac,dstMac,ipv4Protocol,ipv4SourceAddress,udp_dstport,udp_srcport,response.toString());
+                        //build_response_pkt(connectPoint,srcMac,dstMac,ipv4Protocol,ipv4SourceAddress,udp_dstport,udp_srcport,response.toString());
+                        build_response_pkt(DGWConnectPoint,srcMac,dstMac,ipv4Protocol,ipv4SourceAddress,udp_dstport,udp_srcport,response.toString());
 
                         response = null;
                         if(Constants.DEBUG)

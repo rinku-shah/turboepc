@@ -3768,7 +3768,7 @@
           ],
           "source_info" : {
             "filename" : "epc_handover_offload_1chain_dgw.p4",
-            "line" : 227,
+            "line" : 229,
             "column" : 40,
             "source_fragment" : "standard_metadata.egress_spec = 3"
           }
@@ -3794,7 +3794,7 @@
           ],
           "source_info" : {
             "filename" : "epc_handover_offload_1chain_dgw.p4",
-            "line" : 231,
+            "line" : 233,
             "column" : 40,
             "source_fragment" : "standard_metadata.egress_spec = 2"
           }
@@ -3843,7 +3843,7 @@
           ],
           "source_info" : {
             "filename" : "epc_handover_offload_1chain_dgw.p4",
-            "line" : 233,
+            "line" : 235,
             "column" : 36,
             "source_fragment" : "hdr.ipv4.ttl = hdr.ipv4.ttl - 1"
           }
@@ -3869,7 +3869,7 @@
           ],
           "source_info" : {
             "filename" : "epc_handover_offload_1chain_dgw.p4",
-            "line" : 239,
+            "line" : 241,
             "column" : 32,
             "source_fragment" : "standard_metadata.egress_spec = 1"
           }
@@ -3911,7 +3911,7 @@
           ],
           "source_info" : {
             "filename" : "epc_handover_offload_1chain_dgw.p4",
-            "line" : 240,
+            "line" : 242,
             "column" : 32,
             "source_fragment" : "hdr.ipv4.ttl = hdr.ipv4.ttl - 1"
           }
@@ -3947,7 +3947,7 @@
           ],
           "source_info" : {
             "filename" : "epc_handover_offload_1chain_dgw.p4",
-            "line" : 251,
+            "line" : 253,
             "column" : 20,
             "source_fragment" : "return"
           }
@@ -4029,7 +4029,7 @@
           ],
           "source_info" : {
             "filename" : "epc_handover_offload_1chain_dgw.p4",
-            "line" : 256,
+            "line" : 258,
             "column" : 17,
             "source_fragment" : "tx_port_counter.count((bit<32>) standard_metadata.egress_spec)"
           }
@@ -4081,7 +4081,7 @@
           ],
           "source_info" : {
             "filename" : "epc_handover_offload_1chain_dgw.p4",
-            "line" : 259,
+            "line" : 261,
             "column" : 17,
             "source_fragment" : "rx_port_counter.count((bit<32>) standard_metadata.ingress_port)"
           }
@@ -4742,8 +4742,8 @@
           "source_info" : {
             "filename" : "epc_handover_offload_1chain_dgw.p4",
             "line" : 226,
-            "column" : 39,
-            "source_fragment" : "hdr.data.epc_traffic_code==14 || hdr.data.epc_traffic_code==17 || hdr.data.epc_traffic_code==19"
+            "column" : 38,
+            "source_fragment" : "hdr.data.epc_traffic_code==14 || hdr.data.epc_traffic_code==17 || hdr.data.epc_traffic_code==19 || hdr.data.epc_traffic_code == 5 || hdr.data.epc_traffic_code== 7"
           },
           "expression" : {
             "type" : "expression",
@@ -4756,14 +4756,54 @@
                   "left" : {
                     "type" : "expression",
                     "value" : {
-                      "op" : "==",
+                      "op" : "or",
                       "left" : {
-                        "type" : "field",
-                        "value" : ["data", "epc_traffic_code"]
+                        "type" : "expression",
+                        "value" : {
+                          "op" : "or",
+                          "left" : {
+                            "type" : "expression",
+                            "value" : {
+                              "op" : "==",
+                              "left" : {
+                                "type" : "field",
+                                "value" : ["data", "epc_traffic_code"]
+                              },
+                              "right" : {
+                                "type" : "hexstr",
+                                "value" : "0x0e"
+                              }
+                            }
+                          },
+                          "right" : {
+                            "type" : "expression",
+                            "value" : {
+                              "op" : "==",
+                              "left" : {
+                                "type" : "field",
+                                "value" : ["data", "epc_traffic_code"]
+                              },
+                              "right" : {
+                                "type" : "hexstr",
+                                "value" : "0x11"
+                              }
+                            }
+                          }
+                        }
                       },
                       "right" : {
-                        "type" : "hexstr",
-                        "value" : "0x0e"
+                        "type" : "expression",
+                        "value" : {
+                          "op" : "==",
+                          "left" : {
+                            "type" : "field",
+                            "value" : ["data", "epc_traffic_code"]
+                          },
+                          "right" : {
+                            "type" : "hexstr",
+                            "value" : "0x13"
+                          }
+                        }
                       }
                     }
                   },
@@ -4777,7 +4817,7 @@
                       },
                       "right" : {
                         "type" : "hexstr",
-                        "value" : "0x11"
+                        "value" : "0x05"
                       }
                     }
                   }
@@ -4793,7 +4833,7 @@
                   },
                   "right" : {
                     "type" : "hexstr",
-                    "value" : "0x13"
+                    "value" : "0x07"
                   }
                 }
               }
@@ -4807,7 +4847,7 @@
           "id" : 8,
           "source_info" : {
             "filename" : "epc_handover_offload_1chain_dgw.p4",
-            "line" : 230,
+            "line" : 232,
             "column" : 44,
             "source_fragment" : "hdr.data.epc_traffic_code==54 || hdr.data.epc_traffic_code==57 || hdr.data.epc_traffic_code==59"
           },
@@ -4873,7 +4913,7 @@
           "id" : 9,
           "source_info" : {
             "filename" : "epc_handover_offload_1chain_dgw.p4",
-            "line" : 238,
+            "line" : 240,
             "column" : 28,
             "source_fragment" : "standard_metadata.ingress_port==2 || standard_metadata.ingress_port==3"
           },
@@ -4943,7 +4983,7 @@
           "id" : 11,
           "source_info" : {
             "filename" : "epc_handover_offload_1chain_dgw.p4",
-            "line" : 246,
+            "line" : 248,
             "column" : 16,
             "source_fragment" : "hdr.gtpu.isValid()"
           },
@@ -4990,7 +5030,7 @@
           "id" : 13,
           "source_info" : {
             "filename" : "epc_handover_offload_1chain_dgw.p4",
-            "line" : 255,
+            "line" : 257,
             "column" : 17,
             "source_fragment" : "standard_metadata.egress_spec < 255"
           },
@@ -5016,7 +5056,7 @@
           "id" : 14,
           "source_info" : {
             "filename" : "epc_handover_offload_1chain_dgw.p4",
-            "line" : 258,
+            "line" : 260,
             "column" : 17,
             "source_fragment" : "standard_metadata.ingress_port < 255"
           },
@@ -5044,7 +5084,7 @@
       "id" : 1,
       "source_info" : {
         "filename" : "epc_handover_offload_1chain_dgw.p4",
-        "line" : 267,
+        "line" : 269,
         "column" : 8,
         "source_fragment" : "c_egress"
       },

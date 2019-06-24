@@ -32,56 +32,13 @@ import java.util.concurrent.Future;
 import org.slf4j.Logger;
 import static org.slf4j.LoggerFactory.getLogger;
 
-//import net.floodlightcontroller.core.FloodlightContext;
-//import net.floodlightcontroller.core.IOFMessageListener;
-//import net.floodlightcontroller.core.IOFSwitch;
-//import net.floodlightcontroller.core.IOFSwitchListener;
-//import net.floodlightcontroller.core.PortChangeType;
-//import net.floodlightcontroller.core.internal.FloodlightProvider;
-//import net.floodlightcontroller.core.internal.IOFSwitchService;
-//import net.floodlightcontroller.core.module.FloodlightModuleContext;
-//import net.floodlightcontroller.core.module.FloodlightModuleException;
-//import net.floodlightcontroller.core.module.IFloodlightModule;
-//import net.floodlightcontroller.core.module.IFloodlightService;
-//import net.floodlightcontroller.debugcounter.IDebugCounter;
-//import net.floodlightcontroller.storage.IStorageSourceService;
-//
-//import org.projectfloodlight.openflow.protocol.OFControllerRole;
-//import org.projectfloodlight.openflow.protocol.OFMessage;
-//import org.projectfloodlight.openflow.protocol.OFPortDesc;
-//import org.projectfloodlight.openflow.protocol.OFRoleReply;
-//import org.projectfloodlight.openflow.protocol.OFType;
-//import org.projectfloodlight.openflow.types.DatapathId;
-//import org.projectfloodlight.openflow.types.TransportPort;
-//import org.sdnplatform.sync.IStoreClient;
-//import org.sdnplatform.sync.IStoreListener;
-//import org.sdnplatform.sync.ISyncService;
-//import org.sdnplatform.sync.ISyncService.Scope;
-//import org.sdnplatform.sync.Versioned;
-//import org.sdnplatform.sync.error.SyncException;
-//import org.sdnplatform.sync.internal.rpc.IRPCListener;
-import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-//import org.sdnplatform.sync.internal.SyncManager;
 
-//public class FT implements
-//IOFMessageListener,
-//IFloodlightModule,
-//IStoreListener<String>,
-//IOFSwitchListener,
-//IRPCListener
 public class FT{
 	private static final Logger log = getLogger(EpcApp.class);
 
-//	public ISyncService syncService;
-//	private static IStoreClient<String, String> storeEPC1;
-//	private static IStoreClient<String, String> storeEPC2;
-//	private static IStoreClient<String, String> storeEPC3;
-//	private static IStoreClient<String, String> storeEPC4;
-//	private static IStoreClient<String, String> storeEPC5;
-//	private static IStoreClient<String, String> storeEPC6;
+
 	protected static Logger logger = LoggerFactory.getLogger(FT.class);
-//	protected static IOFSwitchService switchService;
 	private String controllerId;
 		
 	public static ConcurrentHashMap<String, String> uekey_sgw_teid_map = new ConcurrentHashMap<String, String>();
@@ -89,7 +46,6 @@ public class FT{
 	public static ConcurrentHashMap<String, String> uekey_ueip_map = new ConcurrentHashMap<String, String>();
 	public static ConcurrentHashMap<String, String> ue_state = new ConcurrentHashMap<String, String>();	// Key: UE_Key, Value: State (TRUE: Active, FALSE: Idle)
 	public static ConcurrentHashMap<String, String> SGW_PGW_TEID_MAP = new ConcurrentHashMap<String, String>();
-//	private static ConcurrentHashMap<String, TransportPort> uekey_udp_src_port_map = new ConcurrentHashMap<String, TransportPort>(); // key = ue key, Value = UE UDP port number
 
 	static Long putCount=(long) 0;
 	

@@ -80,15 +80,15 @@ parser c_parser(packet_in packet,
             7  : parse_send_ue_teid;
             26  : parse_send_ue_teid;
             9  : parse_detach_req;
-            // @HO : sgw2 will only get service request BEFORE handover with original epc traffic code for chain2
-            14 : parse_ue_context_release;
-            // 54 : parse_ue_context_release;
-            // @HO : sgw2 will only get service request BEFORE handover with original epc traffic code for chain2
-            17 : parse_ue_service_req;
-            // 57 : parse_ue_service_req;
-            // @HO : sgw2 will only get service request BEFORE handover with original epc traffic code for chain2
-            19 : parse_initial_ctxt_setup_resp;
-            // 59 : parse_initial_ctxt_setup_resp;
+             14 : parse_ue_context_release;
+            // @HO : sgw1 will only get service request AFTER handover with changed epc traffic code
+            54 : parse_ue_context_release;
+             17 : parse_ue_service_req;
+            // @HO : sgw1 will only get service request AFTER handover with changed epc traffic code
+            57 : parse_ue_service_req;
+             19 : parse_initial_ctxt_setup_resp;
+            // @HO : sgw1 will only get service request AFTER handover with changed epc traffic code
+            59 : parse_initial_ctxt_setup_resp;
             // deafult is 12(request_starting_ip) so accept it 
             default : accept;
         }
@@ -178,6 +178,11 @@ control c_deparser(packet_out packet, in headers hdr) {
         packet.emit(hdr.auth_step_three);
         packet.emit(hdr.nas_step_two);
         packet.emit(hdr.send_apn);
+
+       // emit handover packet appended with ue state as well
+        packet.emit(hdr.handover_offload_state);
+
+
         packet.emit(hdr.send_ue_teid);
         //DETACH REQUEST
         packet.emit(hdr.detach_req);

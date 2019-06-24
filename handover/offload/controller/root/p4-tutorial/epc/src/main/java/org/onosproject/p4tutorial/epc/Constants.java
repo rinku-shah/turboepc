@@ -207,8 +207,11 @@ public class Constants {
 
 			final static DeviceId DGW_NAME_chain2 = DeviceId.deviceId("device:bmv2:s4");
 			final static String DGW_NAME_chain2_s4 = "s4";
-
-			final static DeviceId SGW_NAME_chain2 = DeviceId.deviceId("device:bmv2:s3");
+                        
+			//DGW1 switch connectpoint format name
+                        final static DeviceId DGW1_connectpoint = DeviceId.deviceId("device:bmv2:s1");
+			
+                        final static DeviceId SGW_NAME_chain2 = DeviceId.deviceId("device:bmv2:s3");
 
 			final static int SGW_SWITCH_ID_chain2 = 3;
 			

@@ -137,12 +137,15 @@ control c_ingress(inout headers hdr,
 
 /* definig offload tables here which will be used on SGW for Context Release and Service Request */
     action populate_uekey_uestate_map(bit<8> uestate){
-       hdr.uekey_uestate.ue_state = uestate;
+       //hdr.uekey_uestate.ue_state = uestate;
+       hdr.handover_offload_state.setValid();
+       hdr.handover_offload_state.sep = hdr.send_apn.sep1;
+       hdr.handover_offload_state.ue_state  = uestate;
     }
 
     table uekey_uestate_map{
       key={
-            hdr.uekey_uestate.ue_key : exact;
+            hdr.send_apn.key : exact;
       }
       actions={
           populate_uekey_uestate_map;
@@ -255,7 +258,7 @@ control c_ingress(inout headers hdr,
             // requested by the controller (packet_out header) and remove the
             // packet_out header.
             standard_metadata.egress_spec = hdr.packet_out.egress_port;
-            // hdr.ipv4.ttl = hdr.ipv4.ttl - 1;
+            hdr.ipv4.ttl = hdr.ipv4.ttl - 1;
             hdr.packet_out.setInvalid();
             return;
         } else {
@@ -278,13 +281,14 @@ control c_ingress(inout headers hdr,
                             // forward the original packet to lcoal onos 
 
                     // we use I2E_CLONE_SESSION_ID = 500 and set the out port as 1 in egress pipeline to reply back to RAN
-                    clone3(CloneType.I2E, I2E_CLONE_SESSION_ID, standard_metadata);
+                    //clone3(CloneType.I2E, I2E_CLONE_SESSION_ID, standard_metadata);
 
                     // handle context release message 
                     // @HO : sgw2 will only get service context release AFTER handover with changed epc traffic code
                     if(hdr.data.epc_traffic_code == 14){
                         // send the original packet back to RAN by appending the reply packet
 
+                    clone3(CloneType.I2E, I2E_CLONE_SESSION_ID, standard_metadata);
                         standard_metadata.egress_spec = CPU_PORT;
                         // Packets sent to the controller needs to be prepended with the
                         // packet-in header. By setting it valid we make sure it will be
@@ -297,15 +301,41 @@ control c_ingress(inout headers hdr,
                     // @HO : sgw2 will only get service request AFTER handover with changed epc traffic code
                     else if(hdr.data.epc_traffic_code == 17){
                         // send the original packet to local onos by appending the sgw_teid field
+                    clone3(CloneType.I2E, I2E_CLONE_SESSION_ID, standard_metadata);
                         service_req_uekey_sgwteid_map.apply();
                         // return;
                     }
                     // @HO : sgw2 will only get service request AFTER handover with changed epc traffic code
                     else if(hdr.data.epc_traffic_code == 19){
                         // send the original packet to local onos by appending the sgw_teid field
+                    clone3(CloneType.I2E, I2E_CLONE_SESSION_ID, standard_metadata);
                         ctxt_setup_uekey_sgwteid_map.apply();
                         // return;
                     }
+                   else if(hdr.data.epc_traffic_code==5 ){
+                        // applying this table appends the ue_state to the packet 
+                         uekey_uestate_map.apply();
+                         //once the state is appemnded the packet is forwarded to the root controller
+                         standard_metadata.egress_spec = CPU_PORT;
+                        // Packets sent to the controller needs to be prepended with the
+                        // packet-in header. By setting it valid we make sure it will be
+                        // deparsed on the wire (see c_deparser).
+                        hdr.packet_in.setValid();
+                        hdr.packet_in.ingress_port = standard_metadata.ingress_port;
+                        hdr.packet_in.reason_code = 100; // reason code 50 means packet_in has to be sent to ROOT onos controller running on switch
+                        return;
+                    }
+                     else  if(hdr.data.epc_traffic_code==7){
+                        standard_metadata.egress_spec = CPU_PORT;
+                        // Packets sent to the controller needs to be prepended with the
+                        // packet-in header. By setting it valid we make sure it will be
+                        // deparsed on the wire (see c_deparser).
+                        hdr.packet_in.setValid();
+                        hdr.packet_in.ingress_port = standard_metadata.ingress_port;
+                        hdr.packet_in.reason_code = 100; // reason code 50 means packet_in has to be sent to ROOT onos controller running on switch
+                        return; 
+                      }
+
                     
           }
 
@@ -326,7 +356,7 @@ control c_ingress(inout headers hdr,
 
             // compiler removes tables which are not used, to prevent offload tables from being removed lets make an if check with large ttl values so that it is not removed.
             if(hdr.ipv4.ttl == 250){
-                uekey_uestate_map.apply();
+                //uekey_uestate_map.apply();
                 uekey_guti_map.apply();
             }
             

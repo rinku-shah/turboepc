@@ -147,7 +147,8 @@ public class FR{
      public void populate_uekey_uestate_map(boolean removeRule,ApplicationId appId,FlowRuleService flowRuleService,DeviceId switchId,int ue_key, int ue_state){
 
         PiTableId tunnelIngressTableId = PiTableId.of("c_ingress.uekey_uestate_map");
-        PiMatchFieldId ueKeyFieldId = PiMatchFieldId.of("hdr.uekey_uestate.ue_key");
+        // PiMatchFieldId ueKeyFieldId = PiMatchFieldId.of("hdr.uekey_uestate.ue_key");
+        PiMatchFieldId ueKeyFieldId = PiMatchFieldId.of("hdr.send_apn.key");
         PiCriterion match = PiCriterion.builder()
                 .matchExact(ueKeyFieldId, ue_key)
                 .build();
