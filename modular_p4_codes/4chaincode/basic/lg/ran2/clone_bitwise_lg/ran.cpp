@@ -45,7 +45,8 @@ bool networkServiceRequest = false;	// Network initiated service request (downli
 // vector<vector<int>> traffic_mix={{0,100,0,0,0},{499,99501,0,0,0},{1499,98501,0,0,0},{2999,97001,0,0,0},{6999,93001,0,0,0},{8999,91001,0,0,0},{10999,89001,0,0,0},{30999,69001,0,0,0},{40999,59001,0,0,0},{50999,49001,0,0,0},{60999,39001,0,0,0},{100,0,0,0,0}};
 vector<vector<int>> traffic_mix={{0,0,0,9909,90991,0},{499,0,0,0,99501,0},{1499,98501,0,0,0,0},{2999,97001,0,0,0,0},{6999,93001,0,0,0,0},{8999,91001,0,0,0,0},{10999,89001,0,0,0,0},{30999,69001,0,0,0,0},{40999,59001,0,0,0,0},{0,0,0,0,100,0},{0,0,0,0,0,100},{0,0,0,100,0,0}};
 int start_ue = 200;
-int wait_latency = 28000;
+int wait_latency = 28000; //This is the delay between two messages ; For read retransmit on timeout set "double timeout =x" in client.h file
+
 //2_98,0
 //5_95,1
 //6_94,2
@@ -143,6 +144,8 @@ vector<unsigned long long> ue_registration_response_time;
 vector<unsigned long long> sr_registration_response_time;
 vector<unsigned long long> stored_ue_registration_response_time;//For delay distribution
 //long delay[1000][10000]; //For storing index of UE delays
+
+//struct timeval start[500];
 
 string rate;		// Rate at which each UE sends data
 time_t endTime;		// Simulation end time
@@ -289,8 +292,10 @@ void* multithreading_func(void *arg){
 	pthread_setcancelstate(PTHREAD_CANCEL_ENABLE, NULL);
 	pthread_setcanceltype(PTHREAD_CANCEL_ASYNCHRONOUS, NULL);
 	//struct timeval start, end;
-	struct timeval start, start1, start2, start3, end, end1, end2, end3;
-	long mtime, useconds, seconds;
+	//struct timeval start, start1, start2, start3, end, end1, end2, end3;
+	//struct timeval end, end1, end2, end3;
+	//long useconds, seconds;
+	long mtime;
 	size_t idleSleepTime, serviceRequestSleepTime;
 
 	// Client user(threadId+1), sink_user(threadId+1);
@@ -404,11 +409,13 @@ void* multithreading_func(void *arg){
 			if(DO_DEBUG){
 				cout<<"Attaching with MME"<<endl;
 			}
-			gettimeofday(&start, NULL);
+			//gettimeofday(&ue.start, NULL);
+			//gettimeofday(&start, NULL);
 			//usleep(my_rand()+2000);
 			// usleep(200000);
 			usleep(my_rand()+wait_latency);
-			if(attach_with_mme(ue, user, checkIntegrity_t)){ 	// Authentication
+			mtime=0;
+			if(attach_with_mme(ue, user, checkIntegrity_t, mtime)){ 	// Authentication
 				//if(setUpTunnel_t || serviceRequestLoopFlag){
 					// Setup tunnel
 				if(setUpTunnel_t) {
@@ -420,8 +427,9 @@ void* multithreading_func(void *arg){
 					// attNo++;
 					// lat_mtx.unlock();
 					//usleep(my_rand()+200);
-					gettimeofday(&start1, NULL);
-					tmpArray = setup_tunnel(ue, user, doEncryption_t);
+					//gettimeofday(&ue.start1, NULL);
+					//gettimeofday(&start1, NULL);
+					tmpArray = setup_tunnel(ue, user, doEncryption_t, mtime);
 					//cout<<"IP Address of UE="<<tmpArray[1]<<" and SGW TEID="<<tmpArray[2]<<endl;
 					// string UE_IP = tmpArray[1];
 					//lat_mtx.lock();
@@ -429,18 +437,21 @@ void* multithreading_func(void *arg){
 					//num_ue_per_thread[threadId] += 1; //Increment completion num for att req
 					//lat_mtx.unlock();
 					//////PRINT REG TIME TO ARRAY////
-					gettimeofday(&end1, NULL);
-					seconds  = end1.tv_sec  - start1.tv_sec;
-					useconds = end1.tv_usec - start1.tv_usec;
-					mtime = ((seconds) * 1000000 + useconds);
-					lat_mtx.lock();
+					/*gettimeofday(&end1, NULL);
+					seconds  = end1.tv_sec  - ue.start1.tv_sec;
+					useconds = end1.tv_usec - ue.start1.tv_usec;
+					//seconds  = end1.tv_sec  - start1.tv_sec;
+                                        //useconds = end1.tv_usec - start1.tv_usec;
+					mtime = ((seconds) * 1000000 + useconds);*/
+					//lat_mtx.lock();
 					ue_registration_response_time[threadId] += mtime;
-					lat_mtx.unlock();
+					//lat_mtx.unlock();
 					//cout<<"a:"<<mtime<<endl;
 					lat_mtx.lock();
-                                        attNo++;
-                                        num_ue_per_thread[threadId] += 1; //Increment completion num for att req
-                                        lat_mtx.unlock();
+                        attNo++;
+                    lat_mtx.unlock();
+					num_ue_per_thread[threadId] += 1; //Increment completion num for att req
+
 					/*stored_ue_registration_response_time[j] = mtime;
 					j = j + 1;*/
 						////////////////////////////////////
@@ -472,25 +483,29 @@ void* multithreading_func(void *arg){
 							//usleep(my_rand()+2000);		//200-700 usec
 							usleep(my_rand()+wait_latency);
 							//sreqNo++;
-							gettimeofday(&start2, NULL);
-							ue_context_release(ue, user, ue_num, tmpArray[1], tmpArray[2], tmpArray[3], currentPort, networkServiceRequest);
+							//gettimeofday(&ue.start2, NULL);
+							//gettimeofday(&start2, NULL);
+							mtime=0;
+							ue_context_release(ue, user, ue_num, tmpArray[1], tmpArray[2], tmpArray[3], currentPort, networkServiceRequest, mtime);
 							//lat_mtx.lock();
 							//num_ue_per_thread[threadId] += 1;//Increment completion num for serv req
 							//sreqNo++;
 							//lat_mtx.unlock();
-							gettimeofday(&end2, NULL);
-							seconds  = end2.tv_sec  - start2.tv_sec;
-							useconds = end2.tv_usec - start2.tv_usec;
-							mtime = ((seconds) * 1000000 + useconds);
-							lat_mtx.lock();
+							/*gettimeofday(&end2, NULL);
+							seconds  = end2.tv_sec  - ue.start2.tv_sec;
+							useconds = end2.tv_usec - ue.start2.tv_usec;
+							//seconds  = end2.tv_sec  - start2.tv_sec;
+                                                        //useconds = end2.tv_usec - start2.tv_usec;
+							mtime = ((seconds) * 1000000 + useconds);*/
+							//lat_mtx.lock();
 							ue_registration_response_time[threadId] += mtime;
 							sr_registration_response_time[threadId] += mtime;
-							lat_mtx.unlock();
+							//lat_mtx.unlock();
 							//cout<<"c:"<<mtime<<endl;	
-							lat_mtx.lock();
-                                                        num_ue_per_thread[threadId] += 1;//Increment completion num for serv req
-                                                        sreqNo++;
-                                                        lat_mtx.unlock();
+                            num_ue_per_thread[threadId] += 1;//Increment completion num for serv req
+                            lat_mtx.lock();
+							sreqNo++;
+                            lat_mtx.unlock();
 
 							if(DO_DEBUG){
 								cout<<"UE CONTEXT RELEASE DONE with UE NUM="<<ue_num<<endl;
@@ -508,8 +523,8 @@ void* multithreading_func(void *arg){
 								if(DO_DEBUG){
 									cout<<"UE SERVICE REQUEST INITIATED with UE NUM="<<ue_num<<" after "<<serviceRequestSleepTime<<" seconds"<<endl;
 								}
-								lat_mtx.lock();
 								num_ue_per_thread[threadId] += 1;//Increment completion num for serv req
+								lat_mtx.lock();
 								sreqNo++;
 								lat_mtx.unlock();
 								//cout<<"SLEEPING BEFORE service request"<<endl;
@@ -517,17 +532,21 @@ void* multithreading_func(void *arg){
 								//usleep(my_rand()+2000);
 								usleep(my_rand()+wait_latency);
 								//usleep(my_rand()+2000);
-								gettimeofday(&start2, NULL);
-								tmpArray[3] = ue_service_request(ue, user, ue_num, tmpArray[1]); //returns newly generated ue_teid
+								//gettimeofday(&ue.start2, NULL);
+								//gettimeofday(&start2, NULL);
+								mtime=0;
+								tmpArray[3] = ue_service_request(ue, user, ue_num, tmpArray[1], mtime); //returns newly generated ue_teid
 									//////PRINT REG TIME TO ARRAY////
-								gettimeofday(&end2, NULL);
-								seconds  = end2.tv_sec  - start2.tv_sec;
-								useconds = end2.tv_usec - start2.tv_usec;
-								mtime = ((seconds) * 1000000 + useconds);
-								lat_mtx.lock();
+								/*gettimeofday(&end2, NULL);
+								seconds  = end2.tv_sec  - ue.start2.tv_sec;
+								useconds = end2.tv_usec - ue.start2.tv_usec;
+								//seconds  = end2.tv_sec  - start2.tv_sec;
+                                                                //useconds = end2.tv_usec - start2.tv_usec;
+								mtime = ((seconds) * 1000000 + useconds);*/
+								//lat_mtx.lock();
 								ue_registration_response_time[threadId] += mtime;
 								sr_registration_response_time[threadId] += mtime;
-								lat_mtx.unlock();
+								//lat_mtx.unlock();
 
 								//cout<<"s:"<<mtime<<endl;
 								/*stored_ue_registration_response_time[j] = mtime;
@@ -571,23 +590,27 @@ void* multithreading_func(void *arg){
 							usleep(my_rand()+wait_latency);
 						att_done=false;
 						usleep(my_rand()+wait_latency);
-						gettimeofday(&start3, NULL);
-						detach_ue(ue, user, ue_num, tmpArray[1], tmpArray[2], tmpArray[3]);
+						//gettimeofday(&ue.start3, NULL);
+						//gettimeofday(&start3, NULL);
+						mtime=0;
+						detach_ue(ue, user, ue_num, tmpArray[1], tmpArray[2], tmpArray[3], mtime);
 						// sleep(300);
 
-						gettimeofday(&end3, NULL);
+						//gettimeofday(&end3, NULL);
 						lat_mtx.lock();
 						detNo++;
-						num_ue_per_thread[threadId] += 1;//Increment completion num for delreq
 						lat_mtx.unlock();
+                                                num_ue_per_thread[threadId] += 1;//Increment completion num for delreq
 
 						//////PRINT REG TIME TO ARRAY////
-						seconds  = end3.tv_sec  - start3.tv_sec;
-						useconds = end3.tv_usec - start3.tv_usec;
-						mtime = ((seconds) * 1000000 + useconds);
-						lat_mtx.lock();
+						/*seconds  = end3.tv_sec  - ue.start3.tv_sec;
+						useconds = end3.tv_usec - ue.start3.tv_usec;
+						//seconds  = end3.tv_sec  - start3.tv_sec;
+                                                //useconds = end3.tv_usec - start3.tv_usec;
+						mtime = ((seconds) * 1000000 + useconds);*/
+						//lat_mtx.lock();
 						ue_registration_response_time[threadId] += mtime;
-						lat_mtx.unlock();
+						//lat_mtx.unlock();
 						/*stored_ue_registration_response_time[j] = mtime;
 						j = j + 1;*/
 						////////////////////////////////////
@@ -715,36 +738,36 @@ bool apu_exit(UserEquipment &ue, Client &user){
 	return ue.apu_exit(user);
 }
 
-bool attach_with_mme(UserEquipment &ue, Client &user, bool checkIntegrity){
-	return ue.authenticate(user, checkIntegrity);
+bool attach_with_mme(UserEquipment &ue, Client &user, bool checkIntegrity, long& mtime){
+	return ue.authenticate(user, checkIntegrity, mtime);
 }
 
 string get_starting_IP_Address(UserEquipment &ue, Client &user){
 	return ue.getStartingIPAddress(user);
 }
 
-vector<string> setup_tunnel(UserEquipment &ue, Client &user, bool doEncryption){
-	return ue.setupTunnel(user, doEncryption);
+vector<string> setup_tunnel(UserEquipment &ue, Client &user, bool doEncryption, long& mtime){
+	return ue.setupTunnel(user, doEncryption, mtime);
 }
 
 int send_ue_data(UserEquipment &ue, int ue_num, string rate, int serverPort, int startingPort, int endPort, Client &user, vector<string>& tmpArray, int dataTime){
 	return ue.sendUserData(user, ue_num, rate, serverPort, startingPort, endPort, tmpArray, dataTime);
 }
 
-void ue_context_release(UserEquipment &ue, Client &user, int ue_num, string ue_ip, string sgw_teid, string ue_teid, int currentPort, bool networkServiceRequest){
-	ue.initiate_ue_context_release(user, ue_num, ue_ip, sgw_teid, ue_teid, currentPort, networkServiceRequest);
+void ue_context_release(UserEquipment &ue, Client &user, int ue_num, string ue_ip, string sgw_teid, string ue_teid, int currentPort, bool networkServiceRequest, long &mtime){
+	ue.initiate_ue_context_release(user, ue_num, ue_ip, sgw_teid, ue_teid, currentPort, networkServiceRequest, mtime);
 }
 
-string ue_service_request(UserEquipment &ue, Client &user, int ue_num, string ue_ip){
-	return ue.send_ue_service_request(user, ue_num, ue_ip);
+string ue_service_request(UserEquipment &ue, Client &user, int ue_num, string ue_ip, long& mtime){
+	return ue.send_ue_service_request(user, ue_num, ue_ip, mtime);
 }
 
 string network_service_request(UserEquipment &ue, Client &user, int ue_num, string ue_ip){
 	return ue.receive_paging_request(user, ue_num, ue_ip);
 }
 
-void detach_ue(UserEquipment &ue, Client &user, int ue_num, string ue_ip, string sgw_teid, string ue_teid){
-	ue.initiate_detach(user, ue_num, ue_ip, sgw_teid, ue_teid);
+void detach_ue(UserEquipment &ue, Client &user, int ue_num, string ue_ip, string sgw_teid, string ue_teid, long& mtime){
+	ue.initiate_detach(user, ue_num, ue_ip, sgw_teid, ue_teid, mtime);
 }
 
 // Generate UE IP addresses and assign to the network interface

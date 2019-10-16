@@ -4,12 +4,12 @@
 void* multithreading_func(void*);
 
 /* High-level functions for various LTE procedures */
-bool attach_with_mme(UserEquipment&, Client&, bool);
+bool attach_with_mme(UserEquipment&, Client&, bool, long&);
 int send_ue_data(UserEquipment&, int, string, int, int, int, Client&, vector<string>&, int);
-vector<string> setup_tunnel(UserEquipment&, Client&, bool);
-void detach_ue(UserEquipment&, Client&, int, string, string, string);
-void ue_context_release(UserEquipment&, Client&, int, string, string, string, int, bool);
-string ue_service_request(UserEquipment&, Client&, int, string);
+vector<string> setup_tunnel(UserEquipment&, Client&, bool, long&);
+void detach_ue(UserEquipment&, Client&, int, string, string, string, long&);
+void ue_context_release(UserEquipment&, Client&, int, string, string, string, int, bool, long&);
+string ue_service_request(UserEquipment&, Client&, int, string, long&);
 string network_service_request(UserEquipment&, Client&, int, string);
 bool apu_exit(UserEquipment&, Client&);
 

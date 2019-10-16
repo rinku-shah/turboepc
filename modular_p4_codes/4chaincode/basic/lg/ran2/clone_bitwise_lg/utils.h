@@ -63,8 +63,8 @@
 #include <atomic>
 using namespace std;
 
-#define DO_DEBUG 0
-#define MY_DEBUG 0
+#define DO_DEBUG 1
+#define MY_DEBUG 1
 #define WANT_DELAY_CDF 0
 #define UE_PER_THREAD 1000000
 /**************************************** Configurable parameters **********************************************/
@@ -82,7 +82,7 @@ using namespace std;
 
 /***************************************************************************************************************/
 
-#define BUFFER_SIZE 300   // Maximum packet size
+#define BUFFER_SIZE 2048   // Maximum packet size
 #define MAX_PACKET_SIZE 2048
 #define LINK_MTU 1424   // MTU value for iperf3
 
