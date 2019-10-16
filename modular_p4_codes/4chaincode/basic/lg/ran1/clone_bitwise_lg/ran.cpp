@@ -145,6 +145,8 @@ vector<unsigned long long> sr_registration_response_time;
 vector<unsigned long long> stored_ue_registration_response_time;//For delay distribution
 //long delay[1000][10000]; //For storing index of UE delays
 
+//struct timeval start[500];
+
 string rate;		// Rate at which each UE sends data
 time_t endTime;		// Simulation end time
 time_t mix_endTime; //End time of current traffic mix
@@ -407,6 +409,7 @@ void* multithreading_func(void *arg){
 				cout<<"Attaching with MME"<<endl;
 			}
 			gettimeofday(&ue.start, NULL);
+			//gettimeofday(&start, NULL);
 			//usleep(my_rand()+2000);
 			// usleep(200000);
 			usleep(my_rand()+wait_latency);
@@ -423,6 +426,7 @@ void* multithreading_func(void *arg){
 					// lat_mtx.unlock();
 					//usleep(my_rand()+200);
 					gettimeofday(&ue.start1, NULL);
+					//gettimeofday(&start1, NULL);
 					tmpArray = setup_tunnel(ue, user, doEncryption_t);
 					//cout<<"IP Address of UE="<<tmpArray[1]<<" and SGW TEID="<<tmpArray[2]<<endl;
 					// string UE_IP = tmpArray[1];
@@ -434,15 +438,18 @@ void* multithreading_func(void *arg){
 					gettimeofday(&end1, NULL);
 					seconds  = end1.tv_sec  - ue.start1.tv_sec;
 					useconds = end1.tv_usec - ue.start1.tv_usec;
+					//seconds  = end1.tv_sec  - start1.tv_sec;
+                                        //useconds = end1.tv_usec - start1.tv_usec;
 					mtime = ((seconds) * 1000000 + useconds);
-					lat_mtx.lock();
+					//lat_mtx.lock();
 					ue_registration_response_time[threadId] += mtime;
-					lat_mtx.unlock();
+					//lat_mtx.unlock();
 					//cout<<"a:"<<mtime<<endl;
 					lat_mtx.lock();
                                         attNo++;
-                                        num_ue_per_thread[threadId] += 1; //Increment completion num for att req
                                         lat_mtx.unlock();
+					num_ue_per_thread[threadId] += 1; //Increment completion num for att req
+
 					/*stored_ue_registration_response_time[j] = mtime;
 					j = j + 1;*/
 						////////////////////////////////////
@@ -475,6 +482,7 @@ void* multithreading_func(void *arg){
 							usleep(my_rand()+wait_latency);
 							//sreqNo++;
 							gettimeofday(&ue.start2, NULL);
+							//gettimeofday(&start2, NULL);
 							ue_context_release(ue, user, ue_num, tmpArray[1], tmpArray[2], tmpArray[3], currentPort, networkServiceRequest);
 							//lat_mtx.lock();
 							//num_ue_per_thread[threadId] += 1;//Increment completion num for serv req
@@ -483,15 +491,17 @@ void* multithreading_func(void *arg){
 							gettimeofday(&end2, NULL);
 							seconds  = end2.tv_sec  - ue.start2.tv_sec;
 							useconds = end2.tv_usec - ue.start2.tv_usec;
+							//seconds  = end2.tv_sec  - start2.tv_sec;
+                                                        //useconds = end2.tv_usec - start2.tv_usec;
 							mtime = ((seconds) * 1000000 + useconds);
-							lat_mtx.lock();
+							//lat_mtx.lock();
 							ue_registration_response_time[threadId] += mtime;
 							sr_registration_response_time[threadId] += mtime;
-							lat_mtx.unlock();
+							//lat_mtx.unlock();
 							//cout<<"c:"<<mtime<<endl;	
-							lat_mtx.lock();
                                                         num_ue_per_thread[threadId] += 1;//Increment completion num for serv req
-                                                        sreqNo++;
+                                                        lat_mtx.lock();
+							sreqNo++;
                                                         lat_mtx.unlock();
 
 							if(DO_DEBUG){
@@ -510,8 +520,8 @@ void* multithreading_func(void *arg){
 								if(DO_DEBUG){
 									cout<<"UE SERVICE REQUEST INITIATED with UE NUM="<<ue_num<<" after "<<serviceRequestSleepTime<<" seconds"<<endl;
 								}
-								lat_mtx.lock();
 								num_ue_per_thread[threadId] += 1;//Increment completion num for serv req
+								lat_mtx.lock();
 								sreqNo++;
 								lat_mtx.unlock();
 								//cout<<"SLEEPING BEFORE service request"<<endl;
@@ -520,16 +530,19 @@ void* multithreading_func(void *arg){
 								usleep(my_rand()+wait_latency);
 								//usleep(my_rand()+2000);
 								gettimeofday(&ue.start2, NULL);
+								//gettimeofday(&start2, NULL);
 								tmpArray[3] = ue_service_request(ue, user, ue_num, tmpArray[1]); //returns newly generated ue_teid
 									//////PRINT REG TIME TO ARRAY////
 								gettimeofday(&end2, NULL);
 								seconds  = end2.tv_sec  - ue.start2.tv_sec;
 								useconds = end2.tv_usec - ue.start2.tv_usec;
+								//seconds  = end2.tv_sec  - start2.tv_sec;
+                                                                //useconds = end2.tv_usec - start2.tv_usec;
 								mtime = ((seconds) * 1000000 + useconds);
-								lat_mtx.lock();
+								//lat_mtx.lock();
 								ue_registration_response_time[threadId] += mtime;
 								sr_registration_response_time[threadId] += mtime;
-								lat_mtx.unlock();
+								//lat_mtx.unlock();
 
 								//cout<<"s:"<<mtime<<endl;
 								/*stored_ue_registration_response_time[j] = mtime;
@@ -574,22 +587,25 @@ void* multithreading_func(void *arg){
 						att_done=false;
 						usleep(my_rand()+wait_latency);
 						gettimeofday(&ue.start3, NULL);
+						//gettimeofday(&start3, NULL);
 						detach_ue(ue, user, ue_num, tmpArray[1], tmpArray[2], tmpArray[3]);
 						// sleep(300);
 
 						gettimeofday(&end3, NULL);
 						lat_mtx.lock();
 						detNo++;
-						num_ue_per_thread[threadId] += 1;//Increment completion num for delreq
 						lat_mtx.unlock();
+                                                num_ue_per_thread[threadId] += 1;//Increment completion num for delreq
 
 						//////PRINT REG TIME TO ARRAY////
 						seconds  = end3.tv_sec  - ue.start3.tv_sec;
 						useconds = end3.tv_usec - ue.start3.tv_usec;
+						//seconds  = end3.tv_sec  - start3.tv_sec;
+                                                //useconds = end3.tv_usec - start3.tv_usec;
 						mtime = ((seconds) * 1000000 + useconds);
-						lat_mtx.lock();
+						//lat_mtx.lock();
 						ue_registration_response_time[threadId] += mtime;
-						lat_mtx.unlock();
+						//lat_mtx.unlock();
 						/*stored_ue_registration_response_time[j] = mtime;
 						j = j + 1;*/
 						////////////////////////////////////
