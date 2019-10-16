@@ -622,8 +622,10 @@ bool UserEquipment::apu_exit(Client &user){
  * A mutual authentication takes place between the UE and the MME (i.e. the network).
  */
 
-bool UserEquipment::authenticate(Client &user, bool checkIntegrity){
+bool UserEquipment::authenticate(Client &user, bool checkIntegrity, long& mtime){
     string send, receive;
+        struct timeval start, end;
+    long useconds, seconds;
   /*unsigned long long autn;
   unsigned long long rand;
   unsigned long long res;*/
@@ -726,6 +728,7 @@ bool UserEquipment::authenticate(Client &user, bool checkIntegrity){
   one.tai[6] =  (tai >> 8) & 0xFF;
   one.tai[7] =  (tai) & 0xFF;
     do{
+    gettimeofday(&start, NULL);
     bzero(user.client_buffer, BUFFER_SIZE);
 
   int len=0;
@@ -957,8 +960,14 @@ bool UserEquipment::authenticate(Client &user, bool checkIntegrity){
       // three.res[7] =  (authenticationVector[1]) & 0xFF;
       // cout<<"size of av.xres = "<<sizeof(av.xres)<<endl;
       memcpy(three.res,av.xres,sizeof(av.xres));
+
+       gettimeofday(&end, NULL);
+  seconds  = end.tv_sec  - start.tv_sec;
+  useconds = end.tv_usec - start.tv_usec;
+  mtime = mtime + ((seconds) * 1000000 + useconds);
                         
       do{
+        gettimeofday(&start, NULL);
       // now write struct elemets to buffer one by one
       bzero(user.client_buffer, BUFFER_SIZE);
       int len=0;  // reset length which holds no of bytes written in buffer
@@ -1158,18 +1167,23 @@ bool UserEquipment::authenticate(Client &user, bool checkIntegrity){
     //exit(1);
     return false;
   }
+   gettimeofday(&end, NULL);
+  seconds  = end.tv_sec  - start.tv_sec;
+  useconds = end.tv_usec - start.tv_usec;
+  mtime = mtime + ((seconds) * 1000000 + useconds);
 }
 
 /*
  * This function initiates the tunnel setup procedure.
  */
-vector<string> UserEquipment::setupTunnel(Client &user, bool doEncryption){
+vector<string> UserEquipment::setupTunnel(Client &user, bool doEncryption, long &mtime){
   string send, receive, initial;
   vector<string> tmpArray;
   vector<string> clearToSend;
   int ue_teid;
   bool done=false;
-
+      struct timeval start, end;
+    long useconds, seconds;
   //mtx.lock();
   while(!done){
     mtx.lock();
@@ -1250,7 +1264,7 @@ vector<string> UserEquipment::setupTunnel(Client &user, bool doEncryption){
   apnt.key = htonl(ue_key);
         
         do{
-  gettimeofday(&start1, NULL);
+  gettimeofday(&start, NULL);
   // now write struct elemets to buffer one by one
   bzero(user.client_buffer, BUFFER_SIZE);
   int len=0;  // reset length which holds no of bytes written in buffer
@@ -1332,7 +1346,13 @@ vector<string> UserEquipment::setupTunnel(Client &user, bool doEncryption){
     // st.key[7] =  (ue_key) & 0xFF;
 
     st.key = htonl(ue_key);
+
+     gettimeofday(&end, NULL);
+  seconds  = end.tv_sec  - start.tv_sec;
+  useconds = end.tv_usec - start.tv_usec;
+  mtime = mtime + ((seconds) * 1000000 + useconds);
                 do{
+                  gettimeofday(&start, NULL);
     // now write struct elemets to buffer one by one
     bzero(user.client_buffer, BUFFER_SIZE);
     int len=0;  // reset length which holds no of bytes written in buffer
@@ -1383,7 +1403,10 @@ vector<string> UserEquipment::setupTunnel(Client &user, bool doEncryption){
       cout<<"ERROR: NOT CLEAR TO SEND DATA"<<endl;
       exit(1);
     }
-
+     gettimeofday(&end, NULL);
+  seconds  = end.tv_sec  - start.tv_sec;
+  useconds = end.tv_usec - start.tv_usec;
+  mtime = mtime + ((seconds) * 1000000 + useconds);
     time_t seconds;
     seconds = time (NULL);
     if(DO_DEBUG){
@@ -1426,10 +1449,11 @@ int UserEquipment::sendUserData(Client &user, int ue_num, string rate, int serve
 /*
  * This function initiates the detach procedure which is invoked by UE.
  */
-void UserEquipment::initiate_detach(Client &user, int ue_num, string ue_ip, string sgw_teid, string ue_teid){
+void UserEquipment::initiate_detach(Client &user, int ue_num, string ue_ip, string sgw_teid, string ue_teid, long &mtime){
   string send, receive;
   vector<string> tmpArray;
-
+     struct timeval start, end;
+    long useconds, seconds;
   //rewriting Initiate detach procedure
 
   // struct detach_req_t{
@@ -1473,7 +1497,7 @@ void UserEquipment::initiate_detach(Client &user, int ue_num, string ue_ip, stri
   detach.ue_num = htonl(ue_num);
 
         do{
-  gettimeofday(&start3, NULL);
+  gettimeofday(&start, NULL);
   // now write struct elemets to buffer one by one
   bzero(user.client_buffer, BUFFER_SIZE);
   int len=0;  // reset length which holds no of bytes written in buffer
@@ -1546,16 +1570,21 @@ void UserEquipment::initiate_detach(Client &user, int ue_num, string ue_ip, stri
     cout<<"ERROR: UE DETACH ACCEPT ERROR:  IP Address of UE="<<ue_ip<<" and UE TEID="<<ue_teid<<" SGW TEID"<<sgw_teid<<endl;
     exit(1);
   }
+   gettimeofday(&end, NULL);
+  seconds  = end.tv_sec  - start.tv_sec;
+  useconds = end.tv_usec - start.tv_usec;
+  mtime = mtime + ((seconds) * 1000000 + useconds);
 }
 
 /*
  * This function initiates the context release procedure. It is invoked by a UE (eNodeB in real life) after it
  * remains idle for a particular duration of time. The tunnel is then ruptured with the help of RAN and controller.
  */
-void UserEquipment::initiate_ue_context_release(Client &user, int ue_num, string ue_ip, string sgw_teid, string ue_teid, int sinkUDPServerPort, bool networkServiceRequest){
+void UserEquipment::initiate_ue_context_release(Client &user, int ue_num, string ue_ip, string sgw_teid, string ue_teid, int sinkUDPServerPort, bool networkServiceRequest, long &mtime){
   string send, receive;
   vector<string> tmpArray;
-
+    struct timeval start, end;
+    long useconds, seconds;
   // Initiate ue context release procedure
 
   // struct ue_context_rel_req_t{
@@ -1598,7 +1627,7 @@ void UserEquipment::initiate_ue_context_release(Client &user, int ue_num, string
   ctxtrel.ue_num = htonl(ue_num);
   
   do{
-  gettimeofday(&start2, NULL);
+  gettimeofday(&start, NULL);
         // now write struct elemets to buffer one by one
   bzero(user.client_buffer, BUFFER_SIZE);
   int len=0;  // reset length which holds no of bytes written in buffer
@@ -1699,19 +1728,24 @@ void UserEquipment::initiate_ue_context_release(Client &user, int ue_num, string
   if(DO_DEBUG){
     cout<<"UE INITIATED CONTEXT RELEASE COMPLETE: UE Key="<<ue_num<<endl;
   }
+   gettimeofday(&end, NULL);
+  seconds  = end.tv_sec  - start.tv_sec;
+  useconds = end.tv_usec - start.tv_usec;
+  mtime = mtime + ((seconds) * 1000000 + useconds);
 }
 
 /*
  * This function initiates for the tunnel resetup when a UE wishes to send data after remaining idle for a long time.
  * Ideally, no re-authentication needs to be done in this case. We just need to re-establish the tunnel for traffic flow.
  */
-string UserEquipment::send_ue_service_request(Client& user, int ue_num, string ue_ip){
+string UserEquipment::send_ue_service_request(Client& user, int ue_num, string ue_ip, long& mtime){
   vector<string> clearToSend;
   int ue_teid;
   string send, receive, response= "";
   vector<string> tmpArray;
   string KSI_ASME = "7";
-
+    struct timeval start, end;
+    long useconds, seconds;
   // Send UE Service request
   // struct ue_service_req_t{
     // uint8_t msg_id;
@@ -1746,7 +1780,7 @@ string UserEquipment::send_ue_service_request(Client& user, int ue_num, string u
   serreq.ue_ip = inet_addr(ue_ip.c_str());
 
         do{
-  gettimeofday(&start2, NULL);
+  gettimeofday(&start, NULL);
   // now write struct elemets to buffer one by one
   bzero(user.client_buffer, BUFFER_SIZE);
   int len=0;  // reset length which holds no of bytes written in buffer
@@ -1853,6 +1887,7 @@ string UserEquipment::send_ue_service_request(Client& user, int ue_num, string u
       //goto check;
 
     }
+
   }
     /*if(!reusable_ue_teid.empty()){
       ue_teid = reusable_ue_teid.front();
@@ -1913,8 +1948,13 @@ string UserEquipment::send_ue_service_request(Client& user, int ue_num, string u
       ctxtresp.sep3[2] = htons(0x3A40);
 
       ctxtresp.ue_ip = inet_addr(ue_ip.c_str());
+       gettimeofday(&end, NULL);
+  seconds  = end.tv_sec  - start.tv_sec;
+  useconds = end.tv_usec - start.tv_usec;
+  mtime = mtime + ((seconds) * 1000000 + useconds);
 
                         do{
+                          gettimeofday(&start, NULL);
       // now write struct elemets to buffer one by one
       bzero(user.client_buffer, BUFFER_SIZE);
       int len=0;  // reset length which holds no of bytes written in buffer
@@ -1951,6 +1991,11 @@ string UserEquipment::send_ue_service_request(Client& user, int ue_num, string u
 
       user.read_data2();
         } while(user.timeoutFlagOff);
+
+      gettimeofday(&end, NULL);
+  seconds  = end.tv_sec  - start.tv_sec;
+  useconds = end.tv_usec - start.tv_usec;
+  mtime = mtime + ((seconds) * 1000000 + useconds);
 
       int code_name2 = (int)(user.my_client_byte_buffer[0]);
 
@@ -2011,6 +2056,7 @@ string UserEquipment::send_ue_service_request(Client& user, int ue_num, string u
 string UserEquipment::receive_paging_request(Client& user, int ue_num, string ue_ip){
   string receive, ue_teid= "";
   vector<string> tmpArray;
+  long mtime =0;
   // Receive paging request from MME
   user.read_data();
   receive = (string) (user.client_buffer);
@@ -2023,7 +2069,7 @@ string UserEquipment::receive_paging_request(Client& user, int ue_num, string ue
       if(DO_DEBUG){
         cout<<"Received PAGING_REQUEST for UE with key="<<ue_num<<" SGW TEID = "<<tmpArray[1]<<endl;
       }
-      ue_teid = send_ue_service_request(user, ue_num, ue_ip);
+      ue_teid = send_ue_service_request(user, ue_num, ue_ip, mtime);
     }
   }
   return ue_teid;

@@ -27,17 +27,17 @@ class UserEquipment{
 
 		unsigned long long tai; 	// Tracking area ID
 		int type;
-		struct timeval start, start1, start2, start3;
+		//struct timeval start, start1, start2, start3;
 		// Constructor
 		UserEquipment(int);
 
 		/* Functions for various LTE procedures */
-		bool authenticate(Client&, bool);
-		vector<string> setupTunnel(Client&, bool);
+		bool authenticate(Client&, bool, long&);
+		vector<string> setupTunnel(Client&, bool, long&);
 		int sendUserData(Client&, int, string, int, int, int, vector<string>&, int);
-		void initiate_detach(Client&, int, string, string, string);
-		void initiate_ue_context_release(Client&, int, string, string, string, int, bool);
-		string send_ue_service_request(Client&, int, string);
+		void initiate_detach(Client&, int, string, string, string, long&);
+		void initiate_ue_context_release(Client&, int, string, string, string, int, bool, long&);
+		string send_ue_service_request(Client&, int, string, long&);
 		string receive_paging_request(Client&, int, string);
 		
 		/* High-level functions for encryption/decryption */
