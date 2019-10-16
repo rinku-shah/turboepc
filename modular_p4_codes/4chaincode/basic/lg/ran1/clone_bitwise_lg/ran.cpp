@@ -45,7 +45,8 @@ bool networkServiceRequest = false;	// Network initiated service request (downli
 // vector<vector<int>> traffic_mix={{0,100,0,0,0},{499,99501,0,0,0},{1499,98501,0,0,0},{2999,97001,0,0,0},{6999,93001,0,0,0},{8999,91001,0,0,0},{10999,89001,0,0,0},{30999,69001,0,0,0},{40999,59001,0,0,0},{50999,49001,0,0,0},{60999,39001,0,0,0},{100,0,0,0,0}};
 vector<vector<int>> traffic_mix={{0,0,0,9909,90991,0},{499,0,0,0,99501,0},{1499,98501,0,0,0,0},{2999,97001,0,0,0,0},{6999,93001,0,0,0,0},{8999,91001,0,0,0,0},{10999,89001,0,0,0,0},{30999,69001,0,0,0,0},{40999,59001,0,0,0,0},{0,0,0,0,100,0},{0,0,0,0,0,100},{0,0,0,100,0,0}};
 int start_ue = 100;
-int wait_latency = 28000;
+int wait_latency = 28000; //This is the delay between two messages ; For read retransmit on timeout set "double timeout =x" in client.h file
+
 //2_98,0
 //5_95,1
 //6_94,2
@@ -289,7 +290,8 @@ void* multithreading_func(void *arg){
 	pthread_setcancelstate(PTHREAD_CANCEL_ENABLE, NULL);
 	pthread_setcanceltype(PTHREAD_CANCEL_ASYNCHRONOUS, NULL);
 	//struct timeval start, end;
-	struct timeval start, start1, start2, start3, end, end1, end2, end3;
+	//struct timeval start, start1, start2, start3, end, end1, end2, end3;
+	struct timeval end, end1, end2, end3;
 	long mtime, useconds, seconds;
 	size_t idleSleepTime, serviceRequestSleepTime;
 
@@ -404,7 +406,7 @@ void* multithreading_func(void *arg){
 			if(DO_DEBUG){
 				cout<<"Attaching with MME"<<endl;
 			}
-			gettimeofday(&start, NULL);
+			gettimeofday(&ue.start, NULL);
 			//usleep(my_rand()+2000);
 			// usleep(200000);
 			usleep(my_rand()+wait_latency);
@@ -420,7 +422,7 @@ void* multithreading_func(void *arg){
 					// attNo++;
 					// lat_mtx.unlock();
 					//usleep(my_rand()+200);
-					gettimeofday(&start1, NULL);
+					gettimeofday(&ue.start1, NULL);
 					tmpArray = setup_tunnel(ue, user, doEncryption_t);
 					//cout<<"IP Address of UE="<<tmpArray[1]<<" and SGW TEID="<<tmpArray[2]<<endl;
 					// string UE_IP = tmpArray[1];
@@ -430,8 +432,8 @@ void* multithreading_func(void *arg){
 					//lat_mtx.unlock();
 					//////PRINT REG TIME TO ARRAY////
 					gettimeofday(&end1, NULL);
-					seconds  = end1.tv_sec  - start1.tv_sec;
-					useconds = end1.tv_usec - start1.tv_usec;
+					seconds  = end1.tv_sec  - ue.start1.tv_sec;
+					useconds = end1.tv_usec - ue.start1.tv_usec;
 					mtime = ((seconds) * 1000000 + useconds);
 					lat_mtx.lock();
 					ue_registration_response_time[threadId] += mtime;
@@ -472,15 +474,15 @@ void* multithreading_func(void *arg){
 							//usleep(my_rand()+2000);		//200-700 usec
 							usleep(my_rand()+wait_latency);
 							//sreqNo++;
-							gettimeofday(&start2, NULL);
+							gettimeofday(&ue.start2, NULL);
 							ue_context_release(ue, user, ue_num, tmpArray[1], tmpArray[2], tmpArray[3], currentPort, networkServiceRequest);
 							//lat_mtx.lock();
 							//num_ue_per_thread[threadId] += 1;//Increment completion num for serv req
 							//sreqNo++;
 							//lat_mtx.unlock();
 							gettimeofday(&end2, NULL);
-							seconds  = end2.tv_sec  - start2.tv_sec;
-							useconds = end2.tv_usec - start2.tv_usec;
+							seconds  = end2.tv_sec  - ue.start2.tv_sec;
+							useconds = end2.tv_usec - ue.start2.tv_usec;
 							mtime = ((seconds) * 1000000 + useconds);
 							lat_mtx.lock();
 							ue_registration_response_time[threadId] += mtime;
@@ -517,12 +519,12 @@ void* multithreading_func(void *arg){
 								//usleep(my_rand()+2000);
 								usleep(my_rand()+wait_latency);
 								//usleep(my_rand()+2000);
-								gettimeofday(&start2, NULL);
+								gettimeofday(&ue.start2, NULL);
 								tmpArray[3] = ue_service_request(ue, user, ue_num, tmpArray[1]); //returns newly generated ue_teid
 									//////PRINT REG TIME TO ARRAY////
 								gettimeofday(&end2, NULL);
-								seconds  = end2.tv_sec  - start2.tv_sec;
-								useconds = end2.tv_usec - start2.tv_usec;
+								seconds  = end2.tv_sec  - ue.start2.tv_sec;
+								useconds = end2.tv_usec - ue.start2.tv_usec;
 								mtime = ((seconds) * 1000000 + useconds);
 								lat_mtx.lock();
 								ue_registration_response_time[threadId] += mtime;
@@ -571,7 +573,7 @@ void* multithreading_func(void *arg){
 							usleep(my_rand()+wait_latency);
 						att_done=false;
 						usleep(my_rand()+wait_latency);
-						gettimeofday(&start3, NULL);
+						gettimeofday(&ue.start3, NULL);
 						detach_ue(ue, user, ue_num, tmpArray[1], tmpArray[2], tmpArray[3]);
 						// sleep(300);
 
@@ -582,8 +584,8 @@ void* multithreading_func(void *arg){
 						lat_mtx.unlock();
 
 						//////PRINT REG TIME TO ARRAY////
-						seconds  = end3.tv_sec  - start3.tv_sec;
-						useconds = end3.tv_usec - start3.tv_usec;
+						seconds  = end3.tv_sec  - ue.start3.tv_sec;
+						useconds = end3.tv_usec - ue.start3.tv_usec;
 						mtime = ((seconds) * 1000000 + useconds);
 						lat_mtx.lock();
 						ue_registration_response_time[threadId] += mtime;

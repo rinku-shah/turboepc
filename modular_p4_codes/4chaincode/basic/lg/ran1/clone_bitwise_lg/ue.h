@@ -27,7 +27,7 @@ class UserEquipment{
 
 		unsigned long long tai; 	// Tracking area ID
 		int type;
-		
+		struct timeval start, start1, start2, start3;
 		// Constructor
 		UserEquipment(int);
 

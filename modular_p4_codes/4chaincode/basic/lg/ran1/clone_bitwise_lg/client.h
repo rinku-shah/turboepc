@@ -127,8 +127,16 @@ public:
     bool tflag=false; //flag to test dest UDP port for demux of packets
     time_t cT;
     time_t eT;
-        double timeout = 2;
-        bool timeoutFlag=false; // Flag =true if read timedout
+
+    clock_t begin, beginOff; //for timeout in us
+    clock_t end, endOff;
+    clock_t curr, currOff;
+    double elapsed_secs, elapsed_secsOff; 
+
+        double timeout = 5000; //timeout value in us
+        bool timeoutFlag=false; // Flag =true if read timedout for non-offloadable messages
+        double timeoutOff = 2000; //timeout value in us
+        bool timeoutFlagOff=false; // Flag =true if read timedout for offloadable messages
 
     // Constructor
     Client(int);

@@ -146,18 +146,27 @@ void Client::read_data2(){
         int status=0;
         unsigned char* my_buffer;
         
-        timeoutFlag = false;
-        time(&cT);
-        eT = cT + (int) timeout;
+        timeoutFlagOff = false;
+        //time(&cT);
+        //eT = cT + (int) timeout;
+        beginOff = clock();
+        endOff = beginOff + timeoutOff; //timeout in usec
         while(status!=17 || !tflag){    
             bzero(my_client_byte_buffer, BUFFER_SIZE);
             data_size = recvfrom(sock_raw, my_client_byte_buffer , BUFFER_SIZE-1 , 0 , &saddr , (socklen_t*)&saddr_size);
             //Now process the packet        
             status=ProcessPacket2((unsigned char*)my_client_byte_buffer , data_size);
-            time(&cT);
+            /*time(&cT);
             if (cT > eT) {
                 cout<<"Read Timed out"<<endl;
                 timeoutFlag = true;
+                break;
+            }*/
+            currOff = clock();
+            elapsed_secsOff =  double(currOff - beginOff); // / CLOCKS_PER_SEC;
+            if (elapsed_secsOff > endOff) {
+                cout<<"Read Timed out-- Offl"<<endl;
+                timeoutFlagOff = true;
                 break;
             }
         }
@@ -227,20 +236,30 @@ void Client::print_udp_packet2(unsigned char *Buffer , int Size)
  void Client::read_data(){
         int status=0;
         unsigned char* my_buffer;
-    timeoutFlag = false;
-        time(&cT);
-        eT = cT + (int) timeout;
+    timeoutFlag = false; //for non offloadable messages
+        //time(&cT);
+        //eT = cT + (int) timeout;
+     begin = clock();
+     end = begin + timeout; //timeout in usec
+
     while(status!=17 || !tflag){    
      bzero(client_buffer, BUFFER_SIZE);
          data_size = recvfrom(sock_raw, client_buffer , BUFFER_SIZE-1 , 0 , &saddr , (socklen_t*)&saddr_size);
         //Now process the packet        
         status=ProcessPacket((unsigned char*)client_buffer , data_size); 
-        time(&cT);
+        /*time(&cT);
         if (cT > eT) {
           cout<<"Read Timed out"<<endl;
           timeoutFlag = true;
           break;
-          }
+          }*/
+        curr = clock();
+        elapsed_secs =  double(curr - begin); // / CLOCKS_PER_SEC;
+        if (elapsed_secs > end) {
+            cout<<"Read Timed out"<<endl;
+            timeoutFlag = true;
+            break;
+        }
     }
 
  }

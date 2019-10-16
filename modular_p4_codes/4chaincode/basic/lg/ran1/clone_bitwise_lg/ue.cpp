@@ -1250,6 +1250,7 @@ vector<string> UserEquipment::setupTunnel(Client &user, bool doEncryption){
   apnt.key = htonl(ue_key);
         
         do{
+  gettimeofday(&start1, NULL);
   // now write struct elemets to buffer one by one
   bzero(user.client_buffer, BUFFER_SIZE);
   int len=0;  // reset length which holds no of bytes written in buffer
@@ -1282,7 +1283,6 @@ vector<string> UserEquipment::setupTunnel(Client &user, bool doEncryption){
   if(doEncryption) {
     sendEncryptedData(user, SEND_APN + SEPARATOR,  longToString(apn) + SEPARATOR + longToString(ue_key),"SEND_APN");
   }
-
   // Receive UE IP address and SGW TEID from MME
   user.read_data();
         } while(user.timeoutFlag);
@@ -1473,6 +1473,7 @@ void UserEquipment::initiate_detach(Client &user, int ue_num, string ue_ip, stri
   detach.ue_num = htonl(ue_num);
 
         do{
+  gettimeofday(&start3, NULL);
   // now write struct elemets to buffer one by one
   bzero(user.client_buffer, BUFFER_SIZE);
   int len=0;  // reset length which holds no of bytes written in buffer
@@ -1597,6 +1598,7 @@ void UserEquipment::initiate_ue_context_release(Client &user, int ue_num, string
   ctxtrel.ue_num = htonl(ue_num);
   
   do{
+  gettimeofday(&start2, NULL);
         // now write struct elemets to buffer one by one
   bzero(user.client_buffer, BUFFER_SIZE);
   int len=0;  // reset length which holds no of bytes written in buffer
@@ -1640,7 +1642,7 @@ void UserEquipment::initiate_ue_context_release(Client &user, int ue_num, string
   // Receive UE_CONTEXT_RELEASE_COMMAND from MME
   // user.read_data();
   user.read_data2();
-        } while(user.timeoutFlag);
+        } while(user.timeoutFlagOff);
 
   //int code_name = (int)(user.my_client_byte_buffer[0]);
    int code_name = user.my_client_byte_buffer[0];
@@ -1744,6 +1746,7 @@ string UserEquipment::send_ue_service_request(Client& user, int ue_num, string u
   serreq.ue_ip = inet_addr(ue_ip.c_str());
 
         do{
+  gettimeofday(&start2, NULL);
   // now write struct elemets to buffer one by one
   bzero(user.client_buffer, BUFFER_SIZE);
   int len=0;  // reset length which holds no of bytes written in buffer
@@ -1781,7 +1784,7 @@ string UserEquipment::send_ue_service_request(Client& user, int ue_num, string u
   // Receive reply from MME
   // user.read_data();
   user.read_data2();
-        } while(user.timeoutFlag);
+        } while(user.timeoutFlagOff);
 
   int code_name1 = (int)(user.my_client_byte_buffer[0]);
   // not parsing sep as not needed
@@ -1947,7 +1950,7 @@ string UserEquipment::send_ue_service_request(Client& user, int ue_num, string u
         // user.write_data(INITIAL_CONTEXT_SETUP_RESPONSE);
 
       user.read_data2();
-                        } while(user.timeoutFlag);
+        } while(user.timeoutFlagOff);
 
       int code_name2 = (int)(user.my_client_byte_buffer[0]);
 
