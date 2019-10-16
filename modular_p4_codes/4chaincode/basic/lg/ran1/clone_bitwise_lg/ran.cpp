@@ -448,8 +448,8 @@ void* multithreading_func(void *arg){
 					//lat_mtx.unlock();
 					//cout<<"a:"<<mtime<<endl;
 					lat_mtx.lock();
-                        attNo++;
-                    lat_mtx.unlock();
+                        		attNo++;
+                    			lat_mtx.unlock();
 					num_ue_per_thread[threadId] += 1; //Increment completion num for att req
 
 					/*stored_ue_registration_response_time[j] = mtime;
