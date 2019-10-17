@@ -166,6 +166,7 @@ void Client::read_data2(){
             elapsed_secsOff =  double(currOff - beginOff); // / CLOCKS_PER_SEC;
             if (elapsed_secsOff > endOff) {
                 cout<<"Read Timed out-- Offl"<<endl;
+
                 timeoutFlagOff = true;
                 break;
             }
