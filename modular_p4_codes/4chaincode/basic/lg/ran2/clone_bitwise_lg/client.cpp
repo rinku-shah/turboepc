@@ -166,7 +166,8 @@ void Client::read_data2(){
             currOff = clock();
             elapsed_secsOff =  double(currOff - beginOff); // / CLOCKS_PER_SEC;
             if (elapsed_secsOff > endOff) {
-                //cout<<"Read Timed out-- Offl"<<endl;
+                cout<<"Read Timed out-- Offl"<<endl;
+
                 timeoutFlagOff = true;
                 break;
             }
@@ -257,7 +258,7 @@ void Client::print_udp_packet2(unsigned char *Buffer , int Size)
         curr = clock();
         elapsed_secs =  double(curr - begin); // / CLOCKS_PER_SEC;
         if (elapsed_secs > end) {
-            //cout<<"Read Timed out"<<endl;
+            cout<<"Read Timed out"<<endl;
             timeoutFlag = true;
             break;
         }
