@@ -133,7 +133,7 @@ public:
     clock_t curr, currOff;
     double elapsed_secs, elapsed_secsOff; 
 
-        double timeout = 7000; //timeout value in us
+        double timeout = 12000; //timeout value in us
         bool timeoutFlag=false; // Flag =true if read timedout for non-offloadable messages
         double timeoutOff = 2000; //timeout value in us
         bool timeoutFlagOff=false; // Flag =true if read timedout for offloadable messages
