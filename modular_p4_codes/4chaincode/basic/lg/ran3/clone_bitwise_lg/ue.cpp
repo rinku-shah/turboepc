@@ -1196,12 +1196,13 @@ vector<string> UserEquipment::setupTunnel(Client &user, bool doEncryption, long 
     }
 
     else{
-      mtx.unlock();
+      //mtx.unlock();
       cout<<"UE TEID CROSSOVER!!!!"<<count<<endl;
       usleep(1000);
       //goto check;
 
     }
+   mtx.unlock();
   }
   /*if(!reusable_ue_teid.empty()){
     ue_teid = reusable_ue_teid.front();
