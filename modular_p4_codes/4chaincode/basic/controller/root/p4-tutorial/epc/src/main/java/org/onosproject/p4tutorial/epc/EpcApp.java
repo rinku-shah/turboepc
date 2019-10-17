@@ -766,7 +766,7 @@ public class EpcApp {
                                 }
                                 else{
                                     log.info("AUTHENTICATION_STEP_THREE: imsi not found");
-                                    System.exit(1);
+                                    //System.exit(1);
                                 }
                                 // K_ASME = uekey_nas_keys_map.get(imsi)[0];
 								k = uekey_nas_keys_map.get(imsi)[0];
@@ -809,7 +809,7 @@ public class EpcApp {
 //                                sendPacket(sw, inPort, destMac, sourceMac, dstIp, srcIp,  IpProtocol.UDP, dstPort, srcPort, Constants.AUTHENTICATION_FAILURE);
                                 build_response_pkt(connectPoint,srcMac,dstMac,ipv4Protocol,ipv4SourceAddress,udp_dstport,udp_srcport,Constants.AUTHENTICATION_FAILURE);
 								response = null;
-                                System.exit(1);
+                                //System.exit(1);
                             }
                         }else{
                             log.info("AUTHENTICATION_STEP_THREE failure");
