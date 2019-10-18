@@ -27,7 +27,7 @@
                             }
                         }
                     }, 
-                    "name": "host_to_net1",
+                    "name": "host_to_net10",
                     "match": {
                         "standard_metadata.ingress_port": {
                             "value": "v0.1"
@@ -59,7 +59,7 @@
                             }
                         }
                     }, 
-                    "name": "net_to_host2", 
+                    "name": "net_to_host20", 
                     "match": {
                         "standard_metadata.ingress_port": {
                             "value": "p1"
