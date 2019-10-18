@@ -105,7 +105,6 @@ class Initial_Ctxt_Setup_Resp(Packet):
 							ShortField('sep32', None), #2bytes
 							IntField("sgw_teid", None)]
 
-
 class PacketProcessor(object):
     def __init__(self, router_ext_ip, cur_udp_port, ext_port, controller_port, 
                  controller_port_rules, device_number,ruleNum):
@@ -136,9 +135,33 @@ class PacketProcessor(object):
         # sendp(new_p_str, iface=self.controller_port, verbose=0)
         s.send(new_p_str)
 
+#############  abhik's write code starts ###################
+   def byte_to_int(byte_list):
+        result = 0
+        for i in range(len(byte_list)):
+                result = result*16*16 + int(byte_list[i])
+        return result
+
+   def byte_to_struct(byte_list):
+        result = ''
+        for i in range(len(byte_list)):
+                result += struct.pack('B',int(byte_list[i]))
+        return result
+
+
+   def create_write_rpy(key_list, value_list):
+        rpy_packet = struct.pack('B', 3)
+        rpy_packet += byte_to_struct(key_list)
+        rpy_packet += byte_to_struct(value_list)
+        return rpy_packet
+        #s.sendto(create_write_rpy(key_list, value_list), addr)
+
+############## abhik's write code ends ##########################
+
     def processPacket(self, p):
                 #src_ip = p[IP].src
 		#dst_ip = p[IP].dst
+    ############################# (Help for packet send)  https://github.com/open-nfpsw/p4c_firewall/blob/master/dynamic_rule_fw/firewall-controller.py #################
 		p_str = str(p)
 		try:
 			switch_port = p_str[0:2]
