@@ -2,6 +2,5 @@
 with TCP data
 
 the mapping is as follows:
-dgw(p0) - sgw(p0)
-sgw(p1) - pgw(p0)
-
+dgw(p1) - sgw(p1)
+sgw(p0) - pgw(p0)
