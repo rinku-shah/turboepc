@@ -248,12 +248,20 @@ control c_ingress(inout headers hdr,
                     // process the control packet
                     if(hdr.ipv4.protocol == PROTO_UDP){
                     // handling attach detach via the java controller runnign at SGW   
-                    if(hdr.data.epc_traffic_code != 14 || hdr.data.epc_traffic_code != 17 ||
-                        hdr.data.epc_traffic_code != 19){
+                    	if(hdr.data.epc_traffic_code == 1 || hdr.data.epc_traffic_code == 3 
+			   || hdr.data.epc_traffic_code == 20 || hdr.data.epc_traffic_code == 5 
+			   || hdr.data.epc_traffic_code == 7 || hdr.data.epc_traffic_code == 9){
                                 // it means it is a attach or detach packet
                                 //  so forward it to CPU_PORT(vf0_0) to controller
+                                //standard_metadata.egress_spec = CPU_PORT;
+    	                        hdr.ipv4.ttl = hdr.ipv4.ttl - 1;
+                                // send the packet to python controller running at SGW
                                 standard_metadata.egress_spec = CPU_PORT;
-                                hdr.ipv4.ttl = hdr.ipv4.ttl - 1;
+                                // Packets sent to the controller needs to be prepended with the
+                                // packet-in header. By setting it valid we make sure it will be
+                                // deparsed on the wire (see c_deparser).
+                                hdr.packet_in.setValid();
+                                hdr.packet_in.ingress_port = standard_metadata.ingress_port;
                                 return;
                     }
 
@@ -432,7 +440,9 @@ control c_egress(inout headers hdr,
                                     hdr.udp.length_ = 7 + UDP_HDR_SIZE;
                                     hdr.ipv4.totalLen =  hdr.udp.length_ + IPV4_HDR_SIZE;
                                     // forwarding the cloned packet back to RAN on "p1"(1)
-                                    standard_metadata.egress_port = 1;
+                                    //@rinku: changing port to spec
+				    //standard_metadata.egress_spec = 1;
+				    standard_metadata.egress_port = 1;
 
                             }
 
@@ -470,7 +480,9 @@ control c_egress(inout headers hdr,
                                     hdr.ipv4.totalLen =  hdr.udp.length_ + IPV4_HDR_SIZE;
 
                                      // forwarding the cloned packet back to RAN on "p1"(1)
-                                    standard_metadata.egress_port = 1;
+                                     //@rinku: changing port to spec
+                                    // standard_metadata.egress_spec = 1;
+				     standard_metadata.egress_port = 1;
                                      // return;
                             }
 
