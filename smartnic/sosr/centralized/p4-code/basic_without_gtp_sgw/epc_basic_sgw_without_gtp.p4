@@ -308,9 +308,10 @@ control c_ingress(inout headers hdr,
                 ip_op_tun_s2_uplink.apply();
                 ip_op_tun_s2_downlink.apply();
             }
-           
-    }
-}
+       }  //if ipv4.isvalid ends here     
+    } //apply ends here
+ } //control ingress ends here
+
 /*************************************************************************
 ****************  E G R E S S   P R O C E S S I N G   *******************
 *************************************************************************/
