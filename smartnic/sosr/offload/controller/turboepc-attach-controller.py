@@ -156,7 +156,7 @@ class PacketProcessor(object):
 		#print "Switch Port : " + switch_port
 		sink_ip=str("192.168.3.4")
                 if data.epc_traffic_code == 1:  #1:Authentication Step One
-		    print "Authentication Step 1"
+		    #print "Authentication Step 1"
 		    #ether = Ether(dst='00:11:11:11:11:11')
 		    #ip = IP(src=self.host, dst='192.168.2.2')
 		    #udp = UDP(sport=68, dport=self.port)
@@ -182,7 +182,7 @@ class PacketProcessor(object):
 		    #p2.show()
 		else:
 			if data.epc_traffic_code == 3:  #Authentication Step 3
-			    print "Authentication Step 3" 
+			    #print "Authentication Step 3" 
 			    p2['Data'].epc_traffic_code = 4 #NAS_STEP_ONE
 			    temp = p2['UDP'].sport
 			    p2['UDP'].sport = p2['UDP'].dport
@@ -197,10 +197,11 @@ class PacketProcessor(object):
 			    #p2.show()
 			else:
 				if data.epc_traffic_code == 20:  #NAS_STEP_TWO
-				    print "NAS_STEP_TWO" #send nothing
+				    pass
+				    #print "NAS_STEP_TWO" #send nothing
 				else:
 				        if data.epc_traffic_code == 5:  #Send APN
-					    print "Send APN" 
+					    #print "Send APN" 
 					    p2['Data'].epc_traffic_code = 6 #SEND_IP_SGW_TEID
 					    temp = p2['UDP'].sport
 					    p2['UDP'].sport = p2['UDP'].dport
@@ -231,7 +232,7 @@ class PacketProcessor(object):
 					    PacketProcessor.SendToSwitch(self, p2, switch_port)  
 					else:
 				    	        if data.epc_traffic_code == 7:  #SEND_UE_TEID
-						    print "Attach accept" 
+						    #print "Attach accept" 
 						    p2['Data'].epc_traffic_code = 25 #ACTUAL_ATTACH_ACCEPT
 						    temp = p2['UDP'].sport
 						    p2['UDP'].sport = p2['UDP'].dport
@@ -262,7 +263,7 @@ class PacketProcessor(object):
 
 					        else:
 				    	                if data.epc_traffic_code == 9:  #DETACH_REQ
-					                    print "Detach request" 
+					                    #print "Detach request" 
 							    p2['Data'].epc_traffic_code = 10 #DETACH_ACCEPT
 							    temp = p2['UDP'].sport
 							    p2['UDP'].sport = p2['UDP'].dport
