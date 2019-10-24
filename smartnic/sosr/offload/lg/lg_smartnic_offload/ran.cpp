@@ -45,7 +45,7 @@ bool networkServiceRequest = false;	// Network initiated service request (downli
 // vector<vector<int>> traffic_mix={{0,100,0,0,0},{499,99501,0,0,0},{1499,98501,0,0,0},{2999,97001,0,0,0},{6999,93001,0,0,0},{8999,91001,0,0,0},{10999,89001,0,0,0},{30999,69001,0,0,0},{40999,59001,0,0,0},{50999,49001,0,0,0},{60999,39001,0,0,0},{100,0,0,0,0}};
 vector<vector<int>> traffic_mix={{0,0,0,9909,90991,0},{499,0,0,0,99501,0},{1499,98501,0,0,0,0},{2999,97001,0,0,0,0},{6999,93001,0,0,0,0},{8999,91001,0,0,0,0},{10999,89001,0,0,0,0},{30999,69001,0,0,0,0},{40999,59001,0,0,0,0},{0,0,0,0,100,0},{0,0,0,0,0,100},{0,0,0,100,0,0}};
 int start_ue = 101;
-int wait_latency = 10000; //28000 for <1ms; 58000 for 5ms, 108000 for 10ms //This is the delay between two messages ; For read retransmit on timeout set "double timeout =x" in client.h file
+int wait_latency = 0; //1000; //28000 for <1ms; 58000 for 5ms, 108000 for 10ms //This is the delay between two messages ; For read retransmit on timeout set "double timeout =x" in client.h file
 
 //2_98,0
 //5_95,1
@@ -381,7 +381,7 @@ void* multithreading_func(void *arg){
 					checkIntegrity_t = false;
 					ueServiceRequest_t = true;
 					dataTime = 1;
-					loop1 = 10;    //outer loop---attach
+					loop1 = 1;    //outer loop---attach
 					loop2 = 999;   //inner loop---service-req
 					break;
 
@@ -412,7 +412,7 @@ void* multithreading_func(void *arg){
 			//gettimeofday(&ue.start, NULL);
 			//gettimeofday(&start, NULL);
 			//usleep(my_rand()+2000);
-			usleep(500000);
+			//usleep(50000);
 			usleep(my_rand()+wait_latency);
 			mtime=0;
 			if(attach_with_mme(ue, user, checkIntegrity_t, mtime)){ 	// Authentication
@@ -459,7 +459,7 @@ void* multithreading_func(void *arg){
 				}
 					//tmpArray: [0] = SEND_IP_SGW_TEID, [1] = IP Address of UE, [2] = SGW TEID, [3] = ue_teid, [4] = GUTI
 
-				// usleep(200000);
+				usleep(200000);
 				if(tmpArray.size()>=5){
 					do{
 						if(sendData_t){

@@ -938,7 +938,9 @@ bool UserEquipment::authenticate(Client &user, bool checkIntegrity, long& mtime)
           }
           return true;
         }else{
-          cout<<"**ERROR: Step FOUR authentication failure for UE with key = " <<key<<endl;
+	  if(DO_DEBUG){
+          cout<<"**ERROR: Step FOUR authentication failure for UE with key = "<<endl;// <<key<<endl;
+	  }
           //exit(1);
           //return false;
 	   return true;
@@ -1096,7 +1098,9 @@ vector<string> UserEquipment::setupTunnel(Client &user, bool doEncryption, long 
         cout<<"Attach Accept"<<endl;
          } 
     }else{
-	      cout<<"ERROR: NOT CLEAR TO SEND DATA"<<endl;
+	if(DO_DEBUG){
+	       cout<<"ERROR: NOT CLEAR TO SEND DATA"<<endl;
+	}
 	      //exit(1);
      } //end attach-accept
      gettimeofday(&end, NULL);
@@ -1284,7 +1288,9 @@ void UserEquipment::initiate_detach(Client &user, int ue_num, string ue_ip, stri
 //    int ue_teid;
 
   }else{
-    cout<<"ERROR: UE DETACH ACCEPT ERROR:  IP Address of UE="<<ue_ip<<" and UE TEID="<<ue_teid<<" SGW TEID"<<sgw_teid<<endl;
+	if(DO_DEBUG){
+    		cout<<"ERROR: UE DETACH ACCEPT ERROR:  IP Address of UE="<<ue_ip<<" and UE TEID="<<ue_teid<<" SGW TEID"<<sgw_teid<<endl;
+    	}
     //exit(1);
   }
     mtx.lock();
