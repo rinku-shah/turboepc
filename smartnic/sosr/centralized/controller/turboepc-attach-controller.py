@@ -3,7 +3,9 @@ import argparse
 import time
 import threading
 from threading import Event
+
 from time import sleep
+from functools import wraps
 
 from RTEInterface import RTEInterface
 
@@ -156,7 +158,7 @@ class PacketProcessor(object):
 		#print "Switch Port : " + switch_port
 		sink_ip=str("192.168.3.4")
                 if data.epc_traffic_code == 1:  #1:Authentication Step One
-		    print "Authentication Step 1"
+		    #print "Authentication Step 1"
 		    #ether = Ether(dst='00:11:11:11:11:11')
 		    #ip = IP(src=self.host, dst='192.168.2.2')
 		    #udp = UDP(sport=68, dport=self.port)
@@ -178,11 +180,12 @@ class PacketProcessor(object):
 		    #p3 = Ether(src=p2['Ether'].dst, dst=p2['Ether'].src) / IP(src=p2['IP'].dst, dst=p2['IP'].src) / UDP(sport=p2['UDP'].dport, dport=p2['UDP'].sport) / Raw('\x02@:##:@')  
 		    #p3.show()
 		    #time.sleep(0.05)
+		    random_sort(990)
 		    PacketProcessor.SendToSwitch(self, p2, switch_port)
 		    #p2.show()
 		else:
 			if data.epc_traffic_code == 3:  #Authentication Step 3
-			    print "Authentication Step 3" 
+			    #print "Authentication Step 3" 
 			    p2['Data'].epc_traffic_code = 4 #NAS_STEP_ONE
 			    temp = p2['UDP'].sport
 			    p2['UDP'].sport = p2['UDP'].dport
@@ -192,15 +195,17 @@ class PacketProcessor(object):
 			    p2['IP'].dst = temp
 			    temp = p2['Ether'].src
 			    p2['Ether'].src = p2['Ether'].dst
-			    p2['Ether'].dst = temp    
+			    p2['Ether'].dst = temp 
+			    random_sort(990)   
 			    PacketProcessor.SendToSwitch(self, p2, switch_port)
 			    #p2.show()
 			else:
 				if data.epc_traffic_code == 20:  #NAS_STEP_TWO
-				    print "NAS_STEP_TWO" #send nothing
+				    #print "NAS_STEP_TWO" #send nothing
+				    pass
 				else:
 				        if data.epc_traffic_code == 5:  #Send APN
-					    print "Send APN" 
+					    #print "Send APN" 
 					    p2['Data'].epc_traffic_code = 6 #SEND_IP_SGW_TEID
 					    temp = p2['UDP'].sport
 					    p2['UDP'].sport = p2['UDP'].dport
@@ -231,7 +236,7 @@ class PacketProcessor(object):
 					    PacketProcessor.SendToSwitch(self, p2, switch_port)  
 					else:
 				    	        if data.epc_traffic_code == 7:  #SEND_UE_TEID
-						    print "Attach accept" 
+						    #print "Attach accept" 
 						    p2['Data'].epc_traffic_code = 25 #ACTUAL_ATTACH_ACCEPT
 						    temp = p2['UDP'].sport
 						    p2['UDP'].sport = p2['UDP'].dport
@@ -243,26 +248,13 @@ class PacketProcessor(object):
 						    p2['Ether'].src = p2['Ether'].dst
 						    p2['Ether'].dst = temp
 						    #PacketProcessor.SendToSwitch(self, p2, switch_port)    
-						    #p2.show()
-						    try:
-							    tbl_id = 'ingress::uekey_uestate_map' #update on SGW
-							    #rule_name = 'update_ue_state_1_' + str(data.param2)
-							    rule_name = str(data.param2-99)
-							    default_rule = False
-							    actions = '{  "type" : "ingress::populate_uekey_uestate_map",  "data" : { "uestate" : { "value" : "1" } } }' 
-							    match = '{ "ingress::uekey_uestate.ue_key"  :{  "value" : "%s"} }' % (data.param2)   
-							    with THRIFT_API_LOCK:
-								if data.param2 != 0:
-									RTEInterface.Tables.EditRule(tbl_id, rule_name, default_rule, match, actions, 1)
-						    except Exception, err:
-							    #print("Exceptioni:uekey_uestate_map:add")
-							    #print(err)
-							    pass
+						    #p2.show()	
+						    random_sort(990)					
 						    PacketProcessor.SendToSwitch(self, p2, switch_port)  
 
 					        else:
 				    	                if data.epc_traffic_code == 9:  #DETACH_REQ
-					                    print "Detach request" 
+					                    #print "Detach request" 
 							    p2['Data'].epc_traffic_code = 10 #DETACH_ACCEPT
 							    temp = p2['UDP'].sport
 							    p2['UDP'].sport = p2['UDP'].dport
@@ -290,29 +282,28 @@ class PacketProcessor(object):
 								#print "param4 = ", data.param4
 								#print(err)
 								pass
-
-							    try:
-									tbl_id = 'ingress::uekey_uestate_map' #update on SGW
-									#rule_name = 'update_ue_state_0_' + str(data.param4)
-									rule_name =  str(data.param4-99)
-									default_rule = False
-									actions = '{  "type" : "ingress::populate_uekey_uestate_map",  "data" : { "uestate" : { "value" : "0" } } }' 
-									match = '{ "ingress::uekey_uestate.ue_key" : {  "value" : "%s"} }' % (data.param4) 
-
-									with THRIFT_API_LOCK:
-										if data.param4 != 0:
-											RTEInterface.Tables.EditRule(tbl_id, rule_name, default_rule, match, actions, 1)
-											#RTEInterface.Tables.AddRule(tbl_id, rule_name, default_rule, match, actions, 1)
-											# RTEInterface.Tables.AddRule(tbl_id, rule_name, default_rule, match, actions, 1, 3)
-							    except Exception, err:
-								#print("Exception:uekey_uestate_map:add")
-								#print(err)
-								pass
-							    self.ruleNum += 4   
+							    random_sort(990)
 							    PacketProcessor.SendToSwitch(self, p2, switch_port)
 							    #p2.show()
+ 
+def fn_timer(function):
+    @wraps(function)
+    def function_timer(*args, **kwargs):
+        t0 = time.time()
+        result = function(*args, **kwargs)
+        t1 = time.time()
+        print ("Total time running %s: %s seconds" %
+               (function.func_name, str(t1-t0))
+               )
+        return result
+    return function_timer
+
+#@fn_timer
+def random_sort(n):
+    return sorted([random.random() for i in range(n)])
   
 def main():
+    #random_sort(18000) ## 990: 2.5ms, 18K: 5.7ms, 19K: 6ms CPU time
     parser = argparse.ArgumentParser(description='P4 TurboEPC SGW config')
     parser.add_argument('-i','--ip', help='External IP address - "192.168.0.1"', required=False,default="192.168.0.1")
     # parser.add_argument('-p','--ext-port', help='External port for rules - "v0.2"', required=False,default="v0.2")

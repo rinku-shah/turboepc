@@ -134,9 +134,9 @@ public:
     clock_t curr, currOff;
     double elapsed_secs, elapsed_secsOff; 
 
-        double timeout = 100000; //timeout value in us
+        double timeout = 500000; //timeout value in us
         bool timeoutFlag=false; // Flag =true if read timedout for non-offloadable messages
-        double timeoutOff = 2000; //timeout value in us
+        double timeoutOff = 20000; //timeout value in us
         bool timeoutFlagOff=false; // Flag =true if read timedout for offloadable messages
 
     // Constructor

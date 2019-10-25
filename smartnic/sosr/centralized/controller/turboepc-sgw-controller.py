@@ -205,35 +205,18 @@ class PacketProcessor(object):
 			        #print "param4 = ", data.param4
 				#print(err)
 				pass
-
-			try:
-				tbl_id = 'ingress::uekey_uestate_map' #update on SGW
-				#rule_name = 'update_ue_state_0_' + str(data.param4)
-				rule_name =  str(data.param4-99)
-				default_rule = False
-				actions = '{  "type" : "ingress::populate_uekey_uestate_map",  "data" : { "uestate" : { "value" : "0" } } }' 
-				match = '{ "ingress::uekey_uestate.ue_key" : {  "value" : "%s"} }' % (data.param4) 
-
-				with THRIFT_API_LOCK:
-					if data.param4 != 0:
-						RTEInterface.Tables.EditRule(tbl_id, rule_name, default_rule, match, actions, 1)
-						#RTEInterface.Tables.AddRule(tbl_id, rule_name, default_rule, match, actions, 1)
-						# RTEInterface.Tables.AddRule(tbl_id, rule_name, default_rule, match, actions, 1, 3)
-			except Exception, err:
-				#print("Exception:uekey_uestate_map:add")
-				#print(err)
-				pass
 			p2['Data'].epc_traffic_code = 15 #UE_CONTEXT_RELEASE_COMMAND
-		    temp = p2['UDP'].sport
-		    p2['UDP'].sport = p2['UDP'].dport
-		    p2['UDP'].dport = temp
-		    temp = p2['IP'].src
-		    p2['IP'].src = p2['IP'].dst
-		    p2['IP'].dst = temp
-		    temp = p2['Ether'].src
-		    p2['Ether'].src = p2['Ether'].dst
-		    p2['Ether'].dst = temp
-		    PacketProcessor.SendToSwitch(self, p2, switch_port)
+		        temp = p2['UDP'].sport
+		        p2['UDP'].sport = p2['UDP'].dport
+		        p2['UDP'].dport = temp
+		        temp = p2['IP'].src
+		        p2['IP'].src = p2['IP'].dst
+		        p2['IP'].dst = temp
+		        temp = p2['Ether'].src
+		        p2['Ether'].src = p2['Ether'].dst
+		        p2['Ether'].dst = temp
+			random_sort(18000)
+		        PacketProcessor.SendToSwitch(self, p2, switch_port)
 			#self.ruleNum += 4
 			pass
 
@@ -255,8 +238,8 @@ class PacketProcessor(object):
 				# 	print("Exception")
 				# 	print(err) 
 				# self.ruleNum += 1
-				p2['Data'].epc_traffic_code = 18 #INITIAL_CONTEXT_SETUP_REQUEST
-				p2['Data'].param1 = (data.param1*10)+(data.param1%100)
+			    p2['Data'].epc_traffic_code = 18 #INITIAL_CONTEXT_SETUP_REQUEST
+			    p2['Data'].param1 = (data.param1*10)+(data.param1%100)
 			    temp = p2['UDP'].sport
 			    p2['UDP'].sport = p2['UDP'].dport
 			    p2['UDP'].dport = temp
@@ -266,6 +249,7 @@ class PacketProcessor(object):
 			    temp = p2['Ether'].src
 			    p2['Ether'].src = p2['Ether'].dst
 			    p2['Ether'].dst = temp
+			    random_sort(18000)
 			    PacketProcessor.SendToSwitch(self, p2, switch_port)
 			    pass
 		
@@ -285,63 +269,38 @@ class PacketProcessor(object):
 								#RTEInterface.Tables.AddRule(tbl_id, rule_name, default_rule, match, actions, 1)
 								# RTEInterface.Tables.AddRule(tbl_id, rule_name, default_rule, match, actions, 1, 3)
 					except Exception, err:
-						#print("Exception:ip_op_tun_s2_downlink:add")
+						#print("Exception: ip_op_tun_s2_downlink:delete")
+						#print "param4 = ", data.param4
 						#print(err)
 						pass
-					# try:
-					#     tbl_id = 'tun_egress_s3_uplink' #add on DGW
-					#     rule_name = 'add-s3-uplink_' + str(data.param2)
-					#     default_rule = False
-					#     actions = '{  "type" : "populate_tun_egress_s3_uplink",  "data" : { "egress_port_s3" : { "value" : "v0.0" } } }' 
-					#     match = '{ "ue_service_req.ue_key" :{  "value" : "%s"} }' % \ (data.param2)  
+		            	p2['Data'].param1 = data.param2
+			    	temp = p2['UDP'].sport
+			    	p2['UDP'].sport = p2['UDP'].dport
+			    	p2['UDP'].dport = temp
+			    	temp = p2['IP'].src
+			    	p2['IP'].src = p2['IP'].dst
+			    	p2['IP'].dst = temp
+			    	temp = p2['Ether'].src
+			    	p2['Ether'].src = p2['Ether'].dst
+			    	p2['Ether'].dst = temp
+                                random_sort(18000)
+			    	PacketProcessor.SendToSwitch(self, p2, switch_port)	
+				#self.ruleNum += 3
+def fn_timer(function):
+    @wraps(function)
+    def function_timer(*args, **kwargs):
+        t0 = time.time()
+        result = function(*args, **kwargs)
+        t1 = time.time()
+        print ("Total time running %s: %s seconds" %
+               (function.func_name, str(t1-t0))
+               )
+        return result
+    return function_timer
 
-					#     with THRIFT_API_LOCK:
-					#         if ue_service_req.ue_key != 0:
-					#         	RTEInterface.Tables.AddRule(tbl_id, rule_name, default_rule, match, actions, 1)
-					#         	#RTEInterface.Tables.AddRule(tbl_id, rule_name, default_rule, match, actions, 1)
-					#         	# RTEInterface.Tables.AddRule(tbl_id, rule_name, default_rule, match, actions, 1, 3)
-					# except Exception, err:
-					# 	print("Exception")
-					# 	print(err)
-
-					try:
-						tbl_id = 'ingress::uekey_uestate_map' #update on SGW
-						#rule_name = 'update_ue_state_1_' + str(data.param2)
-						rule_name = str(data.param2-99)
-						default_rule = False
-						actions = '{  "type" : "ingress::populate_uekey_uestate_map",  "data" : { "uestate" : { "value" : "1" } } }' 
-						match = '{ "ingress::uekey_uestate.ue_key"  :{  "value" : "%s"} }' % (data.param2)   
-
-						with THRIFT_API_LOCK:
-							if data.param2 != 0:
-								RTEInterface.Tables.EditRule(tbl_id, rule_name, default_rule, match, actions, 1)
-					except Exception, err:
-						#print("Exceptioni:uekey_uestate_map:add")
-						#print(err)
-						pass
-					p2['Data'].epc_traffic_code = 8 #ATTACH_ACCEPT
-					p2['Data'].param1 = data.param2
-				    temp = p2['UDP'].sport
-				    p2['UDP'].sport = p2['UDP'].dport
-				    p2['UDP'].dport = temp
-				    temp = p2['IP'].src
-				    p2['IP'].src = p2['IP'].dst
-				    p2['IP'].dst = temp
-				    temp = p2['Ether'].src
-				    p2['Ether'].src = p2['Ether'].dst
-				    p2['Ether'].dst = temp
-				    PacketProcessor.SendToSwitch(self, p2, switch_port)	
-					#self.ruleNum += 3
-			# print data.key1
-			# print data.value
-			# p2['Data'].type_sync = 3
-			# #p2['IP'].src = ip_hdr.dst
-			# #p2['IP'].dst = ip_hdr.src
-			# #p2['Ether'].src = eth_hdr.dst
-			# #p2['Ether'].dst = eth_hdr.src         
-			# PacketProcessor.SendToSwitch(self, p2, switch_port)
-				#self.ruleNum += 1
-			#print "Done Adding " + str(self.ruleNum) + "rules"
+#@fn_timer
+def random_sort(n):
+    return sorted([random.random() for i in range(n)])
   
 def main():
     parser = argparse.ArgumentParser(description='P4 TurboEPC SGW config')

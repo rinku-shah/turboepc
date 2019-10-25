@@ -248,11 +248,11 @@ control c_ingress(inout headers hdr,
                     // process the control packet
                     if(hdr.ipv4.protocol == PROTO_UDP){
                     // handling attach detach via the java controller runnign at SGW   
-                    	if(hdr.data.epc_traffic_code == 1 || hdr.data.epc_traffic_code == 3 
-			   || hdr.data.epc_traffic_code == 20 || hdr.data.epc_traffic_code == 5 
-			   || hdr.data.epc_traffic_code == 7 || hdr.data.epc_traffic_code == 9
-			   || hdr.data.epc_traffic_code == 14 || hdr.data.epc_traffic_code == 17
-			   || hdr.data.epc_traffic_code == 19){
+                    	//if(hdr.data.epc_traffic_code == 1 || hdr.data.epc_traffic_code == 3 
+			//   || hdr.data.epc_traffic_code == 20 || hdr.data.epc_traffic_code == 5 
+			//   || hdr.data.epc_traffic_code == 7 || hdr.data.epc_traffic_code == 9
+			//   || hdr.data.epc_traffic_code == 14 || hdr.data.epc_traffic_code == 17
+			//   || hdr.data.epc_traffic_code == 19){
                                 // it means it is a attach or detach packet, 14,17,19 for service req/context red packet in centralised mode
                                 //  so forward it to CPU_PORT(vf0_0) to controller
                                 //standard_metadata.egress_spec = CPU_PORT;
@@ -266,7 +266,7 @@ control c_ingress(inout headers hdr,
 		                hdr.packet_in.setValid();
 		                hdr.packet_in.ingress_port = standard_metadata.ingress_port;
                                 return;
-                    }       
+                   // }       
                     
           }
 
@@ -308,9 +308,10 @@ control c_ingress(inout headers hdr,
                 ip_op_tun_s2_uplink.apply();
                 ip_op_tun_s2_downlink.apply();
             }
-           
-    }
-}
+       }  //if ipv4.isvalid ends here     
+    } //apply ends here
+ } //control ingress ends here
+
 /*************************************************************************
 ****************  E G R E S S   P R O C E S S I N G   *******************
 *************************************************************************/

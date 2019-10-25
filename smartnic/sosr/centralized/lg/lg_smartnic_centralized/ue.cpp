@@ -938,7 +938,9 @@ bool UserEquipment::authenticate(Client &user, bool checkIntegrity, long& mtime)
           }
           return true;
         }else{
-          cout<<"**ERROR: Step FOUR authentication failure for UE with key = " <<key<<endl;
+	  if(DO_DEBUG){
+          cout<<"**ERROR: Step FOUR authentication failure for UE with key = "<<endl;// <<key<<endl;
+	  }
           //exit(1);
           //return false;
 	   return true;
@@ -948,7 +950,7 @@ bool UserEquipment::authenticate(Client &user, bool checkIntegrity, long& mtime)
   seconds  = end.tv_sec  - start.tv_sec;
   useconds = end.tv_usec - start.tv_usec;
   mtime = mtime + ((seconds) * 1000000 + useconds);
-  usleep(10000);
+  //usleep(10000);
 }
 
 /*
@@ -975,7 +977,7 @@ vector<string> UserEquipment::setupTunnel(Client &user, bool doEncryption, long 
            else{
 	      //mtx.unlock();
 	      cout<<"UE TEID CROSSOVER!!!!"<<count<<endl;
-	      usleep(1000);
+	      //usleep(1000);
 	      //goto check;
 	    }//end else
    	   mtx.unlock();
@@ -1060,7 +1062,7 @@ vector<string> UserEquipment::setupTunnel(Client &user, bool doEncryption, long 
      seconds  = end.tv_sec  - start.tv_sec;
      useconds = end.tv_usec - start.tv_usec;
      mtime = mtime + ((seconds) * 1000000 + useconds);
-      usleep(10000);          
+     // usleep(10000);          
      do{
 	    gettimeofday(&start, NULL);
 	    // now write struct elemets to buffer one by one
@@ -1096,7 +1098,9 @@ vector<string> UserEquipment::setupTunnel(Client &user, bool doEncryption, long 
         cout<<"Attach Accept"<<endl;
          } 
     }else{
-	      cout<<"ERROR: NOT CLEAR TO SEND DATA"<<endl;
+	if(DO_DEBUG){
+	       cout<<"ERROR: NOT CLEAR TO SEND DATA"<<endl;
+	}
 	      //exit(1);
      } //end attach-accept
      gettimeofday(&end, NULL);
@@ -1284,7 +1288,9 @@ void UserEquipment::initiate_detach(Client &user, int ue_num, string ue_ip, stri
 //    int ue_teid;
 
   }else{
-    cout<<"ERROR: UE DETACH ACCEPT ERROR:  IP Address of UE="<<ue_ip<<" and UE TEID="<<ue_teid<<" SGW TEID"<<sgw_teid<<endl;
+	if(DO_DEBUG){
+    		cout<<"ERROR: UE DETACH ACCEPT ERROR:  IP Address of UE="<<ue_ip<<" and UE TEID="<<ue_teid<<" SGW TEID"<<sgw_teid<<endl;
+    	}
     //exit(1);
   }
     mtx.lock();
@@ -1602,7 +1608,7 @@ string UserEquipment::send_ue_service_request(Client& user, int ue_num, string u
     else{
       mtx.unlock();
       cout<<"UE TEID CROSSOVER!!!!"<<count<<endl;
-      usleep(1000);
+      //usleep(1000);
       //goto check;
 
     }

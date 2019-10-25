@@ -386,8 +386,8 @@ def main():
 
     while(1):
         s = conf.L2socket(iface=args.controller_port)
-        s.sniff(prn=pp ,filter='udp')
-    # sniff(iface=args.controller_port, prn=pp)
+        #s.sniff(prn=pp ,filter='udp')
+    	sniff(iface=args.controller_port, prn=pp)
 
 if __name__ == '__main__':
 	main()
