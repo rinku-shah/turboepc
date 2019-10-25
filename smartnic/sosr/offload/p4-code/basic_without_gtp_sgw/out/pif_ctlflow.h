@@ -1,0 +1,150 @@
+/* Copyright (C) 2015-2016,  Netronome Systems, Inc.  All rights reserved. */
+
+#ifndef __PIF_CTLFLOW_H__
+#define __PIF_CTLFLOW_H__
+
+/* Defines for checking flow presence */
+#define PIF_CTLFLOW_HAS_ingress_flow
+#define PIF_CTLFLOW_HAS_egress_flow
+
+#define PIF_CTLFLOW_STATE_ingress 0
+#define PIF_CTLFLOW_STATE_accept 0
+/* Control state nodes for ingress_flow */
+#define PIF_CTLFLOW_STATE_ingress_flow_DONE -1
+#define PIF_CTLFLOW_STATE_ingress_flow_exit_control_flow -1
+#define PIF_CTLFLOW_STATE_ingress_flow 0
+
+#define PIF_CTLFLOW_STATE_ingress_flow__condition_18 0
+#define PIF_CTLFLOW_STATE_ingress_flow_ingress__tbl_act_11 1
+#define PIF_CTLFLOW_STATE_ingress_flow__condition_20 2
+#define PIF_CTLFLOW_STATE_ingress_flow_ingress__tbl_act_13 3
+#define PIF_CTLFLOW_STATE_ingress_flow__condition_22 4
+#define PIF_CTLFLOW_STATE_ingress_flow__condition_16 5
+#define PIF_CTLFLOW_STATE_ingress_flow__condition_17 6
+#define PIF_CTLFLOW_STATE_ingress_flow__condition_15 7
+#define PIF_CTLFLOW_STATE_ingress_flow_ingress__ctxt_setup_uekey_sgwteid_map 8
+#define PIF_CTLFLOW_STATE_ingress_flow__condition_14 9
+#define PIF_CTLFLOW_STATE_ingress_flow_ingress__service_req_uekey_sgwteid_map 10
+#define PIF_CTLFLOW_STATE_ingress_flow__condition_19 11
+#define PIF_CTLFLOW_STATE_ingress_flow__condition_12 12
+#define PIF_CTLFLOW_STATE_ingress_flow_ingress__tbl_act_14 13
+#define PIF_CTLFLOW_STATE_ingress_flow_ingress__tbl_act_0 14
+#define PIF_CTLFLOW_STATE_ingress_flow__condition_5 15
+#define PIF_CTLFLOW_STATE_ingress_flow__condition_2 16
+#define PIF_CTLFLOW_STATE_ingress_flow_ingress__tbl_act_1 17
+#define PIF_CTLFLOW_STATE_ingress_flow__condition_21 18
+#define PIF_CTLFLOW_STATE_ingress_flow__condition_1 19
+#define PIF_CTLFLOW_STATE_ingress_flow__condition_6 20
+#define PIF_CTLFLOW_STATE_ingress_flow__condition_7 21
+#define PIF_CTLFLOW_STATE_ingress_flow_ingress__tbl_act_5 22
+#define PIF_CTLFLOW_STATE_ingress_flow__condition_8 23
+#define PIF_CTLFLOW_STATE_ingress_flow_ingress__ip_op_tun_s2_downlink 24
+#define PIF_CTLFLOW_STATE_ingress_flow__condition_3 25
+#define PIF_CTLFLOW_STATE_ingress_flow__condition_4 26
+#define PIF_CTLFLOW_STATE_ingress_flow_ingress__uekey_guti_map 27
+#define PIF_CTLFLOW_STATE_ingress_flow_ingress__ip_op_tun_s2_uplink 28
+#define PIF_CTLFLOW_STATE_ingress_flow__condition_9 29
+#define PIF_CTLFLOW_STATE_ingress_flow__condition_10 30
+#define PIF_CTLFLOW_STATE_ingress_flow__condition_11 31
+#define PIF_CTLFLOW_STATE_ingress_flow__condition_23 32
+#define PIF_CTLFLOW_STATE_ingress_flow_ingress__uekey_uestate_map 33
+#define PIF_CTLFLOW_STATE_ingress_flow_ingress__tbl_act_6 34
+#define PIF_CTLFLOW_STATE_ingress_flow__condition_0 35
+#define PIF_CTLFLOW_STATE_ingress_flow_ingress__tbl_act_12 36
+#define PIF_CTLFLOW_STATE_ingress_flow_ingress__tbl_act_2 37
+#define PIF_CTLFLOW_STATE_ingress_flow_ingress__tbl_act_7 38
+#define PIF_CTLFLOW_STATE_ingress_flow_ingress__tbl_act_3 39
+#define PIF_CTLFLOW_STATE_ingress_flow_ingress__tbl_act_10 40
+#define PIF_CTLFLOW_STATE_ingress_flow_ingress__tbl_act_8 41
+#define PIF_CTLFLOW_STATE_ingress_flow_ingress__tbl_act_9 42
+#define PIF_CTLFLOW_STATE_ingress_flow_ingress__tbl_act_4 43
+#define PIF_CTLFLOW_STATE_ingress_flow_ingress__tbl_act 44
+#define PIF_CTLFLOW_STATE_ingress_flow_ingress__arp_tbl 45
+#define PIF_CTLFLOW_STATE_ingress_flow__condition_13 46
+
+/* Control state nodes for egress_flow */
+#define PIF_CTLFLOW_STATE_egress_flow_DONE -1
+#define PIF_CTLFLOW_STATE_egress_flow_exit_control_flow -1
+#define PIF_CTLFLOW_STATE_egress_flow 0
+
+#define PIF_CTLFLOW_STATE_egress_flow__condition_29 0
+#define PIF_CTLFLOW_STATE_egress_flow_egress__tbl_act_19 1
+#define PIF_CTLFLOW_STATE_egress_flow_egress__tbl_act_18 2
+#define PIF_CTLFLOW_STATE_egress_flow__condition_27 3
+#define PIF_CTLFLOW_STATE_egress_flow_egress__ctxt_release_uekey_sgwteid_map 4
+#define PIF_CTLFLOW_STATE_egress_flow_egress__tbl_act_15 5
+#define PIF_CTLFLOW_STATE_egress_flow__condition_26 6
+#define PIF_CTLFLOW_STATE_egress_flow__condition_24 7
+#define PIF_CTLFLOW_STATE_egress_flow__condition_25 8
+#define PIF_CTLFLOW_STATE_egress_flow__condition_28 9
+#define PIF_CTLFLOW_STATE_egress_flow_egress__tbl_act_20 10
+#define PIF_CTLFLOW_STATE_egress_flow_egress__tbl_act_16 11
+#define PIF_CTLFLOW_STATE_egress_flow_egress__tbl_act_17 12
+
+/* Unified control state numbers */
+#define PIF_CTLFLOW_STATE__condition_18 0
+#define PIF_CTLFLOW_STATE_ingress__tbl_act_11 1
+#define PIF_CTLFLOW_STATE__condition_20 2
+#define PIF_CTLFLOW_STATE_ingress__tbl_act_13 3
+#define PIF_CTLFLOW_STATE__condition_22 4
+#define PIF_CTLFLOW_STATE__condition_16 5
+#define PIF_CTLFLOW_STATE__condition_17 6
+#define PIF_CTLFLOW_STATE__condition_15 7
+#define PIF_CTLFLOW_STATE_ingress__ctxt_setup_uekey_sgwteid_map 8
+#define PIF_CTLFLOW_STATE__condition_14 9
+#define PIF_CTLFLOW_STATE_ingress__service_req_uekey_sgwteid_map 10
+#define PIF_CTLFLOW_STATE__condition_19 11
+#define PIF_CTLFLOW_STATE__condition_12 12
+#define PIF_CTLFLOW_STATE_ingress__tbl_act_14 13
+#define PIF_CTLFLOW_STATE_ingress__tbl_act_0 14
+#define PIF_CTLFLOW_STATE__condition_5 15
+#define PIF_CTLFLOW_STATE__condition_2 16
+#define PIF_CTLFLOW_STATE_ingress__tbl_act_1 17
+#define PIF_CTLFLOW_STATE__condition_21 18
+#define PIF_CTLFLOW_STATE__condition_1 19
+#define PIF_CTLFLOW_STATE__condition_6 20
+#define PIF_CTLFLOW_STATE__condition_7 21
+#define PIF_CTLFLOW_STATE_ingress__tbl_act_5 22
+#define PIF_CTLFLOW_STATE__condition_8 23
+#define PIF_CTLFLOW_STATE_ingress__ip_op_tun_s2_downlink 24
+#define PIF_CTLFLOW_STATE__condition_3 25
+#define PIF_CTLFLOW_STATE__condition_4 26
+#define PIF_CTLFLOW_STATE_ingress__uekey_guti_map 27
+#define PIF_CTLFLOW_STATE_ingress__ip_op_tun_s2_uplink 28
+#define PIF_CTLFLOW_STATE__condition_9 29
+#define PIF_CTLFLOW_STATE__condition_10 30
+#define PIF_CTLFLOW_STATE__condition_11 31
+#define PIF_CTLFLOW_STATE__condition_23 32
+#define PIF_CTLFLOW_STATE_ingress__uekey_uestate_map 33
+#define PIF_CTLFLOW_STATE_ingress__tbl_act_6 34
+#define PIF_CTLFLOW_STATE__condition_0 35
+#define PIF_CTLFLOW_STATE_ingress__tbl_act_12 36
+#define PIF_CTLFLOW_STATE_ingress__tbl_act_2 37
+#define PIF_CTLFLOW_STATE_ingress__tbl_act_7 38
+#define PIF_CTLFLOW_STATE_ingress__tbl_act_3 39
+#define PIF_CTLFLOW_STATE_ingress__tbl_act_10 40
+#define PIF_CTLFLOW_STATE_ingress__tbl_act_8 41
+#define PIF_CTLFLOW_STATE_ingress__tbl_act_9 42
+#define PIF_CTLFLOW_STATE_ingress__tbl_act_4 43
+#define PIF_CTLFLOW_STATE_ingress__tbl_act 44
+#define PIF_CTLFLOW_STATE_ingress__arp_tbl 45
+#define PIF_CTLFLOW_STATE__condition_13 46
+#define PIF_CTLFLOW_STATE__condition_29 47
+#define PIF_CTLFLOW_STATE_egress__tbl_act_19 48
+#define PIF_CTLFLOW_STATE_egress__tbl_act_18 49
+#define PIF_CTLFLOW_STATE__condition_27 50
+#define PIF_CTLFLOW_STATE_egress__ctxt_release_uekey_sgwteid_map 51
+#define PIF_CTLFLOW_STATE_egress__tbl_act_15 52
+#define PIF_CTLFLOW_STATE__condition_26 53
+#define PIF_CTLFLOW_STATE__condition_24 54
+#define PIF_CTLFLOW_STATE__condition_25 55
+#define PIF_CTLFLOW_STATE__condition_28 56
+#define PIF_CTLFLOW_STATE_egress__tbl_act_20 57
+#define PIF_CTLFLOW_STATE_egress__tbl_act_16 58
+#define PIF_CTLFLOW_STATE_egress__tbl_act_17 59
+
+/* Control flow entry points  */
+int pif_ctlflow_ingress_flow(int *start_state, __lmem uint32_t *_pif_parrep, __mem __addr40 uint32_t *actbuf, unsigned int actbuf_off);
+int pif_ctlflow_egress_flow(int *start_state, __lmem uint32_t *_pif_parrep, __mem __addr40 uint32_t *actbuf, unsigned int actbuf_off);
+
+#endif /* __PIF_CTLFLOW_H__ */

@@ -1,0 +1,40 @@
+.%scope file "/opt/netronome/p4/components/nfp_pif/me/apps/pif_app_nfd/include/config.h"
+.%scope function multiply_32x32 _multiply_32x32 "/opt/netronome/p4/components/nfp_pif/me/lib/pif/src/mac_time_user.c" 29 48
+.%arg x 0 x_80_V$21
+.%arg y 0 y_80_V$22
+.%var lo 0 lo_80 LIX
+.%var hi 0 hi_80 LIX
+.%scope end
+.%var mac_time 1 _mac_time SEX
+.%scope function mac_time_fetch _mac_time_fetch "/opt/netronome/p4/components/nfp_pif/me/lib/pif/src/mac_time_user.c" 52 55
+.%arg mac_time_xfer 3 mac_time_xfer_82_V$26
+.%scope end
+.%scope function mac_time_calc _mac_time_calc "/opt/netronome/p4/components/nfp_pif/me/lib/pif/src/mac_time_user.c" 58 82
+.%arg mac_time_buf 1 mac_time_buf_83_V$27
+.%var ret 4 ret_83 LIX
+.%var me_time 0 me_time_83 LIX
+.%var conv_result 5 conv_result_83 LIX
+.%var delta_ns 0 delta_ns_83 LIX
+.%scope end
+.%scope function mac_time_calc_pkt _mac_time_calc_pkt "/opt/netronome/p4/components/nfp_pif/me/lib/pif/src/mac_time_user.c" 87 120
+.%arg mac_time_buf 1 mac_time_buf_86_V$36
+.%arg pkt_time_ns 0 pkt_time_ns_86_V$3c
+.%var ret 4 ret_86 LIX
+.%var time_diff 6 time_diff_86 LIX
+.%scope end
+.%type U4
+.%type S16 mac_time_state{
+mac_time_s 0 0;
+mac_time_ns 4 0;
+me_time 8 0;
+conv_mult 12 2;
+conv_rshift 14 2;
+}
+.%type U2
+.%type P2 1
+.%type S8 mac_time_data{
+sec 0 0;
+nsec 4 0;
+}
+.%type U8
+.%type I4

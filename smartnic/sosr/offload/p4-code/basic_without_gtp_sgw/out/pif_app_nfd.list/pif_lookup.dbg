@@ -1,0 +1,103 @@
+.%scope file "/opt/netronome/p4/components/nfp_pif/me/apps/pif_app_nfd/include/config.h"
+.%scope function multiply_24x8 _multiply_24x8 "/opt/netronome/p4/components/nfp_pif/me/lib/pif/include/pif_common.h" 62 77
+.%arg x 0 x_453_V$810
+.%arg y 0 y_453_V$811
+.%var result 0 result_453 LIX
+.%scope end
+.%var BLM_NBI8_BLQ0_EMU_QD_BASE 1 _BLM_NBI8_BLQ0_EMU_QD_BASE SEX
+.%var BLM_NBI8_BLQ0_EMU_Q_BASE 3 _BLM_NBI8_BLQ0_EMU_Q_BASE SEX
+.%var BLM_NBI8_BLQ1_EMU_QD_BASE 4 _BLM_NBI8_BLQ1_EMU_QD_BASE SEX
+.%var BLM_NBI8_BLQ1_EMU_Q_BASE 5 _BLM_NBI8_BLQ1_EMU_Q_BASE SEX
+.%var BLM_NBI8_BLQ2_EMU_QD_BASE 6 _BLM_NBI8_BLQ2_EMU_QD_BASE SEX
+.%var BLM_NBI8_BLQ2_EMU_Q_BASE 7 _BLM_NBI8_BLQ2_EMU_Q_BASE SEX
+.%var BLM_NBI8_BLQ3_EMU_QD_BASE 8 _BLM_NBI8_BLQ3_EMU_QD_BASE SEX
+.%var BLM_NBI8_BLQ3_EMU_Q_BASE 9 _BLM_NBI8_BLQ3_EMU_Q_BASE SEX
+.%var BLM_NBI8_BLQ0_EMU_EMEM0_BUFS_BASE 10 _BLM_NBI8_BLQ0_EMU_EMEM0_BUFS_BASE SEX
+.%var BLM_NBI8_BLQ0_BDSRAM_EMEM0_BUFS_BASE 11 _BLM_NBI8_BLQ0_BDSRAM_EMEM0_BUFS_BASE SEX
+.%scope function pif_lookup _pif_lookup "/opt/netronome/p4/components/nfp_pif/me/lib/pif/src/pif_lookup.c" 94 313
+.%arg tableno 0 tableno_472_V$814
+.%arg parrep 12 parrep_472_V$815
+.%arg action_buffer 13 action_buffer_472_V$816
+.%arg action_buffer_offset 0 action_buffer_offset_472_V$817
+.%var label_set 14 label_set_472 LIX
+.%var d 23 d_472 LIR
+.%var result 25 result_472 LIX
+.%var rule 0 rule_472 LIX
+.%var cfg_ptr 27 cfg_ptr_472 LIX
+.%scope block 167 200
+.%var label_set_id 28 label_set_id_476 LIX
+.%scope end
+.%scope block 227 311
+.%var sig 28 sig_480 LIX
+.%var ruledata 13 ruledata_480 LIX
+.%var rd_buf 29 rd_buf_480 LIR
+.%var wr_buf 30 wr_buf_480 LIW
+.%var rd_buf_ptr 31 rd_buf_ptr_480 LIX
+.%var act_op 32 act_op_480 LIX
+.%var action_id 28 action_id_480 LIX
+.%var i 28 i_480 LIX
+.%scope end
+.%scope end
+.%type U4
+.%type A16 2
+.%type U1
+.%type A32768 2
+.%type A16 2
+.%type A2048 2
+.%type A16 2
+.%type A2048 2
+.%type A16 2
+.%type A2048 2
+.%type A41943040 2
+.%type A10485760 2
+.%type P6 0
+.%type P3 0
+.%type A192 15
+.%type S64 dcfl_label_set{
+__unnamed 0 16;
+}
+.%type S64 {
+__unnamed 0 17;
+results 0 20;
+values 0 22;
+}
+.%type S64 {
+labels 0 18;
+}
+.%type A64 19
+.%type U2
+.%type A64 21
+.%type S4 {
+priority 0:16:16 0;
+rule_id 0:0:16 0;
+}
+.%type A64 0
+.%type S16 pif_actiondata_table_desc{
+table_address 0 24;
+rule_count 8 0;
+reserved 12 19;
+record_shift 14 2;
+flags 15 2;
+}
+.%type P3 0
+.%type S8 pif_lookup_result{
+action_id 0 26;
+action_len 4 26;
+}
+.%type I4
+.%type P3 2
+.%type I4
+.%type A96 0
+.%type A96 0
+.%type P2 0
+.%type P2 33
+.%type S4 pif_action_opdata{
+__unnamed 0 34;
+val32 0 0;
+}
+.%type S4 {
+reserved0 0:24:8 28;
+action_id 0:16:8 28;
+dbg_flags 0:8:8 28;
+actdata_cnt 0:0:8 28;
+}

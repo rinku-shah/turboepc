@@ -1,0 +1,12 @@
+.%scope file "/opt/netronome/p4/components/nfp_pif/me/apps/pif_app_nfd/include/config.h"
+.%scope function __rt_assert ___rt_assert "/opt/netronome/components/flowenv/me/include/assert.h" 91 99
+.%var reg 0 reg_11 LIX
+.%scope end
+.%scope function __signal_me ___signal_me "/opt/netronome/p4/components/flowcache/me/lib/standardlibrary/_c/cluster_target.c" 16 23
+.%arg dst_island 0 dst_island_133_V$223
+.%arg dst_me 0 dst_me_133_V$224
+.%arg dst_ctx 0 dst_ctx_133_V$225
+.%arg sig_no 0 sig_no_133_V$226
+.%var addr 0 addr_133 LIX
+.%scope end
+.%type U4

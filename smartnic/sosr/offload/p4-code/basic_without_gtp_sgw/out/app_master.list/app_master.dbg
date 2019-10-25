@@ -1,0 +1,81 @@
+.%scope file "/opt/netronome/p4/components/nfp_pif/me/apps/pif_app_nfd/include/config.h"
+.%scope function __rt_assert ___rt_assert "/opt/netronome/components/flowenv/me/include/assert.h" 91 99
+.%var reg 0 reg_249 LIX
+.%scope end
+.%var BLM_NBI8_BLQ0_EMU_QD_BASE 1 _BLM_NBI8_BLQ0_EMU_QD_BASE SEX
+.%var BLM_NBI8_BLQ0_EMU_Q_BASE 3 _BLM_NBI8_BLQ0_EMU_Q_BASE SEX
+.%var BLM_NBI8_BLQ1_EMU_QD_BASE 4 _BLM_NBI8_BLQ1_EMU_QD_BASE SEX
+.%var BLM_NBI8_BLQ1_EMU_Q_BASE 5 _BLM_NBI8_BLQ1_EMU_Q_BASE SEX
+.%var BLM_NBI8_BLQ2_EMU_QD_BASE 6 _BLM_NBI8_BLQ2_EMU_QD_BASE SEX
+.%var BLM_NBI8_BLQ2_EMU_Q_BASE 7 _BLM_NBI8_BLQ2_EMU_Q_BASE SEX
+.%var BLM_NBI8_BLQ3_EMU_QD_BASE 8 _BLM_NBI8_BLQ3_EMU_QD_BASE SEX
+.%var BLM_NBI8_BLQ3_EMU_Q_BASE 9 _BLM_NBI8_BLQ3_EMU_Q_BASE SEX
+.%var BLM_NBI8_BLQ0_EMU_EMEM0_BUFS_BASE 10 _BLM_NBI8_BLQ0_EMU_EMEM0_BUFS_BASE SEX
+.%var BLM_NBI8_BLQ0_BDSRAM_EMEM0_BUFS_BASE 11 _BLM_NBI8_BLQ0_BDSRAM_EMEM0_BUFS_BASE SEX
+.%var app_master_nfd_config_changed 0 _app_master_nfd_config_changed SEX
+.%var pif_app_mes 12 _pif_app_mes SEX
+.%var pif_config_change 0 _pif_config_change SEX
+.%var pif_current_config 0 _pif_current_config SEX
+.%scope function __hashmap_lock_release ___hashmap_lock_release "/opt/netronome/p4/components/nfp_pif/me/lib/hashmap/include/hashmap.h" 103 122
+.%arg lock 13 lock_263_V$842
+.%var ind 18 ind_263 LIX
+.%var addr_hi 0 addr_hi_263 LIX
+.%var addr_lo 0 addr_lo_263 LIX
+.%scope end
+.%scope function multiply_24x8 _multiply_24x8 "/opt/netronome/p4/components/nfp_pif/me/lib/pif/include/pif_common.h" 62 77
+.%arg x 0 x_571_V$85b
+.%arg y 0 y_571_V$85c
+.%var result 0 result_571 LIX
+.%scope end
+.%scope function pvs_poll _pvs_poll "/opt/netronome/p4/components/nfp_pif/me/apps/pif_app_nfd/src/app_master.c" 48 55
+.%scope end
+.%scope function config_change_poll _config_change_poll "/opt/netronome/p4/components/nfp_pif/me/apps/pif_app_nfd/src/app_master.c" 58 93
+.%var app_mes 21 app_mes_582 LIR
+.%var i 22 i_582 LIX
+.%var j 22 j_582 LIX
+.%var done 22 done_582 LIX
+.%scope end
+.%scope function main _main "/opt/netronome/p4/components/nfp_pif/me/apps/pif_app_nfd/src/app_master.c" 96 126
+.%scope end
+.%type U4
+.%type A16 2
+.%type U1
+.%type A32768 2
+.%type A16 2
+.%type A2048 2
+.%type A16 2
+.%type A2048 2
+.%type A16 2
+.%type A2048 2
+.%type A41943040 2
+.%type A10485760 2
+.%type A512 0
+.%type P2 14
+.%type S10 {
+addr 0 15;
+state 8 17;
+}
+.%type P3 16
+.%type U4
+.%type U2
+.%type S4 nfp_mecsr_prev_alu{
+__unnamed 0 19;
+}
+.%type S4 {
+__unnamed 0 20;
+__raw 0 0;
+}
+.%type S4 {
+data16 0:16:16 0;
+res 0:15:1 0;
+ov_sig_ctx 0:14:1 0;
+ov_sig_num 0:13:1 0;
+length 0:8:5 0;
+ov_len 0:7:1 0;
+ov_bm_csr 0:6:1 0;
+ove_data 0:3:3 0;
+ove_master 0:1:2 0;
+ov_sm 0:0:1 0;
+}
+.%type A32 0
+.%type I4

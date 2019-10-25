@@ -1,0 +1,109 @@
+.%scope file "/opt/netronome/p4/components/nfp_pif/me/apps/pif_app_nfd/include/config.h"
+.%scope function multiply_24x8 _multiply_24x8 "/opt/netronome/p4/components/nfp_pif/me/lib/pif/include/pif_common.h" 62 77
+.%arg x 0 x_401_V$58c
+.%arg y 0 y_401_V$58d
+.%var result 0 result_401 LIX
+.%scope end
+.%var BLM_NBI8_BLQ0_EMU_QD_BASE 1 _BLM_NBI8_BLQ0_EMU_QD_BASE SEX
+.%var BLM_NBI8_BLQ0_EMU_Q_BASE 3 _BLM_NBI8_BLQ0_EMU_Q_BASE SEX
+.%var BLM_NBI8_BLQ1_EMU_QD_BASE 4 _BLM_NBI8_BLQ1_EMU_QD_BASE SEX
+.%var BLM_NBI8_BLQ1_EMU_Q_BASE 5 _BLM_NBI8_BLQ1_EMU_Q_BASE SEX
+.%var BLM_NBI8_BLQ2_EMU_QD_BASE 6 _BLM_NBI8_BLQ2_EMU_QD_BASE SEX
+.%var BLM_NBI8_BLQ2_EMU_Q_BASE 7 _BLM_NBI8_BLQ2_EMU_Q_BASE SEX
+.%var BLM_NBI8_BLQ3_EMU_QD_BASE 8 _BLM_NBI8_BLQ3_EMU_QD_BASE SEX
+.%var BLM_NBI8_BLQ3_EMU_Q_BASE 9 _BLM_NBI8_BLQ3_EMU_Q_BASE SEX
+.%var BLM_NBI8_BLQ0_EMU_EMEM0_BUFS_BASE 10 _BLM_NBI8_BLQ0_EMU_EMEM0_BUFS_BASE SEX
+.%var BLM_NBI8_BLQ0_BDSRAM_EMEM0_BUFS_BASE 11 _BLM_NBI8_BLQ0_BDSRAM_EMEM0_BUFS_BASE SEX
+.%scope function pif_mem_meter _pif_mem_meter "/opt/netronome/p4/components/nfp_pif/me/lib/pif/src/pif_meter.c" 19 36
+.%arg mval 12 mval_403_V$590
+.%arg addr 13 addr_403_V$591
+.%arg colour 15 colour_403_V$592
+.%arg rfc 15 rfc_403_V$593
+.%var meter_sig 16 meter_sig_403 LIX
+.%var high_addr 0 high_addr_403 LIX
+.%var low_addr 0 low_addr_403 LIX
+.%scope end
+.%scope function mult32_oflow0 _mult32_oflow0 "/opt/netronome/p4/components/nfp_pif/me/lib/pif/src/pif_meter.c" 42 61
+.%arg v0 0 v0_404_V$599
+.%arg v1 0 v1_404_V$59a
+.%var result 0 result_404 LIX
+.%var result_hi 0 result_hi_404 LIX
+.%scope end
+.%scope function update_meter_timers _update_meter_timers "/opt/netronome/p4/components/nfp_pif/me/lib/pif/src/pif_meter.c" 64 167
+.%arg meter 17 meter_405_V$59e
+.%var ctime 21 ctime_405 LIX
+.%var ctime_upper 0 ctime_upper_405 LIX
+.%var ptime_upper 0 ptime_upper_405 LIX
+.%var ctime_lower 0 ctime_lower_405 LIX
+.%var ptime_lower 0 ptime_lower_405 LIX
+.%var tdelta 0 tdelta_405 LIX
+.%var shift 2 shift_405 LIX
+.%var mdata_rd 18 mdata_rd_405 LIR
+.%var mdata_wr 22 mdata_wr_405 LIW
+.%scope block 117 150
+.%var Pdelta 0 Pdelta_409 LIX
+.%var Cdelta 0 Cdelta_409 LIX
+.%var newP 0 newP_409 LIX
+.%var newC 0 newC_409 LIX
+.%scope end
+.%scope block 154 166
+.%var val 0 val_414 LIW
+.%var tmr_addr 23 tmr_addr_414 LIX
+.%scope end
+.%scope end
+.%scope function pif_meter_execute _pif_meter_execute "/opt/netronome/p4/components/nfp_pif/me/lib/pif/src/pif_meter.c" 173 206
+.%arg meter 17 meter_415_V$5ce
+.%arg colour_in 15 colour_in_415_V$5cf
+.%arg tick 15 tick_415_V$5d0
+.%var xval32 0 xval32_415 LIX
+.%var offset 23 offset_415 LIX
+.%scope end
+.%type U4
+.%type A16 2
+.%type U1
+.%type A32768 2
+.%type A16 2
+.%type A2048 2
+.%type A16 2
+.%type A2048 2
+.%type A16 2
+.%type A2048 2
+.%type A41943040 2
+.%type A10485760 2
+.%type P2 0
+.%type P3 14
+.%type U4
+.%type I4
+.%type S8 SIGNAL_PAIR{
+even 0 15;
+odd 4 15;
+}
+.%type P3 18
+.%type S32 pif_meter_data{
+bucket_P 0 0;
+bucket_C 4 0;
+__unnamed 8 19;
+last_update_low 12 0;
+PBS 16 0;
+PIR 20 0;
+config 24 0;
+reserved_word 28 0;
+}
+.%type S4 {
+__unnamed 0 20;
+last_update_high_shft 0 0;
+}
+.%type S4 last_update_high_enc{
+locked 0:31:1 0;
+reserved 0:29:2 0;
+cfg_shift 0:24:5 0;
+last_update_upper 0:0:24 0;
+}
+.%type U8
+.%type S16 pif_meter_data_wr{
+bucket_P 0 0;
+bucket_C 4 0;
+last_update_high_shft 8 0;
+last_update_low 12 0;
+}
+.%type P3 2

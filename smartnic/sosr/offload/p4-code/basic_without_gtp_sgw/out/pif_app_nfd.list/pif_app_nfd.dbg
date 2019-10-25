@@ -1,0 +1,587 @@
+.%scope file "/opt/netronome/p4/components/nfp_pif/me/apps/pif_app_nfd/include/config.h"
+.%scope function multiply_24x8 _multiply_24x8 "/opt/netronome/p4/components/nfp_pif/me/lib/pif/include/pif_common.h" 62 77
+.%arg x 0 x_333_V$ae8
+.%arg y 0 y_333_V$ae9
+.%var result 0 result_333 LIX
+.%scope end
+.%var BLM_NBI8_BLQ0_EMU_QD_BASE 1 _BLM_NBI8_BLQ0_EMU_QD_BASE SEX
+.%var BLM_NBI8_BLQ0_EMU_Q_BASE 3 _BLM_NBI8_BLQ0_EMU_Q_BASE SEX
+.%var BLM_NBI8_BLQ1_EMU_QD_BASE 4 _BLM_NBI8_BLQ1_EMU_QD_BASE SEX
+.%var BLM_NBI8_BLQ1_EMU_Q_BASE 5 _BLM_NBI8_BLQ1_EMU_Q_BASE SEX
+.%var BLM_NBI8_BLQ2_EMU_QD_BASE 6 _BLM_NBI8_BLQ2_EMU_QD_BASE SEX
+.%var BLM_NBI8_BLQ2_EMU_Q_BASE 7 _BLM_NBI8_BLQ2_EMU_Q_BASE SEX
+.%var BLM_NBI8_BLQ3_EMU_QD_BASE 8 _BLM_NBI8_BLQ3_EMU_QD_BASE SEX
+.%var BLM_NBI8_BLQ3_EMU_Q_BASE 9 _BLM_NBI8_BLQ3_EMU_Q_BASE SEX
+.%var BLM_NBI8_BLQ0_EMU_EMEM0_BUFS_BASE 10 _BLM_NBI8_BLQ0_EMU_EMEM0_BUFS_BASE SEX
+.%var BLM_NBI8_BLQ0_BDSRAM_EMEM0_BUFS_BASE 11 _BLM_NBI8_BLQ0_BDSRAM_EMEM0_BUFS_BASE SEX
+.%var pif_counter_RX 12 _pif_counter_RX SEX
+.%var pif_counter_RX_NFD 12 _pif_counter_RX_NFD SEX
+.%var pif_counter_TX 12 _pif_counter_TX SEX
+.%var pif_counter_TX_NFD 12 _pif_counter_TX_NFD SEX
+.%var pif_counter_TX_WQ 12 _pif_counter_TX_WQ SEX
+.%var pif_counter_DROP 12 _pif_counter_DROP SEX
+.%var pif_counter_DROP_META 12 _pif_counter_DROP_META SEX
+.%var pif_counter_DROP_NFD_NO_CREDITS 12 _pif_counter_DROP_NFD_NO_CREDITS SEX
+.%var pif_counter_DROP_PORT_PAUSED 12 _pif_counter_DROP_PORT_PAUSED SEX
+.%var pif_counter_DROP_INVALID_PKT_MOD_SCRIPT 12 _pif_counter_DROP_INVALID_PKT_MOD_SCRIPT SEX
+.%var pif_counter_FLOWCACHE_HIT 12 _pif_counter_FLOWCACHE_HIT SEX
+.%var pif_counter_FLOWCACHE_MISS 12 _pif_counter_FLOWCACHE_MISS SEX
+.%var pif_counter_FLOWCACHE_BYPASS 12 _pif_counter_FLOWCACHE_BYPASS SEX
+.%var pif_counter_MULTICAST 12 _pif_counter_MULTICAST SEX
+.%var pif_counter_ERROR_PKTMETA 12 _pif_counter_ERROR_PKTMETA SEX
+.%var pif_counter_ERROR_PARREP 13 _pif_counter_ERROR_PARREP SEX
+.%var pif_counter_ERROR_FLOWCACHE 12 _pif_counter_ERROR_FLOWCACHE SEX
+.%var pif_counter_ERROR_INGRESS 14 _pif_counter_ERROR_INGRESS SEX
+.%var pif_counter_ERROR_EGRESS 15 _pif_counter_ERROR_EGRESS SEX
+.%var pif_counter_ERROR_DEPARSE 16 _pif_counter_ERROR_DEPARSE SEX
+.%var pkt_clone_destination 17 _pkt_clone_destination SEX
+.%var pif_qos_supported 0 _pif_qos_supported SEX
+.%var pif_version 18 _pif_version SEX
+.%var pkt 19 _pkt SEX
+.%var pif_pkt_info_copy 28 _pif_pkt_info_copy SEX
+.%var parrep 33 _parrep SEX
+.%var parrep_copy 34 _parrep_copy SEX
+.%var flowkey 35 _flowkey SEX
+.%var pif_flowcache_bypass 0 _pif_flowcache_bypass SEX
+.%var pkt_dup_state 36 _pkt_dup_state SEX
+.%var pif_pkt_info_spec 29 _pif_pkt_info_spec SEX
+.%var pif_traffic_class_map 39 _pif_traffic_class_map SEX
+.%var port_configs 40 _port_configs SEX
+.%var multi_rx_ctm_pkt_no 44 _multi_rx_ctm_pkt_no SEX
+.%var multi_rx_nfd_sig 44 _multi_rx_nfd_sig SEX
+.%var multi_rx_nbi_sig 44 _multi_rx_nbi_sig SEX
+.%var multi_rx_nfd_rxd 45 _multi_rx_nfd_rxd SER
+.%var multi_rx_nbi_rxd 52 _multi_rx_nbi_rxd SER
+.%var multi_rx_state 0 _multi_rx_state SEX
+.%var flowkey_copy 64 _flowkey_copy SEX
+.%scope function nfd_cfg_bar_base _nfd_cfg_bar_base "/opt/netronome/components/ng_nfd/me/blocks/vnic/shared/nfd_cfg.h" 273 319
+.%arg isl 0 isl_526_V$aec
+.%arg vid 0 vid_526_V$aed
+.%var bar_base 65 bar_base_526 LIX
+.%scope end
+.%scope function __rt_assert ___rt_assert "/opt/netronome/components/flowenv/me/include/assert.h" 91 99
+.%var reg 0 reg_655 LIX
+.%scope end
+.%scope function __hashmap_lock_release ___hashmap_lock_release "/opt/netronome/p4/components/nfp_pif/me/lib/hashmap/include/hashmap.h" 103 122
+.%arg lock 66 lock_669_V$af3
+.%var ind 70 ind_669 LIX
+.%var addr_hi 0 addr_hi_669 LIX
+.%var addr_lo 0 addr_lo_669 LIX
+.%scope end
+.%scope function multi_rx_wait_signals _multi_rx_wait_signals "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/pif_app_nfd.c" 181 210
+.%arg sig_nfd 73 sig_nfd_700_V$b0c
+.%arg sig_nbi 73 sig_nbi_700_V$b0d
+.%arg state 0 state_700_V$b0e
+.%var ret 44 ret_700 LIX
+.%scope end
+.%scope function forward _forward "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/pif_app_nfd.c" 219 302
+.%arg parrep 74 parrep_708_V$b11
+.%var sig_mac_paused 44 sig_mac_paused_708 LIX
+.%var port_bit 12 port_bit_708 LIX
+.%var xfr_port_bitmap 12 xfr_port_bitmap_708 LIR
+.%var sig_traffic_class_xlate 44 sig_traffic_class_xlate_708 LIX
+.%var xfr_traffic_class_queue 0 xfr_traffic_class_queue_708 LIR
+.%var tc_map 75 tc_map_708 LIX
+.%var channel 0 channel_708 LIX
+.%var port_spec 0 port_spec_708 LIX
+.%var port 0 port_708 LIX
+.%var nbi 0 nbi_708 LIX
+.%scope block 278 285
+.%var port 0 port_712 LIX
+.%scope end
+.%scope end
+.%scope function load_fc_control _load_fc_control "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/pif_app_nfd.c" 310 320
+.%arg buf 75 buf_715_V$b1e
+.%arg ig_len 44 ig_len_715_V$b1f
+.%arg eg_len 44 eg_len_715_V$b20
+.%var control_buf 76 control_buf_715 LIX
+.%var control 76 control_715 LIW
+.%scope end
+.%scope function handle_error_packet _handle_error_packet "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/pif_app_nfd.c" 329 345
+.%arg reason 44 reason_716_V$b2d
+.%scope end
+.%scope function main _main "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/pif_app_nfd.c" 353 1302
+.%var action_buffer 81 action_buffer_717 LIX
+.%var ready_ctxs 0 ready_ctxs_717 LIX
+.%var act_buf 82 act_buf_717 LIX
+.%scope block 382 408
+.%var mb0 0 mb0_719 LIX
+.%scope end
+.%scope block 417 1301
+.%var flowkey_len 0 flowkey_len_721 LIX
+.%var exit_node 44 exit_node_721 LIX
+.%var result 83 result_721 LIX
+.%var ingress_cached 44 ingress_cached_721 LIX
+.%var egress_cached 44 egress_cached_721 LIX
+.%var rep_info 87 rep_info_721 LIX
+.%scope block 443 496
+.%var to_process 44 to_process_725 LIX
+.%var multi_rx_ret 44 multi_rx_ret_725 LIX
+.%scope end
+.%scope block 536 544
+.%var pkt_buf 90 pkt_buf_733 LIX
+.%scope end
+.%scope block 548 553
+.%var flcalc_verify_result 44 flcalc_verify_result_734 LIX
+.%scope end
+.%scope block 555 571
+.%var err_code 44 err_code_735 LIX
+.%scope end
+.%scope block 589 607
+.%var control 76 control_738 LIR
+.%scope end
+.%scope block 674 738
+.%var ret 44 ret_743 LIX
+.%scope block 688 725
+.%var len 44 len_746 LIX
+.%scope block 694 698
+.%var errcode 44 errcode_747 LIX
+.%scope end
+.%scope end
+.%scope end
+.%scope block 738 776
+.%var ret 44 ret_751 LIX
+.%scope end
+.%scope block 784 914
+.%var port_spec 0 port_spec_754 LIX
+.%scope block 788 836
+.%var port 44 port_755 LIX
+.%scope end
+.%scope end
+.%scope block 915 964
+.%var type 0 type_762 LIX
+.%scope block 922 946
+.%var port 44 port_763 LIX
+.%scope end
+.%scope end
+.%scope block 1008 1069
+.%var ret 44 ret_766 LIX
+.%scope block 1015 1050
+.%var len 44 len_767 LIX
+.%scope block 1018 1025
+.%var errcode 44 errcode_768 LIX
+.%scope end
+.%scope end
+.%scope end
+.%scope block 1069 1101
+.%var ret 44 ret_770 LIX
+.%scope end
+.%scope block 1143 1151
+.%var pkt_byteoffset 44 pkt_byteoffset_774 LIX
+.%scope end
+.%scope block 1199 1277
+.%var ret_code 44 ret_code_780 LIX
+.%scope block 1205 1254
+.%var gmeta 91 gmeta_781 LIW
+.%var ph 107 ph_781 LIX
+.%var xwq 19 xwq_781 LIW
+.%var dst_q 44 dst_q_781 LIX
+.%var mw0 0 mw0_781 LIX
+.%var mw1 0 mw1_781 LIX
+.%var ctm_ptr 75 ctm_ptr_781 LIX
+.%scope block 1240 1253
+.%var wh 110 wh_783 LIW
+.%var ma 0 ma_783 LIX
+.%scope end
+.%scope end
+.%scope end
+.%scope end
+.%scope end
+.%type U4
+.%type A16 2
+.%type U1
+.%type A32768 2
+.%type A16 2
+.%type A2048 2
+.%type A16 2
+.%type A2048 2
+.%type A16 2
+.%type A2048 2
+.%type A41943040 2
+.%type A10485760 2
+.%type U8
+.%type A512 12
+.%type A16 12
+.%type A16 12
+.%type A40 12
+.%type S16 pkt_clone_destination{
+ctm_pkt_num 0 0;
+mu_ptr 8 12;
+}
+.%type A64 2
+.%type S28 pktio_meta{
+__unnamed 0 20;
+}
+.%type S28 {
+__unnamed 0 21;
+__raw 0 27;
+}
+.%type S28 {
+p_nbi 0 22;
+p_ctm_size 8:30:2 0;
+p_orig_len 8:16:14 0;
+p_offset 8:0:16 0;
+p_src 12:16:16 0;
+p_dst 12:0:16 0;
+p_seq 16:16:16 0;
+p_ro_ctx 16:11:5 0;
+p_is_gro_seq 16:10:1 0;
+p_rx_ipv4_csum_ok 16:9:1 0;
+p_rx_ipv4_csum_present 16:8:1 0;
+p_rx_l4_csum_ok 16:7:1 0;
+p_rx_l4_csum_present 16:6:1 0;
+p_rx_l4_tcp 16:5:1 0;
+p_rx_mac_matched 16:4:1 0;
+p_tunnel 16:3:1 0;
+resv4 16:0:3 0;
+__unnamed 20 26;
+p_vlan 24:16:16 0;
+resv3 24:0:16 0;
+}
+.%type S8 nbi_meta_pkt_info{
+__unnamed 0 23;
+}
+.%type S8 {
+__unnamed 0 24;
+__raw 0 25;
+}
+.%type S8 {
+isl 0:26:6 0;
+pnum 0:16:10 0;
+bls 0:14:2 0;
+len 0:0:14 0;
+split 4:31:1 0;
+resv0 4:29:2 0;
+muptr 4:0:29 0;
+}
+.%type A8 0
+.%type S4 {
+p_timestamp 0:0:32 0;
+}
+.%type A28 0
+.%type S36 pif_pkt_combined{
+specific 0 29;
+pkt 8 19;
+}
+.%type S8 pif_pkt_specific{
+__unnamed 0 30;
+}
+.%type S8 {
+__unnamed 0 31;
+_raw 0 32;
+}
+.%type S8 {
+resv3 0:24:8 0;
+trunc_len 0:10:14 0;
+pkt_pl_off 0:0:10 0;
+calc_fld_bmsk 4 0;
+}
+.%type A8 0
+.%type A332 0
+.%type A328 0
+.%type A48 0
+.%type S4 pif_pkt_duplication_type{
+__unnamed 0 37;
+}
+.%type S4 {
+__unnamed 0 38;
+__raw 0 0;
+}
+.%type S4 {
+action 0:31:1 0;
+reserved 0:16:15 0;
+type 0:0:16 0;
+}
+.%type A32768 0
+.%type A2048 41
+.%type S4 port_config{
+__unnamed 0 42;
+}
+.%type S4 {
+__unnamed 0 43;
+__raw 0 0;
+}
+.%type S4 {
+nic_offload_vlan_rx 0:31:1 0;
+nic_offload_vlan_tx 0:30:1 0;
+nic_offload_checksum_rx 0:29:1 0;
+nic_offload_checksum_tx 0:28:1 0;
+port_paused 0:27:1 0;
+reserved0 0:0:27 0;
+}
+.%type I4
+.%type S16 nfd_in_pkt_desc{
+__unnamed 0 46;
+}
+.%type S16 {
+__unnamed 0 47;
+__raw 0 51;
+}
+.%type S16 {
+sp0 0:31:1 0;
+offset 0:24:7 0;
+seq_num 0:8:16 0;
+intf 0:6:2 0;
+q_num 0:0:6 0;
+invalid 4:31:1 0;
+jumbo 4:30:1 0;
+sp2 4:29:1 0;
+buf_addr 4:0:29 0;
+flags 8:24:8 0;
+lso_seq_cnt 8:16:8 0;
+lso_end 8:15:1 0;
+sp1 8:14:1 0;
+mss 8:0:14 0;
+data_len 12 48;
+__unnamed 14 49;
+}
+.%type U2
+.%type S2 {
+__unnamed 0 50;
+vlan 0 48;
+}
+.%type S2 {
+l4_offset 0 2;
+l3_offset 1 2;
+}
+.%type A16 0
+.%type S32 pktio_nbi_meta{
+__unnamed 0 53;
+}
+.%type S32 {
+__unnamed 0 54;
+__raw 0 63;
+}
+.%type S32 {
+nbi 0 55;
+mac 24 59;
+}
+.%type S24 nbi_meta_catamaran{
+__unnamed 0 56;
+}
+.%type S24 {
+__unnamed 0 57;
+__raw 0 58;
+}
+.%type S24 {
+pkt_info 0 22;
+seq 8:16:16 0;
+nfp 8:14:2 0;
+__reserved_12 8:11:3 0;
+seqr 8:8:3 0;
+prot_err 8:7:1 0;
+meta_type 8:4:3 0;
+meta_valid 8:3:1 0;
+buffer_pool 8:0:3 0;
+__reserved_19 12:19:13 0;
+e_term 12:18:1 0;
+tunnel_depth 12:16:2 0;
+outer_l4_prot_type 12:12:4 0;
+outer_l3_prot_type 12:8:4 0;
+outer_l2_prot_type 12:3:5 0;
+__reserved_1 12:0:3 0;
+port 16:24:8 0;
+hp_off1 16:16:8 0;
+hp_off0 16:8:8 0;
+misc 16:0:8 0;
+pe 20:31:1 0;
+ie 20:30:1 0;
+pw 20:29:1 0;
+sp 20:28:1 0;
+vlan_cnt 20:26:2 0;
+it 20:25:1 0;
+ts 20:24:1 0;
+outer_off 20:16:8 0;
+lif 20:0:16 0;
+}
+.%type A24 0
+.%type S8 pktio_mac_prepend{
+__unnamed 0 60;
+}
+.%type S8 {
+__unnamed 0 61;
+__raw 0 62;
+}
+.%type S8 {
+timestamp 0:0:32 0;
+csum_status 4:29:3 0;
+resv1 4:22:7 0;
+l3_info 4:20:2 0;
+mpls_count 4:18:2 0;
+vlans_count 4:16:2 0;
+csum 4:0:16 0;
+}
+.%type A8 0
+.%type A32 0
+.%type A1024 0
+.%type P3 2
+.%type P2 67
+.%type S10 {
+addr 0 68;
+state 8 48;
+}
+.%type P3 69
+.%type U4
+.%type S4 nfp_mecsr_prev_alu{
+__unnamed 0 71;
+}
+.%type S4 {
+__unnamed 0 72;
+__raw 0 0;
+}
+.%type S4 {
+data16 0:16:16 0;
+res 0:15:1 0;
+ov_sig_ctx 0:14:1 0;
+ov_sig_num 0:13:1 0;
+length 0:8:5 0;
+ov_len 0:7:1 0;
+ov_bm_csr 0:6:1 0;
+ove_data 0:3:3 0;
+ove_master 0:1:2 0;
+ov_sm 0:0:1 0;
+}
+.%type P2 44
+.%type P6 0
+.%type P3 0
+.%type S4 fc_control{
+__unnamed 0 77;
+}
+.%type S4 {
+__unnamed 0 78;
+_raw 0 80;
+}
+.%type S4 {
+ingress_len 0 79;
+egress_len 2 79;
+}
+.%type I2
+.%type A4 0
+.%type A1024 0
+.%type P3 0
+.%type S16 fc_lookup_result_t{
+payload_address 0 12;
+lock 8 84;
+result_code 12 86;
+}
+.%type S4 fc_lock_t{
+__unnamed 0 85;
+value 0 0;
+}
+.%type S4 {
+bucket_address 0:6:26 0;
+exclusive_lock 0:5:1 0;
+cam_entry 0:2:3 0;
+bucket_mu 0:0:2 0;
+}
+.%type E4 FC_LOOKUP_RESULT_CODE{
+FC_LOOKUP_ERROR 0;
+FC_LOOKUP_EXACT_MATCH 1;
+FC_LOOKUP_ENTRY_ADDED 2;
+FC_LOOKUP_ALLOCATE_ERROR 6;
+FC_LOOKUP_CAM_OVERFLOW 255;
+}
+.%type S4 replication_information{
+__unnamed 0 88;
+}
+.%type S4 {
+__unnamed 0 89;
+__raw 0 0;
+}
+.%type S4 {
+group 0 79;
+rid 2 79;
+}
+.%type P3 2
+.%type S16 gro_meta{
+drop 0 92;
+nbi 0 96;
+nfd 0 100;
+memq 0 104;
+}
+.%type S16 gro_meta_drop{
+__unnamed 0 93;
+}
+.%type S16 {
+__unnamed 0 94;
+__raw 0 95;
+}
+.%type S16 {
+unused 0:7:25 0;
+dest 0:3:4 0;
+type 0:0:3 0;
+ctm_addr_hi 4:24:8 0;
+unused2 4:9:15 0;
+ctm_pkt_num 4:0:9 0;
+mu_ring_addr_hi 8:24:8 0;
+mu_ring_num 8:0:24 0;
+mu_handle 12 0;
+}
+.%type A16 0
+.%type S16 gro_meta_nbi{
+__unnamed 0 97;
+}
+.%type S16 {
+__unnamed 0 98;
+__raw 0 99;
+}
+.%type S16 {
+unused 0:7:25 0;
+dest 0:3:4 0;
+type 0:0:3 0;
+addr_hi 4 0;
+addr_lo 8 0;
+prev_alu 12 0;
+}
+.%type A16 0
+.%type S16 gro_meta_nfd3{
+w0 0 101;
+w1 4 0;
+w2 8 0;
+w3 12 0;
+}
+.%type S4 gro_meta_nfd3_w0{
+__unnamed 0 102;
+}
+.%type S4 {
+__unnamed 0 103;
+__raw 0 0;
+}
+.%type S4 {
+isl 0:26:6 0;
+ctm_only 0:25:1 0;
+pktnum 0:16:9 0;
+split 0:14:2 0;
+off 0:7:7 0;
+pcie 0:3:4 0;
+type 0:0:3 0;
+}
+.%type S16 gro_meta_memq{
+w0 0 105;
+qdata 4 106;
+}
+.%type S4 gro_meta_memq_w0{
+q_hi 0:24:8 0;
+unused 0:17:7 0;
+qnum 0:7:10 0;
+dest 0:3:4 0;
+type 0:0:3 0;
+}
+.%type A12 0
+.%type S4 pktio_handle{
+__unnamed 0 108;
+}
+.%type S4 {
+__unnamed 0 109;
+__raw 0 0;
+}
+.%type S4 {
+ph_isl 0 2;
+pad 1 2;
+ph_pnum 2 48;
+}
+.%type S12 wq_handle{
+xph 0 107;
+mw0 4 0;
+mw1 8 0;
+}
