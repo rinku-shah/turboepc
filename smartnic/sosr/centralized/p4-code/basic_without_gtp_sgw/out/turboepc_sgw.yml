@@ -1,0 +1,1054 @@
+##########################################
+# Header instance definitions            #
+##########################################
+
+attach_accept:
+    fields:
+    -   epc_traffic_code: 8
+    -   sep1: 48
+    -   ue_key: 32
+    type: header
+
+auth_step_one:
+    fields:
+    -   imsi: 32
+    -   sep1: 48
+    -   ue_nw_capability: 8
+    -   sep2: 48
+    -   ksi_asme: 256
+    -   sep3: 48
+    -   sqn: 32
+    -   sep4: 48
+    -   tai: 64
+    type: header
+
+auth_step_three:
+    fields:
+    -   imsi: 32
+    -   sep1: 48
+    -   res: 64
+    type: header
+
+data:
+    fields:
+    -   epc_traffic_code: 8
+    -   sep: 48
+    type: header
+
+detach_req:
+    fields:
+    -   ue_ip: 32
+    -   sep1: 48
+    -   ue_teid: 32
+    -   sep2: 48
+    -   sgw_teid: 32
+    -   sep3: 48
+    -   ue_num: 32
+    type: header
+
+errors:
+    type: enum
+    values:
+    -   NoError: 1
+    -   PacketTooShort: 2
+    -   NoMatch: 3
+    -   StackOutOfBounds: 4
+    -   HeaderTooShort: 5
+    -   ParserTimeout: 6
+
+ethernet:
+    fields:
+    -   dstAddr: 48
+    -   srcAddr: 48
+    -   etherType: 16
+    type: header
+
+ingress::scalars:
+    fields:
+    -   hasReturned_0: 1
+    -   _padding: 7
+    type: metadata
+
+ingress::uekey_guti:
+    fields:
+    -   ue_key: 32
+    -   guti: 32
+    type: header
+
+ingress::uekey_uestate:
+    fields:
+    -   ue_key: 32
+    -   ue_state: 8
+    type: header
+
+initial_ctxt_setup_req:
+    fields:
+    -   epc_traffic_code: 8
+    -   sep1: 48
+    -   sgw_teid: 32
+    type: header
+
+initial_ctxt_setup_resp:
+    fields:
+    -   ue_teid: 32
+    -   sep1: 48
+    -   ue_key: 32
+    -   sep2: 48
+    -   ue_ip: 32
+    type: header
+
+ipv4:
+    calculated_fields:
+    -   condition: valid(ipv4)
+        field: hdrChecksum
+        func: calc
+        type: verify
+    -   condition: valid(ipv4)
+        field: hdrChecksum
+        func: calc_0
+        type: update
+    fields:
+    -   version: 4
+    -   ihl: 4
+    -   diffserv: 8
+    -   totalLen: 16
+    -   identification: 16
+    -   flags: 3
+    -   fragOffset: 13
+    -   ttl: 8
+    -   protocol: 8
+    -   hdrChecksum: 16
+    -   srcAddr: 32
+    -   dstAddr: 32
+    type: header
+
+kv:
+    fields:
+    -   key1: 128
+    -   value: 128
+    type: header
+
+nas_step_two:
+    fields:
+    -   encrypted_hash: 160
+    -   sep1: 48
+    -   imsi: 32
+    type: header
+
+offload_initial_ctxt_setup_resp:
+    fields:
+    -   ue_teid: 32
+    -   sep1: 48
+    -   ue_key: 32
+    -   sep2: 48
+    -   ue_ip: 32
+    -   sep3: 48
+    -   sgw_teid: 32
+    type: header
+
+offload_ue_service_req:
+    fields:
+    -   ue_key: 32
+    -   sep1: 48
+    -   ksi_asme: 32
+    -   sep2: 48
+    -   ue_ip: 32
+    -   sep3: 48
+    -   sgw_teid: 32
+    type: header
+
+packet_in:
+    fields:
+    -   ingress_port: 16
+    type: header
+
+packet_out:
+    fields:
+    -   egress_port: 16
+    type: header
+
+send_apn:
+    fields:
+    -   apn: 64
+    -   sep1: 48
+    -   key: 32
+    type: header
+
+send_ue_teid:
+    fields:
+    -   ue_teid: 32
+    -   sep1: 48
+    -   key: 32
+    type: header
+
+standard_metadata:
+    fields:
+    -   ingress_port: 16
+    -   packet_length: 14
+    -   egress_spec: 16
+    -   egress_port: 16
+    -   egress_instance: 10
+    -   instance_type: 4
+    -   clone_spec: 32
+    -   parser_error_location: 8
+    -   parser_status: 3
+    -   checksum_error: 1
+    type: metadata
+
+tcp:
+    fields:
+    -   src_port: 16
+    -   dst_port: 16
+    -   seq_no: 32
+    -   ack_no: 32
+    -   data_offset: 4
+    -   res: 3
+    -   ecn: 3
+    -   ctrl: 6
+    -   window: 16
+    -   checksum: 16
+    -   urgent_ptr: 16
+    type: header
+
+tmpvar:
+    fields:
+    -   tmpUdpPort: 16
+    type: header
+
+udp:
+    fields:
+    -   srcPort: 16
+    -   dstPort: 16
+    -   length_: 16
+    -   checksum: 16
+    type: header
+
+ue_context_rel_command:
+    fields:
+    -   epc_traffic_code: 8
+    -   sep1: 48
+    type: header
+
+ue_context_rel_req:
+    fields:
+    -   ue_ip: 32
+    -   sep1: 48
+    -   ue_teid: 32
+    -   sep2: 48
+    -   sgw_teid: 32
+    -   sep3: 48
+    -   ue_num: 32
+    type: header
+
+ue_service_req:
+    fields:
+    -   ue_key: 32
+    -   sep1: 48
+    -   ksi_asme: 32
+    -   sep2: 48
+    -   ue_ip: 32
+    type: header
+
+uekey_sgwteid:
+    fields:
+    -   ue_key: 32
+    -   sgw_teid: 32
+    type: header
+
+vlan:
+    fields:
+    -   pcp: 3
+    -   dei: 1
+    -   vid: 12
+    -   vlan_type: 16
+    type: header
+
+
+##########################################
+# Field list definitions                 #
+##########################################
+
+field_list_1:
+    fields:
+    - ipv4.version
+    - ipv4.ihl
+    - ipv4.diffserv
+    - ipv4.totalLen
+    - ipv4.identification
+    - ipv4.flags
+    - ipv4.fragOffset
+    - ipv4.ttl
+    - ipv4.protocol
+    - ipv4.srcAddr
+    - ipv4.dstAddr
+    type: field_list
+
+
+##########################################
+# Field list calculations                #
+##########################################
+
+calc:
+    algorithm: csum16
+    inputs:
+    - field_list_1
+    output_width: 16
+    type: field_list_calculation
+
+calc_0:
+    algorithm: csum16
+    inputs:
+    - field_list_1
+    output_width: 16
+    type: field_list_calculation
+
+
+##########################################
+# Parse states                           #
+##########################################
+
+parse_auth_step_one:
+    implementation: extract(auth_step_one);
+    src_filename: include/parser.p4
+    src_lineno: 82
+    type: parse_state
+
+parse_auth_step_three:
+    implementation: extract(auth_step_three);
+    src_filename: include/parser.p4
+    src_lineno: 87
+    type: parse_state
+
+parse_detach_req:
+    implementation: extract(detach_req);
+    src_filename: include/parser.p4
+    src_lineno: 107
+    type: parse_state
+
+parse_initial_ctxt_setup_resp:
+    implementation: extract(initial_ctxt_setup_resp);
+    src_filename: include/parser.p4
+    src_lineno: 122
+    type: parse_state
+
+parse_ipv4:
+    implementation: extract(ipv4);
+    select_value:
+    - ipv4.protocol
+    src_filename: include/parser.p4
+    src_lineno: 36
+    type: parse_state
+
+parse_nas_step_two:
+    implementation: extract(nas_step_two);
+    src_filename: include/parser.p4
+    src_lineno: 92
+    type: parse_state
+
+parse_send_apn:
+    implementation: extract(send_apn);
+    src_filename: include/parser.p4
+    src_lineno: 97
+    type: parse_state
+
+parse_send_ue_teid:
+    implementation: extract(send_ue_teid);
+    src_filename: include/parser.p4
+    src_lineno: 102
+    type: parse_state
+
+parse_tcp:
+    implementation: extract(tcp);
+    src_filename: include/parser.p4
+    src_lineno: 55
+    type: parse_state
+
+parse_udp:
+    implementation: |-
+        extract(udp);
+        extract(data);
+    select_value:
+    - data.epc_traffic_code
+    src_filename: include/parser.p4
+    src_lineno: 45
+    type: parse_state
+
+parse_ue_context_release:
+    implementation: extract(ue_context_rel_req);
+    src_filename: include/parser.p4
+    src_lineno: 112
+    type: parse_state
+
+parse_ue_service_req:
+    implementation: extract(ue_service_req);
+    src_filename: include/parser.p4
+    src_lineno: 117
+    type: parse_state
+
+start:
+    implementation: extract(ethernet);
+    select_value:
+    - ethernet.etherType
+    src_filename: include/parser.p4
+    src_lineno: 14
+    type: parse_state
+
+
+##########################################
+# Parser                                 #
+##########################################
+
+parser:
+    format: dot
+    implementation: |-
+        digraph {
+            start -> parse_ipv4 [value="0x0800", mask="none", order="0"]
+            start -> exit [value="default", mask="none", order="1"]
+            parse_ipv4 -> parse_tcp [value="0x06", mask="none", order="0"]
+            parse_ipv4 -> parse_udp [value="0x11", mask="none", order="1"]
+            parse_ipv4 -> exit [value="default", mask="none", order="2"]
+            parse_tcp -> exit [value="default", mask="none", order="0"]
+            parse_udp -> parse_auth_step_one [value="0x01", mask="none", order="0"]
+            parse_udp -> parse_auth_step_three [value="0x03", mask="none", order="1"]
+            parse_udp -> parse_nas_step_two [value="0x14", mask="none", order="2"]
+            parse_udp -> parse_send_apn [value="0x05", mask="none", order="3"]
+            parse_udp -> parse_send_ue_teid [value="0x07", mask="none", order="4"]
+            parse_udp -> parse_detach_req [value="0x09", mask="none", order="5"]
+            parse_udp -> parse_ue_context_release [value="0x0e", mask="none", order="6"]
+            parse_udp -> parse_ue_service_req [value="0x11", mask="none", order="7"]
+            parse_udp -> parse_initial_ctxt_setup_resp [value="0x13", mask="none", order="8"]
+            parse_udp -> exit [value="default", mask="none", order="9"]
+            parse_auth_step_one -> exit [value="default", mask="none", order="0"]
+            parse_auth_step_three -> exit [value="default", mask="none", order="0"]
+            parse_nas_step_two -> exit [value="default", mask="none", order="0"]
+            parse_send_apn -> exit [value="default", mask="none", order="0"]
+            parse_send_ue_teid -> exit [value="default", mask="none", order="0"]
+            parse_detach_req -> exit [value="default", mask="none", order="0"]
+            parse_ue_context_release -> exit [value="default", mask="none", order="0"]
+            parse_ue_service_req -> exit [value="default", mask="none", order="0"]
+            parse_initial_ctxt_setup_resp -> exit [value="default", mask="none", order="0"]
+        }
+    start_state: start
+    type: parser
+
+
+##########################################
+# Action Expressions                     #
+##########################################
+
+_expression_populate_ip_op_tun_s2_downlink_0:
+    expression: ((((ipv4.ttl) + (0xff))) & (0xff))
+    format: bracketed_expr
+    type: expression
+
+_expression_populate_ip_op_tun_s2_uplink_0:
+    expression: ((((ipv4.ttl) + (0xff))) & (0xff))
+    format: bracketed_expr
+    type: expression
+
+
+##########################################
+# Action sets                            #
+##########################################
+
+ingress::act:
+    implementation: |-
+        modify_field(standard_metadata.egress_spec, 0x0001);
+        modify_field(ingress::scalars.hasReturned_0, 1);
+    src_filename: ''
+    src_lineno: 1
+    type: action
+
+ingress::act_0:
+    implementation: |-
+        modify_field(standard_metadata.egress_spec, 0x0000);
+        modify_field(ingress::scalars.hasReturned_0, 1);
+    src_filename: ''
+    src_lineno: 1
+    type: action
+
+ingress::act_1:
+    implementation: |-
+        modify_field(standard_metadata.egress_spec, 0x0001);
+        modify_field(ingress::scalars.hasReturned_0, 1);
+    src_filename: ''
+    src_lineno: 1
+    type: action
+
+ingress::act_10:
+    implementation: |-
+        modify_field(standard_metadata.egress_spec, 0x0001);
+        modify_field(ingress::scalars.hasReturned_0, 1);
+    src_filename: ''
+    src_lineno: 1
+    type: action
+
+ingress::act_2:
+    implementation: |-
+        modify_field(standard_metadata.egress_spec, 0x0000);
+        modify_field(ingress::scalars.hasReturned_0, 1);
+    src_filename: ''
+    src_lineno: 1
+    type: action
+
+ingress::act_3:
+    implementation: |-
+        modify_field(standard_metadata.egress_spec, 0x0001);
+        modify_field(ingress::scalars.hasReturned_0, 1);
+    src_filename: ''
+    src_lineno: 1
+    type: action
+
+ingress::act_4:
+    implementation: modify_field(ingress::scalars.hasReturned_0, 0);
+    src_filename: ''
+    src_lineno: 1
+    type: action
+
+ingress::act_5:
+    implementation: modify_field(ingress::scalars.hasReturned_0, 1);
+    src_filename: ''
+    src_lineno: 1
+    type: action
+
+ingress::act_6:
+    implementation: |-
+        modify_field(standard_metadata.egress_spec, 0x0300);
+        add_header(packet_in);
+        modify_field(packet_in.ingress_port, standard_metadata.ingress_port);
+        modify_field(ingress::scalars.hasReturned_0, 1);
+    src_filename: ''
+    src_lineno: 1
+    type: action
+
+ingress::act_7:
+    implementation: |-
+        modify_field(standard_metadata.egress_spec, 0x0300);
+        modify_field(ingress::scalars.hasReturned_0, 1);
+    src_filename: ''
+    src_lineno: 1
+    type: action
+
+ingress::act_8:
+    implementation: |-
+        modify_field(standard_metadata.egress_spec, 0x0000);
+        modify_field(ingress::scalars.hasReturned_0, 1);
+    src_filename: ''
+    src_lineno: 1
+    type: action
+
+ingress::act_9:
+    implementation: |-
+        modify_field(standard_metadata.egress_spec, 0x0300);
+        modify_field(ingress::scalars.hasReturned_0, 1);
+    src_filename: ''
+    src_lineno: 1
+    type: action
+
+ingress::drop_act:
+    implementation: drop();
+    src_filename: epc_basic_sgw_without_gtp.p4
+    src_lineno: 187
+    type: action
+
+ingress::fwd_act:
+    implementation: modify_field(standard_metadata.egress_spec, prt);
+    parameter_list:
+    -   prt: 16
+    src_filename: epc_basic_sgw_without_gtp.p4
+    src_lineno: 183
+    type: action
+
+ingress::populate_ip_op_tun_s2_downlink:
+    implementation: |-
+        modify_field(standard_metadata.egress_spec, egress_port_s2);
+        modify_field(ipv4.ttl, _expression_populate_ip_op_tun_s2_downlink_0);
+    parameter_list:
+    -   egress_port_s2: 16
+    src_filename: epc_basic_sgw_without_gtp.p4
+    src_lineno: 49
+    type: action
+
+ingress::populate_ip_op_tun_s2_uplink:
+    implementation: |-
+        modify_field(standard_metadata.egress_spec, egress_port_s2);
+        modify_field(ipv4.ttl, _expression_populate_ip_op_tun_s2_uplink_0);
+    parameter_list:
+    -   egress_port_s2: 16
+    src_filename: epc_basic_sgw_without_gtp.p4
+    src_lineno: 25
+    type: action
+
+ingress::populate_uekey_guti_map:
+    implementation: modify_field(ingress::uekey_guti.guti, guti);
+    parameter_list:
+    -   guti: 32
+    src_filename: epc_basic_sgw_without_gtp.p4
+    src_lineno: 88
+    type: action
+
+ingress::populate_uekey_uestate_map:
+    implementation: modify_field(ingress::uekey_uestate.ue_state, uestate);
+    parameter_list:
+    -   uestate: 8
+    src_filename: epc_basic_sgw_without_gtp.p4
+    src_lineno: 72
+    type: action
+
+
+##########################################
+# Ingress and Egress tables              #
+##########################################
+
+ingress::arp_tbl:
+    allowed_actions:
+    - ingress::fwd_act
+    - ingress::drop_act
+    match_on:
+        standard_metadata.ingress_port: exact
+    max_entries: 65001
+    src_filename: epc_basic_sgw_without_gtp.p4
+    src_lineno: 191
+    type: table
+
+ingress::ip_op_tun_s2_downlink:
+    allowed_actions:
+    - ingress::populate_ip_op_tun_s2_downlink
+    match_on:
+        ue_service_req.ue_key: exact
+    max_entries: 65001
+    src_filename: epc_basic_sgw_without_gtp.p4
+    src_lineno: 53
+    type: table
+
+ingress::ip_op_tun_s2_uplink:
+    allowed_actions:
+    - ingress::populate_ip_op_tun_s2_uplink
+    match_on:
+        ue_service_req.ue_key: exact
+    max_entries: 65001
+    src_filename: epc_basic_sgw_without_gtp.p4
+    src_lineno: 30
+    type: table
+
+ingress::tbl_act:
+    allowed_actions:
+    - ingress::act_4
+    default_entry:
+        action: ingress::act_4
+        const: true
+    max_entries: 1025
+    src_filename: ''
+    src_lineno: 1
+    type: table
+
+ingress::tbl_act_0:
+    allowed_actions:
+    - ingress::act
+    default_entry:
+        action: ingress::act
+        const: true
+    max_entries: 1025
+    src_filename: ''
+    src_lineno: 1
+    type: table
+
+ingress::tbl_act_1:
+    allowed_actions:
+    - ingress::act_0
+    default_entry:
+        action: ingress::act_0
+        const: true
+    max_entries: 1025
+    src_filename: ''
+    src_lineno: 1
+    type: table
+
+ingress::tbl_act_10:
+    allowed_actions:
+    - ingress::act_10
+    default_entry:
+        action: ingress::act_10
+        const: true
+    max_entries: 1025
+    src_filename: ''
+    src_lineno: 1
+    type: table
+
+ingress::tbl_act_2:
+    allowed_actions:
+    - ingress::act_1
+    default_entry:
+        action: ingress::act_1
+        const: true
+    max_entries: 1025
+    src_filename: ''
+    src_lineno: 1
+    type: table
+
+ingress::tbl_act_3:
+    allowed_actions:
+    - ingress::act_2
+    default_entry:
+        action: ingress::act_2
+        const: true
+    max_entries: 1025
+    src_filename: ''
+    src_lineno: 1
+    type: table
+
+ingress::tbl_act_4:
+    allowed_actions:
+    - ingress::act_3
+    default_entry:
+        action: ingress::act_3
+        const: true
+    max_entries: 1025
+    src_filename: ''
+    src_lineno: 1
+    type: table
+
+ingress::tbl_act_5:
+    allowed_actions:
+    - ingress::act_5
+    default_entry:
+        action: ingress::act_5
+        const: true
+    max_entries: 1025
+    src_filename: ''
+    src_lineno: 1
+    type: table
+
+ingress::tbl_act_6:
+    allowed_actions:
+    - ingress::act_6
+    default_entry:
+        action: ingress::act_6
+        const: true
+    max_entries: 1025
+    src_filename: ''
+    src_lineno: 1
+    type: table
+
+ingress::tbl_act_7:
+    allowed_actions:
+    - ingress::act_7
+    default_entry:
+        action: ingress::act_7
+        const: true
+    max_entries: 1025
+    src_filename: ''
+    src_lineno: 1
+    type: table
+
+ingress::tbl_act_8:
+    allowed_actions:
+    - ingress::act_8
+    default_entry:
+        action: ingress::act_8
+        const: true
+    max_entries: 1025
+    src_filename: ''
+    src_lineno: 1
+    type: table
+
+ingress::tbl_act_9:
+    allowed_actions:
+    - ingress::act_9
+    default_entry:
+        action: ingress::act_9
+        const: true
+    max_entries: 1025
+    src_filename: ''
+    src_lineno: 1
+    type: table
+
+ingress::uekey_guti_map:
+    allowed_actions:
+    - ingress::populate_uekey_guti_map
+    match_on:
+        ingress::uekey_guti.ue_key: exact
+    max_entries: 65001
+    src_filename: epc_basic_sgw_without_gtp.p4
+    src_lineno: 92
+    type: table
+
+ingress::uekey_uestate_map:
+    allowed_actions:
+    - ingress::populate_uekey_uestate_map
+    match_on:
+        ingress::uekey_uestate.ue_key: exact
+    max_entries: 65001
+    src_filename: epc_basic_sgw_without_gtp.p4
+    src_lineno: 76
+    type: table
+
+
+##########################################
+# Ingress conditionals sets              #
+##########################################
+
+_condition_0:
+    condition: ((standard_metadata.ingress_port) == (768))
+    format: bracketed_expr
+    src_filename: epc_basic_sgw_without_gtp.p4
+    src_lineno: 204
+    type: conditional
+
+_condition_1:
+    condition: ((((ethernet.etherType) == (2054))) and (((ethernet.dstAddr) == (73300775185))))
+    format: bracketed_expr
+    src_filename: epc_basic_sgw_without_gtp.p4
+    src_lineno: 213
+    type: conditional
+
+_condition_10:
+    condition: ((ipv4.protocol) == (17))
+    format: bracketed_expr
+    src_filename: epc_basic_sgw_without_gtp.p4
+    src_lineno: 249
+    type: conditional
+
+_condition_11:
+    condition: (not((ingress::scalars.hasReturned_0)))
+    format: bracketed_expr
+    src_filename: ''
+    src_lineno: 1
+    type: conditional
+
+_condition_12:
+    condition: ((ipv4.protocol) == (6))
+    format: bracketed_expr
+    src_filename: epc_basic_sgw_without_gtp.p4
+    src_lineno: 277
+    type: conditional
+
+_condition_13:
+    condition: ((((standard_metadata.ingress_port) == (1))) and (((ipv4.dstAddr) ==
+        (3232236035))))
+    format: bracketed_expr
+    src_filename: epc_basic_sgw_without_gtp.p4
+    src_lineno: 281
+    type: conditional
+
+_condition_14:
+    condition: ((((standard_metadata.ingress_port) == (1))) and (((ipv4.dstAddr) ==
+        (3232236036))))
+    format: bracketed_expr
+    src_filename: epc_basic_sgw_without_gtp.p4
+    src_lineno: 286
+    type: conditional
+
+_condition_15:
+    condition: ((((standard_metadata.ingress_port) == (0))) and (((ipv4.dstAddr) ==
+        (3232236035))))
+    format: bracketed_expr
+    src_filename: epc_basic_sgw_without_gtp.p4
+    src_lineno: 292
+    type: conditional
+
+_condition_16:
+    condition: ((((standard_metadata.ingress_port) == (0))) and (((ipv4.dstAddr) ==
+        (3232236034))))
+    format: bracketed_expr
+    src_filename: epc_basic_sgw_without_gtp.p4
+    src_lineno: 297
+    type: conditional
+
+_condition_17:
+    condition: (not((ingress::scalars.hasReturned_0)))
+    format: bracketed_expr
+    src_filename: ''
+    src_lineno: 1
+    type: conditional
+
+_condition_18:
+    condition: ((ipv4.ttl) == (250))
+    format: bracketed_expr
+    src_filename: epc_basic_sgw_without_gtp.p4
+    src_lineno: 305
+    type: conditional
+
+_condition_2:
+    condition: ((((ethernet.etherType) == (2054))) and (((ethernet.dstAddr) == (219902325555))))
+    format: bracketed_expr
+    src_filename: epc_basic_sgw_without_gtp.p4
+    src_lineno: 218
+    type: conditional
+
+_condition_3:
+    condition: ((((ipv4.protocol) == (6))) and (((ipv4.dstAddr) == (3232236034))))
+    format: bracketed_expr
+    src_filename: epc_basic_sgw_without_gtp.p4
+    src_lineno: 223
+    type: conditional
+
+_condition_4:
+    condition: ((((ipv4.protocol) == (6))) and (((ipv4.dstAddr) == (3232236036))))
+    format: bracketed_expr
+    src_filename: epc_basic_sgw_without_gtp.p4
+    src_lineno: 229
+    type: conditional
+
+_condition_5:
+    condition: (not((ingress::scalars.hasReturned_0)))
+    format: bracketed_expr
+    src_filename: ''
+    src_lineno: 1
+    type: conditional
+
+_condition_6:
+    condition: (not((ingress::scalars.hasReturned_0)))
+    format: bracketed_expr
+    src_filename: ''
+    src_lineno: 1
+    type: conditional
+
+_condition_7:
+    condition: ((ethernet.etherType) == (2054))
+    format: bracketed_expr
+    src_filename: epc_basic_sgw_without_gtp.p4
+    src_lineno: 241
+    type: conditional
+
+_condition_8:
+    condition: (not((ingress::scalars.hasReturned_0)))
+    format: bracketed_expr
+    src_filename: ''
+    src_lineno: 1
+    type: conditional
+
+_condition_9:
+    condition: (valid(ipv4))
+    format: bracketed_expr
+    src_filename: epc_basic_sgw_without_gtp.p4
+    src_lineno: 247
+    type: conditional
+
+
+##########################################
+# Ingress control flow                   #
+##########################################
+
+ingress_flow:
+    doc: control flow for ingress
+    format: dot
+    implementation: |-
+        digraph {
+            "ingress::tbl_act" -> "_condition_0" [action = always]
+            "_condition_0" -> "_condition_6" [condition = false]
+            "_condition_0" -> "_condition_1" [condition = true]
+            "_condition_6" -> "_condition_8" [condition = false]
+            "_condition_6" -> "_condition_7" [condition = true]
+            "_condition_8" -> "exit_control_flow" [condition = false]
+            "_condition_8" -> "_condition_9" [condition = true]
+            "_condition_9" -> "exit_control_flow" [condition = false]
+            "_condition_9" -> "_condition_10" [condition = true]
+            "_condition_10" -> "_condition_11" [condition = false]
+            "_condition_10" -> "ingress::tbl_act_6" [condition = true]
+            "_condition_11" -> "_condition_17" [condition = false]
+            "_condition_11" -> "_condition_12" [condition = true]
+            "_condition_17" -> "exit_control_flow" [condition = false]
+            "_condition_17" -> "_condition_18" [condition = true]
+            "_condition_18" -> "exit_control_flow" [condition = false]
+            "_condition_18" -> "ingress::uekey_uestate_map" [condition = true]
+            "ingress::uekey_uestate_map" -> "ingress::uekey_guti_map" [action = always]
+            "ingress::uekey_guti_map" -> "ingress::ip_op_tun_s2_uplink" [action = always]
+            "ingress::ip_op_tun_s2_uplink" -> "ingress::ip_op_tun_s2_downlink" [action = always]
+            "ingress::ip_op_tun_s2_downlink" -> "exit_control_flow" [action = always]
+            "_condition_12" -> "_condition_17" [condition = false]
+            "_condition_12" -> "_condition_13" [condition = true]
+            "_condition_13" -> "_condition_14" [condition = false]
+            "_condition_13" -> "ingress::tbl_act_7" [condition = true]
+            "_condition_14" -> "_condition_15" [condition = false]
+            "_condition_14" -> "ingress::tbl_act_8" [condition = true]
+            "_condition_15" -> "_condition_16" [condition = false]
+            "_condition_15" -> "ingress::tbl_act_9" [condition = true]
+            "_condition_16" -> "_condition_17" [condition = false]
+            "_condition_16" -> "ingress::tbl_act_10" [condition = true]
+            "ingress::tbl_act_10" -> "_condition_17" [action = always]
+            "ingress::tbl_act_9" -> "_condition_17" [action = always]
+            "ingress::tbl_act_8" -> "_condition_17" [action = always]
+            "ingress::tbl_act_7" -> "_condition_17" [action = always]
+            "ingress::tbl_act_6" -> "_condition_11" [action = always]
+            "_condition_7" -> "_condition_8" [condition = false]
+            "_condition_7" -> "ingress::arp_tbl" [condition = true]
+            "ingress::arp_tbl" -> "ingress::tbl_act_5" [action = always]
+            "ingress::tbl_act_5" -> "_condition_8" [action = always]
+            "_condition_1" -> "_condition_2" [condition = false]
+            "_condition_1" -> "ingress::tbl_act_0" [condition = true]
+            "_condition_2" -> "_condition_3" [condition = false]
+            "_condition_2" -> "ingress::tbl_act_1" [condition = true]
+            "_condition_3" -> "_condition_4" [condition = false]
+            "_condition_3" -> "ingress::tbl_act_2" [condition = true]
+            "_condition_4" -> "_condition_5" [condition = false]
+            "_condition_4" -> "ingress::tbl_act_3" [condition = true]
+            "_condition_5" -> "_condition_6" [condition = false]
+            "_condition_5" -> "ingress::tbl_act_4" [condition = true]
+            "ingress::tbl_act_4" -> "_condition_6" [action = always]
+            "ingress::tbl_act_3" -> "_condition_5" [action = always]
+            "ingress::tbl_act_2" -> "_condition_5" [action = always]
+            "ingress::tbl_act_1" -> "_condition_5" [action = always]
+            "ingress::tbl_act_0" -> "_condition_5" [action = always]
+        }
+    start_state: ingress::tbl_act
+    type: control_flow
+
+
+##########################################
+# Deparsers                              #
+##########################################
+
+deparser:
+    order:
+    - packet_in
+    - packet_out
+    - ethernet
+    - ipv4
+    - tcp
+    - udp
+    - data
+    - auth_step_one
+    - auth_step_three
+    - nas_step_two
+    - send_apn
+    - send_ue_teid
+    - detach_req
+    - ue_context_rel_req
+    - ue_service_req
+    - initial_ctxt_setup_resp
+    - offload_ue_service_req
+    - offload_initial_ctxt_setup_resp
+    - ue_context_rel_command
+    - initial_ctxt_setup_req
+    - attach_accept
+    type: deparser
+
+
+##########################################
+# Processor layout                       #
+##########################################
+
+layout:
+    format: list
+    implementation:
+    - parser
+    - ingress
+    type: processor_layout
+
+
+##########################################
+# Source info                            #
+##########################################
+
+source_info:
+    date: 2019/10/25 14:32:04
+    output_file: out/turboepc_sgw.yml
+    p4_version: '16'
+    source_files:
+    - epc_basic_sgw_without_gtp.p4
+    - ''
+    - /opt/netronome/p4/include/16/p4include/core.p4
+    type: source_info
+
+

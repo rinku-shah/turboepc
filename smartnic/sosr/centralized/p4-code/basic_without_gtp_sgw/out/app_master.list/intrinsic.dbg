@@ -1,0 +1,387 @@
+.%scope file "/opt/netronome/p4/components/nfp_pif/me/apps/pif_app_nfd/include/config.h"
+.%scope function _ME __ME "/opt/netronome/components/standardlibrary/microc/src/intrinsic.c" 28 49
+.%var current_me 0 current_me_83 LIX
+.%var current_island 0 current_island_83 LIX
+.%scope end
+.%scope function _island __island "/opt/netronome/components/standardlibrary/microc/src/intrinsic.c" 54 72
+.%var current_me 0 current_me_85 LIX
+.%var current_island 0 current_island_85 LIX
+.%scope end
+.%scope function assert_range _assert_range "/opt/netronome/components/standardlibrary/microc/src/intrinsic.c" 76 90
+.%arg value 0 value_87_V$21
+.%arg min_value 0 min_value_87_V$22
+.%arg max_value 0 max_value_87_V$23
+.%scope end
+.%scope function crc_iscsi_le _crc_iscsi_le "/opt/netronome/components/standardlibrary/microc/src/intrinsic.c" 96 138
+.%arg data 0 data_91_V$26
+.%arg bspec 1 bspec_91_V$27
+.%var result 0 result_91 LIX
+.%scope end
+.%scope function crc_iscsi_be _crc_iscsi_be "/opt/netronome/components/standardlibrary/microc/src/intrinsic.c" 144 186
+.%arg data 0 data_100_V$2c
+.%arg bspec 1 bspec_100_V$2d
+.%var result 0 result_100 LIX
+.%scope end
+.%scope function crc_10_le _crc_10_le "/opt/netronome/components/standardlibrary/microc/src/intrinsic.c" 192 234
+.%arg data 0 data_109_V$30
+.%arg bspec 1 bspec_109_V$31
+.%var result 0 result_109 LIX
+.%scope end
+.%scope function crc_10_be _crc_10_be "/opt/netronome/components/standardlibrary/microc/src/intrinsic.c" 240 282
+.%arg data 0 data_118_V$34
+.%arg bspec 1 bspec_118_V$35
+.%var result 0 result_118 LIX
+.%scope end
+.%scope function crc_5_le _crc_5_le "/opt/netronome/components/standardlibrary/microc/src/intrinsic.c" 288 330
+.%arg data 0 data_127_V$38
+.%arg bspec 1 bspec_127_V$39
+.%var result 0 result_127 LIX
+.%scope end
+.%scope function crc_5_be _crc_5_be "/opt/netronome/components/standardlibrary/microc/src/intrinsic.c" 336 378
+.%arg data 0 data_136_V$3c
+.%arg bspec 1 bspec_136_V$3d
+.%var result 0 result_136 LIX
+.%scope end
+.%scope function crc_iscsi_le_bit_swap _crc_iscsi_le_bit_swap "/opt/netronome/components/standardlibrary/microc/src/intrinsic.c" 384 426
+.%arg data 0 data_145_V$40
+.%arg bspec 1 bspec_145_V$41
+.%var result 0 result_145 LIX
+.%scope end
+.%scope function crc_iscsi_be_bit_swap _crc_iscsi_be_bit_swap "/opt/netronome/components/standardlibrary/microc/src/intrinsic.c" 431 473
+.%arg data 0 data_154_V$44
+.%arg bspec 1 bspec_154_V$45
+.%var result 0 result_154 LIX
+.%scope end
+.%scope function crc_10_le_bit_swap _crc_10_le_bit_swap "/opt/netronome/components/standardlibrary/microc/src/intrinsic.c" 478 520
+.%arg data 0 data_163_V$48
+.%arg bspec 1 bspec_163_V$49
+.%var result 0 result_163 LIX
+.%scope end
+.%scope function crc_10_be_bit_swap _crc_10_be_bit_swap "/opt/netronome/components/standardlibrary/microc/src/intrinsic.c" 525 567
+.%arg data 0 data_172_V$4c
+.%arg bspec 1 bspec_172_V$4d
+.%var result 0 result_172 LIX
+.%scope end
+.%scope function crc_5_le_bit_swap _crc_5_le_bit_swap "/opt/netronome/components/standardlibrary/microc/src/intrinsic.c" 572 614
+.%arg data 0 data_181_V$50
+.%arg bspec 1 bspec_181_V$51
+.%var result 0 result_181 LIX
+.%scope end
+.%scope function crc_5_be_bit_swap _crc_5_be_bit_swap "/opt/netronome/components/standardlibrary/microc/src/intrinsic.c" 619 661
+.%arg data 0 data_190_V$54
+.%arg bspec 1 bspec_190_V$55
+.%var result 0 result_190 LIX
+.%scope end
+.%scope function pop_count _pop_count "/opt/netronome/components/standardlibrary/microc/src/intrinsic.c" 667 683
+.%arg data 0 data_199_V$58
+.%var result 0 result_199 LIX
+.%scope end
+.%scope function rotr _rotr "/opt/netronome/components/standardlibrary/microc/src/intrinsic.c" 687 702
+.%arg value 0 value_201_V$5b
+.%arg shift 2 shift_201_V$5c
+.%var result 0 result_201 LIX
+.%scope end
+.%scope function rotl _rotl "/opt/netronome/components/standardlibrary/microc/src/intrinsic.c" 705 720
+.%arg value 0 value_204_V$61
+.%arg shift 2 shift_204_V$62
+.%var result 0 result_204 LIX
+.%scope end
+.%scope function crc_16_le _crc_16_le "/opt/netronome/components/standardlibrary/microc/src/intrinsic.c" 725 767
+.%arg data 0 data_207_V$65
+.%arg bspec 1 bspec_207_V$66
+.%var result 0 result_207 LIX
+.%scope end
+.%scope function crc_16_be _crc_16_be "/opt/netronome/components/standardlibrary/microc/src/intrinsic.c" 772 814
+.%arg data 0 data_216_V$69
+.%arg bspec 1 bspec_216_V$6a
+.%var result 0 result_216 LIX
+.%scope end
+.%scope function crc_32_le _crc_32_le "/opt/netronome/components/standardlibrary/microc/src/intrinsic.c" 820 862
+.%arg data 0 data_225_V$6d
+.%arg bspec 1 bspec_225_V$6e
+.%var result 0 result_225 LIX
+.%scope end
+.%scope function crc_32_be _crc_32_be "/opt/netronome/components/standardlibrary/microc/src/intrinsic.c" 868 910
+.%arg data 0 data_234_V$71
+.%arg bspec 1 bspec_234_V$72
+.%var result 0 result_234 LIX
+.%scope end
+.%scope function crc_ccitt_le _crc_ccitt_le "/opt/netronome/components/standardlibrary/microc/src/intrinsic.c" 916 958
+.%arg data 0 data_243_V$75
+.%arg bspec 1 bspec_243_V$76
+.%var result 0 result_243 LIX
+.%scope end
+.%scope function crc_ccitt_be _crc_ccitt_be "/opt/netronome/components/standardlibrary/microc/src/intrinsic.c" 964 1006
+.%arg data 0 data_252_V$79
+.%arg bspec 1 bspec_252_V$7a
+.%var result 0 result_252 LIX
+.%scope end
+.%scope function crc_none_le _crc_none_le "/opt/netronome/components/standardlibrary/microc/src/intrinsic.c" 1016 1058
+.%arg data 0 data_261_V$7d
+.%arg bspec 1 bspec_261_V$7e
+.%var result 0 result_261 LIX
+.%scope end
+.%scope function crc_none_be _crc_none_be "/opt/netronome/components/standardlibrary/microc/src/intrinsic.c" 1063 1105
+.%arg data 0 data_270_V$81
+.%arg bspec 1 bspec_270_V$82
+.%var result 0 result_270 LIX
+.%scope end
+.%scope function crc_16_le_bit_swap _crc_16_le_bit_swap "/opt/netronome/components/standardlibrary/microc/src/intrinsic.c" 1110 1152
+.%arg data 0 data_279_V$85
+.%arg bspec 1 bspec_279_V$86
+.%var result 0 result_279 LIX
+.%scope end
+.%scope function crc_16_be_bit_swap _crc_16_be_bit_swap "/opt/netronome/components/standardlibrary/microc/src/intrinsic.c" 1157 1199
+.%arg data 0 data_288_V$89
+.%arg bspec 1 bspec_288_V$8a
+.%var result 0 result_288 LIX
+.%scope end
+.%scope function crc_32_le_bit_swap _crc_32_le_bit_swap "/opt/netronome/components/standardlibrary/microc/src/intrinsic.c" 1204 1246
+.%arg data 0 data_297_V$8d
+.%arg bspec 1 bspec_297_V$8e
+.%var result 0 result_297 LIX
+.%scope end
+.%scope function crc_32_be_bit_swap _crc_32_be_bit_swap "/opt/netronome/components/standardlibrary/microc/src/intrinsic.c" 1251 1293
+.%arg data 0 data_306_V$91
+.%arg bspec 1 bspec_306_V$92
+.%var result 0 result_306 LIX
+.%scope end
+.%scope function crc_ccitt_le_bit_swap _crc_ccitt_le_bit_swap "/opt/netronome/components/standardlibrary/microc/src/intrinsic.c" 1298 1340
+.%arg data 0 data_315_V$95
+.%arg bspec 1 bspec_315_V$96
+.%var result 0 result_315 LIX
+.%scope end
+.%scope function crc_ccitt_be_bit_swap _crc_ccitt_be_bit_swap "/opt/netronome/components/standardlibrary/microc/src/intrinsic.c" 1345 1387
+.%arg data 0 data_324_V$99
+.%arg bspec 1 bspec_324_V$9a
+.%var result 0 result_324 LIX
+.%scope end
+.%scope function crc_none_le_bit_swap _crc_none_le_bit_swap "/opt/netronome/components/standardlibrary/microc/src/intrinsic.c" 1392 1434
+.%arg data 0 data_333_V$9d
+.%arg bspec 1 bspec_333_V$9e
+.%var result 0 result_333 LIX
+.%scope end
+.%scope function crc_none_be_bit_swap _crc_none_be_bit_swap "/opt/netronome/components/standardlibrary/microc/src/intrinsic.c" 1439 1481
+.%arg data 0 data_342_V$a1
+.%arg bspec 1 bspec_342_V$a2
+.%var result 0 result_342 LIX
+.%scope end
+.%scope function crc_read _crc_read "/opt/netronome/components/standardlibrary/microc/src/intrinsic.c" 1486 1495
+.%var result 0 result_351 LIX
+.%scope end
+.%scope function crc_write _crc_write "/opt/netronome/components/standardlibrary/microc/src/intrinsic.c" 1501 1508
+.%arg residue 0 residue_353_V$a7
+.%scope end
+.%scope function byte_align_block_le _byte_align_block_le "/opt/netronome/components/standardlibrary/microc/src/intrinsic.c" 1519 1772
+.%arg n_byte_align_oper 0 n_byte_align_oper_354_V$a8
+.%arg dest 3 dest_354_V$a9
+.%arg src 3 src_354_V$aa
+.%arg shift_cnt 0 shift_cnt_354_V$ab
+.%scope end
+.%scope function byte_align_block_be _byte_align_block_be "/opt/netronome/components/standardlibrary/microc/src/intrinsic.c" 1777 2029
+.%arg n_byte_align_oper 0 n_byte_align_oper_372_V$b4
+.%arg dest 3 dest_372_V$b5
+.%arg src 3 src_372_V$b6
+.%arg shift_cnt 0 shift_cnt_372_V$b7
+.%scope end
+.%scope function ffs _ffs "/opt/netronome/components/standardlibrary/microc/src/intrinsic.c" 2035 2046
+.%arg data 0 data_390_V$b8
+.%var result 0 result_390 LIX
+.%scope end
+.%scope function cam_write _cam_write "/opt/netronome/components/standardlibrary/microc/src/intrinsic.c" 2061 2079
+.%arg entry_num 0 entry_num_392_V$bb
+.%arg tag 0 tag_392_V$bc
+.%arg cam_state 0 cam_state_392_V$bd
+.%scope end
+.%scope function cam_lookup _cam_lookup "/opt/netronome/components/standardlibrary/microc/src/intrinsic.c" 2085 2098
+.%arg tag 0 tag_395_V$c2
+.%var result 5 result_395 LIX
+.%scope end
+.%scope function cam_write_state _cam_write_state "/opt/netronome/components/standardlibrary/microc/src/intrinsic.c" 2103 2120
+.%arg entry_num 0 entry_num_397_V$d3
+.%arg cam_state 0 cam_state_397_V$d4
+.%scope end
+.%scope function cam_read_tag _cam_read_tag "/opt/netronome/components/standardlibrary/microc/src/intrinsic.c" 2125 2140
+.%arg entry_num 0 entry_num_400_V$d5
+.%var result 0 result_400 LIX
+.%scope end
+.%scope function cam_read_state _cam_read_state "/opt/netronome/components/standardlibrary/microc/src/intrinsic.c" 2145 2160
+.%arg entry_num 0 entry_num_403_V$d8
+.%var result 5 result_403 LIX
+.%scope end
+.%scope function cam_clear _cam_clear "/opt/netronome/components/standardlibrary/microc/src/intrinsic.c" 2166 2175
+.%scope end
+.%scope function multiply_24x8 _multiply_24x8 "/opt/netronome/components/standardlibrary/microc/src/intrinsic.c" 2181 2198
+.%arg x 0 x_408_V$e9
+.%arg y 0 y_408_V$ea
+.%var result 0 result_408 LIX
+.%scope end
+.%scope function multiply_16x16 _multiply_16x16 "/opt/netronome/components/standardlibrary/microc/src/intrinsic.c" 2201 2219
+.%arg x 0 x_410_V$ed
+.%arg y 0 y_410_V$ee
+.%var result 0 result_410 LIX
+.%scope end
+.%scope function multiply_32x32_lo _multiply_32x32_lo "/opt/netronome/components/standardlibrary/microc/src/intrinsic.c" 2222 2242
+.%arg x 0 x_412_V$f1
+.%arg y 0 y_412_V$f2
+.%var result 0 result_412 LIX
+.%scope end
+.%scope function multiply_32x32_hi _multiply_32x32_hi "/opt/netronome/components/standardlibrary/microc/src/intrinsic.c" 2245 2266
+.%arg x 0 x_414_V$f5
+.%arg y 0 y_414_V$f6
+.%var result 0 result_414 LIX
+.%scope end
+.%scope function multiply_32x32 _multiply_32x32 "/opt/netronome/components/standardlibrary/microc/src/intrinsic.c" 2269 2290
+.%arg x 0 x_416_V$f9
+.%arg y 0 y_416_V$fa
+.%var lo 0 lo_416 LIX
+.%var hi 0 hi_416 LIX
+.%scope end
+.%scope function _set_timestamp __set_timestamp "/opt/netronome/components/standardlibrary/microc/src/intrinsic.c" 2295 2306
+.%arg timestamp 7 timestamp_418_V$fe
+.%scope end
+.%scope function _timestamp_start __timestamp_start "/opt/netronome/components/standardlibrary/microc/src/intrinsic.c" 2309 2319
+.%var lo 0 lo_420 LIX
+.%var hi 0 hi_420 LIX
+.%scope end
+.%scope function _timestamp_stop __timestamp_stop "/opt/netronome/components/standardlibrary/microc/src/intrinsic.c" 2322 2333
+.%arg handle 7 handle_422_V$102
+.%var curr 7 curr_422 LIX
+.%scope end
+.%scope function _set_profile_count __set_profile_count "/opt/netronome/components/standardlibrary/microc/src/intrinsic.c" 2336 2346
+.%arg profile_count 0 profile_count_424_V$105
+.%scope end
+.%scope function _profile_count_start __profile_count_start "/opt/netronome/components/standardlibrary/microc/src/intrinsic.c" 2349 2358
+.%var result 0 result_426 LIX
+.%scope end
+.%scope function _profile_count_stop __profile_count_stop "/opt/netronome/components/standardlibrary/microc/src/intrinsic.c" 2361 2372
+.%arg handle 0 handle_428_V$108
+.%var curr 0 curr_428 LIX
+.%scope end
+.%scope function _sleep __sleep "/opt/netronome/components/standardlibrary/microc/src/intrinsic.c" 2377 2397
+.%arg cycles 0 cycles_430_V$10b
+.%scope block 2383 2395
+.%var sig 2 sig_431 LIX
+.%var sig_num 0 sig_num_431 LIX
+.%var tlo 0 tlo_431 LIX
+.%scope end
+.%scope end
+.%scope function bit_test _bit_test "/opt/netronome/components/standardlibrary/microc/src/intrinsic.c" 2402 2420
+.%arg data 0 data_432_V$10f
+.%arg bit_pos 0 bit_pos_432_V$110
+.%var result 2 result_432 LIX
+.%scope end
+.%scope function inp_state_test _inp_state_test "/opt/netronome/components/standardlibrary/microc/src/intrinsic.c" 2423 2440
+.%arg state_name 8 state_name_434_V$115
+.%var result 2 result_434 LIX
+.%scope end
+.%scope function nn_ring_dequeue_incr _nn_ring_dequeue_incr "/opt/netronome/components/standardlibrary/microc/src/intrinsic.c" 2443 2452
+.%var result 0 result_436 LIX
+.%scope end
+.%scope function nn_ring_dequeue _nn_ring_dequeue "/opt/netronome/components/standardlibrary/microc/src/intrinsic.c" 2455 2464
+.%var result 0 result_438 LIX
+.%scope end
+.%scope function nn_ring_enqueue_incr _nn_ring_enqueue_incr "/opt/netronome/components/standardlibrary/microc/src/intrinsic.c" 2467 2476
+.%arg val 0 val_440_V$11d
+.%scope end
+.%scope function bswap _bswap "/opt/netronome/components/standardlibrary/microc/src/intrinsic.c" 2481 2497
+.%arg v 0 v_442_V$11e
+.%var result 0 result_442 LIX
+.%scope end
+.%scope function bitswap _bitswap "/opt/netronome/components/standardlibrary/microc/src/intrinsic.c" 2502 2513
+.%arg v 0 v_444_V$121
+.%var m1 0 m1_444 LIX
+.%var v2 0 v2_444 LIX
+.%var m2 0 m2_444 LIX
+.%var v3 0 v3_444 LIX
+.%var m3 0 m3_444 LIX
+.%var v4 0 v4_444 LIX
+.%scope end
+.%scope function ctx_wait _ctx_wait "/opt/netronome/components/standardlibrary/microc/src/intrinsic.c" 2517 2538
+.%arg sig 9 sig_445_V$129
+.%scope end
+.%scope function signal_same_ME _signal_same_ME "/opt/netronome/components/standardlibrary/microc/src/intrinsic.c" 2542 2552
+.%arg sig_no 0 sig_no_450_V$12c
+.%arg ctx 0 ctx_450_V$12d
+.%scope end
+.%scope function signal_same_ME_next_ctx _signal_same_ME_next_ctx "/opt/netronome/components/standardlibrary/microc/src/intrinsic.c" 2555 2564
+.%arg sig_no 0 sig_no_452_V$12e
+.%scope end
+.%scope function signal_prev_ME _signal_prev_ME "/opt/netronome/components/standardlibrary/microc/src/intrinsic.c" 2567 2577
+.%arg sig_no 0 sig_no_454_V$12f
+.%arg ctx 0 ctx_454_V$130
+.%scope end
+.%scope function signal_prev_ME_this_ctx _signal_prev_ME_this_ctx "/opt/netronome/components/standardlibrary/microc/src/intrinsic.c" 2580 2589
+.%arg sig_no 0 sig_no_456_V$131
+.%scope end
+.%scope function signal_next_ME _signal_next_ME "/opt/netronome/components/standardlibrary/microc/src/intrinsic.c" 2592 2602
+.%arg sig_no 0 sig_no_458_V$132
+.%arg ctx 0 ctx_458_V$133
+.%scope end
+.%scope function signal_next_ME_this_ctx _signal_next_ME_this_ctx "/opt/netronome/components/standardlibrary/microc/src/intrinsic.c" 2605 2614
+.%arg sig_no 0 sig_no_460_V$134
+.%scope end
+.%scope function halt _halt "/opt/netronome/components/standardlibrary/microc/src/intrinsic.c" 2619 2629
+.%scope end
+.%type U4
+.%type E4 {
+bytes_0_3 0;
+bytes_0_2 1;
+bytes_0_1 2;
+byte_0 3;
+bytes_1_3 4;
+bytes_2_3 5;
+byte_3 6;
+}
+.%type I4
+.%type P2 4
+.%type U4
+.%type S4 cam_lookup_t{
+__unnamed 0 6;
+value 0 0;
+}
+.%type S4 {
+zeros1 0:12:20 0;
+state 0:8:4 0;
+hit 0:7:1 0;
+entry_num 0:3:4 0;
+zeros2 0:0:3 0;
+}
+.%type I8
+.%type E4 {
+inp_state_nn_empty 0;
+inp_state_nn_full 1;
+inp_state_ctm_ring0_status 2;
+inp_state_ctm_ring1_status 3;
+inp_state_ctm_ring2_status 4;
+inp_state_ctm_ring3_status 5;
+inp_state_ctm_ring4_status 6;
+inp_state_ctm_ring5_status 7;
+inp_state_ctm_ring6_status 8;
+inp_state_ctm_ring7_status 9;
+inp_state_ctm_ring8_status 10;
+inp_state_ctm_ring9_status 11;
+inp_state_ctm_ring10_status 12;
+inp_state_ctm_ring11_status 13;
+inp_state_ctm_ring12_status 14;
+inp_state_ctm_ring13_status 15;
+inp_state_ctm_ring0_full 2;
+inp_state_ctm_ring1_full 3;
+inp_state_ctm_ring2_full 4;
+inp_state_ctm_ring3_full 5;
+inp_state_ctm_ring4_full 6;
+inp_state_ctm_ring5_full 7;
+inp_state_ctm_ring6_full 8;
+inp_state_ctm_ring7_full 9;
+inp_state_ctm_ring8_full 10;
+inp_state_ctm_ring9_full 11;
+inp_state_ctm_ring10_full 12;
+inp_state_ctm_ring11_full 13;
+inp_state_ctm_ring12_full 14;
+inp_state_ctm_ring13_full 15;
+}
+.%type E4 {
+kill 0;
+voluntary 1;
+bpt 2;
+}

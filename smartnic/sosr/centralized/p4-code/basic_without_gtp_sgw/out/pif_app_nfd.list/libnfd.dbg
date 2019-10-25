@@ -1,0 +1,425 @@
+.%scope file "/opt/netronome/p4/components/nfp_pif/me/apps/pif_app_nfd/include/config.h"
+.%scope function __rt_assert ___rt_assert "/opt/netronome/components/flowenv/me/include/assert.h" 91 99
+.%var reg 0 reg_11 LIX
+.%scope end
+.%var BLM_NBI8_BLQ0_EMU_QD_BASE 1 _BLM_NBI8_BLQ0_EMU_QD_BASE SEX
+.%var BLM_NBI8_BLQ0_EMU_Q_BASE 3 _BLM_NBI8_BLQ0_EMU_Q_BASE SEX
+.%var BLM_NBI8_BLQ1_EMU_QD_BASE 4 _BLM_NBI8_BLQ1_EMU_QD_BASE SEX
+.%var BLM_NBI8_BLQ1_EMU_Q_BASE 5 _BLM_NBI8_BLQ1_EMU_Q_BASE SEX
+.%var BLM_NBI8_BLQ2_EMU_QD_BASE 6 _BLM_NBI8_BLQ2_EMU_QD_BASE SEX
+.%var BLM_NBI8_BLQ2_EMU_Q_BASE 7 _BLM_NBI8_BLQ2_EMU_Q_BASE SEX
+.%var BLM_NBI8_BLQ3_EMU_QD_BASE 8 _BLM_NBI8_BLQ3_EMU_QD_BASE SEX
+.%var BLM_NBI8_BLQ3_EMU_Q_BASE 9 _BLM_NBI8_BLQ3_EMU_Q_BASE SEX
+.%var BLM_NBI8_BLQ0_EMU_EMEM0_BUFS_BASE 10 _BLM_NBI8_BLQ0_EMU_EMEM0_BUFS_BASE SEX
+.%var BLM_NBI8_BLQ0_BDSRAM_EMEM0_BUFS_BASE 11 _BLM_NBI8_BLQ0_BDSRAM_EMEM0_BUFS_BASE SEX
+.%var nfd_out_cntrs0 12 _nfd_out_cntrs0 SEX
+.%var nfd_out_ring_info 14 _nfd_out_ring_info SEX
+.%var nfd_out_cntrs_base 18 _nfd_out_cntrs_base SEX
+.%var nfd_in_cntrs0 20 _nfd_in_cntrs0 SEX
+.%var nfd_in_ring_info 21 _nfd_in_ring_info SEX
+.%var nfd_in_cntrs_base 22 _nfd_in_cntrs_base SEX
+.%scope function nfd_cfg_bar_base _nfd_cfg_bar_base "/opt/netronome/components/ng_nfd/me/blocks/vnic/shared/nfd_cfg.h" 273 319
+.%arg isl 0 isl_311_V$316
+.%arg vid 0 vid_311_V$317
+.%var bar_base 23 bar_base_311 LIX
+.%scope end
+.%scope function nfd_out_send_init _nfd_out_send_init "/opt/netronome/components/ng_nfd/me/blocks/vnic/pci_out.c" 69 90
+.%scope end
+.%scope function nfd_out_map_queue _nfd_out_map_queue "/opt/netronome/components/ng_nfd/me/blocks/vnic/pci_out.c" 94 97
+.%arg type 0 type_323_V$337
+.%arg vnic 0 vnic_323_V$338
+.%arg queue 0 queue_323_V$339
+.%scope end
+.%scope function __nfd_out_get_credit ___nfd_out_get_credit "/opt/netronome/components/ng_nfd/me/blocks/vnic/pci_out.c" 104 128
+.%arg pcie_isl 0 pcie_isl_324_V$33b
+.%arg bmsk_queue 0 bmsk_queue_324_V$33c
+.%arg num 0 num_324_V$33d
+.%arg data 24 data_324_V$33e
+.%arg sync 25 sync_324_V$33f
+.%arg sigpair 26 sigpair_324_V$340
+.%var addr_hi 0 addr_hi_324 LIX
+.%var addr_lo 0 addr_lo_324 LIX
+.%scope end
+.%scope function nfd_out_get_credit _nfd_out_get_credit "/opt/netronome/components/ng_nfd/me/blocks/vnic/pci_out.c" 132 143
+.%arg pcie_isl 0 pcie_isl_330_V$349
+.%arg bmsk_queue 0 bmsk_queue_330_V$34a
+.%arg num 0 num_330_V$34b
+.%var data 0 data_330 LIX
+.%var sig 27 sig_330 LIX
+.%var ret 0 ret_330 LIX
+.%scope end
+.%scope function __nfd_out_cnt_pkt ___nfd_out_cnt_pkt "/opt/netronome/components/ng_nfd/me/blocks/vnic/pci_out.c" 147 155
+.%arg pcie_isl 0 pcie_isl_331_V$352
+.%arg bmsk_queue 0 bmsk_queue_331_V$353
+.%arg byte_count 0 byte_count_331_V$354
+.%arg sync 25 sync_331_V$355
+.%arg sig 29 sig_331_V$356
+.%scope end
+.%scope function __nfd_out_push_pkt_cnt ___nfd_out_push_pkt_cnt "/opt/netronome/components/ng_nfd/me/blocks/vnic/pci_out.c" 158 181
+.%arg pcie_isl 0 pcie_isl_334_V$359
+.%arg bmsk_queue 0 bmsk_queue_334_V$35a
+.%arg sync 25 sync_334_V$35b
+.%arg sig 29 sig_334_V$35c
+.%var pkt_count 0 pkt_count_334 LIX
+.%var byte_count 13 byte_count_334 LIX
+.%var xfer_update 30 xfer_update_334 LIW
+.%var vid 28 vid_334 LIX
+.%var vqn 28 vqn_334 LIX
+.%scope end
+.%scope function __nfd_out_metadata_push ___nfd_out_metadata_push "/opt/netronome/components/ng_nfd/me/blocks/vnic/pci_out.c" 184 237
+.%arg meta_len 31 meta_len_342_V$365
+.%arg meta_types 0 meta_types_342_V$366
+.%arg meta_val 31 meta_val_342_V$367
+.%arg meta_type_num 0 meta_type_num_342_V$368
+.%arg meta_val_len 0 meta_val_len_342_V$369
+.%arg meta_val_len_max 0 meta_val_len_max_342_V$36a
+.%arg pkt_start_ptr 33 pkt_start_ptr_342_V$36b
+.%arg sync 25 sync_342_V$36c
+.%arg sig 29 sig_342_V$36d
+.%var meta_len_cp 0 meta_len_cp_342 LIX
+.%var meta_ptr 34 meta_ptr_342 LIX
+.%var meta_data 35 meta_data_342 LIW
+.%var sig_meta 28 sig_meta_342 LIX
+.%var ret 28 ret_342 LIX
+.%scope block 213 222
+.%var meta_info 0 meta_info_352 LIR
+.%scope end
+.%scope end
+.%scope function nfd_out_metadata_push _nfd_out_metadata_push "/opt/netronome/components/ng_nfd/me/blocks/vnic/pci_out.c" 240 251
+.%arg meta_len 31 meta_len_354_V$386
+.%arg meta_types 0 meta_types_354_V$387
+.%arg meta_val 31 meta_val_354_V$388
+.%arg meta_type_num 0 meta_type_num_354_V$389
+.%arg meta_val_len 0 meta_val_len_354_V$38a
+.%arg pkt_start_ptr 33 pkt_start_ptr_354_V$38b
+.%var sig_meta 28 sig_meta_354 LIX
+.%scope end
+.%scope function nfd_out_fill_desc _nfd_out_fill_desc "/opt/netronome/components/ng_nfd/me/blocks/vnic/pci_out.c" 255 274
+.%arg desc 36 desc_355_V$38e
+.%arg pkt_info 31 pkt_info_355_V$38f
+.%arg nbi 0 nbi_355_V$390
+.%arg ctm_split 0 ctm_split_355_V$391
+.%arg pkt_start 0 pkt_start_355_V$392
+.%arg meta_len 0 meta_len_355_V$393
+.%scope end
+.%scope function nfd_out_check_ctm_only _nfd_out_check_ctm_only "/opt/netronome/components/ng_nfd/me/blocks/vnic/pci_out.c" 278 299
+.%arg desc 36 desc_357_V$497
+.%var ctm_bytes 0 ctm_bytes_357 LIX
+.%var dma_end 0 dma_end_357 LIX
+.%scope end
+.%scope function nfd_out_dummy_vlan _nfd_out_dummy_vlan "/opt/netronome/components/ng_nfd/me/blocks/vnic/pci_out.c" 303 308
+.%arg desc 36 desc_361_V$53b
+.%arg vlan 0 vlan_361_V$53c
+.%arg flags 0 flags_361_V$53d
+.%scope end
+.%scope function __nfd_out_send ___nfd_out_send "/opt/netronome/components/ng_nfd/me/blocks/vnic/pci_out.c" 312 336
+.%arg pcie_isl 0 pcie_isl_362_V$56c
+.%arg bmsk_queue 0 bmsk_queue_362_V$56d
+.%arg desc_out 46 desc_out_362_V$56e
+.%arg desc 36 desc_362_V$56f
+.%arg sync 25 sync_362_V$570
+.%arg sig 29 sig_362_V$571
+.%var desc_sz 0 desc_sz_362 LIX
+.%var raddr 0 raddr_362 LIX
+.%var rnum 0 rnum_362 LIX
+.%scope end
+.%scope function nfd_out_send _nfd_out_send "/opt/netronome/components/ng_nfd/me/blocks/vnic/pci_out.c" 340 348
+.%arg pcie_isl 0 pcie_isl_366_V$5f6
+.%arg bmsk_queue 0 bmsk_queue_366_V$5f7
+.%arg desc 36 desc_366_V$5f8
+.%var data 37 data_366 LIW
+.%var sig 28 sig_366 LIX
+.%scope end
+.%scope function swapw64 _swapw64 "/opt/netronome/components/ng_nfd/me/blocks/vnic/pci_in.c" 74 79
+.%arg val 13 val_388_V$612
+.%var tmp 0 tmp_388 LIX
+.%scope end
+.%scope function nfd_in_recv_init _nfd_in_recv_init "/opt/netronome/components/ng_nfd/me/blocks/vnic/pci_in.c" 86 107
+.%scope end
+.%scope function __nfd_in_recv ___nfd_in_recv "/opt/netronome/components/ng_nfd/me/blocks/vnic/pci_in.c" 111 129
+.%arg pcie_isl 0 pcie_isl_391_V$62e
+.%arg workq 0 workq_391_V$62f
+.%arg nfd_in_meta 47 nfd_in_meta_391_V$630
+.%arg sync 25 sync_391_V$631
+.%arg sig 29 sig_391_V$632
+.%var raddr 0 raddr_391 LIX
+.%var rnum 0 rnum_391 LIX
+.%scope end
+.%scope function nfd_in_recv _nfd_in_recv "/opt/netronome/components/ng_nfd/me/blocks/vnic/pci_in.c" 132 138
+.%arg pcie_isl 0 pcie_isl_395_V$641
+.%arg workq 0 workq_395_V$642
+.%arg nfd_in_meta 47 nfd_in_meta_395_V$643
+.%var sig 28 sig_395 LIX
+.%scope end
+.%scope function __nfd_in_cnt_pkt ___nfd_in_cnt_pkt "/opt/netronome/components/ng_nfd/me/blocks/vnic/pci_in.c" 141 149
+.%arg pcie_isl 0 pcie_isl_396_V$645
+.%arg bmsk_queue 0 bmsk_queue_396_V$646
+.%arg byte_count 0 byte_count_396_V$647
+.%arg sync 25 sync_396_V$648
+.%arg sig 29 sig_396_V$649
+.%scope end
+.%scope function __nfd_in_push_pkt_cnt ___nfd_in_push_pkt_cnt "/opt/netronome/components/ng_nfd/me/blocks/vnic/pci_in.c" 152 175
+.%arg pcie_isl 0 pcie_isl_399_V$64c
+.%arg bmsk_queue 0 bmsk_queue_399_V$64d
+.%arg sync 25 sync_399_V$64e
+.%arg sig 29 sig_399_V$64f
+.%var pkt_count 0 pkt_count_399 LIX
+.%var byte_count 13 byte_count_399 LIX
+.%var xfer_update 55 xfer_update_399 LIW
+.%var vid 28 vid_399 LIX
+.%var vqn 28 vqn_399 LIX
+.%scope end
+.%scope function nfd_in_metadata_pop _nfd_in_metadata_pop "/opt/netronome/components/ng_nfd/me/blocks/vnic/pci_in.c" 179 230
+.%arg meta_val 31 meta_val_407_V$658
+.%arg meta_len 56 meta_len_407_V$659
+.%arg meta_info 56 meta_info_407_V$65a
+.%arg pkt_buf_ptr 33 pkt_buf_ptr_407_V$65b
+.%var meta_ptr 34 meta_ptr_407 LIX
+.%var meta_data 57 meta_data_407 LIR
+.%var sig_meta 28 sig_meta_407 LIX
+.%var ret 28 ret_407 LIX
+.%scope end
+.%scope function nfd_in_metadata_pop_cache _nfd_in_metadata_pop_cache "/opt/netronome/components/ng_nfd/me/blocks/vnic/pci_in.c" 234 343
+.%arg meta_val 56 meta_val_416_V$667
+.%arg meta_len 56 meta_len_416_V$668
+.%arg meta_info 56 meta_info_416_V$669
+.%arg meta_cache 58 meta_cache_416_V$66a
+.%arg meta_cache_ptr 56 meta_cache_ptr_416_V$66b
+.%arg meta_cache_len 0 meta_cache_len_416_V$66c
+.%arg pkt_buf_ptr 33 pkt_buf_ptr_416_V$66d
+.%var meta_ptr 34 meta_ptr_416 LIX
+.%var ret 28 ret_416 LIX
+.%var i 0 i_416 LIX
+.%var sig_meta 28 sig_meta_416 LIX
+.%scope end
+.%scope function nfd_in_fill_meta _nfd_in_fill_meta "/opt/netronome/components/ng_nfd/me/blocks/vnic/pci_in.c" 347 383
+.%arg pkt_info 31 pkt_info_427_V$678
+.%arg nfd_in_meta 47 nfd_in_meta_427_V$679
+.%var data_len 0 data_len_427 LIX
+.%var bls 0 bls_427 LIX
+.%scope end
+.%scope function nfd_in_map_queue _nfd_in_map_queue "/opt/netronome/components/ng_nfd/me/blocks/vnic/pci_in.c" 387 391
+.%arg type 56 type_429_V$708
+.%arg vnic 56 vnic_429_V$709
+.%arg queue 56 queue_429_V$70a
+.%arg nfd_queue 0 nfd_queue_429_V$70b
+.%scope end
+.%scope function nfd_in_pkt_len _nfd_in_pkt_len "/opt/netronome/components/ng_nfd/me/blocks/vnic/pci_in.c" 395 398
+.%arg nfd_in_meta 47 nfd_in_meta_434_V$70c
+.%scope end
+.%scope function nfd_in_get_seqn _nfd_in_get_seqn "/opt/netronome/components/ng_nfd/me/blocks/vnic/pci_in.c" 402 410
+.%arg nfd_in_meta 47 nfd_in_meta_435_V$73c
+.%scope end
+.%scope function nfd_cfg_init_cfg_msg _nfd_cfg_init_cfg_msg "/opt/netronome/components/ng_nfd/me/blocks/vnic/shared/nfd_cfg.c" 37 42
+.%arg cfg_sig 29 cfg_sig_440_V$755
+.%arg cfg_msg 59 cfg_msg_440_V$756
+.%scope end
+.%scope function send_interthread_sig _send_interthread_sig "/opt/netronome/components/ng_nfd/me/blocks/vnic/shared/nfd_cfg.c" 45 56
+.%arg dst_me 0 dst_me_441_V$761
+.%arg ctx 0 ctx_441_V$762
+.%arg sig_no 0 sig_no_441_V$763
+.%var addr 0 addr_441 LIX
+.%scope end
+.%scope function nfd_cfg_check_cfg_msg _nfd_cfg_check_cfg_msg "/opt/netronome/components/ng_nfd/me/blocks/vnic/shared/nfd_cfg.c" 59 86
+.%arg cfg_msg 59 cfg_msg_442_V$765
+.%arg cfg_sig 29 cfg_sig_442_V$766
+.%arg rnum 0 rnum_442_V$767
+.%scope block 63 85
+.%var ret 28 ret_443 LIX
+.%var cfg_msg_rd 60 cfg_msg_rd_443 LIR
+.%var ring_addr 0 ring_addr_443 LIX
+.%scope end
+.%scope end
+.%scope function _nfd_flr_ack_pf __nfd_flr_ack_pf "/opt/netronome/components/ng_nfd/me/blocks/vnic/shared/nfd_cfg.c" 97 118
+.%arg pcie_isl 0 pcie_isl_446_V$789
+.%var flr_data 0 flr_data_446 LIW
+.%var flr_addr 0 flr_addr_446 LIX
+.%var atomic_data 0 atomic_data_446 LIX
+.%var atomic_addr 34 atomic_addr_446 LIX
+.%scope end
+.%scope function _nfd_flr_ack_vf __nfd_flr_ack_vf "/opt/netronome/components/ng_nfd/me/blocks/vnic/shared/nfd_cfg.c" 130 156
+.%arg pcie_isl 0 pcie_isl_447_V$78f
+.%arg vf 0 vf_447_V$790
+.%var flr_data 0 flr_data_447 LIX
+.%var flr_addr 0 flr_addr_447 LIX
+.%var atomic_data 0 atomic_data_447 LIW
+.%var atomic_addr 34 atomic_addr_447 LIX
+.%scope end
+.%scope function nfd_cfg_app_complete_cfg_msg _nfd_cfg_app_complete_cfg_msg "/opt/netronome/components/ng_nfd/me/blocks/vnic/shared/nfd_cfg.c" 160 215
+.%arg pcie_isl 0 pcie_isl_448_V$795
+.%arg cfg_msg 59 cfg_msg_448_V$796
+.%arg isl_base 63 isl_base_448_V$797
+.%arg cfg_sig 29 cfg_sig_448_V$798
+.%var result 0 result_448 LIW
+.%var addr 64 addr_448 LIX
+.%var update_request 0 update_request_448 LIR
+.%var read_sig 28 read_sig_448 LIX
+.%var write_sig 28 write_sig_448 LIX
+.%var nfd_isl_master 0 nfd_isl_master_448 LIX
+.%scope end
+.%scope function nfd_cfg_complete_cfg_msg _nfd_cfg_complete_cfg_msg "/opt/netronome/components/ng_nfd/me/blocks/vnic/shared/nfd_cfg.c" 219 247
+.%arg cfg_msg 59 cfg_msg_455_V$7c7
+.%arg cfg_sig 29 cfg_sig_455_V$7c8
+.%arg cfg_sig_remote 65 cfg_sig_remote_455_V$7c9
+.%arg next_me 0 next_me_455_V$7ca
+.%arg rnum_out 0 rnum_out_455_V$7cb
+.%var cfg_msg_tmp 60 cfg_msg_tmp_455 LIX
+.%var cfg_msg_wr 60 cfg_msg_wr_455 LIW
+.%var ring_addr 0 ring_addr_455 LIX
+.%var journal_sig 28 journal_sig_455 LIX
+.%scope end
+.%type U4
+.%type A16 2
+.%type U1
+.%type A32768 2
+.%type A16 2
+.%type A2048 2
+.%type A16 2
+.%type A2048 2
+.%type A16 2
+.%type A2048 2
+.%type A41943040 2
+.%type A10485760 2
+.%type A512 13
+.%type U8
+.%type A16 15
+.%type S4 nfd_ring_info{
+__unnamed 0 16;
+}
+.%type S4 {
+__unnamed 0 17;
+__raw 0 0;
+}
+.%type S4 {
+addr_hi 0:24:8 0;
+sp0 0:10:14 0;
+rnum 0:0:10 0;
+}
+.%type A32 19
+.%type S8 pkt_cntr_addr{
+hi 0 0;
+lo 4 0;
+}
+.%type A512 13
+.%type A16 15
+.%type A32 19
+.%type P3 2
+.%type P2 0
+.%type E4 {
+sig_done 0;
+ctx_swap 1;
+}
+.%type P2 27
+.%type S8 SIGNAL_PAIR{
+even 0 28;
+odd 4 28;
+}
+.%type I4
+.%type P2 28
+.%type A16 13
+.%type P2 32
+.%type U4
+.%type P3 32
+.%type P3 2
+.%type A8 0
+.%type P2 37
+.%type S16 nfd_out_input{
+cpp 0 38;
+rxd 8 42;
+}
+.%type S8 nfd_out_cpp_desc{
+__unnamed 0 39;
+}
+.%type S8 {
+__unnamed 0 40;
+__raw 0 41;
+}
+.%type S8 {
+isl 0:26:6 0;
+ctm_only 0:25:1 0;
+pktnum 0:16:9 0;
+split 0:14:2 0;
+reserved 0:13:1 0;
+offset 0:0:13 0;
+nbi 4:31:1 0;
+bls 4:29:2 0;
+mu_addr 4:0:29 0;
+}
+.%type A8 0
+.%type S8 nfd_out_rx_desc{
+__unnamed 0 43;
+}
+.%type S8 {
+__unnamed 0 44;
+__raw 0 45;
+}
+.%type S8 {
+dd 0:31:1 0;
+meta_len 0:24:7 0;
+queue 0:16:8 0;
+data_len 0:0:16 0;
+vlan 4:16:16 0;
+flags 4:0:16 0;
+}
+.%type A8 0
+.%type P2 37
+.%type P2 48
+.%type S16 nfd_in_pkt_desc{
+__unnamed 0 49;
+}
+.%type S16 {
+__unnamed 0 50;
+__raw 0 54;
+}
+.%type S16 {
+sp0 0:31:1 0;
+offset 0:24:7 0;
+seq_num 0:8:16 0;
+intf 0:6:2 0;
+q_num 0:0:6 0;
+invalid 4:31:1 0;
+jumbo 4:30:1 0;
+sp2 4:29:1 0;
+buf_addr 4:0:29 0;
+flags 8:24:8 0;
+lso_seq_cnt 8:16:8 0;
+lso_end 8:15:1 0;
+sp1 8:14:1 0;
+mss 8:0:14 0;
+data_len 12 51;
+__unnamed 14 52;
+}
+.%type U2
+.%type S2 {
+__unnamed 0 53;
+vlan 0 51;
+}
+.%type S2 {
+l4_offset 0 2;
+l3_offset 1 2;
+}
+.%type A16 0
+.%type A16 13
+.%type P2 0
+.%type A8 0
+.%type P2 0
+.%type P2 60
+.%type S4 nfd_cfg_msg{
+__unnamed 0 61;
+}
+.%type S4 {
+__unnamed 0 62;
+__raw 0 0;
+}
+.%type S4 {
+msg_valid 0:31:1 0;
+error 0:30:1 0;
+interested 0:29:1 0;
+up_bit 0:28:1 0;
+spare 0:16:12 0;
+queue 0:8:8 0;
+vid 0:0:8 0;
+}
+.%type P3 32
+.%type P3 2
+.%type P2 28

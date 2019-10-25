@@ -1,0 +1,167 @@
+.%scope file "/opt/netronome/p4/components/nfp_pif/me/apps/pif_app_nfd/include/config.h"
+.%scope function multiply_24x8 _multiply_24x8 "/opt/netronome/p4/components/nfp_pif/me/lib/pif/include/pif_common.h" 62 77
+.%arg x 0 x_332_V$564
+.%arg y 0 y_332_V$565
+.%var result 0 result_332 LIX
+.%scope end
+.%var BLM_NBI8_BLQ0_EMU_QD_BASE 1 _BLM_NBI8_BLQ0_EMU_QD_BASE SEX
+.%var BLM_NBI8_BLQ0_EMU_Q_BASE 3 _BLM_NBI8_BLQ0_EMU_Q_BASE SEX
+.%var BLM_NBI8_BLQ1_EMU_QD_BASE 4 _BLM_NBI8_BLQ1_EMU_QD_BASE SEX
+.%var BLM_NBI8_BLQ1_EMU_Q_BASE 5 _BLM_NBI8_BLQ1_EMU_Q_BASE SEX
+.%var BLM_NBI8_BLQ2_EMU_QD_BASE 6 _BLM_NBI8_BLQ2_EMU_QD_BASE SEX
+.%var BLM_NBI8_BLQ2_EMU_Q_BASE 7 _BLM_NBI8_BLQ2_EMU_Q_BASE SEX
+.%var BLM_NBI8_BLQ3_EMU_QD_BASE 8 _BLM_NBI8_BLQ3_EMU_QD_BASE SEX
+.%var BLM_NBI8_BLQ3_EMU_Q_BASE 9 _BLM_NBI8_BLQ3_EMU_Q_BASE SEX
+.%var BLM_NBI8_BLQ0_EMU_EMEM0_BUFS_BASE 10 _BLM_NBI8_BLQ0_EMU_EMEM0_BUFS_BASE SEX
+.%var BLM_NBI8_BLQ0_BDSRAM_EMEM0_BUFS_BASE 11 _BLM_NBI8_BLQ0_BDSRAM_EMEM0_BUFS_BASE SEX
+.%var pkt 12 _pkt SEX
+.%var port_configs 21 _port_configs SEX
+.%scope function pif_global_metadata_init _pif_global_metadata_init "out/pif_global.c" 10 19
+.%arg parrep 25 parrep_339_V$568
+.%var standard_metadata 26 standard_metadata_339 LIX
+.%scope end
+.%scope function pif_global_get_stdmd_egress_spec _pif_global_get_stdmd_egress_spec "out/pif_global.c" 21 25
+.%arg parrep 25 parrep_345_V$56a
+.%var standard_metadata 26 standard_metadata_345 LIX
+.%scope end
+.%scope function pif_global_get_stdmd_egress_port _pif_global_get_stdmd_egress_port "out/pif_global.c" 27 31
+.%arg parrep 25 parrep_346_V$56d
+.%var standard_metadata 26 standard_metadata_346 LIX
+.%scope end
+.%scope function pif_global_set_stdmd_egress_port _pif_global_set_stdmd_egress_port "out/pif_global.c" 33 37
+.%arg parrep 25 parrep_347_V$570
+.%arg port_spec 0 port_spec_347_V$571
+.%var standard_metadata 26 standard_metadata_347 LIX
+.%scope end
+.%scope function pif_global_set_stdmd_instance_type _pif_global_set_stdmd_instance_type "out/pif_global.c" 39 43
+.%arg parrep 25 parrep_349_V$573
+.%arg instance_type 0 instance_type_349_V$574
+.%var standard_metadata 26 standard_metadata_349 LIX
+.%scope end
+.%scope function pif_global_set_stdmd_egress_instance _pif_global_set_stdmd_egress_instance "out/pif_global.c" 45 49
+.%arg parrep 25 parrep_351_V$576
+.%arg egress_instance 0 egress_instance_351_V$577
+.%var standard_metadata 26 standard_metadata_351 LIX
+.%scope end
+.%scope function pif_global_set_stdmd_parser_status _pif_global_set_stdmd_parser_status "out/pif_global.c" 51 57
+.%arg parrep 25 parrep_353_V$579
+.%arg error 0 error_353_V$57a
+.%var standard_metadata 26 standard_metadata_353 LIX
+.%scope end
+.%scope function pif_global_set_stdmd_parser_error_location _pif_global_set_stdmd_parser_error_location "out/pif_global.c" 59 63
+.%arg parrep 25 parrep_355_V$57c
+.%arg node 0 node_355_V$57d
+.%var standard_metadata 26 standard_metadata_355 LIX
+.%scope end
+.%scope function pif_global_set_pktmd_nic_vlan _pif_global_set_pktmd_nic_vlan "out/pif_global.c" 65 67
+.%arg parrep 25 parrep_357_V$57f
+.%scope end
+.%scope function pif_global_get_nic_rxoffload _pif_global_get_nic_rxoffload "out/pif_global.c" 69 71
+.%arg parrep 25 parrep_358_V$580
+.%scope end
+.%scope function pif_global_set_flow_id _pif_global_set_flow_id "out/pif_global.c" 72 74
+.%arg parrep 25 parrep_359_V$581
+.%arg act_buf 28 act_buf_359_V$582
+.%scope end
+.%scope function pif_global_get_wq_metawords _pif_global_get_wq_metawords "out/pif_global.c" 76 80
+.%arg parrep 25 parrep_360_V$583
+.%arg mw0 30 mw0_360_V$584
+.%arg mw1 30 mw1_360_V$585
+.%scope end
+.%type U4
+.%type A16 2
+.%type U1
+.%type A32768 2
+.%type A16 2
+.%type A2048 2
+.%type A16 2
+.%type A2048 2
+.%type A16 2
+.%type A2048 2
+.%type A41943040 2
+.%type A10485760 2
+.%type S28 pktio_meta{
+__unnamed 0 13;
+}
+.%type S28 {
+__unnamed 0 14;
+__raw 0 20;
+}
+.%type S28 {
+p_nbi 0 15;
+p_ctm_size 8:30:2 0;
+p_orig_len 8:16:14 0;
+p_offset 8:0:16 0;
+p_src 12:16:16 0;
+p_dst 12:0:16 0;
+p_seq 16:16:16 0;
+p_ro_ctx 16:11:5 0;
+p_is_gro_seq 16:10:1 0;
+p_rx_ipv4_csum_ok 16:9:1 0;
+p_rx_ipv4_csum_present 16:8:1 0;
+p_rx_l4_csum_ok 16:7:1 0;
+p_rx_l4_csum_present 16:6:1 0;
+p_rx_l4_tcp 16:5:1 0;
+p_rx_mac_matched 16:4:1 0;
+p_tunnel 16:3:1 0;
+resv4 16:0:3 0;
+__unnamed 20 19;
+p_vlan 24:16:16 0;
+resv3 24:0:16 0;
+}
+.%type S8 nbi_meta_pkt_info{
+__unnamed 0 16;
+}
+.%type S8 {
+__unnamed 0 17;
+__raw 0 18;
+}
+.%type S8 {
+isl 0:26:6 0;
+pnum 0:16:10 0;
+bls 0:14:2 0;
+len 0:0:14 0;
+split 4:31:1 0;
+resv0 4:29:2 0;
+muptr 4:0:29 0;
+}
+.%type A8 0
+.%type S4 {
+p_timestamp 0:0:32 0;
+}
+.%type A28 0
+.%type A2048 22
+.%type S4 port_config{
+__unnamed 0 23;
+}
+.%type S4 {
+__unnamed 0 24;
+__raw 0 0;
+}
+.%type S4 {
+nic_offload_vlan_rx 0:31:1 0;
+nic_offload_vlan_tx 0:30:1 0;
+nic_offload_checksum_rx 0:29:1 0;
+nic_offload_checksum_tx 0:28:1 0;
+port_paused 0:27:1 0;
+reserved0 0:0:27 0;
+}
+.%type P6 0
+.%type P6 27
+.%type S16 pif_header_standard_metadata{
+clone_spec 0:0:32 0;
+egress_spec 4:16:16 0;
+egress_port 4:0:16 0;
+ingress_port 8:16:16 0;
+packet_length 8:2:14 0;
+checksum_error 8:1:1 0;
+_padding_0 8:0:1 0;
+egress_instance 12:22:10 0;
+parser_error_location 12:14:8 0;
+instance_type 12:10:4 0;
+parser_status 12:7:3 0;
+_padding_1 12:0:7 0;
+}
+.%type P3 29
+.%type U4
+.%type P2 0

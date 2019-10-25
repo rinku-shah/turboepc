@@ -1,0 +1,697 @@
+.%scope file "/opt/netronome/p4/components/nfp_pif/me/apps/pif_app_nfd/include/config.h"
+.%scope function __rt_assert ___rt_assert "/opt/netronome/components/flowenv/me/include/assert.h" 91 99
+.%var reg 0 reg_241 LIX
+.%scope end
+.%var BLM_NBI8_BLQ0_EMU_QD_BASE 1 _BLM_NBI8_BLQ0_EMU_QD_BASE SEX
+.%var BLM_NBI8_BLQ0_EMU_Q_BASE 3 _BLM_NBI8_BLQ0_EMU_Q_BASE SEX
+.%var BLM_NBI8_BLQ1_EMU_QD_BASE 4 _BLM_NBI8_BLQ1_EMU_QD_BASE SEX
+.%var BLM_NBI8_BLQ1_EMU_Q_BASE 5 _BLM_NBI8_BLQ1_EMU_Q_BASE SEX
+.%var BLM_NBI8_BLQ2_EMU_QD_BASE 6 _BLM_NBI8_BLQ2_EMU_QD_BASE SEX
+.%var BLM_NBI8_BLQ2_EMU_Q_BASE 7 _BLM_NBI8_BLQ2_EMU_Q_BASE SEX
+.%var BLM_NBI8_BLQ3_EMU_QD_BASE 8 _BLM_NBI8_BLQ3_EMU_QD_BASE SEX
+.%var BLM_NBI8_BLQ3_EMU_Q_BASE 9 _BLM_NBI8_BLQ3_EMU_Q_BASE SEX
+.%var BLM_NBI8_BLQ0_EMU_EMEM0_BUFS_BASE 10 _BLM_NBI8_BLQ0_EMU_EMEM0_BUFS_BASE SEX
+.%var BLM_NBI8_BLQ0_BDSRAM_EMEM0_BUFS_BASE 11 _BLM_NBI8_BLQ0_BDSRAM_EMEM0_BUFS_BASE SEX
+.%var pkt 12 _pkt SEX
+.%var pif_pkt_info_spec 21 _pif_pkt_info_spec SEX
+.%var parrep 25 _parrep SEX
+.%scope function __hashmap_lock_release ___hashmap_lock_release "/opt/netronome/p4/components/nfp_pif/me/lib/hashmap/include/hashmap.h" 103 122
+.%arg lock 26 lock_255_V$787
+.%var ind 31 ind_255 LIX
+.%var addr_hi 0 addr_hi_255 LIX
+.%var addr_lo 0 addr_lo_255 LIX
+.%scope end
+.%scope function multiply_24x8 _multiply_24x8 "/opt/netronome/p4/components/nfp_pif/me/lib/pif/include/pif_common.h" 62 77
+.%arg x 0 x_514_V$7a0
+.%arg y 0 y_514_V$7a1
+.%var result 0 result_514 LIX
+.%scope end
+.%scope function pif_parrep_extract _pif_parrep_extract "out/pif_parrep.c" 8 1599
+.%arg _pif_parrep 34 _pif_parrep_516_V$7a4
+.%arg _pif_parrep_pktdata 35 _pif_parrep_pktdata_516_V$7a5
+.%arg _pif_parrep_pktlen 0 _pif_parrep_pktlen_516_V$7a6
+.%arg _pif_parrep_fk_ptr 34 _pif_parrep_fk_ptr_516_V$7a7
+.%arg _pif_parrep_fk_len 36 _pif_parrep_fk_len_516_V$7a8
+.%var _pif_ctldata 37 _pif_ctldata_516 LIX
+.%var pkt_info 39 pkt_info_516 LIX
+.%var _pif_read_xbuf 40 _pif_read_xbuf_516 LIR
+.%var _pif_read_xbuf_off 0 _pif_read_xbuf_off_516 LIX
+.%var _pif_parrep_pktoff 0 _pif_parrep_pktoff_516 LIX
+.%var _pif_t_index 0 _pif_t_index_516 LIX
+.%var _pif_parrep_state 41 _pif_parrep_state_516 LIX
+.%var _pif_parrep_error 41 _pif_parrep_error_516 LIX
+.%var i 41 i_516 LIX
+.%scope block 28 130
+.%var _pif_ctldata 37 _pif_ctldata_517 LIX
+.%var ethernet 42 ethernet_517 LIX
+.%scope block 40 114
+.%var _pif_parrep_hdrsz 0 _pif_parrep_hdrsz_519 LIX
+.%scope block 43 103
+.%var lm32 34 lm32_520 LIX
+.%var sizeLW 0 sizeLW_520 LIX
+.%var sizeB 0 sizeB_520 LIX
+.%var lmoff 0 lmoff_520 LIX
+.%var i 0 i_520 LIX
+.%scope block 62 79
+.%var lmval 0 lmval_522 LIX
+.%scope end
+.%scope block 79 100
+.%var lmval 0 lmval_523 LIX
+.%scope end
+.%scope end
+.%scope end
+.%scope block 117 123
+.%var _pif_fk 44 _pif_fk_527 LIX
+.%scope end
+.%scope end
+.%scope block 132 244
+.%var _pif_ctldata 37 _pif_ctldata_530 LIX
+.%var ipv4 46 ipv4_530 LIX
+.%scope block 144 225
+.%var _pif_parrep_hdrsz 0 _pif_parrep_hdrsz_532 LIX
+.%scope block 147 214
+.%var lm32 34 lm32_533 LIX
+.%var sizeLW 0 sizeLW_533 LIX
+.%var sizeB 0 sizeB_533 LIX
+.%var lmoff 0 lmoff_533 LIX
+.%var i 0 i_533 LIX
+.%scope block 166 186
+.%var lmval 0 lmval_535 LIX
+.%scope end
+.%scope block 186 211
+.%var lmval 0 lmval_536 LIX
+.%scope end
+.%scope end
+.%scope end
+.%scope block 228 235
+.%var _pif_fk 48 _pif_fk_540 LIX
+.%scope end
+.%scope end
+.%scope block 246 342
+.%var _pif_ctldata 37 _pif_ctldata_544 LIX
+.%var tcp 50 tcp_544 LIX
+.%scope block 258 339
+.%var _pif_parrep_hdrsz 0 _pif_parrep_hdrsz_546 LIX
+.%scope block 261 328
+.%var lm32 34 lm32_547 LIX
+.%var sizeLW 0 sizeLW_547 LIX
+.%var sizeB 0 sizeB_547 LIX
+.%var lmoff 0 lmoff_547 LIX
+.%var i 0 i_547 LIX
+.%scope block 280 300
+.%var lmval 0 lmval_549 LIX
+.%scope end
+.%scope block 300 325
+.%var lmval 0 lmval_550 LIX
+.%scope end
+.%scope end
+.%scope end
+.%scope end
+.%scope block 344 507
+.%var _pif_ctldata 37 _pif_ctldata_554 LIX
+.%var data 52 data_554 LIX
+.%var udp 54 udp_554 LIX
+.%scope block 358 418
+.%var _pif_parrep_hdrsz 0 _pif_parrep_hdrsz_556 LIX
+.%scope block 361 407
+.%var lm32 34 lm32_557 LIX
+.%var sizeLW 0 sizeLW_557 LIX
+.%var sizeB 0 sizeB_557 LIX
+.%var lmoff 0 lmoff_557 LIX
+.%var i 0 i_557 LIX
+.%scope block 380 391
+.%var lmval 0 lmval_559 LIX
+.%scope end
+.%scope block 391 404
+.%var lmval 0 lmval_560 LIX
+.%scope end
+.%scope end
+.%scope end
+.%scope block 424 484
+.%var _pif_parrep_hdrsz 0 _pif_parrep_hdrsz_565 LIX
+.%scope block 427 473
+.%var lm32 34 lm32_566 LIX
+.%var sizeLW 0 sizeLW_566 LIX
+.%var sizeB 0 sizeB_566 LIX
+.%var lmoff 0 lmoff_566 LIX
+.%var i 0 i_566 LIX
+.%scope block 446 457
+.%var lmval 0 lmval_568 LIX
+.%scope end
+.%scope block 457 470
+.%var lmval 0 lmval_569 LIX
+.%scope end
+.%scope end
+.%scope end
+.%scope end
+.%scope block 509 605
+.%var _pif_ctldata 37 _pif_ctldata_583 LIX
+.%var send_apn 56 send_apn_583 LIX
+.%scope block 521 602
+.%var _pif_parrep_hdrsz 0 _pif_parrep_hdrsz_585 LIX
+.%scope block 524 591
+.%var lm32 34 lm32_586 LIX
+.%var sizeLW 0 sizeLW_586 LIX
+.%var sizeB 0 sizeB_586 LIX
+.%var lmoff 0 lmoff_586 LIX
+.%var i 0 i_586 LIX
+.%scope block 543 563
+.%var lmval 0 lmval_588 LIX
+.%scope end
+.%scope block 563 588
+.%var lmval 0 lmval_589 LIX
+.%scope end
+.%scope end
+.%scope end
+.%scope end
+.%scope block 607 801
+.%var _pif_ctldata 37 _pif_ctldata_593 LIX
+.%var auth_step_one 58 auth_step_one_593 LIX
+.%scope block 619 798
+.%var _pif_parrep_hdrsz 0 _pif_parrep_hdrsz_595 LIX
+.%scope block 622 787
+.%var lm32 34 lm32_596 LIX
+.%var sizeLW 0 sizeLW_596 LIX
+.%var sizeB 0 sizeB_596 LIX
+.%var lmoff 0 lmoff_596 LIX
+.%var i 0 i_596 LIX
+.%scope block 641 703
+.%var lmval 0 lmval_598 LIX
+.%scope end
+.%scope block 703 784
+.%var lmval 0 lmval_599 LIX
+.%scope end
+.%scope end
+.%scope end
+.%scope end
+.%scope block 803 906
+.%var _pif_ctldata 37 _pif_ctldata_603 LIX
+.%var initial_ctxt_setup_resp 60 initial_ctxt_setup_resp_603 LIX
+.%scope block 815 903
+.%var _pif_parrep_hdrsz 0 _pif_parrep_hdrsz_605 LIX
+.%scope block 818 892
+.%var lm32 34 lm32_606 LIX
+.%var sizeLW 0 sizeLW_606 LIX
+.%var sizeB 0 sizeB_606 LIX
+.%var lmoff 0 lmoff_606 LIX
+.%var i 0 i_606 LIX
+.%scope block 837 860
+.%var lmval 0 lmval_608 LIX
+.%scope end
+.%scope block 860 889
+.%var lmval 0 lmval_609 LIX
+.%scope end
+.%scope end
+.%scope end
+.%scope end
+.%scope block 908 1032
+.%var _pif_ctldata 37 _pif_ctldata_613 LIX
+.%var detach_req 62 detach_req_613 LIX
+.%scope block 920 1029
+.%var _pif_parrep_hdrsz 0 _pif_parrep_hdrsz_615 LIX
+.%scope block 923 1018
+.%var lm32 34 lm32_616 LIX
+.%var sizeLW 0 sizeLW_616 LIX
+.%var sizeB 0 sizeB_616 LIX
+.%var lmoff 0 lmoff_616 LIX
+.%var i 0 i_616 LIX
+.%scope block 942 974
+.%var lmval 0 lmval_618 LIX
+.%scope end
+.%scope block 974 1015
+.%var lmval 0 lmval_619 LIX
+.%scope end
+.%scope end
+.%scope end
+.%scope end
+.%scope block 1034 1151
+.%var _pif_ctldata 37 _pif_ctldata_623 LIX
+.%var nas_step_two 64 nas_step_two_623 LIX
+.%scope block 1046 1148
+.%var _pif_parrep_hdrsz 0 _pif_parrep_hdrsz_625 LIX
+.%scope block 1049 1137
+.%var lm32 34 lm32_626 LIX
+.%var sizeLW 0 sizeLW_626 LIX
+.%var sizeB 0 sizeB_626 LIX
+.%var lmoff 0 lmoff_626 LIX
+.%var i 0 i_626 LIX
+.%scope block 1068 1097
+.%var lmval 0 lmval_628 LIX
+.%scope end
+.%scope block 1097 1134
+.%var lmval 0 lmval_629 LIX
+.%scope end
+.%scope end
+.%scope end
+.%scope end
+.%scope block 1153 1277
+.%var _pif_ctldata 37 _pif_ctldata_633 LIX
+.%var ue_context_rel_req 66 ue_context_rel_req_633 LIX
+.%scope block 1165 1274
+.%var _pif_parrep_hdrsz 0 _pif_parrep_hdrsz_635 LIX
+.%scope block 1168 1263
+.%var lm32 34 lm32_636 LIX
+.%var sizeLW 0 sizeLW_636 LIX
+.%var sizeB 0 sizeB_636 LIX
+.%var lmoff 0 lmoff_636 LIX
+.%var i 0 i_636 LIX
+.%scope block 1187 1219
+.%var lmval 0 lmval_638 LIX
+.%scope end
+.%scope block 1219 1260
+.%var lmval 0 lmval_639 LIX
+.%scope end
+.%scope end
+.%scope end
+.%scope end
+.%scope block 1279 1375
+.%var _pif_ctldata 37 _pif_ctldata_643 LIX
+.%var auth_step_three 68 auth_step_three_643 LIX
+.%scope block 1291 1372
+.%var _pif_parrep_hdrsz 0 _pif_parrep_hdrsz_645 LIX
+.%scope block 1294 1361
+.%var lm32 34 lm32_646 LIX
+.%var sizeLW 0 sizeLW_646 LIX
+.%var sizeB 0 sizeB_646 LIX
+.%var lmoff 0 lmoff_646 LIX
+.%var i 0 i_646 LIX
+.%scope block 1313 1333
+.%var lmval 0 lmval_648 LIX
+.%scope end
+.%scope block 1333 1358
+.%var lmval 0 lmval_649 LIX
+.%scope end
+.%scope end
+.%scope end
+.%scope end
+.%scope block 1377 1466
+.%var _pif_ctldata 37 _pif_ctldata_653 LIX
+.%var send_ue_teid 70 send_ue_teid_653 LIX
+.%scope block 1389 1463
+.%var _pif_parrep_hdrsz 0 _pif_parrep_hdrsz_655 LIX
+.%scope block 1392 1452
+.%var lm32 34 lm32_656 LIX
+.%var sizeLW 0 sizeLW_656 LIX
+.%var sizeB 0 sizeB_656 LIX
+.%var lmoff 0 lmoff_656 LIX
+.%var i 0 i_656 LIX
+.%scope block 1411 1428
+.%var lmval 0 lmval_658 LIX
+.%scope end
+.%scope block 1428 1449
+.%var lmval 0 lmval_659 LIX
+.%scope end
+.%scope end
+.%scope end
+.%scope end
+.%scope block 1468 1578
+.%var _pif_ctldata 37 _pif_ctldata_663 LIX
+.%var ue_service_req 72 ue_service_req_663 LIX
+.%scope block 1480 1568
+.%var _pif_parrep_hdrsz 0 _pif_parrep_hdrsz_665 LIX
+.%scope block 1483 1557
+.%var lm32 34 lm32_666 LIX
+.%var sizeLW 0 sizeLW_666 LIX
+.%var sizeB 0 sizeB_666 LIX
+.%var lmoff 0 lmoff_666 LIX
+.%var i 0 i_666 LIX
+.%scope block 1502 1525
+.%var lmval 0 lmval_668 LIX
+.%scope end
+.%scope block 1525 1554
+.%var lmval 0 lmval_669 LIX
+.%scope end
+.%scope end
+.%scope end
+.%scope block 1571 1575
+.%var _pif_fk 74 _pif_fk_673 LIX
+.%scope end
+.%scope end
+.%scope block 1583 1589
+.%var standard_metadata 76 standard_metadata_675 LIX
+.%var _pif_fk 78 _pif_fk_675 LIX
+.%scope end
+.%scope end
+.%scope function pif_parrep_exceptions _pif_parrep_exceptions "out/pif_parrep.c" 1602 1605
+.%arg _pif_parrep 34 _pif_parrep_676_V$85c
+.%arg _pif_pe_error 41 _pif_pe_error_676_V$85d
+.%arg _pif_parrep_fk_ptr 34 _pif_parrep_fk_ptr_676_V$85e
+.%arg _pif_parrep_fk_len 36 _pif_parrep_fk_len_676_V$85f
+.%scope end
+.%type U4
+.%type A16 2
+.%type U1
+.%type A32768 2
+.%type A16 2
+.%type A2048 2
+.%type A16 2
+.%type A2048 2
+.%type A16 2
+.%type A2048 2
+.%type A41943040 2
+.%type A10485760 2
+.%type S28 pktio_meta{
+__unnamed 0 13;
+}
+.%type S28 {
+__unnamed 0 14;
+__raw 0 20;
+}
+.%type S28 {
+p_nbi 0 15;
+p_ctm_size 8:30:2 0;
+p_orig_len 8:16:14 0;
+p_offset 8:0:16 0;
+p_src 12:16:16 0;
+p_dst 12:0:16 0;
+p_seq 16:16:16 0;
+p_ro_ctx 16:11:5 0;
+p_is_gro_seq 16:10:1 0;
+p_rx_ipv4_csum_ok 16:9:1 0;
+p_rx_ipv4_csum_present 16:8:1 0;
+p_rx_l4_csum_ok 16:7:1 0;
+p_rx_l4_csum_present 16:6:1 0;
+p_rx_l4_tcp 16:5:1 0;
+p_rx_mac_matched 16:4:1 0;
+p_tunnel 16:3:1 0;
+resv4 16:0:3 0;
+__unnamed 20 19;
+p_vlan 24:16:16 0;
+resv3 24:0:16 0;
+}
+.%type S8 nbi_meta_pkt_info{
+__unnamed 0 16;
+}
+.%type S8 {
+__unnamed 0 17;
+__raw 0 18;
+}
+.%type S8 {
+isl 0:26:6 0;
+pnum 0:16:10 0;
+bls 0:14:2 0;
+len 0:0:14 0;
+split 4:31:1 0;
+resv0 4:29:2 0;
+muptr 4:0:29 0;
+}
+.%type A8 0
+.%type S4 {
+p_timestamp 0:0:32 0;
+}
+.%type A28 0
+.%type S8 pif_pkt_specific{
+__unnamed 0 22;
+}
+.%type S8 {
+__unnamed 0 23;
+_raw 0 24;
+}
+.%type S8 {
+resv3 0:24:8 0;
+trunc_len 0:10:14 0;
+pkt_pl_off 0:0:10 0;
+calc_fld_bmsk 4 0;
+}
+.%type A8 0
+.%type A336 0
+.%type P2 27
+.%type S10 {
+addr 0 28;
+state 8 30;
+}
+.%type P3 29
+.%type U4
+.%type U2
+.%type S4 nfp_mecsr_prev_alu{
+__unnamed 0 32;
+}
+.%type S4 {
+__unnamed 0 33;
+__raw 0 0;
+}
+.%type S4 {
+data16 0:16:16 0;
+res 0:15:1 0;
+ov_sig_ctx 0:14:1 0;
+ov_sig_num 0:13:1 0;
+length 0:8:5 0;
+ov_len 0:7:1 0;
+ov_bm_csr 0:6:1 0;
+ove_data 0:3:3 0;
+ove_master 0:1:2 0;
+ov_sm 0:0:1 0;
+}
+.%type P6 0
+.%type P3 2
+.%type P2 0
+.%type P6 38
+.%type S8 pif_parrep_ctldata{
+valid 0:31:1 0;
+t0_valid 0:30:1 0;
+t0_dirty 0:29:1 0;
+t0_orig_len 0:28:1 0;
+t1_valid 0:27:1 0;
+t1_dirty 0:26:1 0;
+t1_orig_len 0:25:1 0;
+t2_valid 0:24:1 0;
+t2_dirty 0:23:1 0;
+t2_orig_len 0:22:1 0;
+t3_valid 0:21:1 0;
+t3_dirty 0:20:1 0;
+t3_orig_len 0:19:1 0;
+t4_valid 0:18:1 0;
+t4_dirty 0:17:1 0;
+t4_orig_len 0:16:1 0;
+t5_valid 0:15:1 0;
+t5_dirty 0:14:1 0;
+t5_orig_len 0:13:1 0;
+t6_valid 0:12:1 0;
+t6_type 0:8:4 0;
+t6_dirty 0:7:1 0;
+t6_orig_len 0:0:7 0;
+t7_valid 4:31:1 0;
+t7_dirty 4:30:1 0;
+t7_orig_len 4:29:1 0;
+t8_valid 4:28:1 0;
+t8_dirty 4:27:1 0;
+t8_orig_len 4:26:1 0;
+t9_valid 4:25:1 0;
+t9_dirty 4:24:1 0;
+t9_orig_len 4:23:1 0;
+t10_valid 4:22:1 0;
+t10_dirty 4:21:1 0;
+t10_orig_len 4:20:1 0;
+t11_valid 4:19:1 0;
+t11_dirty 4:18:1 0;
+t11_orig_len 4:17:1 0;
+}
+.%type P2 12
+.%type A96 0
+.%type I4
+.%type P6 43
+.%type S16 pif_header_ethernet{
+dstAddr 0:0:32 0;
+__dstAddr_1 4:16:16 0;
+srcAddr 4:0:16 0;
+__srcAddr_1 8:0:32 0;
+etherType 12:16:16 0;
+}
+.%type P6 45
+.%type S8 pif_global_flowkey_ethernet{
+ethernet__etherType 0:16:16 0;
+ethernet__dstAddr 0:16:32 0;
+ethernet____dstAddr_1 4:0:16 0;
+}
+.%type P6 47
+.%type S20 pif_header_ipv4{
+version 0:28:4 0;
+ihl 0:24:4 0;
+diffserv 0:16:8 0;
+totalLen 0:0:16 0;
+identification 4:16:16 0;
+flags 4:13:3 0;
+fragOffset 4:0:13 0;
+ttl 8:24:8 0;
+protocol 8:16:8 0;
+hdrChecksum 8:0:16 0;
+srcAddr 12:0:32 0;
+dstAddr 16:0:32 0;
+}
+.%type P6 49
+.%type S8 pif_global_flowkey_ipv4{
+ipv4__dstAddr 0:0:32 0;
+ipv4__protocol 4:24:8 0;
+ipv4__ttl 4:16:8 0;
+__padding 4:0:16 0;
+}
+.%type P6 51
+.%type S20 pif_header_tcp{
+src_port 0:16:16 0;
+dst_port 0:0:16 0;
+seq_no 4:0:32 0;
+ack_no 8:0:32 0;
+data_offset 12:28:4 0;
+res 12:25:3 0;
+ecn 12:22:3 0;
+ctrl 12:16:6 0;
+window 12:0:16 0;
+checksum 16:16:16 0;
+urgent_ptr 16:0:16 0;
+}
+.%type P6 53
+.%type S8 pif_header_data{
+epc_traffic_code 0:24:8 0;
+sep 0:0:24 0;
+__sep_1 4:8:24 0;
+}
+.%type P6 55
+.%type S8 pif_header_udp{
+srcPort 0:16:16 0;
+dstPort 0:0:16 0;
+length_ 4:16:16 0;
+checksum 4:0:16 0;
+}
+.%type P6 57
+.%type S20 pif_header_send_apn{
+apn 0:0:32 0;
+__apn_1 4:0:32 0;
+sep1 8:0:32 0;
+__sep1_1 12:16:16 0;
+key 12:0:16 0;
+__key_1 16:16:16 0;
+}
+.%type P6 59
+.%type S76 pif_header_auth_step_one{
+imsi 0:0:32 0;
+sep1 4:0:32 0;
+__sep1_1 8:16:16 0;
+ue_nw_capability 8:8:8 0;
+sep2 8:0:8 0;
+__sep2_1 12:0:32 0;
+__sep2_2 16:24:8 0;
+ksi_asme 16:0:24 0;
+__ksi_asme_1 20:0:32 0;
+__ksi_asme_2 24:0:32 0;
+__ksi_asme_3 28:0:32 0;
+__ksi_asme_4 32:0:32 0;
+__ksi_asme_5 36:0:32 0;
+__ksi_asme_6 40:0:32 0;
+__ksi_asme_7 44:0:32 0;
+__ksi_asme_8 48:24:8 0;
+sep3 48:0:24 0;
+__sep3_1 52:8:24 0;
+sqn 52:0:8 0;
+__sqn_1 56:8:24 0;
+sep4 56:0:8 0;
+__sep4_1 60:0:32 0;
+__sep4_2 64:24:8 0;
+tai 64:0:24 0;
+__tai_1 68:0:32 0;
+__tai_2 72:24:8 0;
+}
+.%type P6 61
+.%type S24 pif_header_initial_ctxt_setup_resp{
+ue_teid 0:0:32 0;
+sep1 4:0:32 0;
+__sep1_1 8:16:16 0;
+ue_key 8:0:16 0;
+__ue_key_1 12:16:16 0;
+sep2 12:0:16 0;
+__sep2_1 16:0:32 0;
+ue_ip 20:0:32 0;
+}
+.%type P6 63
+.%type S36 pif_header_detach_req{
+ue_ip 0:0:32 0;
+sep1 4:0:32 0;
+__sep1_1 8:16:16 0;
+ue_teid 8:0:16 0;
+__ue_teid_1 12:16:16 0;
+sep2 12:0:16 0;
+__sep2_1 16:0:32 0;
+sgw_teid 20:0:32 0;
+sep3 24:0:32 0;
+__sep3_1 28:16:16 0;
+ue_num 28:0:16 0;
+__ue_num_1 32:16:16 0;
+}
+.%type P6 65
+.%type S32 pif_header_nas_step_two{
+encrypted_hash 0:0:32 0;
+__encrypted_hash_1 4:0:32 0;
+__encrypted_hash_2 8:0:32 0;
+__encrypted_hash_3 12:0:32 0;
+__encrypted_hash_4 16:0:32 0;
+sep1 20:0:32 0;
+__sep1_1 24:16:16 0;
+imsi 24:0:16 0;
+__imsi_1 28:16:16 0;
+}
+.%type P6 67
+.%type S36 pif_header_ue_context_rel_req{
+ue_ip 0:0:32 0;
+sep1 4:0:32 0;
+__sep1_1 8:16:16 0;
+ue_teid 8:0:16 0;
+__ue_teid_1 12:16:16 0;
+sep2 12:0:16 0;
+__sep2_1 16:0:32 0;
+sgw_teid 20:0:32 0;
+sep3 24:0:32 0;
+__sep3_1 28:16:16 0;
+ue_num 28:0:16 0;
+__ue_num_1 32:16:16 0;
+}
+.%type P6 69
+.%type S20 pif_header_auth_step_three{
+imsi 0:0:32 0;
+sep1 4:0:32 0;
+__sep1_1 8:16:16 0;
+res 8:0:16 0;
+__res_1 12:0:32 0;
+__res_2 16:16:16 0;
+}
+.%type P6 71
+.%type S16 pif_header_send_ue_teid{
+ue_teid 0:0:32 0;
+sep1 4:0:32 0;
+__sep1_1 8:16:16 0;
+key 8:0:16 0;
+__key_1 12:16:16 0;
+}
+.%type P6 73
+.%type S24 pif_header_ue_service_req{
+ue_key 0:0:32 0;
+sep1 4:0:32 0;
+__sep1_1 8:16:16 0;
+ksi_asme 8:0:16 0;
+__ksi_asme_1 12:16:16 0;
+sep2 12:0:16 0;
+__sep2_1 16:0:32 0;
+ue_ip 20:0:32 0;
+}
+.%type P6 75
+.%type S4 pif_global_flowkey_ue_service_req{
+ue_service_req__ue_key 0:0:32 0;
+}
+.%type P6 77
+.%type S16 pif_header_standard_metadata{
+clone_spec 0:0:32 0;
+egress_spec 4:16:16 0;
+egress_port 4:0:16 0;
+ingress_port 8:16:16 0;
+packet_length 8:2:14 0;
+checksum_error 8:1:1 0;
+_padding_0 8:0:1 0;
+egress_instance 12:22:10 0;
+parser_error_location 12:14:8 0;
+instance_type 12:10:4 0;
+parser_status 12:7:3 0;
+_padding_1 12:0:7 0;
+}
+.%type P6 79
+.%type S4 pif_global_flowkey_metadata{
+standard_metadata__ingress_port 0:16:16 0;
+__padding 0:0:16 0;
+}

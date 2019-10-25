@@ -1,0 +1,18 @@
+.%scope file "/opt/netronome/p4/components/nfp_pif/me/apps/pif_app_nfd/include/config.h"
+.%scope function __rt_assert ___rt_assert "/opt/netronome/components/flowenv/me/include/assert.h" 91 99
+.%var reg 0 reg_11 LIX
+.%scope end
+.%var system_init_done_flag 0 _system_init_done_flag SEX
+.%var init_done 1 _init_done SIX
+.%scope function system_init_wait_done _system_init_wait_done "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/system_init.c" 25 44
+.%var xr_done 0 xr_done_200 LIR
+.%scope end
+.%scope function system_init_done _system_init_done "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/system_init.c" 46 53
+.%var xr_done 0 xr_done_205 LIW
+.%scope end
+.%scope function system_reorder_contexts _system_reorder_contexts "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/system_init.c" 57 84
+.%var last_context_number 0 last_context_number_206 LIX
+.%var sig 1 sig_206 LIX
+.%scope end
+.%type U4
+.%type I4

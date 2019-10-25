@@ -1,0 +1,337 @@
+.%scope file "/opt/netronome/p4/components/nfp_pif/me/apps/pif_app_nfd/include/config.h"
+.%scope function __rt_assert ___rt_assert "/opt/netronome/components/flowenv/me/include/assert.h" 91 99
+.%var reg 0 reg_11 LIX
+.%scope end
+.%var fc_emu_0_buckets_ptr 1 _fc_emu_0_buckets_ptr SEX
+.%var fc_emu_0_entries_ptr 10 _fc_emu_0_entries_ptr SEX
+.%var fc_emu_0_payloads_ptr 16 _fc_emu_0_payloads_ptr SEX
+.%var tune_start_time 14 _tune_start_time SEX
+.%var fc_timeout_settings 17 _fc_timeout_settings SEX
+.%var fc_timeout_stats_loop_counter 20 _fc_timeout_stats_loop_counter SEX
+.%var fc_timeout_stats_flows_deleted 21 _fc_timeout_stats_flows_deleted SEX
+.%var fc_timeout_err_shared_lock_fail 22 _fc_timeout_err_shared_lock_fail SEX
+.%var fc_timeout_err_exclusive_lock_fail 23 _fc_timeout_err_exclusive_lock_fail SEX
+.%var fc_timeout_err_head_ptr_zero 24 _fc_timeout_err_head_ptr_zero SEX
+.%var fc_timeout_err_next_ptr_zero 25 _fc_timeout_err_next_ptr_zero SEX
+.%var fc_timeout_err_free_entry_zero 26 _fc_timeout_err_free_entry_zero SEX
+.%var fc_timeout_err_ovf_hash_value_zero 27 _fc_timeout_err_ovf_hash_value_zero SEX
+.%scope function timeout_get_64bit_timestamp _timeout_get_64bit_timestamp "/opt/netronome/p4/components/flowcache/me/lib/flowcache/_c/flow_cache_timeout.c" 83 94
+.%var lo 0 lo_305 LIX
+.%var hi 0 hi_305 LIX
+.%scope end
+.%scope function fc_timeout_cam_bucket_calc_addresses _fc_timeout_cam_bucket_calc_addresses "/opt/netronome/p4/components/flowcache/me/lib/flowcache/_c/flow_cache_timeout.c" 283 314
+.%arg bucket_emu 0 bucket_emu_308_V$2f7
+.%arg cam_start_address 28 cam_start_address_308_V$2f8
+.%arg cam_end_address 28 cam_end_address_308_V$2f9
+.%arg cam_base_address 28 cam_base_address_308_V$2fa
+.%var number_contexts 0 number_contexts_308 LIX
+.%var active_ctx 0 active_ctx_308 LIX
+.%scope end
+.%scope function fc_timeout_process_entry_list _fc_timeout_process_entry_list "/opt/netronome/p4/components/flowcache/me/lib/flowcache/_c/flow_cache_timeout.c" 328 469
+.%arg bucket_base_ptr 30 bucket_base_ptr_311_V$2fd
+.%arg entry_base_ptr 30 entry_base_ptr_311_V$2fe
+.%arg payload_base_ptr 30 payload_base_ptr_311_V$2ff
+.%arg entry_idx 0 entry_idx_311_V$300
+.%arg lock 31 lock_311_V$301
+.%arg flush_entries_flag 33 flush_entries_flag_311_V$308
+.%var rd_sig_1 34 rd_sig_1_311 LIX
+.%var rd_sig_2 34 rd_sig_2_311 LIX
+.%var entry_tbl_ptr 30 entry_tbl_ptr_311 LIX
+.%var rd_entry 11 rd_entry_311 LIR
+.%var expired 33 expired_311 LIX
+.%var next_entry_idx 0 next_entry_idx_311 LIX
+.%scope block 362 366
+.%var timeout 35 timeout_314 LIX
+.%scope block 365 365
+.%var result 34 result_315 LIX
+.%scope end
+.%scope end
+.%scope block 407 411
+.%var timeout 35 timeout_321 LIX
+.%scope block 410 410
+.%var result 34 result_322 LIX
+.%scope end
+.%scope end
+.%scope end
+.%scope function fc_timeout _fc_timeout "/opt/netronome/p4/components/flowcache/me/lib/flowcache/_c/flow_cache_timeout.c" 472 1706
+.%arg bucket_mu 0 bucket_mu_328_V$329
+.%var cam_read_address 29 cam_read_address_328 LIX
+.%var cam_start_address 29 cam_start_address_328 LIX
+.%var cam_end_address 29 cam_end_address_328 LIX
+.%var cam_base_address 29 cam_base_address_328 LIX
+.%var entry_base_ptr 30 entry_base_ptr_328 LIX
+.%var payload_base_ptr 30 payload_base_ptr_328 LIX
+.%scope block 481 518
+.%var entry_mu 0 entry_mu_329 LIX
+.%var payload_mu 0 payload_mu_329 LIX
+.%scope end
+.%scope block 538 1703
+.%var i 34 i_335 LIX
+.%var entry_idx 0 entry_idx_335 LIX
+.%var check_head_flag 0 check_head_flag_335 LIX
+.%var check_next_flag 0 check_next_flag_335 LIX
+.%var shared_lock_flag 0 shared_lock_flag_335 LIX
+.%var lock 31 lock_335 LIX
+.%var shared_lock_fail 0 shared_lock_fail_335 LIX
+.%var exclusive_lock_fail 0 exclusive_lock_fail_335 LIX
+.%var head_ptr_zero 0 head_ptr_zero_335 LIX
+.%var next_ptr_zero 0 next_ptr_zero_335 LIX
+.%scope block 558 1702
+.%var flush_entries_flag 0 flush_entries_flag_336 LIX
+.%scope block 561 581
+.%var timeout_disable_flag 0 timeout_disable_flag_337 LIX
+.%var read_settings 17 read_settings_337 LIR
+.%var sig_1 34 sig_1_337 LIX
+.%scope end
+.%scope block 627 691
+.%var fc_cam_bucket 2 fc_cam_bucket_341 LIR
+.%var sig_1 34 sig_1_341 LIX
+.%scope block 650 659
+.%var timeout 35 timeout_344 LIX
+.%var current_time 34 current_time_344 LIX
+.%scope block 658 658
+.%var result 34 result_345 LIX
+.%scope end
+.%scope end
+.%scope end
+.%scope block 753 842
+.%var fc_cam_bucket 2 fc_cam_bucket_353 LIR
+.%var sig_1 34 sig_1_353 LIX
+.%scope block 786 792
+.%var timeout 35 timeout_356 LIX
+.%var current_time 34 current_time_356 LIX
+.%scope block 791 791
+.%var result 34 result_357 LIX
+.%scope end
+.%scope end
+.%scope block 795 841
+.%var remove_result 36 remove_result_359 LIX
+.%scope end
+.%scope end
+.%scope block 878 913
+.%var fc_cam_bucket 2 fc_cam_bucket_363 LIR
+.%var rd_sig_1 34 rd_sig_1_363 LIX
+.%var rd_sig_2 34 rd_sig_2_363 LIX
+.%scope end
+.%scope block 918 928
+.%var entry_ptr 37 entry_ptr_366 LIX
+.%scope end
+.%scope block 997 1208
+.%var fc_cam_bucket 2 fc_cam_bucket_371 LIR
+.%var sig_1 34 sig_1_371 LIX
+.%scope block 1053 1059
+.%var timeout 35 timeout_379 LIX
+.%var current_time 34 current_time_379 LIX
+.%scope block 1058 1058
+.%var result 34 result_380 LIX
+.%scope end
+.%scope end
+.%scope block 1095 1101
+.%var timeout 35 timeout_389 LIX
+.%var current_time 34 current_time_389 LIX
+.%scope block 1100 1100
+.%var result 34 result_390 LIX
+.%scope end
+.%scope end
+.%scope block 1127 1133
+.%var timeout 35 timeout_396 LIX
+.%var current_time 34 current_time_396 LIX
+.%scope block 1132 1132
+.%var result 34 result_397 LIX
+.%scope end
+.%scope end
+.%scope block 1161 1167
+.%var timeout 35 timeout_403 LIX
+.%var current_time 34 current_time_403 LIX
+.%scope block 1166 1166
+.%var result 34 result_404 LIX
+.%scope end
+.%scope end
+.%scope end
+.%scope block 1274 1414
+.%var fc_cam_bucket 2 fc_cam_bucket_413 LIR
+.%var sig_1 34 sig_1_413 LIX
+.%var sig_2 34 sig_2_413 LIX
+.%scope block 1331 1337
+.%var timeout 35 timeout_420 LIX
+.%var current_time 34 current_time_420 LIX
+.%scope block 1336 1336
+.%var result 34 result_421 LIX
+.%scope end
+.%scope end
+.%scope block 1339 1345
+.%var timeout 35 timeout_423 LIX
+.%var current_time 34 current_time_423 LIX
+.%scope block 1344 1344
+.%var result 34 result_424 LIX
+.%scope end
+.%scope end
+.%scope block 1347 1353
+.%var timeout 35 timeout_426 LIX
+.%var current_time 34 current_time_426 LIX
+.%scope block 1352 1352
+.%var result 34 result_427 LIX
+.%scope end
+.%scope end
+.%scope block 1355 1361
+.%var timeout 35 timeout_429 LIX
+.%var current_time 34 current_time_429 LIX
+.%scope block 1360 1360
+.%var result 34 result_430 LIX
+.%scope end
+.%scope end
+.%scope block 1364 1413
+.%var remove_result 36 remove_result_432 LIX
+.%scope end
+.%scope end
+.%scope block 1450 1495
+.%var fc_cam_bucket 2 fc_cam_bucket_437 LIR
+.%var rd_sig_1 34 rd_sig_1_437 LIX
+.%var rd_sig_2 34 rd_sig_2_437 LIX
+.%scope end
+.%scope block 1499 1555
+.%var entry_ptr 37 entry_ptr_443 LIX
+.%scope end
+.%scope block 1594 1652
+.%var cam_end_ptr 29 cam_end_ptr_447 LIX
+.%var cam_block_address 0 cam_block_address_447 LIX
+.%scope block 1606 1651
+.%var current_end_time 14 current_end_time_448 LIX
+.%var expected_end_time 14 expected_end_time_448 LIX
+.%var time_to_wait 0 time_to_wait_448 LIX
+.%scope block 1632 1650
+.%var i 34 i_452 LIX
+.%var sleep_cycles 0 sleep_cycles_452 LIX
+.%scope end
+.%scope end
+.%scope end
+.%scope block 1671 1681
+.%var rd_flush_flag 0 rd_flush_flag_456 LIR
+.%scope end
+.%scope block 1686 1699
+.%var active_context 0 active_context_457 LIX
+.%scope end
+.%scope end
+.%scope end
+.%scope end
+.%scope function main _main "/opt/netronome/p4/components/flowcache/me/lib/flowcache/_c/flow_cache_timeout.c" 1711 1782
+.%var active_ctx 0 active_ctx_458 LIX
+.%scope end
+.%type U4
+.%type P3 2
+.%type S64 fc_cam_bucket_t{
+__unnamed 0 3;
+value 0 9;
+}
+.%type S64 {
+cam_entry1 0 4;
+cam_entry2 4 4;
+cam_entry3 8 4;
+cam_entry4 12 4;
+lock_overflow 16:24:8 0;
+timeout1 16:16:8 0;
+timeout2 16:8:8 0;
+timeout3 16:0:8 0;
+timeout4 20:24:8 0;
+timeout_overflow 20:16:8 0;
+timestamp1 20:0:16 0;
+timestamp2 24:16:16 0;
+timestamp3 24:0:16 0;
+timestamp4 28:16:16 0;
+timestamp_overflow 28:0:16 0;
+stats 32 6;
+head2 52:8:24 0;
+head3_hi 52:0:8 0;
+head3_lo 56:16:16 0;
+head4_hi 56:0:16 0;
+head4_lo 60:24:8 0;
+head_overflow 60:0:24 0;
+}
+.%type S4 fc_cam_lock_hash_t{
+__unnamed 0 5;
+value 0 0;
+}
+.%type S4 {
+lock 0:24:8 0;
+hash 0:0:24 0;
+}
+.%type A20 7
+.%type S4 fc_statistics_t{
+__unnamed 0 8;
+value 0 0;
+}
+.%type S4 {
+bytes 0:11:21 0;
+guard 0:10:1 0;
+packets 0:1:9 0;
+next 0:0:1 0;
+}
+.%type A64 0
+.%type P3 11
+.%type S128 fc_entry_t{
+__unnamed 0 12;
+value 0 15;
+}
+.%type S128 {
+unused 0 0;
+version 4 0;
+host_context 8:8:24 0;
+hash_hi 8:0:8 0;
+hash_lo 12:16:16 0;
+timestamp 12:0:16 0;
+timeout 16:24:8 0;
+next 16:0:24 0;
+key 20 13;
+packet_count 112 14;
+byte_count 120 14;
+}
+.%type A92 0
+.%type U8
+.%type A128 0
+.%type P3 0
+.%type S16 fc_timeout_settings_t{
+__unnamed 0 18;
+value 0 19;
+}
+.%type S16 {
+reserved 0:9:23 0;
+disable_timeout 0:8:1 0;
+flush_flag 0:0:8 0;
+reserved_word2 4:0:32 0;
+reserved_word3 8:0:32 0;
+reserved_word4 12:0:32 0;
+}
+.%type A16 0
+.%type A32 0
+.%type A32 0
+.%type A32 0
+.%type A32 0
+.%type A32 0
+.%type A32 0
+.%type A32 0
+.%type A32 0
+.%type P2 29
+.%type P3 2
+.%type P3 0
+.%type S4 fc_lock_t{
+__unnamed 0 32;
+value 0 0;
+}
+.%type S4 {
+bucket_address 0:6:26 0;
+exclusive_lock 0:5:1 0;
+cam_entry 0:2:3 0;
+bucket_mu 0:0:2 0;
+}
+.%type U1
+.%type I4
+.%type U2
+.%type E4 FC_REMOVE_RESULT_CODE{
+FC_REMOVE_ERROR 0;
+FC_REMOVE_WAIT_FOR_LOCK 1;
+FC_REMOVE_ENTRY_NOT_FOUND 2;
+FC_REMOVE_EXACT_MATCH 3;
+FC_REMOVE_EXACT_MATCH_LOCK_CLEARED 4;
+FC_REMOVE_EXCLUSIVE_LOCK_EXP 5;
+}
+.%type P3 11

@@ -1,0 +1,277 @@
+.%scope file "/opt/netronome/p4/components/nfp_pif/me/apps/pif_app_nfd/include/config.h"
+.%scope function __rt_assert ___rt_assert "/opt/netronome/components/flowenv/me/include/assert.h" 91 99
+.%var reg 0 reg_11 LIX
+.%scope end
+.%var gro_ctxcfg 1 _gro_ctxcfg SEX
+.%var gro_cli_lm_ctx 3 _gro_cli_lm_ctx SEX
+.%var gro_cli_cntrs 4 _gro_cli_cntrs SEX
+.%scope function gro_cli_init _gro_cli_init "/opt/netronome/p4/components/gro/libgro.c" 143 151
+.%var xctx 2 xctx_280 LIR
+.%var i 6 i_280 LIX
+.%scope end
+.%scope function gro_cli_build_drop_seq_meta _gro_cli_build_drop_seq_meta "/opt/netronome/p4/components/gro/libgro.c" 155 161
+.%arg meta 7 meta_282_V$31a
+.%scope end
+.%scope function gro_cli_build_drop_ctm_buf_meta _gro_cli_build_drop_ctm_buf_meta "/opt/netronome/p4/components/gro/libgro.c" 165 173
+.%arg meta 7 meta_283_V$34f
+.%arg isl 0 isl_283_V$350
+.%arg pkt_num 0 pkt_num_283_V$351
+.%scope end
+.%scope function gro_cli_build_drop_mu_buf_meta _gro_cli_build_drop_mu_buf_meta "/opt/netronome/p4/components/gro/libgro.c" 177 186
+.%arg meta 7 meta_284_V$386
+.%arg ring_addr_hi 0 ring_addr_hi_284_V$387
+.%arg ring_num 0 ring_num_284_V$388
+.%arg mu_handle 0 mu_handle_284_V$389
+.%scope end
+.%scope function gro_cli_build_memq_meta _gro_cli_build_memq_meta "/opt/netronome/p4/components/gro/libgro.c" 190 209
+.%arg meta 12 meta_285_V$3be
+.%arg type 6 type_285_V$3bf
+.%arg isl 0 isl_285_V$3c0
+.%arg qnum 0 qnum_285_V$3c1
+.%arg nwords 6 nwords_285_V$3c2
+.%arg qd0 6 qd0_285_V$3c3
+.%arg qd1 6 qd1_285_V$3c4
+.%arg qd2 6 qd2_285_V$3c5
+.%var w0 14 w0_285 LIX
+.%scope end
+.%scope function gro_cli_build_workq_meta1 _gro_cli_build_workq_meta1 "/opt/netronome/p4/components/gro/libgro.c" 213 217
+.%arg meta 12 meta_288_V$3f1
+.%arg isl 0 isl_288_V$3f2
+.%arg qnum 0 qnum_288_V$3f3
+.%arg qd0 6 qd0_288_V$3f4
+.%scope end
+.%scope function gro_cli_build_workq_meta2 _gro_cli_build_workq_meta2 "/opt/netronome/p4/components/gro/libgro.c" 221 225
+.%arg meta 12 meta_289_V$3f5
+.%arg isl 0 isl_289_V$3f6
+.%arg qnum 0 qnum_289_V$3f7
+.%arg qd0 6 qd0_289_V$3f8
+.%arg qd1 6 qd1_289_V$3f9
+.%scope end
+.%scope function gro_cli_build_workq_meta3 _gro_cli_build_workq_meta3 "/opt/netronome/p4/components/gro/libgro.c" 229 234
+.%arg meta 12 meta_290_V$3fa
+.%arg isl 0 isl_290_V$3fb
+.%arg qnum 0 qnum_290_V$3fc
+.%arg qd0 6 qd0_290_V$3fd
+.%arg qd1 6 qd1_290_V$3fe
+.%arg qd2 6 qd2_290_V$3ff
+.%scope end
+.%scope function gro_cli_build_mem_ring_meta1 _gro_cli_build_mem_ring_meta1 "/opt/netronome/p4/components/gro/libgro.c" 238 242
+.%arg meta 12 meta_291_V$400
+.%arg isl 0 isl_291_V$401
+.%arg qnum 0 qnum_291_V$402
+.%arg qd0 6 qd0_291_V$403
+.%scope end
+.%scope function gro_cli_build_mem_ring_meta2 _gro_cli_build_mem_ring_meta2 "/opt/netronome/p4/components/gro/libgro.c" 246 251
+.%arg meta 12 meta_292_V$404
+.%arg isl 0 isl_292_V$405
+.%arg qnum 0 qnum_292_V$406
+.%arg qd0 6 qd0_292_V$407
+.%arg qd1 6 qd1_292_V$408
+.%scope end
+.%scope function gro_cli_build_mem_ring_meta3 _gro_cli_build_mem_ring_meta3 "/opt/netronome/p4/components/gro/libgro.c" 255 260
+.%arg meta 12 meta_293_V$409
+.%arg isl 0 isl_293_V$40a
+.%arg qnum 0 qnum_293_V$40b
+.%arg qd0 6 qd0_293_V$40c
+.%arg qd1 6 qd1_293_V$40d
+.%arg qd2 6 qd2_293_V$40e
+.%scope end
+.%scope function gro_cli_build_nbi_meta _gro_cli_build_nbi_meta "/opt/netronome/p4/components/gro/libgro.c" 265 316
+.%arg meta 16 meta_294_V$40f
+.%arg pkt_isl 0 pkt_isl_294_V$410
+.%arg pkt_num 0 pkt_num_294_V$411
+.%arg ctm_sz 0 ctm_sz_294_V$412
+.%arg ms_off 0 ms_off_294_V$413
+.%arg eoff 0 eoff_294_V$414
+.%arg nbi 0 nbi_294_V$415
+.%arg txq 0 txq_294_V$416
+.%var dm 0 dm_294 LIX
+.%scope end
+.%scope function gro_cli_nfd_desc2meta _gro_cli_nfd_desc2meta "/opt/netronome/p4/components/gro/libgro.c" 328 357
+.%arg odesc 21 odesc_300_V$447
+.%arg idescp 26 idescp_300_V$448
+.%arg pcie 0 pcie_300_V$449
+.%arg qid 0 qid_300_V$44a
+.%var idesc 28 idesc_300 LIX
+.%var w0 23 w0_300 LIX
+.%var off 0 off_300 LIX
+.%scope end
+.%scope function _gro_cli_cntr_enqueued_incr __gro_cli_cntr_enqueued_incr "/opt/netronome/p4/components/gro/libgro.c" 411 414
+.%arg ctx 0 ctx_301_V$490
+.%scope end
+.%scope function _gro_cli_cntr_released_add __gro_cli_cntr_released_add "/opt/netronome/p4/components/gro/libgro.c" 418 421
+.%arg ctx 0 ctx_302_V$491
+.%arg amt 0 amt_302_V$492
+.%scope end
+.%scope function _gro_cli_release __gro_cli_release "/opt/netronome/p4/components/gro/libgro.c" 425 451
+.%arg clictx 29 clictx_303_V$493
+.%arg ctx 0 ctx_303_V$494
+.%arg nrel 0 nrel_303_V$495
+.%var addr_hi 0 addr_hi_303 LIX
+.%var addr_lo 0 addr_lo_303 LIX
+.%var rel 30 rel_303 LIX
+.%var xrel 30 xrel_303 LIX
+.%var putsig 33 putsig_303 LIX
+.%scope end
+.%scope function gro_cli_abort_ticket _gro_cli_abort_ticket "/opt/netronome/p4/components/gro/libgro.c" 455 467
+.%arg ctx 0 ctx_305_V$4af
+.%arg tape 0 tape_305_V$4b0
+.%arg seq 0 seq_305_V$4b1
+.%scope end
+.%scope function gro_cli_abort_tape _gro_cli_abort_tape "/opt/netronome/p4/components/gro/libgro.c" 472 484
+.%arg ctx 0 ctx_306_V$4b2
+.%arg tape 0 tape_306_V$4b3
+.%arg nrel 0 nrel_306_V$4b4
+.%scope end
+.%scope function ticket_error_is_fatal _ticket_error_is_fatal "/opt/netronome/p4/components/gro/libgro.c" 488 529
+.%arg addr_hi 0 addr_hi_307_V$4b5
+.%arg addr_lo 0 addr_lo_307_V$4b6
+.%arg ticket_seq 0 ticket_seq_307_V$4b7
+.%arg epoch 0 epoch_307_V$4b8
+.%var prev_epoch 0 prev_epoch_307 LIX
+.%var skid_marker 0 skid_marker_307 LIX
+.%var tape_epoch 0 tape_epoch_307 LIX
+.%var tape_seq 0 tape_seq_307 LIX
+.%var rel_seq 0 rel_seq_307 LIX
+.%var tape_read_sig 6 tape_read_sig_307 LIX
+.%var ticket_tape 34 ticket_tape_307 LIR
+.%scope end
+.%scope function cascaded_ticket_error_is_fatal _cascaded_ticket_error_is_fatal "/opt/netronome/p4/components/gro/libgro.c" 533 551
+.%arg addr_hi 0 addr_hi_310_V$4c2
+.%arg addr_lo 0 addr_lo_310_V$4c3
+.%arg epoch 0 epoch_310_V$4c4
+.%var prev_epoch 0 prev_epoch_310 LIX
+.%var skid_marker 0 skid_marker_310 LIX
+.%var tape_read_sig 6 tape_read_sig_310 LIX
+.%var tape_seq 0 tape_seq_310 LIR
+.%scope end
+.%scope function gro_cli_send _gro_cli_send "/opt/netronome/p4/components/gro/libgro.c" 555 660
+.%arg meta 35 meta_311_V$4ca
+.%arg ctx 0 ctx_311_V$4cb
+.%arg seq 0 seq_311_V$4cc
+.%var adj_seq 0 adj_seq_311 LIX
+.%var nrel 6 nrel_311 LIX
+.%var tape 0 tape_311 LIX
+.%var ticket_seq 0 ticket_seq_311 LIX
+.%var rel_ctx 0 rel_ctx_311 LIX
+.%var addr_hi 0 addr_hi_311 LIX
+.%var addr_lo 0 addr_lo_311 LIX
+.%var ntapes 0 ntapes_311 LIX
+.%var epoch 0 epoch_311 LIX
+.%var clictx 29 clictx_311 LIX
+.%var ticket 0 ticket_311 LIX
+.%var meta_sig 6 meta_sig_311 LIX
+.%var ticket_sig 33 ticket_sig_311 LIX
+.%scope end
+.%type U4
+.%type A128 2
+.%type S16 gro_client_ctx{
+ring_addr_hi 0:24:8 0;
+ring_addr_lo 0:0:24 0;
+bm_addr_hi 4:24:8 0;
+bm_addr_lo 4:0:24 0;
+q_addr_hi 8:24:8 0;
+q_size 8:0:24 0;
+q_addr_lo 12 0;
+}
+.%type A128 2
+.%type A128 5
+.%type U8
+.%type I4
+.%type P2 8
+.%type S16 gro_meta_drop{
+__unnamed 0 9;
+}
+.%type S16 {
+__unnamed 0 10;
+__raw 0 11;
+}
+.%type S16 {
+unused 0:7:25 0;
+dest 0:3:4 0;
+type 0:0:3 0;
+ctm_addr_hi 4:24:8 0;
+unused2 4:9:15 0;
+ctm_pkt_num 4:0:9 0;
+mu_ring_addr_hi 8:24:8 0;
+mu_ring_num 8:0:24 0;
+mu_handle 12 0;
+}
+.%type A16 0
+.%type P2 13
+.%type S16 gro_meta_memq{
+w0 0 14;
+qdata 4 15;
+}
+.%type S4 gro_meta_memq_w0{
+q_hi 0:24:8 0;
+unused 0:17:7 0;
+qnum 0:7:10 0;
+dest 0:3:4 0;
+type 0:0:3 0;
+}
+.%type A12 0
+.%type P2 17
+.%type S16 gro_meta_nbi{
+__unnamed 0 18;
+}
+.%type S16 {
+__unnamed 0 19;
+__raw 0 20;
+}
+.%type S16 {
+unused 0:7:25 0;
+dest 0:3:4 0;
+type 0:0:3 0;
+addr_hi 4 0;
+addr_lo 8 0;
+prev_alu 12 0;
+}
+.%type A16 0
+.%type P2 22
+.%type S16 gro_meta_nfd3{
+w0 0 23;
+w1 4 0;
+w2 8 0;
+w3 12 0;
+}
+.%type S4 gro_meta_nfd3_w0{
+__unnamed 0 24;
+}
+.%type S4 {
+__unnamed 0 25;
+__raw 0 0;
+}
+.%type S4 {
+isl 0:26:6 0;
+ctm_only 0:25:1 0;
+pktnum 0:16:9 0;
+split 0:14:2 0;
+off 0:7:7 0;
+pcie 0:3:4 0;
+type 0:0:3 0;
+}
+.%type P2 27
+.%type U4
+.%type P2 0
+.%type P6 2
+.%type S4 gro_release{
+__unnamed 0 31;
+}
+.%type S4 {
+__unnamed 0 32;
+__raw 0 0;
+}
+.%type S4 {
+valid 0:31:1 0;
+pad2 0:23:8 0;
+nrel 0:16:7 0;
+pad1 0:3:13 0;
+ctx 0:0:3 0;
+}
+.%type S8 SIGNAL_PAIR{
+even 0 6;
+odd 4 6;
+}
+.%type A12 0
+.%type P2 27

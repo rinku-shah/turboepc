@@ -1,0 +1,411 @@
+.%scope file "/opt/netronome/p4/components/nfp_pif/me/apps/pif_app_nfd/include/config.h"
+.%scope function multiply_24x8 _multiply_24x8 "/opt/netronome/p4/components/nfp_pif/me/lib/pif/include/pif_common.h" 62 77
+.%arg x 0 x_407_V$5e4
+.%arg y 0 y_407_V$5e5
+.%var result 0 result_407 LIX
+.%scope end
+.%var nfp_cls_autopush_user_event 1 _nfp_cls_autopush_user_event SEX
+.%var nfp_cls_autopush_user_event_status 2 _nfp_cls_autopush_user_event_status SEX
+.%var BLM_NBI8_BLQ0_EMU_QD_BASE 3 _BLM_NBI8_BLQ0_EMU_QD_BASE SEX
+.%var BLM_NBI8_BLQ0_EMU_Q_BASE 5 _BLM_NBI8_BLQ0_EMU_Q_BASE SEX
+.%var BLM_NBI8_BLQ1_EMU_QD_BASE 6 _BLM_NBI8_BLQ1_EMU_QD_BASE SEX
+.%var BLM_NBI8_BLQ1_EMU_Q_BASE 7 _BLM_NBI8_BLQ1_EMU_Q_BASE SEX
+.%var BLM_NBI8_BLQ2_EMU_QD_BASE 8 _BLM_NBI8_BLQ2_EMU_QD_BASE SEX
+.%var BLM_NBI8_BLQ2_EMU_Q_BASE 9 _BLM_NBI8_BLQ2_EMU_Q_BASE SEX
+.%var BLM_NBI8_BLQ3_EMU_QD_BASE 10 _BLM_NBI8_BLQ3_EMU_QD_BASE SEX
+.%var BLM_NBI8_BLQ3_EMU_Q_BASE 11 _BLM_NBI8_BLQ3_EMU_Q_BASE SEX
+.%var BLM_NBI8_BLQ0_EMU_EMEM0_BUFS_BASE 12 _BLM_NBI8_BLQ0_EMU_EMEM0_BUFS_BASE SEX
+.%var BLM_NBI8_BLQ0_BDSRAM_EMEM0_BUFS_BASE 13 _BLM_NBI8_BLQ0_BDSRAM_EMEM0_BUFS_BASE SEX
+.%var pkt 14 _pkt SEX
+.%scope function pif_flcalc_csum16_update_lw _pif_flcalc_csum16_update_lw "/opt/netronome/p4/components/nfp_pif/me/lib/pif/src/pif_flcalc_algorithms.c" 517 539
+.%arg init 23 init_460_V$5e8
+.%arg val 0 val_460_V$5e9
+.%arg val_mask 0 val_mask_460_V$5ea
+.%arg is_rem 24 is_rem_460_V$5eb
+.%var sum32 0 sum32_460 LIX
+.%scope end
+.%scope function pif_flcalc_xor16_update_lw _pif_flcalc_xor16_update_lw "/opt/netronome/p4/components/nfp_pif/me/lib/pif/src/pif_flcalc_algorithms.c" 542 555
+.%arg init 23 init_463_V$5ee
+.%arg val 0 val_463_V$5ef
+.%arg val_mask 0 val_mask_463_V$5f0
+.%arg is_rem 24 is_rem_463_V$5f1
+.%var xor16 23 xor16_463 LIX
+.%scope end
+.%scope function __pif_flcalc_csum16_var ___pif_flcalc_csum16_var "/opt/netronome/p4/components/nfp_pif/me/lib/pif/src/pif_flcalc_algorithms.c" 27 61
+.%arg in_sum32 0 in_sum32_409_V$5f4
+.%arg cls_ptr 25 cls_ptr_409_V$5f5
+.%arg cls_len 0 cls_len_409_V$5f6
+.%arg odd_byte_offset 4 odd_byte_offset_409_V$5f7
+.%var out_sum32 0 out_sum32_409 LIX
+.%var cls_offset 0 cls_offset_409 LIX
+.%var i 0 i_409 LIX
+.%var val16 23 val16_409 LIX
+.%var to_rd 0 to_rd_409 LIX
+.%var rem 4 rem_409 LIX
+.%var xfr_rd 26 xfr_rd_409 LIR
+.%var sig_rd 24 sig_rd_409 LIX
+.%scope end
+.%scope function __pif_flcalc_csum16_payload ___pif_flcalc_csum16_payload "/opt/netronome/p4/components/nfp_pif/me/lib/pif/src/pif_flcalc_algorithms.c" 74 106
+.%arg in_sum32 0 in_sum32_412_V$602
+.%arg payload_base 27 payload_base_412_V$603
+.%arg payload_offset 0 payload_offset_412_V$604
+.%arg payload_len 0 payload_len_412_V$605
+.%arg odd_byte_offset 4 odd_byte_offset_412_V$606
+.%var out_sum32 0 out_sum32_412 LIX
+.%var i 0 i_412 LIX
+.%var val16 23 val16_412 LIX
+.%var to_rd 0 to_rd_412 LIX
+.%var xfr_rd 29 xfr_rd_412 LIR
+.%var sig_rd 24 sig_rd_412 LIX
+.%scope end
+.%scope function pif_flcalc_csum16 _pif_flcalc_csum16 "/opt/netronome/p4/components/nfp_pif/me/lib/pif/src/pif_flcalc_algorithms.c" 108 181
+.%arg init 23 init_415_V$60f
+.%arg lm_ptr 30 lm_ptr_415_V$610
+.%arg lm_len 0 lm_len_415_V$611
+.%arg cls_ptr 25 cls_ptr_415_V$612
+.%arg cls_len 0 cls_len_415_V$613
+.%arg payld_offset 0 payld_offset_415_V$614
+.%arg payld_len 0 payld_len_415_V$615
+.%arg odd_byte_offset_bmask 4 odd_byte_offset_bmask_415_V$616
+.%var i 0 i_415 LIX
+.%var csum16 23 csum16_415 LIX
+.%var val16 23 val16_415 LIX
+.%var odd_byte_offset 4 odd_byte_offset_415 LIX
+.%var sum32 0 sum32_415 LIX
+.%scope block 142 171
+.%var ctm_payld_len 0 ctm_payld_len_418 LIX
+.%var mu_payld_len 0 mu_payld_len_418 LIX
+.%var payld_base 27 payld_base_418 LIX
+.%var mu_offset 0 mu_offset_418 LIX
+.%scope end
+.%scope end
+.%scope function pif_flcalc_csum16_lmem _pif_flcalc_csum16_lmem "/opt/netronome/p4/components/nfp_pif/me/lib/pif/src/pif_flcalc_algorithms.c" 183 214
+.%arg init 23 init_424_V$621
+.%arg lm_ptr 31 lm_ptr_424_V$622
+.%arg lm_len 0 lm_len_424_V$623
+.%var i 0 i_424 LIX
+.%var csum16 23 csum16_424 LIX
+.%var rem 0 rem_424 LIX
+.%var val 0 val_424 LIX
+.%var sum32 0 sum32_424 LIX
+.%scope end
+.%scope function pif_flcalc_csum16_mem _pif_flcalc_csum16_mem "/opt/netronome/p4/components/nfp_pif/me/lib/pif/src/pif_flcalc_algorithms.c" 216 259
+.%arg init 23 init_429_V$62a
+.%arg payld_offset 0 payld_offset_429_V$62b
+.%arg payld_len 0 payld_len_429_V$62c
+.%var i 0 i_429 LIX
+.%var csum16 23 csum16_429 LIX
+.%var rem 0 rem_429 LIX
+.%var val 0 val_429 LIX
+.%var sum32 0 sum32_429 LIX
+.%var ctm_len 0 ctm_len_429 LIX
+.%var mu_len 0 mu_len_429 LIX
+.%var mem_addr 27 mem_addr_429 LIX
+.%var mu_offset 0 mu_offset_429 LIX
+.%var pkt_buf 32 pkt_buf_429 LIX
+.%scope end
+.%scope function pif_flcalc_csum16_update _pif_flcalc_csum16_update "/opt/netronome/p4/components/nfp_pif/me/lib/pif/src/pif_flcalc_algorithms.c" 261 310
+.%arg init 23 init_433_V$638
+.%arg lm_old 30 lm_old_433_V$639
+.%arg lm_new 30 lm_new_433_V$63a
+.%arg lm_len 0 lm_len_433_V$63b
+.%arg odd_byte_offset 4 odd_byte_offset_433_V$63c
+.%arg byte_mask_first 4 byte_mask_first_433_V$63d
+.%arg byte_mask_last 4 byte_mask_last_433_V$63e
+.%var i 0 i_433 LIX
+.%var val8 4 val8_433 LIX
+.%var val16 23 val16_433 LIX
+.%var csum16 23 csum16_433 LIX
+.%var sum32 0 sum32_433 LIX
+.%scope end
+.%scope function __pif_flcalc_xor16_var ___pif_flcalc_xor16_var "/opt/netronome/p4/components/nfp_pif/me/lib/pif/src/pif_flcalc_algorithms.c" 326 360
+.%arg in_xor16 23 in_xor16_440_V$645
+.%arg cls_ptr 25 cls_ptr_440_V$646
+.%arg cls_len 0 cls_len_440_V$647
+.%arg odd_byte_offset 4 odd_byte_offset_440_V$648
+.%var out_xor16 23 out_xor16_440 LIX
+.%var cls_offset 0 cls_offset_440 LIX
+.%var i 0 i_440 LIX
+.%var val16 23 val16_440 LIX
+.%var to_rd 0 to_rd_440 LIX
+.%var rem 4 rem_440 LIX
+.%var xfr_rd 33 xfr_rd_440 LIR
+.%var sig_rd 24 sig_rd_440 LIX
+.%scope end
+.%scope function __pif_flcalc_xor16_payload ___pif_flcalc_xor16_payload "/opt/netronome/p4/components/nfp_pif/me/lib/pif/src/pif_flcalc_algorithms.c" 373 405
+.%arg in_xor16 23 in_xor16_443_V$653
+.%arg payload_base 27 payload_base_443_V$654
+.%arg payload_offset 0 payload_offset_443_V$655
+.%arg payload_len 0 payload_len_443_V$656
+.%arg odd_byte_offset 4 odd_byte_offset_443_V$657
+.%var out_xor16 23 out_xor16_443 LIX
+.%var i 0 i_443 LIX
+.%var val16 23 val16_443 LIX
+.%var to_rd 0 to_rd_443 LIX
+.%var xfr_rd 34 xfr_rd_443 LIR
+.%var sig_rd 24 sig_rd_443 LIX
+.%scope end
+.%scope function pif_flcalc_xor16 _pif_flcalc_xor16 "/opt/netronome/p4/components/nfp_pif/me/lib/pif/src/pif_flcalc_algorithms.c" 407 471
+.%arg init 23 init_446_V$660
+.%arg lm_ptr 30 lm_ptr_446_V$661
+.%arg lm_len 0 lm_len_446_V$662
+.%arg cls_ptr 25 cls_ptr_446_V$663
+.%arg cls_len 0 cls_len_446_V$664
+.%arg payld_offset 0 payld_offset_446_V$665
+.%arg payld_len 0 payld_len_446_V$666
+.%arg odd_byte_offset_bmask 4 odd_byte_offset_bmask_446_V$667
+.%var i 0 i_446 LIX
+.%var odd_byte_offset 4 odd_byte_offset_446 LIX
+.%var val16 23 val16_446 LIX
+.%var xor16 23 xor16_446 LIX
+.%scope block 440 468
+.%var ctm_payld_len 0 ctm_payld_len_449 LIX
+.%var mu_payld_len 0 mu_payld_len_449 LIX
+.%var payld_base 27 payld_base_449 LIX
+.%var mu_offset 0 mu_offset_449 LIX
+.%scope end
+.%scope end
+.%scope function pif_flcalc_xor16_update _pif_flcalc_xor16_update "/opt/netronome/p4/components/nfp_pif/me/lib/pif/src/pif_flcalc_algorithms.c" 473 514
+.%arg init 23 init_454_V$671
+.%arg lm_old 30 lm_old_454_V$672
+.%arg lm_new 30 lm_new_454_V$673
+.%arg lm_len 0 lm_len_454_V$674
+.%arg odd_byte_offset 4 odd_byte_offset_454_V$675
+.%arg byte_mask_first 4 byte_mask_first_454_V$676
+.%arg byte_mask_last 4 byte_mask_last_454_V$677
+.%var i 0 i_454 LIX
+.%var val8 4 val8_454 LIX
+.%var val16 23 val16_454 LIX
+.%var xor16 23 xor16_454 LIX
+.%scope end
+.%scope function __pif_flcalc_crc16_byte ___pif_flcalc_crc16_byte "/opt/netronome/p4/components/nfp_pif/me/lib/pif/src/pif_flcalc_algorithms.c" 572 584
+.%arg in_crc16 23 in_crc16_464_V$67d
+.%arg dbyte 4 dbyte_464_V$67e
+.%var out_crc16 23 out_crc16_464 LIX
+.%var ibyte 0 ibyte_464 LIX
+.%scope end
+.%scope function __pif_flcalc_crc16_xfr_buf ___pif_flcalc_crc16_xfr_buf "/opt/netronome/p4/components/nfp_pif/me/lib/pif/src/pif_flcalc_algorithms.c" 597 664
+.%arg in_crc16 23 in_crc16_465_V$682
+.%arg xfr_buf 35 xfr_buf_465_V$683
+.%arg xfr_len_b 0 xfr_len_b_465_V$684
+.%var out_crc16 23 out_crc16_465 LIX
+.%var t_val 0 t_val_465 LIX
+.%var xfr_len_lw 0 xfr_len_lw_465 LIX
+.%var rem_b 0 rem_b_465 LIX
+.%var jump_idx 0 jump_idx_465 LIX
+.%scope end
+.%scope function __pif_flcalc_crc16_var ___pif_flcalc_crc16_var "/opt/netronome/p4/components/nfp_pif/me/lib/pif/src/pif_flcalc_algorithms.c" 675 702
+.%arg in_crc16 23 in_crc16_470_V$68b
+.%arg cls_ptr 25 cls_ptr_470_V$68c
+.%arg cls_len 0 cls_len_470_V$68d
+.%var out_crc16 23 out_crc16_470 LIX
+.%var cls_offset 0 cls_offset_470 LIX
+.%var i 0 i_470 LIX
+.%var to_rd 0 to_rd_470 LIX
+.%var xfr_rd 36 xfr_rd_470 LIR
+.%var sig_rd 24 sig_rd_470 LIX
+.%scope end
+.%scope function __pif_flcalc_crc16_payload ___pif_flcalc_crc16_payload "/opt/netronome/p4/components/nfp_pif/me/lib/pif/src/pif_flcalc_algorithms.c" 714 741
+.%arg in_crc16 23 in_crc16_472_V$696
+.%arg payload_base 27 payload_base_472_V$697
+.%arg payload_offset 0 payload_offset_472_V$698
+.%arg payload_len 0 payload_len_472_V$699
+.%var out_crc16 23 out_crc16_472 LIX
+.%var i 0 i_472 LIX
+.%var to_rd 0 to_rd_472 LIX
+.%var xfr_rd 37 xfr_rd_472 LIR
+.%var sig_rd 24 sig_rd_472 LIX
+.%scope end
+.%scope function pif_flcalc_crc16 _pif_flcalc_crc16 "/opt/netronome/p4/components/nfp_pif/me/lib/pif/src/pif_flcalc_algorithms.c" 743 802
+.%arg init 23 init_474_V$6a1
+.%arg lm_ptr 30 lm_ptr_474_V$6a2
+.%arg lm_len 0 lm_len_474_V$6a3
+.%arg cls_ptr 25 cls_ptr_474_V$6a4
+.%arg cls_len 0 cls_len_474_V$6a5
+.%arg payld_offset 0 payld_offset_474_V$6a6
+.%arg payld_len 0 payld_len_474_V$6a7
+.%var i 4 i_474 LIX
+.%var ibyte 4 ibyte_474 LIX
+.%var crc16 23 crc16_474 LIX
+.%scope block 772 799
+.%var ctm_payld_len 0 ctm_payld_len_477 LIX
+.%var mu_payld_len 0 mu_payld_len_477 LIX
+.%var payld_base 27 payld_base_477 LIX
+.%var mu_offset 0 mu_offset_477 LIX
+.%scope end
+.%scope end
+.%scope function pif_flcalc_crc16_lmem _pif_flcalc_crc16_lmem "/opt/netronome/p4/components/nfp_pif/me/lib/pif/src/pif_flcalc_algorithms.c" 804 837
+.%arg init 23 init_482_V$6b0
+.%arg lm_ptr 31 lm_ptr_482_V$6b1
+.%arg lm_len_b 0 lm_len_b_482_V$6b2
+.%var i 0 i_482 LIX
+.%var crc16 23 crc16_482 LIX
+.%var rem_b 0 rem_b_482 LIX
+.%var val 0 val_482 LIX
+.%var tmp 0 tmp_482 LIX
+.%scope end
+.%scope function __pif_flcalc_crc32_byte ___pif_flcalc_crc32_byte "/opt/netronome/p4/components/nfp_pif/me/lib/pif/src/pif_flcalc_algorithms.c" 854 867
+.%arg in_crc32 0 in_crc32_488_V$6b9
+.%arg dbyte 4 dbyte_488_V$6ba
+.%var out_crc32 0 out_crc32_488 LIX
+.%var ibyte 0 ibyte_488 LIX
+.%scope end
+.%scope function __pif_flcalc_crc32_xfr_buf ___pif_flcalc_crc32_xfr_buf "/opt/netronome/p4/components/nfp_pif/me/lib/pif/src/pif_flcalc_algorithms.c" 880 947
+.%arg in_crc32 0 in_crc32_489_V$6be
+.%arg xfr_buf 35 xfr_buf_489_V$6bf
+.%arg xfr_len_b 0 xfr_len_b_489_V$6c0
+.%var out_crc32 0 out_crc32_489 LIX
+.%var t_val 0 t_val_489 LIX
+.%var xfr_len_lw 0 xfr_len_lw_489 LIX
+.%var rem_b 0 rem_b_489 LIX
+.%var jump_idx 0 jump_idx_489 LIX
+.%scope end
+.%scope function __pif_flcalc_crc32_var ___pif_flcalc_crc32_var "/opt/netronome/p4/components/nfp_pif/me/lib/pif/src/pif_flcalc_algorithms.c" 958 985
+.%arg in_crc32 0 in_crc32_494_V$6c7
+.%arg cls_ptr 25 cls_ptr_494_V$6c8
+.%arg cls_len 0 cls_len_494_V$6c9
+.%var out_crc32 0 out_crc32_494 LIX
+.%var cls_offset 0 cls_offset_494 LIX
+.%var i 0 i_494 LIX
+.%var to_rd 0 to_rd_494 LIX
+.%var xfr_rd 38 xfr_rd_494 LIR
+.%var sig_rd 24 sig_rd_494 LIX
+.%scope end
+.%scope function __pif_flcalc_crc32_payload ___pif_flcalc_crc32_payload "/opt/netronome/p4/components/nfp_pif/me/lib/pif/src/pif_flcalc_algorithms.c" 997 1024
+.%arg in_crc32 0 in_crc32_496_V$6d2
+.%arg payload_base 27 payload_base_496_V$6d3
+.%arg payload_offset 0 payload_offset_496_V$6d4
+.%arg payload_len 0 payload_len_496_V$6d5
+.%var out_crc32 0 out_crc32_496 LIX
+.%var i 0 i_496 LIX
+.%var to_rd 0 to_rd_496 LIX
+.%var xfr_rd 39 xfr_rd_496 LIR
+.%var sig_rd 24 sig_rd_496 LIX
+.%scope end
+.%scope function pif_flcalc_crc32_reflect _pif_flcalc_crc32_reflect "/opt/netronome/p4/components/nfp_pif/me/lib/pif/src/pif_flcalc_algorithms.c" 1026 1039
+.%arg in_crc32 0 in_crc32_498_V$6dd
+.%var crc32 0 crc32_498 LIX
+.%var crc32_reflected 0 crc32_reflected_498 LIX
+.%var i 4 i_498 LIX
+.%scope end
+.%scope function pif_flcalc_crc32 _pif_flcalc_crc32 "/opt/netronome/p4/components/nfp_pif/me/lib/pif/src/pif_flcalc_algorithms.c" 1041 1100
+.%arg init 0 init_499_V$6e2
+.%arg lm_ptr 30 lm_ptr_499_V$6e3
+.%arg lm_len 0 lm_len_499_V$6e4
+.%arg cls_ptr 25 cls_ptr_499_V$6e5
+.%arg cls_len 0 cls_len_499_V$6e6
+.%arg payld_offset 0 payld_offset_499_V$6e7
+.%arg payld_len 0 payld_len_499_V$6e8
+.%var i 4 i_499 LIX
+.%var ibyte 4 ibyte_499 LIX
+.%var crc32 0 crc32_499 LIX
+.%scope block 1070 1097
+.%var ctm_payld_len 0 ctm_payld_len_502 LIX
+.%var mu_payld_len 0 mu_payld_len_502 LIX
+.%var payld_base 27 payld_base_502 LIX
+.%var mu_offset 0 mu_offset_502 LIX
+.%scope end
+.%scope end
+.%scope function pif_flcalc_crc32_lmem _pif_flcalc_crc32_lmem "/opt/netronome/p4/components/nfp_pif/me/lib/pif/src/pif_flcalc_algorithms.c" 1102 1135
+.%arg init 0 init_507_V$6f1
+.%arg lm_ptr 31 lm_ptr_507_V$6f2
+.%arg lm_len_b 0 lm_len_b_507_V$6f3
+.%var i 0 i_507 LIX
+.%var crc32 0 crc32_507 LIX
+.%var rem_b 0 rem_b_507 LIX
+.%var val 0 val_507 LIX
+.%var tmp 0 tmp_507 LIX
+.%scope end
+.%type U4
+.%type S4 {
+__reserved_16 0:16:16 0;
+source 0:4:12 0;
+type 0:0:4 0;
+}
+.%type S4 {
+__reserved_21 0:21:11 0;
+overflow 0:20:1 0;
+hwm 0:16:4 0;
+__reserved_12 0:12:4 0;
+read 0:8:4 0;
+__reserved_4 0:4:4 0;
+write 0:0:4 0;
+}
+.%type A16 4
+.%type U1
+.%type A32768 4
+.%type A16 4
+.%type A2048 4
+.%type A16 4
+.%type A2048 4
+.%type A16 4
+.%type A2048 4
+.%type A41943040 4
+.%type A10485760 4
+.%type S28 pktio_meta{
+__unnamed 0 15;
+}
+.%type S28 {
+__unnamed 0 16;
+__raw 0 22;
+}
+.%type S28 {
+p_nbi 0 17;
+p_ctm_size 8:30:2 0;
+p_orig_len 8:16:14 0;
+p_offset 8:0:16 0;
+p_src 12:16:16 0;
+p_dst 12:0:16 0;
+p_seq 16:16:16 0;
+p_ro_ctx 16:11:5 0;
+p_is_gro_seq 16:10:1 0;
+p_rx_ipv4_csum_ok 16:9:1 0;
+p_rx_ipv4_csum_present 16:8:1 0;
+p_rx_l4_csum_ok 16:7:1 0;
+p_rx_l4_csum_present 16:6:1 0;
+p_rx_l4_tcp 16:5:1 0;
+p_rx_mac_matched 16:4:1 0;
+p_tunnel 16:3:1 0;
+resv4 16:0:3 0;
+__unnamed 20 21;
+p_vlan 24:16:16 0;
+resv3 24:0:16 0;
+}
+.%type S8 nbi_meta_pkt_info{
+__unnamed 0 18;
+}
+.%type S8 {
+__unnamed 0 19;
+__raw 0 20;
+}
+.%type S8 {
+isl 0:26:6 0;
+pnum 0:16:10 0;
+bls 0:14:2 0;
+len 0:0:14 0;
+split 4:31:1 0;
+resv0 4:29:2 0;
+muptr 4:0:29 0;
+}
+.%type A8 0
+.%type S4 {
+p_timestamp 0:0:32 0;
+}
+.%type A28 0
+.%type U2
+.%type I4
+.%type P12 4
+.%type A32 4
+.%type P3 28
+.%type U4
+.%type A32 4
+.%type P6 4
+.%type P6 0
+.%type P3 4
+.%type A32 4
+.%type A128 0
+.%type P2 0
+.%type A32 0
+.%type A32 0
+.%type A32 0
+.%type A32 0
