@@ -5575,7 +5575,7 @@
           ],
           "match_type" : "exact",
           "type" : "simple",
-          "max_size" : 2048,
+          "max_size" : 65000,
           "with_counters" : false,
           "support_timeout" : false,
           "direct_meters" : null,

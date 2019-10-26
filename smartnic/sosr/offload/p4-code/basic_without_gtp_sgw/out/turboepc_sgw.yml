@@ -801,7 +801,7 @@ egress::ctxt_release_uekey_sgwteid_map:
     - egress::populate_ctxt_release_uekey_sgwteid_map
     match_on:
         ue_service_req.ue_key: exact
-    max_entries: 2049
+    max_entries: 65001
     src_filename: epc_basic_sgw_without_gtp.p4
     src_lineno: 387
     type: table
@@ -1513,7 +1513,7 @@ layout:
 ##########################################
 
 source_info:
-    date: 2019/10/25 12:18:44
+    date: 2019/10/26 16:44:10
     output_file: out/turboepc_sgw.yml
     p4_version: '16'
     source_files:

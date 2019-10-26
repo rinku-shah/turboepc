@@ -52,7 +52,7 @@
                 "name": "ingress::ip_op_tun_s2_uplink"
             }, 
             "egress::ctxt_release_uekey_sgwteid_map": {
-                "max_entries": 2049, 
+                "max_entries": 65001, 
                 "allowed_actions": [
                     "egress::populate_ctxt_release_uekey_sgwteid_map"
                 ], 
@@ -430,13 +430,13 @@
     "vendor": {
         "register_info": {}, 
         "backend_source_info": {
-            "date": "2019/10/25 12:18:46", 
+            "date": "2019/10/26 16:44:11", 
             "source_files": "out/turboepc_sgw.yml"
         }, 
         "counters_info": {}, 
         "meter_info": {}, 
         "frontend_source_info": {
-            "date": "2019/10/25 12:18:44", 
+            "date": "2019/10/26 16:44:10", 
             "source_files": [
                 "epc_basic_sgw_without_gtp.p4", 
                 "", 
@@ -727,7 +727,7 @@
                     "egress::populate_ctxt_release_uekey_sgwteid_map"
                 ], 
                 "id": 0, 
-                "max_entries": 2049, 
+                "max_entries": 65001, 
                 "data_shift": 4, 
                 "rtsym": "_pif_actiondata_table_0_egress__ctxt_release_uekey_sgwteid_map", 
                 "data_size": 16
@@ -2072,9 +2072,9 @@
         }, 
         "build_uuid": [
             1741385362, 
-            2385838110, 
-            4146139625, 
-            2543158945
+            2172846110, 
+            4161737193, 
+            3596629529
         ], 
         "digests_info": {}, 
         "parser_value_set_info": {}
@@ -2277,7 +2277,7 @@
                     "id": 33603007, 
                     "name": "ctxt_release_uekey_sgwteid_map"
                 }, 
-                "size": "2048"
+                "size": "65000"
             }
         ], 
         "actions": [

@@ -72,6 +72,7 @@
 .%declare_resource "..brary/include/nfp_chipres.h" 367 pcie0_dma_cfg_regs global 0x10
 .%declare_resource "..brary/include/nfp_chipres.h" 370 pcie0_topci_med global 0x40
 .%declare_resource "..brary/include/nfp_chipres.h" 372 pcie0_frompci_hi global 0x40
+.%declare_resource "..brary/include/nfp_chipres.h" 374 pcie0_frompci_lo global 0x80
 .%declare_resource "..brary/include/nfp_chipres.h" 378 pcie1_cpp2pcie_bars global 0x8
 .%declare_resource "..brary/include/nfp_chipres.h" 382 pcie1_topci_med global 0x40
 .%declare_resource "..brary/include/nfp_chipres.h" 385 pcie1_frompci_med global 0x40
@@ -153,9 +154,7 @@
 .%declare_resource "..brary/include/nfp_chipres.h" 369 pcie0_topci_hi global 0x40
 .%declare_resource "..brary/include/nfp_chipres.h" 370 pcie0_topci_med global 0x40
 .%declare_resource "..brary/include/nfp_chipres.h" 371 pcie0_topci_lo global 0x80
-.%declare_resource "..brary/include/nfp_chipres.h" 373 pcie0_frompci_med global 0x40
 .%declare_resource "..brary/include/nfp_chipres.h" 374 pcie0_frompci_lo global 0x80
-.%declare_resource "..brary/include/nfp_chipres.h" 378 pcie1_cpp2pcie_bars global 0x8
 .%declare_resource "..brary/include/nfp_chipres.h" 379 pcie1_dma_cfg_regs global 0x10
 .%declare_resource "..brary/include/nfp_chipres.h" 381 pcie1_topci_hi global 0x40
 .%declare_resource "..brary/include/nfp_chipres.h" 382 pcie1_topci_med global 0x40
@@ -181,135 +180,135 @@
 .%init_csr "..apps/common/src/dcfl_init.c" 23 xpbm:IntMu0IsldXpbmMap.Island.IntMuXpbMap.MuLookupReg1.AlgorithmicTableLocation0 const 0
 .%init_csr "..apps/common/src/dcfl_init.c" 24 xpbm:IntMu0IsldXpbmMap.Island.IntMuXpbMap.MuLookupReg0.AlgorithmicTableLocation1 const 0
 .%init_csr "..apps/common/src/dcfl_init.c" 25 xpbm:IntMu0IsldXpbmMap.Island.IntMuXpbMap.MuLookupReg1.AlgorithmicTableLocation1 const 0
-.%declare_resource "..brary/include/nfp_chipres.h" 197 cls_apfilters island 0x10
-.%declare_resource "..brary/include/nfp_chipres.h" 366 pcie0_cpp2pcie_bars global 0x8
-.%declare_resource "..brary/include/nfp_chipres.h" 367 pcie0_dma_cfg_regs global 0x10
-.%declare_resource "..brary/include/nfp_chipres.h" 369 pcie0_topci_hi global 0x40
-.%declare_resource "..brary/include/nfp_chipres.h" 370 pcie0_topci_med global 0x40
-.%declare_resource "..brary/include/nfp_chipres.h" 371 pcie0_topci_lo global 0x80
-.%declare_resource "..brary/include/nfp_chipres.h" 372 pcie0_frompci_hi global 0x40
-.%declare_resource "..brary/include/nfp_chipres.h" 373 pcie0_frompci_med global 0x40
-.%declare_resource "..brary/include/nfp_chipres.h" 374 pcie0_frompci_lo global 0x80
-.%declare_resource "..brary/include/nfp_chipres.h" 382 pcie1_topci_med global 0x40
-.%declare_resource "..brary/include/nfp_chipres.h" 383 pcie1_topci_lo global 0x80
-.%declare_resource "..brary/include/nfp_chipres.h" 384 pcie1_frompci_hi global 0x40
-.%declare_resource "..brary/include/nfp_chipres.h" 385 pcie1_frompci_med global 0x40
-.%declare_resource "..brary/include/nfp_chipres.h" 121 emem1_queues global 0x400
-.%declare_resource "..brary/include/nfp_chipres.h" 181 cls_apsignals island 0x10
-.%declare_resource "..brary/include/nfp_chipres.h" 197 cls_apfilters island 0x10
-.%declare_resource "..brary/include/nfp_chipres.h" 366 pcie0_cpp2pcie_bars global 0x8
-.%declare_resource "..brary/include/nfp_chipres.h" 367 pcie0_dma_cfg_regs global 0x10
-.%declare_resource "..brary/include/nfp_chipres.h" 372 pcie0_frompci_hi global 0x40
-.%declare_resource "..brary/include/nfp_chipres.h" 381 pcie1_topci_hi global 0x40
-.%declare_resource "..brary/include/nfp_chipres.h" 383 pcie1_topci_lo global 0x80
-.%declare_resource "..brary/include/nfp_chipres.h" 121 emem1_queues global 0x400
-.%declare_resource "..brary/include/nfp_chipres.h" 162 cls_rings island 0x10
-.%declare_resource "..brary/include/nfp_chipres.h" 181 cls_apsignals island 0x10
-.%declare_resource "..brary/include/nfp_chipres.h" 197 cls_apfilters island 0x10
-.%declare_resource "..brary/include/nfp_chipres.h" 366 pcie0_cpp2pcie_bars global 0x8
-.%declare_resource "..brary/include/nfp_chipres.h" 367 pcie0_dma_cfg_regs global 0x10
-.%declare_resource "..brary/include/nfp_chipres.h" 369 pcie0_topci_hi global 0x40
-.%declare_resource "..brary/include/nfp_chipres.h" 370 pcie0_topci_med global 0x40
-.%declare_resource "..brary/include/nfp_chipres.h" 371 pcie0_topci_lo global 0x80
-.%declare_resource "..brary/include/nfp_chipres.h" 373 pcie0_frompci_med global 0x40
-.%declare_resource "..brary/include/nfp_chipres.h" 374 pcie0_frompci_lo global 0x80
-.%declare_resource "..brary/include/nfp_chipres.h" 378 pcie1_cpp2pcie_bars global 0x8
-.%declare_resource "..brary/include/nfp_chipres.h" 379 pcie1_dma_cfg_regs global 0x10
-.%declare_resource "..brary/include/nfp_chipres.h" 383 pcie1_topci_lo global 0x80
-.%declare_resource "..brary/include/nfp_chipres.h" 384 pcie1_frompci_hi global 0x40
-.%declare_resource "..brary/include/nfp_chipres.h" 386 pcie1_frompci_lo global 0x80
-.%declare_resource "..brary/include/nfp_chipres.h" 121 emem1_queues global 0x400
-.%declare_resource "..brary/include/nfp_chipres.h" 181 cls_apsignals island 0x10
-.%declare_resource "..brary/include/nfp_chipres.h" 369 pcie0_topci_hi global 0x40
-.%declare_resource "..brary/include/nfp_chipres.h" 372 pcie0_frompci_hi global 0x40
-.%declare_resource "..brary/include/nfp_chipres.h" 374 pcie0_frompci_lo global 0x80
-.%declare_resource "..brary/include/nfp_chipres.h" 378 pcie1_cpp2pcie_bars global 0x8
-.%declare_resource "..brary/include/nfp_chipres.h" 381 pcie1_topci_hi global 0x40
-.%declare_resource "..brary/include/nfp_chipres.h" 383 pcie1_topci_lo global 0x80
-.%declare_resource "..brary/include/nfp_chipres.h" 384 pcie1_frompci_hi global 0x40
-.%declare_resource "..brary/include/nfp_chipres.h" 385 pcie1_frompci_med global 0x40
-.%declare_resource "..brary/include/nfp_chipres.h" 197 cls_apfilters island 0x10
-.%declare_resource "..brary/include/nfp_chipres.h" 366 pcie0_cpp2pcie_bars global 0x8
-.%declare_resource "..brary/include/nfp_chipres.h" 370 pcie0_topci_med global 0x40
-.%declare_resource "..brary/include/nfp_chipres.h" 371 pcie0_topci_lo global 0x80
-.%declare_resource "..brary/include/nfp_chipres.h" 378 pcie1_cpp2pcie_bars global 0x8
-.%declare_resource "..brary/include/nfp_chipres.h" 379 pcie1_dma_cfg_regs global 0x10
-.%declare_resource "..brary/include/nfp_chipres.h" 381 pcie1_topci_hi global 0x40
-.%declare_resource "..brary/include/nfp_chipres.h" 384 pcie1_frompci_hi global 0x40
-.%declare_resource "..brary/include/nfp_chipres.h" 385 pcie1_frompci_med global 0x40
-.%declare_resource "..brary/include/nfp_chipres.h" 386 pcie1_frompci_lo global 0x80
 .%declare_resource "..brary/include/nfp_chipres.h" 110 emem0_queues global 0x400
-.%declare_resource "..brary/include/nfp_chipres.h" 162 cls_rings island 0x10
-.%declare_resource "..brary/include/nfp_chipres.h" 181 cls_apsignals island 0x10
 .%declare_resource "..brary/include/nfp_chipres.h" 197 cls_apfilters island 0x10
+.%declare_resource "..brary/include/nfp_chipres.h" 366 pcie0_cpp2pcie_bars global 0x8
 .%declare_resource "..brary/include/nfp_chipres.h" 367 pcie0_dma_cfg_regs global 0x10
 .%declare_resource "..brary/include/nfp_chipres.h" 369 pcie0_topci_hi global 0x40
 .%declare_resource "..brary/include/nfp_chipres.h" 370 pcie0_topci_med global 0x40
+.%declare_resource "..brary/include/nfp_chipres.h" 371 pcie0_topci_lo global 0x80
+.%declare_resource "..brary/include/nfp_chipres.h" 372 pcie0_frompci_hi global 0x40
 .%declare_resource "..brary/include/nfp_chipres.h" 373 pcie0_frompci_med global 0x40
-.%declare_resource "..brary/include/nfp_chipres.h" 379 pcie1_dma_cfg_regs global 0x10
+.%declare_resource "..brary/include/nfp_chipres.h" 374 pcie0_frompci_lo global 0x80
 .%declare_resource "..brary/include/nfp_chipres.h" 382 pcie1_topci_med global 0x40
+.%declare_resource "..brary/include/nfp_chipres.h" 383 pcie1_topci_lo global 0x80
 .%declare_resource "..brary/include/nfp_chipres.h" 384 pcie1_frompci_hi global 0x40
 .%declare_resource "..brary/include/nfp_chipres.h" 385 pcie1_frompci_med global 0x40
+.%declare_resource "..brary/include/nfp_chipres.h" 121 emem1_queues global 0x400
+.%declare_resource "..brary/include/nfp_chipres.h" 181 cls_apsignals island 0x10
+.%declare_resource "..brary/include/nfp_chipres.h" 197 cls_apfilters island 0x10
+.%declare_resource "..brary/include/nfp_chipres.h" 366 pcie0_cpp2pcie_bars global 0x8
+.%declare_resource "..brary/include/nfp_chipres.h" 367 pcie0_dma_cfg_regs global 0x10
+.%declare_resource "..brary/include/nfp_chipres.h" 372 pcie0_frompci_hi global 0x40
+.%declare_resource "..brary/include/nfp_chipres.h" 381 pcie1_topci_hi global 0x40
+.%declare_resource "..brary/include/nfp_chipres.h" 383 pcie1_topci_lo global 0x80
+.%declare_resource "..brary/include/nfp_chipres.h" 121 emem1_queues global 0x400
+.%declare_resource "..brary/include/nfp_chipres.h" 162 cls_rings island 0x10
+.%declare_resource "..brary/include/nfp_chipres.h" 181 cls_apsignals island 0x10
+.%declare_resource "..brary/include/nfp_chipres.h" 366 pcie0_cpp2pcie_bars global 0x8
+.%declare_resource "..brary/include/nfp_chipres.h" 370 pcie0_topci_med global 0x40
+.%declare_resource "..brary/include/nfp_chipres.h" 371 pcie0_topci_lo global 0x80
+.%declare_resource "..brary/include/nfp_chipres.h" 373 pcie0_frompci_med global 0x40
+.%declare_resource "..brary/include/nfp_chipres.h" 374 pcie0_frompci_lo global 0x80
+.%declare_resource "..brary/include/nfp_chipres.h" 378 pcie1_cpp2pcie_bars global 0x8
+.%declare_resource "..brary/include/nfp_chipres.h" 379 pcie1_dma_cfg_regs global 0x10
+.%declare_resource "..brary/include/nfp_chipres.h" 383 pcie1_topci_lo global 0x80
+.%declare_resource "..brary/include/nfp_chipres.h" 384 pcie1_frompci_hi global 0x40
+.%declare_resource "..brary/include/nfp_chipres.h" 386 pcie1_frompci_lo global 0x80
+.%declare_resource "..brary/include/nfp_chipres.h" 121 emem1_queues global 0x400
+.%declare_resource "..brary/include/nfp_chipres.h" 181 cls_apsignals island 0x10
+.%declare_resource "..brary/include/nfp_chipres.h" 366 pcie0_cpp2pcie_bars global 0x8
+.%declare_resource "..brary/include/nfp_chipres.h" 369 pcie0_topci_hi global 0x40
+.%declare_resource "..brary/include/nfp_chipres.h" 372 pcie0_frompci_hi global 0x40
+.%declare_resource "..brary/include/nfp_chipres.h" 374 pcie0_frompci_lo global 0x80
+.%declare_resource "..brary/include/nfp_chipres.h" 378 pcie1_cpp2pcie_bars global 0x8
+.%declare_resource "..brary/include/nfp_chipres.h" 381 pcie1_topci_hi global 0x40
+.%declare_resource "..brary/include/nfp_chipres.h" 383 pcie1_topci_lo global 0x80
+.%declare_resource "..brary/include/nfp_chipres.h" 384 pcie1_frompci_hi global 0x40
+.%declare_resource "..brary/include/nfp_chipres.h" 385 pcie1_frompci_med global 0x40
+.%declare_resource "..brary/include/nfp_chipres.h" 110 emem0_queues global 0x400
 .%declare_resource "..brary/include/nfp_chipres.h" 121 emem1_queues global 0x400
 .%declare_resource "..brary/include/nfp_chipres.h" 162 cls_rings island 0x10
 .%declare_resource "..brary/include/nfp_chipres.h" 197 cls_apfilters island 0x10
 .%declare_resource "..brary/include/nfp_chipres.h" 366 pcie0_cpp2pcie_bars global 0x8
-.%declare_resource "..brary/include/nfp_chipres.h" 367 pcie0_dma_cfg_regs global 0x10
+.%declare_resource "..brary/include/nfp_chipres.h" 369 pcie0_topci_hi global 0x40
+.%declare_resource "..brary/include/nfp_chipres.h" 371 pcie0_topci_lo global 0x80
+.%declare_resource "..brary/include/nfp_chipres.h" 372 pcie0_frompci_hi global 0x40
+.%declare_resource "..brary/include/nfp_chipres.h" 374 pcie0_frompci_lo global 0x80
+.%declare_resource "..brary/include/nfp_chipres.h" 378 pcie1_cpp2pcie_bars global 0x8
+.%declare_resource "..brary/include/nfp_chipres.h" 382 pcie1_topci_med global 0x40
+.%declare_resource "..brary/include/nfp_chipres.h" 383 pcie1_topci_lo global 0x80
+.%declare_resource "..brary/include/nfp_chipres.h" 162 cls_rings island 0x10
+.%declare_resource "..brary/include/nfp_chipres.h" 181 cls_apsignals island 0x10
+.%declare_resource "..brary/include/nfp_chipres.h" 197 cls_apfilters island 0x10
+.%declare_resource "..brary/include/nfp_chipres.h" 366 pcie0_cpp2pcie_bars global 0x8
 .%declare_resource "..brary/include/nfp_chipres.h" 370 pcie0_topci_med global 0x40
+.%declare_resource "..brary/include/nfp_chipres.h" 371 pcie0_topci_lo global 0x80
+.%declare_resource "..brary/include/nfp_chipres.h" 373 pcie0_frompci_med global 0x40
+.%declare_resource "..brary/include/nfp_chipres.h" 378 pcie1_cpp2pcie_bars global 0x8
+.%declare_resource "..brary/include/nfp_chipres.h" 379 pcie1_dma_cfg_regs global 0x10
+.%declare_resource "..brary/include/nfp_chipres.h" 381 pcie1_topci_hi global 0x40
+.%declare_resource "..brary/include/nfp_chipres.h" 382 pcie1_topci_med global 0x40
+.%declare_resource "..brary/include/nfp_chipres.h" 383 pcie1_topci_lo global 0x80
+.%declare_resource "..brary/include/nfp_chipres.h" 384 pcie1_frompci_hi global 0x40
+.%declare_resource "..brary/include/nfp_chipres.h" 386 pcie1_frompci_lo global 0x80
+.%declare_resource "..brary/include/nfp_chipres.h" 162 cls_rings island 0x10
+.%declare_resource "..brary/include/nfp_chipres.h" 181 cls_apsignals island 0x10
+.%declare_resource "..brary/include/nfp_chipres.h" 197 cls_apfilters island 0x10
+.%declare_resource "..brary/include/nfp_chipres.h" 369 pcie0_topci_hi global 0x40
 .%declare_resource "..brary/include/nfp_chipres.h" 371 pcie0_topci_lo global 0x80
 .%declare_resource "..brary/include/nfp_chipres.h" 372 pcie0_frompci_hi global 0x40
 .%declare_resource "..brary/include/nfp_chipres.h" 378 pcie1_cpp2pcie_bars global 0x8
+.%declare_resource "..brary/include/nfp_chipres.h" 379 pcie1_dma_cfg_regs global 0x10
+.%declare_resource "..brary/include/nfp_chipres.h" 381 pcie1_topci_hi global 0x40
+.%declare_resource "..brary/include/nfp_chipres.h" 382 pcie1_topci_med global 0x40
 .%declare_resource "..brary/include/nfp_chipres.h" 383 pcie1_topci_lo global 0x80
 .%declare_resource "..brary/include/nfp_chipres.h" 385 pcie1_frompci_med global 0x40
-.%declare_resource "..brary/include/nfp_chipres.h" 386 pcie1_frompci_lo global 0x80
 .%declare_resource "out/pif_digests.c" 11 emem0_queues global 0x400
 .%declare_resource "..brary/include/nfp_chipres.h" 110 emem0_queues global 0x400
-.%declare_resource "..brary/include/nfp_chipres.h" 121 emem1_queues global 0x400
-.%declare_resource "..brary/include/nfp_chipres.h" 162 cls_rings island 0x10
 .%declare_resource "..brary/include/nfp_chipres.h" 197 cls_apfilters island 0x10
 .%declare_resource "..brary/include/nfp_chipres.h" 366 pcie0_cpp2pcie_bars global 0x8
-.%declare_resource "..brary/include/nfp_chipres.h" 369 pcie0_topci_hi global 0x40
+.%declare_resource "..brary/include/nfp_chipres.h" 370 pcie0_topci_med global 0x40
 .%declare_resource "..brary/include/nfp_chipres.h" 371 pcie0_topci_lo global 0x80
-.%declare_resource "..brary/include/nfp_chipres.h" 372 pcie0_frompci_hi global 0x40
-.%declare_resource "..brary/include/nfp_chipres.h" 374 pcie0_frompci_lo global 0x80
 .%declare_resource "..brary/include/nfp_chipres.h" 378 pcie1_cpp2pcie_bars global 0x8
-.%declare_resource "..brary/include/nfp_chipres.h" 382 pcie1_topci_med global 0x40
-.%declare_resource "..brary/include/nfp_chipres.h" 383 pcie1_topci_lo global 0x80
-.%declare_resource "..brary/include/nfp_chipres.h" 110 emem0_queues global 0x400
-.%declare_resource "..brary/include/nfp_chipres.h" 121 emem1_queues global 0x400
-.%declare_resource "..brary/include/nfp_chipres.h" 162 cls_rings island 0x10
-.%declare_resource "..brary/include/nfp_chipres.h" 197 cls_apfilters island 0x10
-.%declare_resource "..brary/include/nfp_chipres.h" 366 pcie0_cpp2pcie_bars global 0x8
-.%declare_resource "..brary/include/nfp_chipres.h" 369 pcie0_topci_hi global 0x40
-.%declare_resource "..brary/include/nfp_chipres.h" 371 pcie0_topci_lo global 0x80
-.%declare_resource "..brary/include/nfp_chipres.h" 372 pcie0_frompci_hi global 0x40
-.%declare_resource "..brary/include/nfp_chipres.h" 374 pcie0_frompci_lo global 0x80
-.%declare_resource "..brary/include/nfp_chipres.h" 378 pcie1_cpp2pcie_bars global 0x8
-.%declare_resource "..brary/include/nfp_chipres.h" 382 pcie1_topci_med global 0x40
-.%declare_resource "..brary/include/nfp_chipres.h" 383 pcie1_topci_lo global 0x80
-.%declare_resource "..brary/include/nfp_chipres.h" 121 emem1_queues global 0x400
-.%declare_resource "..brary/include/nfp_chipres.h" 162 cls_rings island 0x10
-.%declare_resource "..brary/include/nfp_chipres.h" 181 cls_apsignals island 0x10
-.%declare_resource "..brary/include/nfp_chipres.h" 197 cls_apfilters island 0x10
-.%declare_resource "..brary/include/nfp_chipres.h" 367 pcie0_dma_cfg_regs global 0x10
-.%declare_resource "..brary/include/nfp_chipres.h" 369 pcie0_topci_hi global 0x40
-.%declare_resource "..brary/include/nfp_chipres.h" 371 pcie0_topci_lo global 0x80
-.%declare_resource "..brary/include/nfp_chipres.h" 372 pcie0_frompci_hi global 0x40
-.%declare_resource "..brary/include/nfp_chipres.h" 373 pcie0_frompci_med global 0x40
 .%declare_resource "..brary/include/nfp_chipres.h" 379 pcie1_dma_cfg_regs global 0x10
 .%declare_resource "..brary/include/nfp_chipres.h" 381 pcie1_topci_hi global 0x40
-.%declare_resource "..brary/include/nfp_chipres.h" 383 pcie1_topci_lo global 0x80
 .%declare_resource "..brary/include/nfp_chipres.h" 384 pcie1_frompci_hi global 0x40
+.%declare_resource "..brary/include/nfp_chipres.h" 385 pcie1_frompci_med global 0x40
+.%declare_resource "..brary/include/nfp_chipres.h" 386 pcie1_frompci_lo global 0x80
 .%declare_resource "..brary/include/nfp_chipres.h" 110 emem0_queues global 0x400
+.%declare_resource "..brary/include/nfp_chipres.h" 121 emem1_queues global 0x400
+.%declare_resource "..brary/include/nfp_chipres.h" 162 cls_rings island 0x10
+.%declare_resource "..brary/include/nfp_chipres.h" 197 cls_apfilters island 0x10
+.%declare_resource "..brary/include/nfp_chipres.h" 366 pcie0_cpp2pcie_bars global 0x8
+.%declare_resource "..brary/include/nfp_chipres.h" 369 pcie0_topci_hi global 0x40
+.%declare_resource "..brary/include/nfp_chipres.h" 371 pcie0_topci_lo global 0x80
+.%declare_resource "..brary/include/nfp_chipres.h" 372 pcie0_frompci_hi global 0x40
+.%declare_resource "..brary/include/nfp_chipres.h" 374 pcie0_frompci_lo global 0x80
+.%declare_resource "..brary/include/nfp_chipres.h" 378 pcie1_cpp2pcie_bars global 0x8
+.%declare_resource "..brary/include/nfp_chipres.h" 382 pcie1_topci_med global 0x40
+.%declare_resource "..brary/include/nfp_chipres.h" 383 pcie1_topci_lo global 0x80
 .%declare_resource "..brary/include/nfp_chipres.h" 181 cls_apsignals island 0x10
+.%declare_resource "..brary/include/nfp_chipres.h" 197 cls_apfilters island 0x10
+.%declare_resource "..brary/include/nfp_chipres.h" 366 pcie0_cpp2pcie_bars global 0x8
+.%declare_resource "..brary/include/nfp_chipres.h" 367 pcie0_dma_cfg_regs global 0x10
 .%declare_resource "..brary/include/nfp_chipres.h" 369 pcie0_topci_hi global 0x40
 .%declare_resource "..brary/include/nfp_chipres.h" 370 pcie0_topci_med global 0x40
 .%declare_resource "..brary/include/nfp_chipres.h" 371 pcie0_topci_lo global 0x80
 .%declare_resource "..brary/include/nfp_chipres.h" 372 pcie0_frompci_hi global 0x40
+.%declare_resource "..brary/include/nfp_chipres.h" 379 pcie1_dma_cfg_regs global 0x10
+.%declare_resource "..brary/include/nfp_chipres.h" 381 pcie1_topci_hi global 0x40
+.%declare_resource "..brary/include/nfp_chipres.h" 384 pcie1_frompci_hi global 0x40
+.%declare_resource "..brary/include/nfp_chipres.h" 385 pcie1_frompci_med global 0x40
+.%declare_resource "..brary/include/nfp_chipres.h" 386 pcie1_frompci_lo global 0x80
+.%declare_resource "..brary/include/nfp_chipres.h" 110 emem0_queues global 0x400
+.%declare_resource "..brary/include/nfp_chipres.h" 181 cls_apsignals island 0x10
+.%declare_resource "..brary/include/nfp_chipres.h" 366 pcie0_cpp2pcie_bars global 0x8
+.%declare_resource "..brary/include/nfp_chipres.h" 371 pcie0_topci_lo global 0x80
+.%declare_resource "..brary/include/nfp_chipres.h" 372 pcie0_frompci_hi global 0x40
 .%declare_resource "..brary/include/nfp_chipres.h" 373 pcie0_frompci_med global 0x40
 .%declare_resource "..brary/include/nfp_chipres.h" 374 pcie0_frompci_lo global 0x80
 .%declare_resource "..brary/include/nfp_chipres.h" 378 pcie1_cpp2pcie_bars global 0x8
-.%declare_resource "..brary/include/nfp_chipres.h" 379 pcie1_dma_cfg_regs global 0x10
 .%declare_resource "..brary/include/nfp_chipres.h" 381 pcie1_topci_hi global 0x40
 .%declare_resource "..brary/include/nfp_chipres.h" 383 pcie1_topci_lo global 0x80
 .%declare_resource "..brary/include/nfp_chipres.h" 384 pcie1_frompci_hi global 0x40
@@ -386,7 +385,7 @@
 .%alloc_mem _pif_actiondata_table_3_ingress__uekey_uestate_map emem global 2080032 16 addr40
 .%alloc_mem _pif_actiondata_table_2_ingress__uekey_guti_map emem global 2080032 16 addr40
 .%alloc_mem _pif_actiondata_table_1_ingress__ip_op_tun_s2_downlink emem global 2080032 16 addr40
-.%alloc_mem _pif_actiondata_table_0_egress__ctxt_release_uekey_sgwteid_map emem global 65568 16 addr40
+.%alloc_mem _pif_actiondata_table_0_egress__ctxt_release_uekey_sgwteid_map emem global 2080032 16 addr40
 .%alloc_mem _dcfl_ct_7 emem global 20971520 262144 addr40
 .%alloc_mem _dcfl_ct_6 emem global 20971520 262144 addr40
 .%alloc_mem _dcfl_ct_5 emem global 20971520 262144 addr40
@@ -588,9 +587,9 @@
 .%init _pif_version+60 0x0
 .%init _pif_qos_supported+0 0x1
 .%init _pif_design_uuid+0 0x67cb6e92
-.%init _pif_design_uuid+4 0x8e35001e
-.%init _pif_design_uuid+8 0xf72111e9
-.%init _pif_design_uuid+12 0x979586a1
+.%init _pif_design_uuid+4 0x8183001e
+.%init _pif_design_uuid+8 0xf80f11e9
+.%init _pif_design_uuid+12 0xd6603619
 .%init _pif_actiondata_table_descs+0 0x0
 .%init _pif_actiondata_table_descs+4 0x0
 .%init _pif_actiondata_table_descs+8 0x0
@@ -5092,7 +5091,7 @@ l_472#:
 l_653#:
 	immed_w0[b1, _pif_counter_RX_NFD]
 .%import_expr common_code 245 <27:20:24,7:0:16> _pif_counter_RX_NFD &v 32 >> 0xffff0000 &
-.245 00F440A007E0 common_code
+.245 00F440B00700 common_code
 	.%operands 0 1 0 b1 B1 -- -- b1 B1 -- --
 	.%line 477 "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/pif_app_nfd.c" 1 fiid:2678 0
 	immed_w1[b1, _pif_counter_RX_NFD]
@@ -5102,7 +5101,7 @@ l_653#:
 	.%line 477 "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/pif_app_nfd.c" 1 fiid:2678 0
 	immed_w0[a2, _pif_counter_RX_NFD]
 .%import_expr common_code 247 <27:20:24,17:10:16> _pif_counter_RX_NFD &v 0 + 0xffff0000 &
-.247 00F440AF8002 common_code
+.247 00F440BC0002 common_code
 	.%operands 0 1 0 a2 A2 -- -- a2 A2 -- --
 	.%line 477 "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/pif_app_nfd.c" 1 fiid:2678 0
 	immed_w1[a2, _pif_counter_RX_NFD]
@@ -5334,7 +5333,7 @@ l_660#:
 l_39207#:
 	immed_w0[b1, _pif_counter_ERROR_PKTMETA]
 .%import_expr common_code 301 <27:20:24,7:0:16> _pif_counter_ERROR_PKTMETA &v 32 >> 0xffff0000 &
-.301 00F440A007E0 common_code
+.301 00F440B00700 common_code
 	.%operands 0 1 0 b1 B1 -- -- b1 B1 -- --
 	.%line 473 "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/pif_app_nfd.c" 1 fiid:2679 0
 	immed_w1[b1, _pif_counter_ERROR_PKTMETA]
@@ -5344,7 +5343,7 @@ l_39207#:
 	.%line 473 "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/pif_app_nfd.c" 1 fiid:2679 0
 	immed_w0[a3, _pif_counter_ERROR_PKTMETA]
 .%import_expr common_code 303 <27:20:24,17:10:16> _pif_counter_ERROR_PKTMETA &v 0 + 0xffff0000 &
-.303 00F440AF8003 common_code
+.303 00F440BC0003 common_code
 	.%operands 0 1 0 a3 A3 -- -- a3 A3 -- --
 	.%line 473 "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/pif_app_nfd.c" 1 fiid:2679 0
 	immed_w1[a3, _pif_counter_ERROR_PKTMETA]
@@ -5506,7 +5505,7 @@ l_717#:
 /******/                          PIF_COUNT(RX);
 	immed_w0[a2, _pif_counter_RX]
 .%import_expr common_code 339 <27:20:24,17:10:16> _pif_counter_RX &v 32 >> 0xffff0000 &
-.339 00F440AF8002 common_code
+.339 00F440BC0002 common_code
 	.%operands 0 1 0 a2 A2 -- -- a2 A2 -- --
 	.%line 488 "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/pif_app_nfd.c" 1 fiid:2691 0
 	immed_w1[a2, _pif_counter_RX]
@@ -5516,7 +5515,7 @@ l_717#:
 	.%line 488 "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/pif_app_nfd.c" 1 fiid:2691 0
 	immed_w0[b1, _pif_counter_RX]
 .%import_expr common_code 341 <27:20:24,7:0:16> _pif_counter_RX &v 0 + 0xffff0000 &
-.341 00F440A007E0 common_code
+.341 00F440B00700 common_code
 	.%operands 0 1 0 b1 B1 -- -- b1 B1 -- --
 	.%line 488 "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/pif_app_nfd.c" 1 fiid:2691 0
 	immed_w1[b1, _pif_counter_RX]
@@ -6464,7 +6463,7 @@ l_39208#:
 /******/                      PIF_COUNT(FLOWCACHE_HIT);
 	immed_w0[b1, _pif_counter_FLOWCACHE_HIT]
 .%import_expr common_code 551 <27:20:24,7:0:16> _pif_counter_FLOWCACHE_HIT &v 32 >> 0xffff0000 &
-.551 00F440A007E0 common_code
+.551 00F440B00700 common_code
 	.%operands 0 1 0 b1 B1 -- -- b1 B1 -- --
 	.%line 595 "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/pif_app_nfd.c" 1 fiid:2605 0
 	immed_w1[b1, _pif_counter_FLOWCACHE_HIT]
@@ -6474,7 +6473,7 @@ l_39208#:
 	.%line 595 "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/pif_app_nfd.c" 1 fiid:2605 0
 	immed_w0[a3, _pif_counter_FLOWCACHE_HIT]
 .%import_expr common_code 553 <27:20:24,17:10:16> _pif_counter_FLOWCACHE_HIT &v 0 + 0xffff0000 &
-.553 00F440AF8003 common_code
+.553 00F440BC0003 common_code
 	.%operands 0 1 0 a3 A3 -- -- a3 A3 -- --
 	.%line 595 "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/pif_app_nfd.c" 1 fiid:2605 0
 	immed_w1[a3, _pif_counter_FLOWCACHE_HIT]
@@ -6552,7 +6551,7 @@ l_733#:
 l_39209#:
 	immed_w0[a2, _pif_counter_ERROR_PKTMETA]
 .%import_expr common_code 569 <27:20:24,17:10:16> _pif_counter_ERROR_PKTMETA &v 32 >> 0xffff0000 &
-.569 00F440AF8002 common_code
+.569 00F440BC0002 common_code
 	.%operands 0 1 0 a2 A2 -- -- a2 A2 -- --
 	.%line 483 "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/pif_app_nfd.c" 1 fiid:2692 0
 	immed_w1[a2, _pif_counter_ERROR_PKTMETA]
@@ -6562,7 +6561,7 @@ l_39209#:
 	.%line 483 "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/pif_app_nfd.c" 1 fiid:2692 0
 	immed_w0[b2, _pif_counter_ERROR_PKTMETA]
 .%import_expr common_code 571 <27:20:24,7:0:16> _pif_counter_ERROR_PKTMETA &v 0 + 0xffff0000 &
-.571 00F440A00BE0 common_code
+.571 00F440B00B00 common_code
 	.%operands 0 1 0 b2 B2 -- -- b2 B2 -- --
 	.%line 483 "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/pif_app_nfd.c" 1 fiid:2692 0
 	immed_w1[b2, _pif_counter_ERROR_PKTMETA]
@@ -8513,7 +8512,7 @@ l_1352#:
 	.%line 561 "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/pif_app_nfd.c" 1 fiid:53 0
 	immed_w0[a2, _pif_counter_ERROR_PARREP]
 .%import_expr common_code 968 <27:20:24,17:10:16> _pif_counter_ERROR_PARREP &v 32 >> 0xffff0000 &
-.968 00F440AF8002 common_code
+.968 00F440BC0002 common_code
 	.%operands 0 1 0 a2 A2 -- -- a2 A2 -- --
 	.%line 561 "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/pif_app_nfd.c" 1 fiid:53 0
 	immed_w1[a2, _pif_counter_ERROR_PARREP]
@@ -8523,7 +8522,7 @@ l_1352#:
 	.%line 561 "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/pif_app_nfd.c" 1 fiid:53 0
 	immed_w0[b1, _pif_counter_ERROR_PARREP]
 .%import_expr common_code 970 <27:20:24,7:0:16> _pif_counter_ERROR_PARREP &v 0 + 0xffff0000 &
-.970 00F440A007E0 common_code
+.970 00F440B00700 common_code
 	.%operands 0 1 0 b1 B1 -- -- b1 B1 -- --
 	.%line 561 "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/pif_app_nfd.c" 1 fiid:53 0
 	immed_w1[b1, _pif_counter_ERROR_PARREP]
@@ -8862,7 +8861,7 @@ l_39215#:
 l_39216#:
 	immed_w0[b1, _pif_counter_DROP]
 .%import_expr common_code 1039 <27:20:24,7:0:16> _pif_counter_DROP &v 32 >> 0xffff0000 &
-.1039 00F440A007E0 common_code
+.1039 00F440B00700 common_code
 	.%operands 0 1 0 b1 B1 -- -- b1 B1 -- --
 	.%line 759 "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/pif_app_nfd.c" 1 fiid:2602 0
 	immed_w1[b1, _pif_counter_DROP]
@@ -8872,7 +8871,7 @@ l_39216#:
 	.%line 759 "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/pif_app_nfd.c" 1 fiid:2602 0
 	immed_w0[a2, _pif_counter_DROP]
 .%import_expr common_code 1041 <27:20:24,17:10:16> _pif_counter_DROP &v 0 + 0xffff0000 &
-.1041 00F440AF8002 common_code
+.1041 00F440BC0002 common_code
 	.%operands 0 1 0 a2 A2 -- -- a2 A2 -- --
 	.%line 759 "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/pif_app_nfd.c" 1 fiid:2602 0
 	immed_w1[a2, _pif_counter_DROP]
@@ -8911,7 +8910,7 @@ l_1479#:
 /******/                      PIF_COUNT(FLOWCACHE_MISS);
 	immed_w0[a2, _pif_counter_FLOWCACHE_MISS]
 .%import_expr common_code 1049 <27:20:24,17:10:16> _pif_counter_FLOWCACHE_MISS &v 32 >> 0xffff0000 &
-.1049 00F440AF8002 common_code
+.1049 00F440BC0002 common_code
 	.%operands 0 1 0 a2 A2 -- -- a2 A2 -- --
 	.%line 610 "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/pif_app_nfd.c" 1 fiid:2608 0
 	immed_w1[a2, _pif_counter_FLOWCACHE_MISS]
@@ -8921,7 +8920,7 @@ l_1479#:
 	.%line 610 "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/pif_app_nfd.c" 1 fiid:2608 0
 	immed_w0[b1, _pif_counter_FLOWCACHE_MISS]
 .%import_expr common_code 1051 <27:20:24,7:0:16> _pif_counter_FLOWCACHE_MISS &v 0 + 0xffff0000 &
-.1051 00F440A007E0 common_code
+.1051 00F440B00700 common_code
 	.%operands 0 1 0 b1 B1 -- -- b1 B1 -- --
 	.%line 610 "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/pif_app_nfd.c" 1 fiid:2608 0
 	immed_w1[b1, _pif_counter_FLOWCACHE_MISS]
@@ -8973,7 +8972,7 @@ l_1486#:
 l_39217#:
 	immed_w0[a2, _pif_counter_ERROR_FLOWCACHE]
 .%import_expr common_code 1061 <27:20:24,17:10:16> _pif_counter_ERROR_FLOWCACHE &v 32 >> 0xffff0000 &
-.1061 00F440AF8002 common_code
+.1061 00F440BC0002 common_code
 	.%operands 0 1 0 a2 A2 -- -- a2 A2 -- --
 	.%line 618 "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/pif_app_nfd.c" 1 fiid:2609 0
 	immed_w1[a2, _pif_counter_ERROR_FLOWCACHE]
@@ -8983,7 +8982,7 @@ l_39217#:
 	.%line 618 "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/pif_app_nfd.c" 1 fiid:2609 0
 	immed_w0[b2, _pif_counter_ERROR_FLOWCACHE]
 .%import_expr common_code 1063 <27:20:24,7:0:16> _pif_counter_ERROR_FLOWCACHE &v 0 + 0xffff0000 &
-.1063 00F440A00BE0 common_code
+.1063 00F440B00B00 common_code
 	.%operands 0 1 0 b2 B2 -- -- b2 B2 -- --
 	.%line 618 "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/pif_app_nfd.c" 1 fiid:2609 0
 	immed_w1[b2, _pif_counter_ERROR_FLOWCACHE]
@@ -9045,7 +9044,7 @@ l_1492#:
 /******/                  PIF_COUNT(FLOWCACHE_BYPASS);
 	immed_w0[b1, _pif_counter_FLOWCACHE_BYPASS]
 .%import_expr common_code 1076 <27:20:24,7:0:16> _pif_counter_FLOWCACHE_BYPASS &v 32 >> 0xffff0000 &
-.1076 00F440A007E0 common_code
+.1076 00F440B00700 common_code
 	.%operands 0 1 0 b1 B1 -- -- b1 B1 -- --
 	.%line 626 "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/pif_app_nfd.c" 1 fiid:2613 0
 	immed_w1[b1, _pif_counter_FLOWCACHE_BYPASS]
@@ -9055,7 +9054,7 @@ l_1492#:
 	.%line 626 "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/pif_app_nfd.c" 1 fiid:2613 0
 	immed_w0[a3, _pif_counter_FLOWCACHE_BYPASS]
 .%import_expr common_code 1078 <27:20:24,17:10:16> _pif_counter_FLOWCACHE_BYPASS &v 0 + 0xffff0000 &
-.1078 00F440AF8003 common_code
+.1078 00F440BC0003 common_code
 	.%operands 0 1 0 a3 A3 -- -- a3 A3 -- --
 	.%line 626 "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/pif_app_nfd.c" 1 fiid:2613 0
 	immed_w1[a3, _pif_counter_FLOWCACHE_BYPASS]
@@ -9575,7 +9574,7 @@ l_39221#:
 /******/              PIF_COUNT(DROP_PORT_PAUSED);
 	immed_w0[b1, _pif_counter_DROP_PORT_PAUSED]
 .%import_expr common_code 1190 <27:20:24,7:0:16> _pif_counter_DROP_PORT_PAUSED &v 32 >> 0xffff0000 &
-.1190 00F440A007E0 common_code
+.1190 00F440B00700 common_code
 	.%operands 0 1 0 b1 B1 -- -- b1 B1 -- --
 	.%line 273 "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/pif_app_nfd.c" 1 fiid:2572 0
 	immed_w1[b1, _pif_counter_DROP_PORT_PAUSED]
@@ -9585,7 +9584,7 @@ l_39221#:
 	.%line 273 "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/pif_app_nfd.c" 1 fiid:2572 0
 	immed_w0[a2, _pif_counter_DROP_PORT_PAUSED]
 .%import_expr common_code 1192 <27:20:24,17:10:16> _pif_counter_DROP_PORT_PAUSED &v 0 + 0xffff0000 &
-.1192 00F440AF8002 common_code
+.1192 00F440BC0002 common_code
 	.%operands 0 1 0 a2 A2 -- -- a2 A2 -- --
 	.%line 273 "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/pif_app_nfd.c" 1 fiid:2572 0
 	immed_w1[a2, _pif_counter_DROP_PORT_PAUSED]
@@ -9793,7 +9792,7 @@ l_39223#:
 /******/                          PIF_COUNT(MULTICAST);
 	immed_w0[a2, _pif_counter_MULTICAST]
 .%import_expr common_code 1235 <27:20:24,17:10:16> _pif_counter_MULTICAST &v 32 >> 0xffff0000 &
-.1235 00F440AF8002 common_code
+.1235 00F440BC0002 common_code
 	.%operands 0 1 0 a2 A2 -- -- a2 A2 -- --
 	.%line 816 "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/pif_app_nfd.c" 1 fiid:2585 0
 	immed_w1[a2, _pif_counter_MULTICAST]
@@ -9803,7 +9802,7 @@ l_39223#:
 	.%line 816 "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/pif_app_nfd.c" 1 fiid:2585 0
 	immed_w0[b7, _pif_counter_MULTICAST]
 .%import_expr common_code 1237 <27:20:24,7:0:16> _pif_counter_MULTICAST &v 0 + 0xffff0000 &
-.1237 00F440A01FE0 common_code
+.1237 00F440B01F00 common_code
 	.%operands 0 1 0 b7 B7 -- -- b7 B7 -- --
 	.%line 816 "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/pif_app_nfd.c" 1 fiid:2585 0
 	immed_w1[b7, _pif_counter_MULTICAST]
@@ -10122,7 +10121,7 @@ l_1674#:
 	.%line 696 "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/pif_app_nfd.c" 1 fiid:53 0
 	immed_w0[a2, _pif_counter_ERROR_INGRESS]
 .%import_expr common_code 1304 <27:20:24,17:10:16> _pif_counter_ERROR_INGRESS &v 32 >> 0xffff0000 &
-.1304 00F440AF8002 common_code
+.1304 00F440BC0002 common_code
 	.%operands 0 1 0 a2 A2 -- -- a2 A2 -- --
 	.%line 696 "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/pif_app_nfd.c" 1 fiid:53 0
 	immed_w1[a2, _pif_counter_ERROR_INGRESS]
@@ -10132,7 +10131,7 @@ l_1674#:
 	.%line 696 "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/pif_app_nfd.c" 1 fiid:53 0
 	immed_w0[b2, _pif_counter_ERROR_INGRESS]
 .%import_expr common_code 1306 <27:20:24,7:0:16> _pif_counter_ERROR_INGRESS &v 0 + 0xffff0000 &
-.1306 00F440A00BE0 common_code
+.1306 00F440B00B00 common_code
 	.%operands 0 1 0 b2 B2 -- -- b2 B2 -- --
 	.%line 696 "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/pif_app_nfd.c" 1 fiid:53 0
 	immed_w1[b2, _pif_counter_ERROR_INGRESS]
@@ -10306,7 +10305,7 @@ l_1759#:
 l_39227#:
 	immed_w0[b1, _pif_counter_DROP]
 .%import_expr common_code 1342 <27:20:24,7:0:16> _pif_counter_DROP &v 32 >> 0xffff0000 &
-.1342 00F440A007E0 common_code
+.1342 00F440B00700 common_code
 	.%operands 0 1 0 b1 B1 -- -- b1 B1 -- --
 	.%line 723 "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/pif_app_nfd.c" 1 fiid:2595 0
 	immed_w1[b1, _pif_counter_DROP]
@@ -10316,7 +10315,7 @@ l_39227#:
 	.%line 723 "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/pif_app_nfd.c" 1 fiid:2595 0
 	immed_w0[a3, _pif_counter_DROP]
 .%import_expr common_code 1344 <27:20:24,17:10:16> _pif_counter_DROP &v 0 + 0xffff0000 &
-.1344 00F440AF8003 common_code
+.1344 00F440BC0003 common_code
 	.%operands 0 1 0 a3 A3 -- -- a3 A3 -- --
 	.%line 723 "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/pif_app_nfd.c" 1 fiid:2595 0
 	immed_w1[a3, _pif_counter_DROP]
@@ -10657,7 +10656,7 @@ l_1855#:
 	.%line 1023 "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/pif_app_nfd.c" 1 fiid:53 0
 	immed_w0[a3, _pif_counter_ERROR_EGRESS]
 .%import_expr common_code 1416 <27:20:24,17:10:16> _pif_counter_ERROR_EGRESS &v 32 >> 0xffff0000 &
-.1416 00F440AF8003 common_code
+.1416 00F440BC0003 common_code
 	.%operands 0 1 0 a3 A3 -- -- a3 A3 -- --
 	.%line 1023 "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/pif_app_nfd.c" 1 fiid:53 0
 	immed_w1[a3, _pif_counter_ERROR_EGRESS]
@@ -10667,7 +10666,7 @@ l_1855#:
 	.%line 1023 "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/pif_app_nfd.c" 1 fiid:53 0
 	immed_w0[b1, _pif_counter_ERROR_EGRESS]
 .%import_expr common_code 1418 <27:20:24,7:0:16> _pif_counter_ERROR_EGRESS &v 0 + 0xffff0000 &
-.1418 00F440A007E0 common_code
+.1418 00F440B00700 common_code
 	.%operands 0 1 0 b1 B1 -- -- b1 B1 -- --
 	.%line 1023 "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/pif_app_nfd.c" 1 fiid:53 0
 	immed_w1[b1, _pif_counter_ERROR_EGRESS]
@@ -10848,7 +10847,7 @@ l_1940#:
 l_39231#:
 	immed_w0[a2, _pif_counter_DROP]
 .%import_expr common_code 1456 <27:20:24,17:10:16> _pif_counter_DROP &v 32 >> 0xffff0000 &
-.1456 00F440AF8002 common_code
+.1456 00F440BC0002 common_code
 	.%operands 0 1 0 a2 A2 -- -- a2 A2 -- --
 	.%line 1048 "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/pif_app_nfd.c" 1 fiid:2577 0
 	immed_w1[a2, _pif_counter_DROP]
@@ -10858,7 +10857,7 @@ l_39231#:
 	.%line 1048 "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/pif_app_nfd.c" 1 fiid:2577 0
 	immed_w0[b1, _pif_counter_DROP]
 .%import_expr common_code 1458 <27:20:24,7:0:16> _pif_counter_DROP &v 0 + 0xffff0000 &
-.1458 00F440A007E0 common_code
+.1458 00F440B00700 common_code
 	.%operands 0 1 0 b1 B1 -- -- b1 B1 -- --
 	.%line 1048 "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/pif_app_nfd.c" 1 fiid:2577 0
 	immed_w1[b1, _pif_counter_DROP]
@@ -15576,7 +15575,7 @@ l_39281#:
 /******/              PIF_COUNT(OFFSET_TOO_LARGE_SHIFT);
 	immed_w0[b2, _pif_counter_OFFSET_TOO_LARGE_SHIFT]
 .%import_expr common_code 2415 <27:20:24,7:0:16> _pif_counter_OFFSET_TOO_LARGE_SHIFT &v 32 >> 0xffff0000 &
-.2415 00F440A00BE0 common_code
+.2415 00F440B00B00 common_code
 	.%operands 0 1 0 b2 B2 -- -- b2 B2 -- --
 	.%line 937 "/home/p4client/turboepc/smartnic/sosr/offload/p4-code/basic_without_gtp_sgw/out/pif_deparse.c" 1 fiid:2551 0
 	immed_w1[b2, _pif_counter_OFFSET_TOO_LARGE_SHIFT]
@@ -15586,7 +15585,7 @@ l_39281#:
 	.%line 937 "/home/p4client/turboepc/smartnic/sosr/offload/p4-code/basic_without_gtp_sgw/out/pif_deparse.c" 1 fiid:2551 0
 	immed_w0[a2, _pif_counter_OFFSET_TOO_LARGE_SHIFT]
 .%import_expr common_code 2417 <27:20:24,17:10:16> _pif_counter_OFFSET_TOO_LARGE_SHIFT &v 0 + 0xffff0000 &
-.2417 00F440AF8002 common_code
+.2417 00F440BC0002 common_code
 	.%operands 0 1 0 a2 A2 -- -- a2 A2 -- --
 	.%line 937 "/home/p4client/turboepc/smartnic/sosr/offload/p4-code/basic_without_gtp_sgw/out/pif_deparse.c" 1 fiid:2551 0
 	immed_w1[a2, _pif_counter_OFFSET_TOO_LARGE_SHIFT]
@@ -15668,7 +15667,7 @@ l_39282#:
 /******/              PIF_COUNT(OFFSET_TOO_LARGE_SHIFT);
 	immed_w0[a2, _pif_counter_OFFSET_TOO_LARGE_SHIFT]
 .%import_expr common_code 2434 <27:20:24,17:10:16> _pif_counter_OFFSET_TOO_LARGE_SHIFT &v 32 >> 0xffff0000 &
-.2434 00F440AF8002 common_code
+.2434 00F440BC0002 common_code
 	.%operands 0 1 0 a2 A2 -- -- a2 A2 -- --
 	.%line 947 "/home/p4client/turboepc/smartnic/sosr/offload/p4-code/basic_without_gtp_sgw/out/pif_deparse.c" 1 fiid:2552 0
 	immed_w1[a2, _pif_counter_OFFSET_TOO_LARGE_SHIFT]
@@ -15678,7 +15677,7 @@ l_39282#:
 	.%line 947 "/home/p4client/turboepc/smartnic/sosr/offload/p4-code/basic_without_gtp_sgw/out/pif_deparse.c" 1 fiid:2552 0
 	immed_w0[b7, _pif_counter_OFFSET_TOO_LARGE_SHIFT]
 .%import_expr common_code 2436 <27:20:24,7:0:16> _pif_counter_OFFSET_TOO_LARGE_SHIFT &v 0 + 0xffff0000 &
-.2436 00F440A01FE0 common_code
+.2436 00F440B01F00 common_code
 	.%operands 0 1 0 b7 B7 -- -- b7 B7 -- --
 	.%line 947 "/home/p4client/turboepc/smartnic/sosr/offload/p4-code/basic_without_gtp_sgw/out/pif_deparse.c" 1 fiid:2552 0
 	immed_w1[b7, _pif_counter_OFFSET_TOO_LARGE_SHIFT]
@@ -16634,7 +16633,7 @@ l_4272#:
 /******/                  PIF_COUNT(TX_NFD);
 	immed_w0[a2, _pif_counter_TX_NFD]
 .%import_expr common_code 2660 <27:20:24,17:10:16> _pif_counter_TX_NFD &v 32 >> 0xffff0000 &
-.2660 00F440AF8002 common_code
+.2660 00F440BC0002 common_code
 	.%operands 0 1 0 a2 A2 -- -- a2 A2 -- --
 	.%line 1272 "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/pif_app_nfd.c" 1 fiid:2426 0
 	immed_w1[a2, _pif_counter_TX_NFD]
@@ -16644,7 +16643,7 @@ l_4272#:
 	.%line 1272 "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/pif_app_nfd.c" 1 fiid:2426 0
 	immed_w0[b2, _pif_counter_TX_NFD]
 .%import_expr common_code 2662 <27:20:24,7:0:16> _pif_counter_TX_NFD &v 0 + 0xffff0000 &
-.2662 00F440A00BE0 common_code
+.2662 00F440B00B00 common_code
 	.%operands 0 1 0 b2 B2 -- -- b2 B2 -- --
 	.%line 1272 "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/pif_app_nfd.c" 1 fiid:2426 0
 	immed_w1[b2, _pif_counter_TX_NFD]
@@ -19333,7 +19332,7 @@ l_39057#:
 /******/                      PIF_COUNT(TX);
 	immed_w0[a2, _pif_counter_TX]
 .%import_expr common_code 3287 <27:20:24,17:10:16> _pif_counter_TX &v 32 >> 0xffff0000 &
-.3287 00F440AF8002 common_code
+.3287 00F440BC0002 common_code
 	.%operands 0 1 0 a2 A2 -- -- a2 A2 -- --
 	.%line 1260 "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/pif_app_nfd.c" 1 fiid:2422 0
 	immed_w1[a2, _pif_counter_TX]
@@ -19343,7 +19342,7 @@ l_39057#:
 	.%line 1260 "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/pif_app_nfd.c" 1 fiid:2422 0
 	immed_w0[b2, _pif_counter_TX]
 .%import_expr common_code 3289 <27:20:24,7:0:16> _pif_counter_TX &v 0 + 0xffff0000 &
-.3289 00F440A00BE0 common_code
+.3289 00F440B00B00 common_code
 	.%operands 0 1 0 b2 B2 -- -- b2 B2 -- --
 	.%line 1260 "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/pif_app_nfd.c" 1 fiid:2422 0
 	immed_w1[b2, _pif_counter_TX]
@@ -19370,7 +19369,7 @@ l_4280#:
 /******/                      PIF_COUNT(DROP_INVALID_PKT_MOD_SCRIPT);
 	immed_w0[b1, _pif_counter_DROP_INVALID_PKT_MOD_SCRIPT]
 .%import_expr common_code 3294 <27:20:24,7:0:16> _pif_counter_DROP_INVALID_PKT_MOD_SCRIPT &v 32 >> 0xffff0000 &
-.3294 00F440A007E0 common_code
+.3294 00F440B00700 common_code
 	.%operands 0 1 0 b1 B1 -- -- b1 B1 -- --
 	.%line 1262 "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/pif_app_nfd.c" 1 fiid:2423 0
 	immed_w1[b1, _pif_counter_DROP_INVALID_PKT_MOD_SCRIPT]
@@ -19380,7 +19379,7 @@ l_4280#:
 	.%line 1262 "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/pif_app_nfd.c" 1 fiid:2423 0
 	immed_w0[a3, _pif_counter_DROP_INVALID_PKT_MOD_SCRIPT]
 .%import_expr common_code 3296 <27:20:24,17:10:16> _pif_counter_DROP_INVALID_PKT_MOD_SCRIPT &v 0 + 0xffff0000 &
-.3296 00F440AF8003 common_code
+.3296 00F440BC0003 common_code
 	.%operands 0 1 0 a3 A3 -- -- a3 A3 -- --
 	.%line 1262 "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/pif_app_nfd.c" 1 fiid:2423 0
 	immed_w1[a3, _pif_counter_DROP_INVALID_PKT_MOD_SCRIPT]
@@ -19411,7 +19410,7 @@ l_4286#:
 /******/                      PIF_COUNT(DROP_PORT_PAUSED);
 	immed_w0[a2, _pif_counter_DROP_PORT_PAUSED]
 .%import_expr common_code 3302 <27:20:24,17:10:16> _pif_counter_DROP_PORT_PAUSED &v 32 >> 0xffff0000 &
-.3302 00F440AF8002 common_code
+.3302 00F440BC0002 common_code
 	.%operands 0 1 0 a2 A2 -- -- a2 A2 -- --
 	.%line 1264 "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/pif_app_nfd.c" 1 fiid:2424 0
 	immed_w1[a2, _pif_counter_DROP_PORT_PAUSED]
@@ -19421,7 +19420,7 @@ l_4286#:
 	.%line 1264 "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/pif_app_nfd.c" 1 fiid:2424 0
 	immed_w0[b2, _pif_counter_DROP_PORT_PAUSED]
 .%import_expr common_code 3304 <27:20:24,7:0:16> _pif_counter_DROP_PORT_PAUSED &v 0 + 0xffff0000 &
-.3304 00F440A00BE0 common_code
+.3304 00F440B00B00 common_code
 	.%operands 0 1 0 b2 B2 -- -- b2 B2 -- --
 	.%line 1264 "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/pif_app_nfd.c" 1 fiid:2424 0
 	immed_w1[b2, _pif_counter_DROP_PORT_PAUSED]
@@ -19451,7 +19450,7 @@ l_39187#:
 l_39058#:
 	immed_w0[b1, _pif_counter_TX_WQ]
 .%import_expr common_code 3310 <27:20:24,7:0:16> _pif_counter_TX_WQ &v 32 >> 0xffff0000 &
-.3310 00F440A007E0 common_code
+.3310 00F440B00700 common_code
 	.%operands 0 1 0 b1 B1 -- -- b1 B1 -- --
 	.%line 1268 "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/pif_app_nfd.c" 1 fiid:2425 0
 	immed_w1[b1, _pif_counter_TX_WQ]
@@ -19461,7 +19460,7 @@ l_39058#:
 	.%line 1268 "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/pif_app_nfd.c" 1 fiid:2425 0
 	immed_w0[a3, _pif_counter_TX_WQ]
 .%import_expr common_code 3312 <27:20:24,17:10:16> _pif_counter_TX_WQ &v 0 + 0xffff0000 &
-.3312 00F440AF8003 common_code
+.3312 00F440BC0003 common_code
 	.%operands 0 1 0 a3 A3 -- -- a3 A3 -- --
 	.%line 1268 "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/pif_app_nfd.c" 1 fiid:2425 0
 	immed_w1[a3, _pif_counter_TX_WQ]
@@ -19478,7 +19477,7 @@ l_39058#:
 l_4306#:
 	immed_w0[b1, _pif_counter_DROP_NFD_NO_CREDITS]
 .%import_expr common_code 3315 <27:20:24,7:0:16> _pif_counter_DROP_NFD_NO_CREDITS &v 32 >> 0xffff0000 &
-.3315 00F440A007E0 common_code
+.3315 00F440B00700 common_code
 	.%operands 0 1 0 b1 B1 -- -- b1 B1 -- --
 	.%line 1275 "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/pif_app_nfd.c" 1 fiid:2427 0
 	immed_w1[b1, _pif_counter_DROP_NFD_NO_CREDITS]
@@ -19488,7 +19487,7 @@ l_4306#:
 	.%line 1275 "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/pif_app_nfd.c" 1 fiid:2427 0
 	immed_w0[a3, _pif_counter_DROP_NFD_NO_CREDITS]
 .%import_expr common_code 3317 <27:20:24,17:10:16> _pif_counter_DROP_NFD_NO_CREDITS &v 0 + 0xffff0000 &
-.3317 00F440AF8003 common_code
+.3317 00F440BC0003 common_code
 	.%operands 0 1 0 a3 A3 -- -- a3 A3 -- --
 	.%line 1275 "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/pif_app_nfd.c" 1 fiid:2427 0
 	immed_w1[a3, _pif_counter_DROP_NFD_NO_CREDITS]
@@ -19550,7 +19549,7 @@ l_39283#:
 	.%line 1148 "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/pif_app_nfd.c" 1 fiid:53 0
 	immed_w0[b2, _pif_counter_ERROR_DEPARSE]
 .%import_expr common_code 3330 <27:20:24,7:0:16> _pif_counter_ERROR_DEPARSE &v 32 >> 0xffff0000 &
-.3330 00F440A00BE0 common_code
+.3330 00F440B00B00 common_code
 	.%operands 0 1 0 b2 B2 -- -- b2 B2 -- --
 	.%line 1148 "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/pif_app_nfd.c" 1 fiid:53 0
 	immed_w1[b2, _pif_counter_ERROR_DEPARSE]
@@ -19560,7 +19559,7 @@ l_39283#:
 	.%line 1148 "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/pif_app_nfd.c" 1 fiid:53 0
 	immed_w0[b1, _pif_counter_ERROR_DEPARSE]
 .%import_expr common_code 3332 <27:20:24,7:0:16> _pif_counter_ERROR_DEPARSE &v 0 + 0xffff0000 &
-.3332 00F440A007E0 common_code
+.3332 00F440B00700 common_code
 	.%operands 0 1 0 b1 B1 -- -- b1 B1 -- --
 	.%line 1148 "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/pif_app_nfd.c" 1 fiid:53 0
 	immed_w1[b1, _pif_counter_ERROR_DEPARSE]
@@ -19614,7 +19613,7 @@ l_4321#:
 /******/          PIF_COUNT(DROP_META);
 	immed_w0[a2, _pif_counter_DROP_META]
 .%import_expr common_code 3344 <27:20:24,17:10:16> _pif_counter_DROP_META &v 32 >> 0xffff0000 &
-.3344 00F440AF8002 common_code
+.3344 00F440BC0002 common_code
 	.%operands 0 1 0 a2 A2 -- -- a2 A2 -- --
 	.%line 297 "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/pif_app_nfd.c" 1 fiid:2569 0
 	immed_w1[a2, _pif_counter_DROP_META]
@@ -19624,7 +19623,7 @@ l_4321#:
 	.%line 297 "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/pif_app_nfd.c" 1 fiid:2569 0
 	immed_w0[b2, _pif_counter_DROP_META]
 .%import_expr common_code 3346 <27:20:24,7:0:16> _pif_counter_DROP_META &v 0 + 0xffff0000 &
-.3346 00F440A00BE0 common_code
+.3346 00F440B00B00 common_code
 	.%operands 0 1 0 b2 B2 -- -- b2 B2 -- --
 	.%line 297 "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/pif_app_nfd.c" 1 fiid:2569 0
 	immed_w1[b2, _pif_counter_DROP_META]
@@ -19653,7 +19652,7 @@ l_4321#:
 l_4327#:
 	immed_w0[b1, _pif_counter_DROP_META]
 .%import_expr common_code 3352 <27:20:24,7:0:16> _pif_counter_DROP_META &v 32 >> 0xffff0000 &
-.3352 00F440A007E0 common_code
+.3352 00F440B00700 common_code
 	.%operands 0 1 0 b1 B1 -- -- b1 B1 -- --
 	.%line 237 "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/pif_app_nfd.c" 1 fiid:2567 0
 	immed_w1[b1, _pif_counter_DROP_META]
@@ -19663,7 +19662,7 @@ l_4327#:
 	.%line 237 "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/pif_app_nfd.c" 1 fiid:2567 0
 	immed_w0[a3, _pif_counter_DROP_META]
 .%import_expr common_code 3354 <27:20:24,17:10:16> _pif_counter_DROP_META &v 0 + 0xffff0000 &
-.3354 00F440AF8003 common_code
+.3354 00F440BC0003 common_code
 	.%operands 0 1 0 a3 A3 -- -- a3 A3 -- --
 	.%line 237 "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/pif_app_nfd.c" 1 fiid:2567 0
 	immed_w1[a3, _pif_counter_DROP_META]
@@ -19791,7 +19790,7 @@ l_4338#:
 l_39286#:
 	immed_w0[a2, _pif_counter_DROP]
 .%import_expr common_code 3380 <27:20:24,17:10:16> _pif_counter_DROP &v 32 >> 0xffff0000 &
-.3380 00F440AF8002 common_code
+.3380 00F440BC0002 common_code
 	.%operands 0 1 0 a2 A2 -- -- a2 A2 -- --
 	.%line 1093 "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/pif_app_nfd.c" 1 fiid:2583 0
 	immed_w1[a2, _pif_counter_DROP]
@@ -19801,7 +19800,7 @@ l_39286#:
 	.%line 1093 "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/pif_app_nfd.c" 1 fiid:2583 0
 	immed_w0[b2, _pif_counter_DROP]
 .%import_expr common_code 3382 <27:20:24,7:0:16> _pif_counter_DROP &v 0 + 0xffff0000 &
-.3382 00F440A00BE0 common_code
+.3382 00F440B00B00 common_code
 	.%operands 0 1 0 b2 B2 -- -- b2 B2 -- --
 	.%line 1093 "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/pif_app_nfd.c" 1 fiid:2583 0
 	immed_w1[b2, _pif_counter_DROP]
@@ -23399,7 +23398,7 @@ l_7057#:
 l_7059#:
 	immed_w0[b7, _dcfl_cross_overflow_counter]
 .%import_expr common_code 4157 <27:20:24,7:0:16> _dcfl_cross_overflow_counter &v 32 >> 0xffff0000 &
-.4157 00F440A01FE0 common_code
+.4157 00F440B01F00 common_code
 	.%operands 0 1 0 b7 B7 -- -- b7 B7 -- --
 	.%line 124 "/opt/netronome/p4/components/dcfl/me/lib/dcfl/_c/an.c" 1 fiid:994 0
 	immed_w1[b7, _dcfl_cross_overflow_counter]
@@ -23409,7 +23408,7 @@ l_7059#:
 	.%line 124 "/opt/netronome/p4/components/dcfl/me/lib/dcfl/_c/an.c" 1 fiid:994 0
 	immed_w0[a7, _dcfl_cross_overflow_counter]
 .%import_expr common_code 4159 <27:20:24,17:10:16> _dcfl_cross_overflow_counter &v 0 + 0xffff0000 &
-.4159 00F440AF8007 common_code
+.4159 00F440BC0007 common_code
 	.%operands 0 1 0 a7 A7 -- -- a7 A7 -- --
 	.%line 124 "/opt/netronome/p4/components/dcfl/me/lib/dcfl/_c/an.c" 1 fiid:994 0
 	immed_w1[a7, _dcfl_cross_overflow_counter]
@@ -23985,7 +23984,7 @@ l_7231#:
 l_7233#:
 	immed_w0[b11, _dcfl_cross_overflow_counter]
 .%import_expr common_code 4286 <27:20:24,7:0:16> _dcfl_cross_overflow_counter &v 32 >> 0xffff0000 &
-.4286 00F440A02FE0 common_code
+.4286 00F440B02F00 common_code
 	.%operands 0 1 0 b11 B11 -- -- b11 B11 -- --
 	.%line 251 "/opt/netronome/p4/components/dcfl/me/lib/dcfl/_c/an.c" 1 fiid:989 0
 	immed_w1[b11, _dcfl_cross_overflow_counter]
@@ -23995,7 +23994,7 @@ l_7233#:
 	.%line 251 "/opt/netronome/p4/components/dcfl/me/lib/dcfl/_c/an.c" 1 fiid:989 0
 	immed_w0[a3, _dcfl_cross_overflow_counter]
 .%import_expr common_code 4288 <27:20:24,17:10:16> _dcfl_cross_overflow_counter &v 0 + 0xffff0000 &
-.4288 00F440AF8003 common_code
+.4288 00F440BC0003 common_code
 	.%operands 0 1 0 a3 A3 -- -- a3 A3 -- --
 	.%line 251 "/opt/netronome/p4/components/dcfl/me/lib/dcfl/_c/an.c" 1 fiid:989 0
 	immed_w1[a3, _dcfl_cross_overflow_counter]
@@ -26273,7 +26272,7 @@ _pif_clone_i2e#:
 /******/      PIF_COUNT(CLONE_I2E);
 	immed_w0[a2, _pif_counter_CLONE_I2E]
 .%import_expr common_code 4760 <27:20:24,17:10:16> _pif_counter_CLONE_I2E &v 32 >> 0xffff0000 &
-.4760 00F440AF8002 common_code
+.4760 00F440BC0002 common_code
 	.%operands 0 1 0 a2 A2 -- -- a2 A2 -- --
 	.%line 118 "/home/p4client/turboepc/smartnic/sosr/offload/p4-code/basic_without_gtp_sgw/out/pif_pkt_clone.c" 1 fiid:1667 0
 	immed_w1[a2, _pif_counter_CLONE_I2E]
@@ -26283,7 +26282,7 @@ _pif_clone_i2e#:
 	.%line 118 "/home/p4client/turboepc/smartnic/sosr/offload/p4-code/basic_without_gtp_sgw/out/pif_pkt_clone.c" 1 fiid:1667 0
 	immed_w0[b2, _pif_counter_CLONE_I2E]
 .%import_expr common_code 4762 <27:20:24,7:0:16> _pif_counter_CLONE_I2E &v 0 + 0xffff0000 &
-.4762 00F440A00BE0 common_code
+.4762 00F440B00B00 common_code
 	.%operands 0 1 0 b2 B2 -- -- b2 B2 -- --
 	.%line 118 "/home/p4client/turboepc/smartnic/sosr/offload/p4-code/basic_without_gtp_sgw/out/pif_pkt_clone.c" 1 fiid:1667 0
 	immed_w1[b2, _pif_counter_CLONE_I2E]
@@ -30926,34 +30925,34 @@ __DEBUG__pif_action_state_egress__act_19#:
 	.%line 1746 "/home/p4client/turboepc/smartnic/sosr/offload/p4-code/basic_without_gtp_sgw/out/pif_actions.c" 1 fiid:135 0
 /******/      attach_accept = (__lmem struct pif_header_attach_accept *) (_pif_parrep + PIF_PARREP_attach_accept_OFF_LW);
 	alu[a13, b25, +, 236]
-.5725 008B20708650 common_code
-	.%operands 8 1 0 *l$index0 *L00 -- 1 a7 A7 -- --
+.5725 008B25008650 common_code
+	.%operands 8 1 0 *l$index0 *L00 -- 1 *l$index0 *L00 -- --
 	.%line 1747 "/home/p4client/turboepc/smartnic/sosr/offload/p4-code/basic_without_gtp_sgw/out/pif_actions.c" 1 fiid:135 0
 /******/      PIF_PARREP_SET_data_DIRTY(_pif_ctldata);
-	alu_shf[a7, *l$index0, OR, 1, <<14]
-.5726 00A061000007 common_code
-	.%operands 264 1 0 -- -- a7 A7 *l$index0++ *L00 -- --
-	.%line 1747 "/home/p4client/turboepc/smartnic/sosr/offload/p4-code/basic_without_gtp_sgw/out/pif_actions.c" 1 fiid:135 0
-	alu[*l$index0++, --, B, a7]
-.5727 008AE0308650 common_code
-	.%operands 8 1 0 *l$index0 *L00 -- 1 a3 A3 -- --
+	alu_shf[*l$index0, *l$index0, OR, 1, <<14]
+.5726 008AC0708650 common_code
+	.%operands 8 1 0 *l$index0 *L00 -- 1 a7 A7 -- --
 	.%line 1748 "/home/p4client/turboepc/smartnic/sosr/offload/p4-code/basic_without_gtp_sgw/out/pif_actions.c" 1 fiid:135 0
+/******/      PIF_PARREP_SET_ipv4_DIRTY(_pif_ctldata);
+	alu_shf[a7, *l$index0, OR, 1, <<20]
+.5727 00A061000007 common_code
+	.%operands 264 1 0 -- -- a7 A7 *l$index0++ *L00 -- --
+	.%line 1748 "/home/p4client/turboepc/smartnic/sosr/offload/p4-code/basic_without_gtp_sgw/out/pif_actions.c" 1 fiid:135 0
+	alu[*l$index0++, --, B, a7]
+.5728 008AE0308650 common_code
+	.%operands 8 1 0 *l$index0 *L00 -- 1 a3 A3 -- --
+	.%line 1749 "/home/p4client/turboepc/smartnic/sosr/offload/p4-code/basic_without_gtp_sgw/out/pif_actions.c" 1 fiid:135 0
 /******/      PIF_PARREP_SET_attach_accept_DIRTY(_pif_ctldata);
 	alu_shf[a3, *l$index0, OR, 1, <<18]
-.5728 00A061100003 common_code
+.5729 00A061100003 common_code
 	.%operands 264 1 0 -- -- a3 A3 *l$index0-- *L00 -- --
-	.%line 1748 "/home/p4client/turboepc/smartnic/sosr/offload/p4-code/basic_without_gtp_sgw/out/pif_actions.c" 1 fiid:135 0
-	alu[*l$index0--, --, B, a3]
-.5729 008AC5008607 common_code
-	.%operands 8 1 0 a7 A7 -- 1 *l$index0 *L00 -- --
 	.%line 1749 "/home/p4client/turboepc/smartnic/sosr/offload/p4-code/basic_without_gtp_sgw/out/pif_actions.c" 1 fiid:135 0
-/******/      PIF_PARREP_SET_ipv4_DIRTY(_pif_ctldata);
-	alu_shf[*l$index0, a7, OR, 1, <<20]
-.5730 008B95008650 common_code
-	.%operands 8 1 0 *l$index0 *L00 -- 1 *l$index0 *L00 -- --
+	alu[*l$index0--, --, B, a3]
+.5730 008B95008607 common_code
+	.%operands 8 1 0 a7 A7 -- 1 *l$index0 *L00 -- --
 	.%line 1750 "/home/p4client/turboepc/smartnic/sosr/offload/p4-code/basic_without_gtp_sgw/out/pif_actions.c" 1 fiid:135 0
 /******/      PIF_PARREP_SET_initial_ctxt_setup_resp_DIRTY(_pif_ctldata);
-	alu_shf[*l$index0, *l$index0, OR, 1, <<7]
+	alu_shf[*l$index0, a7, OR, 1, <<7]
 .5731 009A90D08650 common_code
 	.%operands 8 1 0 *l$index0 *L00 -- 1 b13 B13 -- --
 	.%line 1751 "/home/p4client/turboepc/smartnic/sosr/offload/p4-code/basic_without_gtp_sgw/out/pif_actions.c" 1 fiid:135 0
@@ -39579,7 +39578,7 @@ l_38450#:
 	.%line 921 "/opt/netronome/components/flowenv/me/lib/pktio/libpktio.c" 1 fiid:2270 0
 	immed_w0[a0, @_gro_ctxcfg]
 .%import_expr common_code 7602 <27:20:24,17:10:16> _gro_ctxcfg &v 32 >> 0xffff0000 &
-.7602 00F440AF8000 common_code
+.7602 00F440BC0000 common_code
 	.%operands 0 1 0 a0 A0 -- -- a0 A0 -- --
 	.%line 921 "/opt/netronome/components/flowenv/me/lib/pktio/libpktio.c" 1 fiid:2270 0
 	immed_w1[a0, @_gro_ctxcfg]
@@ -39589,7 +39588,7 @@ l_38450#:
 	.%line 921 "/opt/netronome/components/flowenv/me/lib/pktio/libpktio.c" 1 fiid:2270 0
 	immed_w0[b1, @_gro_ctxcfg]
 .%import_expr common_code 7604 <27:20:24,7:0:16> _gro_ctxcfg &v 0 + 0xffff0000 &
-.7604 00F440A007E0 common_code
+.7604 00F440B00700 common_code
 	.%operands 0 1 0 b1 B1 -- -- b1 B1 -- --
 	.%line 921 "/opt/netronome/components/flowenv/me/lib/pktio/libpktio.c" 1 fiid:2270 0
 	immed_w1[b1, @_gro_ctxcfg]
@@ -39675,7 +39674,7 @@ l_38523#:
 /******/              mem_read32(&xr_done,
 	immed_w0[b1, @_system_init_done_flag]
 .%import_expr common_code 7623 <27:20:24,7:0:16> _system_init_done_flag &v 32 >> 0xffff0000 &
-.7623 00F440A007E0 common_code
+.7623 00F440B00700 common_code
 	.%operands 0 1 0 b1 B1 -- -- b1 B1 -- --
 	.%line 32 "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/system_init.c" 1 fiid:2276 0
 	immed_w1[b1, @_system_init_done_flag]
@@ -39685,7 +39684,7 @@ l_38523#:
 	.%line 32 "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/system_init.c" 1 fiid:2276 0
 	immed_w0[a1, @_system_init_done_flag]
 .%import_expr common_code 7625 <27:20:24,17:10:16> _system_init_done_flag &v 0 + 0xffff0000 &
-.7625 00F440AF8001 common_code
+.7625 00F440BC0001 common_code
 	.%operands 0 1 0 a1 A1 -- -- a1 A1 -- --
 	.%line 32 "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/system_init.c" 1 fiid:2276 0
 	immed_w1[a1, @_system_init_done_flag]
@@ -39980,7 +39979,7 @@ _handle_error_packet#:
 l_39288#:
 	immed_w0[b1, _pif_counter_DROP]
 .%import_expr common_code 7687 <27:20:24,7:0:16> _pif_counter_DROP &v 32 >> 0xffff0000 &
-.7687 00F440A007E0 common_code
+.7687 00F440B00700 common_code
 	.%operands 0 1 0 b1 B1 -- -- b1 B1 -- --
 	.%line 343 "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/pif_app_nfd.c" 1 fiid:2722 0
 	immed_w1[b1, _pif_counter_DROP]
@@ -39990,7 +39989,7 @@ l_39288#:
 	.%line 343 "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/pif_app_nfd.c" 1 fiid:2722 0
 	immed_w0[a2, _pif_counter_DROP]
 .%import_expr common_code 7689 <27:20:24,17:10:16> _pif_counter_DROP &v 0 + 0xffff0000 &
-.7689 00F440AF8002 common_code
+.7689 00F440BC0002 common_code
 	.%operands 0 1 0 a2 A2 -- -- a2 A2 -- --
 	.%line 343 "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/pif_app_nfd.c" 1 fiid:2722 0
 	immed_w1[a2, _pif_counter_DROP]
@@ -40649,7 +40648,7 @@ l_6836#:
 /******/                  mem_incr64(&DCFL_LKP_OVERFLOW_CNTR);
 	immed_w0[a7, _dcfl_lkp_overflow_counter]
 .%import_expr common_code 7831 <27:20:24,17:10:16> _dcfl_lkp_overflow_counter &v 32 >> 0xffff0000 &
-.7831 00F440AF8007 common_code
+.7831 00F440BC0007 common_code
 	.%operands 0 1 0 a7 A7 -- -- a7 A7 -- --
 	.%line 258 "/opt/netronome/p4/components/dcfl/me/lib/dcfl/_c/field_lkp.c" 1 fiid:982 0
 	immed_w1[a7, _dcfl_lkp_overflow_counter]
@@ -40659,7 +40658,7 @@ l_6836#:
 	.%line 258 "/opt/netronome/p4/components/dcfl/me/lib/dcfl/_c/field_lkp.c" 1 fiid:982 0
 	immed_w0[b7, _dcfl_lkp_overflow_counter]
 .%import_expr common_code 7833 <27:20:24,7:0:16> _dcfl_lkp_overflow_counter &v 0 + 0xffff0000 &
-.7833 00F440A01FE0 common_code
+.7833 00F440B01F00 common_code
 	.%operands 0 1 0 b7 B7 -- -- b7 B7 -- --
 	.%line 258 "/opt/netronome/p4/components/dcfl/me/lib/dcfl/_c/field_lkp.c" 1 fiid:982 0
 	immed_w1[b7, _dcfl_lkp_overflow_counter]
@@ -41109,7 +41108,7 @@ l_10032#:
 /******/          PIF_COUNT(ERROR_WAIT_CTM_PKT_ALLOC);
 	immed_w0[a7, _pif_counter_ERROR_WAIT_CTM_PKT_ALLOC]
 .%import_expr common_code 7934 <27:20:24,17:10:16> _pif_counter_ERROR_WAIT_CTM_PKT_ALLOC &v 0 + 0xffff0000 &
-.7934 00F440AF8007 common_code
+.7934 00F440BC0007 common_code
 	.%operands 0 1 0 a7 A7 -- -- a7 A7 -- --
 	.%line 239 "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/pkt_clone.c" 1 fiid:2392 0
 	immed_w1[a7, _pif_counter_ERROR_WAIT_CTM_PKT_ALLOC]
@@ -41133,7 +41132,7 @@ l_10032#:
 /******/          PIF_COUNT(ERROR_WAIT_CTM_PKT_ALLOC);
 	immed_w0[b2, _pif_counter_ERROR_WAIT_CTM_PKT_ALLOC]
 .%import_expr common_code 7939 <27:20:24,7:0:16> _pif_counter_ERROR_WAIT_CTM_PKT_ALLOC &v 32 >> 0xffff0000 &
-.7939 00F440A00BE0 common_code
+.7939 00F440B00B00 common_code
 	.%operands 0 1 0 b2 B2 -- -- b2 B2 -- --
 	.%line 239 "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/pkt_clone.c" 1 fiid:2392 0
 	immed_w1[b2, _pif_counter_ERROR_WAIT_CTM_PKT_ALLOC]
@@ -41441,7 +41440,7 @@ l_38984#:
 /******/              PIF_COUNT(ERROR_WAIT_BLM_BUF_ALLOC);
 	immed_w0[a15, _pif_counter_ERROR_WAIT_BLM_BUF_ALLOC]
 .%import_expr common_code 8007 <27:20:24,17:10:16> _pif_counter_ERROR_WAIT_BLM_BUF_ALLOC &v 32 >> 0xffff0000 &
-.8007 00F440AF800F common_code
+.8007 00F440BC000F common_code
 	.%operands 0 1 0 a15 A15 -- -- a15 A15 -- --
 	.%line 252 "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/pkt_clone.c" 1 fiid:2372 0
 	immed_w1[a15, _pif_counter_ERROR_WAIT_BLM_BUF_ALLOC]
@@ -41451,7 +41450,7 @@ l_38984#:
 	.%line 252 "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/pkt_clone.c" 1 fiid:2372 0
 	immed_w0[b7, _pif_counter_ERROR_WAIT_BLM_BUF_ALLOC]
 .%import_expr common_code 8009 <27:20:24,7:0:16> _pif_counter_ERROR_WAIT_BLM_BUF_ALLOC &v 0 + 0xffff0000 &
-.8009 00F440A01FE0 common_code
+.8009 00F440B01F00 common_code
 	.%operands 0 1 0 b7 B7 -- -- b7 B7 -- --
 	.%line 252 "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/pkt_clone.c" 1 fiid:2372 0
 	immed_w1[b7, _pif_counter_ERROR_WAIT_BLM_BUF_ALLOC]
@@ -49791,7 +49790,7 @@ l_8809#:
 l_8810#:
 	immed_w0[b1, _pif_counter_DROP_MCAST_PORT_OUT_BOUNDS]
 .%import_expr common_code 9818 <27:20:24,7:0:16> _pif_counter_DROP_MCAST_PORT_OUT_BOUNDS &v 32 >> 0xffff0000 &
-.9818 00F440A007E0 common_code
+.9818 00F440B00700 common_code
 	.%operands 0 1 0 b1 B1 -- -- b1 B1 -- --
 	.%line 103 "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/mcast.c" 1 fiid:2310 0
 	immed_w1[b1, _pif_counter_DROP_MCAST_PORT_OUT_BOUNDS]
@@ -49801,7 +49800,7 @@ l_8810#:
 	.%line 103 "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/mcast.c" 1 fiid:2310 0
 	immed_w0[a3, _pif_counter_DROP_MCAST_PORT_OUT_BOUNDS]
 .%import_expr common_code 9820 <27:20:24,17:10:16> _pif_counter_DROP_MCAST_PORT_OUT_BOUNDS &v 0 + 0xffff0000 &
-.9820 00F440AF8003 common_code
+.9820 00F440BC0003 common_code
 	.%operands 0 1 0 a3 A3 -- -- a3 A3 -- --
 	.%line 103 "/opt/netronome/p4/components/nfp_pif/me/apps/common/src/mcast.c" 1 fiid:2310 0
 	immed_w1[a3, _pif_counter_DROP_MCAST_PORT_OUT_BOUNDS]
@@ -63006,7 +63005,7 @@ actdata 4 901;
 .%type A20971520 903
 .%type A20971520 903
 .%type A20971520 903
-.%type A65568 903
+.%type A2080032 903
 .%type A2080032 903
 .%type A2080032 903
 .%type A2080032 903
@@ -74283,12 +74282,12 @@ f_cfg 4 1742;
 .%scope block 246 256
 .%var buf 248 R
 .%liverange 0 $R0 8019:8028
-.%scope function blm_buf_alloc _blm_buf_alloc "/opt/netronome/components/flowenv/me/blocks/blm/libblm.c" fiid:2366 34 37 8016 8021 -- 8022 249
+.%scope function blm_buf_alloc _blm_buf_alloc "/opt/netronome/components/flowenv/me/blocks/blm/libblm.c" fiid:2366 34 37 8016 8021 -- 8003,8022 249
 .%var buf 536 R
 .%liverange 0 -- 
 .%var blq 524 R
 .%liverange 0 -- 
-.%scope function blm_buf_alloc_bulk _blm_buf_alloc_bulk "/opt/netronome/components/flowenv/me/blocks/blm/libblm.c" fiid:2367 70 75 8016 8021 -- 8022 36
+.%scope function blm_buf_alloc_bulk _blm_buf_alloc_bulk "/opt/netronome/components/flowenv/me/blocks/blm/libblm.c" fiid:2367 70 75 8016 8021 -- 8003,8022 36
 .%var bufs 536 R
 .%liverange 0 -- 
 .%var count 524 R
@@ -74298,7 +74297,7 @@ f_cfg 4 1742;
 .%var sigpair 538 R 249
 .%liverange 0 G4 8019:8021
 .%liverange 4 G5 8019:8021
-.%scope function __blm_buf_alloc_bulk ___blm_buf_alloc_bulk "/opt/netronome/components/flowenv/me/blocks/blm/libblm.c" fiid:2368 40 67 8016 8021 -- 8022 74
+.%scope function __blm_buf_alloc_bulk ___blm_buf_alloc_bulk "/opt/netronome/components/flowenv/me/blocks/blm/libblm.c" fiid:2368 40 67 8016 8021 -- 8003,8022 74
 .%var bufs 536 R
 .%liverange 0 -- 
 .%var count 524 R

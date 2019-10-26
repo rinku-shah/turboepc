@@ -6,7 +6,7 @@
 
 /* Table 0 : egress::ctxt_release_uekey_sgwteid_map */
 #define PIF_TABLE_ACTIONDATA_SIZE_0 16
-#define PIF_TABLE_MAX_ENTRIES_0 2049
+#define PIF_TABLE_MAX_ENTRIES_0 65001
 #define PIF_TABLE_SHIFT_0 4
 
 /* Table 1 : ingress::ip_op_tun_s2_downlink */

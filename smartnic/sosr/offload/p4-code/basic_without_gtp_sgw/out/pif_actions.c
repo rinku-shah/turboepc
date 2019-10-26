@@ -1745,8 +1745,8 @@ static int pif_action_exec_egress__act_19(__lmem uint32_t *_pif_parrep, __xread 
     ethernet = (__lmem struct pif_header_ethernet *) (_pif_parrep + PIF_PARREP_ethernet_OFF_LW);
     attach_accept = (__lmem struct pif_header_attach_accept *) (_pif_parrep + PIF_PARREP_attach_accept_OFF_LW);
     PIF_PARREP_SET_data_DIRTY(_pif_ctldata);
-    PIF_PARREP_SET_attach_accept_DIRTY(_pif_ctldata);
     PIF_PARREP_SET_ipv4_DIRTY(_pif_ctldata);
+    PIF_PARREP_SET_attach_accept_DIRTY(_pif_ctldata);
     PIF_PARREP_SET_initial_ctxt_setup_resp_DIRTY(_pif_ctldata);
     PIF_PARREP_SET_ethernet_DIRTY(_pif_ctldata);
 

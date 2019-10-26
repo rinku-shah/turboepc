@@ -394,7 +394,7 @@ control c_egress(inout headers hdr,
                 populate_ctxt_release_uekey_sgwteid_map;
                 NoAction;
             }
-            size = 2048;
+            size = 65000;
             default_action = NoAction();
         }
 
