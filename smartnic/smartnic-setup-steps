@@ -25,7 +25,7 @@ cd /opt/netronome/p4/bin
 /////////////////////  STARTUP STEPS IF NFP MODULE CANNOT ACCCESS CARD  ////////////////
 RTE logs are here - cat /var/log/nfp-sdk6-rte.log |tail
 
-p4server@p4server:/opt/netronome/p4/bin$ sudo ./nfp-nffw unload -n 0
+p4server@p4server:/opt/netronome/bin$ sudo ./nfp-nffw unload -n 0
 
 sudo rmmod nfp
 
