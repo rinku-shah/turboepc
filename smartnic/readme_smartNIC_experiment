@@ -1,6 +1,6 @@
 1. Compile P4 code using Programmer studio in a windows machine
 2. Burn the firmware code onto smartNIC 
-    a. cd /opt/nfp_pif/
+    a. cd /opt/nfp_pif/bin
     b. sudo /opt/nfp_pif/bin/pif_rte -n 0 -p 20207 -I -z -s /opt/nfp_pif/scripts/pif_ctl_nfd.sh -d <design-file-path> -f <nffw-file-path> -c <p4cfg-file-path>
     design-file-path : locate ?/out/pif_design.json and give absolute path
     nffw-file-path : locate ?/basic_without_gtp_sgw.nffw file 
