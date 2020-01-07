@@ -22,7 +22,7 @@ Repeat step 2 for SGW and PGW
 2. Start RTE service
     sudo service nfp-sdk6-rte start
 3. Check RTE service status (confirm running)
-    sudo service nfp-sdk6-rte start
+    sudo service nfp-sdk6-rte status
 4. Load the firmware
     cd /opt/netronome/p4/bin
     example:
