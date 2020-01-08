@@ -382,7 +382,7 @@ void* multithreading_func(void *arg){
 					ueServiceRequest_t = true;
 					dataTime = 1;
 					loop1 = 1;    //outer loop---attach
-					loop2 = 99;   //inner loop---service-req
+					loop2 = 99999;   //inner loop---service-req
 					break;
 
 			/* att-serv-req-data-loop2-det*/
@@ -661,7 +661,7 @@ void* multithreading_func(void *arg){
 					float tmp_tpt = (num_ue_per_epoch[curr_mix_index]*1.0)/(traffic_shape[curr_mix_index][0] * 60);
 					float tmp_lat = (ue_response_time_per_epoch[curr_mix_index]*0.001)/num_ue_per_epoch[curr_mix_index];
 					cout<<"Throughput= "<<tmp_tpt<<endl;
-					cout<<"Latency(ms)= "<<tmp_lat<<endl;
+					cout<<"Latency(us)= "<<tmp_lat<<endl;
 					tpt[curr_mix_index] = tmp_tpt;
 					lat[curr_mix_index] = tmp_lat;
 //					cout<<"Num this epoch is "<<(num_ue_per_epoch[curr_mix_index]*1.0)/(traffic_shape[curr_mix_index][0] * 60.0)<<endl;
@@ -1014,7 +1014,7 @@ int main(int argc, char *args[]){
 	printf("Total Execution Time=%d sec\n", (actual_endTime - curTime));
 
 	average_registration_time = average_registration_time/1000000.0;
-	cout<<"Latency = "<<average_registration_time<<" secs"<<endl;
+	cout<<"Latency = "<<average_registration_time<<" usecs"<<endl;
 	cout<<"Service Request Latency = "<<average_sr_registration_time<<" secs"<<endl;
 	cout<<"Registration Throughput="<<registrationThroughput<<" registrations/sec"<<endl;
 	cout<<"Attach-Request= "<<attNo<<"  Detach-Request= "<< detNo<<"  Service-Request= "<<sreqNo<<endl;
@@ -1043,14 +1043,14 @@ int main(int argc, char *args[]){
 		data.append("#MaxThreads").append(COMMA).append("#UE").append(COMMA).append("AvUE/Thread").append(COMMA);
 		data.append("ExecutionTime").append(COMMA);
 		data.append("RegistrationThroughput(registrations/sec)").append(COMMA);
-		data.append("RegistrationLatency(sec)").append(COMMA);
+		data.append("RegistrationLatency(usec)").append(COMMA);
 		data.append("SetupTunnel(Yes/No)").append(COMMA);
 		data.append("DO Detach (Yes/No)").append(COMMA);
 		data.append("SendingData?(Yes/No)").append(COMMA).append("MeanDataSendingTime").append(COMMA).append("SendingRate").append(COMMA);
 		data.append("#Attach").append(COMMA).append("#Detach").append(COMMA);
 		data.append("#Service_Requests").append(COMMA);
 		data.append("ATTACH_PERCENT").append(COMMA);
-		data.append("EPOCH_TPT").append(COMMA).append("EPOCH_DELAY_ms").append(COMMA).append("ServiceRequestLatency");
+		data.append("EPOCH_TPT").append(COMMA).append("EPOCH_DELAY_ms").append(COMMA).append("ServiceRequestLatency(us)");
 		data.append("\n");
 	}
 	/*if(!fileExists(INST_FILE)){

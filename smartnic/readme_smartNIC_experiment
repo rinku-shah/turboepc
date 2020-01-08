@@ -17,4 +17,25 @@ Repeat step 2 for SGW and PGW
    c. python turboepc-sgw-controller.py //on a seperate terminal 
 5. On the DGW machine run ran code 
    a. sudo ./ran 1 1 0k
-
+/////////////////////////////////////////
+1. Compile P4 code
+2. Start RTE service
+    sudo service nfp-sdk6-rte start
+3. Check RTE service status (confirm running)
+    sudo service nfp-sdk6-rte status
+4. Load the firmware
+    cd /opt/netronome/p4/bin
+    example:
+    sudo ./rtecli design-load -f ~/basic_without_gtp_dgw/out/turboepc_dgw.nffw -p ~/basic_without_gtp_dgw/out/pif_design.json -c ~/basic_without_gtp_dgw/dgw.p4cfg
+4. Assign IP to vf0_0 interfaces: Run the below steps in all DGW,SGW,PGW
+   copy vfinit_dgw.sh script from turboepc/smartnic/scripts/<vfinit_dgw.sh> to home folder of DGW machines
+    a. sudo ~/.vfinit_dgw.sh
+    Repeat step 3 for SGW and PGW machines as well
+4. Controller :
+   on SGW machine copy the Controller scripts from Github turboepc/smartnic/controller path to /opt/nfp_pif/thrift/client
+   a. cd /opt/nfp_pif/thrift/client
+   b. python turboepc-dgw-controller.py
+   c. python turboepc-sgw-controller.py //on a seperate terminal 
+   d. python turboepc-attach-controller.py //on a seperate terminal 
+5. On the DGW machine run ran code 
+   a. sudo ./ran 1 1 0k

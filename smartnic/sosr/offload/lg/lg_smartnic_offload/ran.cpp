@@ -382,7 +382,7 @@ void* multithreading_func(void *arg){
 					ueServiceRequest_t = true;
 					dataTime = 1;
 					loop1 = 1;    //outer loop---attach
-					loop2 = 999;   //inner loop---service-req
+					loop2 = 9999999;   //inner loop---service-req
 					break;
 
 			/* att-serv-req-data-loop2-det*/
@@ -459,7 +459,7 @@ void* multithreading_func(void *arg){
 				}
 					//tmpArray: [0] = SEND_IP_SGW_TEID, [1] = IP Address of UE, [2] = SGW TEID, [3] = ue_teid, [4] = GUTI
 
-				usleep(200000);
+				//usleep(200000);
 				if(tmpArray.size()>=5){
 					do{
 						if(sendData_t){
@@ -481,7 +481,7 @@ void* multithreading_func(void *arg){
 						if(s1_release_t){
 							//cout<<"SLEEPING BEFORE s1 release"<<endl;
 							//usleep(my_rand()+2000);		//200-700 usec
-							usleep(my_rand()+wait_latency);
+							//usleep(my_rand()+wait_latency);
 							//sreqNo++;
 							//gettimeofday(&ue.start2, NULL);
 							//gettimeofday(&start2, NULL);
@@ -530,7 +530,7 @@ void* multithreading_func(void *arg){
 								//cout<<"SLEEPING BEFORE service request"<<endl;
 								//usleep(my_rand());
 								//usleep(my_rand()+2000);
-								usleep(my_rand()+wait_latency);
+								//usleep(my_rand()+wait_latency);
 								//usleep(my_rand()+2000);
 								//gettimeofday(&ue.start2, NULL);
 								//gettimeofday(&start2, NULL);
@@ -589,7 +589,7 @@ void* multithreading_func(void *arg){
 						if(!s1_release_t && !sendData_t)
 							usleep(my_rand()+wait_latency);
 						att_done=false;
-						usleep(my_rand()+wait_latency);
+						//usleep(my_rand()+wait_latency);
 						//gettimeofday(&ue.start3, NULL);
 						//gettimeofday(&start3, NULL);
 						mtime=0;
@@ -661,7 +661,7 @@ void* multithreading_func(void *arg){
 					float tmp_tpt = (num_ue_per_epoch[curr_mix_index]*1.0)/(traffic_shape[curr_mix_index][0] * 60);
 					float tmp_lat = (ue_response_time_per_epoch[curr_mix_index]*0.001)/num_ue_per_epoch[curr_mix_index];
 					cout<<"Throughput= "<<tmp_tpt<<endl;
-					cout<<"Latency(ms)= "<<tmp_lat<<endl;
+					cout<<"Latency(us)= "<<tmp_lat<<endl;
 					tpt[curr_mix_index] = tmp_tpt;
 					lat[curr_mix_index] = tmp_lat;
 //					cout<<"Num this epoch is "<<(num_ue_per_epoch[curr_mix_index]*1.0)/(traffic_shape[curr_mix_index][0] * 60.0)<<endl;
@@ -979,7 +979,7 @@ int main(int argc, char *args[]){
 		float tmp_tpt = (num_ue_per_epoch[curr_mix_index]*1.0)/(traffic_shape[curr_mix_index-1][0] * 60);
 		float tmp_lat = (ue_response_time_per_epoch[curr_mix_index]*0.001)/num_ue_per_epoch[curr_mix_index];
 		cout<<"Throughput= "<<tmp_tpt<<endl;
-		cout<<"Latency(ms)= "<<tmp_lat<<endl;
+		cout<<"Latency(us)= "<<tmp_lat<<endl;
 		tpt[curr_mix_index] = tmp_tpt;
 		lat[curr_mix_index] = tmp_lat;
 	}
@@ -1015,7 +1015,7 @@ int main(int argc, char *args[]){
 
 	average_registration_time = average_registration_time/1000000.0;
 	cout<<"Latency = "<<average_registration_time<<" secs"<<endl;
-	cout<<"Service Request Latency = "<<average_sr_registration_time<<" secs"<<endl;
+	cout<<"Service Request Latency = "<<average_sr_registration_time<<" usecs"<<endl;
 	cout<<"Registration Throughput="<<registrationThroughput<<" registrations/sec"<<endl;
 	cout<<"Attach-Request= "<<attNo<<"  Detach-Request= "<< detNo<<"  Service-Request= "<<sreqNo<<endl;
 	cout << fixed;
@@ -1043,7 +1043,7 @@ int main(int argc, char *args[]){
 		data.append("#MaxThreads").append(COMMA).append("#UE").append(COMMA).append("AvUE/Thread").append(COMMA);
 		data.append("ExecutionTime").append(COMMA);
 		data.append("RegistrationThroughput(registrations/sec)").append(COMMA);
-		data.append("RegistrationLatency(sec)").append(COMMA);
+		data.append("RegistrationLatency(usec)").append(COMMA);
 		data.append("SetupTunnel(Yes/No)").append(COMMA);
 		data.append("DO Detach (Yes/No)").append(COMMA);
 		data.append("SendingData?(Yes/No)").append(COMMA).append("MeanDataSendingTime").append(COMMA).append("SendingRate").append(COMMA);
