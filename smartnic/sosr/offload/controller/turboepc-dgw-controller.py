@@ -201,7 +201,7 @@ class PacketProcessor(object):
 			    tbl_id = 'ingress::ip_op_tun_s1_uplink' #del on DGW
 			    rule_name = str(data.param4) #'del-s1-uplink_' + str(data.param4)
 			    default_rule = False
-			    actions = '{  "type" : "ingress::populate_ip_op_tun_s1_uplink",  "data" : { "egress_port_s1" : { "value" : "p0" } } }' 
+			    actions = '{  "type" : "ingress::populate_ip_op_tun_s1_uplink",  "data" : { "egress_port_s1" : { "value" : "p1" } } }' 
 			    match = '{ "ipv4.srcAddr" : {  "value" : "10.127.1.1"} , "ipv4.dstAddr" : { "value" : "192.168.3.4"} } ' #% (data.param4)  
 
 			    with THRIFT_API_LOCK:

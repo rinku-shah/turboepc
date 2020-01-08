@@ -1,0 +1,44 @@
+Register syntax
+
+register<bit<512>>(1024) reg_key;
+reg-size = 512
+num-entries = 1024
+reg-array-name = reg_key
+
+    table nc_read_table {
+    	key = {
+    		hdr.nc_hdr.key : exact;
+    	}
+    	actions = {
+    		nc_read_reply;
+    	}
+
+    	size = 4096;
+    }
+
+    table nc_write_table {
+        key = {
+            hdr.nc_hdr.key : exact;
+        }
+
+        actions = {
+            nc_write_reply;
+        }
+
+        size = 4096;
+    }
+
+        action nc_read_reply (bit <32> index) {
+		// Starting Read reply
+		hdr.ipv4.totalLen = hdr.ipv4.totalLen + 64;
+		hdr.udp.len = hdr.udp.len + 64;
+		hdr.nc_hdr.op = 0x1;
+		hdr.nc_load.setValid();
+		reg_key.read(hdr.nc_load.load , index);
+    }
+
+    action nc_write_reply (bit <32> index) {
+		// Starting Write reply
+		hdr.nc_hdr.op = 0x3;
+		reg_key.write(index, hdr.nc_load.load);
+    }
