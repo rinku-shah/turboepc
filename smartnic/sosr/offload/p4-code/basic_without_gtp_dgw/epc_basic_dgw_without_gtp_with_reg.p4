@@ -66,8 +66,8 @@ bit<16> port_egress = 1;
     table tun_egress_s3_uplink{
         key={
             // @adding dummy field as we are assuiming we will not pass data in hardware
-            hdr.ue_service_req.ue_key:exact;
-            //hdr.tmpreg.ue_key:exact;
+            //hdr.ue_service_req.ue_key:exact;
+            hdr.tmpreg.ue_key:exact;
             // match on gtp teid field and set the corressponding egress port
             // hdr.gtpu.teid : exact;
             // @vikas : withouth gtpu we need to think of something else to match on or we can leave it empty as well
