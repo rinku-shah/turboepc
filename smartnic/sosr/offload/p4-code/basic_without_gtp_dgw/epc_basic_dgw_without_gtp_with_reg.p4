@@ -21,13 +21,15 @@ control c_ingress(inout headers hdr,
 
 register<bit<16>>(65000) s3_uplink_egress_port;
 register<bit<16>>(65000) tun_s1_uplink_egress_port;
-bit<16> port_index; 
-bit<32> tmp_ue_key;
+//bit<32> port_index; 
+//bit<32> tmp_ue_key;
+bit<16> del = 65535;
+bit<16> port_egress = 1;
 
    // ***************** Uplink Tunnel(DGW->PGW) Setup *******************************
     // action populate_ip_op_tun_s1_uplink(bit<32> op_tunnel_s1,bit<16> egress_port_s1){
-    action populate_ip_op_tun_s1_uplink(bit<16> egress_port_s1){
-        port_index = egress_port_s1; 
+    action populate_ip_op_tun_s1_uplink(bit<32> egress_port_s1){
+        hdr.tmpreg.port_index = egress_port_s1; 
         //standard_metadata.egress_spec = egress_port_s1; //port = p1
         //hdr.ipv4.ttl = hdr.ipv4.ttl - 1;
     }
@@ -47,24 +49,25 @@ bit<32> tmp_ue_key;
    }
 
    // ***************** Downlink Tunnel(PGW->DGW) Setup *******************************
-    action populate_tun_egress_s3_uplink(bit<16> egress_port_s3){
-        standard_metadata.egress_spec = egress_port_s3;
+    action populate_tun_egress_s3_uplink(bit<32> egress_port_s3){
+        hdr.tmpreg.port_index = egress_port_s3;
+	//standard_metadata.egress_spec = egress_port_s3;
 
-        // Downlink trafiic at DWG comes from Sink and it has to be forwarded to RAN
-         if(hdr.ipv4.srcAddr==sink_ip){
-             if(hdr.tcp.src_port == 13001){
-                hdr.ethernet.dstAddr = ran1;
-            }
-        }
-        hdr.ipv4.ttl = hdr.ipv4.ttl - 1;
+        //// Downlink trafiic at DWG comes from Sink and it has to be forwarded to RAN
+        // if(hdr.ipv4.srcAddr==sink_ip){
+        //     if(hdr.tcp.src_port == 13001){
+        //        hdr.ethernet.dstAddr = ran1;
+         //   }
+        //}
+        //hdr.ipv4.ttl = hdr.ipv4.ttl - 1;
     }
 
     // tunnel to egress port map for DGW
     table tun_egress_s3_uplink{
         key={
             // @adding dummy field as we are assuiming we will not pass data in hardware
-            //hdr.ue_service_req.ue_key:exact;
-            tmp_ue_key:exact;
+            hdr.ue_service_req.ue_key:exact;
+            //hdr.tmpreg.ue_key:exact;
             // match on gtp teid field and set the corressponding egress port
             // hdr.gtpu.teid : exact;
             // @vikas : withouth gtpu we need to think of something else to match on or we can leave it empty as well
@@ -122,18 +125,19 @@ bit<32> tmp_ue_key;
                             else if(hdr.ipv4.protocol == PROTO_UDP){
                                 if(hdr.data.epc_traffic_code == 14){
                                     ip_op_tun_s1_uplink.apply();
-                                    tun_s1_uplink_egress_port.write(port_index, 65535);
-                                    tmp_ue_key = hdr.ue_context_rel_req.ue_num;
+                                    tun_s1_uplink_egress_port.write( hdr.tmpreg.port_index, del);
+                                    hdr.tmpreg.ue_key = hdr.ue_context_rel_req.ue_num;
                                     tun_egress_s3_uplink.apply();
-                                    tun_egress_s3_uplink_egress_port.write(port_index, 65535);
+                                    s3_uplink_egress_port.write( hdr.tmpreg.port_index, del);
                                 }
                                 if(hdr.data.epc_traffic_code == 17){
-                                    tmp_ue_key = hdr.ue_service_req.ue_key;
-                                    tun_egress_s3_uplink.apply(port_index, 1);
+                                    hdr.tmpreg.ue_key = hdr.ue_service_req.ue_key;
+                                    tun_egress_s3_uplink.apply();
+				    s3_uplink_egress_port.write(hdr.tmpreg.port_index, port_egress);
                                 }
                                 if(hdr.data.epc_traffic_code == 19){
                                     ip_op_tun_s1_uplink.apply();
-                                    tun_s1_uplink_egress_port.write(port_index, 1);
+                                    tun_s1_uplink_egress_port.write(hdr.tmpreg.port_index, port_egress);
                                 }
                                     standard_metadata.egress_spec = 1;
                                     hdr.ipv4.ttl = hdr.ipv4.ttl - 1;
