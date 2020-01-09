@@ -19,6 +19,13 @@ control c_ingress(inout headers hdr,
                   inout metadata meta,
                   inout standard_metadata_t standard_metadata) {
 
+register<bit<16>>(65000) s2_downlink_egress_port;
+register<bit<8>>(65000) reg_uestate;
+bit<16> del_port = 65535;
+bit<16> port_egress = 0;
+bit<8> state_idle = 0;
+bit<8> state_busy = 1;
+
    // ***************** Uplink Tunnel(DGW->PGW) Setup *******************************
 
     // action populate_ip_op_tun_s2_uplink(bit<32> op_tunnel_s2,bit<16> egress_port_s2){
@@ -46,15 +53,17 @@ control c_ingress(inout headers hdr,
    // ***************** Downlink Tunnel(PGW->DGW) Setup *******************************
 
 //    action populate_ip_op_tun_s2_downlink(bit<32> op_tunnel_s2,bit<16> egress_port_s2){
-   action populate_ip_op_tun_s2_downlink(bit<16> egress_port_s2){
-       standard_metadata.egress_spec = egress_port_s2;
-        hdr.ipv4.ttl = hdr.ipv4.ttl - 1;
+   action populate_ip_op_tun_s2_downlink(bit<32> egress_port_s2){
+       //standard_metadata.egress_spec = egress_port_s2;
+       //hdr.ipv4.ttl = hdr.ipv4.ttl - 1;
+       //egress_port_s2 is the index to the register
+       hdr.tmpreg.tmp_index = egress_port_s2; 
    }
   table ip_op_tun_s2_downlink{
       key={
-
             // @adding dummy field as we are assuiming we will not pass data in hardware
-             hdr.ue_service_req.ue_key:exact;
+            // hdr.ue_service_req.ue_key:exact;
+            hdr.tmpreg.ue_key:exact;
             // match on gtp teid field and set the corressponding egress port
             // hdr.gtpu.teid : exact;
             // @vikas : withouth gtpu we need to think of something else to match on or we can leave it empty as well
@@ -69,13 +78,16 @@ control c_ingress(inout headers hdr,
 
 
 /* definig offload tables here which will be used on SGW for Context Release and Service Request */
-    action populate_uekey_uestate_map(bit<8> uestate){
-       hdr.uekey_uestate.ue_state = uestate;
+    //action populate_uekey_uestate_map(bit<8> uestate){
+    action populate_uekey_uestate_map(bit<32> reg_index){
+       //hdr.uekey_uestate.ue_state = uestate;
+       hdr.tmpreg.tmp_index = reg_index;
     }
 
     table uekey_uestate_map{
       key={
-            hdr.uekey_uestate.ue_key : exact;
+            //hdr.uekey_uestate.ue_key : exact;
+            hdr.tmpreg.ue_key : exact;
       }
       actions={
           populate_uekey_uestate_map;
@@ -275,7 +287,7 @@ control c_ingress(inout headers hdr,
                     clone3(CloneType.I2E, I2E_CLONE_SESSION_ID, standard_metadata);
 
                     // handle context release message 
-                    if(hdr.data.epc_traffic_code == 14){
+                    /*if(hdr.data.epc_traffic_code == 14){
                         // send the original packet back to RAN by appending the reply packet
                         // we are sending packet to the python controller running over SGW switch CPU_PORT here is "v0.0"(768)
                         standard_metadata.egress_spec = CPU_PORT;
@@ -297,6 +309,32 @@ control c_ingress(inout headers hdr,
                         // send the original packet to local onos by appending the sgw_teid field
                         ctxt_setup_uekey_sgwteid_map.apply();
                         return;
+                    }*/
+
+                    if(hdr.data.epc_traffic_code == 14){
+                      hdr.tmpreg.ue_key = hdr.ue_context_rel_req.ue_num;
+                    }
+                    if(hdr.data.epc_traffic_code == 19){
+                      hdr.tmpreg.ue_key = hdr.initial_ctxt_setup_resp.ue_key;
+                    }
+                    if((hdr.data.epc_traffic_code == 14) || (hdr.data.epc_traffic_code == 19)){
+                      ip_op_tun_s2_downlink.apply();
+                    }
+                    if(hdr.data.epc_traffic_code == 14){
+                      s2_downlink_egress_port.write(hdr.tmpreg.tmp_index, del_port)
+                    }
+                    if(hdr.data.epc_traffic_code == 19){
+                      s2_downlink_egress_port.write(hdr.tmpreg.tmp_index, port_egress);
+                    }
+
+                    if((hdr.data.epc_traffic_code == 14) || (hdr.data.epc_traffic_code == 19)){
+                      uekey_uestate_map.apply();
+                    }
+                    if(hdr.data.epc_traffic_code == 14){
+                      reg_uestate.write( hdr.tmpreg.tmp_index, state_idle);
+                    }
+                    if(hdr.data.epc_traffic_code == 19){
+                      reg_uestate.write(hdr.tmpreg.tmp_index, state_busy);
                     }
                 }
                     
@@ -335,10 +373,12 @@ control c_ingress(inout headers hdr,
 
             // compiler removes tables which are not used, to prevent offload tables from being removed lets make an if check with large ttl values so that it is not removed.
             if(hdr.ipv4.ttl == 250){
-                uekey_uestate_map.apply();
+                //uekey_uestate_map.apply();
                 uekey_guti_map.apply();
                 ip_op_tun_s2_uplink.apply();
-                ip_op_tun_s2_downlink.apply();
+                //ip_op_tun_s2_downlink.apply();
+                service_req_uekey_sgwteid_map.apply();
+                ctxt_setup_uekey_sgwteid_map.apply();
             }
            
     }
@@ -483,7 +523,7 @@ control c_egress(inout headers hdr,
                                      // forwarding the cloned packet back to RAN on "p1"(1)
                                      //@rinku: changing port to spec
                                     // standard_metadata.egress_spec = 1;
-				     standard_metadata.egress_port = 1;
+				                            standard_metadata.egress_port = 1;
                                      // return;
                             }
 

@@ -235,6 +235,12 @@ header tmpvar_t{
     bit<16> tmpUdpPort; 
 }
 
+header tmpreg_t{
+    //used for holding values for table plus register index/vars
+    bit<32> tmp_index;
+    bit<32> ue_key;
+}
+
 struct metadata {
     /* empty */
      
@@ -283,5 +289,6 @@ struct headers {
     
     kv_t        kv;
     tmpvar_t tmpvar;
+    tmpreg_t tmpreg;
 }
 #endif
