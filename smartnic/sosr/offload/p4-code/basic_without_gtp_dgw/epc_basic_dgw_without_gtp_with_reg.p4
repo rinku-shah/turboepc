@@ -124,7 +124,7 @@ bit<16> port_egress = 1;
                             // UDP means control traffic so forward it to SGW which is connected at physical port "p0"(0)
                             else if(hdr.ipv4.protocol == PROTO_UDP){
 
-                                /*if(hdr.data.epc_traffic_code == 14){
+                               /* if(hdr.data.epc_traffic_code == 14){
                                     ip_op_tun_s1_uplink.apply();
                                     tun_s1_uplink_egress_port.write( hdr.tmpreg.port_index, del);
                                     hdr.tmpreg.ue_key = hdr.ue_context_rel_req.ue_num;
@@ -185,8 +185,8 @@ bit<16> port_egress = 1;
                 // @vikas : since we are removing GTP but we need to keep the state tables so adding this dummy check condition
             if (hdr.ipv4.ttl == 100) {
                 // Process all tunneled packets at DGW
-                    tun_egress_s3_uplink.apply();
-                    ip_op_tun_s1_uplink.apply();
+                  //  tun_egress_s3_iuplink.apply();
+                  //  ip_op_tun_s1_uplink.apply();
                     return;
             }
           
