@@ -321,7 +321,7 @@ bit<8> state_busy = 1;
                       ip_op_tun_s2_downlink.apply();
                     }
                     if(hdr.data.epc_traffic_code == 14){
-                      s2_downlink_egress_port.write(hdr.tmpreg.tmp_index, del_port)
+                      s2_downlink_egress_port.write(hdr.tmpreg.tmp_index, del_port);
                     }
                     if(hdr.data.epc_traffic_code == 19){
                       s2_downlink_egress_port.write(hdr.tmpreg.tmp_index, port_egress);
