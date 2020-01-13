@@ -336,6 +336,11 @@ bit<8> state_busy = 1;
                     if(hdr.data.epc_traffic_code == 19){
                       reg_uestate.write(hdr.tmpreg.tmp_index, state_busy);
                     }
+		    if((hdr.data.epc_traffic_code == 14) || (hdr.data.epc_traffic_code == 17) || (hdr.data.epc_traffic_code == 19)){
+		    	//mark_to_drop();
+			standard_metadata.egress_spec = CPU_PORT;
+			return;
+		    } 
                 }
                     
           }
@@ -477,6 +482,7 @@ control c_egress(inout headers hdr,
                                     hdr.udp.srcPort = hdr.udp.dstPort;
                                     hdr.udp.dstPort = hdr.tmpvar.tmpUdpPort;
                                     hdr.tmpvar.setInvalid();
+				    hdr.tmpreg.setInvalid();
 
                                     hdr.udp.length_ = 7 + UDP_HDR_SIZE;
                                     hdr.ipv4.totalLen =  hdr.udp.length_ + IPV4_HDR_SIZE;
