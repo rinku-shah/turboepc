@@ -115,7 +115,7 @@ bit<8> state_busy = 1;
 
     // @offload design : handling service request at SGW for local onos processing
     action populate_service_req_uekey_sgwteid_map(bit<32> sgwteid){
-
+	/*
         // copy the original header(ue_service_req) to new header(offload_ue_service_req) and add sgwteid from the lookup to new service request header
         hdr.offload_ue_service_req.setValid();
 
@@ -136,7 +136,36 @@ bit<8> state_busy = 1;
         // packet-in header. By setting it valid we make sure it will be
         // deparsed on the wire (see c_deparser).
         hdr.packet_in.setValid();
-        hdr.packet_in.ingress_port = standard_metadata.ingress_port;
+        hdr.packet_in.ingress_port = standard_metadata.ingress_port; */
+
+         hdr.initial_ctxt_setup_req.setValid();
+         hdr.initial_ctxt_setup_req.epc_traffic_code = 18;
+         hdr.initial_ctxt_setup_req.sep1 = hdr.ue_service_req.sep1;
+         hdr.initial_ctxt_setup_req.sgw_teid = sgwteid;
+         // set invalid the incoming headers as we are appending new one
+         hdr.data.setInvalid();
+         hdr.ue_service_req.setInvalid();
+
+         hdr.ipv4.ttl = 64;
+         hdr.ethernet.dstAddr =  hdr.ethernet.srcAddr;
+         hdr.ipv4.dstAddr = hdr.ipv4.srcAddr;
+
+         // we need to send reply from sgw1,sgw2,sge3,sgw4 as per the chain
+         if(hdr.ethernet.srcAddr == ran1){
+             hdr.ethernet.srcAddr = sgw1;
+             hdr.ipv4.srcAddr = s1u_sgw_addr;
+         }
+
+         hdr.tmpvar.tmpUdpPort = hdr.udp.srcPort;
+         hdr.udp.srcPort = hdr.udp.dstPort;
+         hdr.udp.dstPort = hdr.tmpvar.tmpUdpPort;
+         hdr.tmpvar.setInvalid();
+
+         hdr.udp.length_ = 11 + UDP_HDR_SIZE;
+         hdr.ipv4.totalLen =  hdr.udp.length_ + IPV4_HDR_SIZE;
+
+         // forwarding the cloned packet back to RAN on "p1"(1)
+         standard_metadata.egress_spec = 1;
     }
 
     table service_req_uekey_sgwteid_map{
@@ -314,6 +343,11 @@ bit<8> state_busy = 1;
                     if(hdr.data.epc_traffic_code == 14){
                       hdr.tmpreg.ue_key = hdr.ue_context_rel_req.ue_num;
                     }
+		    if(hdr.data.epc_traffic_code == 17){
+                        // send the original packet to local onos by appending the sgw_teid field
+                        service_req_uekey_sgwteid_map.apply();
+                        return;
+                    }
                     if(hdr.data.epc_traffic_code == 19){
                       hdr.tmpreg.ue_key = hdr.initial_ctxt_setup_resp.ue_key;
                     }
@@ -332,15 +366,84 @@ bit<8> state_busy = 1;
                     }
                     if(hdr.data.epc_traffic_code == 14){
                       reg_uestate.write( hdr.tmpreg.tmp_index, state_idle);
+		      
+                      // send the packet back to RAN
+                                    hdr.ue_context_rel_command.setValid();
+                                    hdr.ue_context_rel_command.epc_traffic_code = 15;
+                                    hdr.ue_context_rel_command.sep1 = hdr.ue_context_rel_req.sep1;
+                                    // set invalid the incoming headers as we are appending new one
+                                    hdr.data.setInvalid();
+                                    hdr.ue_context_rel_req.setInvalid();
+
+                                    // setting ipv4 ttl back as 64 so that DGW can handle the packet                    
+                                    hdr.ipv4.ttl = 64;
+                                    hdr.ethernet.dstAddr =  hdr.ethernet.srcAddr;
+                                    hdr.ipv4.dstAddr = hdr.ipv4.srcAddr;
+
+                                    // we need to send reply from sgw1,sgw2,sge3,sgw4 as per the chain
+                                    if(hdr.ethernet.srcAddr == ran1){
+                                         hdr.ethernet.srcAddr = sgw1;
+                                        hdr.ipv4.srcAddr = s1u_sgw_addr;
+                                    }
+
+                                    hdr.tmpvar.tmpUdpPort = hdr.udp.srcPort;
+                                    hdr.udp.srcPort = hdr.udp.dstPort;
+                                    hdr.udp.dstPort = hdr.tmpvar.tmpUdpPort;
+                                    hdr.tmpvar.setInvalid();
+          			    hdr.tmpreg.setInvalid();
+
+                                    hdr.udp.length_ = 7 + UDP_HDR_SIZE;
+                                    hdr.ipv4.totalLen =  hdr.udp.length_ + IPV4_HDR_SIZE;
+                                    // forwarding the cloned packet back to RAN on "p1"(1)
+                                    //@rinku: changing port to spec
+            			    standard_metadata.egress_spec = 1;
+			            //standard_metadata.egress_port = 1;
+				    return;
+
                     }
                     if(hdr.data.epc_traffic_code == 19){
                       reg_uestate.write(hdr.tmpreg.tmp_index, state_busy);
-                    }
-                    if((hdr.data.epc_traffic_code == 14) || (hdr.data.epc_traffic_code == 17) || (hdr.data.epc_traffic_code == 19)){
-                      mark_to_drop();
-                      //standard_metadata.egress_spec = CPU_PORT;
+
+		      // send the packet back to RAN
+                      hdr.attach_accept.setValid();
+                      hdr.attach_accept.epc_traffic_code = 8;
+                      hdr.attach_accept.sep1 = hdr.initial_ctxt_setup_resp.sep1;
+                      hdr.attach_accept.ue_key = hdr.initial_ctxt_setup_resp.ue_key;
+                      // set invalid the incoming headers as we are appending new one
+                      hdr.data.setInvalid();
+                      hdr.initial_ctxt_setup_resp.setInvalid();
+                      // send the packet back to RAN
+                      hdr.ipv4.ttl = 64;
+
+                      hdr.ethernet.dstAddr =  hdr.ethernet.srcAddr;
+                      hdr.ipv4.dstAddr = hdr.ipv4.srcAddr;
+
+                      if(hdr.ethernet.srcAddr == ran1){
+                          hdr.ethernet.srcAddr = sgw1;
+                          hdr.ipv4.srcAddr = s1u_sgw_addr;
+                      }
+
+                      hdr.tmpvar.tmpUdpPort = hdr.udp.srcPort;
+                      hdr.udp.srcPort = hdr.udp.dstPort;
+                      hdr.udp.dstPort = hdr.tmpvar.tmpUdpPort;
+                      hdr.tmpvar.setInvalid();
+		      hdr.tmpreg.setInvalid();
+
+                      hdr.udp.length_ = 11 + UDP_HDR_SIZE;
+                      hdr.ipv4.totalLen =  hdr.udp.length_ + IPV4_HDR_SIZE;
+
+                      // forwarding the cloned packet back to RAN on "p1"(1)
+                      //@rinku: changing port to spec
+                      standard_metadata.egress_spec = 1;
+                      //standard_metadata.egress_port = 1;
                       return;
-                    } 
+                    }
+
+                   /* if((hdr.data.epc_traffic_code == 14) || (hdr.data.epc_traffic_code == 17) || (hdr.data.epc_traffic_code == 19)){
+                      //mark_to_drop();
+                      standard_metadata.egress_spec = CPU_PORT; //2;
+                      return;
+                    }*/ 
                 }
                     
           }
@@ -382,7 +485,7 @@ bit<8> state_busy = 1;
                 uekey_guti_map.apply();
                 ip_op_tun_s2_uplink.apply();
                 //ip_op_tun_s2_downlink.apply();
-                service_req_uekey_sgwteid_map.apply();
+                //service_req_uekey_sgwteid_map.apply();
                 ctxt_setup_uekey_sgwteid_map.apply();
             }
            
