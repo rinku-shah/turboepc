@@ -1,7 +1,7 @@
 # ROOT ONOS installation on root container
-1. copy turboepc/scripts/root_onos_scripts/install_onos.sh to home directory of machine
+1. copy ./scripts/root_onos_scripts/install_onos.sh to home directory of machine
 2. run ./install_onos.sh
-3. copy turboepc/scripts/root_onos_scripts/root_init_scripts directory to home directory 
+3. copy ./scripts/root_onos_scripts/root_init_scripts directory to home directory 
 4. cd ~/root_init_scripts
 5. ./root_onos_bootstap.sh
 6. Manually create a database in mysql server as per the instructions provided below
@@ -31,9 +31,9 @@
 ************************************************************************************************
 
 # LOCAL ONOS+bmv2 installation on SGW container
-1. copy turboepc/scripts/local_onos_scripts/install_onos.sh to home directory of machine
+1. copy ./scripts/local_onos_scripts/install_onos.sh to home directory of machine
 2. run ./install_onos.sh
-3. copy turboepc/scripts/local_onos_scripts/local_init_scripts to home directory 
+3. copy ./scripts/local_onos_scripts/local_init_scripts to home directory 
 4. cd ~/local_init_scripts
 5. ./sgw_onos_bootstart.sh
 6. cp ~/local_init_scripts/run_onos.sh ~/onos
@@ -48,9 +48,9 @@
     For series/parallel setup we need sgw1,sgw2,sgw3 pipeconfs,
     For basic/traditional we need sgw1 pipeconf 
     For handover/ft we need sgw1,sgw2 pipeconf
-9. copy turboepc/scripts/local_onos_scripts/log.h to home folder   # to enable/disable P4Runtime logs
-10. copy pi_server.cpp from turboepc/scripts/switch_pi_server_scripts/?  as per the respective setup
-11. copy turboepc/scripts/local_onos_scripts/install-p4-tools.sh to home folder 
+9. copy ./scripts/local_onos_scripts/log.h to home folder   # to enable/disable P4Runtime logs
+10. copy pi_server.cpp from ./scripts/switch_pi_server_scripts/?  as per the respective setup
+11. copy ./scripts/local_onos_scripts/install-p4-tools.sh to home folder 
 12. ./install-p4-tools.sh  #this will install bmv2 switch 
 13. To run ONOS 
     cd ~/onos
@@ -58,9 +58,9 @@
 
 ************************************************************************************************
 #  bmv2 installation on DGW,PGW switch 
-1. copy turboepc/scripts/log.h to home folder   # to enable/disable P4Runtime logs
-2. copy pi_server.cpp from turboepc/scripts/switch_pi_server_scripts/?/pi_server.cpp  as per the respective setup
-3. copy turboepc/scripts/install-p4-tools.sh to home folder 
+1. copy ./scripts/log.h to home folder   # to enable/disable P4Runtime logs
+2. copy pi_server.cpp from ./scripts/switch_pi_server_scripts/?/pi_server.cpp  as per the respective setup
+3. copy ./scripts/install-p4-tools.sh to home folder 
 4. ./install-p4-tools.sh  #this will install bmv2 switch 
 
 
