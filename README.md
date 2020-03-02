@@ -1,7 +1,10 @@
 # TurboEPC
 Accelerate mobile core network control plane functions using programmable switches
 
-# Designs:
+## Publication
+Rinku Shah, Vikas Kumar, Mythili Vutukuru, Purushottam Kulkarni. "TurboEPC: Leveraging Dataplane Programmability to Accelerate the Mobile Packet Core". In the ACM SIGCOMM Symposium on SDN Research (SOSR), 2020
+
+## Designs:
 
 traditional- All control plane messages serviced by Root controller, only GTP processing at switches.
 
@@ -15,7 +18,7 @@ FT- Single chain of RAN-DGW-SGW-PGW-SINK with SGW-FT instance where the UE state
 
 handover- In this setup the user registers, establishes session with chain 2, handover is done over chain 1, delete the tunnel created over chain 2. case 6 in ran.cpp is used for this scenario. The load geneator configuration for only handovers is, service_request and s1_release flags are kept false. loop 1 and loop 2 values are set to be 1.
 
-# Roadmap
+## Roadmap
 
 Installation steps :
 Please follow steps from turboepc/turboepc-hardware/smartnic-setup-steps for hardware Netronome setup and turboepc/turboepc-software/installation_steps.txt for software bmv2 setup
