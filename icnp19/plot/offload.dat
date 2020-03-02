@@ -1,5 +1,0 @@
-# Traffic-mix	throughput	end-to-end-latency(ms)
-Service-request 1958.16 1.40325 1.0925
-Medium-attach 1466.08 3.21525 1.14427
-Attach 852.945 4.40625  0.998068
-Handover 0

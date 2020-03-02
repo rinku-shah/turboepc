@@ -1,9 +1,0 @@
-# Design			      throughput latency(ms)	
-Traditional-EPC 		402.093 9.2897 Traditional-EPC
-Turbo-Basic 	        	409.14  1.192	TurboEPC-Basic 
-Turbo-Series-Hit(1)  		403     1.0	TurboEPC-Series-Hit(1st switch)
-Turbo-Series-Hit(2)		346.8	1.4749	TurboEPC-Series-Hit(2nd switch)
-Turbo-Series-Miss		321.83	9.9399	TurboEPC-Series-Miss
-Turbo-Parallel-Hit		414.93	1.1342	TurboEPC-Parallel-Hit
-Turbo-Parallel-Miss		403.53	9.5145	TurboEPC-Parallel-Miss
-Turbo-FT			387	3.7349	TurboEPC-FT

@@ -1,4 +1,0 @@
-This dir is for 3 SGW connected in series in 1 chain, we ran 3 experiments on it:
-1. Hit on the first SGW 
-2. Miss on 1st SGW and hit on Second SGW
-3. Miss at both SGWs and the second SGW sends the packet to root controller in this case

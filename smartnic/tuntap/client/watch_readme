@@ -1,2 +1,0 @@
-watch command:
-watch -n 0.1 "ifconfig tun2"

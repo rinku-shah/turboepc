@@ -1,8 +1,0 @@
-#MaxThreads,#UE,AvUE/Thread,ExecutionTime,RegistrationThroughput(registrations/sec),RegistrationLatency(sec),SetupTunnel(Yes/No),DO Detach (Yes/No),SendingData?(Yes/No),MeanDataSendingTime,SendingRate,#Attach,#Detach,#Service_Requests,ATTACH_PERCENT,EPOCH_TPT,EPOCH_DELAY_ms,ServiceRequestLatency
-20,26020,1301,62,419.677419,0.001464,No,No,Yes,1,0K,142,122,25756,1.014604,985.164816  // SGW1_1 Hit in series 
-20,23990,1199.5,62,386.935484,0.001368,No,No,Yes,1,0K,132,112,23746,1.017090,996.603681     // Run2 
-20,18653,932.65,61,305.786885,0.002704,No,No,Yes,1,0K,98,91,18464,1.013242,1688.596675   //SGW1_2 Hit Series
-20,18921,946.05,61,310.180328,0.002087,No,No,Yes,1,0K,102,83,18736,0.977750,1546.516225   //Run2
-20,21901,1095.05,61,359.032787,0.010450,No,No,Yes,1,0K,111,100,21690,0.963426,9939.919917  // Series miss
-20,19632,981.6,61,321.836066,0.009212,No,No,Yes,1,0K,106,96,19430,1.028932,8797.977200     // series Miss Run2 with 20 threads  
-10,10784,1078.4,61,176.786885,0.005141,No,No,Yes,1,0K,56,48,10680,0.964392,4999.920880      // series miss Run3 with 10 threads
