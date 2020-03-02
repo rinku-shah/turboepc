@@ -1,0 +1,73 @@
+{ 
+    "tables":{
+        "ingress::arp_tbl": {
+            "rules": [
+                {
+                    "action": {
+                        "type": "ingress::fwd_act", 
+                        "data": {
+                            "prt": {
+                                "value": "p0"
+                            }
+                        }
+                    }, 
+                    "name": "host_to_net1",
+                    "match": {
+                        "standard_metadata.ingress_port": {
+                            "value": "v0.0"
+                        }
+                    }
+                },
+		{
+                    "action": {
+                        "type": "ingress::fwd_act", 
+                        "data": {
+                            "prt": {
+                                "value": "p1"
+                            }
+                        }
+                    }, 
+                    "name": "host_to_net10",
+                    "match": {
+                        "standard_metadata.ingress_port": {
+                            "value": "v0.1"
+                        }
+                    }
+                }, 
+                {
+                    "action": {
+                        "type": "ingress::fwd_act", 
+                        "data": {
+                            "prt": {
+                                "value": "v0.0"
+                            }
+                        }
+                    }, 
+                    "name": "net_to_host2", 
+                    "match": {
+                        "standard_metadata.ingress_port": {
+                            "value": "p0"
+                        }
+                    }
+                }, 
+                {
+                    "action": {
+                        "type": "ingress::fwd_act", 
+                        "data": {
+                            "prt": {
+                                "value": "v0.0"
+                            }
+                        }
+                    }, 
+                    "name": "net_to_host20", 
+                    "match": {
+                        "standard_metadata.ingress_port": {
+                            "value": "p1"
+                        }
+                    }
+                }
+            ]
+        }
+    }
+}
+

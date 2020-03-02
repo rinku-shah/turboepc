@@ -1,0 +1,25 @@
+1. Traditional EPC
+    This is a 1 chain experiment with DGW, SGW and PGW connected to root ONOS controller
+    RUN steps:
+    1. on the base machine, create all bridges using the ~/bridge_init.sh script
+    2. start the containers using the container start script
+    3. ssh into all the containers on terminator using 10.0.3.* IPs (deafult username:ubuntu passworsd:ubuntu)
+    4. on the root container :
+        a. cd ~/onos 
+        b. ./run_onos.sh
+    5. To connect the individual switches to root, follow thses steps:
+        a. cd ~/scripts
+        b. ./run_switch_wo_log.sh // this will start the bmv2 switches
+    6. once all the switches are started, we need to connect them to root controller in specific order 
+       to connect to root controller go to terminal of each switch and run the following commands
+        a. cd ~/scripts
+        b. python con.py  // this will connect the switch to the root controller  
+       Repeat steps 6a and 6b for all the switches in this order: DGW,SGW,PGW
+    7. once all the switches are connected to root contoller, bring up the onos CLI and activate epc app at the root controller terminal using the steps below:
+       a. cd ~
+       b. onos localhost
+       c. onos cli> app activate org.onosproject.p4tutorial.epc
+    8. To start the ran Load Generator go to ran container terminal 
+       a. cd ran_code/clone_bitwise_lg
+       b. make
+       c. sudo ./ran 1 1 0k // this will run ran for 1 thread for 1 minute 

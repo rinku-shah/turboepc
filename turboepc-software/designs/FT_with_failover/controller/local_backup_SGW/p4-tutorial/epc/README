@@ -1,0 +1,4 @@
+ONOS_APPS=proxyarp,hostprovider,lldpprovider,drivers.bmv2,p4tutorial.pipeconf,p4tutorial.epc ok clean 
+
+
+sudo -E mn --custom $BMV2_MN_PY --switch onosbmv2,pipeconf=p4-tutorial-pipeconf --topo linear,3 --controller remote,ip=127.0.0.1

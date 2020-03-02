@@ -1,0 +1,72 @@
+# Template used to create this container: /usr/share/lxc/templates/lxc-ubuntu
+# Parameters passed to the template:
+# Template script checksum (SHA-1): 4d7c613c3c0a0efef4b23917f44888df507e662b
+# For additional config options, please look at lxc.container.conf(5)
+# Uncomment the following line to support nesting containers:
+#lxc.include = /usr/share/lxc/config/nesting.conf
+# (Be aware this has security implications)
+# Common configuration
+lxc.include = /usr/share/lxc/config/ubuntu.common.conf
+# Container specific configuration
+lxc.arch = amd64
+lxc.cgroup.memory.limit_in_bytes = 4G
+lxc.cgroup.cpuset.cpus = 40,41
+# Network configuration
+
+lxc.network.type = veth
+lxc.network.flags = up
+lxc.network.link = lxcbr0
+lxc.network.hwaddr = 00:16:3e:d6:a4:7e
+
+lxc.network.type = veth
+lxc.network.flags = up
+lxc.network.link = br3
+lxc.network.hwaddr = 00:16:3e:44:69:4c
+lxc.network.ipv4 = 192.168.3.4/24
+
+lxc.network.type = veth
+lxc.network.flags = up
+lxc.network.link = br9
+lxc.network.hwaddr = 00:16:3e:f1:bb:b2
+lxc.network.ipv4 = 192.168.9.4/24
+
+lxc.network.type = veth
+lxc.network.flags = up
+lxc.network.link = br10
+lxc.network.hwaddr = 00:16:3e:59:af:9d
+lxc.network.ipv4 = 192.168.10.4/24
+
+lxc.network.type = veth
+lxc.network.flags = up
+lxc.network.link = br13
+lxc.network.hwaddr = 00:16:3e:6e:41:14
+lxc.network.ipv4 = 192.168.13.4/24
+
+lxc.network.type = veth
+lxc.network.flags = up
+lxc.network.link = br18
+lxc.network.hwaddr = 00:16:3e:b5:39:f6
+lxc.network.ipv4 = 192.168.18.4/24
+
+lxc.network.type = veth
+lxc.network.flags = up
+lxc.network.link = br19
+lxc.network.hwaddr = 00:16:3e:88:51:43
+lxc.network.ipv4 = 192.168.19.4/24
+
+lxc.network.type = veth
+lxc.network.flags = up
+lxc.network.link = br4
+lxc.network.hwaddr = 00:16:3e:d2:f0:d4
+lxc.network.ipv4 = 192.168.4.4/24
+
+lxc.network.type = veth
+lxc.network.flags = up
+lxc.network.link = br0
+lxc.network.hwaddr = 00:16:3e:60:99:4c
+lxc.network.ipv4 = 192.168.100.17/24
+
+
+lxc.rootfs = /var/lib/lxc/pgw/rootfs
+lxc.rootfs.backend = dir
+lxc.utsname = pgw

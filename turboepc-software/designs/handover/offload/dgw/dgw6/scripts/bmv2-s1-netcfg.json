@@ -1,0 +1,38 @@
+{
+    "devices": {
+        "device:bmv2:s12": {
+            "generalprovider": {
+                "p4runtime": {
+                    "ip": "192.168.100.22", 
+                    "deviceKeyId": "p4runtime:device:bmv2:s12", 
+                    "port": 50051, 
+                    "deviceId": 11
+                }
+            }, 
+            "piPipeconf": {
+                "piPipeconfId": "p4-tutorial-pipeconf"
+            }, 
+            "ports": {
+                "1": {
+                    "name": "eth1", 
+                    "speed": 10000, 
+                    "enabled": true, 
+                    "number": 1, 
+                    "removed": false, 
+                    "type": "copper"
+                }, 
+                "2": {
+                    "name": "eth2", 
+                    "speed": 10000, 
+                    "enabled": true, 
+                    "number": 2, 
+                    "removed": false, 
+                    "type": "copper"
+                }
+            }, 
+            "basic": {
+                "driver": "bmv2"
+            }
+        }
+    }
+}

@@ -1,0 +1,35 @@
+
+run commands as sudo
+Remove all the agilio packages, find using: apt list | grep "agilio\|nfp-"
+
+To install netronome sdk and rte
+
+dpkg -i nfp-sdk_6.1.0.1-preview-3243-2_amd64.deb
+cd nfp-sdk-6-rte-v6.1.0.1-preview-Ubuntu-Release-r2750-2018-10-10-ubuntu.binary/
+./sdk6_rte_install.sh install
+
+
+To generate nffw: wire.nffw is output file name, wire.p4 is input p4 file name
+/opt/netronome/p4/bin/nfp4build -o wire.nffw -p out_dir -4 wire.p4 -l lithium
+
+To start rte service: sudo systemctl start nfp-sdk6-rte
+
+If RTE service does not start refer:
+https://help.netronome.com/support/solutions/articles/36000152964-problems-starting-rte-service
+
+To offload nffw to smartnic: 
+cd /opt/netronome/p4/bin
+./rtecli design-load -f ~/wire/wire.nffw -c ~/wire/wire.p4cfg 
+
+
+/////////////////////  STARTUP STEPS IF NFP MODULE CANNOT ACCCESS CARD  ////////////////
+RTE logs are here - cat /var/log/nfp-sdk6-rte.log |tail
+
+p4server@p4server:/opt/netronome/bin$ sudo ./nfp-nffw unload -n 0
+
+sudo rmmod nfp
+
+sudo insmod /var/lib/dkms/nfp-bsp-6000-b0/2018.03.13.1102/4.15.0-64-generic/x86_64/module/nfp.ko nfp_dev_cpp=1
+
+sudo service nfp-sdk6-rte status/start/stop
+

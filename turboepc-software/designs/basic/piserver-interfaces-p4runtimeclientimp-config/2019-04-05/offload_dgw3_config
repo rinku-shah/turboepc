@@ -1,0 +1,41 @@
+# Template used to create this container: /usr/share/lxc/templates/lxc-ubuntu
+# Parameters passed to the template:
+# Template script checksum (SHA-1): 4d7c613c3c0a0efef4b23917f44888df507e662b
+# For additional config options, please look at lxc.container.conf(5)
+# Uncomment the following line to support nesting containers:
+#lxc.include = /usr/share/lxc/config/nesting.conf
+# (Be aware this has security implications)
+# Common configuration
+lxc.include = /usr/share/lxc/config/ubuntu.common.conf
+# Container specific configuration
+lxc.arch = amd64
+# Network configuration
+lxc.cgroup.memory.limit_in_bytes = 3G
+lxc.cgroup.cpuset.cpus = 20,21
+
+lxc.network.type = veth
+lxc.network.flags = up
+lxc.network.link = lxcbr0
+lxc.network.hwaddr = 00:16:3e:d5:49:55
+
+lxc.network.type = veth
+lxc.network.flags = up
+lxc.network.link = br7
+lxc.network.hwaddr = 00:16:3e:f1:74:b3
+lxc.network.ipv4 = 192.168.7.2/24
+
+lxc.network.type = veth
+lxc.network.flags = up
+lxc.network.link = br8
+lxc.network.hwaddr = 00:16:3e:44:13:09
+lxc.network.ipv4 = 192.168.8.2/24
+
+lxc.network.type = veth
+lxc.network.flags = up
+lxc.network.link = br0
+lxc.network.hwaddr = 00:16:3e:97:47:e0
+lxc.network.ipv4 = 192.168.100.15/24
+
+lxc.rootfs = /var/lib/lxc/offload_dgw3/rootfs
+lxc.rootfs.backend = dir
+lxc.utsname = offload_dgw3

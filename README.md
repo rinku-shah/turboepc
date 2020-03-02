@@ -7,39 +7,19 @@ traditional- All control plane messages serviced by Root controller, only GTP pr
 
 basic- All offloadable messages (service request/context release/GTP processing) processed at the switch, and attach/detach at the Root controller. We consider that the user state is always available at the switch (always HIT).
 
-parallel1miss- Single chain of RAN-DGW-SGW-PGW-SINK that considers HIT & MISS scenario at the SGW switch for UE context/state.
+parallel- Single chain (one edge switch) with the user context is partitioned among 3 edge switches in parallel.
 
-parallel2miss- Scale the EPC system- RAN-DGW-SGW-PGW-SINK with two instances of SGW in parallel working in offload mode.
+series- Single chain (one edge switch) with the user context is partitioned among 3 edge switches in series.
 
-series- RAN-DGW-SGW1-SGW2-PGW-SINK, i.e., two instances of SGW in series to scale the number of users in offload mode.
+FT- Single chain of RAN-DGW-SGW-PGW-SINK with SGW-FT instance where the UE state is mirrored so that under failures the user state at the failed switch is not lost. 
 
-FT- Single chain of RAN-DGW-SGW-PGW-SINK with SGW-FT instance where the UE state is mirrored so that under failures the user state at the failed switch is not lost. This design also considers HIT & MISS scenario at the SGW switch for UE context/state.
-
-HANDOVER- In this setup the user registers, establishes session with chain 2, handover is done over chain 1, delete the tunnel created over chain 2 (delete pending as of now). case 6 in ran.cpp is used for this scenario. For only handovers, service_request and s1_release flags are kept false. loop 1 and loop 2 values are set to be 1.
+handover- In this setup the user registers, establishes session with chain 2, handover is done over chain 1, delete the tunnel created over chain 2. case 6 in ran.cpp is used for this scenario. The load geneator configuration for only handovers is, service_request and s1_release flags are kept false. loop 1 and loop 2 values are set to be 1.
 
 # Roadmap
 
 Installation steps :
-Please follow steps from turboepc/installation_steps.txt
+Please follow steps from turboepc/turboepc-hardware/smartnic-setup-steps for hardware Netronome setup and turboepc/turboepc-software/installation_steps.txt for software bmv2 setup
 
-traditional - 
- code location: turboepc/modular_p4_codes/4chaincode/traditional/
-
-basic - 
- code location: turboepc/modular_p4_codes/4chaincode/basic
-
-parallel - 
- code location: turboepc/modular_p4_codes/4chain_3sgwscode/parallel/
-
-series -  
- code location: turboepc/modular_p4_codes/4chain_3sgwscode/series/
-
-handover -
- code location: turboepc/handover/
-
-FT -
-code location: turboepc/modular_p4_codes/1chaincode/FT_with_failover/
- 
 # FAQs
 ## ONOS : 
     a. after too many runs, if the onos does not behave as expected please do the following

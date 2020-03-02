@@ -1,0 +1,11 @@
+We are using version 1.13 of onos 
+To install onos-1.13 use the below instructions:
+git clone https://github.com/opennetworkinglab/onos.git
+git checkout onos-1.13
+git pull 
+
+Then use the INSTALL instructions given on github repo
+
+We have added some more pipeconf entries in modules.defs file in this folder
+
+deps.json file is located at onos/lib/deps.json
