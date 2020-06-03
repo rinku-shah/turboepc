@@ -33,3 +33,4 @@ OR
 
 7. On the DGW machine run ran code 
    a. sudo ./ran 1 1 0k
+    // If you get error related to SSL while compiling lg, "sudo apt-get install libssl1.0-dev"
