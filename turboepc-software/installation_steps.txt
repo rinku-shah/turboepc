@@ -12,7 +12,7 @@
     #Logout from MySql and run the following command from where the file HSS.sql is located (can be found under /src/controller/HSS).
     $ mysql -u root -proot HSS < HSS.sql
 7. cp ~/root_init_scripts/run_onos.sh ~/onos
-8. Add "mysql":"mvn:mysql:mysql-connector-java:5.1.35", to ~/onos/lib/deps.json under the artifacts section
+8. Add "mysql":"mvn:mysql:mysql-connector-java:5.1.35", to ~/onos/lib/deps.json under the artifacts section. Run onos-lib-gen to install libraries
 9. Add these entries in onos/modules.defs file under "ONOS_APPS" section as required in the setup
     '//apps/p4-tutorial/epc:onos-apps-p4-tutorial-epc-oar',                  #default
     '//apps/p4-tutorial/pipeconf:onos-apps-p4-tutorial-pipeconf-oar',        #default
