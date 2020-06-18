@@ -27,6 +27,32 @@
 8. To run ONOS 
     cd ~/onos
     ./run_onos.sh
+    ########## FAQ TO ADD LIB ##########
+    
+For example: 
+1. add "mysql":"mvn:mysql:mysql-connector-java:jar:5.1.35", to artifacts in lib/deps.json
+2. compiled it using "onos-lib-gen". It added
+remote_jar (
+ name = 'mysql',
+ out = 'mysql-connector-java-5.1.35.jar',
+ url = 'mvn:mysql:mysql-connector-java:jar:5.1.35',
+ sha1 = 'b6ac941b7288376a7e8bc6490264bbd4427fb94e',
+ maven_coords = 'mysql:mysql-connector-java:5.1.35',
+ visibility = [ 'PUBLIC' ],)
+to the lib/BUCK file automatically.
+3. Then added '//lib:mysql', to COMPILE_DEPS part in BUCK file of MyApp
+also added in BUNDLES as part of vim apps/p4-tutorial/epc/BUCK
+
+NOTE: If there is artifacts error, the problem is that maven uses "http" instead of "https"
+ERROR looks like "org.eclipse.aether.resolution.ArtifactResolutionException: Could not transfer artifact redis.clients:jedis:jar:2.8.0 from/to central (http://repo1.maven.org/maven2/): Not Implemented (501)"
+SOLUTION: vim tools/build/libgen/src/main/java/org/onosproject/libgen/AetherResolver.java
+change the link to https
+"
+private static final String CENTRAL_URL = "https://repo1.maven.org/maven2/";
+"
+and run, onos-lib-gen
+
+##################
 
 ************************************************************************************************
 
