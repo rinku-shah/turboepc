@@ -45,7 +45,8 @@ bool networkServiceRequest = false;	// Network initiated service request (downli
 // vector<vector<int>> traffic_mix={{0,100,0,0,0},{499,99501,0,0,0},{1499,98501,0,0,0},{2999,97001,0,0,0},{6999,93001,0,0,0},{8999,91001,0,0,0},{10999,89001,0,0,0},{30999,69001,0,0,0},{40999,59001,0,0,0},{50999,49001,0,0,0},{60999,39001,0,0,0},{100,0,0,0,0}};
 vector<vector<int>> traffic_mix={{0,0,0,9909,90991,0},{499,0,0,0,99501,0},{1499,98501,0,0,0,0},{2999,97001,0,0,0,0},{6999,93001,0,0,0,0},{8999,91001,0,0,0,0},{10999,89001,0,0,0,0},{30999,69001,0,0,0,0},{40999,59001,0,0,0,0},{0,0,0,0,100,0},{0,0,0,0,0,100},{0,0,0,100,0,0}};
 int start_ue = 400;
-int wait_latency = 28000;
+bool ATTgt50 = false;
+int wait_latency = 56000; //set 56000 for local controller offload //28000;
 //2_98,0
 //5_95,1
 //6_94,2
@@ -141,6 +142,7 @@ unsigned long long prev_lat = 0; //To remember lat till previous period
 vector<unsigned long long> num_ue_per_thread;
 vector<unsigned long long> ue_registration_response_time;
 vector<unsigned long long> sr_registration_response_time;
+vector<unsigned long long> att_registration_response_time;
 vector<unsigned long long> stored_ue_registration_response_time;//For delay distribution
 //long delay[1000][10000]; //For storing index of UE delays
 
@@ -433,9 +435,10 @@ void* multithreading_func(void *arg){
 					seconds  = end1.tv_sec  - start1.tv_sec;
 					useconds = end1.tv_usec - start1.tv_usec;
 					mtime = ((seconds) * 1000000 + useconds);
-					lat_mtx.lock();
+					//lat_mtx.lock();
 					ue_registration_response_time[threadId] += mtime;
-					lat_mtx.unlock();
+					att_registration_response_time[threadId] += mtime;
+					//lat_mtx.unlock();
 					//cout<<"a:"<<mtime<<endl;
 					lat_mtx.lock();
                                         attNo++;
@@ -450,7 +453,17 @@ void* multithreading_func(void *arg){
 
 				// usleep(200000);
 				if(tmpArray.size()>=5){
+					if(ATTgt50){
+						//loop2 modified for attach % > 50; comment for other cases
+						if((attNo % 80)<2){
+							loop2=9; //loop2=9 for att=80%
+						}else loop2=0;
+					}
 					do{
+						if(ATTgt50){
+						     if(loop2==0)
+							continue;
+						}
 						if(sendData_t){
 								// Send data
 							if(DO_DEBUG){
@@ -482,10 +495,10 @@ void* multithreading_func(void *arg){
 							seconds  = end2.tv_sec  - start2.tv_sec;
 							useconds = end2.tv_usec - start2.tv_usec;
 							mtime = ((seconds) * 1000000 + useconds);
-							lat_mtx.lock();
+							//lat_mtx.lock();
 							ue_registration_response_time[threadId] += mtime;
 							sr_registration_response_time[threadId] += mtime;
-							lat_mtx.unlock();
+							//lat_mtx.unlock();
 							//cout<<"c:"<<mtime<<endl;	
 							lat_mtx.lock();
                                                         num_ue_per_thread[threadId] += 1;//Increment completion num for serv req
@@ -523,10 +536,10 @@ void* multithreading_func(void *arg){
 								seconds  = end2.tv_sec  - start2.tv_sec;
 								useconds = end2.tv_usec - start2.tv_usec;
 								mtime = ((seconds) * 1000000 + useconds);
-								lat_mtx.lock();
+								//lat_mtx.lock();
 								ue_registration_response_time[threadId] += mtime;
 								sr_registration_response_time[threadId] += mtime;
-								lat_mtx.unlock();
+								//lat_mtx.unlock();
 
 								//cout<<"s:"<<mtime<<endl;
 								/*stored_ue_registration_response_time[j] = mtime;
@@ -584,9 +597,10 @@ void* multithreading_func(void *arg){
 						seconds  = end3.tv_sec  - start3.tv_sec;
 						useconds = end3.tv_usec - start3.tv_usec;
 						mtime = ((seconds) * 1000000 + useconds);
-						lat_mtx.lock();
+						//lat_mtx.lock();
 						ue_registration_response_time[threadId] += mtime;
-						lat_mtx.unlock();
+						att_registration_response_time[threadId] += mtime;
+						//lat_mtx.unlock();
 						/*stored_ue_registration_response_time[j] = mtime;
 						j = j + 1;*/
 						////////////////////////////////////
@@ -622,7 +636,7 @@ void* multithreading_func(void *arg){
 					//num_ue_per_epoch[curr_mix_index] = attNo + detNo + sreqNo;
 					for(int i=0; i<maxThreads; i++){
 						num_ue_per_epoch[curr_mix_index] = num_ue_per_epoch[curr_mix_index] + num_ue_per_thread[i];
-						ue_response_time_per_epoch[curr_mix_index] = ue_response_time_per_epoch[curr_mix_index] + ue_registration_response_time[i];
+				ue_response_time_per_epoch[curr_mix_index] = ue_response_time_per_epoch[curr_mix_index] + ue_registration_response_time[i];
 					}
 					lat_mtx.unlock();
 					//cout<<"Total Num previous epoch is "<<num_ue_per_epoch[curr_mix_index]<<endl;
@@ -845,6 +859,7 @@ int main(int argc, char *args[]){
 	num_ue_per_thread.resize(maxThreads, 0);
 	ue_registration_response_time.resize(maxThreads, 0);
 	sr_registration_response_time.resize(maxThreads, 0);
+        att_registration_response_time.resize(maxThreads, 0);
         //int ue_per_thr = 50000;
 	stored_ue_registration_response_time.resize(UE_PER_THREAD, 0);
 
@@ -919,7 +934,9 @@ int main(int argc, char *args[]){
 	unsigned long long total_reistration_time = 0;
 	double average_registration_time = 0.0;
 	unsigned long long total_sr_reistration_time = 0;
+	unsigned long long total_att_reistration_time =0;
         double average_sr_registration_time = 0.0;
+	double average_att_registration_time = 0.0;
 	double registrationThroughput = 0.0;
 
 	// Sleep for the specified simulation time
@@ -970,10 +987,12 @@ int main(int argc, char *args[]){
 		total_ue += num_ue_per_thread[i];
 		total_reistration_time += ue_registration_response_time[i];
 		total_sr_reistration_time += sr_registration_response_time[i];
+		total_att_reistration_time += att_registration_response_time[i];
 		cout<<"num_ue_per_thread["<<i<<"] "<<num_ue_per_thread[i]<<endl;
 		cout<<"ue_registration_response_time["<<i<<"] "<<((ue_registration_response_time[i]*1.0)/num_ue_per_thread[i])<<" us"<<endl;
 	}
 	average_sr_registration_time = (total_sr_reistration_time*1.0)/(sreqNo*1.0);
+        average_att_registration_time = (total_att_reistration_time*1.0)/((attNo+detNo)*1.0);
 	average_registration_time = (total_reistration_time*1.0)/(total_ue*1.0);
 	registrationThroughput = (total_ue*1.0)/(actual_endTime - curTime);
 
@@ -991,7 +1010,8 @@ int main(int argc, char *args[]){
 
 	average_registration_time = average_registration_time/1000000.0;
 	cout<<"Latency = "<<average_registration_time<<" secs"<<endl;
-	cout<<"Service Request Latency = "<<average_sr_registration_time<<" secs"<<endl;
+	cout<<"Service Request Latency = "<<average_sr_registration_time<<" usecs"<<endl;
+	cout<<"Attach Latency = "<<average_att_registration_time<<" usecs"<<endl;
 	cout<<"Registration Throughput="<<registrationThroughput<<" registrations/sec"<<endl;
 	cout<<"Attach-Request= "<<attNo<<"  Detach-Request= "<< detNo<<"  Service-Request= "<<sreqNo<<endl;
 	cout << fixed;
@@ -1026,7 +1046,7 @@ int main(int argc, char *args[]){
 		data.append("#Attach").append(COMMA).append("#Detach").append(COMMA);
 		data.append("#Service_Requests").append(COMMA);
 		data.append("ATTACH_PERCENT").append(COMMA);
-		data.append("EPOCH_TPT").append(COMMA).append("EPOCH_DELAY_ms").append(COMMA).append("ServiceRequestLatency");
+		data.append("EPOCH_TPT").append(COMMA).append("EPOCH_DELAY_ms").append(COMMA).append("ServiceRequestLatency").append(COMMA).append("AttachDetachLatency");
 		data.append("\n");
 	}
 	/*if(!fileExists(INST_FILE)){
@@ -1047,7 +1067,8 @@ int main(int argc, char *args[]){
 		data.append(to_string(UE_MEAN_DATA_SENDING_TIME)).append(COMMA).append(rate).append(COMMA);
 		data.append(to_string(attNo)).append(COMMA);
 		data.append(to_string(detNo)).append(COMMA).append(to_string(sreqNo)).append(COMMA);
-		data.append(to_string(traffic_percent)).append(COMMA).append(to_string(average_sr_registration_time));
+		data.append(to_string(traffic_percent)).append(COMMA).append(to_string(average_sr_registration_time).append(COMMA));
+		data.append(to_string(average_att_registration_time));
 		if (dynLoad==true){
 			for (int i=0; i<=curr_mix_index; i++){
 				data.append(COMMA).append(to_string(tpt[i])).append(COMMA).append(to_string(lat[i]));

@@ -127,7 +127,7 @@ public:
     bool tflag=false; //flag to test dest UDP port for demux of packets
     time_t cT;
     time_t eT;
-        double timeout = 4;
+        double timeout = 4; //4;
         bool timeoutFlag=false; // Flag =true if read timedout
 
     // Constructor
