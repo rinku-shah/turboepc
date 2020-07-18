@@ -1,0 +1,1 @@
+sudo simple_switch_grpc --device-id 12 --no-p4 -i 1@eth1 -i 2@eth2 -i 3@eth3 -i 4@eth4 -i 5@eth5 -i 6@eth6 -i 7@eth7 -i 8@eth8 -i 9@eth9 -i 10@eth10 -- --grpc-server-addr 192.168.100.23:50051 --cpu-port 255 
